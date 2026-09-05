@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/img/cover/upc-logo.png" alt="UPC Logo" width="150"/>
+<img src="assets/img/cover/upc-logo.png" alt="UPC Logo" width="70"/>
 
 Universidad Peruana de Ciencias Aplicadas
 
@@ -14,11 +14,13 @@ NRC
 
 **4945**
 
-### Informe de Trabajo Final
+### Informe del Trabajo Final
 
-**Docente**
+Docente
 
-Mayta Guillermo, Jorge Luis
+**Mayta Guillermo, Jorge Luis**
+
+<br>
 
 Equipo
 
@@ -28,24 +30,24 @@ Proyecto
 
 **Serenia**
 
+<br>
+
 Integrantes
 
-<p align="center">
-Código  Apellidos y Nombres
+| Código | Apellidos y Nombres |
+|---|---|
+| u202414802 | Contreras Torres, Arturo Valentino |
+| u202414970 | Gallardo Morales, Carla Alejandra |
+| u202012001 | García Paredes, Victor Manuel |
+| u202410239 | Salinas Guzman, Brianna Cristina |
+| u202418645 | Sandoval Aiquipa, Kelber Yamir |
 
-u202414802 - Contreras Torres, Arturo Valentino <br>
-u202414970 - Gallardo Morales, Carla Alejandra <br>
-u202012001 - García Paredes, Victor Manuel <br>
-u202410239 - Salinas Guzman, Brianna Cristina <br>
-u202418645 - Sandoval Aiquipa, Kelber Yamir <br>
-</p>
+<br>
 
+**Período 202620**
 
-***Período 202620***
-
-***Septiembre, 2026***
+**Septiembre 2026**
 
 </div>
 
 ---
-
