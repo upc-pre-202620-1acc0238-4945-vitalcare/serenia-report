@@ -51,3 +51,41 @@ Integrantes
 </div>
 
 ---
+
+# Registro de Versiones del Informe
+
+<table>
+  <tr>
+    <th>Versión</th>
+    <th>Fecha</th>
+    <th>Autor</th>
+    <th>Descripción de modificación</th>
+  </tr>
+
+  <tr>
+    <td><b>Primera Entrega (AV1)</b></td>
+    <td>XX/09/2026</td>
+    <td>
+      Contreras Torres, Arturo Valentino <br>
+      <br>
+      <p></p>
+      Gallardo Morales, Carla Alejandra <br>
+      <br>
+      <p></p>
+      García Paredes, Victor Manuel <br>
+      <br>
+      <p></p>
+      Salinas Guzman, Brianna Cristina <br>
+      <br>
+      <p></p>
+      Sandoval Aiquipa, Kelber Yamir <br>
+    </td>
+    <td>
+      Capítulo I: Presentación <br>
+      Capítulo II: Requirements Development and Software Solution Design <br>
+    </td>
+  </tr>
+  </table>
+
+  ---
+
