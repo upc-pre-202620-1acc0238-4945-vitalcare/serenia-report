@@ -89,3 +89,13 @@ Integrantes
 
   ---
 
+# Project Report Collaboration Insights
+
+El informe del proyecto fue desarrollado de manera colaborativa por el equipo mediante repositorios de GitHub creados para la gestión del Project Report y de los diferentes componentes del proyecto. Estos repositorios contienen los archivos del informe, diagramas, evidencias, wireframes, mockups y el historial de versiones correspondiente a cada entrega.
+
+URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-report <br>
+
+**Primera Entrega (AV1)**
+
+---
+
