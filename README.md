@@ -276,13 +276,39 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
     </tr>
 </table>
 
+---
 
 # Objetivos SMART
 
 # Capítulo I: Presentación
 ## 1.1. Startup Profile
 ### 1.1.1. Descripción de la Startup
+
 ### 1.1.2. Perfiles de integrantes del equipo
+
+<table>
+  <tr>
+    <td rowspan="4" align="center">
+      <img src="assets/img/arturo-contreras.PNG" alt="Foto de Arturo Contreras" width="500"/>
+    </td>
+    <td><b>Nombre:</b> Arturo Valentino Contreras Torres</td>
+  </tr>
+  <tr>
+    <td><b>Código:</b> u202414802</td>
+  </tr>
+  <tr>
+    <td>
+      <b>Descripción:</b><br/>
+            Soy <b>Arturo Valentino Contreras Torres</b>, tengo 19 años y estudio Ingeniería de Software en la UPC, actualmente en el 6to ciclo. Me gusta aprender y aplicar tecnologías innovadoras para resolver problemas complejos y desarrollar soluciones eficientes. Me apasiona participar en concursos de programación, donde profundizo en programación competitiva y en la creación de nuevas ideas. Tengo conocimiento en frameworks como Vue, Angular y Spring Boot, y disfruto trabajar en equipo bajo metodologías ágiles. También me interesan Clean Architecture, Domain-Driven Design y otras prácticas que ayudan a escribir mejor código.
+      <br/>
+    </td>
+  </tr>
+  <tr>
+  </tr>
+
+
+</table>
+
 ## 1.2. Solution Profile
 ### 1.2.1. Antecedentes y problemática
 ### 1.2.2. Lean UX Process
