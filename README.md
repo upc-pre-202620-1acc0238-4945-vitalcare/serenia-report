@@ -288,7 +288,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
 
 <table>
   <tr>
-    <td rowspan="4" align="center">
+    <td rowspan="3" align="center">
       <img src="assets/img/member-profiles/arturo-contreras.PNG" alt="Foto de Arturo Contreras" width="500"/>
     </td>
     <td><b>Nombre:</b> Arturo Valentino Contreras Torres</td>
@@ -299,13 +299,78 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
   <tr>
     <td>
       <b>Descripción:</b><br/>
-            Soy <b>Arturo Valentino Contreras Torres</b>, tengo 19 años y estudio Ingeniería de Software en la UPC, actualmente en el 6to ciclo. Me gusta aprender y aplicar tecnologías innovadoras para resolver problemas complejos y desarrollar soluciones eficientes. Me apasiona participar en concursos de programación, donde profundizo en programación competitiva y en la creación de nuevas ideas. Tengo conocimiento en frameworks como Vue, Angular y Spring Boot, y disfruto trabajar en equipo bajo metodologías ágiles. También me interesan Clean Architecture, Domain-Driven Design y otras prácticas que ayudan a escribir mejor código.
+      Soy <b>Arturo Valentino Contreras Torres</b>, tengo 19 años y estudio Ingeniería de Software en la UPC, actualmente en el 6to ciclo. Me gusta aprender y aplicar tecnologías innovadoras para resolver problemas complejos y desarrollar soluciones eficientes. Me apasiona participar en concursos de programación, donde profundizo en programación competitiva y en la creación de nuevas ideas. Tengo conocimiento en frameworks como Vue, Angular y Spring Boot, y disfruto trabajar en equipo bajo metodologías ágiles. También me interesan Clean Architecture, Domain-Driven Design y otras prácticas que ayudan a escribir mejor código.
       <br/>
     </td>
   </tr>
+
   <tr>
+    <td rowspan="3" align="center">
+      <img src="" alt="Foto de Carla Gallardo" width="500"/>
+    </td>
+    <td><b>Nombre:</b> Gallardo Morales, Carla Alejandra</td>
+  </tr>
+  <tr>
+    <td><b>Código:</b> u202414970</td>
+  </tr>
+  <tr>
+    <td>
+      <b>Descripción:</b><br/>
+      Soy <b></b>
+      <br/>
+    </td>
   </tr>
 
+  <tr>
+    <td rowspan="3" align="center">
+      <img src="" alt="Foto de Victor García" width="500"/>
+    </td>
+    <td><b>Nombre:</b> García Paredes, Victor Manuel</td>
+  </tr>
+  <tr>
+    <td><b>Código:</b> u202012001</td>
+  </tr>
+  <tr>
+    <td>
+      <b>Descripción:</b><br/>
+      Soy <b></b>
+      <br/>
+    </td>
+  </tr>
+
+  <tr>
+    <td rowspan="3" align="center">
+      <img src="" alt="Foto de Brianna Salinas" width="500"/>
+    </td>
+    <td><b>Nombre:</b> Salinas Guzman, Brianna Cristina</td>
+  </tr>
+  <tr>
+    <td><b>Código:</b> u202410239</td>
+  </tr>
+  <tr>
+    <td>
+      <b>Descripción:</b><br/>
+      Soy <b></b>
+      <br/>
+    </td>
+  </tr>
+
+  <tr>
+    <td rowspan="3" align="center">
+      <img src="" alt="Foto de Kelber Sandoval" width="500"/>
+    </td>
+    <td><b>Nombre:</b> Sandoval Aiquipa, Kelber Yamir</td>
+  </tr>
+  <tr>
+    <td><b>Código:</b> u202418645</td>
+  </tr>
+  <tr>
+    <td>
+      <b>Descripción:</b><br/>
+      Soy <b></b>
+      <br/>
+    </td>
+  </tr>
 
 </table>
 
