@@ -212,14 +212,70 @@ URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vi
 
 ---
 
-# Registro de Versiones del Informe
+# Student Outcome
 
-# Project Report Collaboration Insights
+El curso contribuye al cumplimiento del Student Outcome ABET:
 
-# Contenido
-## Tabla de contenidos
+**ABET – EAC - Student Outcome 7**
 
-# Student Outcome (ver anexo A)
+**Criterio:** *La capacidad de adquirir y aplicar nuevos conocimientos según sea necesario, utilizando estrategias de aprendizaje apropiadas.*
+
+En el siguiente cuadro se describe las acciones realizadas y enunciados de conclusiones por parte del grupo, que permiten sustentar el haber alcanzado el logro del ABET – EAC - Student Outcome 7.
+
+<table>
+  <tr>
+    <th>Criterio específico</th>
+    <th>Acciones realizadas</th>
+    <th>Conclusiones</th>
+  </tr>
+  <tr>
+      <td><b>Actualiza conceptos y conocimientos necesarios para su desarrollo profesional y en especial para su proyecto en soluciones de software.</b></td>
+      <td>
+            <b>Contreras Torres, Arturo Valentino</b><br>
+            <u>AV1</u><br>
+            <br><br>
+            <b>Gallardo Morales, Carla Alejandra</b><br>
+            <u>AV1</u><br>
+            <br><br>
+            <b>García Paredes, Victor Manuel</b><br>
+            <u>AV1</u><br>
+            <br><br>
+            <b>Salinas Guzman, Brianna Cristina</b><br>
+            <u>AV1</u><br>
+            <br><br>
+            <b>Sandoval Aiquipa, Kelber Yamir</b><br>
+            <u>AV1</u><br>
+            <br><br>
+        </td>
+        <td>
+            <u>AV1</u><br>
+        </td>
+    </tr>
+      <tr>
+      <td><b>Reconoce la necesidad del aprendizaje permanente para el desempeño profesional y el desarrollo de proyectos en soluciones de software.</b></td>
+      <td>
+            <b>Contreras Torres, Arturo Valentino</b><br>
+            <u>AV1</u><br>
+            <br><br>
+            <b>Gallardo Morales, Carla Alejandra</b><br>
+            <u>AV1</u><br>
+            <br><br>
+            <b>García Paredes, Victor Manuel</b><br>
+            <u>AV1</u><br>
+            <br><br>
+            <b>Salinas Guzman, Brianna Cristina</b><br>
+            <u>AV1</u><br>
+            <br><br>
+            <b>Sandoval Aiquipa, Kelber Yamir</b><br>
+            <u>AV1</u><br>
+            <br><br>
+        </td>
+        <td>
+            <u>AV1</u><br>
+        </td>
+    </tr>
+</table>
+
 
 # Objetivos SMART
 
