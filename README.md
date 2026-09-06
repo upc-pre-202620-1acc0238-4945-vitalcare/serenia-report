@@ -289,7 +289,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
 <table>
   <tr>
     <td rowspan="4" align="center">
-      <img src="assets/img/arturo-contreras.PNG" alt="Foto de Arturo Contreras" width="500"/>
+      <img src="assets/img/member-profiles/arturo-contreras.PNG" alt="Foto de Arturo Contreras" width="500"/>
     </td>
     <td><b>Nombre:</b> Arturo Valentino Contreras Torres</td>
   </tr>
