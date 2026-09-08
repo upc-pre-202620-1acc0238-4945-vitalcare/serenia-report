@@ -335,7 +335,7 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
 
   <tr>
     <td rowspan="3" align="center">
-      <img src="" alt="Foto de Carla Gallardo" width="500"/>
+      <img src="assets/img/member-profiles/carla-gallardo.png" alt="Foto de Carla Gallardo" width="500"/>
     </td>
     <td><b>Nombre:</b> Gallardo Morales, Carla Alejandra</td>
   </tr>
@@ -345,7 +345,9 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
   <tr>
     <td>
       <b>Descripción:</b><br/>
-      Soy <b></b>
+      Soy <b>Carla Alejandra Gallardo Morales</b>, tengo 19 años. Desde que me incorporé en la Universidad Peruana de Ciencias Aplicadas en el periodo 2024-01, es decir que ahora mismo estoy cursando el sexto ciclo de la carrera de Ing. de Software, he adquirido y desarrollado distintos conocimientos a cerca de la programación, específicamente en el lenguaje C++, JavaScript y TypeScript, además, de forma autodidacta y extracurricular, he profundizado en el lenguaje Python, lo que ha ampliado mi perspectiva sobre la lógica y resolución de problemas.
+      <br/><br/>
+      Dentro del equipo, mi contribución se basa en el apoyo continuo del desarrollo del frontend de nuestro aplicativo mobile, asimismo ayudo en la implementación del informe de nuestro proyecto.
       <br/>
     </td>
   </tr>
