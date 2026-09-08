@@ -354,7 +354,7 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
 
   <tr>
     <td rowspan="3" align="center">
-      <img src="" alt="Foto de Victor García" width="500"/>
+      <img src="assets/img/member-profiles/victor-garcia.png" alt="Foto de Victor García" width="500"/>
     </td>
     <td><b>Nombre:</b> García Paredes, Victor Manuel</td>
   </tr>
