@@ -440,8 +440,43 @@ Serenia conecta a dos perfiles de usuarios clave, definidos a partir del problem
 ## 2.1. Competidores
 ### 2.1.1. Análisis competitivo
 ### 2.1.2. Estrategias y tácticas frente a competidores
+
 ## 2.2. Entrevistas
+
 ### 2.2.1. Diseño de entrevistas
+
+Para conocer mejor a nuestros dos segmentos, se diseñaron dos guías de entrevista: una para adultos mayores que viven solos y otra para familiares a distancia. Las preguntas van de lo general (datos personales, rutina) a lo más específico (vínculo familiar, tecnología, frustraciones), buscando entender tanto hechos concretos como sentimientos y motivaciones de cada entrevistado.
+
+#### Segmento 1: Adultos mayores que viven solos
+
+1. ¿Cuál es su nombre, edad y distrito de residencia?
+2. ¿Vive solo/a? ¿Desde hace cuánto tiempo?
+3. ¿Cuál es su estado civil? ¿Tiene hijos u otros familiares cercanos?
+4. ¿A qué se dedica o se dedicaba usted?
+5. ¿Cómo es un día normal para usted?
+6. ¿Con qué frecuencia sale de casa y para qué?
+7. ¿Con qué frecuencia habla con sus familiares que no viven con usted?
+8. Cuando tiene un mal día, ¿se lo cuenta a su familia? ¿Por qué?
+9. ¿Qué celular usa: táctil o de botones?
+10. ¿Qué aplicaciones usa más seguido?
+11. ¿Alguna vez sintió que no quiere "molestar" a su familia contándole algo suyo?
+12. ¿Qué le frustra o incomoda de usar aplicaciones o el celular?
+
+#### Segmento 2: Familiares a distancia
+
+1. ¿Cuál es su nombre, edad y distrito de residencia?
+2. ¿Cuál es su estado civil y con quién vive actualmente?
+3. ¿A qué se dedica actualmente?
+4. ¿Quién es su familiar adulto mayor que vive solo y hace cuánto no conviven?
+5. ¿Con qué frecuencia se comunica con él/ella y por qué medio?
+6. ¿Alguna vez sintió ansiedad por no saber cómo estaba? Cuénteme.
+7. ¿Qué es lo que más le preocupa sobre su bienestar?
+8. ¿Coordina con otros familiares para comunicarse con él/ella?
+9. ¿Qué smartphone usa y qué apps usa con más frecuencia?
+10. ¿Ha usado alguna app de monitoreo de salud o bienestar familiar?
+11. Si pudiera ver diariamente cómo está su familiar sin llamarlo, ¿qué información le gustaría ver?
+12. ¿Qué le generaría desconfianza en una app así?
+
 ### 2.2.2. Registro de entrevistas
 ### 2.2.3. Análisis de entrevistas
 ## 2.3. Needfinding
