@@ -369,7 +369,7 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
     </td>
   </tr>
 
-    <tr>
+  <tr>
     <td rowspan="3" align="center">
       <img src="assets/img/member-profiles/brianna-salinas.png" alt="Foto de Brianna Salinas" width="500"/>
     </td>
