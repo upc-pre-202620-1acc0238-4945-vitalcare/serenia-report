@@ -10,15 +10,11 @@ Carrera de Ingeniería de Software
 
 **Aplicaciones para Dispositivos Móviles**
 
-NRC
-
-**4945**
+NRC: **4945**
 
 ### Informe del Trabajo Final
 
-Docente
-
-**Mayta Guillermo, Jorge Luis**
+Docente: **Mayta Guillermo, Jorge Luis**
 
 <br>
 
@@ -44,11 +40,13 @@ Integrantes
 
 <br>
 
-**Período 202620**
+**Período 2026-20**
 
 **Septiembre 2026**
 
 </div>
+
+<br>
 
 ---
 
@@ -67,16 +65,12 @@ Integrantes
     <td>XX/09/2026</td>
     <td>
       Contreras Torres, Arturo Valentino <br>
-      <br>
       <p></p>
       Gallardo Morales, Carla Alejandra <br>
-      <br>
       <p></p>
       García Paredes, Victor Manuel <br>
-      <br>
       <p></p>
       Salinas Guzman, Brianna Cristina <br>
-      <br>
       <p></p>
       Sandoval Aiquipa, Kelber Yamir <br>
     </td>
@@ -87,6 +81,8 @@ Integrantes
   </tr>
   </table>
 
+<br>
+
   ---
 
 # Project Report Collaboration Insights
@@ -96,6 +92,8 @@ El informe del proyecto fue desarrollado de manera colaborativa por el equipo me
 URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-report <br>
 
 **Primera Entrega (AV1)**
+
+<br>
 
 ---
 
@@ -217,6 +215,8 @@ URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vi
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
 
+<br>
+
 ---
 
 # Student Outcome
@@ -287,6 +287,8 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
 
 # Objetivos SMART
 
+<br>
+
 # Capítulo I: Presentación
 ## 1.1. Startup Profile
 ### 1.1.1. Descripción de la Startup
@@ -297,15 +299,21 @@ VitalCare nace para sanar esta desconexión apostando por tecnología que acompa
 
 El corazón de Serenia es que cada interacción se sienta como una charla genuina y no como un chequeo médico. Incluye preguntas ligeras, un espacio para grabar anécdotas y alertas familiares que solo suenan cuando de verdad hacen falta. Queremos devolver la naturalidad al cuidado a distancia: dándole tranquilidad a la familia y respetando siempre la autonomía del adulto mayor.
 
-#### Misión
+<br>
+
+## Misión
 
 Dar a los adultos mayores que viven solos una forma simple y natural de comunicar su día a día, y a sus familias, la tranquilidad de saber cómo están. Reducimos la ansiedad de la distancia conectándolos desde el afecto, sin caer en el monitoreo invasivo.
 
-#### Visión
+<br>
+
+## Visión
 
 Ser la plataforma de compañía digital que transforme cómo las familias de Latinoamérica se cuidan a distancia. Queremos fortalecer el vínculo emocional por encima del reporte clínico, logrando que ningún adulto mayor enfrente la soledad en silencio.
 
-#### Valores
+<br>
+
+## Valores
 
 - **Cercanía:** <br>
   Diseñamos cada interacción con un lenguaje cálido y humano. Cuidar no debe sentirse como una obligación ni leerse como un historial médico.
@@ -319,6 +327,7 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
 - **Conexión emocional:** <br>
   Celebramos lo bueno de la rutina. Fomentamos espacios como "cuéntame algo" para registrar pequeñas victorias y reforzar el cariño diario, no solo para alertar sobre problemas.
 
+<br>
 
 ### 1.1.2. Perfiles de integrantes del equipo
 
@@ -378,7 +387,7 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
 
   <tr>
     <td rowspan="3" align="center">
-      <img src="" alt="Foto de Brianna Salinas" width="500"/>
+      <img src="assets/img/member-profiles/brianna-salinas.png" alt="Foto de Brianna Salinas" width="500"/>
     </td>
     <td><b>Nombre:</b> Salinas Guzman, Brianna Cristina</td>
   </tr>
@@ -388,7 +397,7 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
   <tr>
     <td>
       <b>Descripción:</b><br/>
-      Soy <b></b>
+      Soy <b>Brianna Cristina Salinas Guzmán</b>, tengo 19 años y estudio Ingeniería de Software en la Universidad Peruana de Ciencias Aplicadas (UPC), actualmente en el 6to ciclo. Tengo experiencia en desarrollo backend con Spring Boot y Express.js, aplicando Domain-Driven Design (bounded contexts, autenticación JWT, integración con APIs externas), así como en frontend con Angular, React y Vue. Me interesa profundizar en el desarrollo de aplicaciones móviles, tanto nativas como multiplataforma, y disfruto trabajar bajo metodologías ágiles y buenas prácticas de arquitectura de software.
       <br/>
     </td>
   </tr>
@@ -412,6 +421,8 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
 
 </table>
 
+<br>
+
 ## 1.2. Solution Profile
 
 Serenia es una solución con dos interfaces: una dirigida al adulto mayor que vive solo y otra dirigida al familiar a distancia. Ambos comparten un mismo objetivo: sustituir la llamada telefónica diaria motivada por la ansiedad con una forma de comunicación más simple, natural y menos invasiva del bienestar cotidiano.
@@ -422,7 +433,12 @@ Del lado del familiar, la aplicación ofrece un panel de estado diario que muest
 
 El diferenciador central de Serenia frente a otras soluciones de monitoreo es su enfoque en la compañía por encima de la vigilancia: el lenguaje y las interacciones evitan el tono clínico o de "reporte", priorizando el vínculo emocional cotidiano entre adulto mayor y su familia, sin descuidar la seguridad ante situaciones de emergencia.
 
+<br>
+
 ### 1.2.1. Antecedentes y problemática
+
+<br>
+
 ### 1.2.2. Lean UX Process
 
 Esta sección desarrolla el Lean UX Process aplicado al dominio del problema de Serenia, siguiendo la metodología de Jeff Gothelf y Josh Seiden (*Lean UX, 3rd Edition*). Se parte de un Problem Statement único para todo el proyecto, se derivan los Assumptions organizados según los cinco tipos propuestos por Lean UX, se construyen los Hypothesis Statements correspondientes a cada Feature Assumption, y finalmente se consolida todo en un Lean UX Canvas.
@@ -438,6 +454,8 @@ Nuestro producto resolverá esta brecha **ofreciendo un check-in diario de un so
 Nuestro enfoque inicial será **adultos mayores de 60 años a más que viven solos en zonas urbanas del Perú, y sus familiares directos de 25 a 59 años que residen en una ciudad o distrito distinto**.
 
 Sabremos que hemos tenido éxito cuando veamos **una alta tasa de check-ins diarios completados por el adulto mayor, una reducción en la frecuencia de llamadas motivadas por ansiedad por parte del familiar, y un uso recurrente del panel de estado sin necesidad de soporte o intervención externa**.
+
+<br>
 
 #### 1.2.2.2. Lean UX Assumptions
 
@@ -467,12 +485,16 @@ Sabremos que hemos tenido éxito cuando veamos **una alta tasa de check-ins diar
 - Un panel de estado con alertas inteligentes (solo ante anomalías) evitará que el familiar revise la aplicación de forma ansiosa.
 - Un botón de auxilio siempre visible cubrirá el escenario de emergencia sin necesidad de vigilancia constante.
 
+<br>
+
 #### 1.2.2.3. Lean UX Hypothesis Statements
 
 1. **Check-in diario de un toque**: Creemos que lograremos *una alta tasa de adopción diaria del check-in* si *los adultos mayores que viven solos en zonas urbanas del Perú* logran *comunicar su estado de ánimo sin esfuerzo ni necesidad de dar explicaciones extensas* con *un check-in de un solo toque con preguntas ligeras y variables*.
 2. **"Cuéntame algo"**: Creemos que lograremos *un mayor vínculo emocional percibido entre ambos segmentos* si *los adultos mayores y sus familiares a distancia* logran *compartir momentos cotidianos más allá de reportes de bienestar* con *un espacio de grabación de audio corto llamado "cuéntame algo"*.
 3. **Panel de estado con alertas inteligentes**: Creemos que lograremos *una reducción en la frecuencia de llamadas motivadas por ansiedad* si *los familiares a distancia* logran *conocer el estado de bienestar de su familiar sin necesidad de preguntar constantemente* con *un panel de estado diario que solo emite alertas cuando se detecta una anomalía*.
 4. **Botón de auxilio**: Creemos que lograremos *mayor confianza en la solución como respaldo ante emergencias* si *los adultos mayores que viven solos* logran *solicitar ayuda de forma inmediata en caso de urgencia* con *un botón de auxilio siempre visible y de fácil acceso*.
+
+<br>
 
 #### 1.2.2.4. Lean UX Canvas
 
@@ -483,6 +505,8 @@ El Lean UX Canvas consolida el Business Problem, los Business Outcomes, los User
 </p>
 
 URL del archivo en Figma: https://www.figma.com/design/MtWwz8GxmrY0eR7eyc2UC0/Lean-UX-Canvas--Serenia-?node-id=0-1
+
+<br>
 
 ## 1.3. Segmentos objetivo
 
@@ -500,10 +524,20 @@ Serenia conecta a dos perfiles de usuarios clave, definidos a partir del problem
 
 - **Sustento:** Lima concentra el 45,4% de los migrantes internos del país por motivos laborales o educativos (Carrasco Freitas, 2026), evidenciando una alta proporción de familias separadas geográficamente. Para acortar esta distancia, la tecnología es el puente ideal: el 95,4% de hogares peruanos ya cuenta con un smartphone (OSIPTEL, 2026), con una adopción que bordea el 95% en los adultos jóvenes y de mediana edad. Así, este segmento combina perfectamente la necesidad emocional de estar presentes con la fluidez tecnológica para integrar la app en su rutina diaria.
 
+<br>
+
 # Capítulo II: Requirements Development and Software Solution Design
 ## 2.1. Competidores
+
+<br>
+
 ### 2.1.1. Análisis competitivo
+
+<br>
+
 ### 2.1.2. Estrategias y tácticas frente a competidores
+
+<br>
 
 ## 2.2. Entrevistas
 
@@ -541,99 +575,291 @@ Para conocer mejor a nuestros dos segmentos, se diseñaron dos guías de entrevi
 11. Si pudiera ver diariamente cómo está su familiar sin llamarlo, ¿qué información le gustaría ver?
 12. ¿Qué le generaría desconfianza en una app así?
 
+<br>
+
 ### 2.2.2. Registro de entrevistas
+
+<br>
+
 ### 2.2.3. Análisis de entrevistas
+
+<br>
+
 ## 2.3. Needfinding
 ### 2.3.1. User Personas
+
+<br>
+
 ### 2.3.2. User Task Matrix
+
+<br>
+
 ### 2.3.3. User Journey Mapping
+
+<br>
+
 ### 2.3.4. Empathy Mapping
+
+<br>
+
 ### 2.3.5. Big Picture EventStorming
+
+<br>
+
 ### 2.3.6. Ubiquitous Language
+
+<br>
+
 ## 2.4. Requirements specification
+
 ### 2.4.1. User Stories
+
+<br>
+
 ### 2.4.2. Impact Mapping
+
+<br>
+
 ### 2.4.3. Product Backlog
+
+<br>
+
 ## 2.5. Strategic-Level Domain-Driven Design
 ### 2.5.1. EventStorming
 #### 2.5.1.1. Candidate Context Discovery
+
+<br>
+
 #### 2.5.1.2. Domain Message Flows Modeling
+
+<br>
+
 #### 2.5.1.3. Bounded Context Canvases
+
+<br>
+
 ### 2.5.2. Context Mapping
+
+<br>
+
 ### 2.5.3. Software Architecture
 #### 2.5.3.1. Software Architecture Context Level Diagrams
+
+<br>
+
 #### 2.5.3.2. Software Architecture Container Level Diagrams
+
+<br>
+
 #### 2.5.3.3. Software Architecture Deployment Diagrams
+
+<br>
+
 ## 2.6. Tactical-Level Domain-Driven Design
 ### 2.6.x. Bounded Context: <Bounded Context Name>
+
+<br>
+
 #### 2.6.x.1. Domain Layer
+
+<br>
+
 #### 2.6.x.2. Interface Layer
+
+<br>
+
 #### 2.6.x.3. Application Layer
+
+<br>
+
 #### 2.6.x.4 Infrastructure Layer
+
+<br>
+
 #### 2.6.x.5. Bounded Context Software Architecture Component Level Diagrams
+
+<br>
+
 #### 2.6.x.6. Bounded Context Software Architecture Code Level Diagrams
+
+<br>
+
 ##### 2.6.x.6.1. Bounded Context Domain Layer Class Diagrams
+
+<br>
+
 ##### 2.6.x.6.2. Bounded Context Database Design Diagram
+
+<br>
+
 
 # Capítulo III: Solution UI/UX Design
 ## 3.1. Product design
 ### 3.1.1. Style Guidelines
+
+<br>
+
 #### 3.1.1.1. General Style Guidelines
+
+<br>
+
 ### 3.1.2. Information Architecture
 #### 3.1.2.1. Organization Systems
+
+<br>
+
 #### 3.1.2.2. Labelling Systems
+
+<br>
+
 #### 3.1.2.3. SEO Tags and Meta Tags
+
+<br>
+
 #### 3.1.2.4. Searching Systems
+
+<br>
+
 #### 3.1.2.5. Navigation Systems
+
+<br>
+
 ### 3.1.3. Landing Page UI Design
 #### 3.1.3.1. Landing Page Wireframe
+
+<br>
+
 #### 3.1.3.2. Landing Page Mock-up
+
+<br>
+
 ### 3.1.4. Mobile Applications UX/UI Design
 #### 3.1.4.1. Mobile Applications Wireframes
+
+<br>
+
 #### 3.1.4.2. Mobile Applications Wireflow Diagrams
+
+<br>
+
 #### 3.1.4.3. Mobile Applications Mock-ups
+
+<br>
+
 #### 3.1.4.4. Mobile Applications User Flow Diagrams
+
+<br>
+
 #### 3.1.4.5. Mobile Applications Prototyping
+
+<br>
 
 # Capítulo IV: Product Implementation & Validation
 ## 4. Product Implementation & Validation
 ## 4.1. Software Configuration Management
 ### 4.1.1. Software Development Environment Configuration
+
+<br>
+
 ### 4.1.2. Source Code Management
+
+<br>
+
 ### 4.1.3. Source Code Style Guide & Conventions
+
+<br>
+
 ### 4.1.4. Software Deployment Configuration
+
+<br>
+
 ## 4.2. Landing Page & Mobile Application Implementation
 ### 4.2.1. Sprint n
 #### 4.2.1.1. Sprint Planning n
+
+<br>
+
 #### 4.2.1.2. Aspect Leaders and Collaborators
+
+<br>
+
 #### 4.2.1.3. Sprint Backlog n
+
+<br>
+
 #### 4.2.1.4. Development Evidence for Sprint Review
+
+<br>
+
 #### 4.2.1.5. Testing Suite Evidence for Sprint Review
+
+<br>
+
 #### 4.2.1.6. Execution Evidence for Sprint Review
+
+<br>
+
 #### 4.2.1.7. Services Documentation Evidence for Sprint Review
+
+<br>
+
 #### 4.2.1.8. Software Deployment Evidence for Sprint Review
+
+<br>
+
 #### 4.2.1.9. Team Collaboration Insights during Sprint
+
+<br>
+
 ## 4.3. Validation Interviews
 ### 4.3.1. Diseño de Entrevistas
+
+<br>
+
 ### 4.3.2. Registro de Entrevistas
+
+<br>
+
 ### 4.3.3. Evaluaciones según heurísticas
 
+<br>
+
 # Conclusiones
-## Conclusiones y recomendaciones.
+
+<br>
+
+## Recomendaciones
+
+<br>
+
 ## Video App Validation
+
+<br>
+
 ## Video About the product
+
+<br>
+
 ## Video About the team
+
+<br>
 
 # Glosario
 
+<br>
+
 # Bibliografía
 
-Carrasco Freitas, M. (2026, 29 de mayo). Lima es el principal destino migratorio: más de 3 millones de peruanos llegaron desde otras regiones, según Censo 2025. Infobae. https://www.infobae.com/peru/2026/05/29/lima-es-el-principal-destrino-migratorio-mas-de-3-millones-de-peruanos-llegaron-desde-otras-regiones-segun-censo-2025/
+> Carrasco Freitas, M. (2026, 29 de mayo). Lima es el principal destino migratorio: más de 3 millones de peruanos llegaron desde otras regiones, según Censo 2025. Infobae. https://www.infobae.com/peru/2026/05/29/lima-es-el-principal-destrino-migratorio-mas-de-3-millones-de-peruanos-llegaron-desde-otras-regiones-segun-censo-2025/
 
-Instituto Nacional de Estadística e Informática. (2025a, 26 de marzo). El 42,0 % de los hogares del país tiene entre sus miembros a un adulto mayor. Gob.pe. https://www.gob.pe/institucion/inei/noticias/1133454-el-42-0-de-los-hogares-
+> Instituto Nacional de Estadística e Informática. (2025a, 26 de marzo). El 42,0 % de los hogares del país tiene entre sus miembros a un adulto mayor. Gob.pe. https://www.gob.pe/institucion/inei/noticias/1133454-el-42-0-de-los-hogares-
 
-Instituto Nacional de Estadística e Informática. (2025b). Estadísticas de las tecnologías de información y comunicación en los hogares: informe técnico, enero-febrero-marzo 2025. https://www.inei.gob.pe/media/MenuRecursivo/boletines/informe-tecnico_tecnologiasdelainformacion_ene_feb_mar2025.pdf
+> Instituto Nacional de Estadística e Informática. (2025b). Estadísticas de las tecnologías de información y comunicación en los hogares: informe técnico, enero-febrero-marzo 2025. https://www.inei.gob.pe/media/MenuRecursivo/boletines/informe-tecnico_tecnologiasdelainformacion_ene_feb_mar2025.pdf
 
-Organismo Supervisor de Inversión Privada en Telecomunicaciones. (2026). Erestel 2025: cada vez más hogares peruanos cuentan con un smartphone. https://www.osiptel.gob.pe/portal-del-usuario/noticias/erestel-2025-cada-vez-m%C3%A1s-hogares-peruanos-cuentan-con-un-smartphone-cu%C3%A1ntos-tienen/
+> Organismo Supervisor de Inversión Privada en Telecomunicaciones. (2026). Erestel 2025: cada vez más hogares peruanos cuentan con un smartphone. https://www.osiptel.gob.pe/portal-del-usuario/noticias/erestel-2025-cada-vez-m%C3%A1s-hogares-peruanos-cuentan-con-un-smartphone-cu%C3%A1ntos-tienen/
+
+<br>
 
 # Anexos
+
+<br>
