@@ -106,12 +106,15 @@ URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vi
 - [Registro de Versiones del Informe](#registro-de-versiones-del-informe)
 - [Project Report Collaboration Insights](#project-report-collaboration-insights)
 - [Contenido](#contenido)
-  - [Tabla de contenidos](#tabla-de-contenidos)
+  - [Tabla de Contenidos](#tabla-de-contenidos)
 - [Student Outcome](#student-outcome)
 - [Objetivos SMART](#objetivos-smart)
 - [Capítulo I: Presentación](#capítulo-i-presentación)
   - [1.1. Startup Profile](#11-startup-profile)
     - [1.1.1. Descripción de la Startup](#111-descripción-de-la-startup)
+      - [Misión](#misión)
+      - [Visión](#visión)
+      - [Valores](#valores)
     - [1.1.2. Perfiles de integrantes del equipo](#112-perfiles-de-integrantes-del-equipo)
   - [1.2. Solution Profile](#12-solution-profile)
     - [1.2.1. Antecedentes y problemática](#121-antecedentes-y-problemática)
@@ -121,12 +124,16 @@ URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vi
       - [1.2.2.3. Lean UX Hypothesis Statements](#1223-lean-ux-hypothesis-statements)
       - [1.2.2.4. Lean UX Canvas](#1224-lean-ux-canvas)
   - [1.3. Segmentos objetivo](#13-segmentos-objetivo)
+      - [Segmento 1: Adultos mayores que viven solos](#segmento-1-adultos-mayores-que-viven-solos)
+      - [Segmento 2: Familiares a distancia](#segmento-2-familiares-a-distancia)
 - [Capítulo II: Requirements Development and Software Solution Design](#capítulo-ii-requirements-development-and-software-solution-design)
   - [2.1. Competidores](#21-competidores)
     - [2.1.1. Análisis competitivo](#211-análisis-competitivo)
     - [2.1.2. Estrategias y tácticas frente a competidores](#212-estrategias-y-tácticas-frente-a-competidores)
   - [2.2. Entrevistas](#22-entrevistas)
     - [2.2.1. Diseño de entrevistas](#221-diseño-de-entrevistas)
+      - [Segmento 1: Adultos mayores que viven solos](#segmento-1-adultos-mayores-que-viven-solos-1)
+      - [Segmento 2: Familiares a distancia](#segmento-2-familiares-a-distancia-1)
     - [2.2.2. Registro de entrevistas](#222-registro-de-entrevistas)
     - [2.2.3. Análisis de entrevistas](#223-análisis-de-entrevistas)
   - [2.3. Needfinding](#23-needfinding)
@@ -151,7 +158,7 @@ URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vi
       - [2.5.3.2. Software Architecture Container Level Diagrams](#2532-software-architecture-container-level-diagrams)
       - [2.5.3.3. Software Architecture Deployment Diagrams](#2533-software-architecture-deployment-diagrams)
   - [2.6. Tactical-Level Domain-Driven Design](#26-tactical-level-domain-driven-design)
-    - [2.6.x. Bounded Context: <Bounded Context Name>](#26x-bounded-context-bounded-context-name)
+    - [2.6.x. Bounded Context: ](#26x-bounded-context-)
       - [2.6.x.1. Domain Layer](#26x1-domain-layer)
       - [2.6.x.2. Interface Layer](#26x2-interface-layer)
       - [2.6.x.3. Application Layer](#26x3-application-layer)
@@ -179,14 +186,14 @@ URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vi
       - [3.1.4.3. Mobile Applications Mock-ups](#3143-mobile-applications-mock-ups)
       - [3.1.4.4. Mobile Applications User Flow Diagrams](#3144-mobile-applications-user-flow-diagrams)
       - [3.1.4.5. Mobile Applications Prototyping](#3145-mobile-applications-prototyping)
-- [Capítulo IV: Product Implementation & Validation](#capítulo-iv-product-implementation--validation)
-  - [4. Product Implementation & Validation](#4-product-implementation--validation)
+- [Capítulo IV: Product Implementation \& Validation](#capítulo-iv-product-implementation--validation)
+  - [4. Product Implementation \& Validation](#4-product-implementation--validation)
   - [4.1. Software Configuration Management](#41-software-configuration-management)
     - [4.1.1. Software Development Environment Configuration](#411-software-development-environment-configuration)
     - [4.1.2. Source Code Management](#412-source-code-management)
-    - [4.1.3. Source Code Style Guide & Conventions](#413-source-code-style-guide--conventions)
+    - [4.1.3. Source Code Style Guide \& Conventions](#413-source-code-style-guide--conventions)
     - [4.1.4. Software Deployment Configuration](#414-software-deployment-configuration)
-  - [4.2. Landing Page & Mobile Application Implementation](#42-landing-page--mobile-application-implementation)
+  - [4.2. Landing Page \& Mobile Application Implementation](#42-landing-page--mobile-application-implementation)
     - [4.2.1. Sprint n](#421-sprint-n)
       - [4.2.1.1. Sprint Planning n](#4211-sprint-planning-n)
       - [4.2.1.2. Aspect Leaders and Collaborators](#4212-aspect-leaders-and-collaborators)
@@ -202,7 +209,7 @@ URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vi
     - [4.3.2. Registro de Entrevistas](#432-registro-de-entrevistas)
     - [4.3.3. Evaluaciones según heurísticas](#433-evaluaciones-según-heurísticas)
 - [Conclusiones](#conclusiones)
-  - [Conclusiones y recomendaciones](#conclusiones-y-recomendaciones)
+  - [Conclusiones y recomendaciones.](#conclusiones-y-recomendaciones)
   - [Video App Validation](#video-app-validation)
   - [Video About the product](#video-about-the-product)
   - [Video About the team](#video-about-the-team)
@@ -469,44 +476,13 @@ Sabremos que hemos tenido éxito cuando veamos **una alta tasa de check-ins diar
 
 #### 1.2.2.4. Lean UX Canvas
 
-<table>
-  <tr>
-    <th>Bloque</th>
-    <th>Contenido</th>
-  </tr>
-  <tr>
-    <td><b>Business Problem</b></td>
-    <td>Las familias con un adulto mayor que vive solo dependen de llamadas reactivas motivadas por la ansiedad, sin una forma cotidiana y no invasiva de saber que todo está bien.</td>
-  </tr>
-  <tr>
-    <td><b>Business Outcomes</b></td>
-    <td>Incremento de check-ins semanales completados, reducción de consultas de soporte, incremento de registros por referidos.</td>
-  </tr>
-  <tr>
-    <td><b>Users</b></td>
-    <td>Adultos mayores de 60 años a más que viven solos (zonas urbanas del Perú); familiares de 25 a 59 años que residen a distancia.</td>
-  </tr>
-  <tr>
-    <td><b>User Outcomes & Benefits</b></td>
-    <td>Expresarse sin esfuerzo (adulto mayor); tranquilidad diaria sin llamar constantemente (familiar).</td>
-  </tr>
-  <tr>
-    <td><b>Solutions</b></td>
-    <td>Check-in de un toque, "cuéntame algo", panel de estado con alertas inteligentes, botón de auxilio.</td>
-  </tr>
-  <tr>
-    <td><b>Hypotheses</b></td>
-    <td>Las 4 hypothesis statements descritas en la sección 1.2.2.3.</td>
-  </tr>
-  <tr>
-    <td><b>Lo mínimo que necesitamos aprender primero</b></td>
-    <td>Validar si el check-in de un toque se adopta como hábito diario, por ser la asunción de mayor riesgo e impacto.</td>
-  </tr>
-  <tr>
-    <td><b>Cómo lo probaremos</b></td>
-    <td>Prototipo del flujo de check-in validado con 3 a 5 usuarios del Segmento 1 antes de construir el resto de las funcionalidades.</td>
-  </tr>
-</table>
+El Lean UX Canvas consolida el Business Problem, los Business Outcomes, los Users, los User Outcomes & Benefits, las Solutions y las Hypotheses desarrolladas en las subsecciones anteriores, junto con la identificación de la asunción de mayor riesgo (Segmento 1 adoptando el check-in diario como hábito) y el experimento de menor esfuerzo para validarla.
+
+<p align="center">
+  <img src="assets/img/diagrams/lean-ux-canvas.png" alt="Lean UX Canvas de Serenia" width="900"/>
+</p>
+
+URL del archivo en Figma: https://www.figma.com/design/MtWwz8GxmrY0eR7eyc2UC0/Lean-UX-Canvas--Serenia-?node-id=0-1
 
 ## 1.3. Segmentos objetivo
 
