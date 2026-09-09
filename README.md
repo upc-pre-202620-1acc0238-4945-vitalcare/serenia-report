@@ -453,13 +453,13 @@ El problema se ubica principalmente en hogares peruanos donde el adulto mayor vi
 Es un problema de naturaleza diaria y recurrente, no puntual: la incertidumbre y las llamadas por ansiedad ocurren todos los días, y se agrava progresivamente a medida que crece la proporción de adultos mayores que viven solos.
 
 ### Why (¿Por qué?)
-Según cifras del Instituto Nacional de Estadística e Informática, en Lima Metropolitana el 25,3% de los hogares jefaturados por adultos mayores (60 años a más) son unipersonales —es decir, compuestos únicamente por la persona mayor—, cifra que aumentó 2,3 puntos porcentuales respecto al mismo periodo del año anterior (Andina, 2025). Esta creciente proporción de adultos mayores que viven solos explica por qué los familiares terminan llamando todos los días por ansiedad —no porque haya pasado algo puntual— y por qué el adulto mayor evita reportar molestias por no sentirse una carga. No existe hoy un canal intermedio entre "no comunicarse" y "llamar todos los días" que permita transmitir bienestar de forma ligera, sin fricción y sin depender de una llamada telefónica.
+Según la Agencia Andina (2025), citando datos del Instituto Nacional de Estadística e Informática (INEI), en Lima Metropolitana el 25,3% de los hogares jefaturados por adultos mayores (60 años a más) son unipersonales —es decir, compuestos únicamente por la persona mayor—, cifra que aumentó 2,3 puntos porcentuales respecto al mismo periodo del año anterior (Andina, 2025). Esta creciente proporción de adultos mayores que viven solos explica por qué los familiares terminan llamando todos los días por ansiedad —no porque haya pasado algo puntual— y por qué el adulto mayor evita reportar molestias por no sentirse una carga. No existe hoy un canal intermedio entre "no comunicarse" y "llamar todos los días" que permita transmitir bienestar de forma ligera, sin fricción y sin depender de una llamada telefónica.
 
 ### How (¿Cómo?)
 Se propone Serenia, una solución compuesta por dos aplicaciones móviles conectadas: una dirigida al adulto mayor y otra dirigida al familiar a distancia. La app del adulto mayor inicia proactivamente un check-in diario de un solo toque con preguntas variables y ligeras (no solo "¿cómo estás?"), ofrece un espacio opcional de "cuéntame algo" (mensajes de audio cortos), recordatorios de contacto social, control sobre su propia sensibilidad, un modo simplificado y un botón de auxilio siempre visible. La app del familiar ofrece un panel de estado diario, alertas solo ante señales fuera de lo habitual, sugerencias suaves de acción, registro de pequeñas victorias, coordinación entre varios familiares y notas compartidas. El diferenciador central es que la propuesta busca sentirse como compañía con respaldo y no como una herramienta de vigilancia o monitoreo clínico.
 
 ### How much (¿Cuánto?)
-El costo de no resolver este problema no es solo emocional, sino también económico y de salud mental para quienes ejercen el rol de cuidado a distancia: según una encuesta del Banco Interamericano de Desarrollo aplicada en 25 países de América Latina y el Caribe, el 31% de los cuidadores no remunerados de personas mayores reporta síntomas de depresión y el 44% ha tenido que dejar su empleo para poder cuidar (Banco Interamericano de Desarrollo [BID], 2024). Esto evidencia que, sin una herramienta que aligere la carga de supervisión constante, el desgaste recae de forma directa sobre la salud mental y la estabilidad laboral del familiar cuidador. Para el AV1, el alcance se limita al análisis del problema, la propuesta de valor y el diseño de la solución (sin desarrollo de código todavía), enfocado en las dos aplicaciones descritas: la app nativa para el adulto mayor y la app cross-platform para el familiar.
+El costo de no resolver este problema no es solo emocional, sino también económico y de salud mental para quienes ejercen el rol de cuidado a distancia: el Banco Interamericano de Desarrollo (BID, 2024), en una encuesta aplicada en 25 países de América Latina y el Caribe, encontró que el 31% de los cuidadores no remunerados de personas mayores reporta síntomas de depresión y que el 44% ha tenido que dejar su empleo para poder cuidar (Banco Interamericano de Desarrollo [BID], 2024). Esto evidencia que, sin una herramienta que aligere la carga de supervisión constante, el desgaste recae de forma directa sobre la salud mental y la estabilidad laboral del familiar cuidador. Para el AV1, el alcance se limita al análisis del problema, la propuesta de valor y el diseño de la solución (sin desarrollo de código todavía), enfocado en las dos aplicaciones descritas: la app nativa para el adulto mayor y la app cross-platform para el familiar.
 
 <br>
 
@@ -553,9 +553,130 @@ Serenia conecta a dos perfiles de usuarios clave, definidos a partir del problem
 # Capítulo II: Requirements Development and Software Solution Design
 ## 2.1. Competidores
 
-<br>
-
 ### 2.1.1. Análisis competitivo
+
+Esta sección tiene como objetivo profundizar en el conocimiento de los competidores, contrastando la percepción inicial con un análisis más detallado. Para ello, se desarrolla el siguiente Landscape:
+
+<table>
+  <tr>
+    <th colspan="5" align="center">Competitive analysis landscape</th>
+  </tr>
+  <tr>
+    <td><b>¿Por qué llevar a cabo este análisis?</b></td>
+    <td colspan="4">
+      Entender cómo las soluciones existentes de cuidado y compañía para adultos mayores abordan la conexión con la familia a distancia, para identificar vacíos que Serenia puede cubrir con su enfoque de "compañía con respaldo" (no de vigilancia clínica), y detectar amenazas y oportunidades reales de mercado.
+    </td>
+  </tr>
+  <tr>
+    <td align="center"><i>(En la cabecera colocar por cada competidor nombre y logo)</i></td>
+    <td align="center">
+      <img src="assets/img/competitors/serenia-logo.png" alt="Logo" width="80"/><br/>
+      <b>Su startup<br/>Serenia</b>
+    </td>
+    <td align="center">
+      <img src="assets/img/competitors/alexa-together-logo.png" alt="Logo" width="80"/><br/>
+      <b>Alexa Together</b>
+    </td>
+    <td align="center">
+      <img src="assets/img/competitors/grandpad-logo.png" alt="Logo" width="80"/><br/>
+      <b>GrandPad</b>
+    </td>
+    <td align="center">
+      <img src="assets/img/competitors/papa-logo.png" alt="Logo" width="80"/><br/>
+      <b>Papa</b>
+    </td>
+  </tr>
+
+  <tr>
+    <td rowspan="2" align="center"><b>Perfil</b></td>
+    <td><b>Overview</b></td>
+    <td>Dos apps móviles conectadas —una nativa para el adulto mayor y otra cross-platform para el familiar—, con check-ins diarios ligeros iniciados por la app y un panel de estado tranquilo para la familia, priorizando el vínculo emocional sobre el monitoreo clínico.</td>
+    <td>Servicio de suscripción de Amazon que extiende Alexa Care Hub: combina dispositivos Echo con monitoreo remoto, recordatorios, respuesta de emergencia 24/7 y un "círculo de apoyo" familiar.</td>
+    <td>Tablet física diseñada para adultos mayores, con conectividad LTE integrada y sin tiendas de apps externas; enfocada en videollamadas, fotos y mensajes dentro de un círculo familiar cerrado, con asistente de voz "Grandie".</td>
+    <td>Plataforma de acompañamiento a domicilio que conecta adultos mayores con "Papa Pals" (acompañantes verificados) para visitas de compañía, tareas del hogar y transporte, sin brindar cuidado médico.</td>
+  </tr>
+  <tr>
+    <td><b>Ventaja competitiva</b><br/>¿Qué valor ofrece a los clientes?</td>
+    <td>Comunicación bidireccional simple y de tono humano (no clínico), sin necesidad de comprar hardware adicional, pensada para el contexto de hogares peruanos con adultos mayores que viven solos.</td>
+    <td>Ecosistema Amazon/IoT ya instalado en muchos hogares y respuesta de emergencia profesional 24/7.</td>
+    <td>Curva de aprendizaje casi nula gracias a un dispositivo dedicado y soporte humano 24/7; "vende dignidad", no solo tecnología.</td>
+    <td>Compañía humana real y presencial (no solo digital), con costo cero para el usuario final al estar cubierta por seguros o beneficios laborales.</td>
+  </tr>
+
+  <tr>
+    <td rowspan="2" align="center"><b>Perfil de<br/>Marketing</b></td>
+    <td><b>Mercado objetivo</b></td>
+    <td>Familias peruanas urbanas con adultos mayores que viven solos y familiares que residen en otro distrito o ciudad.</td>
+    <td>Hogares en EE. UU. con dispositivos Alexa; generación "baby boomer" que envejece en casa.</td>
+    <td>Adultos mayores tecnológicamente reacios en EE. UU./Reino Unido que buscan simplicidad extrema.</td>
+    <td>Miembros de planes Medicare Advantage o beneficios de empleadores en EE. UU.</td>
+  </tr>
+  <tr>
+    <td><b>Estrategias de marketing</b></td>
+    <td>Contenido dirigido a hijos/nietos cuidadores en redes sociales, alianzas con clínicas geriátricas o seguros locales, y boca a boca familiar.</td>
+    <td>Cross-sell dentro del ecosistema Amazon (dispositivos Echo) y marketing digital dirigido a cuidadores.</td>
+    <td>Partnerships con operadoras (AT&T, Consumer Cellular), descuentos vía AARP, marketing directo a hijos adultos.</td>
+    <td>Partnerships B2B con aseguradoras y empleadores como canal principal; baja publicidad directa al consumidor.</td>
+  </tr>
+
+  <tr>
+    <td rowspan="3" align="center"><b>Perfil de<br/>Producto</b></td>
+    <td><b>Productos & Servicios</b></td>
+    <td>App nativa (adulto mayor) + app cross-platform (familiar): check-in diario, mensajes de audio, alertas selectivas, coordinación entre familiares.</td>
+    <td>Suscripción + dispositivos Echo: recordatorios, detección de caídas (con hardware de terceros), respuesta de emergencia.</td>
+    <td>Tablet dedicada + app cerrada: videollamadas, fotos, juegos, asistente de voz.</td>
+    <td>Servicio de acompañamiento humano a domicilio, coordinado vía app/plataforma.</td>
+  </tr>
+  <tr>
+    <td><b>Precios & Costos</b></td>
+    <td>Modelo propuesto: freemium (funciones básicas gratuitas; funciones familiares avanzadas bajo suscripción mensual accesible).</td>
+    <td>Suscripción mensual (monto no divulgado públicamente en la fuente consultada).</td>
+    <td>USD 299 (dispositivo) + USD 40/mes de suscripción (USD 38 con AARP), o USD 649/año prepagado.</td>
+    <td>Gratuito para el usuario final (cubierto por seguros/beneficios); el cuidado de compañía tradicional cuesta USD 20–40/hora como referencia.</td>
+  </tr>
+  <tr>
+    <td><b>Canales de distribución</b><br/>(Web y/o Móvil)</td>
+    <td>Apps móviles (Android nativo + cross-platform), sin hardware adicional requerido.</td>
+    <td>App Alexa + dispositivos Echo, distribuidos vía Amazon.</td>
+    <td>Venta directa en GrandPad.net, Amazon, y operadoras como Consumer Cellular.</td>
+    <td>Plataforma web y móvil, con acceso mediado por aseguradoras y empleadores (B2B2C, no venta directa al público).</td>
+  </tr>
+
+  <tr>
+    <td rowspan="5" align="center"><b>Análisis<br/>SWOT</b></td>
+    <td colspan="4">
+      Realice esto para su startup y sus competidores. Sus fortalezas deberían apoyar sus oportunidades y contribuir a lo que ustedes definen como su posible ventaja competitiva.
+    </td>
+  </tr>
+  <tr>
+    <td><b>Fortalezas</b></td>
+    <td>No requiere hardware adicional; lenguaje cercano no clínico como diferenciador emocional; enfocado en el contexto e idioma local (Perú).</td>
+    <td>Ecosistema Amazon ya instalado en millones de hogares; integración IoT amplia; respuesta de emergencia 24/7; marca de confianza establecida.</td>
+    <td>Configuración en menos de 3 minutos; modelo "solo familia" que evita estafas; soporte humano real 24/7; diseño accesible pensado para dignidad del usuario.</td>
+    <td>Sin compromisos ni contratos a largo plazo; disponible en los 50 estados de EE. UU.; costo cero para el usuario final vía seguros; acompañantes verificados con antecedentes revisados.</td>
+  </tr>
+  <tr>
+    <td><b>Debilidades</b></td>
+    <td>Sin marca ni base de usuarios instalada; sin canal B2B con aseguradoras; depende de que ambos extremos (adulto mayor y familiar) usen la app de forma consistente.</td>
+    <td>No integrado a sistemas de salud ni flujos clínicos; depende de que el hogar ya tenga o adopte dispositivos smart home; implicaciones de privacidad del monitoreo doméstico no resueltas públicamente.</td>
+    <td>Costo de suscripción mensual elevado (USD 38–40); limitado únicamente a apps precargadas, sin flexibilidad; el dispositivo queda inutilizable si se cancela la suscripción.</td>
+    <td>No puede brindar cuidado médico ni personal (baño, movilidad); los "Pals" no cuentan con certificación formal de cuidado; acceso público limitado, depende de tener el seguro o beneficio laboral adecuado.</td>
+  </tr>
+  <tr>
+    <td><b>Oportunidades</b></td>
+    <td>Mercado peruano/latinoamericano de cuidado de adultos mayores aún sin un jugador digital dominante enfocado en el vínculo emocional; posibles alianzas con clínicas geriátricas o EPS locales; creciente proporción de adultos mayores viviendo solos (Andina, 2025) amplía el mercado objetivo.</td>
+    <td>Creciente escasez de cuidadores de salud a domicilio en EE. UU., que aumenta la demanda de monitoreo remoto; posibilidad de expandirse a mercados donde Amazon ya tiene presencia comercial.</td>
+    <td>Mercado creciente de adultos mayores tecnológicamente reacios que valoran la simplicidad extrema; alianzas adicionales con operadoras móviles y organizaciones como AARP.</td>
+    <td>Expansión de coberturas de seguros de salud (Medicare Advantage y similares) que incluyan beneficios de compañía; crecimiento general de la tendencia de "aging in place".</td>
+  </tr>
+  <tr>
+    <td><b>Amenazas</b></td>
+    <td>Entrada de jugadores globales (Amazon, GrandPad) a mercados emergentes; baja disposición a pagar suscripciones en el segmento peruano; resistencia tecnológica del adulto mayor; sustitutos informales y gratuitos (grupos de WhatsApp familiares).</td>
+    <td>Regulaciones de privacidad de datos cada vez más estrictas; entrada de competidores tecnológicos (Google, Apple) al mismo espacio; percepción de "vigilancia" que puede generar rechazo en adultos mayores.</td>
+    <td>Aparición de tablets genéricas más económicas con controles familiares similares; alta sensibilidad al precio en el segmento senior de bajos ingresos.</td>
+    <td>Dependencia total de contratos B2B con aseguradoras y empleadores (si se cancelan, se pierde el canal de acceso); competencia de otras plataformas de cuidado tipo gig (Cariloop, Honor).</td>
+  </tr>
+</table>
 
 <br>
 
