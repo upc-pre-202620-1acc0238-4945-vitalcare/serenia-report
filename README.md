@@ -280,6 +280,8 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
 
 # Objetivos SMART
 
+<br>
+
 # Capítulo I: Presentación
 ## 1.1. Startup Profile
 ### 1.1.1. Descripción de la Startup
@@ -312,6 +314,7 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
 - **Conexión emocional:** <br>
   Celebramos lo bueno de la rutina. Fomentamos espacios como "cuéntame algo" para registrar pequeñas victorias y reforzar el cariño diario, no solo para alertar sobre problemas.
 
+<br>
 
 ### 1.1.2. Perfiles de integrantes del equipo
 
@@ -405,6 +408,8 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
 
 </table>
 
+<br>
+
 ## 1.2. Solution Profile
 
 Serenia es una solución con dos interfaces: una dirigida al adulto mayor que vive solo y otra dirigida al familiar a distancia. Ambos comparten un mismo objetivo: sustituir la llamada telefónica diaria motivada por la ansiedad con una forma de comunicación más simple, natural y menos invasiva del bienestar cotidiano.
@@ -415,12 +420,28 @@ Del lado del familiar, la aplicación ofrece un panel de estado diario que muest
 
 El diferenciador central de Serenia frente a otras soluciones de monitoreo es su enfoque en la compañía por encima de la vigilancia: el lenguaje y las interacciones evitan el tono clínico o de "reporte", priorizando el vínculo emocional cotidiano entre adulto mayor y su familia, sin descuidar la seguridad ante situaciones de emergencia.
 
+<br>
+
 ### 1.2.1. Antecedentes y problemática
+
+<br>
+
 ### 1.2.2. Lean UX Process
 #### 1.2.2.1. Lean UX Problem Statements
+
+<br>
+
 #### 1.2.2.2. Lean UX Assumptions
+
+<br>
+
 #### 1.2.2.3. Lean UX Hypothesis Statements
+
+<br>
+
 #### 1.2.2.4. Lean UX Canvas
+
+<br>
 
 ## 1.3. Segmentos objetivo
 
