@@ -369,9 +369,9 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
     </td>
   </tr>
 
-  <tr>
+    <tr>
     <td rowspan="3" align="center">
-      <img src="" alt="Foto de Brianna Salinas" width="500"/>
+      <img src="assets/img/member-profiles/brianna-salinas.png" alt="Foto de Brianna Salinas" width="500"/>
     </td>
     <td><b>Nombre:</b> Salinas Guzman, Brianna Cristina</td>
   </tr>
@@ -381,7 +381,7 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
   <tr>
     <td>
       <b>Descripción:</b><br/>
-      Soy <b></b>
+      Soy <b>Brianna Cristina Salinas Guzmán</b>, tengo 19 años y estudio Ingeniería de Software en la Universidad Peruana de Ciencias Aplicadas (UPC), actualmente en el 6to ciclo. Tengo experiencia en desarrollo backend con Spring Boot y Express.js, aplicando Domain-Driven Design (bounded contexts, autenticación JWT, integración con APIs externas), así como en frontend con Angular, React y Vue. Me interesa profundizar en el desarrollo de aplicaciones móviles, tanto nativas como multiplataforma, y disfruto trabajar bajo metodologías ágiles y buenas prácticas de arquitectura de software.
       <br/>
     </td>
   </tr>
