@@ -417,10 +417,96 @@ El diferenciador central de Serenia frente a otras soluciones de monitoreo es su
 
 ### 1.2.1. Antecedentes y problemática
 ### 1.2.2. Lean UX Process
+
+Esta sección desarrolla el Lean UX Process aplicado al dominio del problema de Serenia, siguiendo la metodología de Jeff Gothelf y Josh Seiden (*Lean UX, 3rd Edition*). Se parte de un Problem Statement único para todo el proyecto, se derivan los Assumptions organizados según los cinco tipos propuestos por Lean UX, se construyen los Hypothesis Statements correspondientes a cada Feature Assumption, y finalmente se consolida todo en un Lean UX Canvas.
+
 #### 1.2.2.1. Lean UX Problem Statements
+
+El estado actual de **la comunicación entre adultos mayores que viven solos y sus familiares a distancia** se ha enfocado principalmente en **llamadas telefónicas reactivas motivadas por la ansiedad, y en aplicaciones de monitoreo de salud con un enfoque clínico y de vigilancia constante**.
+
+Lo que los productos o servicios existentes no logran resolver es **una forma de comunicación cotidiana, ligera y bidireccional que transmita bienestar emocional sin invadir la autonomía del adulto mayor ni generar una carga de vigilancia sobre el familiar**.
+
+Nuestro producto resolverá esta brecha **ofreciendo un check-in diario de un solo toque para el adulto mayor, con preguntas variables y un tono de compañía (no clínico), y un panel de estado para el familiar que solo emite alertas cuando algo se sale de lo habitual**.
+
+Nuestro enfoque inicial será **adultos mayores de 60 años a más que viven solos en zonas urbanas del Perú, y sus familiares directos de 25 a 59 años que residen en una ciudad o distrito distinto**.
+
+Sabremos que hemos tenido éxito cuando veamos **una alta tasa de check-ins diarios completados por el adulto mayor, una reducción en la frecuencia de llamadas motivadas por ansiedad por parte del familiar, y un uso recurrente del panel de estado sin necesidad de soporte o intervención externa**.
+
 #### 1.2.2.2. Lean UX Assumptions
+
+**Business Assumptions**
+- Existe un mercado desatendido de soluciones de comunicación familiar a distancia que no dependen de dispositivos médicos ni wearables costosos.
+- Un modelo freemium (funciones básicas gratuitas, funciones familiares avanzadas de pago) es viable como estrategia de monetización, dado el bajo costo de adquisición vía recomendación familiar (boca a boca).
+- VitalCare puede posicionarse como alternativa a las apps de monitoreo de salud, diferenciándose por su enfoque emocional y no clínico.
+
+**Business Outcome Assumptions**
+- El aumento en la cantidad de check-ins completados por semana indicará que la solución se está adoptando como hábito.
+- La reducción en el costo de soporte/atención al cliente (menos consultas del tipo "¿cómo sé si está bien mi familiar?") indicará que el panel de estado cumple su función sin fricción.
+- El incremento en el número de familiares que se registran a partir de una recomendación de otro usuario validará el boca a boca como canal de adquisición.
+
+**User Assumptions**
+- El adulto mayor que vive solo tiene acceso a un smartphone táctil y sabe realizar interacciones simples (tocar un botón, grabar un audio).
+- El familiar a distancia revisa su smartphone varias veces al día y está dispuesto a instalar una aplicación adicional para conocer el bienestar de su familiar.
+- Ambos segmentos desconfían de soluciones que se sientan "médicas" o de vigilancia constante.
+
+**User Outcome and Benefit Assumptions**
+- El adulto mayor obtiene una forma de expresar cómo se siente sin tener que iniciar una llamada ni dar explicaciones extensas.
+- El familiar obtiene tranquilidad diaria sin tener que llamar constantemente ni sentir que está invadiendo la rutina del adulto mayor.
+- Ambos segmentos fortalecen su vínculo emocional a través de interacciones ligeras (como "cuéntame algo"), en lugar de limitarse a reportes de estado.
+
+**Feature Assumptions**
+- Un check-in diario de un solo toque con preguntas variables reducirá la fricción de comunicación para el adulto mayor.
+- Un espacio de "cuéntame algo" (audio corto) permitirá capturar momentos cotidianos que fortalezcan el vínculo familiar.
+- Un panel de estado con alertas inteligentes (solo ante anomalías) evitará que el familiar revise la aplicación de forma ansiosa.
+- Un botón de auxilio siempre visible cubrirá el escenario de emergencia sin necesidad de vigilancia constante.
+
 #### 1.2.2.3. Lean UX Hypothesis Statements
+
+1. **Check-in diario de un toque**: Creemos que lograremos *una alta tasa de adopción diaria del check-in* si *los adultos mayores que viven solos en zonas urbanas del Perú* logran *comunicar su estado de ánimo sin esfuerzo ni necesidad de dar explicaciones extensas* con *un check-in de un solo toque con preguntas ligeras y variables*.
+2. **"Cuéntame algo"**: Creemos que lograremos *un mayor vínculo emocional percibido entre ambos segmentos* si *los adultos mayores y sus familiares a distancia* logran *compartir momentos cotidianos más allá de reportes de bienestar* con *un espacio de grabación de audio corto llamado "cuéntame algo"*.
+3. **Panel de estado con alertas inteligentes**: Creemos que lograremos *una reducción en la frecuencia de llamadas motivadas por ansiedad* si *los familiares a distancia* logran *conocer el estado de bienestar de su familiar sin necesidad de preguntar constantemente* con *un panel de estado diario que solo emite alertas cuando se detecta una anomalía*.
+4. **Botón de auxilio**: Creemos que lograremos *mayor confianza en la solución como respaldo ante emergencias* si *los adultos mayores que viven solos* logran *solicitar ayuda de forma inmediata en caso de urgencia* con *un botón de auxilio siempre visible y de fácil acceso*.
+
 #### 1.2.2.4. Lean UX Canvas
+
+<table>
+  <tr>
+    <th>Bloque</th>
+    <th>Contenido</th>
+  </tr>
+  <tr>
+    <td><b>Business Problem</b></td>
+    <td>Las familias con un adulto mayor que vive solo dependen de llamadas reactivas motivadas por la ansiedad, sin una forma cotidiana y no invasiva de saber que todo está bien.</td>
+  </tr>
+  <tr>
+    <td><b>Business Outcomes</b></td>
+    <td>Incremento de check-ins semanales completados, reducción de consultas de soporte, incremento de registros por referidos.</td>
+  </tr>
+  <tr>
+    <td><b>Users</b></td>
+    <td>Adultos mayores de 60 años a más que viven solos (zonas urbanas del Perú); familiares de 25 a 59 años que residen a distancia.</td>
+  </tr>
+  <tr>
+    <td><b>User Outcomes & Benefits</b></td>
+    <td>Expresarse sin esfuerzo (adulto mayor); tranquilidad diaria sin llamar constantemente (familiar).</td>
+  </tr>
+  <tr>
+    <td><b>Solutions</b></td>
+    <td>Check-in de un toque, "cuéntame algo", panel de estado con alertas inteligentes, botón de auxilio.</td>
+  </tr>
+  <tr>
+    <td><b>Hypotheses</b></td>
+    <td>Las 4 hypothesis statements descritas en la sección 1.2.2.3.</td>
+  </tr>
+  <tr>
+    <td><b>Lo mínimo que necesitamos aprender primero</b></td>
+    <td>Validar si el check-in de un toque se adopta como hábito diario, por ser la asunción de mayor riesgo e impacto.</td>
+  </tr>
+  <tr>
+    <td><b>Cómo lo probaremos</b></td>
+    <td>Prototipo del flujo de check-in validado con 3 a 5 usuarios del Segmento 1 antes de construir el resto de las funcionalidades.</td>
+  </tr>
+</table>
 
 ## 1.3. Segmentos objetivo
 
