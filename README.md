@@ -10,15 +10,11 @@ Carrera de Ingeniería de Software
 
 **Aplicaciones para Dispositivos Móviles**
 
-NRC
-
-**4945**
+NRC: **4945**
 
 ### Informe del Trabajo Final
 
-Docente
-
-**Mayta Guillermo, Jorge Luis**
+Docente: **Mayta Guillermo, Jorge Luis**
 
 <br>
 
@@ -44,11 +40,13 @@ Integrantes
 
 <br>
 
-**Período 202620**
+**Período 2026-20**
 
 **Septiembre 2026**
 
 </div>
+
+<br>
 
 ---
 
@@ -67,16 +65,12 @@ Integrantes
     <td>XX/09/2026</td>
     <td>
       Contreras Torres, Arturo Valentino <br>
-      <br>
       <p></p>
       Gallardo Morales, Carla Alejandra <br>
-      <br>
       <p></p>
       García Paredes, Victor Manuel <br>
-      <br>
       <p></p>
       Salinas Guzman, Brianna Cristina <br>
-      <br>
       <p></p>
       Sandoval Aiquipa, Kelber Yamir <br>
     </td>
@@ -87,6 +81,8 @@ Integrantes
   </tr>
   </table>
 
+<br>
+
   ---
 
 # Project Report Collaboration Insights
@@ -96,6 +92,8 @@ El informe del proyecto fue desarrollado de manera colaborativa por el equipo me
 URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-report <br>
 
 **Primera Entrega (AV1)**
+
+<br>
 
 ---
 
@@ -210,6 +208,8 @@ URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vi
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
 
+<br>
+
 ---
 
 # Student Outcome
@@ -292,15 +292,21 @@ VitalCare nace para sanar esta desconexión apostando por tecnología que acompa
 
 El corazón de Serenia es que cada interacción se sienta como una charla genuina y no como un chequeo médico. Incluye preguntas ligeras, un espacio para grabar anécdotas y alertas familiares que solo suenan cuando de verdad hacen falta. Queremos devolver la naturalidad al cuidado a distancia: dándole tranquilidad a la familia y respetando siempre la autonomía del adulto mayor.
 
-#### Misión
+<br>
+
+## Misión
 
 Dar a los adultos mayores que viven solos una forma simple y natural de comunicar su día a día, y a sus familias, la tranquilidad de saber cómo están. Reducimos la ansiedad de la distancia conectándolos desde el afecto, sin caer en el monitoreo invasivo.
 
-#### Visión
+<br>
+
+## Visión
 
 Ser la plataforma de compañía digital que transforme cómo las familias de Latinoamérica se cuidan a distancia. Queremos fortalecer el vínculo emocional por encima del reporte clínico, logrando que ningún adulto mayor enfrente la soledad en silencio.
 
-#### Valores
+<br>
+
+## Valores
 
 - **Cercanía:** <br>
   Diseñamos cada interacción con un lenguaje cálido y humano. Cuidar no debe sentirse como una obligación ni leerse como un historial médico.
@@ -459,10 +465,20 @@ Serenia conecta a dos perfiles de usuarios clave, definidos a partir del problem
 
 - **Sustento:** Lima concentra el 45,4% de los migrantes internos del país por motivos laborales o educativos (Carrasco Freitas, 2026), evidenciando una alta proporción de familias separadas geográficamente. Para acortar esta distancia, la tecnología es el puente ideal: el 95,4% de hogares peruanos ya cuenta con un smartphone (OSIPTEL, 2026), con una adopción que bordea el 95% en los adultos jóvenes y de mediana edad. Así, este segmento combina perfectamente la necesidad emocional de estar presentes con la fluidez tecnológica para integrar la app en su rutina diaria.
 
+<br>
+
 # Capítulo II: Requirements Development and Software Solution Design
 ## 2.1. Competidores
+
+<br>
+
 ### 2.1.1. Análisis competitivo
+
+<br>
+
 ### 2.1.2. Estrategias y tácticas frente a competidores
+
+<br>
 
 ## 2.2. Entrevistas
 
@@ -500,99 +516,291 @@ Para conocer mejor a nuestros dos segmentos, se diseñaron dos guías de entrevi
 11. Si pudiera ver diariamente cómo está su familiar sin llamarlo, ¿qué información le gustaría ver?
 12. ¿Qué le generaría desconfianza en una app así?
 
+<br>
+
 ### 2.2.2. Registro de entrevistas
+
+<br>
+
 ### 2.2.3. Análisis de entrevistas
+
+<br>
+
 ## 2.3. Needfinding
 ### 2.3.1. User Personas
+
+<br>
+
 ### 2.3.2. User Task Matrix
+
+<br>
+
 ### 2.3.3. User Journey Mapping
+
+<br>
+
 ### 2.3.4. Empathy Mapping
+
+<br>
+
 ### 2.3.5. Big Picture EventStorming
+
+<br>
+
 ### 2.3.6. Ubiquitous Language
+
+<br>
+
 ## 2.4. Requirements specification
+
 ### 2.4.1. User Stories
+
+<br>
+
 ### 2.4.2. Impact Mapping
+
+<br>
+
 ### 2.4.3. Product Backlog
+
+<br>
+
 ## 2.5. Strategic-Level Domain-Driven Design
 ### 2.5.1. EventStorming
 #### 2.5.1.1. Candidate Context Discovery
+
+<br>
+
 #### 2.5.1.2. Domain Message Flows Modeling
+
+<br>
+
 #### 2.5.1.3. Bounded Context Canvases
+
+<br>
+
 ### 2.5.2. Context Mapping
+
+<br>
+
 ### 2.5.3. Software Architecture
 #### 2.5.3.1. Software Architecture Context Level Diagrams
+
+<br>
+
 #### 2.5.3.2. Software Architecture Container Level Diagrams
+
+<br>
+
 #### 2.5.3.3. Software Architecture Deployment Diagrams
+
+<br>
+
 ## 2.6. Tactical-Level Domain-Driven Design
 ### 2.6.x. Bounded Context: <Bounded Context Name>
+
+<br>
+
 #### 2.6.x.1. Domain Layer
+
+<br>
+
 #### 2.6.x.2. Interface Layer
+
+<br>
+
 #### 2.6.x.3. Application Layer
+
+<br>
+
 #### 2.6.x.4 Infrastructure Layer
+
+<br>
+
 #### 2.6.x.5. Bounded Context Software Architecture Component Level Diagrams
+
+<br>
+
 #### 2.6.x.6. Bounded Context Software Architecture Code Level Diagrams
+
+<br>
+
 ##### 2.6.x.6.1. Bounded Context Domain Layer Class Diagrams
+
+<br>
+
 ##### 2.6.x.6.2. Bounded Context Database Design Diagram
+
+<br>
+
 
 # Capítulo III: Solution UI/UX Design
 ## 3.1. Product design
 ### 3.1.1. Style Guidelines
+
+<br>
+
 #### 3.1.1.1. General Style Guidelines
+
+<br>
+
 ### 3.1.2. Information Architecture
 #### 3.1.2.1. Organization Systems
+
+<br>
+
 #### 3.1.2.2. Labelling Systems
+
+<br>
+
 #### 3.1.2.3. SEO Tags and Meta Tags
+
+<br>
+
 #### 3.1.2.4. Searching Systems
+
+<br>
+
 #### 3.1.2.5. Navigation Systems
+
+<br>
+
 ### 3.1.3. Landing Page UI Design
 #### 3.1.3.1. Landing Page Wireframe
+
+<br>
+
 #### 3.1.3.2. Landing Page Mock-up
+
+<br>
+
 ### 3.1.4. Mobile Applications UX/UI Design
 #### 3.1.4.1. Mobile Applications Wireframes
+
+<br>
+
 #### 3.1.4.2. Mobile Applications Wireflow Diagrams
+
+<br>
+
 #### 3.1.4.3. Mobile Applications Mock-ups
+
+<br>
+
 #### 3.1.4.4. Mobile Applications User Flow Diagrams
+
+<br>
+
 #### 3.1.4.5. Mobile Applications Prototyping
+
+<br>
 
 # Capítulo IV: Product Implementation & Validation
 ## 4. Product Implementation & Validation
 ## 4.1. Software Configuration Management
 ### 4.1.1. Software Development Environment Configuration
+
+<br>
+
 ### 4.1.2. Source Code Management
+
+<br>
+
 ### 4.1.3. Source Code Style Guide & Conventions
+
+<br>
+
 ### 4.1.4. Software Deployment Configuration
+
+<br>
+
 ## 4.2. Landing Page & Mobile Application Implementation
 ### 4.2.1. Sprint n
 #### 4.2.1.1. Sprint Planning n
+
+<br>
+
 #### 4.2.1.2. Aspect Leaders and Collaborators
+
+<br>
+
 #### 4.2.1.3. Sprint Backlog n
+
+<br>
+
 #### 4.2.1.4. Development Evidence for Sprint Review
+
+<br>
+
 #### 4.2.1.5. Testing Suite Evidence for Sprint Review
+
+<br>
+
 #### 4.2.1.6. Execution Evidence for Sprint Review
+
+<br>
+
 #### 4.2.1.7. Services Documentation Evidence for Sprint Review
+
+<br>
+
 #### 4.2.1.8. Software Deployment Evidence for Sprint Review
+
+<br>
+
 #### 4.2.1.9. Team Collaboration Insights during Sprint
+
+<br>
+
 ## 4.3. Validation Interviews
 ### 4.3.1. Diseño de Entrevistas
+
+<br>
+
 ### 4.3.2. Registro de Entrevistas
+
+<br>
+
 ### 4.3.3. Evaluaciones según heurísticas
 
+<br>
+
 # Conclusiones
-## Conclusiones y recomendaciones.
+
+<br>
+
+## Recomendaciones
+
+<br>
+
 ## Video App Validation
+
+<br>
+
 ## Video About the product
+
+<br>
+
 ## Video About the team
+
+<br>
 
 # Glosario
 
+<br>
+
 # Bibliografía
 
-Carrasco Freitas, M. (2026, 29 de mayo). Lima es el principal destino migratorio: más de 3 millones de peruanos llegaron desde otras regiones, según Censo 2025. Infobae. https://www.infobae.com/peru/2026/05/29/lima-es-el-principal-destrino-migratorio-mas-de-3-millones-de-peruanos-llegaron-desde-otras-regiones-segun-censo-2025/
+> Carrasco Freitas, M. (2026, 29 de mayo). Lima es el principal destino migratorio: más de 3 millones de peruanos llegaron desde otras regiones, según Censo 2025. Infobae. https://www.infobae.com/peru/2026/05/29/lima-es-el-principal-destrino-migratorio-mas-de-3-millones-de-peruanos-llegaron-desde-otras-regiones-segun-censo-2025/
 
-Instituto Nacional de Estadística e Informática. (2025a, 26 de marzo). El 42,0 % de los hogares del país tiene entre sus miembros a un adulto mayor. Gob.pe. https://www.gob.pe/institucion/inei/noticias/1133454-el-42-0-de-los-hogares-
+> Instituto Nacional de Estadística e Informática. (2025a, 26 de marzo). El 42,0 % de los hogares del país tiene entre sus miembros a un adulto mayor. Gob.pe. https://www.gob.pe/institucion/inei/noticias/1133454-el-42-0-de-los-hogares-
 
-Instituto Nacional de Estadística e Informática. (2025b). Estadísticas de las tecnologías de información y comunicación en los hogares: informe técnico, enero-febrero-marzo 2025. https://www.inei.gob.pe/media/MenuRecursivo/boletines/informe-tecnico_tecnologiasdelainformacion_ene_feb_mar2025.pdf
+> Instituto Nacional de Estadística e Informática. (2025b). Estadísticas de las tecnologías de información y comunicación en los hogares: informe técnico, enero-febrero-marzo 2025. https://www.inei.gob.pe/media/MenuRecursivo/boletines/informe-tecnico_tecnologiasdelainformacion_ene_feb_mar2025.pdf
 
-Organismo Supervisor de Inversión Privada en Telecomunicaciones. (2026). Erestel 2025: cada vez más hogares peruanos cuentan con un smartphone. https://www.osiptel.gob.pe/portal-del-usuario/noticias/erestel-2025-cada-vez-m%C3%A1s-hogares-peruanos-cuentan-con-un-smartphone-cu%C3%A1ntos-tienen/
+> Organismo Supervisor de Inversión Privada en Telecomunicaciones. (2026). Erestel 2025: cada vez más hogares peruanos cuentan con un smartphone. https://www.osiptel.gob.pe/portal-del-usuario/noticias/erestel-2025-cada-vez-m%C3%A1s-hogares-peruanos-cuentan-con-un-smartphone-cu%C3%A1ntos-tienen/
+
+<br>
 
 # Anexos
+
+<br>
