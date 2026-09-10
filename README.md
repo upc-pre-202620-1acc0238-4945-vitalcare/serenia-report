@@ -776,7 +776,7 @@ Para cada segmento se registraron entre 3 y 5 entrevistas. Todas las entrevistas
 
 ##### Entrevista 1
 
-*Screenshot: pendiente (se agrega cuando el equipo consolide el video único de entrevistas).*
+<img src="assets/img/interviews/segmento1-entrevista1-yrma.png" alt="Screenshot entrevista Yrma Huamán" width="700"/>
 
 <br>
 
@@ -801,9 +801,24 @@ Yrma vive sola hace 6 años en Tarapoto, desde que sus dos hijas (abogada y admi
 
 ##### Entrevista 2
 
-*Pendiente — completar siguiendo el mismo formato de la Entrevista 1.*
+*Screenshot: pendiente.*
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
+</table>
+
+**Resumen:**
 
 </div>
+
+*Pendiente.*
 
 <br>
 
@@ -811,9 +826,24 @@ Yrma vive sola hace 6 años en Tarapoto, desde que sus dos hijas (abogada y admi
 
 ##### Entrevista 3
 
-*Pendiente — completar siguiendo el mismo formato de la Entrevista 1.*
+*Screenshot: pendiente.*
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
+</table>
+
+**Resumen:**
 
 </div>
+
+*Pendiente.*
 
 <br>
 
@@ -823,9 +853,24 @@ Yrma vive sola hace 6 años en Tarapoto, desde que sus dos hijas (abogada y admi
 
 ##### Entrevista 1
 
-*Pendiente — completar siguiendo el mismo formato de la Entrevista 1 del Segmento 1.*
+*Screenshot: pendiente.*
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
+</table>
+
+**Resumen:**
 
 </div>
+
+*Pendiente.*
 
 <br>
 
@@ -833,9 +878,24 @@ Yrma vive sola hace 6 años en Tarapoto, desde que sus dos hijas (abogada y admi
 
 ##### Entrevista 2
 
-*Pendiente — completar siguiendo el mismo formato de la Entrevista 1 del Segmento 1.*
+*Screenshot: pendiente.*
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
+</table>
+
+**Resumen:**
 
 </div>
+
+*Pendiente.*
 
 <br>
 
@@ -843,9 +903,24 @@ Yrma vive sola hace 6 años en Tarapoto, desde que sus dos hijas (abogada y admi
 
 ##### Entrevista 3
 
-*Pendiente — completar siguiendo el mismo formato de la Entrevista 1 del Segmento 1.*
+*Screenshot: pendiente.*
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
+</table>
+
+**Resumen:**
 
 </div>
+
+*Pendiente.*
 
 <br>
 
