@@ -766,6 +766,87 @@ Para conocer mejor a nuestros dos segmentos, se diseñaron dos guías de entrevi
 
 ### 2.2.2. Registro de entrevistas
 
+Para cada segmento se registraron entre 3 y 5 entrevistas. Todas las entrevistas se editarán en un único video, por lo que el campo "Timing en el video" indica el momento exacto (inicio-fin) en que se ubica cada una dentro de dicho video consolidado.
+
+<br>
+
+#### Segmento 1: Adultos mayores que viven solos
+
+<div align="center">
+
+##### Entrevista 1
+
+*Screenshot: pendiente (se agrega cuando el equipo consolide el video único de entrevistas).*
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td>Yrma Huamán Jiménez</td></tr>
+  <tr><td><b>Edad</b></td><td>61 años</td></tr>
+  <tr><td><b>Distrito</b></td><td>Tarapoto, San Martín</td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+
+Yrma vive sola hace 6 años en Tarapoto, desde que sus dos hijas (abogada y administradora) se mudaron a Lima por estudios y luego trabajo. Es profesora jubilada, con una rutina tranquila centrada en el hogar (cocina, televisión, revisar el celular por las tardes) y sale de casa solo 2-3 veces por semana para el mercado. Habla con sus hijas casi a diario por WhatsApp, llamada o mensaje, aunque a veces pasan 2-3 días. Un patrón clave: cuando tiene un mal día, prefiere no contarlo para no preocupar a sus hijas ni sentir que es una carga para ellas, sabiendo que están lejos y "solo van a poder preocuparse". En tecnología, usa un smartphone táctil (Samsung) que le regalaron sus hijas; sus apps más usadas son WhatsApp, Facebook (fotos y noticias) y Messenger. Como frustración, menciona dificultad con funciones nuevas y que el celular "se traba" — evita llamar a sus hijas por esto para no interrumpirlas en su trabajo, reforzando el mismo patrón de no querer molestar.
+
+<br>
+
+<div align="center">
+
+##### Entrevista 2
+
+*Pendiente — completar siguiendo el mismo formato de la Entrevista 1.*
+
+</div>
+
+<br>
+
+<div align="center">
+
+##### Entrevista 3
+
+*Pendiente — completar siguiendo el mismo formato de la Entrevista 1.*
+
+</div>
+
+<br>
+
+#### Segmento 2: Familiares a distancia
+
+<div align="center">
+
+##### Entrevista 1
+
+*Pendiente — completar siguiendo el mismo formato de la Entrevista 1 del Segmento 1.*
+
+</div>
+
+<br>
+
+<div align="center">
+
+##### Entrevista 2
+
+*Pendiente — completar siguiendo el mismo formato de la Entrevista 1 del Segmento 1.*
+
+</div>
+
+<br>
+
+<div align="center">
+
+##### Entrevista 3
+
+*Pendiente — completar siguiendo el mismo formato de la Entrevista 1 del Segmento 1.*
+
+</div>
+
 <br>
 
 ### 2.2.3. Análisis de entrevistas
