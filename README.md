@@ -971,7 +971,17 @@ La principal diferencia radica en la naturaleza de su interacción; el adulto ma
 
 ### 2.3.4. Empathy Mapping
 
-<br>
+En esta sección, el equipo resume el proceso de elaboración de los *Empathy Maps* realizados en UXPressia para cada uno de nuestros *User Personas*[cite: 1]. Durante sesiones colaborativas, nos centramos en empatizar profundamente con nuestros dos actores principales: el adulto mayor que vive solo y su familiar a distancia. Para lograrlo, respondimos preguntas clave sobre su entorno, sus preocupaciones (Pains) y aquello que aliviaría sus frustraciones y los convencería de que nuestra aplicación es la alternativa correcta para mantener su vínculo (Gains)[cite: 1].
+
+A continuación, se presentan las capturas de los mapas resultantes elaborados en la herramienta indicada:
+
+#### Mapa de Empatía: Segmento 1 - Adulto Mayor (Usuario Independiente)
+
+![Empathy Map - Adulto Mayor](assets/img/empathy-maps/empathy-map-adulto-mayor.png)
+
+#### Mapa de Empatía: Segmento 2 - Familiar a distancia (Red de Apoyo)
+
+![Empathy Map - Familiar a Distancia](assets/img/empathy-maps/empathy-map-familiar.png)
 
 ### 2.3.5. Big Picture EventStorming
 
