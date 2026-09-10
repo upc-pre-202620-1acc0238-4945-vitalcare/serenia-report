@@ -854,15 +854,16 @@ Yrma vive sola hace 6 años en Tarapoto, desde que sus dos hijas (abogada y admi
 
 ##### Entrevista 1
 
-*Screenshot: pendiente.*
+
+<img src="assets/img/interviews/interview-relative-photo.jpg" alt="Screenshot entrevista Yrma Huamán" width="700"/>
 
 <br>
 
 <table align="center">
   <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>Edad</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>Distrito</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>Isabel Maria del Carmen Morales Reyna</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>60 años </i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>La Molina</i></td></tr>
   <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
   <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
 </table>
@@ -871,7 +872,10 @@ Yrma vive sola hace 6 años en Tarapoto, desde que sus dos hijas (abogada y admi
 
 </div>
 
-*Pendiente.*
+Isabel nos comenta que es hija de un adulto mayor de 89 años, quien vive solo desde hace aproximadamente 40 años por decisión propia. La comunicación entre ambos es casi escasa debido a la distancia entre sus hogares y, principalmente, a que su padre presenta un 95 % de discapacidad visual y no utiliza el celular, ya que se le dificulta manejarlo. Por ello, su principal medio de comunicación es la presencialidad.
+Isabel expresa su preocupación por el bienestar de su padre cuando se encuentra solo, debido a que, por su avanzada edad y condición visual, podría sufrir alguna caída o presentar algún problema relacionado con su salud sin contar con alguien que pueda asistirlo inmediatamente. Por esta razón, le gustaría que nuestra aplicación cuente con cámaras que le permitan monitorear a su padre a distancia, así como conocer determinadas actividades, por ejemplo, si ha abierto la puerta o si ha dormido a sus horas.
+Asimismo, considera importante que la aplicación sea de fácil uso y accesible, tomando en cuenta la condición visual de su padre. También manifestó su interés en que la solución incluya una sección de juegos mentales y noticias informativas dirigidas a los adultos mayores, con el objetivo de mantenerlos activos y entretenidos.
+Isabel nos comentó que nunca ha utilizado una aplicación enfocada en salud o bienestar familiar; sin embargo, estaría dispuesta a probar nuestra solución, ya que considera que existen pocos proyectos que se preocupen específicamente por el bienestar y cuidado de los adultos mayores.
 
 <br>
 
