@@ -779,7 +779,35 @@ Para conocer mejor a nuestros dos segmentos, se diseñaron dos guías de entrevi
 
 ### 2.3.2. User Task Matrix
 
-<br>
+En esta sección se concentran las tareas principales que los User Personas deben realizar para cumplir sus objetivos diarios de comunicación, cuidado y bienestar de manera natural y poco invasiva. Para este análisis, hemos considerado a nuestros dos segmentos principales: el Adulto Mayor y el Familiar a distancia.
+
+#### Segmento 1: Adulto Mayor (Usuario Independiente)
+
+| Tarea | Frecuencia | Importancia |
+| :--- | :--- | :--- |
+| Reportar su estado de bienestar o responder al check-in diario | Often | High |
+| Solicitar ayuda inmediata mediante el botón de auxilio | Rarely | High |
+| Grabar y compartir anécdotas, quejas o mensajes de voz | Sometimes | High |
+| Atender recordatorios para mantener contacto social con amistades | Sometimes | Medium |
+| Ajustar su nivel de interacción (modo simplificado / sin preguntas hoy) | Occasionally | High |
+| Revisar recordatorios ligeros sobre rutinas (comidas, salidas) | Often | Medium |
+
+#### Segmento 2: Familiar a distancia (Red de Apoyo)
+
+| Tarea | Frecuencia | Importancia |
+| :--- | :--- | :--- |
+| Revisar el panel de estado diario (el check-in) del adulto mayor | Often | High |
+| Recibir y gestionar alertas ante inactividad o respuestas inusuales | Occasionally | High |
+| Escuchar las anécdotas o audios compartidos por el adulto mayor | Sometimes | High |
+| Coordinar turnos de llamadas o atención con otros familiares | Sometimes | Medium |
+| Registrar notas compartidas de contexto (ej. próximas citas médicas) | Occasionally | Medium |
+| Recibir sugerencias de acción o ver los refuerzos positivos del día | Often | Medium |
+
+**Análisis de Tareas**
+
+Al analizar la matriz, se observa que las tareas con mayor frecuencia e importancia para ambos arquetipos giran en torno al estado diario: el adulto mayor reportando su bienestar (Often/High) y el familiar revisándolo para tener paz mental (Often/High). 
+
+La principal diferencia radica en la naturaleza de su interacción; el adulto mayor se enfoca en la autogestión y en compartir vivencias bajo sus propios términos (ajustar privacidad, grabar audios), mientras que el familiar asume un rol de consumo de información, monitoreo sutil y coordinación logística con otros parientes. La coincidencia más crítica es el alto nivel de importancia que ambos le otorgan tanto al manejo de emergencias (alertas/botón de auxilio) como a la conexión emocional real (compartir y escuchar anécdotas), demostrando que la solución debe equilibrar la seguridad física con la salud mental.
 
 ### 2.3.3. User Journey Mapping
 
