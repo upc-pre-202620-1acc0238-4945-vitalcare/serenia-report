@@ -680,6 +680,7 @@ Esta sección tiene como objetivo profundizar en el conocimiento de los competid
 
 <br>
 
+
 ### 2.1.2. Estrategias y tácticas frente a competidores
 
 A partir del análisis competitivo y el FODA desarrollado, se plantean las siguientes estrategias y tácticas preliminares que Serenia aplicará para afrontar las fortalezas de la competencia, aprovechar sus debilidades, y responder al contexto de oportunidades y amenazas del entorno.
@@ -691,13 +692,13 @@ A partir del análisis competitivo y el FODA desarrollado, se plantean las sigui
   <tr>
     <td width="25%"><b>Fortalezas + Oportunidades (FO)</b><br/>Usar las fortalezas propias para capitalizar oportunidades del entorno</td>
     <td>
-      Aprovechar el lenguaje cercano y no clínico de Serenia, junto con su bajo costo de entrada (no requiere comprar hardware, a diferencia de GrandPad), para capturar el mercado peruano y latinoamericano que Alexa Together, GrandPad y Papa aún no atienden, ya que las tres soluciones están diseñadas y comercializadas principalmente para EE. UU. y Reino Unido. Esta ventana se refuerza con la creciente proporción de adultos mayores que viven solos en Lima Metropolitana (Andina, 2025), lo que amplía el mercado objetivo antes de que un jugador global localice su oferta.
+      Aprovechar el lenguaje cercano y no clínico de Serenia, junto con su bajo costo de entrada (no requiere comprar hardware ni pagar planes B2B), para capturar el mercado peruano y latinoamericano que Snug Safety, Caring Village y Papa aún no atienden, ya que las tres soluciones están diseñadas y comercializadas principalmente para EE. UU. Esta ventana se refuerza con la creciente proporción de adultos mayores que viven solos en Lima Metropolitana (Andina, 2025), lo que amplía el mercado objetivo antes de que un jugador extranjero localice su oferta.
     </td>
   </tr>
   <tr>
     <td><b>Fortalezas + Amenazas (FA)</b><br/>Usar las fortalezas propias para neutralizar amenazas externas</td>
     <td>
-      Frente a la amenaza de que jugadores globales como Amazon (Alexa Together) o GrandPad ingresen a mercados emergentes, Serenia debe afianzar su ventaja de contexto local (idioma, sensibilidad cultural, alianzas con clínicas geriátricas o EPS peruanas) antes de que estas empresas adapten su oferta a la región. Frente a la resistencia tecnológica del adulto mayor, se mantiene la interacción de un solo toque en el check-in diario como barrera de simplicidad, replicando el principio de "cero curva de aprendizaje" que hace fuerte a GrandPad, pero sin el costo de un dispositivo dedicado.
+      Frente a la amenaza de que jugadores como Snug Safety o Caring Village ingresen a mercados emergentes, Serenia debe afianzar su ventaja de contexto local (idioma, sensibilidad cultural, alianzas con clínicas geriátricas o EPS peruanas) antes de que estas empresas adapten su oferta a la región. Frente a la resistencia tecnológica del adulto mayor, se mantiene la interacción de un solo toque en el check-in diario como barrera de simplicidad, replicando el principio de check-in ultra simple que hace fuerte a Snug Safety, pero con un enfoque emocional y no solo de seguridad/emergencia.
     </td>
   </tr>
   <tr>
@@ -709,7 +710,7 @@ A partir del análisis competitivo y el FODA desarrollado, se plantean las sigui
   <tr>
     <td><b>Debilidades + Amenazas (DA)</b><br/>Minimizar debilidades propias y evitar el impacto de amenazas externas</td>
     <td>
-      Dado que Serenia depende de que ambos extremos (adulto mayor y familiar) adopten la app de forma consistente, y que existe baja disposición a pagar suscripciones en el segmento peruano, se debe ofrecer un modelo freemium con fricción mínima de onboarding, evitando estrategias de pago agresivas desde el inicio (a diferencia del modelo de suscripción obligatoria de GrandPad). Esto también reduce el riesgo de que sustitutos informales y gratuitos, como los grupos familiares de WhatsApp, sigan siendo la opción por defecto.
+      Dado que Serenia depende de que ambos extremos (adulto mayor y familiar) adopten la app de forma consistente, y que existe baja disposición a pagar suscripciones en el segmento peruano, se debe ofrecer un modelo freemium con fricción mínima de onboarding, siguiendo el ejemplo del nivel gratuito genuino de Snug Safety y evitando planes con límites muy restrictivos como el de Caring Village (solo 2 miembros en su plan gratuito). Esto también reduce el riesgo de que sustitutos informales y gratuitos, como los grupos familiares de WhatsApp, sigan siendo la opción por defecto.
     </td>
   </tr>
 </table>
@@ -718,9 +719,9 @@ A partir del análisis competitivo y el FODA desarrollado, se plantean las sigui
 
 ## Tácticas específicas frente a cada competidor
 
-Frente a **Alexa Together**, cuya fortaleza es el ecosistema Amazon/IoT ya instalado, Serenia no compite en hardware ni en monitoreo domótico, sino que diferencia su mensaje de marketing contrastando "compañía" frente a "vigilancia", aprovechando además que Alexa Together no está integrado a flujos clínicos y genera dudas de privacidad no resueltas públicamente.
+Frente a **Snug Safety**, cuya fortaleza es el check-in diario simple y gratuito con gran base de usuarios en EE. UU., Serenia diferencia su propuesta enfocándose en el vínculo emocional (preguntas variables, mensajes de audio "cuéntame algo") y no solo en la señal de seguridad/emergencia, además de dirigirse a un mercado (Perú) donde Snug Safety no tiene presencia ni soporte en español.
 
-Frente a **GrandPad**, cuya fortaleza es la simplicidad extrema de un dispositivo dedicado, Serenia ofrece una experiencia igualmente simple (check-in de un solo toque) pero sobre el smartphone que la familia peruana ya posee, evitando el costo de USD 299 más USD 40 mensuales que representa la barrera de entrada más débil de GrandPad.
+Frente a **Caring Village**, cuya fortaleza es centralizar toda la coordinación del cuidado familiar en un solo lugar con apoyo de IA, Serenia se posiciona como una alternativa más ligera y cercana emocionalmente, sin la complejidad de gestión de tareas/calendarios que puede sentirse corporativa, aprovechando además que su plan gratuito es muy limitado (solo 2 miembros).
 
 Frente a **Papa**, cuya fortaleza es la compañía humana presencial, Serenia posiciona su espacio de "cuéntame algo" y el check-in emocional diario como un complemento cotidiano entre visitas físicas esporádicas, no como un sustituto, aprovechando además que Papa depende de contratos con aseguradoras y empleadores estadounidenses y no tiene presencia en el mercado peruano.
 
