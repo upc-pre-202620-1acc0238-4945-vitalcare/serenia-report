@@ -404,21 +404,21 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
 
   <tr>
     <td rowspan="3" align="center">
-      <img src="" alt="Foto de Kelber Sandoval" width="500"/>
+      <img src="assets/img/member-profiles/kelber-sandoval.png" alt="Foto de Kelber Sandoval" width="500"/>
     </td>
     <td><b>Nombre:</b> Sandoval Aiquipa, Kelber Yamir</td>
   </tr>
+  
   <tr>
     <td><b>Código:</b> u202418645</td>
   </tr>
   <tr>
     <td>
       <b>Descripción:</b><br/>
-      Soy <b></b>
+      Soy <b>Kelber Yamir Sandoval Aiquipa</b>, estudiante de la carrera de Ingeniería de Software en la Universidad Peruana de Ciencias Aplicadas (UPC), cursando actualmente el 6to ciclo. Cuento con experiencia en programación orientada a objetos, estructuras de datos y desarrollo backend utilizando Spring Boot y bases de datos relacionales y no relacionales. Me apasiona el diseño de software bajo el enfoque de Domain-Driven Design y el desarrollo de aplicaciones móviles enfocadas en resolver necesidades reales con alto impacto en la experiencia de usuario. En el equipo, aporto en la definición de la lógica de negocio, arquitectura del software y en el aseguramiento de buenas prácticas colaborativas con Git y GitHub.
       <br/>
     </td>
   </tr>
-
 </table>
 
 <br>
