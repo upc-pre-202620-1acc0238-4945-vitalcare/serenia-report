@@ -564,7 +564,7 @@ Esta sección tiene como objetivo profundizar en el conocimiento de los competid
   <tr>
     <td colspan="2"><b>¿Por qué llevar a cabo este análisis?</b></td>
     <td colspan="4">
-      Entender cómo las soluciones existentes de cuidado, seguridad y compañía para adultos mayores abordan la conexión con la familia a distancia, para identificar vacíos que Serenia puede cubrir con su enfoque de "compañía con respaldo" (no de vigilancia clínica), y detectar amenazas y oportunidades reales de mercado. Se priorizan competidores que, como Serenia, son principalmente apps móviles (sin requerir hardware dedicado), más uno de referencia con un modelo de compañía humana.
+      Comparar las soluciones que ya existen en el mercado para el cuidado y bienestar de adultos mayores, con el fin de identificar por qué Serenia es una mejor opción: cómo se diferencia de cada una y cómo resuelve el problema de la desconexión entre el adulto mayor y su familia de una forma que ellas no logran.
     </td>
   </tr>
   <tr>
@@ -590,7 +590,7 @@ Esta sección tiene como objetivo profundizar en el conocimiento de los competid
   <tr>
     <td rowspan="2" align="center"><b>Perfil</b></td>
     <td><b>Overview</b></td>
-    <td>Dos apps móviles conectadas (una nativa para el adulto mayor y otra cross-platform para el familiar), con check-ins diarios ligeros iniciados por la app y un panel de estado tranquilo para la familia, priorizando el vínculo emocional sobre el monitoreo clínico.</td>
+    <td>App móvil para el adulto mayor y sus seres queridos, con check-ins diarios ligeros iniciados por la app y un panel de estado tranquilo para la familia, priorizando el vínculo emocional sobre el monitoreo clínico.</td>
     <td>App 100% móvil (sin hardware) de check-in diario de un solo toque para personas que viven solas; si el usuario no responde, notifica automáticamente a sus contactos de emergencia.</td>
     <td>App móvil (iOS/Android) + web de coordinación del cuidado familiar: centraliza calendarios, tareas, medicación y mensajería entre varios cuidadores, con un asistente de IA ("Julia").</td>
     <td>Plataforma de acompañamiento a domicilio que conecta adultos mayores con "Papa Pals" (acompañantes verificados) para visitas de compañía, tareas del hogar y transporte, sin brindar cuidado médico.</td>
