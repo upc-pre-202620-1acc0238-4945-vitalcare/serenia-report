@@ -560,6 +560,7 @@ El Lean UX Canvas consolida el Business Problem, los Business Outcomes, los User
 
 <p align="center">
   <img src="assets/img/diagrams/lean-ux-canvas.png" alt="Lean UX Canvas de Serenia" width="900"/>
+    <br/><i>Imagen 1: Lean UX Canvas.</i>
 </p>
 
 URL del archivo en Figma: https://www.figma.com/design/MtWwz8GxmrY0eR7eyc2UC0/Lean-UX-Canvas--Serenia-?node-id=0-1
@@ -976,7 +977,7 @@ Isabel nos comentó que nunca ha utilizado una aplicación enfocada en salud o b
 
 En esta sección se concentran las tareas principales que los User Personas deben realizar para cumplir sus objetivos diarios de comunicación, cuidado y bienestar de manera natural y poco invasiva. Para este análisis, hemos considerado a nuestros dos segmentos principales: el Adulto Mayor y el Familiar a distancia.
 
-#### Segmento 1: Adulto Mayor (Usuario Independiente)
+#### Segmento 1: Adulto Mayor
 
 | Tarea | Frecuencia | Importancia |
 | :--- | :--- | :--- |
@@ -987,7 +988,7 @@ En esta sección se concentran las tareas principales que los User Personas debe
 | Ajustar su nivel de interacción (modo simplificado / sin preguntas hoy) | Occasionally | High |
 | Revisar recordatorios ligeros sobre rutinas (comidas, salidas) | Often | Medium |
 
-#### Segmento 2: Familiar a distancia (Red de Apoyo)
+#### Segmento 2: Familiar a distancia
 
 | Tarea | Frecuencia | Importancia |
 | :--- | :--- | :--- |
@@ -1014,13 +1015,24 @@ En esta sección, el equipo resume el proceso de elaboración de los *Empathy Ma
 
 A continuación, se presentan las capturas de los mapas resultantes elaborados en la herramienta indicada:
 
-#### Mapa de Empatía: Segmento 1 - Adulto Mayor (Usuario Independiente)
+#### Segmento 1 - Adulto Mayor
+
+<div align="center">
 
 ![Empathy Map - Adulto Mayor](assets/img/empathy-maps/empathy-map-adulto-mayor.png)
+  <br/><i>Imagen 2: Empathy Map - Primer Segmento.</i>
 
-#### Mapa de Empatía: Segmento 2 - Familiar a distancia (Red de Apoyo)
+</div>
+
+
+#### Segmento 2 - Familiar a distancia
+
+<div align="center">
 
 ![Empathy Map - Familiar a Distancia](assets/img/empathy-maps/empathy-map-familiar.png)
+  <br/><i>Imagen 3: Empathy Map - Segundo Segmento.</i>
+
+</div>
 
 ### 2.3.5. Big Picture EventStorming
 
