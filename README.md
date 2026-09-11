@@ -287,6 +287,40 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
 
 # Objetivos SMART
 
+Eh esta sección, cada integrante del equipo formula un plan de dos objetivos SMART orientados a su desarrollo profesional una vez finalizada la carrera. Estos objetivos reflejan de manera clara y medible las metas de crecimiento profesional continuo que cada miembro se propone alcanzar tras su graduación.
+
+**Contreras Torres, Arturo Valentino**
+
+<u> *Objetivo SMART 1:* </u> <br>
+Conseguir un puesto remoto como Desarrollador de Software en una empresa extranjera dentro de los 12 meses posteriores a mi egreso, dedicando al menos 8 horas semanales en fortalecer mi portafolio y postular activamente a vacantes internacionales, con el fin de expandir mis conocimientos en arquitecturas de software y ganar experiencia profesional en un contexto global.
+
+<u> *Objetivo SMART 2:* </u> <br>
+Ser admitido en una maestría de Arquitectura de Software dentro de los 2 años posteriores a mi egreso, cumpliendo con los requisitos de admisión durante el primer año, con el fin de fortalecer mi perfil profesional y acceder a posiciones de mayor responsabilidad técnica.
+
+**Gallardo Morales, Carla Alejandra**
+
+<u> *Objetivo SMART 1:* </u> <br>
+
+<u> *Objetivo SMART 2:* </u> <br>
+
+**García Paredes, Victor Manuel**
+
+<u> *Objetivo SMART 1:* </u> <br>
+
+<u> *Objetivo SMART 2:* </u> <br>
+
+**Salinas Guzman, Brianna Cristina**
+
+<u> *Objetivo SMART 1:* </u> <br>
+
+<u> *Objetivo SMART 2:* </u> <br>
+
+**Sandoval Aiquipa, Kelber Yamir**
+
+<u> *Objetivo SMART 1:* </u> <br>
+
+<u> *Objetivo SMART 2:* </u> <br>
+
 <br>
 
 # Capítulo I: Presentación
