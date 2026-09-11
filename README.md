@@ -921,16 +921,16 @@ Isabel nos comentó que nunca ha utilizado una aplicación enfocada en salud o b
 
 ##### Entrevista 2
 
-*Screenshot: pendiente.*
+<img src="assets/img/interviews/segmento2-entrevista2.png" alt="Screenshot entrevista Enrique Guzmán" width="700"/>
 
 <br>
 
 <table align="center">
   <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>Edad</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>Distrito</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>Enrique Isaias Guzmán Miranda</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>74 años</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>Mollendo - Arequipa</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>11:40</i></td></tr>
   <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
 </table>
 
@@ -938,7 +938,7 @@ Isabel nos comentó que nunca ha utilizado una aplicación enfocada en salud o b
 
 </div>
 
-*Pendiente.*
+Enrique Guzmán Miranda es un adulto mayor jubilado que actualmente continúa realizando actividades laborales de manera independiente y por horas. Vive con su esposa, quien continúa trabajando como gerente de una empresa. Enrique nos comenta que su madre tiene 96 años y vive sola desde el fallecimiento de su esposo, ya que siempre ha preferido permanecer en su propia casa a pesar de que sus hijos intentaron que viviera con alguno de ellos. Debido al deterioro propio de la edad, actualmente necesita asistencia permanente y cuenta con cuidadoras durante el día y la noche. Enrique la visita casi interdiariamente y se encarga de llevarle alimentos, realizar compras y atender sus necesidades, mientras que una de sus hermanas vive al lado y puede atender cualquier emergencia. Además, la familia utiliza cámaras de vigilancia las 24 horas para supervisar su bienestar y el trato que recibe de las cuidadoras. Actualmente, su madre tiene dificultades para caminar, utiliza una silla de ruedas y presenta una pérdida considerable de audición, aunque se encuentra estable de salud y recibe visitas médicas periódicas. Las cuidadoras registran diariamente su temperatura, pulso, presión y cualquier anomalía en un cuaderno de bitácora que los familiares revisan durante sus visitas. Enrique considera que una aplicación de monitoreo podría ser de mucha ayuda para conocer el estado de su madre y recibir información sin depender exclusivamente de llamadas o visitas; sin embargo, desconfía de que una aplicación pueda realizar diagnósticos médicos adecuados, ya que un error podría ocasionar una medicación incorrecta y empeorar su estado de salud. Por ello, considera especialmente importantes funciones como el monitoreo de signos vitales, registro de información, alertas de emergencia y supervisión del bienestar del adulto mayor.
 
 <br>
 
