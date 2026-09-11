@@ -287,6 +287,38 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
 
 # Objetivos SMART
 
+Eh esta sección, cada integrante del equipo formula un plan de dos objetivos SMART orientados a su desarrollo profesional una vez finalizada la carrera. Estos objetivos reflejan de manera clara y medible las metas de crecimiento profesional continuo que cada miembro se propone alcanzar tras su graduación.
+
+**Contreras Torres, Arturo Valentino**
+
+<u> *Objetivo SMART 1:* </u> <br>
+
+<u> *Objetivo SMART 2:* </u> <br>
+
+**Gallardo Morales, Carla Alejandra**
+
+<u> *Objetivo SMART 1:* </u> <br>
+
+<u> *Objetivo SMART 2:* </u> <br>
+
+**García Paredes, Victor Manuel**
+
+<u> *Objetivo SMART 1:* </u> <br>
+
+<u> *Objetivo SMART 2:* </u> <br>
+
+**Salinas Guzman, Brianna Cristina**
+
+<u> *Objetivo SMART 1:* </u> <br>
+
+<u> *Objetivo SMART 2:* </u> <br>
+
+**Sandoval Aiquipa, Kelber Yamir**
+
+<u> *Objetivo SMART 1:* </u> <br>
+
+<u> *Objetivo SMART 2:* </u> <br>
+
 <br>
 
 # Capítulo I: Presentación
