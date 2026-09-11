@@ -501,7 +501,7 @@ Según la Agencia Andina (2025), citando datos del Instituto Nacional de Estadí
 <p align="center">
   <img src="assets/img/estadisticas/hogares-unipersonales-adulto-mayor.png" alt="Evolución del porcentaje de hogares unipersonales jefaturados por adultos mayores en el Perú, según INEI (2023-2025)" width="500">
 </p>
-<p align="center"><sub>Figura 1. Evolución del porcentaje de hogares jefaturados por adultos mayores que son unipersonales, Perú 2023–2025. Elaboración propia con base en datos de INEI, citados por Andina (2025) e Infobae (2025).</sub></p>
+<p align="center"><sub>Figura 1. Hogares jefaturados por adultos mayores, según área de residencia y sexo. Tomado de <em>Informe Técnico: Situación de la Población Adulta Mayor</em>, por Instituto Nacional de Estadística e Informática [INEI], 2025, p. 3 (https://m.inei.gob.pe/media/MenuRecursivo/boletines/informe-tecnico_adultomayor.pdf).</sub></p>
 
 ### How (¿Cómo?)
 
