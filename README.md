@@ -313,7 +313,11 @@ Ser admitido en una maestría de Arquitectura de Software dentro de los 2 años 
 
 <u> *Objetivo SMART 1:* </u> <br>
 
+Conseguir un puesto remoto como Desarrolladora de Software con especialización en ciberseguridad en una empresa internacional dentro de los 12 meses posteriores a mi egreso, obteniendo al menos una certificación reconocida en el área (por ejemplo, CompTIA Security+ o similar) durante ese periodo y dedicando 6 horas semanales a su preparación, con el fin de posicionarme en un área de alta demanda y acceder a oportunidades laborales remotas.
+
 <u> *Objetivo SMART 2:* </u> <br>
+
+Fundar mi propia startup de desarrollo de software orientada a resolver problemas del mercado peruano dentro de los 3 años posteriores a mi egreso, completando un plan de negocio validado durante el primer año y consiguiendo al menos 3 clientes o usuarios piloto en el segundo año de operación, con el fin de impulsar el desarrollo tecnológico local y consolidar mi propio proyecto empresarial.
 
 **Sandoval Aiquipa, Kelber Yamir**
 
