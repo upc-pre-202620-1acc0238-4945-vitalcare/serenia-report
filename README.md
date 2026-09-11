@@ -837,15 +837,15 @@ Yrma vive sola hace 6 años en Tarapoto, desde que sus dos hijas (abogada y admi
 
 ##### Entrevista 2
 
-*Screenshot: pendiente.*
+<img src="assets/img/interviews/interview-photo-yolanda.jpg" alt="Screenshot entrevista yolanda bardalez" width="700"/>
 
 <br>
 
 <table align="center">
   <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>Edad</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>Distrito</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>Yolanda Bardalez Hernandez vda. de Gallardo</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>74 años</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>Chorrillos</i></td></tr>
   <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
   <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
 </table>
@@ -854,7 +854,10 @@ Yrma vive sola hace 6 años en Tarapoto, desde que sus dos hijas (abogada y admi
 
 </div>
 
-*Pendiente.*
+Yolanda vive sola desde hace 13 años. Tiene tres hijos y nueve nietos, quienes mantienen una relación cercana con ella. Su rutina diaria consiste principalmente en realizar las compras en el mercado y encargarse de los quehaceres del hogar. Nos comenta que la mayoría de las tardes sus nietos la visitan para almorzar después de salir de la escuela.
+Yolanda no suele salir diariamente; sin embargo, cada vez que sus hijos o nietos la invitan a comer o a realizar alguna actividad fuera de casa, acepta y disfruta de compartir con ellos.
+En cuanto al uso de la tecnología, Yolanda utiliza principalmente su celular para realizar llamadas y comunicarse con sus hijos mediante WhatsApp. Asimismo, utiliza diariamente aplicaciones como YouTube y Facebook para entretenerse. Sin embargo, uno de sus principales motivos de frustración surge cuando no sabe cómo utilizar alguna función de su celular y necesita recurrir a las personas que se encuentran a su alrededor para solucionar el problema.
+Además, menciona que en muchas ocasiones prefiere no comunicar ciertos problemas, tanto relacionados con el uso del celular como situaciones personales, por miedo a molestar a los demás o pensar que no recibirá ayuda, especialmente debido a que sus familiares viven lejos. 
 
 <br>
 
@@ -890,7 +893,7 @@ Yrma vive sola hace 6 años en Tarapoto, desde que sus dos hijas (abogada y admi
 ##### Entrevista 1
 
 
-<img src="assets/img/interviews/interview-relative-photo.jpg" alt="Screenshot entrevista Yrma Huamán" width="700"/>
+<img src="assets/img/interviews/interview-relative-photo.jpg" alt="Screenshot entrevista Maria Morales" width="700"/>
 
 <br>
 
