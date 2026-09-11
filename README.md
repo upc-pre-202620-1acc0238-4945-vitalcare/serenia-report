@@ -292,8 +292,10 @@ Eh esta sección, cada integrante del equipo formula un plan de dos objetivos SM
 **Contreras Torres, Arturo Valentino**
 
 <u> *Objetivo SMART 1:* </u> <br>
+Conseguir un puesto remoto como Desarrollador de Software en una empresa extranjera dentro de los 12 meses posteriores a mi egreso, dedicando al menos 8 horas semanales en fortalecer mi portafolio y postular activamente a vacantes internacionales, con el fin de expandir mis conocimientos en arquitecturas de software y ganar experiencia profesional en un contexto global.
 
 <u> *Objetivo SMART 2:* </u> <br>
+Ser admitido en una maestría de Arquitectura de Software dentro de los 2 años posteriores a mi egreso, cumpliendo con los requisitos de admisión durante el primer año, con el fin de fortalecer mi perfil profesional y acceder a posiciones de mayor responsabilidad técnica.
 
 **Gallardo Morales, Carla Alejandra**
 
