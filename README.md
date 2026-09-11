@@ -869,56 +869,6 @@ Además, menciona que en muchas ocasiones prefiere no comunicar ciertos problema
 
 ##### Entrevista 3
 
-<img src="assets/img/interviews/entrevista-jose.png" alt="Screenshot entrevista José Cámara" width="700"/>
-
-<br>
-
-<table align="center">
-  <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td><i>José Cámara</i></td></tr>
-  <tr><td><b>Edad</b></td><td><i>20 años</i></td></tr>
-  <tr><td><b>Distrito</b></td><td><i>Surco</i></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
-</table>
-
-**Resumen:**
-
-</div>
-
-José es un joven soltero que reside con su padre y dos hermanos menores. Su rutina diaria es bastante pesada, ya que estudia en la universidad por las mañanas y trabaja como supervisor de turno en el área de ventas y atención al cliente durante las tardes. Su familiar adulto mayor es su abuela materna, con quien dejó de convivir hace aproximadamente cuatro años. Él intenta comunicarse con ella diariamente llamándola a su celular antes de entrar a su turno de trabajo. Sin embargo, debido al ritmo acelerado de su día, a veces se le pasa. José experimenta ansiedad y angustia cuando su abuela no contesta el teléfono rápidamente, preocupándose de que haya sufrido una caída o un problema de salud y él no pueda asistirla por estar trabajando. Además, menciona que no tiene una coordinación clara con su padre sobre quién se comunica con ella, asumiendo a veces que la otra persona ya lo hizo. Utiliza un dispositivo Android y sus aplicaciones principales son WhatsApp, Spotify y las herramientas de la universidad. Nunca ha utilizado aplicaciones de monitoreo de salud familiar porque las considera invasivas. Le gustaría contar con una herramienta que le permita confirmar que su abuela se levantó bien, que está de buen ánimo o poder escuchar un audio suyo, brindándole paz mental sin estresarla. Le genera desconfianza que una aplicación sea difícil de usar para ella o que parezca un reporte médico que invada su privacidad.
-
-<br>
-
-<div align="center">
-
-##### Entrevista 4
-
-<img src="assets/img/interviews/entrevista-kevin.png" alt="Screenshot entrevista Kevin" width="700"/>
-
-<br>
-
-<table align="center">
-  <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td><i>Kevin</i></td></tr>
-  <tr><td><b>Edad</b></td><td><i>27 años</i></td></tr>
-  <tr><td><b>Distrito</b></td><td><i>San Juan de Miraflores</i></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
-</table>
-
-**Resumen:**
-
-</div>
-
-Kevin está comprometido y vive con su novia y su hijo recién nacido. Trabaja como contador en una empresa corporativa, cumpliendo un horario de oficina que en ocasiones se extiende hasta más tarde. Su familiar adulto mayor es su padre, quien vive solo en otra provincia desde hace casi 10 años tras separarse la familia por temas de salud de la madre. La comunicación entre ellos se da casi todos los días a través de WhatsApp, pero las llamadas telefónicas suelen limitarse a los fines de semana. Kevin siente preocupación durante las tardes en el trabajo, imaginando si su padre pudo haber sufrido una caída o ser víctima de la delincuencia sin tener a nadie cerca para auxiliarlo. Coordina ocasionalmente con su hermana, que también vive lejos, pero a veces asumen de forma incorrecta que el otro ya se comunicó. Utiliza un celular Xiaomi con sistema Android y frecuenta aplicaciones como WhatsApp, el correo laboral, LinkedIn y aplicaciones bancarias. Anteriormente, intentó usar Google Maps para compartir la ubicación, pero a su padre no le gustó la experiencia porque se sentía vigilado o espiado. A Kevin le gustaría una solución que le confirme, mediante datos puntuales, que su padre inició bien el día y que todo está en orden, permitiéndole trabajar tranquilo. Su principal motivo de desconfianza hacia una nueva aplicación es que requiera demasiados datos médicos o personales, o que posea una interfaz compleja que termine estresando a su padre, quien no es muy intuitivo con la tecnología.
-
-<br>
-
-<div align="center">
-
-##### Entrevista 3
-
 *Screenshot: pendiente.*
 
 <br>
@@ -1000,15 +950,15 @@ Enrique Guzmán Miranda es un adulto mayor jubilado que actualmente continúa re
 
 ##### Entrevista 3
 
-*Screenshot: pendiente.*
+<img src="assets/img/interviews/entrevista-jose.png" alt="Screenshot entrevista José Cámara" width="700"/>
 
 <br>
 
 <table align="center">
   <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>Edad</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>Distrito</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>José Cámara</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>20 años</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>Surco</i></td></tr>
   <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
   <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
 </table>
@@ -1017,7 +967,32 @@ Enrique Guzmán Miranda es un adulto mayor jubilado que actualmente continúa re
 
 </div>
 
-*Pendiente.*
+José es un joven soltero que reside con su padre y dos hermanos menores. Su rutina diaria es bastante pesada, ya que estudia en la universidad por las mañanas y trabaja como supervisor de turno en el área de ventas y atención al cliente durante las tardes. Su familiar adulto mayor es su abuela materna, con quien dejó de convivir hace aproximadamente cuatro años. Él intenta comunicarse con ella diariamente llamándola a su celular antes de entrar a su turno de trabajo. Sin embargo, debido al ritmo acelerado de su día, a veces se le pasa. José experimenta ansiedad y angustia cuando su abuela no contesta el teléfono rápidamente, preocupándose de que haya sufrido una caída o un problema de salud y él no pueda asistirla por estar trabajando. Además, menciona que no tiene una coordinación clara con su padre sobre quién se comunica con ella, asumiendo a veces que la otra persona ya lo hizo. Utiliza un dispositivo Android y sus aplicaciones principales son WhatsApp, Spotify y las herramientas de la universidad. Nunca ha utilizado aplicaciones de monitoreo de salud familiar porque las considera invasivas. Le gustaría contar con una herramienta que le permita confirmar que su abuela se levantó bien, que está de buen ánimo o poder escuchar un audio suyo, brindándole paz mental sin estresarla. Le genera desconfianza que una aplicación sea difícil de usar para ella o que parezca un reporte médico que invada su privacidad.
+
+<br>
+
+<div align="center">
+
+##### Entrevista 4
+
+<img src="assets/img/interviews/entrevista-kevin.png" alt="Screenshot entrevista Kevin" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>Kevin</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>27 años</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>San Juan de Miraflores</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+
+Kevin está comprometido y vive con su novia y su hijo recién nacido. Trabaja como contador en una empresa corporativa, cumpliendo un horario de oficina que en ocasiones se extiende hasta más tarde. Su familiar adulto mayor es su padre, quien vive solo en otra provincia desde hace casi 10 años tras separarse la familia por temas de salud de la madre. La comunicación entre ellos se da casi todos los días a través de WhatsApp, pero las llamadas telefónicas suelen limitarse a los fines de semana. Kevin siente preocupación durante las tardes en el trabajo, imaginando si su padre pudo haber sufrido una caída o ser víctima de la delincuencia sin tener a nadie cerca para auxiliarlo. Coordina ocasionalmente con su hermana, que también vive lejos, pero a veces asumen de forma incorrecta que el otro ya se comunicó. Utiliza un celular Xiaomi con sistema Android y frecuenta aplicaciones como WhatsApp, el correo laboral, LinkedIn y aplicaciones bancarias. Anteriormente, intentó usar Google Maps para compartir la ubicación, pero a su padre no le gustó la experiencia porque se sentía vigilado o espiado. A Kevin le gustaría una solución que le confirme, mediante datos puntuales, que su padre inició bien el día y que todo está en orden, permitiéndole trabajar tranquilo. Su principal motivo de desconfianza hacia una nueva aplicación es que requiera demasiados datos médicos o personales, o que posea una interfaz compleja que termine estresando a su padre, quien no es muy intuitivo con la tecnología.
 
 <br>
 
