@@ -372,7 +372,7 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
 <table>
   <tr>
     <td rowspan="3" align="center">
-      <img src="assets/img/member-profiles/arturo-contreras.PNG" alt="Foto de Arturo Contreras" width="500"/>
+      <img src="assets/img/member-profiles/arturo-contreras.PNG" alt="Foto de Arturo Contreras" width="800"/>
     </td>
     <td><b>Nombre:</b> Arturo Valentino Contreras Torres</td>
   </tr>
@@ -389,7 +389,7 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
 
   <tr>
     <td rowspan="3" align="center">
-      <img src="assets/img/member-profiles/carla-gallardo.png" alt="Foto de Carla Gallardo" width="500"/>
+      <img src="assets/img/member-profiles/carla-gallardo.png" alt="Foto de Carla Gallardo" width="800"/>
     </td>
     <td><b>Nombre:</b> Gallardo Morales, Carla Alejandra</td>
   </tr>
@@ -408,7 +408,7 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
 
   <tr>
     <td rowspan="3" align="center">
-      <img src="assets/img/member-profiles/victor-garcia.png" alt="Foto de Victor García" width="500"/>
+      <img src="assets/img/member-profiles/victor-garcia.png" alt="Foto de Victor García" width="800"/>
     </td>
     <td><b>Nombre:</b> García Paredes, Victor Manuel</td>
   </tr>
@@ -425,7 +425,7 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
 
   <tr>
     <td rowspan="3" align="center">
-      <img src="assets/img/member-profiles/brianna-salinas.png" alt="Foto de Brianna Salinas" width="500"/>
+      <img src="assets/img/member-profiles/brianna-salinas.png" alt="Foto de Brianna Salinas" width="800"/>
     </td>
     <td><b>Nombre:</b> Salinas Guzman, Brianna Cristina</td>
   </tr>
@@ -442,7 +442,7 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
 
   <tr>
     <td rowspan="3" align="center">
-      <img src="assets/img/member-profiles/kelber-sandoval.png" alt="Foto de Kelber Sandoval" width="500"/>
+      <img src="assets/img/member-profiles/kelber-sandoval.png" alt="Foto de Kelber Sandoval" width="800"/>
     </td>
     <td><b>Nombre:</b> Sandoval Aiquipa, Kelber Yamir</td>
   </tr>
@@ -476,14 +476,17 @@ El diferenciador central de Serenia frente a otras soluciones de monitoreo es su
 ### 1.2.1. Antecedentes y problemática
 
 ## The 5W's y 2H's
+
 ### Who (¿Quién?)
 
 Los afectados son, por un lado, los adultos mayores que viven solos (sin convivir con hijos o familiares) y, por otro, sus familiares directos que residen en otra vivienda o ciudad y que ejercen un rol de cuidado a distancia.
 
 ### What (¿Qué?)
+
 Existe una desconexión de cuidado entre ambas partes: los familiares viven en un estado constante de incertidumbre sobre el bienestar del adulto mayor, mientras que el adulto mayor tiende a ocultar cuando tuvo un mal día, un malestar o un momento de soledad, para no "molestar" a la familia. El resultado es que ambas partes terminan cuidándose a medias, sin un canal simple y natural para comunicar y monitorear el bienestar diario.
 
 ### Where (¿Dónde?)
+
 El problema se ubica principalmente en hogares peruanos donde el adulto mayor vive de manera unipersonal (solo), mientras que los familiares a cargo residen en otro hogar, distrito o ciudad, lo que impide la supervisión presencial cotidiana.
 
 ### When (¿Cuándo?)
@@ -491,12 +494,22 @@ El problema se ubica principalmente en hogares peruanos donde el adulto mayor vi
 Es un problema de naturaleza diaria y recurrente, no puntual: la incertidumbre y las llamadas por ansiedad ocurren todos los días, y se agrava progresivamente a medida que crece la proporción de adultos mayores que viven solos.
 
 ### Why (¿Por qué?)
-Según la Agencia Andina (2025), citando datos del Instituto Nacional de Estadística e Informática (INEI), en Lima Metropolitana el 25,3% de los hogares jefaturados por adultos mayores (60 años a más) son unipersonales (es decir, compuestos únicamente por la persona mayor), cifra que aumentó 2,3 puntos porcentuales respecto al mismo periodo del año anterior (Andina, 2025). Esta creciente proporción de adultos mayores que viven solos explica por qué los familiares terminan llamando todos los días por ansiedad, no porque haya pasado algo puntual, y por qué el adulto mayor evita reportar molestias por no sentirse una carga. No existe hoy un canal intermedio entre "no comunicarse" y "llamar todos los días" que permita transmitir bienestar de forma ligera, sin fricción y sin depender de una llamada telefónica.
+
+Según la Agencia Andina (2025), citando datos del Instituto Nacional de Estadística e Informática (INEI), en Lima Metropolitana el 25,3% de los hogares jefaturados por adultos mayores (60 años a más) son unipersonales —es decir, compuestos únicamente por la persona mayor—, cifra que aumentó 2,3 puntos porcentuales respecto al mismo periodo del año anterior (Andina, 2025). Esta tendencia se ha mantenido creciente: según cifras más recientes del INEI correspondientes al tercer trimestre de 2025, reportadas por Infobae (2025), a nivel nacional el 26,9% de los hogares con jefatura de una persona adulta mayor ya son unipersonales, frente al 24,5% registrado dos años antes (Infobae, 2025). Esta creciente proporción de adultos mayores que viven solos explica por qué los familiares terminan llamando todos los días por ansiedad —no porque haya pasado algo puntual— y por qué el adulto mayor evita reportar molestias por no sentirse una carga. No existe hoy un canal intermedio entre "no comunicarse" y "llamar todos los días" que permita transmitir bienestar de forma ligera, sin fricción y sin depender de una llamada telefónica.
+
+<br>
+<p align="center">
+  <img src="assets/img/estadisticas/hogares-unipersonales-adulto-mayor.png" alt="Evolución del porcentaje de hogares unipersonales jefaturados por adultos mayores en el Perú, según INEI (2023-2025)" width="500">
+</p>
+<p align="center"><sub>Figura 1. Evolución del porcentaje de hogares jefaturados por adultos mayores que son unipersonales, Perú 2023–2025. Elaboración propia con base en datos de INEI, citados por Andina (2025) e Infobae (2025).</sub></p>
 
 ### How (¿Cómo?)
+
 Se propone Serenia, una solución compuesta por dos aplicaciones móviles conectadas: una dirigida al adulto mayor y otra dirigida al familiar a distancia. La app del adulto mayor inicia proactivamente un check-in diario de un solo toque con preguntas variables y ligeras (no solo "¿cómo estás?"), ofrece un espacio opcional de "cuéntame algo" (mensajes de audio cortos), recordatorios de contacto social, control sobre su propia sensibilidad, un modo simplificado y un botón de auxilio siempre visible. La app del familiar ofrece un panel de estado diario, alertas solo ante señales fuera de lo habitual, sugerencias suaves de acción, registro de pequeñas victorias, coordinación entre varios familiares y notas compartidas. El diferenciador central es que la propuesta busca sentirse como compañía con respaldo y no como una herramienta de vigilancia o monitoreo clínico.
 
+
 ### How much (¿Cuánto?)
+
 El costo de no resolver este problema no es solo emocional, sino también económico y de salud mental para quienes ejercen el rol de cuidado a distancia: el Banco Interamericano de Desarrollo (BID, 2024), en una encuesta aplicada en 25 países de América Latina y el Caribe, encontró que el 31% de los cuidadores no remunerados de personas mayores reporta síntomas de depresión y que el 44% ha tenido que dejar su empleo para poder cuidar (Banco Interamericano de Desarrollo [BID], 2024). Esto evidencia que, sin una herramienta que aligere la carga de supervisión constante, el desgaste recae de forma directa sobre la salud mental y la estabilidad laboral del familiar cuidador. Para el AV1, el alcance se limita al análisis del problema, la propuesta de valor y el diseño de la solución (sin desarrollo de código todavía), enfocado en las dos aplicaciones descritas: la app nativa para el adulto mayor y la app cross-platform para el familiar.
 
 <br>
@@ -865,55 +878,6 @@ Además, menciona que en muchas ocasiones prefiere no comunicar ciertos problema
 
 <br>
 
-<div align="center">
-
-##### Entrevista 3
-
-<img src="assets/img/interviews/entrevista-jose.png" alt="Screenshot entrevista José Cámara" width="700"/>
-
-<br>
-
-<table align="center">
-  <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td><i>José Cámara</i></td></tr>
-  <tr><td><b>Edad</b></td><td><i>20 años</i></td></tr>
-  <tr><td><b>Distrito</b></td><td><i>Surco</i></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
-</table>
-
-**Resumen:**
-
-</div>
-
-José es un joven soltero que reside con su padre y dos hermanos menores. Su rutina diaria es bastante pesada, ya que estudia en la universidad por las mañanas y trabaja como supervisor de turno en el área de ventas y atención al cliente durante las tardes. Su familiar adulto mayor es su abuela materna, con quien dejó de convivir hace aproximadamente cuatro años. Él intenta comunicarse con ella diariamente llamándola a su celular antes de entrar a su turno de trabajo. Sin embargo, debido al ritmo acelerado de su día, a veces se le pasa. José experimenta ansiedad y angustia cuando su abuela no contesta el teléfono rápidamente, preocupándose de que haya sufrido una caída o un problema de salud y él no pueda asistirla por estar trabajando. Además, menciona que no tiene una coordinación clara con su padre sobre quién se comunica con ella, asumiendo a veces que la otra persona ya lo hizo. Utiliza un dispositivo Android y sus aplicaciones principales son WhatsApp, Spotify y las herramientas de la universidad. Nunca ha utilizado aplicaciones de monitoreo de salud familiar porque las considera invasivas. Le gustaría contar con una herramienta que le permita confirmar que su abuela se levantó bien, que está de buen ánimo o poder escuchar un audio suyo, brindándole paz mental sin estresarla. Le genera desconfianza que una aplicación sea difícil de usar para ella o que parezca un reporte médico que invada su privacidad.
-
-<br>
-
-<div align="center">
-
-##### Entrevista 4
-
-<img src="assets/img/interviews/entrevista-kevin.png" alt="Screenshot entrevista Kevin" width="700"/>
-
-<br>
-
-<table align="center">
-  <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td><i>Kevin</i></td></tr>
-  <tr><td><b>Edad</b></td><td><i>27 años</i></td></tr>
-  <tr><td><b>Distrito</b></td><td><i>San Juan de Miraflores</i></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
-</table>
-
-**Resumen:**
-
-</div>
-
-Kevin está comprometido y vive con su novia y su hijo recién nacido. Trabaja como contador en una empresa corporativa, cumpliendo un horario de oficina que en ocasiones se extiende hasta más tarde. Su familiar adulto mayor es su padre, quien vive solo en otra provincia desde hace casi 10 años tras separarse la familia por temas de salud de la madre. La comunicación entre ellos se da casi todos los días a través de WhatsApp, pero las llamadas telefónicas suelen limitarse a los fines de semana. Kevin siente preocupación durante las tardes en el trabajo, imaginando si su padre pudo haber sufrido una caída o ser víctima de la delincuencia sin tener a nadie cerca para auxiliarlo. Coordina ocasionalmente con su hermana, que también vive lejos, pero a veces asumen de forma incorrecta que el otro ya se comunicó. Utiliza un celular Xiaomi con sistema Android y frecuenta aplicaciones como WhatsApp, el correo laboral, LinkedIn y aplicaciones bancarias. Anteriormente, intentó usar Google Maps para compartir la ubicación, pero a su padre no le gustó la experiencia porque se sentía vigilado o espiado. A Kevin le gustaría una solución que le confirme, mediante datos puntuales, que su padre inició bien el día y que todo está en orden, permitiéndole trabajar tranquilo. Su principal motivo de desconfianza hacia una nueva aplicación es que requiera demasiados datos médicos o personales, o que posea una interfaz compleja que termine estresando a su padre, quien no es muy intuitivo con la tecnología.
-
-<br>
 
 <div align="center">
 
@@ -1000,15 +964,15 @@ Enrique Guzmán Miranda es un adulto mayor jubilado que actualmente continúa re
 
 ##### Entrevista 3
 
-*Screenshot: pendiente.*
+*<img src="assets/img/interviews/entrevista-jose.png" alt="Screenshot entrevista José Cámara" width="700"/>
 
 <br>
 
 <table align="center">
   <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>Edad</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>Distrito</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>José Cámara</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>20 años</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>Surco</i></td></tr>
   <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
   <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
 </table>
@@ -1017,7 +981,33 @@ Enrique Guzmán Miranda es un adulto mayor jubilado que actualmente continúa re
 
 </div>
 
-*Pendiente.*
+José es un joven soltero que reside con su padre y dos hermanos menores. Su rutina diaria es bastante pesada, ya que estudia en la universidad por las mañanas y trabaja como supervisor de turno en el área de ventas y atención al cliente durante las tardes. Su familiar adulto mayor es su abuela materna, con quien dejó de convivir hace aproximadamente cuatro años. Él intenta comunicarse con ella diariamente llamándola a su celular antes de entrar a su turno de trabajo. Sin embargo, debido al ritmo acelerado de su día, a veces se le pasa. José experimenta ansiedad y angustia cuando su abuela no contesta el teléfono rápidamente, preocupándose de que haya sufrido una caída o un problema de salud y él no pueda asistirla por estar trabajando. Además, menciona que no tiene una coordinación clara con su padre sobre quién se comunica con ella, asumiendo a veces que la otra persona ya lo hizo. Utiliza un dispositivo Android y sus aplicaciones principales son WhatsApp, Spotify y las herramientas de la universidad. Nunca ha utilizado aplicaciones de monitoreo de salud familiar porque las considera invasivas. Le gustaría contar con una herramienta que le permita confirmar que su abuela se levantó bien, que está de buen ánimo o poder escuchar un audio suyo, brindándole paz mental sin estresarla. Le genera desconfianza que una aplicación sea difícil de usar para ella o que parezca un reporte médico que invada su privacidad.
+
+<br>
+
+
+<div align="center">
+
+##### Entrevista 4
+
+<img src="assets/img/interviews/entrevista-kevin.png" alt="Screenshot entrevista Kevin" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>Kevin</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>27 años</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>San Juan de Miraflores</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+
+Kevin está comprometido y vive con su novia y su hijo recién nacido. Trabaja como contador en una empresa corporativa, cumpliendo un horario de oficina que en ocasiones se extiende hasta más tarde. Su familiar adulto mayor es su padre, quien vive solo en otra provincia desde hace casi 10 años tras separarse la familia por temas de salud de la madre. La comunicación entre ellos se da casi todos los días a través de WhatsApp, pero las llamadas telefónicas suelen limitarse a los fines de semana. Kevin siente preocupación durante las tardes en el trabajo, imaginando si su padre pudo haber sufrido una caída o ser víctima de la delincuencia sin tener a nadie cerca para auxiliarlo. Coordina ocasionalmente con su hermana, que también vive lejos, pero a veces asumen de forma incorrecta que el otro ya se comunicó. Utiliza un celular Xiaomi con sistema Android y frecuenta aplicaciones como WhatsApp, el correo laboral, LinkedIn y aplicaciones bancarias. Anteriormente, intentó usar Google Maps para compartir la ubicación, pero a su padre no le gustó la experiencia porque se sentía vigilado o espiado. A Kevin le gustaría una solución que le confirme, mediante datos puntuales, que su padre inició bien el día y que todo está en orden, permitiéndole trabajar tranquilo. Su principal motivo de desconfianza hacia una nueva aplicación es que requiera demasiados datos médicos o personales, o que posea una interfaz compleja que termine estresando a su padre, quien no es muy intuitivo con la tecnología.
 
 <br>
 
@@ -1034,7 +1024,9 @@ Enrique Guzmán Miranda es un adulto mayor jubilado que actualmente continúa re
 
 En esta sección se concentran las tareas principales que los User Personas deben realizar para cumplir sus objetivos diarios de comunicación, cuidado y bienestar de manera natural y poco invasiva. Para este análisis, hemos considerado a nuestros dos segmentos principales: el Adulto Mayor y el Familiar a distancia.
 
-#### Segmento 1: Adulto Mayor
+<br>
+
+#### Segmento 1: Adultos mayores que viven solos
 
 | Tarea | Frecuencia | Importancia |
 | :--- | :--- | :--- |
@@ -1045,7 +1037,9 @@ En esta sección se concentran las tareas principales que los User Personas debe
 | Ajustar su nivel de interacción (modo simplificado / sin preguntas hoy) | Occasionally | High |
 | Revisar recordatorios ligeros sobre rutinas (comidas, salidas) | Often | Medium |
 
-#### Segmento 2: Familiar a distancia
+<br>
+
+#### Segmento 2: Familiares a distancia
 
 | Tarea | Frecuencia | Importancia |
 | :--- | :--- | :--- |
@@ -1056,11 +1050,15 @@ En esta sección se concentran las tareas principales que los User Personas debe
 | Registrar notas compartidas de contexto (ej. próximas citas médicas) | Occasionally | Medium |
 | Recibir sugerencias de acción o ver los refuerzos positivos del día | Often | Medium |
 
+<br>
+
 **Análisis de Tareas**
 
 Al analizar la matriz, se observa que las tareas con mayor frecuencia e importancia para ambos arquetipos giran en torno al estado diario: el adulto mayor reportando su bienestar (Often/High) y el familiar revisándolo para tener paz mental (Often/High). 
 
 La principal diferencia radica en la naturaleza de su interacción; el adulto mayor se enfoca en la autogestión y en compartir vivencias bajo sus propios términos (ajustar privacidad, grabar audios), mientras que el familiar asume un rol de consumo de información, monitoreo sutil y coordinación logística con otros parientes. La coincidencia más crítica es el alto nivel de importancia que ambos le otorgan tanto al manejo de emergencias (alertas/botón de auxilio) como a la conexión emocional real (compartir y escuchar anécdotas), demostrando que la solución debe equilibrar la seguridad física con la salud mental.
+
+<br>
 
 ### 2.3.3. User Journey Mapping
 
@@ -1072,21 +1070,21 @@ En esta sección, el equipo resume el proceso de elaboración de los *Empathy Ma
 
 A continuación, se presentan las capturas de los mapas resultantes elaborados en la herramienta indicada:
 
-#### Segmento 1 - Adulto Mayor
+### Segmento 1 - Adultos mayores que viven solos
 
 <div align="center">
 
-![Empathy Map - Adulto Mayor](assets/img/empathy-maps/empathy-map-adulto-mayor.png)
+![Empathy Map - Adultos mayores que viven solos](assets/img/empathy-maps/empathy-map-adulto-mayor.png)
   <br/><i>Imagen 2: Empathy Map - Primer Segmento.</i>
 
 </div>
 
 
-#### Segmento 2 - Familiar a distancia
+### Segmento 2 - Familiares a distancia
 
 <div align="center">
 
-![Empathy Map - Familiar a Distancia](assets/img/empathy-maps/empathy-map-familiar.png)
+![Empathy Map - Familiares a distancia](assets/img/empathy-maps/empathy-map-familiar.png)
   <br/><i>Imagen 3: Empathy Map - Segundo Segmento.</i>
 
 </div>
@@ -1343,6 +1341,8 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 
 
 > Banco Interamericano de Desarrollo. (2024). *Cuidadoras de personas mayores: sobrecargadas y mal pagadas. Evidencia de una encuesta del Banco Interamericano de Desarrollo en América Latina y el Caribe* (Versión 1). https://publications.iadb.org/publications/spanish/document/Cuidadoras-de-personas-mayores-sobrecargadas-y-mal-pagadas-evidencia-de-una-encuesta-del-Banco-Interamericano-de-Desarrollo-en-America-Latina-y-el-Caribe.-Version-1-junio-2024.pdf
+
+> Infobae. (2025, 31 de diciembre). *Las familias peruanas con adultos mayores en el hogar creció en el tercer trimestre de 2025*. Infobae Perú. https://www.infobae.com/peru/2025/12/31/las-familias-peruanas-con-adultos-mayores-en-el-hogar-crecio-en-2025/
 
 > Carrasco Freitas, M. (2026, 29 de mayo). Lima es el principal destino migratorio: más de 3 millones de peruanos llegaron desde otras regiones, según Censo 2025. Infobae. https://www.infobae.com/peru/2026/05/29/lima-es-el-principal-destrino-migratorio-mas-de-3-millones-de-peruanos-llegaron-desde-otras-regiones-segun-censo-2025/
 
