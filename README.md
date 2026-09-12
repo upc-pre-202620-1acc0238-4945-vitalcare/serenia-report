@@ -889,9 +889,9 @@ Además, menciona que en muchas ocasiones prefiere no comunicar ciertos problema
 
 <table align="center">
   <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>Edad</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>Distrito</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>Eva Martinez Torres</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>67 años</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>Chanchamayo - Junín</i></td></tr>
   <tr><td><b>Timing en el video</b></td><td><i>13:05</i></td></tr>
   <tr><td><b>URL del video</b></td><td><i> <a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Enlace de entrevistas</a></i></td></tr>
 </table>
@@ -900,7 +900,7 @@ Además, menciona que en muchas ocasiones prefiere no comunicar ciertos problema
 
 </div>
 
-*Pendiente.*
+Eva Martínez Torres tiene 67 años y reside en el distrito de Chanchamayo, provincia de Junín. Es casada y tiene 2 hijas, aunque vive sola desde hace 16 años; anteriormente tenía un negocio de ropa deportiva que cerró por la pandemia. Su rutina diaria incluye limpieza del hogar, compras y preparación de comidas, y ocasionalmente trabaja como costurera, saliendo con frecuencia para hacer compras o reunirse con sus amigas. Mantiene comunicación frecuente con sus hijas, aunque el contacto con el resto de la familia le resulta un poco más complicado; la mayoría de las veces comparte con su familia cuando tiene un mal día, pero procura no saturarlos con sus problemas y trata de resolverlos por su cuenta primero. En cuanto a tecnología, cuenta con un celular táctil y usa Facebook, TikTok y WhatsApp, señalando como principal molestia la lentitud ocasional de estas aplicaciones.
 
 <br>
 
