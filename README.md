@@ -1074,6 +1074,7 @@ A continuación, se presentan los diagramas que resumen la situación actual de 
 
 </div>
 
+
 ### Segmento 2 - Familiares a distancia
 
 <div align="center">
