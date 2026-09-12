@@ -839,7 +839,7 @@ Para cada segmento se registraron entre 3 y 5 entrevistas. Todas las entrevistas
   <tr><td><b>Edad</b></td><td>61 años</td></tr>
   <tr><td><b>Distrito</b></td><td>Tarapoto, San Martín</td></tr>
   <tr><td><b>Timing en el video</b></td><td><i>00:03</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Enlace de entrevistas</a></i></td></tr>
 </table>
 
 **Resumen:**
@@ -864,7 +864,7 @@ Yrma vive sola hace 6 años en Tarapoto, desde que sus dos hijas (abogada y admi
   <tr><td><b>Edad</b></td><td><i>74 años</i></td></tr>
   <tr><td><b>Distrito</b></td><td><i>Chorrillos</i></td></tr>
   <tr><td><b>Timing en el video</b></td><td><i>08:34</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Enlace de entrevistas</a></i></td></tr>
 </table>
 
 **Resumen:**
@@ -883,24 +883,24 @@ Además, menciona que en muchas ocasiones prefiere no comunicar ciertos problema
 
 ##### Entrevista 3
 
-*Screenshot: pendiente.*
+<img src="assets/img/interviews/entrevista-eva-martinez.png" alt="Screenshot entrevista Eva Martinez" width="700"/>
 
 <br>
 
 <table align="center">
   <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>Edad</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>Distrito</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>Eva Martinez Torres</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>67 años</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>Chanchamayo - Junín</i></td></tr>
   <tr><td><b>Timing en el video</b></td><td><i>13:05</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Enlace de entrevistas</a></i></td></tr>
 </table>
 
 **Resumen:**
 
 </div>
 
-*Pendiente.*
+Eva Martínez Torres tiene 67 años y reside en el distrito de Chanchamayo, provincia de Junín. Es casada y tiene 2 hijas, aunque vive sola desde hace 16 años; anteriormente tenía un negocio de ropa deportiva que cerró por la pandemia. Su rutina diaria incluye limpieza del hogar, compras y preparación de comidas, y ocasionalmente trabaja como costurera, saliendo con frecuencia para hacer compras o reunirse con sus amigas. Mantiene comunicación frecuente con sus hijas, aunque el contacto con el resto de la familia le resulta un poco más complicado; la mayoría de las veces comparte con su familia cuando tiene un mal día, pero procura no saturarlos con sus problemas y trata de resolverlos por su cuenta primero. En cuanto a tecnología, cuenta con un celular táctil y usa Facebook, TikTok y WhatsApp, señalando como principal molestia la lentitud ocasional de estas aplicaciones.
 
 <br>
 
@@ -921,7 +921,7 @@ Además, menciona que en muchas ocasiones prefiere no comunicar ciertos problema
   <tr><td><b>Edad</b></td><td><i>60 años </i></td></tr>
   <tr><td><b>Distrito</b></td><td><i>La Molina</i></td></tr>
   <tr><td><b>Timing en el video</b></td><td><i>20:22</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Enlace de entrevistas</a></i></td></tr>
 </table>
 
 **Resumen:**
@@ -949,7 +949,7 @@ Isabel nos comentó que nunca ha utilizado una aplicación enfocada en salud o b
   <tr><td><b>Edad</b></td><td><i>74 años</i></td></tr>
   <tr><td><b>Distrito</b></td><td><i>Mollendo - Arequipa</i></td></tr>
   <tr><td><b>Timing en el video</b></td><td><i>46:55</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Enlace de entrevistas</a></i></td></tr>
 </table>
 
 **Resumen:**
@@ -974,7 +974,7 @@ Enrique Guzmán Miranda es un adulto mayor jubilado que actualmente continúa re
   <tr><td><b>Edad</b></td><td><i>20 años</i></td></tr>
   <tr><td><b>Distrito</b></td><td><i>Surco</i></td></tr>
   <tr><td><b>Timing en el video</b></td><td><i>42:33</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Enlace de entrevistas</a></i></td></tr>
 </table>
 
 **Resumen:**
@@ -1000,7 +1000,7 @@ José es un joven soltero que reside con su padre y dos hermanos menores. Su rut
   <tr><td><b>Edad</b></td><td><i>27 años</i></td></tr>
   <tr><td><b>Distrito</b></td><td><i>San Juan de Miraflores</i></td></tr>
   <tr><td><b>Timing en el video</b></td><td><i>35:53</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Enlace de entrevistas</a></i></td></tr>
 </table>
 
 **Resumen:**
