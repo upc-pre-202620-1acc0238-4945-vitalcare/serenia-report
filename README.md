@@ -1062,6 +1062,26 @@ La principal diferencia radica en la naturaleza de su interacción; el adulto ma
 
 ### 2.3.3. User Journey Mapping
 
+En esta sección se detallan los User Journey Maps en su versión "As-Is", uno por cada segmento de usuario definido. El objetivo de estos mapas es ilustrar el proceso de extremo a extremo que realizan actualmente los usuarios para intentar resolver su necesidad, evidenciando los puntos de dolor, las frustraciones y las ineficiencias que experimentan antes de la implementación de nuestra solución propuesta.
+
+A continuación, se presentan los diagramas que resumen la situación actual de los usuarios:
+
+### Segmento 1 - Adultos mayores que viven solos
+
+<div align="center">
+
+![Empathy Map - Adultos mayores que viven solos](assets/img/user-journey-mapping/user-journey-seg1.png)
+
+</div>
+
+### Segmento 2 - Familiares a distancia
+
+<div align="center">
+
+![Empathy Map - Familiares a distancia](assets/img/user-journey-mapping/user-journey-seg2.png)
+
+</div>
+
 <br>
 
 ### 2.3.4. Empathy Mapping
