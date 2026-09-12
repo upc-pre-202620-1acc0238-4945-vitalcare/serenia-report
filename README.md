@@ -838,8 +838,8 @@ Para cada segmento se registraron entre 3 y 5 entrevistas. Todas las entrevistas
   <tr><td><b>Nombres y apellidos</b></td><td>Yrma Huamán Jiménez</td></tr>
   <tr><td><b>Edad</b></td><td>61 años</td></tr>
   <tr><td><b>Distrito</b></td><td>Tarapoto, San Martín</td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>00:03</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i>https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D</i></td></tr>
 </table>
 
 **Resumen:**
@@ -863,8 +863,8 @@ Yrma vive sola hace 6 años en Tarapoto, desde que sus dos hijas (abogada y admi
   <tr><td><b>Nombres y apellidos</b></td><td><i>Yolanda Bardalez Hernandez vda. de Gallardo</i></td></tr>
   <tr><td><b>Edad</b></td><td><i>74 años</i></td></tr>
   <tr><td><b>Distrito</b></td><td><i>Chorrillos</i></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>08:34</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i>https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D</i></td></tr>
 </table>
 
 **Resumen:**
@@ -892,8 +892,8 @@ Además, menciona que en muchas ocasiones prefiere no comunicar ciertos problema
   <tr><td><b>Nombres y apellidos</b></td><td><i>Pendiente</i></td></tr>
   <tr><td><b>Edad</b></td><td><i>Pendiente</i></td></tr>
   <tr><td><b>Distrito</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>13:05</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i>https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D</i></td></tr>
 </table>
 
 **Resumen:**
@@ -920,8 +920,8 @@ Además, menciona que en muchas ocasiones prefiere no comunicar ciertos problema
   <tr><td><b>Nombres y apellidos</b></td><td><i>Isabel Maria del Carmen Morales Reyna</i></td></tr>
   <tr><td><b>Edad</b></td><td><i>60 años </i></td></tr>
   <tr><td><b>Distrito</b></td><td><i>La Molina</i></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>20:22</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i>https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D</i></td></tr>
 </table>
 
 **Resumen:**
@@ -948,8 +948,8 @@ Isabel nos comentó que nunca ha utilizado una aplicación enfocada en salud o b
   <tr><td><b>Nombres y apellidos</b></td><td><i>Enrique Isaias Guzmán Miranda</i></td></tr>
   <tr><td><b>Edad</b></td><td><i>74 años</i></td></tr>
   <tr><td><b>Distrito</b></td><td><i>Mollendo - Arequipa</i></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>11:40</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>46:55</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i>https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D</i></td></tr>
 </table>
 
 **Resumen:**
@@ -973,8 +973,8 @@ Enrique Guzmán Miranda es un adulto mayor jubilado que actualmente continúa re
   <tr><td><b>Nombres y apellidos</b></td><td><i>José Cámara</i></td></tr>
   <tr><td><b>Edad</b></td><td><i>20 años</i></td></tr>
   <tr><td><b>Distrito</b></td><td><i>Surco</i></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>42:33</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i>https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D</i></td></tr>
 </table>
 
 **Resumen:**
@@ -999,8 +999,8 @@ José es un joven soltero que reside con su padre y dos hermanos menores. Su rut
   <tr><td><b>Nombres y apellidos</b></td><td><i>Kevin</i></td></tr>
   <tr><td><b>Edad</b></td><td><i>27 años</i></td></tr>
   <tr><td><b>Distrito</b></td><td><i>San Juan de Miraflores</i></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Pendiente</i></td></tr>
-  <tr><td><b>URL del video</b></td><td><i>Pendiente</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>35:53</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i>https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQCGnQ62jYHXR64Bx3zDMu5VAS2WHslQx9PQog9g6PNzP0o?e=xnrkLf&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D</i></td></tr>
 </table>
 
 **Resumen:**
