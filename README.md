@@ -1018,6 +1018,24 @@ Kevin está comprometido y vive con su novia y su hijo recién nacido. Trabaja c
 ## 2.3. Needfinding
 ### 2.3.1. User Personas
 
+En esta sección se presentan los user personas construidos a partir del análisis de las entrevistas de los adultos mayores y sus familiares a distancia. Estos artefactos sintetizan patrones de comportamiento, necesidades, motivaciones y frustraciones identificadas durante la investigación, permitiendo representar de manera clara a los segmentos clave de nuestro proyecto.
+
+### Segmento 1 - Adultos mayores que viven solos
+
+<div align="center">
+
+![User persona - Adultos mayores que viven solos](assets/img/user-persona/jorge-lopez-seg1.png)
+
+</div>
+
+### Segmento 2 - Familiares a distancia
+
+<div align="center">
+
+![User persona- Familiares a distancia](assets/img/user-persona/daniel-torres-seg2.png)
+
+</div>
+
 <br>
 
 ### 2.3.2. User Task Matrix
@@ -1070,7 +1088,7 @@ A continuación, se presentan los diagramas que resumen la situación actual de 
 
 <div align="center">
 
-![Empathy Map - Adultos mayores que viven solos](assets/img/user-journey-mapping/user-journey-seg1.png)
+![journey mapping - Adultos mayores que viven solos](assets/img/user-journey-mapping/user-journey-seg1.png)
 
 </div>
 
@@ -1079,7 +1097,7 @@ A continuación, se presentan los diagramas que resumen la situación actual de 
 
 <div align="center">
 
-![Empathy Map - Familiares a distancia](assets/img/user-journey-mapping/user-journey-seg2.png)
+![journey mapping - Familiares a distancia](assets/img/user-journey-mapping/user-journey-seg2.png)
 
 </div>
 
