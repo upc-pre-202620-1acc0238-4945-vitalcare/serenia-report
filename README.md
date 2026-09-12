@@ -1013,6 +1013,100 @@ Kevin está comprometido y vive con su novia y su hijo recién nacido. Trabaja c
 
 ### 2.2.3. Análisis de entrevistas
 
+#### Segmento 1: Adultos mayores que viven solos
+
+A partir de las tres entrevistas realizadas a adultos mayores que viven solos, se identificaron características comunes relacionadas con su situación familiar, rutina diaria, comunicación con sus familiares y uso de tecnología. Estos aspectos permiten reconocer patrones importantes para la construcción del arquetipo del segmento.
+
+#### Características objetivas
+
+| Característica | Resultado | Porcentaje |
+|---|---:|---:|
+| Viven solos | 3 de 3 entrevistadas | 100 % |
+| Tienen hijos | 3 de 3 entrevistadas | 100 % |
+| Mantienen comunicación con sus familiares | 3 de 3 entrevistadas | 100 % |
+| Utilizan smartphone | 3 de 3 entrevistadas | 100 % |
+| Utilizan WhatsApp | 3 de 3 entrevistadas | 100 % |
+| Realizan actividades del hogar | 3 de 3 entrevistadas | 100 % |
+| Presentan dificultades ocasionales con el uso del celular | 3 de 3 entrevistadas | 100 % |
+
+Las tres entrevistadas viven solas, aunque mantienen algún nivel de contacto con sus familiares. Yrma vive sola desde hace 6 años, Yolanda desde hace 13 años y Eva desde hace 16 años. A pesar de esta situación, las tres mantienen comunicación con sus hijos o familiares mediante llamadas, WhatsApp o mensajes.
+
+En cuanto a su rutina, las entrevistadas realizan principalmente actividades relacionadas con el hogar, como cocinar, limpiar y realizar compras. Eva, además, realiza ocasionalmente trabajos de costura y sale para reunirse con sus amigas, mientras que Yolanda suele recibir la visita de sus nietos y salir cuando sus familiares la invitan.
+
+Respecto al uso de tecnología, las tres cuentan con un celular táctil y utilizan WhatsApp como uno de sus principales medios de comunicación. También utilizan otras aplicaciones como Facebook, Messenger, YouTube y TikTok. Sin embargo, las tres mencionan dificultades cuando se enfrentan a funciones nuevas, problemas de rendimiento o situaciones que no saben resolver por sí mismas.
+
+#### Características subjetivas
+
+Uno de los patrones más importantes encontrados es el temor a molestar o preocupar a sus familiares. En las tres entrevistas aparece, aunque con diferentes matices, la tendencia a intentar resolver los problemas por cuenta propia antes de comunicarlos.
+
+Yrma menciona que cuando tiene un mal día prefiere no contarles a sus hijas para no preocuparlas, especialmente porque se encuentran lejos. Yolanda también señala que en algunas ocasiones evita comunicar problemas personales por miedo a molestar a los demás o pensar que no recibirá ayuda. Por su parte, Eva suele compartir sus problemas con su familia, pero procura no saturarlos y primero intenta resolverlos por sí misma.
+
+Esto permite identificar que 3 de 3 entrevistadas (100 %) presentan algún nivel de reserva al momento de comunicar sus problemas o necesidades, principalmente para no convertirse en una carga para sus familiares.
+
+Otro aspecto común es la necesidad de sentirse acompañadas y mantener el vínculo familiar, a pesar de vivir solas. Las tres valoran la comunicación con sus hijos o familiares y encuentran en el celular una herramienta importante para mantenerse conectadas.
+
+Finalmente, existe una dificultad tecnológica recurrente. Las entrevistadas utilizan el celular para comunicarse y entretenerse, pero no siempre se sienten seguras utilizando nuevas funciones. Yrma menciona que el celular puede trabarse y que evita llamar para no interrumpir a sus hijas, Yolanda necesita pedir ayuda cuando no sabe utilizar alguna función, y Eva señala como molestia la lentitud ocasional de algunas aplicaciones.
+
+#### Principales patrones identificados
+
+| Patrón identificado | Entrevistas relacionadas | Porcentaje |
+|---|---|---:|
+| Vive sola | Yrma, Yolanda, Eva | 100 % |
+| Mantiene comunicación con familiares | Yrma, Yolanda, Eva | 100 % |
+| Usa WhatsApp | Yrma, Yolanda, Eva | 100 % |
+| Presenta dificultades con algunas funciones del celular | Yrma, Yolanda, Eva | 100 % |
+| Evita comunicar algunos problemas para no molestar | Yrma, Yolanda, Eva | 100 % |
+| Busca mantener una relación cercana con su familia | Yrma, Yolanda, Eva | 100 % |
+
+#### Segmento 2: Familiares a distancia
+
+A partir de las cuatro entrevistas realizadas a familiares de adultos mayores que viven separados de ellos, se identificaron características comunes relacionadas con la distancia, la preocupación por el bienestar del adulto mayor, la comunicación familiar y la necesidad de contar con información sobre su estado sin invadir su privacidad. Estos aspectos permiten reconocer patrones relevantes para la construcción del arquetipo del segmento.
+
+#### Características objetivas
+
+| Característica | Resultado | Porcentaje |
+|---|---:|---:|
+| Tienen un familiar adulto mayor que vive separado de ellos | 4 de 4 entrevistados | 100 % |
+| Mantienen comunicación con el adulto mayor | 4 de 4 entrevistados | 100 % |
+| Utilizan WhatsApp u otros medios digitales para comunicarse | 4 de 4 entrevistados | 100 % |
+| Se preocupan por el bienestar del adulto mayor cuando no pueden contactarlo | 4 de 4 entrevistados | 100 % |
+| Han experimentado dificultades para coordinar el cuidado o comunicación con otros familiares | 2 de 4 entrevistados | 50 % |
+| Consideran útil recibir información sobre el estado del adulto mayor a distancia | 4 de 4 entrevistados | 100 % |
+| Presentan preocupación por la privacidad o sensación de vigilancia | 2 de 4 entrevistados | 50 % |
+
+Los cuatro entrevistados tienen un familiar adulto mayor que vive separado de ellos. Isabel tiene un padre de 89 años que vive solo, Enrique tiene una madre de 96 años, José tiene una abuela con quien dejó de convivir hace aproximadamente cuatro años y Kevin tiene un padre que vive solo en otra provincia desde hace casi diez años.
+
+A pesar de la distancia, todos mantienen algún tipo de comunicación con el adulto mayor. WhatsApp y las llamadas telefónicas son los principales medios utilizados. Sin embargo, la frecuencia y facilidad de comunicación varían según la situación de cada familia. Por ejemplo, José intenta llamar diariamente a su abuela antes de entrar a trabajar, mientras que Kevin se comunica con su padre principalmente mediante WhatsApp y realiza llamadas durante los fines de semana.
+
+Un aspecto común es que la distancia dificulta conocer directamente cómo se encuentra el adulto mayor. Los cuatro entrevistados expresaron preocupación ante la posibilidad de que ocurra una emergencia, una caída o algún problema de salud cuando ellos no se encuentran cerca.
+
+#### Características subjetivas
+
+La principal característica identificada en este segmento es la preocupación constante por el bienestar del adulto mayor. Los familiares quieren saber que la persona se encuentra bien, pero no siempre pueden visitarla o comunicarse con ella durante el día.
+
+José, por ejemplo, experimenta ansiedad cuando su abuela no contesta rápidamente el teléfono, ya que piensa que pudo haber sufrido una caída o algún problema de salud. De manera similar, Kevin se preocupa durante su jornada laboral por la posibilidad de que su padre haya sufrido una caída o algún incidente mientras se encuentra solo.
+
+Esto permite identificar que 4 de 4 entrevistados (100 %) presentan preocupación por no poder verificar directamente el estado del adulto mayor.
+
+Otro patrón importante es la necesidad de recibir información puntual sin tener que realizar constantemente llamadas o visitas. Isabel considera útil poder conocer determinadas actividades de su padre, mientras que Enrique considera que una aplicación podría permitir a la familia conocer el estado de su madre sin depender exclusivamente de visitas o llamadas. José y Kevin también buscan una forma sencilla de confirmar que sus familiares iniciaron bien el día y que todo se encuentra en orden.
+
+Asimismo, se identifica una preocupación por no invadir la privacidad del adulto mayor. José considera invasivas las aplicaciones de monitoreo y busca una solución que permita acompañar a su abuela sin estresarla. Kevin también menciona que su padre tuvo una mala experiencia con Google Maps porque sentía que estaba siendo vigilado. Por ello, 2 de 4 entrevistados (50 %) expresan directamente preocupación por la sensación de vigilancia o invasión de privacidad.
+
+Finalmente, también aparece la necesidad de contar con una solución simple y accesible. Isabel señala que la aplicación debería ser fácil de utilizar y considerar la condición visual de su padre. José y Kevin también consideran importante que la interfaz no sea complicada para el adulto mayor, ya que esto podría generar rechazo o estrés.
+
+#### Principales patrones identificados
+
+| Patrón identificado | Entrevistas relacionadas | Porcentaje |
+|---|---|---:|
+| Se preocupa por el bienestar del adulto mayor | Isabel, Enrique, José, Kevin | 100 % |
+| Mantiene comunicación a distancia | Isabel, Enrique, José, Kevin | 100 % |
+| Busca confirmar que el adulto mayor se encuentra bien | Isabel, Enrique, José, Kevin | 100 % |
+| Considera útil recibir información a distancia | Isabel, Enrique, José, Kevin | 100 % |
+| Busca reducir la dependencia de llamadas o visitas | Isabel, Enrique, José, Kevin | 100 % |
+| Presenta preocupación por la privacidad o sensación de vigilancia | José, Kevin | 50 % |
+| Considera importante una interfaz sencilla | Isabel, José, Kevin | 75 % |
+| Presenta problemas de coordinación con otros familiares | José, Kevin | 50 % |
+
 <br>
 
 ## 2.3. Needfinding
