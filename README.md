@@ -1235,6 +1235,29 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 
 ### 2.3.6. Ubiquitous Language
 
+A continuación, se presenta el glosario de términos del dominio del negocio manejados por el equipo, con el fin de mantener una comunicación clara y sin ambigüedades entre todos los miembros del equipo y los stakeholders del proyecto.
+
+<div align="center">
+
+| Término (en inglés) | Definición |
+|---|---|
+| **Older Adult** (Adulto Mayor) | Persona de edad avanzada que vive sola o pasa la mayor parte del día sin compañía, y que constituye el usuario principal receptor del cuidado y la compañía brindada a través de la aplicación. |
+| **Distant Caregiver** (Cuidador a Distancia) | Familiar (hijo, hija, nieto, etc.) que, por motivos de trabajo, distancia geográfica u otras responsabilidades, no puede acompañar físicamente al adulto mayor de forma constante, pero desea mantenerse informado de su bienestar y sentirse presente en su día a día. |
+| **Family Circle** (Círculo Familiar) | Conjunto de familiares y cuidadores vinculados a un mismo adulto mayor dentro de la aplicación, quienes comparten la responsabilidad de su cuidado, bienestar y compañía. |
+| **Daily Check-in** (Chequeo Diario) | Acción cotidiana mediante la cual el adulto mayor confirma que se encuentra bien, permitiendo a su círculo familiar conocer su estado sin necesidad de una llamada o visita. |
+| **Wellbeing Status** (Estado de Bienestar) | Indicador que resume la condición general del adulto mayor en un momento dado (por ejemplo, "bien", "necesita atención" o "sin respuesta"), calculado a partir de sus check-ins diarios y su actividad reciente en la aplicación. |
+| **Emergency Alert** (Alerta de Emergencia) | Notificación urgente enviada al círculo familiar cuando el adulto mayor solicita ayuda inmediata o cuando se detecta una ausencia prolongada de actividad que sugiere una posible situación de riesgo. |
+| **Social Isolation** (Aislamiento Social) | Situación en la que el adulto mayor carece de contacto frecuente con familiares u otras personas, lo cual incrementa su vulnerabilidad emocional y física, y constituye el problema central que la solución busca mitigar. |
+| **Companionship** (Compañía / Acompañamiento) | Sensación de cercanía afectiva y apoyo emocional que se busca generar en el adulto mayor a través de la interacción frecuente con su familia, aun cuando esta no pueda estar físicamente presente. |
+| **Voice Message** (Mensaje de Voz/Audio) | Forma de comunicación asíncrona basada en grabaciones de audio, utilizada entre el adulto mayor y su círculo familiar como una alternativa más cercana y accesible que el texto escrito. |
+| **Social Contact Reminder** (Recordatorio de Contacto Social) | Aviso programado que motiva al familiar a comunicarse con el adulto mayor, o a este último a interactuar con su círculo familiar, con el fin de mantener una frecuencia de contacto saludable. |
+| **Caregiver Coordination** (Coordinación entre Cuidadores) | Proceso mediante el cual los distintos familiares de un mismo círculo se organizan y distribuyen responsabilidades de acompañamiento y supervisión del adulto mayor, evitando la sobrecarga de un solo cuidador. |
+| **Peace of Mind** (Tranquilidad) | Estado emocional de calma y confianza que experimenta el familiar cuidador al saber, gracias a la aplicación, que el adulto mayor se encuentra bien, aun estando distante. |
+| **Family Bond** (Vínculo Familiar) | Relación afectiva y de cercanía entre el adulto mayor y sus familiares, que la solución busca fortalecer y mantener vigente a pesar de la distancia física. |
+| **Autonomy** (Autonomía) | Capacidad del adulto mayor de realizar por sí mismo sus actividades diarias e interactuar con la aplicación sin depender por completo de terceros, respetando su independencia y dignidad. |
+
+</div>
+
 <br>
 
 ## 2.4. Requirements specification
