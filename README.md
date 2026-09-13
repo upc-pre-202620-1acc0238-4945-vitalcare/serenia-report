@@ -1119,6 +1119,7 @@ En esta sección se presentan los user personas construidos a partir del anális
 <div align="center">
 
 ![User persona - Adultos mayores que viven solos](assets/img/user-persona/jorge-lopez-seg1.png)
+  <br/><i>Imagen 3: User Persona - Primer Segmento.</i>
 
 </div>
 
@@ -1127,6 +1128,7 @@ En esta sección se presentan los user personas construidos a partir del anális
 <div align="center">
 
 ![User persona- Familiares a distancia](assets/img/user-persona/daniel-torres-seg2.png)
+  <br/><i>Imagen 4: User Persona - Segundo Segmento.</i>
 
 </div>
 
@@ -1183,6 +1185,7 @@ A continuación, se presentan los diagramas que resumen la situación actual de 
 <div align="center">
 
 ![journey mapping - Adultos mayores que viven solos](assets/img/user-journey-mapping/user-journey-seg1.png)
+  <br/><i>Imagen 5: User Journey Mapping - Primer Segmento.</i>
 
 </div>
 
@@ -1192,6 +1195,7 @@ A continuación, se presentan los diagramas que resumen la situación actual de 
 <div align="center">
 
 ![journey mapping - Familiares a distancia](assets/img/user-journey-mapping/user-journey-seg2.png)
+  <br/><i>Imagen 6: User Journey Mapping - Segundo Segmento.</i>
 
 </div>
 
@@ -1208,7 +1212,7 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 <div align="center">
 
 ![Empathy Map - Adultos mayores que viven solos](assets/img/empathy-maps/empathy-map-adulto-mayor.png)
-  <br/><i>Imagen 3: Empathy Map - Primer Segmento.</i>
+  <br/><i>Imagen 7: Empathy Map - Primer Segmento.</i>
 
 </div>
 
@@ -1218,9 +1222,11 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 <div align="center">
 
 ![Empathy Map - Familiares a distancia](assets/img/empathy-maps/empathy-map-familiar.png)
-  <br/><i>Imagen 4: Empathy Map - Segundo Segmento.</i>
+  <br/><i>Imagen 8: Empathy Map - Segundo Segmento.</i>
 
 </div>
+
+<br>
 
 
 ### 2.3.5. Big Picture EventStorming
