@@ -501,7 +501,7 @@ Según la Agencia Andina (2025), citando datos del Instituto Nacional de Estadí
 <p align="center">
   <img src="assets/img/estadisticas/hogares-unipersonales-adulto-mayor.png" alt="Evolución del porcentaje de hogares unipersonales jefaturados por adultos mayores en el Perú, según INEI (2023-2025)" width="500">
 </p>
-<p align="center"><sub>Figura 1. Hogares jefaturados por adultos mayores, según área de residencia y sexo. Tomado de <em>Informe Técnico: Situación de la Población Adulta Mayor</em>, por Instituto Nacional de Estadística e Informática [INEI], 2025, p. 3 (https://m.inei.gob.pe/media/MenuRecursivo/boletines/informe-tecnico_adultomayor.pdf).</sub></p>
+<p align="center"><sub>Imagen 1. Hogares jefaturados por adultos mayores, según área de residencia y sexo. Tomado de <em>Informe Técnico: Situación de la Población Adulta Mayor</em>, por Instituto Nacional de Estadística e Informática [INEI], 2025, p. 3 (https://m.inei.gob.pe/media/MenuRecursivo/boletines/informe-tecnico_adultomayor.pdf).</sub></p>
 
 ### How (¿Cómo?)
 
@@ -577,7 +577,7 @@ El Lean UX Canvas consolida el Business Problem, los Business Outcomes, los User
 
 <p align="center">
   <img src="assets/img/diagrams/lean-ux-canvas.png" alt="Lean UX Canvas de Serenia" width="900"/>
-    <br/><i>Imagen 1: Lean UX Canvas.</i>
+    <br/><i>Imagen 2: Lean UX Canvas.</i>
 </p>
 
 URL del archivo en Figma: https://www.figma.com/design/MtWwz8GxmrY0eR7eyc2UC0/Lean-UX-Canvas--Serenia-?node-id=0-1
@@ -1075,7 +1075,7 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 <div align="center">
 
 ![Empathy Map - Adultos mayores que viven solos](assets/img/empathy-maps/empathy-map-adulto-mayor.png)
-  <br/><i>Imagen 2: Empathy Map - Primer Segmento.</i>
+  <br/><i>Imagen 3: Empathy Map - Primer Segmento.</i>
 
 </div>
 
@@ -1085,9 +1085,10 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 <div align="center">
 
 ![Empathy Map - Familiares a distancia](assets/img/empathy-maps/empathy-map-familiar.png)
-  <br/><i>Imagen 3: Empathy Map - Segundo Segmento.</i>
+  <br/><i>Imagen 4: Empathy Map - Segundo Segmento.</i>
 
 </div>
+
 
 ### 2.3.5. Big Picture EventStorming
 
