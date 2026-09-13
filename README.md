@@ -1241,7 +1241,1473 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 
 ### 2.4.1. User Stories
 
+En esta sección se presentan los requisitos identificados para Serenia a partir del análisis realizado en las etapas previas de investigación, organizados en Epics y User Stories que reflejan las necesidades del adulto mayor que vive solo, su familiar a distancia y los demás usuarios del producto.
+
+<table>
+  <tr>
+    <th style="width: 20%;">Epic ID</th>
+    <th style="width: 80%;">Nombre del Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>EP01</strong></td>
+    <td style="text-align: center;">Gestión de Identidad y Vínculo Familiar</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>EP02</strong></td>
+    <td style="text-align: center;">Check-in Diario y Autonomía del Usuario</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>EP03</strong></td>
+    <td style="text-align: center;">Mensajería de Audio Asíncrona</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>EP04</strong></td>
+    <td style="text-align: center;">Recordatorios de Contacto Social</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>EP05</strong></td>
+    <td style="text-align: center;">Alertas de Emergencia</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>EP06</strong></td>
+    <td style="text-align: center;">Panel de Estado y Alertas de Bienestar</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>EP07</strong></td>
+    <td style="text-align: center;">Coordinación entre Cuidadores Familiares</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>EP08</strong></td>
+    <td style="text-align: center;">Experiencia Web — Landing Page</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>EP09</strong></td>
+    <td style="text-align: center;">Calidad y Accesibilidad de la Experiencia</td>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>EP10</strong></td>
+    <td style="text-align: center;">Servicios REST</td>
+  </tr>
+</table>
+
 <br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US01</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP01 – Gestión de Identidad y Vínculo Familiar</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Registro de cuenta de usuario</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor que vive solo, quiero registrarme en la aplicación con mis datos básicos para acceder al check-in diario y mantenerme comunicado con mi familia.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Registro exitoso</strong><br>- <strong>Dado que</strong> el usuario ingresa a la aplicación por primera vez<br>- <strong>Cuando</strong> completa el formulario de registro con datos válidos y lo confirma<br>- <strong>Entonces</strong> el sistema crea la cuenta<br>- <strong>Y</strong> habilita el acceso a la pantalla principal<br><br><strong>Escenario 2: Datos incompletos o inválidos</strong><br>- <strong>Dado que</strong> el usuario completa el formulario de registro<br>- <strong>Cuando</strong> intenta confirmarlo con campos obligatorios vacíos o con formato incorrecto<br>- <strong>Entonces</strong> el sistema rechaza el registro<br>- <strong>Y</strong> indica los campos que requieren corrección</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US02</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP01 – Gestión de Identidad y Vínculo Familiar</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Vinculación familiar por código de invitación</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero vincular mi cuenta con la de mi adulto mayor mediante un código de invitación para acceder a su panel de estado y recibir sus alertas.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Vinculación exitosa</strong><br>- <strong>Dado que</strong> el familiar dispone del código de invitación generado por el adulto mayor<br>- <strong>Cuando</strong> ingresa el código y confirma la solicitud<br>- <strong>Entonces</strong> el sistema registra el vínculo familiar<br>- <strong>Y</strong> habilita el acceso al panel de estado del adulto mayor<br><br><strong>Escenario 2: Código inválido o expirado</strong><br>- <strong>Dado que</strong> el familiar ingresa un código de invitación<br>- <strong>Cuando</strong> el código no corresponde a ningún adulto mayor o ya fue utilizado<br>- <strong>Entonces</strong> el sistema rechaza la vinculación<br>- <strong>Y</strong> informa que el código no es válido</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US03</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP02 – Check-in Diario y Autonomía del Usuario</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Registro de respuesta del check-in diario</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor que vive solo, quiero responder con un solo toque la pregunta diaria sobre cómo me siento para comunicar mi bienestar sin depender de una llamada telefónica.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Check-in respondido</strong><br>- <strong>Dado que</strong> el sistema presenta la pregunta del check-in del día<br>- <strong>Cuando</strong> el usuario selecciona una de las respuestas disponibles<br>- <strong>Entonces</strong> el sistema registra la respuesta con su fecha y hora<br>- <strong>Y</strong> la pone a disposición de los familiares vinculados<br><br><strong>Escenario 2: Check-in no respondido</strong><br>- <strong>Dado que</strong> el sistema presentó la pregunta del check-in del día<br>- <strong>Cuando</strong> transcurre el tiempo límite a partir del horario configurado sin recibir respuesta<br>- <strong>Entonces</strong> el sistema marca el check-in del día como no respondido</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US04</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP02 – Check-in Diario y Autonomía del Usuario</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Notificación programada del check-in diario</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor que vive solo, quiero recibir una notificación en el horario habitual para responder mi check-in sin tener que recordar abrir la aplicación.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Notificación enviada</strong><br>- <strong>Dado que</strong> se alcanza el horario configurado para el check-in del usuario<br>- <strong>Cuando</strong> el sistema verifica que el check-in del día sigue pendiente<br>- <strong>Entonces</strong> el sistema envía una notificación invitando a responderlo<br><br><strong>Escenario 2: Check-in ya respondido</strong><br>- <strong>Dado que</strong> el usuario respondió su check-in antes del horario configurado<br>- <strong>Cuando</strong> se alcanza dicho horario<br>- <strong>Entonces</strong> el sistema omite el envío de la notificación<br><br><strong>Escenario 3: Preguntas pausadas</strong><br>- <strong>Dado que</strong> el usuario activó la pausa de preguntas para el día en curso<br>- <strong>Cuando</strong> se alcanza el horario configurado<br>- <strong>Entonces</strong> el sistema omite el envío de la notificación</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US05</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP02 – Check-in Diario y Autonomía del Usuario</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Configuración del horario del check-in</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor que vive solo, quiero definir a qué hora del día se me consulta cómo me siento para que el check-in se ajuste a mi rutina.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Horario actualizado</strong><br>- <strong>Dado que</strong> el usuario accede a la configuración de su check-in<br>- <strong>Cuando</strong> selecciona un nuevo horario dentro del rango permitido y lo confirma<br>- <strong>Entonces</strong> el sistema guarda el horario<br>- <strong>Y</strong> lo aplica a partir del siguiente check-in<br><br><strong>Escenario 2: Horario fuera del rango permitido</strong><br>- <strong>Dado que</strong> el usuario selecciona un horario fuera del rango permitido por la aplicación<br>- <strong>Cuando</strong> confirma el cambio<br>- <strong>Entonces</strong> el sistema rechaza la configuración<br>- <strong>Y</strong> informa el rango de horarios válido</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US06</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">Low</td>
+    <td style="text-align: center;">EP02 – Check-in Diario y Autonomía del Usuario</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Rotación de preguntas del check-in</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor que vive solo, quiero que las preguntas del check-in varíen entre días para que la interacción se perciba como una conversación y no como un control repetitivo.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Pregunta distinta a la del día anterior</strong><br>- <strong>Dado que</strong> el usuario recibe el check-in de un nuevo día<br>- <strong>Cuando</strong> el sistema selecciona la pregunta a presentar<br>- <strong>Entonces</strong> el sistema presenta una pregunta distinta a la del día inmediatamente anterior<br><br><strong>Escenario 2: Rotación dentro del conjunto disponible</strong><br>- <strong>Dado que</strong> existe un conjunto de preguntas configuradas para el check-in<br>- <strong>Cuando</strong> el sistema construye el check-in del día<br>- <strong>Entonces</strong> el sistema evita repetir una pregunta utilizada recientemente dentro de ese conjunto</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US07</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP02 – Check-in Diario y Autonomía del Usuario</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Pausa diaria de preguntas</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor que vive solo, quiero indicar que hoy no deseo recibir preguntas para conservar el control sobre mi propia disposición a comunicarme.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Pausa activada</strong><br>- <strong>Dado que</strong> el usuario decide no recibir preguntas durante el día en curso<br>- <strong>Cuando</strong> activa la opción de pausar las preguntas<br>- <strong>Entonces</strong> el sistema omite el check-in del día<br>- <strong>Y</strong> informa a los familiares vinculados que el usuario optó por no participar hoy<br><br><strong>Escenario 2: Reanudación automática</strong><br>- <strong>Dado que</strong> el usuario activó la pausa de preguntas para el día en curso<br>- <strong>Cuando</strong> inicia un nuevo día<br>- <strong>Entonces</strong> el sistema reanuda el envío del check-in diario</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US08</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP02 – Check-in Diario y Autonomía del Usuario</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Modo simplificado de interfaz</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor que vive solo, quiero activar un modo con menos opciones en pantalla para interactuar de forma mínima en los días de menor energía.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Modo simplificado activado</strong><br>- <strong>Dado que</strong> el usuario accede a la configuración de su cuenta<br>- <strong>Cuando</strong> activa la opción de modo simplificado<br>- <strong>Entonces</strong> el sistema reduce las funcionalidades visibles a las necesarias para completar el check-in diario<br><br><strong>Escenario 2: Modo simplificado desactivado</strong><br>- <strong>Dado que</strong> el usuario tiene activado el modo simplificado<br>- <strong>Cuando</strong> selecciona desactivarlo<br>- <strong>Entonces</strong> el sistema restablece el conjunto completo de funcionalidades disponibles</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US09</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP03 – Mensajería de Audio Asíncrona</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Grabación y envío de mensaje de audio</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor que vive solo, quiero grabar un audio breve sobre mi día para compartir un mensaje personal con mi familia sin depender de una llamada.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Audio enviado</strong><br>- <strong>Dado que</strong> el usuario graba un audio en el espacio de mensajes personales<br>- <strong>Cuando</strong> confirma el envío<br>- <strong>Entonces</strong> el sistema almacena el audio<br>- <strong>Y</strong> lo pone a disposición de los familiares vinculados<br><br><strong>Escenario 2: Grabación cancelada</strong><br>- <strong>Dado que</strong> el usuario se encuentra grabando un audio<br>- <strong>Cuando</strong> cancela la grabación antes de confirmarla<br>- <strong>Entonces</strong> el sistema descarta el audio<br>- <strong>Y</strong> no lo comparte con los familiares vinculados</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US10</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP03 – Mensajería de Audio Asíncrona</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Reproducción de mensajes de audio recibidos</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero reproducir los audios que comparte mi adulto mayor para conocer cómo estuvo su día de una forma más cercana que un indicador de estado.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Reproducción exitosa</strong><br>- <strong>Dado que</strong> el adulto mayor vinculado compartió un audio<br>- <strong>Cuando</strong> el familiar accede a la sección de mensajes de audio y selecciona uno<br>- <strong>Entonces</strong> el sistema reproduce el audio seleccionado<br><br><strong>Escenario 2: Sin audios disponibles</strong><br>- <strong>Dado que</strong> el adulto mayor vinculado no ha compartido audios<br>- <strong>Cuando</strong> el familiar accede a la sección de mensajes de audio<br>- <strong>Entonces</strong> el sistema informa que aún no hay audios disponibles</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US11</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">Low</td>
+    <td style="text-align: center;">EP04 – Recordatorios de Contacto Social</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Notificación de recordatorio de contacto social</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor que vive solo, quiero recibir recordatorios para contactar a una amistad o asistir a una actividad social para mantener mi vida social activa y no solo mi seguridad física.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Recordatorio presentado</strong><br>- <strong>Dado que</strong> existe un recordatorio de contacto social programado para el día en curso<br>- <strong>Cuando</strong> se alcanza la hora programada<br>- <strong>Entonces</strong> el sistema presenta el recordatorio al usuario<br><br><strong>Escenario 2: Recordatorio completado</strong><br>- <strong>Dado que</strong> el sistema presentó un recordatorio de contacto social<br>- <strong>Cuando</strong> el usuario indica que ya lo realizó<br>- <strong>Entonces</strong> el sistema marca el recordatorio como completado<br>- <strong>Y</strong> no vuelve a presentarlo durante el día</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US12</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">Low</td>
+    <td style="text-align: center;">EP04 – Recordatorios de Contacto Social</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Postergación de recordatorio de contacto social</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor que vive solo, quiero posponer un recordatorio en lugar de descartarlo para no percibir como una falta el no poder atenderlo en ese momento.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Recordatorio pospuesto</strong><br>- <strong>Dado que</strong> el sistema presenta un recordatorio de contacto social<br>- <strong>Cuando</strong> el usuario selecciona posponerlo<br>- <strong>Entonces</strong> el sistema lo reprograma para un momento posterior del mismo día<br><br><strong>Escenario 2: Recordatorio pospuesto sin atender</strong><br>- <strong>Dado que</strong> un recordatorio fue pospuesto dentro del día en curso<br>- <strong>Cuando</strong> finaliza el día sin que el usuario interactúe con él<br>- <strong>Entonces</strong> el sistema lo marca como no completado</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US13</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP05 – Alertas de Emergencia</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Activación del botón de auxilio</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor que vive solo, quiero solicitar ayuda de forma inmediata ante una emergencia para contar con el respaldo de mi familia en cualquier momento del día.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Auxilio activado</strong><br>- <strong>Dado que</strong> el usuario se encuentra en una situación de emergencia<br>- <strong>Cuando</strong> activa el botón de auxilio<br>- <strong>Entonces</strong> el sistema registra la activación<br>- <strong>Y</strong> notifica de inmediato a los familiares vinculados<br><br><strong>Escenario 2: Confirmación al usuario</strong><br>- <strong>Dado que</strong> el usuario activó el botón de auxilio<br>- <strong>Cuando</strong> el sistema completa el envío de la alerta<br>- <strong>Entonces</strong> el sistema confirma al usuario que su familia fue notificada</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US14</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP05 – Alertas de Emergencia</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Recepción de alerta de emergencia</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero recibir una alerta inmediata cuando mi adulto mayor activa el botón de auxilio para poder actuar sin demora.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Alerta recibida</strong><br>- <strong>Dado que</strong> el adulto mayor vinculado activa el botón de auxilio<br>- <strong>Cuando</strong> el sistema procesa la activación<br>- <strong>Entonces</strong> el sistema notifica al familiar<br>- <strong>Y</strong> incluye la fecha y hora de la activación<br><br><strong>Escenario 2: Notificación a múltiples familiares</strong><br>- <strong>Dado que</strong> el adulto mayor tiene más de un familiar vinculado<br>- <strong>Cuando</strong> se registra una alerta de emergencia<br>- <strong>Entonces</strong> el sistema notifica a todos los familiares vinculados de forma simultánea</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US15</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP06 – Panel de Estado y Alertas de Bienestar</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Consulta del panel de estado diario</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero consultar el estado diario de mi adulto mayor para saber si completó su check-in y cómo se sintió sin necesidad de llamarlo.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Check-in disponible</strong><br>- <strong>Dado que</strong> el adulto mayor vinculado respondió su check-in del día<br>- <strong>Cuando</strong> el familiar accede al panel de estado<br>- <strong>Entonces</strong> el sistema muestra la respuesta registrada junto con su fecha y hora<br><br><strong>Escenario 2: Check-in pendiente</strong><br>- <strong>Dado que</strong> el adulto mayor vinculado no ha respondido su check-in del día<br>- <strong>Cuando</strong> el familiar accede al panel de estado<br>- <strong>Entonces</strong> el sistema indica que el check-in del día se encuentra pendiente</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US16</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP06 – Panel de Estado y Alertas de Bienestar</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Alerta por inactividad del check-in</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero recibir una alerta únicamente cuando algo se sale de lo habitual para no tener que revisar la aplicación durante todo el día.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Check-in no respondido</strong><br>- <strong>Dado que</strong> el adulto mayor vinculado no respondió su check-in dentro del tiempo límite a partir de su horario configurado<br>- <strong>Cuando</strong> el sistema evalúa el estado del día<br>- <strong>Entonces</strong> el sistema genera una alerta de inactividad para el familiar<br><br><strong>Escenario 2: Respuesta dentro de lo habitual</strong><br>- <strong>Dado que</strong> el adulto mayor vinculado respondió su check-in dentro de un rango considerado habitual<br>- <strong>Cuando</strong> el sistema procesa la respuesta<br>- <strong>Entonces</strong> el sistema no genera ninguna alerta<br><br><strong>Escenario 3: Preguntas pausadas por el usuario</strong><br>- <strong>Dado que</strong> el adulto mayor vinculado activó la pausa de preguntas para el día en curso<br>- <strong>Cuando</strong> finaliza el día sin un check-in registrado<br>- <strong>Entonces</strong> el sistema no genera una alerta de inactividad</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US17</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP06 – Panel de Estado y Alertas de Bienestar</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Historial de check-ins del adulto mayor</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero consultar los check-ins de días anteriores para identificar patrones y no limitarme al estado del día en curso.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Historial disponible</strong><br>- <strong>Dado que</strong> el adulto mayor vinculado cuenta con check-ins registrados en días anteriores<br>- <strong>Cuando</strong> el familiar accede al historial<br>- <strong>Entonces</strong> el sistema muestra las respuestas ordenadas por fecha<br><br><strong>Escenario 2: Sin registros previos</strong><br>- <strong>Dado que</strong> el adulto mayor vinculado no cuenta con check-ins previos<br>- <strong>Cuando</strong> el familiar accede al historial<br>- <strong>Entonces</strong> el sistema informa que aún no existen registros disponibles</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US18</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">Low</td>
+    <td style="text-align: center;">EP06 – Panel de Estado y Alertas de Bienestar</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Sugerencia de acción por patrón de malestar</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero recibir una sugerencia cuando mi adulto mayor reporta malestar durante varios días seguidos para saber cuándo es oportuno llamarlo o visitarlo.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Patrón detectado</strong><br>- <strong>Dado que</strong> el adulto mayor vinculado reporta malestar durante varios días consecutivos<br>- <strong>Cuando</strong> el sistema evalúa sus respuestas recientes<br>- <strong>Entonces</strong> el sistema genera una sugerencia de acción para el familiar<br><br><strong>Escenario 2: Sin patrón sostenido</strong><br>- <strong>Dado que</strong> el adulto mayor vinculado no presenta un patrón sostenido de malestar<br>- <strong>Cuando</strong> el sistema evalúa sus respuestas recientes<br>- <strong>Entonces</strong> el sistema no genera ninguna sugerencia</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US19</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">Low</td>
+    <td style="text-align: center;">EP06 – Panel de Estado y Alertas de Bienestar</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Registro de pequeñas victorias</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero visualizar los días buenos y las actividades positivas de mi adulto mayor para reforzar lo positivo y no recibir únicamente alertas.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Victorias disponibles</strong><br>- <strong>Dado que</strong> el adulto mayor vinculado reportó actividades positivas en sus check-ins recientes<br>- <strong>Cuando</strong> el familiar accede al registro de pequeñas victorias<br>- <strong>Entonces</strong> el sistema muestra dichas actividades junto con su fecha<br><br><strong>Escenario 2: Sin victorias registradas</strong><br>- <strong>Dado que</strong> no existen actividades positivas registradas en el período reciente<br>- <strong>Cuando</strong> el familiar accede al registro de pequeñas victorias<br>- <strong>Entonces</strong> el sistema informa que no hay registros en el período</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US20</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP07 – Coordinación entre Cuidadores Familiares</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Asignación de turnos de atención</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero asignarme turnos de atención junto a los demás familiares para evitar que todos asuman que otra persona ya se comunicó con el adulto mayor.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Turno asignado</strong><br>- <strong>Dado que</strong> existen varios familiares vinculados al mismo adulto mayor<br>- <strong>Cuando</strong> un familiar se asigna un turno de atención para una fecha determinada<br>- <strong>Entonces</strong> el sistema registra el turno<br>- <strong>Y</strong> lo hace visible para todos los familiares vinculados<br><br><strong>Escenario 2: Turno ya asignado</strong><br>- <strong>Dado que</strong> una fecha ya cuenta con un turno de atención asignado<br>- <strong>Cuando</strong> otro familiar intenta asignarse el mismo turno<br>- <strong>Entonces</strong> el sistema rechaza la asignación<br>- <strong>Y</strong> informa que la fecha ya se encuentra cubierta</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US21</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP07 – Coordinación entre Cuidadores Familiares</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Consulta del turno de atención vigente</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero consultar quién tiene asignado el turno del día para saber si me corresponde a mí hacer seguimiento o ya está cubierto.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Turno vigente asignado</strong><br>- <strong>Dado que</strong> existe un turno de atención asignado para el día en curso<br>- <strong>Cuando</strong> el familiar consulta la coordinación de turnos<br>- <strong>Entonces</strong> el sistema muestra al familiar responsable de esa fecha<br><br><strong>Escenario 2: Día sin asignar</strong><br>- <strong>Dado que</strong> no existe un turno de atención asignado para el día en curso<br>- <strong>Cuando</strong> el familiar consulta la coordinación de turnos<br>- <strong>Entonces</strong> el sistema indica que la fecha se encuentra sin asignar</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US22</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">Low</td>
+    <td style="text-align: center;">EP07 – Coordinación entre Cuidadores Familiares</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Notas compartidas entre familiares</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero registrar notas compartidas con información relevante para que el contexto no se pierda entre los distintos familiares.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Nota registrada</strong><br>- <strong>Dado que</strong> el familiar dispone de información relevante sobre el adulto mayor<br>- <strong>Cuando</strong> registra una nota compartida<br>- <strong>Entonces</strong> el sistema la almacena<br>- <strong>Y</strong> la hace visible para todos los familiares vinculados<br><br><strong>Escenario 2: Nota editada</strong><br>- <strong>Dado que</strong> existe una nota compartida registrada previamente<br>- <strong>Cuando</strong> el familiar que la creó modifica su contenido<br>- <strong>Entonces</strong> el sistema actualiza la nota para todos los familiares vinculados</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US23</strong></td>
+    <td style="text-align: center;">Visitante del sitio web</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP08 – Experiencia Web — Landing Page</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Propuesta de valor en la landing page</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como visitante del sitio web, quiero identificar qué ofrece Serenia y qué problema resuelve para evaluar si corresponde a la necesidad de mi familia.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Propuesta de valor presentada</strong><br>- <strong>Dado que</strong> el visitante accede a la landing page<br>- <strong>Cuando</strong> el sistema carga el contenido<br>- <strong>Entonces</strong> el sistema presenta la propuesta de valor principal junto con las funcionalidades de check-in diario, panel de estado familiar y botón de auxilio<br><br><strong>Escenario 2: Diferenciador comunicado</strong><br>- <strong>Dado que</strong> el visitante recorre la landing page<br>- <strong>Cuando</strong> consulta la sección de propuesta de valor<br>- <strong>Entonces</strong> el sistema comunica el enfoque de acompañamiento y vínculo emocional por encima del monitoreo clínico</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US24</strong></td>
+    <td style="text-align: center;">Visitante del sitio web</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP08 – Experiencia Web — Landing Page</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Presentación del modelo de dos aplicaciones</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como visitante del sitio web, quiero entender cómo operan de forma conectada la aplicación del adulto mayor y la del familiar para saber qué implica adoptar Serenia.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Flujo de uso presentado</strong><br>- <strong>Dado que</strong> el visitante accede a la sección de funcionamiento<br>- <strong>Cuando</strong> el sistema carga el contenido<br>- <strong>Entonces</strong> el sistema presenta el flujo de uso de ambas aplicaciones y la forma en que se vinculan<br><br><strong>Escenario 2: Distinción por segmento</strong><br>- <strong>Dado que</strong> el visitante consulta la sección de funcionamiento<br>- <strong>Cuando</strong> compara ambas aplicaciones<br>- <strong>Entonces</strong> el sistema distingue las funcionalidades correspondientes al adulto mayor de las del familiar</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US25</strong></td>
+    <td style="text-align: center;">Visitante del sitio web</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP08 – Experiencia Web — Landing Page</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Navegación y diseño responsive del sitio</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como visitante del sitio web, quiero recorrer las secciones de la landing page desde cualquier dispositivo para consultar el contenido que me interesa sin dificultad.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Navegación entre secciones</strong><br>- <strong>Dado que</strong> el visitante accede a la landing page<br>- <strong>Cuando</strong> selecciona una sección del menú de navegación<br>- <strong>Entonces</strong> el sistema desplaza la vista hacia la sección correspondiente<br><br><strong>Escenario 2: Visualización en dispositivos móviles</strong><br>- <strong>Dado que</strong> el visitante accede a la landing page desde un dispositivo móvil<br>- <strong>Cuando</strong> el sistema carga el contenido<br>- <strong>Entonces</strong> el sistema adapta la disposición del contenido y del menú al tamaño de la pantalla</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US26</strong></td>
+    <td style="text-align: center;">Visitante del sitio web</td>
+    <td style="text-align: center;">Low</td>
+    <td style="text-align: center;">EP08 – Experiencia Web — Landing Page</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Sección institucional de la startup</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como visitante del sitio web, quiero conocer quiénes están detrás de Serenia para confiar en un producto al que le proporcionaré información sobre mi familia.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Información institucional disponible</strong><br>- <strong>Dado que</strong> el visitante accede a la sección institucional<br>- <strong>Cuando</strong> el sistema carga el contenido<br>- <strong>Entonces</strong> el sistema presenta la misión, la visión y al equipo de VitalCare</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>NF01</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP09 – Calidad y Accesibilidad de la Experiencia</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Accesibilidad visual y táctil de la interfaz</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor con posibles limitaciones visuales o motrices, quiero una interfaz con texto amplio, buen contraste y controles fáciles de accionar para utilizar la aplicación sin dificultad.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Legibilidad del contenido</strong><br>- <strong>Dado que</strong> el usuario accede a cualquier pantalla de la aplicación<br>- <strong>Cuando</strong> el sistema presenta el contenido<br>- <strong>Entonces</strong> el texto y los controles resultan suficientemente amplios y claros para leerse y accionarse sin esfuerzo<br><br><strong>Escenario 2: Contraste adecuado</strong><br>- <strong>Dado que</strong> el usuario visualiza cualquier pantalla de la aplicación<br>- <strong>Cuando</strong> el sistema aplica su estilo visual<br>- <strong>Entonces</strong> los colores mantienen un contraste que permite distinguir el contenido con facilidad</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>NF02</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP09 – Calidad y Accesibilidad de la Experiencia</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Latencia de entrega de alertas de emergencia</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor que vive solo, quiero que la alerta de auxilio se entregue y confirme con rapidez para tener certeza de que mi familia será notificada sin demora.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Entrega inmediata de la alerta</strong><br>- <strong>Dado que</strong> el usuario activa el botón de auxilio con conexión disponible<br>- <strong>Cuando</strong> el sistema procesa la activación<br>- <strong>Entonces</strong> la notificación alcanza a los familiares vinculados de forma prácticamente inmediata</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>NF03</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo / Familiar a distancia</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP09 – Calidad y Accesibilidad de la Experiencia</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Control de acceso a los datos de bienestar</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como usuario de la plataforma, quiero que mi información personal y de bienestar permanezca protegida para confiar en el resguardo de datos sensibles sobre mi familia.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Acceso no autorizado denegado</strong><br>- <strong>Dado que</strong> un familiar intenta acceder al panel de estado de un adulto mayor<br>- <strong>Cuando</strong> el sistema verifica que no existe un vínculo con esa cuenta<br>- <strong>Entonces</strong> el sistema deniega el acceso a la información solicitada</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>NF04</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP09 – Calidad y Accesibilidad de la Experiencia</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Usabilidad sin experiencia tecnológica previa</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor con poca experiencia en aplicaciones móviles, quiero completar las tareas principales en pocos pasos y sin instrucciones externas para no depender de la ayuda de terceros.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Tarea principal completada de forma autónoma</strong><br>- <strong>Dado que</strong> un usuario sin experiencia previa accede a la aplicación por primera vez<br>- <strong>Cuando</strong> intenta completar una tarea principal como el check-in diario<br>- <strong>Entonces</strong> el usuario la completa siguiendo únicamente las indicaciones presentes en la interfaz</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>TS01</strong></td>
+    <td style="text-align: center;">Developer</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP10 – Servicios REST</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Gestión de usuarios del sistema</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como developer, quiero consumir los endpoints de users para registrar y gestionar las cuentas de los usuarios de Serenia.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Registro de usuario exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /users con los datos requeridos válidos<br>- <strong>Cuando</strong> el servidor procesa la solicitud<br>- <strong>Entonces</strong> retorna 201 Created con el objeto del usuario creado<br><br><strong>Escenario 2: Datos inválidos en el registro</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /users con campos requeridos faltantes o mal formateados<br>- <strong>Cuando</strong> el servidor valida la solicitud<br>- <strong>Entonces</strong> retorna 400 Bad Request con el detalle de validación<br><br><strong>Escenario 3: Obtener usuario por ID exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /users/{id} con un ID existente<br>- <strong>Cuando</strong> el servidor busca el recurso<br>- <strong>Entonces</strong> retorna 200 OK con el objeto del usuario correspondiente<br><br><strong>Escenario 4: Usuario no encontrado</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /users/{id} con un ID inexistente<br>- <strong>Cuando</strong> el servidor busca el recurso<br>- <strong>Entonces</strong> retorna 404 Not Found</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>TS02</strong></td>
+    <td style="text-align: center;">Developer</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP10 – Servicios REST</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Gestión de sesiones de autenticación</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como developer, quiero consumir el endpoint de sessions para autenticar usuarios y gestionar el acceso a la aplicación.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Inicio de sesión exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /sessions con credenciales válidas<br>- <strong>Cuando</strong> el servidor autentica las credenciales<br>- <strong>Entonces</strong> retorna 200 OK con el token de sesión y los datos del usuario autenticado<br><br><strong>Escenario 2: Credenciales incorrectas</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /sessions con credenciales inválidas<br>- <strong>Cuando</strong> el servidor valida las credenciales<br>- <strong>Entonces</strong> retorna 401 Unauthorized<br><br><strong>Escenario 3: Campos requeridos faltantes</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /sessions sin los campos requeridos<br>- <strong>Cuando</strong> el servidor valida la solicitud<br>- <strong>Entonces</strong> retorna 400 Bad Request con el detalle de validación</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>TS03</strong></td>
+    <td style="text-align: center;">Developer</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP10 – Servicios REST</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Gestión de vínculos familiares</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como developer, quiero consumir los endpoints de family_links para vincular la cuenta de un familiar con la de un adulto mayor mediante un código de invitación.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Vinculación exitosa</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /family_links con un código de invitación válido<br>- <strong>Cuando</strong> el servidor procesa la solicitud<br>- <strong>Entonces</strong> retorna 201 Created con el vínculo familiar creado<br><br><strong>Escenario 2: Código de invitación inexistente</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /family_links con un código que no corresponde a ningún adulto mayor<br>- <strong>Cuando</strong> el servidor valida el código<br>- <strong>Entonces</strong> retorna 404 Not Found<br><br><strong>Escenario 3: Código utilizado o expirado</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /family_links con un código ya utilizado o expirado<br>- <strong>Cuando</strong> el servidor valida el código<br>- <strong>Entonces</strong> retorna 409 Conflict<br><br><strong>Escenario 4: Obtener vínculos de un usuario exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /family_links con un ID de usuario válido<br>- <strong>Cuando</strong> el servidor busca los registros<br>- <strong>Entonces</strong> retorna 200 OK con la lista de vínculos familiares del usuario</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>TS04</strong></td>
+    <td style="text-align: center;">Developer</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP10 – Servicios REST</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Gestión de check-ins diarios</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como developer, quiero consumir los endpoints de check_ins para registrar y consultar las respuestas diarias del adulto mayor.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Registro de check-in exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /check_ins con los datos requeridos válidos<br>- <strong>Cuando</strong> el servidor procesa la solicitud<br>- <strong>Entonces</strong> retorna 201 Created con el check-in registrado<br><br><strong>Escenario 2: Check-in duplicado en el mismo día</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /check_ins para un adulto mayor que ya registró su check-in del día<br>- <strong>Cuando</strong> el servidor valida la solicitud<br>- <strong>Entonces</strong> retorna 409 Conflict<br><br><strong>Escenario 3: Obtener historial de check-ins exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /check_ins con un ID de adulto mayor válido<br>- <strong>Cuando</strong> el servidor busca los registros<br>- <strong>Entonces</strong> retorna 200 OK con la lista de check-ins ordenados por fecha<br><br><strong>Escenario 4: Datos inválidos</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /check_ins con campos requeridos faltantes<br>- <strong>Cuando</strong> el servidor valida la solicitud<br>- <strong>Entonces</strong> retorna 400 Bad Request con el detalle de validación</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>TS05</strong></td>
+    <td style="text-align: center;">Developer</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP10 – Servicios REST</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Gestión de preferencias del usuario</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como developer, quiero consumir los endpoints de user_preferences para gestionar el horario del check-in, la pausa diaria de preguntas y el modo simplificado.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Actualización de preferencias exitosa</strong><br>- <strong>Dado que</strong> el developer envía una solicitud PUT a /user_preferences/{id} con los datos actualizados<br>- <strong>Cuando</strong> el servidor procesa la actualización<br>- <strong>Entonces</strong> retorna 200 OK con las preferencias actualizadas<br><br><strong>Escenario 2: Obtener preferencias exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /user_preferences con un ID de usuario válido<br>- <strong>Cuando</strong> el servidor busca el registro<br>- <strong>Entonces</strong> retorna 200 OK con las preferencias configuradas<br><br><strong>Escenario 3: Horario fuera del rango permitido</strong><br>- <strong>Dado que</strong> el developer envía una solicitud PUT a /user_preferences/{id} con un horario fuera del rango permitido<br>- <strong>Cuando</strong> el servidor valida la solicitud<br>- <strong>Entonces</strong> retorna 400 Bad Request con el detalle de validación</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>TS06</strong></td>
+    <td style="text-align: center;">Developer</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP10 – Servicios REST</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Gestión de mensajes de audio</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como developer, quiero consumir los endpoints de audio_messages para subir y recuperar los audios compartidos por el adulto mayor.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Subida de audio exitosa</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /audio_messages con un archivo de audio válido<br>- <strong>Cuando</strong> el servidor procesa la solicitud<br>- <strong>Entonces</strong> retorna 201 Created con el mensaje de audio registrado y su URL de acceso<br><br><strong>Escenario 2: Formato de archivo no soportado</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /audio_messages con un archivo en un formato no soportado<br>- <strong>Cuando</strong> el servidor valida el archivo<br>- <strong>Entonces</strong> retorna 415 Unsupported Media Type<br><br><strong>Escenario 3: Obtener audios exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /audio_messages con un ID de adulto mayor válido<br>- <strong>Cuando</strong> el servidor busca los registros<br>- <strong>Entonces</strong> retorna 200 OK con la lista de audios ordenados por fecha<br><br><strong>Escenario 4: Audio no encontrado</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /audio_messages/{id} con un ID inexistente<br>- <strong>Cuando</strong> el servidor busca el recurso<br>- <strong>Entonces</strong> retorna 404 Not Found</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>TS07</strong></td>
+    <td style="text-align: center;">Developer</td>
+    <td style="text-align: center;">Low</td>
+    <td style="text-align: center;">EP10 – Servicios REST</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Gestión de recordatorios de contacto social</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como developer, quiero consumir los endpoints de social_reminders para registrar, consultar y actualizar el estado de los recordatorios del adulto mayor.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Registro de recordatorio exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /social_reminders con los datos requeridos válidos<br>- <strong>Cuando</strong> el servidor procesa la solicitud<br>- <strong>Entonces</strong> retorna 201 Created con el recordatorio registrado<br><br><strong>Escenario 2: Obtener recordatorios exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /social_reminders con un ID de adulto mayor válido<br>- <strong>Cuando</strong> el servidor busca los registros<br>- <strong>Entonces</strong> retorna 200 OK con la lista de recordatorios programados<br><br><strong>Escenario 3: Actualizar estado de recordatorio exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud PUT a /social_reminders/{id} actualizando su estado a completado o pospuesto<br>- <strong>Cuando</strong> el servidor procesa la actualización<br>- <strong>Entonces</strong> retorna 200 OK con el recordatorio actualizado<br><br><strong>Escenario 4: Recordatorio no encontrado</strong><br>- <strong>Dado que</strong> el developer envía una solicitud PUT a /social_reminders/{id} con un ID inexistente<br>- <strong>Cuando</strong> el servidor busca el recurso<br>- <strong>Entonces</strong> retorna 404 Not Found</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>TS08</strong></td>
+    <td style="text-align: center;">Developer</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP10 – Servicios REST</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Gestión de alertas de emergencia</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como developer, quiero consumir los endpoints de emergency_alerts para registrar la activación del botón de auxilio y notificar a los familiares vinculados.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Registro de alerta exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /emergency_alerts con los datos requeridos válidos<br>- <strong>Cuando</strong> el servidor procesa la solicitud<br>- <strong>Entonces</strong> retorna 201 Created con la alerta registrada<br>- <strong>Y</strong> notifica a los familiares vinculados<br><br><strong>Escenario 2: Adulto mayor sin familiares vinculados</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /emergency_alerts para un adulto mayor sin vínculos familiares registrados<br>- <strong>Cuando</strong> el servidor procesa la solicitud<br>- <strong>Entonces</strong> retorna 422 Unprocessable Entity<br><br><strong>Escenario 3: Obtener alertas exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /emergency_alerts con un ID de adulto mayor válido<br>- <strong>Cuando</strong> el servidor busca los registros<br>- <strong>Entonces</strong> retorna 200 OK con la lista de alertas y su fecha y hora de activación</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>TS09</strong></td>
+    <td style="text-align: center;">Developer</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP10 – Servicios REST</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Gestión del panel de estado</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como developer, quiero consumir los endpoints de status_summaries para exponer al familiar el estado diario del adulto mayor vinculado.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Obtener estado del día exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /status_summaries/{elderly_id} con un familiar vinculado autenticado<br>- <strong>Cuando</strong> el servidor busca el registro<br>- <strong>Entonces</strong> retorna 200 OK con el estado del día y la hora del último check-in<br><br><strong>Escenario 2: Familiar no vinculado</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /status_summaries/{elderly_id} con un familiar que no está vinculado a esa cuenta<br>- <strong>Cuando</strong> el servidor valida la autorización<br>- <strong>Entonces</strong> retorna 403 Forbidden<br><br><strong>Escenario 3: Adulto mayor no encontrado</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /status_summaries/{elderly_id} con un ID inexistente<br>- <strong>Cuando</strong> el servidor busca el recurso<br>- <strong>Entonces</strong> retorna 404 Not Found</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>TS10</strong></td>
+    <td style="text-align: center;">Developer</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP10 – Servicios REST</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Gestión de alertas de inactividad</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como developer, quiero consumir los endpoints de inactivity_alerts para consultar y actualizar las alertas generadas cuando el adulto mayor no responde su check-in.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Obtener alertas exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /inactivity_alerts con un ID de adulto mayor válido<br>- <strong>Cuando</strong> el servidor busca los registros<br>- <strong>Entonces</strong> retorna 200 OK con la lista de alertas generadas<br><br><strong>Escenario 2: Sin alertas registradas</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /inactivity_alerts para un adulto mayor sin alertas generadas<br>- <strong>Cuando</strong> el servidor busca los registros<br>- <strong>Entonces</strong> retorna 200 OK con una lista vacía<br><br><strong>Escenario 3: Marcar alerta como atendida exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud PUT a /inactivity_alerts/{id} actualizando su estado a atendida<br>- <strong>Cuando</strong> el servidor procesa la actualización<br>- <strong>Entonces</strong> retorna 200 OK con la alerta actualizada</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>TS11</strong></td>
+    <td style="text-align: center;">Developer</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP10 – Servicios REST</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Gestión de turnos de atención</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como developer, quiero consumir los endpoints de care_shifts para asignar y consultar los turnos de atención entre familiares.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Asignación de turno exitosa</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /care_shifts con los datos requeridos válidos<br>- <strong>Cuando</strong> el servidor procesa la solicitud<br>- <strong>Entonces</strong> retorna 201 Created con el turno asignado<br><br><strong>Escenario 2: Turno ya asignado para esa fecha</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /care_shifts para una fecha que ya cuenta con un turno asignado<br>- <strong>Cuando</strong> el servidor valida la solicitud<br>- <strong>Entonces</strong> retorna 409 Conflict<br><br><strong>Escenario 3: Obtener turnos exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /care_shifts con un ID de adulto mayor válido<br>- <strong>Cuando</strong> el servidor busca los registros<br>- <strong>Entonces</strong> retorna 200 OK con la lista de turnos asignados y sus responsables<br><br><strong>Escenario 4: Datos inválidos</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /care_shifts con campos requeridos faltantes<br>- <strong>Cuando</strong> el servidor valida la solicitud<br>- <strong>Entonces</strong> retorna 400 Bad Request con el detalle de validación</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>TS12</strong></td>
+    <td style="text-align: center;">Developer</td>
+    <td style="text-align: center;">Low</td>
+    <td style="text-align: center;">EP10 – Servicios REST</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Gestión de notas compartidas</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como developer, quiero consumir los endpoints de shared_notes para registrar, consultar y editar las notas compartidas entre familiares.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Registro de nota exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud POST a /shared_notes con los datos requeridos válidos<br>- <strong>Cuando</strong> el servidor procesa la solicitud<br>- <strong>Entonces</strong> retorna 201 Created con la nota creada<br><br><strong>Escenario 2: Obtener notas compartidas exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /shared_notes con un ID de adulto mayor válido<br>- <strong>Cuando</strong> el servidor busca los registros<br>- <strong>Entonces</strong> retorna 200 OK con la lista de notas compartidas<br><br><strong>Escenario 3: Edición de nota exitosa</strong><br>- <strong>Dado que</strong> el developer envía una solicitud PUT a /shared_notes/{id} con los datos actualizados<br>- <strong>Cuando</strong> el servidor procesa la actualización<br>- <strong>Entonces</strong> retorna 200 OK con la nota actualizada<br><br><strong>Escenario 4: Nota no encontrada</strong><br>- <strong>Dado que</strong> el developer envía una solicitud PUT a /shared_notes/{id} con un ID inexistente<br>- <strong>Cuando</strong> el servidor busca el recurso<br>- <strong>Entonces</strong> retorna 404 Not Found</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>TS13</strong></td>
+    <td style="text-align: center;">Developer</td>
+    <td style="text-align: center;">Low</td>
+    <td style="text-align: center;">EP10 – Servicios REST</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Gestión de indicadores de bienestar</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como developer, quiero consumir los endpoints de wellbeing_insights para exponer las sugerencias de acción y el registro de pequeñas victorias del adulto mayor.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Obtener sugerencias exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /wellbeing_insights/suggestions con un ID de adulto mayor válido<br>- <strong>Cuando</strong> el servidor evalúa las respuestas recientes<br>- <strong>Entonces</strong> retorna 200 OK con la lista de sugerencias activas<br><br><strong>Escenario 2: Obtener pequeñas victorias exitoso</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /wellbeing_insights/wins con un ID de adulto mayor válido<br>- <strong>Cuando</strong> el servidor busca los registros<br>- <strong>Entonces</strong> retorna 200 OK con la lista de actividades positivas del período<br><br><strong>Escenario 3: Sin datos suficientes</strong><br>- <strong>Dado que</strong> el developer envía una solicitud GET a /wellbeing_insights/suggestions para un adulto mayor sin respuestas suficientes<br>- <strong>Cuando</strong> el servidor evalúa los datos<br>- <strong>Entonces</strong> retorna 200 OK con una lista vacía</td>
+  </tr>
+</table>
 
 ### 2.4.2. Impact Mapping
 
