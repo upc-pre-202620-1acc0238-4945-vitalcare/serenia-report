@@ -1241,7 +1241,7 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 
 ### 2.4.1. User Stories
 
-<br>
+En esta sección se presentan los requisitos identificados para Serenia a partir del análisis realizado en las etapas previas de investigación, organizados en Epics y User Stories que reflejan las necesidades del adulto mayor que vive solo, su familiar a distancia y los demás usuarios del producto.
 
 ### 2.4.2. Impact Mapping
 
