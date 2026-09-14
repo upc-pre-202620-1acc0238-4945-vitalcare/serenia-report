@@ -306,8 +306,13 @@ Ser admitido en una maestría de Arquitectura de Software dentro de los 2 años 
 **García Paredes, Victor Manuel**
 
 <u> *Objetivo SMART 1:* </u> <br>
+Obtener al menos una certificación profesional reconocida en la nube (por ejemplo, AWS Certified Developer o Microsoft Azure Fundamentals) dentro del primer año posterior a mi egreso, dedicando al menos 5 horas semanales a su preparación, con el fin de fortalecer mis competencias técnicas y aumentar mi competitividad en el mercado laboral.
 
 <u> *Objetivo SMART 2:* </u> <br>
+Conseguir un empleo remoto como desarrollador de software dentro de los 12 meses posteriores a mi egreso, que me permita trabajar desde al menos 2 países distintos durante mi primer año en el puesto, con el fin de combinar mi pasión por la programación con mi interés por conocer el mundo.
+
+<u> *Objetivo SMART 3:* </u> <br>
+Fundar mi propia empresa o startup de software dentro de los 3 años posteriores a mi egreso, validando un modelo de negocio y consiguiendo al menos 1 cliente o usuario piloto en ese periodo, con el fin de aplicar de forma independiente los conocimientos técnicos y de gestión adquiridos en la carrera.
 
 **Salinas Guzman, Brianna Cristina**
 
