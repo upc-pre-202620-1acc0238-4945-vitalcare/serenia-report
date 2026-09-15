@@ -110,12 +110,20 @@ URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vi
 - [Capítulo I: Presentación](#capítulo-i-presentación)
   - [1.1. Startup Profile](#11-startup-profile)
     - [1.1.1. Descripción de la Startup](#111-descripción-de-la-startup)
-      - [Misión](#misión)
-      - [Visión](#visión)
-      - [Valores](#valores)
+  - [Misión](#misión)
+  - [Visión](#visión)
+  - [Valores](#valores)
     - [1.1.2. Perfiles de integrantes del equipo](#112-perfiles-de-integrantes-del-equipo)
   - [1.2. Solution Profile](#12-solution-profile)
     - [1.2.1. Antecedentes y problemática](#121-antecedentes-y-problemática)
+  - [The 5W's y 2H's](#the-5ws-y-2hs)
+    - [Who (¿Quién?)](#who-quién)
+    - [What (¿Qué?)](#what-qué)
+    - [Where (¿Dónde?)](#where-dónde)
+    - [When (¿Cuándo?)](#when-cuándo)
+    - [Why (¿Por qué?)](#why-por-qué)
+    - [How (¿Cómo?)](#how-cómo)
+    - [How much (¿Cuánto?)](#how-much-cuánto)
     - [1.2.2. Lean UX Process](#122-lean-ux-process)
       - [1.2.2.1. Lean UX Problem Statements](#1221-lean-ux-problem-statements)
       - [1.2.2.2. Lean UX Assumptions](#1222-lean-ux-assumptions)
@@ -128,22 +136,49 @@ URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vi
   - [2.1. Competidores](#21-competidores)
     - [2.1.1. Análisis competitivo](#211-análisis-competitivo)
     - [2.1.2. Estrategias y tácticas frente a competidores](#212-estrategias-y-tácticas-frente-a-competidores)
+  - [Tácticas específicas frente a cada competidor](#tácticas-específicas-frente-a-cada-competidor)
   - [2.2. Entrevistas](#22-entrevistas)
     - [2.2.1. Diseño de entrevistas](#221-diseño-de-entrevistas)
       - [Segmento 1: Adultos mayores que viven solos](#segmento-1-adultos-mayores-que-viven-solos-1)
       - [Segmento 2: Familiares a distancia](#segmento-2-familiares-a-distancia-1)
     - [2.2.2. Registro de entrevistas](#222-registro-de-entrevistas)
+      - [Segmento 1: Adultos mayores que viven solos](#segmento-1-adultos-mayores-que-viven-solos-2)
+        - [Entrevista 1](#entrevista-1)
+        - [Entrevista 2](#entrevista-2)
+        - [Entrevista 3](#entrevista-3)
+      - [Segmento 2: Familiares a distancia](#segmento-2-familiares-a-distancia-2)
+        - [Entrevista 1](#entrevista-1-1)
+        - [Entrevista 2](#entrevista-2-1)
+        - [Entrevista 3](#entrevista-3-1)
+        - [Entrevista 4](#entrevista-4)
     - [2.2.3. Análisis de entrevistas](#223-análisis-de-entrevistas)
+      - [Segmento 1: Adultos mayores que viven solos](#segmento-1-adultos-mayores-que-viven-solos-3)
+      - [Características objetivas](#características-objetivas)
+      - [Características subjetivas](#características-subjetivas)
+      - [Principales patrones identificados](#principales-patrones-identificados)
+      - [Segmento 2: Familiares a distancia](#segmento-2-familiares-a-distancia-3)
+      - [Características objetivas](#características-objetivas-1)
+      - [Características subjetivas](#características-subjetivas-1)
+      - [Principales patrones identificados](#principales-patrones-identificados-1)
   - [2.3. Needfinding](#23-needfinding)
     - [2.3.1. User Personas](#231-user-personas)
+    - [Segmento 1 - Adultos mayores que viven solos](#segmento-1---adultos-mayores-que-viven-solos)
+    - [Segmento 2 - Familiares a distancia](#segmento-2---familiares-a-distancia)
     - [2.3.2. User Task Matrix](#232-user-task-matrix)
+      - [Segmento 1: Adultos mayores que viven solos](#segmento-1-adultos-mayores-que-viven-solos-4)
+      - [Segmento 2: Familiares a distancia](#segmento-2-familiares-a-distancia-4)
     - [2.3.3. User Journey Mapping](#233-user-journey-mapping)
+    - [Segmento 1 - Adultos mayores que viven solos](#segmento-1---adultos-mayores-que-viven-solos-1)
+    - [Segmento 2 - Familiares a distancia](#segmento-2---familiares-a-distancia-1)
     - [2.3.4. Empathy Mapping](#234-empathy-mapping)
+    - [Segmento 1 - Adultos mayores que viven solos](#segmento-1---adultos-mayores-que-viven-solos-2)
+    - [Segmento 2 - Familiares a distancia](#segmento-2---familiares-a-distancia-2)
     - [2.3.5. Big Picture EventStorming](#235-big-picture-eventstorming)
     - [2.3.6. Ubiquitous Language](#236-ubiquitous-language)
   - [2.4. Requirements specification](#24-requirements-specification)
     - [2.4.1. User Stories](#241-user-stories)
     - [2.4.2. Impact Mapping](#242-impact-mapping)
+      - [Desglose del Impact Mapping](#desglose-del-impact-mapping)
     - [2.4.3. Product Backlog](#243-product-backlog)
   - [2.5. Strategic-Level Domain-Driven Design](#25-strategic-level-domain-driven-design)
     - [2.5.1. EventStorming](#251-eventstorming)
@@ -156,7 +191,7 @@ URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vi
       - [2.5.3.2. Software Architecture Container Level Diagrams](#2532-software-architecture-container-level-diagrams)
       - [2.5.3.3. Software Architecture Deployment Diagrams](#2533-software-architecture-deployment-diagrams)
   - [2.6. Tactical-Level Domain-Driven Design](#26-tactical-level-domain-driven-design)
-    - [2.6.1. Bounded Context: Identity & Access Context](#261-bounded-context-identity--access-context)
+    - [2.6.1. Bounded Context: Identity \& Access Context](#261-bounded-context-identity--access-context)
       - [2.6.1.1. Domain Layer](#2611-domain-layer)
       - [2.6.1.2. Interface Layer](#2612-interface-layer)
       - [2.6.1.3. Application Layer](#2613-application-layer)
@@ -201,7 +236,7 @@ URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vi
       - [2.6.5.6. Bounded Context Software Architecture Code Level Diagrams](#2656-bounded-context-software-architecture-code-level-diagrams)
         - [2.6.5.6.1. Bounded Context Domain Layer Class Diagrams](#26561-bounded-context-domain-layer-class-diagrams)
         - [2.6.5.6.2. Bounded Context Database Design Diagram](#26562-bounded-context-database-design-diagram)
-    - [2.6.6. Bounded Context: Alerts & Safety](#266-bounded-context-alerts--safety)
+    - [2.6.6. Bounded Context: Alerts \& Safety](#266-bounded-context-alerts--safety)
       - [2.6.6.1. Domain Layer](#2661-domain-layer)
       - [2.6.6.2. Interface Layer](#2662-interface-layer)
       - [2.6.6.3. Application Layer](#2663-application-layer)
@@ -252,7 +287,7 @@ URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vi
     - [4.3.2. Registro de Entrevistas](#432-registro-de-entrevistas)
     - [4.3.3. Evaluaciones según heurísticas](#433-evaluaciones-según-heurísticas)
 - [Conclusiones](#conclusiones)
-  - [Conclusiones y recomendaciones.](#conclusiones-y-recomendaciones)
+  - [Recomendaciones](#recomendaciones)
   - [Video App Validation](#video-app-validation)
   - [Video About the product](#video-about-the-product)
   - [Video About the team](#video-about-the-team)
@@ -1283,7 +1318,7 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 
 ### 2.3.5. Big Picture EventStorming
 
-El equipo realizó una sesión colaborativa de Big Picture EventStorming en Miro, con el objetivo de explorar de forma visual el dominio completo de Serenia: desde la vinculación entre el adulto mayor y su familiar, pasando por el check-in diario y su interpretación, hasta el manejo de emergencias y la compañía social. Se identificaron 35 eventos de dominio, redactados en pasado, y se ordenaron cronológicamente para cada uno de los procesos identificados.
+El equipo realizó una sesión colaborativa de Big Picture EventStorming en Miro, con el objetivo de explorar de forma visual el dominio completo de Serenia: desde la vinculación entre el adulto mayor y su familiar, pasando por el check-in diario y su interpretación, hasta el manejo de emergencias y la compañía social. Se identificaron 45 eventos de dominio, redactados en pasado y en inglés siguiendo la convención de nomenclatura adoptada por el equipo, y se ordenaron cronológicamente para cada uno de los procesos identificados.
 
 <div align="center">
 
@@ -1295,13 +1330,13 @@ URL del tablero en Miro: https://miro.com/app/board/uXjVHmgj4G8=/
 
 **Procesos clave identificados:**
 - **Alta y vínculo**: la creación de cuentas y el establecimiento del vínculo familiar son el punto de partida obligatorio antes de que cualquier otro proceso pueda ocurrir.
-- **Check-in diario**: el ritual central del lado del adulto mayor, con eventos que reflejan tanto su ejecución habitual como sus excepciones (pausa del día, modo simplificado).
+- **Check-in diario**: el ritual central del lado del adulto mayor, con eventos que reflejan tanto su ejecución habitual como sus excepciones (pausa del día, modo simplificado, check-in no respondido).
 - **Interpretación de bienestar**: un conjunto de eventos de lectura que traducen los check-ins en información útil para el familiar, sin decidir por sí solos si algo es urgente.
 - **Alertas y seguridad**: los eventos más críticos del dominio, tanto por activación directa (botón de auxilio) como por detección pasiva (inactividad).
 - **Compañía social**: eventos desligados de cualquier fin de monitoreo, centrados en el vínculo emocional (audios, recordatorios sociales).
 
 **Oportunidades y problemas expuestos durante la sesión:**
-- Se evidenció que "Familiares notificados simultáneamente" y "Alerta de inactividad generada" comparten el mismo mecanismo de notificación aunque se disparan por causas distintas (activación directa vs. detección pasiva), lo que se debe resolver con cuidado en el diseño técnico para no duplicar lógica.
+- Se evidenció que "Relatives Notified Simultaneously" y "Inactivity Alert Generated" comparten el mismo mecanismo de notificación aunque se disparan por causas distintas (activación directa vs. detección pasiva), lo que se debe resolver con cuidado en el diseño técnico para no duplicar lógica.
 - Se identificó que la autorización de acceso a los datos de un adulto mayor específico depende del vínculo familiar vigente, por lo que cualquier eliminación de vínculo debe revocar ese acceso de forma inmediata.
 - Los eventos se organizaron visualmente en las agrupaciones que el equipo identificó durante la sesión, las cuales se retoman y detallan formalmente como bounded contexts en la sección 2.5.1.1 Candidate Context Discovery.
 
