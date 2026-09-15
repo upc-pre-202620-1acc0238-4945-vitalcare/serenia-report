@@ -291,7 +291,6 @@ URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vi
   - [Video App Validation](#video-app-validation)
   - [Video About the product](#video-about-the-product)
   - [Video About the team](#video-about-the-team)
-- [Glosario](#glosario)
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
 
@@ -3376,9 +3375,6 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 
 <br>
 
-# Glosario
-
-<br>
 
 # Bibliografía
 
