@@ -663,7 +663,7 @@ El Lean UX Canvas consolida el Business Problem, los Business Outcomes, los User
 
 <p align="center">
   <img src="assets/img/diagrams/lean-ux-canvas.png" alt="Lean UX Canvas de Serenia" width="900"/>
-    <br/><i>Imagen 2: Lean UX Canvas.</i>
+    <br/><i>Imagen 2. Lean UX Canvas.</i>
 </p>
 
 URL del archivo en Figma: https://www.figma.com/design/MtWwz8GxmrY0eR7eyc2UC0/Lean-UX-Canvas--Serenia-?node-id=0-1
@@ -1205,7 +1205,7 @@ En esta sección se presentan los user personas construidos a partir del anális
 <div align="center">
 
 ![User persona - Adultos mayores que viven solos](assets/img/user-persona/jorge-lopez-seg1.png)
-  <br/><i>Imagen 3: User Persona - Primer Segmento.</i>
+  <br/><i>Imagen 3. User Persona - Primer Segmento.</i>
 
 </div>
 
@@ -1214,7 +1214,7 @@ En esta sección se presentan los user personas construidos a partir del anális
 <div align="center">
 
 ![User persona- Familiares a distancia](assets/img/user-persona/daniel-torres-seg2.png)
-  <br/><i>Imagen 4: User Persona - Segundo Segmento.</i>
+  <br/><i>Imagen 4. User Persona - Segundo Segmento.</i>
 
 </div>
 
@@ -1271,7 +1271,7 @@ A continuación, se presentan los diagramas que resumen la situación actual de 
 <div align="center">
 
 ![journey mapping - Adultos mayores que viven solos](assets/img/user-journey-mapping/user-journey-seg1.png)
-  <br/><i>Imagen 5: User Journey Mapping - Primer Segmento.</i>
+  <br/><i>Imagen 5. User Journey Mapping - Primer Segmento.</i>
 
 </div>
 
@@ -1281,7 +1281,7 @@ A continuación, se presentan los diagramas que resumen la situación actual de 
 <div align="center">
 
 ![journey mapping - Familiares a distancia](assets/img/user-journey-mapping/user-journey-seg2.png)
-  <br/><i>Imagen 6: User Journey Mapping - Segundo Segmento.</i>
+  <br/><i>Imagen 6. User Journey Mapping - Segundo Segmento.</i>
 
 </div>
 
@@ -1298,7 +1298,7 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 <div align="center">
 
 ![Empathy Map - Adultos mayores que viven solos](assets/img/empathy-maps/empathy-map-adulto-mayor.png)
-  <br/><i>Imagen 7: Empathy Map - Primer Segmento.</i>
+  <br/><i>Imagen 7. Empathy Map - Primer Segmento.</i>
 
 </div>
 
@@ -1308,7 +1308,7 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 <div align="center">
 
 ![Empathy Map - Familiares a distancia](assets/img/empathy-maps/empathy-map-familiar.png)
-  <br/><i>Imagen 8: Empathy Map - Segundo Segmento.</i>
+  <br/><i>Imagen 8. Empathy Map - Segundo Segmento.</i>
 
 </div>
 
@@ -1327,7 +1327,7 @@ URL del tablero en Miro: [https://miro.com/app/board/uXjVHmgj4G8=/](https://miro
 <div align="center">
 
 ![Big Picture EventStorming - Serenia](assets/img/big-picture-eventstorming/big-picture-eventstorming.png)
-  <br/><i>Imagen 9: Big Picture EventStorming del dominio de Serenia.</i>
+  <br/><i>Imagen 9. Big Picture EventStorming del dominio de Serenia.</i>
 
 </div>
 
@@ -2924,7 +2924,7 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 <div align="center">
 
 ![Impact Mapping de Serenia](assets/img/diagrams/impact-mapping.png)
-  <br/><i>Imagen 9: Diagrama de Impact Mapping.</i>
+  <br/><i>Imagen 10. Diagrama de Impact Mapping.</i>
 
 </div>
 
