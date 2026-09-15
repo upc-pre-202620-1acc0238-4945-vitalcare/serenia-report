@@ -372,8 +372,10 @@ Fundar mi propia startup de desarrollo de software orientada a resolver problema
 **Sandoval Aiquipa, Kelber Yamir**
 
 <u> *Objetivo SMART 1:* </u> <br>
+Conseguir un puesto como Desarrollador Backend en una empresa del sector tecnológico dentro de los 12 meses posteriores a mi egreso, dedicando 6 horas semanales a perfeccionar mis habilidades en frameworks como Spring Boot y en el diseño de arquitecturas basadas en Domain-Driven Design (DDD), con el fin de especializarme en la construcción de sistemas robustos y escalables.
 
 <u> *Objetivo SMART 2:* </u> <br>
+Asumir un rol de liderazgo técnico o gestión de proyectos (como Tech Lead o Scrum Master) dentro de los 3 primeros años de mi carrera profesional, aprovechando la capacidad de resolución de conflictos y gestión de personal adquirida supervisando equipos de ventas y atención al cliente, y obteniendo una certificación oficial en metodologías ágiles durante los primeros 18 meses.
 
 <br>
 
