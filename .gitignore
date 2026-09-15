@@ -1,0 +1,19 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# JetBrains IDEs (IntelliJ, WebStorm, PyCharm, etc.)
+.idea/
+
+# VS Code
+.vscode/
+
+# Editor backups
+*.swp
+*~
