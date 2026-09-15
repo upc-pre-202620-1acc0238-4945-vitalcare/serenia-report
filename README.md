@@ -2163,6 +2163,39 @@ En esta sección se presentan los requisitos identificados para Serenia a partir
     <th style="width: 35%;">Epic</th>
   </tr>
   <tr>
+    <td style="text-align: center;"><strong>US27</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP03 – Mensajería Multimedia Asíncrona</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Envío de fotografía al adulto mayor</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero compartir una fotografía con mi adulto mayor para hacerle sentir presente en mi día a día sin depender de una llamada.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Fotografía enviada</strong><br>- <strong>Dado que</strong> el familiar selecciona una fotografía para compartir con su adulto mayor vinculado<br>- <strong>Cuando</strong> confirma el envío<br>- <strong>Entonces</strong> el sistema almacena la fotografía<br>- <strong>Y</strong> la pone a disposición del adulto mayor<br><br><strong>Escenario 2: Envío cancelado</strong><br>- <strong>Dado que</strong> el familiar seleccionó una fotografía para compartir<br>- <strong>Cuando</strong> cancela el envío antes de confirmarlo<br>- <strong>Entonces</strong> el sistema descarta la fotografía<br>- <strong>Y</strong> no la comparte con el adulto mayor</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
     <td style="text-align: center;"><strong>NF01</strong></td>
     <td style="text-align: center;">Adulto mayor que vive solo</td>
     <td style="text-align: center;">High</td>
