@@ -1364,6 +1364,16 @@ A continuación, se presenta el glosario de términos del dominio del negocio ma
 | **Peace of Mind** (Tranquilidad) | Estado emocional de calma y confianza que experimenta el familiar cuidador al saber, gracias a la aplicación, que el adulto mayor se encuentra bien, aun estando distante. |
 | **Family Bond** (Vínculo Familiar) | Relación afectiva y de cercanía entre el adulto mayor y sus familiares, que la solución busca fortalecer y mantener vigente a pesar de la distancia física. |
 | **Autonomy** (Autonomía) | Capacidad del adulto mayor de realizar por sí mismo sus actividades diarias e interactuar con la aplicación sin depender por completo de terceros, respetando su independencia y dignidad. |
+| **Invitation Code** (Código de Invitación) | Código que un familiar genera para invitar a otro miembro de la familia a integrarse al círculo familiar de un adulto mayor, estableciendo así el vínculo entre ambas cuentas. |
+| **Care Shift** (Turno de Cuidado) | Periodo de tiempo durante el cual un familiar específico asume la responsabilidad principal de estar atento al bienestar del adulto mayor dentro del círculo familiar. |
+| **Shared Note** (Nota Compartida) | Anotación breve que un familiar deja disponible para el resto del círculo familiar, con el fin de mantener informados a los demás cuidadores sobre alguna situación particular del adulto mayor. |
+| **Simplified Mode** (Modo Simplificado) | Configuración de la interacción del check-in diario pensada para adultos mayores con menor familiaridad tecnológica, que reduce la cantidad de pasos y la complejidad visual necesarios para completar el chequeo. |
+| **Pause Day** (Día de Pausa) | Indicación que el adulto mayor puede registrar para señalar, de forma anticipada, que no completará su check-in en una fecha determinada (por ejemplo, por un viaje o una visita familiar), evitando así una alerta innecesaria. |
+| **Help Button** (Botón de Ayuda) | Elemento de la aplicación que el adulto mayor puede activar de forma directa e inmediata para solicitar auxilio ante una emergencia, sin depender de la detección pasiva de inactividad. |
+| **Inactivity Alert** (Alerta de Inactividad) | Aviso generado automáticamente cuando la aplicación detecta una ausencia prolongada de actividad por parte del adulto mayor, sin que este haya activado el botón de ayuda, y que sugiere una posible situación de riesgo. |
+| **Small Win** (Pequeño Logro) | Registro de un avance o comportamiento positivo del adulto mayor (por ejemplo, una racha de check-ins completados) que la aplicación destaca para reforzar su bienestar y motivación. |
+| **Wellbeing Trend** (Tendencia de Bienestar) | Lectura de la evolución del estado de bienestar del adulto mayor a lo largo del tiempo, construida a partir del historial de check-ins, que permite al familiar identificar mejoras o retrocesos sostenidos. |
+| **Action Suggestion** (Sugerencia de Acción) | Recomendación que la aplicación entrega al familiar a partir de los patrones de bienestar detectados, orientada a motivarlo a tomar una acción concreta de acompañamiento hacia el adulto mayor. |
 
 </div>
 
