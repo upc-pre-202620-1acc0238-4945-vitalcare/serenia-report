@@ -1263,7 +1263,7 @@ En esta sección se presentan los requisitos identificados para Serenia a partir
   </tr>
   <tr>
     <td style="text-align: center;"><strong>EP03</strong></td>
-    <td style="text-align: center;">Mensajería de Audio Asíncrona</td>
+    <td style="text-align: center;">Mensajería Multimedia Asíncrona</td>
   </tr>
   <tr>
     <td style="text-align: center;"><strong>EP04</strong></td>
@@ -1572,7 +1572,7 @@ En esta sección se presentan los requisitos identificados para Serenia a partir
     <td style="text-align: center;"><strong>US09</strong></td>
     <td style="text-align: center;">Adulto mayor que vive solo</td>
     <td style="text-align: center;">Medium</td>
-    <td style="text-align: center;">EP03 – Mensajería de Audio Asíncrona</td>
+    <td style="text-align: center;">EP03 – Mensajería Multimedia Asíncrona</td>
   </tr>
   <tr>
     <th>Title</th>
@@ -1605,7 +1605,7 @@ En esta sección se presentan los requisitos identificados para Serenia a partir
     <td style="text-align: center;"><strong>US10</strong></td>
     <td style="text-align: center;">Familiar a distancia</td>
     <td style="text-align: center;">Medium</td>
-    <td style="text-align: center;">EP03 – Mensajería de Audio Asíncrona</td>
+    <td style="text-align: center;">EP03 – Mensajería Multimedia Asíncrona</td>
   </tr>
   <tr>
     <th>Title</th>
