@@ -1317,27 +1317,35 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 
 ### 2.3.5. Big Picture EventStorming
 
-El equipo realizó una sesión colaborativa de Big Picture EventStorming en Miro, con el objetivo de explorar de forma visual el dominio completo de Serenia: desde la vinculación entre el adulto mayor y su familiar, pasando por el check-in diario y su interpretación, hasta el manejo de emergencias y la compañía social. Se identificaron 45 eventos de dominio, redactados en pasado y en inglés siguiendo la convención de nomenclatura adoptada por el equipo, y se ordenaron cronológicamente para cada uno de los procesos identificados.
+El equipo realizó una sesión colaborativa de *Big Picture EventStorming* en Miro, con el objetivo de explorar de forma visual el dominio completo de Serenia: desde la vinculación entre el adulto mayor y su familiar, pasando por el check-in diario y su interpretación, hasta el manejo de emergencias y la compañía social. Se identificaron 45 eventos de dominio, redactados en pasado y en inglés siguiendo la convención de nomenclatura adoptada por el equipo, y se ordenaron cronológicamente para cada uno de los procesos identificados.
+
+<br>
+
+
+URL del tablero en Miro: [https://miro.com/app/board/uXjVHmgj4G8=/](https://miro.com/app/board/uXjVHmgj4G8=/)
 
 <div align="center">
 
 ![Big Picture EventStorming - Serenia](assets/img/big-picture-eventstorming/big-picture-eventstorming.png)
+  <br/><i>Imagen 9: Big Picture EventStorming del dominio de Serenia.</i>
 
 </div>
 
-URL del tablero en Miro: https://miro.com/app/board/uXjVHmgj4G8=/
-
 **Procesos clave identificados:**
-- **Alta y vínculo**: la creación de cuentas y el establecimiento del vínculo familiar son el punto de partida obligatorio antes de que cualquier otro proceso pueda ocurrir.
-- **Check-in diario**: el ritual central del lado del adulto mayor, con eventos que reflejan tanto su ejecución habitual como sus excepciones (pausa del día, modo simplificado, check-in no respondido).
-- **Interpretación de bienestar**: un conjunto de eventos de lectura que traducen los check-ins en información útil para el familiar, sin decidir por sí solos si algo es urgente.
-- **Alertas y seguridad**: los eventos más críticos del dominio, tanto por activación directa (botón de auxilio) como por detección pasiva (inactividad).
-- **Compañía social**: eventos desligados de cualquier fin de monitoreo, centrados en el vínculo emocional (audios, recordatorios sociales).
+
+- Alta y vínculo: la creación de cuentas y el establecimiento del vínculo familiar son el punto de partida obligatorio antes de que cualquier otro proceso pueda ocurrir.
+- Check-in diario: el ritual central del lado del adulto mayor, con eventos que reflejan tanto su ejecución habitual como sus excepciones (pausa del día, modo simplificado, check-in no respondido).
+- Interpretación de bienestar: un conjunto de eventos de lectura que traducen los check-ins en información útil para el familiar, sin decidir por sí solos si algo es urgente.
+- Alertas y seguridad: los eventos más críticos del dominio, tanto por activación directa (botón de auxilio) como por detección pasiva (inactividad).
+- Compañía social: eventos desligados de cualquier fin de monitoreo, centrados en el vínculo emocional (audios, recordatorios sociales).
+
+<br>
 
 **Oportunidades y problemas expuestos durante la sesión:**
+
 - Se evidenció que "Relatives Notified Simultaneously" y "Inactivity Alert Generated" comparten el mismo mecanismo de notificación aunque se disparan por causas distintas (activación directa vs. detección pasiva), lo que se debe resolver con cuidado en el diseño técnico para no duplicar lógica.
 - Se identificó que la autorización de acceso a los datos de un adulto mayor específico depende del vínculo familiar vigente, por lo que cualquier eliminación de vínculo debe revocar ese acceso de forma inmediata.
-- Los eventos se organizaron visualmente en las agrupaciones que el equipo identificó durante la sesión, las cuales se retoman y detallan formalmente como bounded contexts en la sección 2.5.1.1 Candidate Context Discovery.
+- Los eventos se organizaron visualmente en las agrupaciones que el equipo identificó durante la sesión, las cuales se retoman y detallan formalmente como *bounded contexts* en la sección 2.5.1.1 Candidate Context Discover.
 
 <br>
 
