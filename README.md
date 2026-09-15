@@ -2796,6 +2796,41 @@ En esta sección se presentan los requisitos identificados para Serenia a partir
 
 ### 2.4.2. Impact Mapping
 
+En esta sección se presenta el Impact Mapping de Serenia, una herramienta visual que nos permite alinear las funcionalidades del producto con los objetivos estratégicos del negocio y las necesidades de nuestros usuarios. Este mapa asegura que cada User Story desarrollada contribuya directamente a generar un cambio de comportamiento positivo (Impact) en nuestros segmentos (Actors) para alcanzar una meta medible (Business Goal).
+
+**Business Goal (Meta de Negocio SMART):**
+Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzamiento en Lima Metropolitana, logrando una tasa de retención del 70% mediante el uso continuo del check-in diario.
+
+#### Desglose del Impact Mapping
+
+**Actor 1: Adulto mayor que vive solo (Segmento 1)**
+*   **Impacto (¿Cómo queremos que cambie su comportamiento?):** Comunicar bienestar diario sin perder independencia.
+    *   **Deliverables (Entregables):** Check-in diario de un toque, Modo simplificado de interfaz.
+    *   **User Stories Relacionadas:** US03, US04, US06, US08, NF01.
+*   **Impacto:** Compartir su día a día a su propio ritmo.
+    *   **Deliverables:** Mensajería de audio asíncrona.
+    *   **User Stories Relacionadas:** US09.
+*   **Impacto:** Sentir seguridad física ante crisis reales.
+    *   **Deliverables:** Botón de auxilio.
+    *   **User Stories Relacionadas:** US13, NF02.
+
+**Actor 2: Familiar a distancia (Segmento 2)**
+*   **Impacto (¿Cómo queremos que cambie su comportamiento?):** Reducir ansiedad comprobando estado pasivamente.
+    *   **Deliverables:** Panel de estado diario, Alertas inteligentes.
+    *   **User Stories Relacionadas:** US15, US17, US19, US16, US18.
+*   **Impacto:** Mejorar logística y evitar duplicidad de esfuerzos.
+    *   **Deliverables:** Asignación de turnos, Notas compartidas.
+    *   **User Stories Relacionadas:** US20, US21, US22.
+
+<br>
+
+<div align="center">
+
+![Impact Mapping de Serenia](assets/img/diagrams/impact-mapping.png)
+  <br/><i>Imagen 9: Diagrama de Impact Mapping.</i>
+
+</div>
+
 <br>
 
 ### 2.4.3. Product Backlog
