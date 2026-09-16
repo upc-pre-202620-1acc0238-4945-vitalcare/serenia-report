@@ -3002,23 +3002,47 @@ El proceso se desarrolló en tres momentos:
 
 El resultado de la sesión fuerons seis bounded contexts candidatos, clasificados según su aporte de valor:
 
-**Daily Check-in - Core**
+**Daily Check-in - Core** <br>
 Es el mecanismo primario por el cual Serenia genera valor diferencial: convierte una interacción emocional cotidiana en una señal estructurada, sin que el adulto mayor sienta que está siendo monitoreado clínicamente. Sin este contexto no existe el dato que el resto del sistema necesita para funcionar.
 
-**Wellbeing Monitoring - Core**
+<div align="center">
+  <img src="assets/img/event-storming/daily-check-in.png" alt="Daily Check-in - Bounded Context" width="700"/>
+</div> <br>
+
+**Wellbeing Monitoring - Core** <br>
 Es el contexto que interpreta las señales del check-in y las convierte en información para la familia a distancia. Concentra la lógica del negocio más distintiva de Serenia: distinguir un mal día puntual de un patrón de deterioro sostenido, evitando tanto la falsa alarma como la negligencia.
 
-**Alerts and Safety - Core**
+<div align="center">
+  <img src="assets/img/event-storming/wellbeing-monitoring.png" alt="Wellbeing Monitoring - Bounded Context" width="700"/>
+</div> <br>
+
+**Alerts & Safety - Core** <br>
 Es la garantía de tranquilidad que sostiene la decisión de compra del familiar a distancia. Sin una respuesta confiable ante inactividad o emergencia, el resto de la propuesta de valor pierde sustento, porque el familiar seguiría necesitando de llamar por su cuenta ante cualquier duda.
 
-**Care Circle - Supporting**
+<div align="center">
+  <img src="assets/img/event-storming/alerts-and-safety.png" alt="Alerts & Safety - Bounded Context" width="700"/>
+</div> <br>
+
+**Care Circle - Supporting** <br>
 No genera valor por sí solo, pero es indispensable para que el core opere: sin un vínculo familiar establecido no hay a quién notificar ni con quién compartir el estado del adulto mayor. Se mantiene separado del core porque administra estructura de relación (vínculos, turnos, notas compartidas), no interpretación de bienestar.
 
-**Social Companionship - Supporting**
+<div align="center">
+  <img src="assets/img/event-storming/care-circle.png" alt="Care Circle - Bounded Context" width="700"/>
+</div> <br>
+
+**Social Companionship - Supporting** <br>
 Complementa la experiencia de acompañamiento con mensajería de audio, fotos y recordatorios sociales, pero ninguno de sus eventos produce una señal que el sistema evalúe ni deriva en alerta. Aporta valor percibido, no valor operativo.
 
-**Identity & Access - Generic**
+<div align="center">
+  <img src="assets/img/event-storming/social-companionship.png" alt="Social Companionship - Bounded Context" width="700"/>
+</div> <br>
+
+**Identity & Access - Generic** <br>
 Resuelve un problema estándar (registro, autenticación, gestión de sesión) con reglas de negocio genéricas que no cambian por ser Serenia. Es indispensable para que exista cualquier otro contexto, pero no distingue a Serenia de ninguna otra aplicación.
+
+<div align="center">
+  <img src="assets/img/event-storming/identity-and-access-context.png" alt="IAM - Bounded Context" width="700"/>
+</div> <br>
 
 Al finalizar, el equipo aplicó una verificación del lenguaje ubicuo sobre cada frontera, comprobando que ningún término tuviera dos significados dentro de un mismo contexto. Esta revisión confirmó, por ejemplo, la separación entre Daily Check-in y Wellbeing Monitoring. Otra discusión del equipo fue la frontera entre Daily Check-in y Social Companionship, por compartir ambos la dimensión emocional de la interacción; se resolvió mantenerlas separadas sobre la base de que únicamente el check-on produce una señal que el sistema evalúa, mientras que el acompañamiento social no está sujeto a ninguna evaluación.
 
