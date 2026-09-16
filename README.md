@@ -3026,15 +3026,69 @@ URL del tablero en Miro: https://miro.com/app/board/uXjVHm8lGW8=/
 <br>
 
 ### 2.5.3. Software Architecture
+
 #### 2.5.3.1. Software Architecture Context Level Diagrams
+
+En esta sección se presenta el *System Context Diagram*, primer nivel del C4 Model, elaborado en Structurizr. Este diagrama muestra al sistema Serenia como una única caja central, rodeada de los usuarios y de los sistemas externos con los que interactúa, sin entrar en detalles internos de la solución.
+
+<br>
+<div align="center">
+
+![System Context Diagram - Serenia](assets/img/software-architecture/context-diagram.png)
+  <br/><i>Imagen 11. System Context Diagram de Serenia.</i>
+
+</div>
+
+<br>
+
+Como se observa en el diagrama, el sistema Serenia interactúa con dos tipos de usuario: el **Adulto Mayor**, quien realiza el check-in diario y puede activar el botón de ayuda ante una emergencia, y el **Cuidador a Distancia**, quien recibe alertas, revisa el estado de bienestar y coordina el cuidado junto al resto del círculo familiar desde la aplicación móvil o la landing page web. Asimismo, Serenia depende de sistemas externos para su funcionamiento: un servicio de notificaciones push para el envío de alertas y recordatorios en tiempo real (proveedor aún por definir por el equipo), y un servicio de almacenamiento en la nube para los mensajes de audio grabados por los usuarios.
 
 <br>
 
 #### 2.5.3.2. Software Architecture Container Level Diagrams
 
+En esta sección se presenta el *Container Diagram*, segundo nivel del C4 Model, el cual descompone al sistema Serenia en los grandes bloques tecnológicos (aplicaciones, servicios y almacenes de datos) que lo conforman, indicando la tecnología empleada en cada uno y la forma en que se comunican entre sí.
+
+
+<br>
+<div align="center">
+
+![Container Diagram - Serenia](assets/img/software-architecture/container-diagram.png)
+  <br/><i>Imagen 12. Container Diagram de Serenia.</i>
+
+</div><br>
+
+El diagrama evidencia los principales contenedores de la solución: la **aplicación móvil** (consumida por el adulto mayor y el cuidador a distancia), la **landing page web** (donde se presenta el producto y sus planes a nuevos usuarios), la **API REST** desarrollada en **Spring Boot** —implementada como un **monolito modular**, organizado internamente en un módulo por cada bounded context identificado en el Big Picture EventStorming (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety y Social Companionship), la **base de datos MySQL** donde se persiste, en esquemas separados por bounded context, la información de cuentas, círculos familiares, check-ins y alertas, y el **servicio de notificaciones push** (proveedor aún por definir por el equipo), encargado de entregar en tiempo real las alertas de emergencia y los recordatorios sociales. Todos los contenedores de cliente (móvil y web) se comunican con la API REST mediante peticiones HTTPS/JSON. La composición interna de dicho monolito por módulos se detalla más adelante en los *Component Level Diagrams* de cada bounded context.
+
+Como evidencia complementaria de esta organización modular, se presenta a continuación el diagrama de componentes interno del contenedor API REST, elaborado también en Structurizr, que muestra los módulos correspondientes a cada bounded context y sus relaciones de dependencia:
+
+<br>
+
+<div align="center">
+
+![Component Diagram - API REST de Serenia](assets/img/software-architecture/api-component.png)
+  <br/><i>Imagen 13. Component Diagram del contenedor API REST, organizado por bounded context.</i>
+
+</div>
+
+Como se observa, el módulo **IAM** valida la identidad y los permisos que consume el módulo **Care Circle**, el cual a su vez provee el contexto del círculo familiar tanto al módulo **Daily Check-in** como al módulo **Social Companionship**. El módulo **Daily Check-in** provee el historial de check-ins al módulo **Wellbeing Monitoring** y notifica directamente al módulo **Alerts and Safety** los check-ins no respondidos, mientras que **Wellbeing Monitoring** notifica a **Alerts and Safety** los patrones de riesgo detectados. Esta descomposición interna se retomará y detallará individualmente por cada bounded context.
+
 <br>
 
 #### 2.5.3.3. Software Architecture Deployment Diagrams
+
+En esta sección se presenta el *Deployment Diagram*, el cual muestra la distribución física del sistema, destacando cómo los contenedores de software descritos en la sección anterior se despliegan sobre el hardware y los entornos correspondientes. Este diagrama visualiza los dispositivos, servidores, redes y demás nodos físicos que alojan el software, así como las relaciones y dependencias entre ellos.
+
+<br>
+<div align="center">
+
+![Deployment Diagram - Serenia](assets/img/software-architecture/deployment-diagram.png)
+  <br/><i>Imagen 14. Deployment Diagram de Serenia.</i>
+
+</div>
+<br>
+
+Como se observa en el diagrama, cada uno de los containers de Serenia se despliega sobre un proveedor de infraestructura distinto. La **Aplicación Móvil** se distribuye y se prueba en los dispositivos Android/iOS del adulto mayor y del cuidador a distancia a través de **Firebase**, específicamente mediante **Firebase App Distribution**, lo que permite instalar y validar la aplicación en distintos dispositivos de prueba antes de su lanzamiento. La **Landing Page Web**, al ser un sitio estático, se aloja en **Netlify**, como servicio de hosting/CDN independiente del backend. La **API REST**, correspondiente al monolito modular desarrollado en Spring Boot, se despliega en **Microsoft Azure**, específicamente en un **Azure Web App Service**, mientras que la **Base de Datos MySQL** se aloja en **Microsoft Azure Cloud **, dentro del mismo proveedor cloud que la API, lo que favorece una comunicación de baja latencia entre ambos containers. La Aplicación Móvil y la Landing Page Web realizan peticiones a la API REST vía HTTPS/JSON, y esta a su vez lee y escribe información en la base de datos utilizando el protocolo SQL/TCP.
 
 <br>
 
