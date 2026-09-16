@@ -2992,6 +2992,14 @@ A partir del dominio modelado en el Big Picture EventStorming, el equipo desarro
 
 La técnica aplicada fue start-with-value. En lugar de descomponer el timeline de forma secuencial, el equipo partió de la pregunta sobre qué partes del dominio concentran el mayor valor para el negocio, entendiendo por valor aquello que sostiene directamente la propuesta diferencial de Serenia: reemplazar la común llamada telefónica por un acompañamiento emocional sostenido y verificable a distancia.
 
+El proceso se desarrolló en tres momentos:
+
+**Identificación del core.** El equipo recorrió el muro marcando los eventos sin los cuales la propuesta de valor de Serenia deja de existir. De este recorrido surgieron tres núcleos: los eventos de registro y respuesta del check-in diario, que son el mecanismo por el cual el adulto mayor comunica su estado sin sentirse vigilado; los eventos de interpretación de patrones de bienestar, que convierten esas respuestas en información valiosa para el familiar a distancia; y los eventos de alerta ante emergencia o inactividad prolongada, que son la garantía de tranquilidad que el familiar a distancia está comprando. Estos tres núcleos se delimitaron primero, por ser los que concentran la lógica de negocio propia del producto.
+
+**Delimitación del contexto habilitador.** Un segundo recorrido identificó los eventos que no generan valor por sí mismos pero sin los cuales el core no puede operar: los de creación del círculo de cuidado y vinculación familiar. Sin un vínculo establecido no hay a quién notificar ni con quién compartir el estado del adulto mayor. Este conjunto se delimitó como un contexto propio y no se absorbió dentro del core, ya que administra la estructura de la relación familiar (sobre quién está vinculado, quién tiene un turno de cuidado asignado y qué notas se comparten) y no la interpretación del bienestar.
+
+**Separación de lo genérico y lo complementario.** Finalmente, el equipo aisló los eventos que no aportan diferenciación competitiva. Por un lado, los de identidad, autenticación y gestión de perfil, que son resolubles con mecanismos estándar y cuyas reglas no cambian con el negocio de Serenia. Por otro lado, los de mensajería de audio, imágenes y recordatorios sociales, que enriquecen la experiencia de acompañamiento pero no producen ninguna señal que el sistema evalúe ni disparan ningún flujo de alerta.
+
 <br>
 
 #### 2.5.1.2. Domain Message Flows Modeling
