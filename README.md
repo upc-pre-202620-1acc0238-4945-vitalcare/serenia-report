@@ -3020,6 +3020,8 @@ Complementa la experiencia de acompañamiento con mensajería de audio, fotos y 
 **Identity & Access - Generic**
 Resuelve un problema estándar (registro, autenticación, gestión de sesión) con reglas de negocio genéricas que no cambian por ser Serenia. Es indispensable para que exista cualquier otro contexto, pero no distingue a Serenia de ninguna otra aplicación.
 
+Al finalizar, el equipo aplicó una verificación del lenguaje ubicuo sobre cada frontera, comprobando que ningún término tuviera dos significados dentro de un mismo contexto. Esta revisión confirmó, por ejemplo, la separación entre Daily Check-in y Wellbeing Monitoring. Otra discusión del equipo fue la frontera entre Daily Check-in y Social Companionship, por compartir ambos la dimensión emocional de la interacción; se resolvió mantenerlas separadas sobre la base de que únicamente el check-on produce una señal que el sistema evalúa, mientras que el acompañamiento social no está sujeto a ninguna evaluación.
+
 <br>
 
 #### 2.5.1.2. Domain Message Flows Modeling
