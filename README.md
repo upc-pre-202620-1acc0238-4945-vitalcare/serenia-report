@@ -2988,6 +2988,10 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 ### 2.5.1. EventStorming
 #### 2.5.1.1. Candidate Context Discovery
 
+A partir del dominio modelado en el Big Picture EventStorming, el equipo desarrolló una sesión de Candidate Context Discovery con el fin de identificar los bounded contexts de Serenia. La sesión se realizó en Miro sobre el muro de 46 eventos de dominio previamente levantados y tuvo una duración aproximada de 1 hora y media.
+
+La técnica aplicada fue start-with-value. En lugar de descomponer el timeline de forma secuencial, el equipo partió de la pregunta sobre qué partes del dominio concentran el mayor valor para el negocio, entendiendo por valor aquello que sostiene directamente la propuesta diferencial de Serenia: reemplazar la común llamada telefónica por un acompañamiento emocional sostenido y verificable a distancia.
+
 <br>
 
 #### 2.5.1.2. Domain Message Flows Modeling
