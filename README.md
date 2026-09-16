@@ -3000,6 +3000,27 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 
 ### 2.5.2. Context Mapping
 
+A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety, Social Companionship), el equipo elaboró un Context Map para visualizar y explicar las relaciones estructurales entre ellos, revisando la información recolectada en las etapas previas de investigación para producir el diseño candidato.
+
+<div align="center">
+
+![Context Map - Serenia](assets/img/context-mapping/context-map.png)
+
+</div>
+
+**Discusión de alternativas consideradas:**
+
+- *¿Qué pasaría si duplicamos el Account ID y el Role en cada bounded context, en vez de compartirlo?* Se descartó porque generaría inconsistencias si un rol cambia (por ejemplo, si se revoca una cuenta) y cada context tendría que sincronizarse por separado. Por eso se optó por un **Shared Kernel** mínimo (solo Account ID + Role) entre IAM y los otros 5 contexts.
+- *¿Qué pasaría si Wellbeing Monitoring y Alerts & Safety compartieran directamente su lógica de detección de anomalías?* Se evaluó, pero se decidió mantenerlos separados: Wellbeing Monitoring interpreta tendencias de bienestar (no urgentes), mientras que Alerts & Safety reacciona a umbrales que requieren atención inmediata. Fusionarlos mezclaría dos responsabilidades con niveles de criticidad distintos.
+- *¿Qué pasaría si creáramos un shared service para reducir la duplicación entre Care Circle y los contexts que consultan el vínculo familiar (Wellbeing Monitoring, Alerts and Safety, Social Companionship)?* Se descartó por ahora: como los tres consumen el mismo dato (autorización de vínculo) de la misma forma, no hay duplicación de lógica que justifique un servicio nuevo — cada uno simplemente consulta a Care Circle como su proveedor (**Customer/Supplier**).
+- *¿Qué pasaría si Daily Check-in y Alerts and Safety adoptaran directamente el modelo del Push Notification Provider externo (Conformist), en vez de traducirlo?* Se descartó: el modelo de un proveedor externo (device tokens, formato de payload propio de cada plataforma) es un detalle de infraestructura que no debería filtrarse al dominio, y adoptarlo tal cual dejaría a ambos contexts acoplados a las decisiones de ese proveedor. Por eso se optó por una **Anti-Corruption Layer (ACL)** que traduce el modelo externo antes de que entre al dominio.
+
+**Patrones aplicados:**
+- **Shared Kernel**: IAM comparte Account ID + Role con los 5 contexts restantes, dado el alto acoplamiento aceptable para un dato tan básico y transversal.
+- **Customer/Supplier**: predomina en el resto de relaciones (Care Circle y Daily Check-in como proveedores), ya que todo el sistema lo construye el mismo equipo y puede coordinar cambios libremente entre contexts.
+- **Anti-Corruption Layer (ACL)**: Daily Check-in y Alerts and Safety dependen de un Push Notification Provider externo (servicio de terceros) para enviar notificaciones push al dispositivo del usuario. Se optó por una ACL en lugar de un Conformist porque el modelo del proveedor externo (tokens de dispositivo, formato de payload específico por plataforma) no debe filtrarse al dominio; cada context traduce hacia/desde ese modelo externo antes de operar con sus propios conceptos.
+- **Conformist** no se aplicó: se decidió no adoptar el modelo del proveedor externo tal cual, precisamente para poder aislar el dominio y facilitar un eventual cambio de proveedor sin impactar la lógica de negocio.
+
 <br>
 
 ### 2.5.3. Software Architecture
