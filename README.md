@@ -3054,6 +3054,19 @@ Como se observa, el módulo **IAM** valida la identidad y los permisos que consu
 
 #### 2.5.3.3. Software Architecture Deployment Diagrams
 
+En esta sección se presenta el *Deployment Diagram*, el cual muestra la distribución física del sistema, destacando cómo los contenedores de software descritos en la sección anterior se despliegan sobre el hardware y los entornos correspondientes. Este diagrama visualiza los dispositivos, servidores, redes y demás nodos físicos que alojan el software, así como las relaciones y dependencias entre ellos.
+
+<br>
+<div align="center">
+
+![Deployment Diagram - Serenia](assets/img/software-architecture/deployment-diagram.png)
+  <br/><i>Imagen 14. Deployment Diagram de Serenia.</i>
+
+</div>
+<br>
+
+Como se observa en el diagrama, cada uno de los containers de Serenia se despliega sobre un proveedor de infraestructura distinto. La **Aplicación Móvil** se distribuye y se prueba en los dispositivos Android/iOS del adulto mayor y del cuidador a distancia a través de **Firebase**, específicamente mediante **Firebase App Distribution**, lo que permite instalar y validar la aplicación en distintos dispositivos de prueba antes de su lanzamiento. La **Landing Page Web**, al ser un sitio estático, se aloja en **Netlify**, como servicio de hosting/CDN independiente del backend. La **API REST**, correspondiente al monolito modular desarrollado en Spring Boot, se despliega en **Microsoft Azure**, específicamente en un **Azure Web App Service**, mientras que la **Base de Datos MySQL** se aloja en **Microsoft Azure Cloud **, dentro del mismo proveedor cloud que la API, lo que favorece una comunicación de baja latencia entre ambos containers. La Aplicación Móvil y la Landing Page Web realizan peticiones a la API REST vía HTTPS/JSON, y esta a su vez lee y escribe información en la base de datos utilizando el protocolo SQL/TCP.
+
 <br>
 
 ## 2.6. Tactical-Level Domain-Driven Design
