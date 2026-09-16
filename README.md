@@ -2932,52 +2932,52 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 
 ### 2.4.3. Product Backlog
 
-| # Orden | User Story Id | Título | Story Points (1 / 2 / 3 / 5 / 8) | Sprint |
-| :---: | :--- | :--- | :---: | :---: |
-| 1 | US01 | Registro de cuenta de usuario | 3 | Sprint 1 |
-| 2 | US03 | Registro de respuesta del check-in diario | 2 | Sprint 1 |
-| 3 | US04 | Notificación programada del check-in diario | 5 | Sprint 1 |
-| 4 | US13 | Activación del botón de auxilio | 5 | Sprint 1 |
-| 5 | US23 | Propuesta de valor en la landing page | 1 | Sprint 1 |
-| 6 | US24 | Presentación del modelo de dos aplicaciones | 1 | Sprint 1 |
-| 7 | US25 | Navegación y diseño responsive del sitio | 3 | Sprint 1 |
-| 8 | US26 | Sección institucional de la startup | 1 | Sprint 1 |
-| 9 | NF01 | Accesibilidad visual y táctil de la interfaz | 5 | Sprint 1 |
-| 10 | TS01 | Gestión de usuarios del sistema | 5 | Sprint 1 |
-| 11 | TS04 | Gestión de check-ins diarios | 5 | Sprint 1 |
-| 12 | US02 | Vinculación familiar por código de invitación | 3 | Sprint 2 |
-| 13 | US05 | Configuración del horario del check-in | 2 | Sprint 2 |
-| 14 | US09 | Grabación y envío de mensaje de audio | 5 | Sprint 2 |
-| 15 | US10 | Reproducción de mensajes de audio recibidos | 3 | Sprint 2 |
-| 16 | US15 | Consulta del panel de estado diario | 3 | Sprint 2 |
-| 17 | NF03 | Control de acceso a los datos de bienestar | 5 | Sprint 2 |
-| 18 | TS02 | Gestión de sesiones de autenticación | 5 | Sprint 2 |
-| 19 | TS03 | Gestión de vínculos familiares | 5 | Sprint 2 |
-| 20 | TS06 | Gestión de mensajes de audio | 5 | Sprint 2 |
-| 21 | US06 | Rotación de preguntas del check-in | 3 | Sprint 3 |
-| 22 | US07 | Pausa diaria de preguntas | 2 | Sprint 3 |
-| 23 | US08 | Modo simplificado de interfaz | 3 | Sprint 3 |
-| 24 | US14 | Recepción de alerta de emergencia | 5 | Sprint 3 |
-| 25 | US16 | Alerta por inactividad del check-in | 5 | Sprint 3 |
-| 26 | NF02 | Latencia de entrega de alertas de emergencia | 3 | Sprint 3 |
-| 27 | TS05 | Gestión de preferencias del usuario | 3 | Sprint 3 |
-| 28 | TS08 | Gestión de alertas de emergencia | 5 | Sprint 3 |
-| 29 | TS09 | Gestión del panel de estado | 5 | Sprint 3 |
-| 30 | US11 | Notificación de recordatorio de contacto social | 3 | Sprint 4 |
-| 31 | US12 | Postergación de recordatorio de contacto social | 2 | Sprint 4 |
-| 32 | US17 | Historial de check-ins del adulto mayor | 3 | Sprint 4 |
-| 33 | US18 | Sugerencia de acción por patrón de malestar | 5 | Sprint 4 |
-| 34 | US19 | Registro de pequeñas victorias | 2 | Sprint 4 |
-| 35 | TS07 | Gestión de recordatorios de contacto social | 3 | Sprint 4 |
-| 36 | TS10 | Gestión de alertas de inactividad | 5 | Sprint 4 |
-| 37 | US20 | Asignación de turnos de atención | 5 | Sprint 5 |
-| 38 | US21 | Consulta del turno de atención vigente | 2 | Sprint 5 |
-| 39 | US22 | Notas compartidas entre familiares | 3 | Sprint 5 |
-| 40 | US27 | Envío de fotografía al adulto mayor | 3 | Sprint 5 |
-| 41 | NF04 | Usabilidad sin experiencia tecnológica previa | 3 | Sprint 5 |
-| 42 | TS11 | Gestión de turnos de atención | 5 | Sprint 5 |
-| 43 | TS12 | Gestión de notas compartidas | 3 | Sprint 5 |
-| 44 | TS13 | Gestión de indicadores de bienestar | 5 | Sprint 5 |
+| Orden | User Story Id | Título | Story Points (1 / 2 / 3 / 5 / 8) | Sprint |
+|---:|---|---|---:|---|
+| 1 | US04 | Notificación programada del check-in diario | 5 | Sprint 1 |
+| 2 | US09 | Grabación y envío de mensaje de audio | 5 | Sprint 1 |
+| 3 | US13 | Activación del botón de auxilio | 5 | Sprint 1 |
+| 4 | US14 | Recepción de alerta de emergencia | 5 | Sprint 1 |
+| 5 | NF01 | Accesibilidad visual y táctil de la interfaz | 5 | Sprint 1 |
+| 6 | TS01 | Gestión de usuarios del sistema | 5 | Sprint 1 |
+| 7 | TS02 | Gestión de sesiones de autenticación | 5 | Sprint 1 |
+| 8 | TS03 | Gestión de vínculos familiares | 5 | Sprint 1 |
+| 9 | TS04 | Gestión de check-ins diarios | 5 | Sprint 1 |
+| 10 | US01 | Registro de cuenta de usuario | 3 | Sprint 1 |
+| 11 | US02 | Vinculación familiar por código de invitación | 3 | Sprint 1 |
+| 12 | US10 | Reproducción de mensajes de audio recibidos | 3 | Sprint 1 |
+| 13 | US15 | Consulta del estado diario | 3 | Sprint 1 |
+| 14 | NF02 | Latencia de entrega de alertas de emergencia | 3 | Sprint 1 |
+| 15 | TS05 | Gestión de preferencias del usuario | 3 | Sprint 1 |
+| 16 | US23 | Propuesta de valor en la landing page | 1 | Sprint 1 |
+| 17 | US16 | Alerta por inactividad del check-in | 5 | Sprint 2 |
+| 18 | US18 | Sugerencia de acción por patrón de malestar | 5 | Sprint 2 |
+| 19 | US20 | Asignación de turnos de atención | 5 | Sprint 2 |
+| 20 | NF03 | Control de acceso a los datos de bienestar | 5 | Sprint 2 |
+| 21 | TS06 | Gestión de mensajes de audio | 5 | Sprint 2 |
+| 22 | TS08 | Gestión de alertas de emergencia | 5 | Sprint 2 |
+| 23 | TS09 | Gestión del panel de estado | 5 | Sprint 2 |
+| 24 | TS10 | Gestión de alertas de inactividad | 5 | Sprint 2 |
+| 25 | TS11 | Gestión de turnos de atención | 5 | Sprint 2 |
+| 26 | TS13 | Gestión de indicadores de bienestar | 5 | Sprint 2 |
+| 27 | US06 | Rotación de preguntas del check-in | 3 | Sprint 2 |
+| 28 | US08 | Modo simplificado de interfaz | 3 | Sprint 2 |
+| 29 | US17 | Historial de check-ins del adulto mayor | 3 | Sprint 2 |
+| 30 | NF04 | Usabilidad sin experiencia tecnológica previa | 3 | Sprint 2 |
+| 31 | TS07 | Gestión de recordatorios de contacto social | 3 | Sprint 2 |
+| 32 | TS12 | Gestión de notas compartidas | 3 | Sprint 2 |
+| 33 | US25 | Navegación y diseño responsive del sitio | 3 | Sprint 2 |
+| 34 | US03 | Registro de respuesta del check-in diario | 2 | Sprint 2 |
+| 35 | US05 | Configuración del horario del check-in | 2 | Sprint 2 |
+| 36 | US07 | Pausa diaria de preguntas | 2 | Sprint 2 |
+| 37 | US21 | Consulta del turno de atención vigente | 2 | Sprint 2 |
+| 38 | US11 | Notificación de recordatorio de contacto social | 3 | Sprint 3 |
+| 39 | US22 | Notas compartidas entre familiares | 3 | Sprint 3 |
+| 40 | US12 | Postergación de recordatorio de contacto social | 2 | Sprint 3 |
+| 41 | US19 | Registro de pequeñas victorias | 2 | Sprint 3 |
+| 42 | US24 | Presentación del modelo de dos aplicaciones | 1 | Sprint 3 |
+| 43 | US26 | Sección institucional de la startup | 1 | Sprint 3 |
+| 44 | US27 | Envío de fotografía al adulto mayor | 2 | Sprint 3 |
 
 <br>
 
@@ -2996,6 +2996,70 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 ## 2.5. Strategic-Level Domain-Driven Design
 ### 2.5.1. EventStorming
 #### 2.5.1.1. Candidate Context Discovery
+
+A partir del dominio modelado en el Big Picture EventStorming, el equipo desarrolló una sesión de Candidate Context Discovery con el fin de identificar los bounded contexts de Serenia. La sesión se realizó en Miro sobre el muro de 46 eventos de dominio previamente levantados y tuvo una duración aproximada de 1 hora y media.
+
+La técnica aplicada fue start-with-value. En lugar de descomponer el timeline de forma secuencial, el equipo partió de la pregunta sobre qué partes del dominio concentran el mayor valor para el negocio, entendiendo por valor aquello que sostiene directamente la propuesta diferencial de Serenia: reemplazar la común llamada telefónica por un acompañamiento emocional sostenido y verificable a distancia.
+
+El proceso se desarrolló en tres momentos:
+
+**Identificación del core.** El equipo recorrió el muro marcando los eventos sin los cuales la propuesta de valor de Serenia deja de existir. De este recorrido surgieron tres núcleos: los eventos de registro y respuesta del check-in diario, que son el mecanismo por el cual el adulto mayor comunica su estado sin sentirse vigilado; los eventos de interpretación de patrones de bienestar, que convierten esas respuestas en información valiosa para el familiar a distancia; y los eventos de alerta ante emergencia o inactividad prolongada, que son la garantía de tranquilidad que el familiar a distancia está comprando. Estos tres núcleos se delimitaron primero, por ser los que concentran la lógica de negocio propia del producto.
+
+**Delimitación del contexto habilitador.** Un segundo recorrido identificó los eventos que no generan valor por sí mismos pero sin los cuales el core no puede operar: los de creación del círculo de cuidado y vinculación familiar. Sin un vínculo establecido no hay a quién notificar ni con quién compartir el estado del adulto mayor. Este conjunto se delimitó como un contexto propio y no se absorbió dentro del core, ya que administra la estructura de la relación familiar (sobre quién está vinculado, quién tiene un turno de cuidado asignado y qué notas se comparten) y no la interpretación del bienestar.
+
+**Separación de lo genérico y lo complementario.** Finalmente, el equipo aisló los eventos que no aportan diferenciación competitiva. Por un lado, los de identidad, autenticación y gestión de perfil, que son resolubles con mecanismos estándar y cuyas reglas no cambian con el negocio de Serenia. Por otro lado, los de mensajería de audio, imágenes y recordatorios sociales, que enriquecen la experiencia de acompañamiento pero no producen ninguna señal que el sistema evalúe ni disparan ningún flujo de alerta.
+
+El resultado de la sesión fuerons seis bounded contexts candidatos, clasificados según su aporte de valor:
+
+**Daily Check-in - Core** <br>
+Es el mecanismo primario por el cual Serenia genera valor diferencial: convierte una interacción emocional cotidiana en una señal estructurada, sin que el adulto mayor sienta que está siendo monitoreado clínicamente. Sin este contexto no existe el dato que el resto del sistema necesita para funcionar.
+
+<div align="center">
+  <img src="assets/img/event-storming/daily-check-in.png" alt="Daily Check-in - Bounded Context" width="700"/>
+</div> <br>
+
+**Wellbeing Monitoring - Core** <br>
+Es el contexto que interpreta las señales del check-in y las convierte en información para la familia a distancia. Concentra la lógica del negocio más distintiva de Serenia: distinguir un mal día puntual de un patrón de deterioro sostenido, evitando tanto la falsa alarma como la negligencia.
+
+<div align="center">
+  <img src="assets/img/event-storming/wellbeing-monitoring.png" alt="Wellbeing Monitoring - Bounded Context" width="700"/>
+</div> <br>
+
+**Alerts & Safety - Core** <br>
+Es la garantía de tranquilidad que sostiene la decisión de compra del familiar a distancia. Sin una respuesta confiable ante inactividad o emergencia, el resto de la propuesta de valor pierde sustento, porque el familiar seguiría necesitando de llamar por su cuenta ante cualquier duda.
+
+<div align="center">
+  <img src="assets/img/event-storming/alerts-and-safety.png" alt="Alerts & Safety - Bounded Context" width="700"/>
+</div> <br>
+
+**Care Circle - Supporting** <br>
+No genera valor por sí solo, pero es indispensable para que el core opere: sin un vínculo familiar establecido no hay a quién notificar ni con quién compartir el estado del adulto mayor. Se mantiene separado del core porque administra estructura de relación (vínculos, turnos, notas compartidas), no interpretación de bienestar.
+
+<div align="center">
+  <img src="assets/img/event-storming/care-circle.png" alt="Care Circle - Bounded Context" width="700"/>
+</div> <br>
+
+**Social Companionship - Supporting** <br>
+Complementa la experiencia de acompañamiento con mensajería de audio, fotos y recordatorios sociales, pero ninguno de sus eventos produce una señal que el sistema evalúe ni deriva en alerta. Aporta valor percibido, no valor operativo.
+
+<div align="center">
+  <img src="assets/img/event-storming/social-companionship.png" alt="Social Companionship - Bounded Context" width="700"/>
+</div> <br>
+
+**Identity & Access - Generic** <br>
+Resuelve un problema estándar (registro, autenticación, gestión de sesión) con reglas de negocio genéricas que no cambian por ser Serenia. Es indispensable para que exista cualquier otro contexto, pero no distingue a Serenia de ninguna otra aplicación.
+
+<div align="center">
+  <img src="assets/img/event-storming/identity-and-access-context.png" alt="IAM - Bounded Context" width="700"/>
+</div> <br>
+
+Al finalizar, el equipo aplicó una verificación del lenguaje ubicuo sobre cada frontera, comprobando que ningún término tuviera dos significados dentro de un mismo contexto. Esta revisión confirmó, por ejemplo, la separación entre Daily Check-in y Wellbeing Monitoring. Otra discusión del equipo fue la frontera entre Daily Check-in y Social Companionship, por compartir ambos la dimensión emocional de la interacción; se resolvió mantenerlas separadas sobre la base de que únicamente el check-on produce una señal que el sistema evalúa, mientras que el acompañamiento social no está sujeto a ninguna evaluación.
+
+**EventStorming Serenia**
+
+<div align="center">
+  <img src="assets/img/event-storming/event-storming-serenia.png" alt="EventStorming - Serenia" width="700"/>
+</div>
 
 <br>
 
