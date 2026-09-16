@@ -3203,39 +3203,203 @@ Como se observa en el diagrama, cada uno de los containers de Serenia se desplie
 
 ### 2.6.4. Bounded Context: Wellbeing Monitoring
 
+El bounded context **Wellbeing Monitoring** es responsable de interpretar el historial de check-ins registrados por el módulo **Daily Check-in** para generar tendencias de bienestar del adulto mayor, detectar patrones de riesgo y notificar dichos patrones al bounded context **Alerts and Safety**. A continuación se presenta el diseño táctico propuesto por el equipo para este bounded context, aplicando Domain-Driven Design.
+
 <br>
 
 #### 2.6.4.1. Domain Layer
+
+**Sub-capa Model - Aggregates:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Aggregate | WellbeingProfile | Entidad que representa el perfil de bienestar acumulado de un adulto mayor | Ser el punto de entrada para registrar check-ins, calcular tendencias y mantener la integridad del estado de bienestar como entidad del dominio | Relacionado con el bounded context Daily Check-in (origen del historial de check-ins) y Alerts and Safety (destino de los patrones de riesgo detectados) |
+
+<br>
+
+**Sub-capa Model - Commands:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Command | EvaluateWellbeingTrendCommand | Comando para evaluar la tendencia de bienestar de un adulto mayor | Representar la intención de recalcular la tendencia de bienestar a partir del historial de check-ins disponible | Usado en la implementación del servicio de comandos de bienestar |
+| Command | DetectRiskPatternCommand | Comando para ejecutar la detección de patrones de riesgo | Representar la intención de analizar las tendencias registradas y determinar si existe un patrón de riesgo | Usado en la implementación del servicio de comandos de bienestar |
+| Command | AcknowledgeRiskPatternCommand | Comando para marcar un patrón de riesgo como revisado | Representar la intención de que el equipo de Alerts and Safety confirme la revisión de un patrón de riesgo notificado | Usado en la implementación del servicio de comandos de bienestar |
+
+<br>
+
+**Sub-capa Model - Queries:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Query | GetWellbeingProfileByOlderAdultIdQuery | Consulta para obtener el perfil de bienestar por identificador del adulto mayor | Representar la intención de obtener el estado de bienestar actual de un adulto mayor específico | Usado en la implementación del servicio de consultas |
+| Query | GetWellbeingTrendHistoryQuery | Consulta para obtener el historial de tendencias de bienestar | Representar la intención de obtener las tendencias calculadas para un adulto mayor en un rango de periodos | Usado en la implementación del servicio de consultas |
+| Query | GetRiskPatternsByOlderAdultIdQuery | Consulta para obtener los patrones de riesgo detectados | Representar la intención de obtener los patrones de riesgo asociados a un adulto mayor específico | Usado en la implementación del servicio de consultas |
+| Query | GetAllWellbeingProfilesQuery | Consulta para obtener todos los perfiles de bienestar | Representar la intención de obtener la lista completa de perfiles de bienestar registrados | Usado en la implementación del servicio de consultas |
+
+<br>
+
+**Sub-capa Repositories:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Interface | IWellbeingProfileRepository | Repositorio para operaciones de persistencia del modelo WellbeingProfile | Definir contratos para operaciones CRUD sobre los perfiles de bienestar | Implementado en la capa de Infrastructure |
+
+<br>
+
+**Sub-capa Services:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Interface | IWellbeingCommandService | Servicio para métodos de comandos de bienestar | Estipular una estructura clara a seguir para operaciones de escritura (evaluación de tendencias y detección de riesgo) | Usado en la capa "Application" para implementar los métodos dados |
+| Interface | IWellbeingQueryService | Servicio para métodos de consulta de bienestar | Estipular una estructura clara a seguir para operaciones de lectura | Usado en la capa "Application" para la implementación de los métodos |
 
 <br>
 
 #### 2.6.4.2. Interface Layer
 
+**Sub-capa REST - Resources:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Resource | WellbeingProfileResource | Estructura de datos de perfil de bienestar para API | Representar y exponer datos del perfil de bienestar de forma accesible y estructurada para el cliente | Usado en controladores para estructurar respuestas de perfil de bienestar |
+| Resource | WellbeingTrendResource | Estructura de datos de tendencia de bienestar para API | Representar y exponer una tendencia calculada de forma accesible para el cliente | Usado en controladores para estructurar respuestas de historial de tendencias |
+| Resource | RiskPatternResource | Estructura de datos de patrón de riesgo para API | Representar y exponer un patrón de riesgo detectado de forma accesible para el cliente | Usado en controladores para estructurar respuestas de patrones de riesgo |
+| Resource | EvaluateWellbeingTrendResource | Estructura de petición para evaluar la tendencia de bienestar | Representar datos de entrada necesarios para solicitar el recálculo de una tendencia | Usado en controlador para procesar peticiones de evaluación |
+| Resource | AcknowledgeRiskPatternResource | Estructura de petición para confirmar la revisión de un patrón de riesgo | Representar datos necesarios para identificar y marcar como revisado un patrón de riesgo | Usado en controlador para procesar peticiones de confirmación |
+
+<br>
+
+**Sub-capa REST - Transform:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Assembler | WellbeingProfileResourceFromEntityAssembler | Transformador de entidad WellbeingProfile a WellbeingProfileResource | Convertir la entidad del dominio a su representación REST correspondiente | Usado en controladores para transformar respuestas |
+| Assembler | WellbeingTrendResourceFromEntityAssembler | Transformador de entidad WellbeingTrend a WellbeingTrendResource | Convertir la entidad del dominio a su representación REST correspondiente | Usado en controladores para transformar respuestas |
+| Assembler | EvaluateWellbeingTrendCommandFromResourceAssembler | Transformador de EvaluateWellbeingTrendResource a EvaluateWellbeingTrendCommand | Convertir la petición REST a comando del dominio | Usado en controlador para procesar peticiones de evaluación |
+| Assembler | AcknowledgeRiskPatternCommandFromResourceAssembler | Transformador de AcknowledgeRiskPatternResource a AcknowledgeRiskPatternCommand | Convertir la petición REST a comando del dominio | Usado en controlador para procesar peticiones de confirmación |
+
+<br>
+
+**Sub-capa ACL - Consumers:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Consumer | CheckInRecordedConsumer | Consumidor interno del evento de dominio CheckInRecorded | Escuchar, dentro del monolito modular, el evento publicado por el módulo Daily Check-in para desencadenar el `EvaluateWellbeingTrendCommand` correspondiente | Usado como puente entre el bounded context Daily Check-in y Wellbeing Monitoring |
+
 <br>
 
 #### 2.6.4.3. Application Layer
+
+**Sub-capa Internal - CommandServices:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| CommandHandler | WellbeingCommandService | Implementación de comandos de bienestar | Implementar los métodos para evaluar tendencias, detectar patrones de riesgo y publicar el evento `RiskPatternDetected` | Implementa los métodos de la interface IWellbeingCommandService en la capa de "Services" |
+
+<br>
+
+**Sub-capa Internal - QueryServices:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| QueryHandler | WellbeingQueryService | Implementación de consultas de bienestar | Implementar los métodos para las consultas de perfiles, tendencias y patrones de riesgo | Implementa los métodos de la interface IWellbeingQueryService en la capa de "Services" |
 
 <br>
 
 #### 2.6.4.4 Infrastructure Layer
 
+**Sub-capa Persistence - Repositories:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Repository | WellbeingProfileRepository | Repositorio para uso del modelo "WellbeingProfile" | Acceder y manipular datos persistidos de perfiles de bienestar y sus tendencias en la base de datos | Usado en la capa "Application" para implementar operaciones CRUD de perfiles de bienestar |
+
 <br>
 
 #### 2.6.4.5. Bounded Context Software Architecture Component Level Diagrams
+
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Wellbeing Monitoring, elaborado con la herramienta Structurizr. El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: el `WellbeingController` como punto de entrada de las peticiones REST; los *Resources* (`WellbeingProfileResource`, `WellbeingTrendResource`, `RiskPatternResource`, `EvaluateWellbeingTrendResource`, `AcknowledgeRiskPatternResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y la entidad de dominio `WellbeingProfile`; los *Commands* y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `WellbeingCommandService` y `WellbeingQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IWellbeingCommandService` e `IWellbeingQueryService`; y finalmente `IWellbeingProfileRepository`, implementado por `WellbeingProfileRepository`, que gestiona la persistencia del agregado. Se incluye además `CheckInRecordedConsumer`, componente que escucha el evento `CheckInRecorded` publicado por el bounded context Daily Check-in para desencadenar la evaluación de una nueva tendencia de bienestar.
+
+<br>
+
+<div align="center">
+
+![Component Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-diagram.png)
+  <br/><i>Imagen 17. Component Diagram del Bounded Context Wellbeing Monitoring.</i>
+
+</div>
 
 <br>
 
 #### 2.6.4.6. Bounded Context Software Architecture Code Level Diagrams
 
-<br>
-
 ##### 2.6.4.6.1. Bounded Context Domain Layer Class Diagrams
+
+Diagrama de clases de la capa Domain: En esta imagen se muestran las clases del dominio Wellbeing Monitoring que incluyen `WellbeingProfile` como aggregate root, Commands para las operaciones de evaluación de tendencias y gestión de patrones de riesgo, Queries para las consultas de información de bienestar, e interfaces para los servicios de dominio con sus respectivas implementaciones.
+
+<br>
+<div align="center">
+
+![Domain Layer Class Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-class-diagram.png)
+  <br/><i>Imagen 18. Domain Layer Class Diagram del Bounded Context Wellbeing Monitoring.</i>
+
+</div>
 
 <br>
 
 ##### 2.6.4.6.2. Bounded Context Database Design Diagram
 
 <br>
+
+**Tabla `wellbeing_profiles`:**
+
+| Nombre | Descripción |
+|---|---|
+| wbp_id | Identificador único del registro, clave primaria de la tabla (prefijo `wbp` de `wellbeing_profiles`). |
+| wbp_created_at | Fecha y hora en que se creó el registro. |
+| wbp_updated_at | Fecha y hora de la última actualización del registro. |
+| wbp_older_adult_id | Identificador del adulto mayor al que pertenece el perfil de bienestar (referencia al bounded context IAM). |
+| wbp_current_risk_level | Nivel de riesgo actual del perfil (LOW, MEDIUM, HIGH, CRITICAL). |
+| wbp_last_evaluated_at | Fecha y hora de la última evaluación de tendencia realizada sobre el perfil. |
+
+<br>
+
+**Tabla `wellbeing_trends`:**
+
+| Nombre | Descripción |
+|---|---|
+| wbt_id | Identificador único del registro, clave primaria de la tabla (prefijo `wbt` de `wellbeing_trends`). |
+| wbt_created_at | Fecha y hora en que se creó el registro. |
+| wbt_wbp_id | Llave foránea hacia `wellbeing_profiles.wbp_id`; identifica el perfil de bienestar al que pertenece la tendencia calculada. |
+| wbt_period | Periodo sobre el cual se calculó la tendencia (WEEKLY, MONTHLY). |
+| wbt_score | Puntaje numérico de bienestar calculado para el periodo (0-100). |
+| wbt_generated_at | Fecha y hora en que se generó la tendencia. |
+
+<br>
+
+**Tabla `risk_patterns`:**
+
+| Nombre | Descripción |
+|---|---|
+| rsp_id | Identificador único del registro, clave primaria de la tabla (prefijo `rsp` de `risk_patterns`). |
+| rsp_created_at | Fecha y hora en que se creó el registro. |
+| rsp_wbp_id | Llave foránea hacia `wellbeing_profiles.wbp_id`; identifica el perfil de bienestar al que pertenece el patrón de riesgo detectado. |
+| rsp_risk_level | Nivel de riesgo del patrón detectado (LOW, MEDIUM, HIGH, CRITICAL). |
+| rsp_description | Descripción del patrón de riesgo, generada a partir del análisis del historial de check-ins. |
+| rsp_detected_at | Fecha y hora en que se detectó el patrón de riesgo. |
+| rsp_acknowledged | Indica si el patrón de riesgo detectado ya fue revisado por el equipo de Alerts and Safety. |
+| rsp_acknowledged_at | Fecha y hora en que se confirmó la revisión del patrón de riesgo. |
+
+<br>
+
+<div align="center">
+
+![Database Design Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-database-diagram.png)
+  <br/><i>Imagen 19: Database Design Diagram del Bounded Context Wellbeing Monitoring.</i>
+
+</div>
+<br>
+
 
 ### 2.6.5. Bounded Context: Social Companionship
 
