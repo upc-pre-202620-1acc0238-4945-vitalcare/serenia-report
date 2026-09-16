@@ -2932,52 +2932,52 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 
 ### 2.4.3. Product Backlog
 
-| # Orden | User Story Id | Título | Story Points (1 / 2 / 3 / 5 / 8) | Sprint |
-| :---: | :--- | :--- | :---: | :---: |
-| 1 | US01 | Registro de cuenta de usuario | 3 | Sprint 1 |
-| 2 | US03 | Registro de respuesta del check-in diario | 2 | Sprint 1 |
-| 3 | US04 | Notificación programada del check-in diario | 5 | Sprint 1 |
-| 4 | US13 | Activación del botón de auxilio | 5 | Sprint 1 |
-| 5 | US23 | Propuesta de valor en la landing page | 1 | Sprint 1 |
-| 6 | US24 | Presentación del modelo de dos aplicaciones | 1 | Sprint 1 |
-| 7 | US25 | Navegación y diseño responsive del sitio | 3 | Sprint 1 |
-| 8 | US26 | Sección institucional de la startup | 1 | Sprint 1 |
-| 9 | NF01 | Accesibilidad visual y táctil de la interfaz | 5 | Sprint 1 |
-| 10 | TS01 | Gestión de usuarios del sistema | 5 | Sprint 1 |
-| 11 | TS04 | Gestión de check-ins diarios | 5 | Sprint 1 |
-| 12 | US02 | Vinculación familiar por código de invitación | 3 | Sprint 2 |
-| 13 | US05 | Configuración del horario del check-in | 2 | Sprint 2 |
-| 14 | US09 | Grabación y envío de mensaje de audio | 5 | Sprint 2 |
-| 15 | US10 | Reproducción de mensajes de audio recibidos | 3 | Sprint 2 |
-| 16 | US15 | Consulta del panel de estado diario | 3 | Sprint 2 |
-| 17 | NF03 | Control de acceso a los datos de bienestar | 5 | Sprint 2 |
-| 18 | TS02 | Gestión de sesiones de autenticación | 5 | Sprint 2 |
-| 19 | TS03 | Gestión de vínculos familiares | 5 | Sprint 2 |
-| 20 | TS06 | Gestión de mensajes de audio | 5 | Sprint 2 |
-| 21 | US06 | Rotación de preguntas del check-in | 3 | Sprint 3 |
-| 22 | US07 | Pausa diaria de preguntas | 2 | Sprint 3 |
-| 23 | US08 | Modo simplificado de interfaz | 3 | Sprint 3 |
-| 24 | US14 | Recepción de alerta de emergencia | 5 | Sprint 3 |
-| 25 | US16 | Alerta por inactividad del check-in | 5 | Sprint 3 |
-| 26 | NF02 | Latencia de entrega de alertas de emergencia | 3 | Sprint 3 |
-| 27 | TS05 | Gestión de preferencias del usuario | 3 | Sprint 3 |
-| 28 | TS08 | Gestión de alertas de emergencia | 5 | Sprint 3 |
-| 29 | TS09 | Gestión del panel de estado | 5 | Sprint 3 |
-| 30 | US11 | Notificación de recordatorio de contacto social | 3 | Sprint 4 |
-| 31 | US12 | Postergación de recordatorio de contacto social | 2 | Sprint 4 |
-| 32 | US17 | Historial de check-ins del adulto mayor | 3 | Sprint 4 |
-| 33 | US18 | Sugerencia de acción por patrón de malestar | 5 | Sprint 4 |
-| 34 | US19 | Registro de pequeñas victorias | 2 | Sprint 4 |
-| 35 | TS07 | Gestión de recordatorios de contacto social | 3 | Sprint 4 |
-| 36 | TS10 | Gestión de alertas de inactividad | 5 | Sprint 4 |
-| 37 | US20 | Asignación de turnos de atención | 5 | Sprint 5 |
-| 38 | US21 | Consulta del turno de atención vigente | 2 | Sprint 5 |
-| 39 | US22 | Notas compartidas entre familiares | 3 | Sprint 5 |
-| 40 | US27 | Envío de fotografía al adulto mayor | 3 | Sprint 5 |
-| 41 | NF04 | Usabilidad sin experiencia tecnológica previa | 3 | Sprint 5 |
-| 42 | TS11 | Gestión de turnos de atención | 5 | Sprint 5 |
-| 43 | TS12 | Gestión de notas compartidas | 3 | Sprint 5 |
-| 44 | TS13 | Gestión de indicadores de bienestar | 5 | Sprint 5 |
+| Orden | User Story Id | Título | Story Points (1 / 2 / 3 / 5 / 8) | Sprint |
+|---:|---|---|---:|---|
+| 1 | US04 | Notificación programada del check-in diario | 5 | Sprint 1 |
+| 2 | US09 | Grabación y envío de mensaje de audio | 5 | Sprint 1 |
+| 3 | US13 | Activación del botón de auxilio | 5 | Sprint 1 |
+| 4 | US14 | Recepción de alerta de emergencia | 5 | Sprint 1 |
+| 5 | NF01 | Accesibilidad visual y táctil de la interfaz | 5 | Sprint 1 |
+| 6 | TS01 | Gestión de usuarios del sistema | 5 | Sprint 1 |
+| 7 | TS02 | Gestión de sesiones de autenticación | 5 | Sprint 1 |
+| 8 | TS03 | Gestión de vínculos familiares | 5 | Sprint 1 |
+| 9 | TS04 | Gestión de check-ins diarios | 5 | Sprint 1 |
+| 10 | US01 | Registro de cuenta de usuario | 3 | Sprint 1 |
+| 11 | US02 | Vinculación familiar por código de invitación | 3 | Sprint 1 |
+| 12 | US10 | Reproducción de mensajes de audio recibidos | 3 | Sprint 1 |
+| 13 | US15 | Consulta del estado diario | 3 | Sprint 1 |
+| 14 | NF02 | Latencia de entrega de alertas de emergencia | 3 | Sprint 1 |
+| 15 | TS05 | Gestión de preferencias del usuario | 3 | Sprint 1 |
+| 16 | US23 | Propuesta de valor en la landing page | 1 | Sprint 1 |
+| 17 | US16 | Alerta por inactividad del check-in | 5 | Sprint 2 |
+| 18 | US18 | Sugerencia de acción por patrón de malestar | 5 | Sprint 2 |
+| 19 | US20 | Asignación de turnos de atención | 5 | Sprint 2 |
+| 20 | NF03 | Control de acceso a los datos de bienestar | 5 | Sprint 2 |
+| 21 | TS06 | Gestión de mensajes de audio | 5 | Sprint 2 |
+| 22 | TS08 | Gestión de alertas de emergencia | 5 | Sprint 2 |
+| 23 | TS09 | Gestión del panel de estado | 5 | Sprint 2 |
+| 24 | TS10 | Gestión de alertas de inactividad | 5 | Sprint 2 |
+| 25 | TS11 | Gestión de turnos de atención | 5 | Sprint 2 |
+| 26 | TS13 | Gestión de indicadores de bienestar | 5 | Sprint 2 |
+| 27 | US06 | Rotación de preguntas del check-in | 3 | Sprint 2 |
+| 28 | US08 | Modo simplificado de interfaz | 3 | Sprint 2 |
+| 29 | US17 | Historial de check-ins del adulto mayor | 3 | Sprint 2 |
+| 30 | NF04 | Usabilidad sin experiencia tecnológica previa | 3 | Sprint 2 |
+| 31 | TS07 | Gestión de recordatorios de contacto social | 3 | Sprint 2 |
+| 32 | TS12 | Gestión de notas compartidas | 3 | Sprint 2 |
+| 33 | US25 | Navegación y diseño responsive del sitio | 3 | Sprint 2 |
+| 34 | US03 | Registro de respuesta del check-in diario | 2 | Sprint 2 |
+| 35 | US05 | Configuración del horario del check-in | 2 | Sprint 2 |
+| 36 | US07 | Pausa diaria de preguntas | 2 | Sprint 2 |
+| 37 | US21 | Consulta del turno de atención vigente | 2 | Sprint 2 |
+| 38 | US11 | Notificación de recordatorio de contacto social | 3 | Sprint 3 |
+| 39 | US22 | Notas compartidas entre familiares | 3 | Sprint 3 |
+| 40 | US12 | Postergación de recordatorio de contacto social | 2 | Sprint 3 |
+| 41 | US19 | Registro de pequeñas victorias | 2 | Sprint 3 |
+| 42 | US24 | Presentación del modelo de dos aplicaciones | 1 | Sprint 3 |
+| 43 | US26 | Sección institucional de la startup | 1 | Sprint 3 |
+| 44 | US27 | Envío de fotografía al adulto mayor | 2 | Sprint 3 |
 
 <br>
 
