@@ -3008,6 +3008,8 @@ A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-
 
 </div>
 
+URL del tablero en Miro: https://miro.com/app/board/uXjVHm8lGW8=/
+
 **Discusión de alternativas consideradas:**
 
 - *¿Qué pasaría si duplicamos el Account ID y el Role en cada bounded context, en vez de compartirlo?* Se descartó porque generaría inconsistencias si un rol cambia (por ejemplo, si se revoca una cuenta) y cada context tendría que sincronizarse por separado. Por eso se optó por un **Shared Kernel** mínimo (solo Account ID + Role) entre IAM y los otros 5 contexts.
