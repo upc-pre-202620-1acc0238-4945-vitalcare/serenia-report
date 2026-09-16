@@ -2979,9 +2979,18 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 | 43 | TS12 | Gestión de notas compartidas | 3 | Sprint 5 |
 | 44 | TS13 | Gestión de indicadores de bienestar | 5 | Sprint 5 |
 
-![product backlog](assets/img/product-backlog/product-backlog-trello.png)
+<br>
 
-**Link del product backlog en la herramienta solicitada:** https://trello.com/invite/b/6aa8e6d78ed225cd21e9e93c/ATTI46cbaeeceb1072274d9c62399714ddaeF68A89AE/serenia
+<div align="center">
+
+![product backlog](assets/img/product-backlog/product-backlog-trello.png)
+  <br/><i>Imagen 11. Captura de Product Backlog en Trello.</i>
+
+</div>
+<br>
+
+**URL:** https://trello.com/invite/b/6aa8e6d78ed225cd21e9e93c/ATTI46cbaeeceb1072274d9c62399714ddaeF68A89AE/serenia
+
 <br>
 
 ## 2.5. Strategic-Level Domain-Driven Design
@@ -3005,10 +3014,12 @@ A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-
 <div align="center">
 
 ![Context Map - Serenia](assets/img/context-mapping/context-map.png)
-
+  <br/><i>Imagen 12. Context Mapping Diagram.</i>
 </div>
 
-URL del tablero en Miro: https://miro.com/app/board/uXjVHm8lGW8=/
+**URL del tablero en Miro:** https://miro.com/app/board/uXjVHm8lGW8=/
+
+<br>
 
 **Discusión de alternativas consideradas:**
 
@@ -3035,7 +3046,7 @@ En esta sección se presenta el *System Context Diagram*, primer nivel del C4 Mo
 <div align="center">
 
 ![System Context Diagram - Serenia](assets/img/software-architecture/context-diagram.png)
-  <br/><i>Imagen 11. System Context Diagram de Serenia.</i>
+  <br/><i>Imagen 13. System Context Diagram de Serenia.</i>
 
 </div>
 
@@ -3054,7 +3065,7 @@ En esta sección se presenta el *Container Diagram*, segundo nivel del C4 Model,
 <div align="center">
 
 ![Container Diagram - Serenia](assets/img/software-architecture/container-diagram.png)
-  <br/><i>Imagen 12. Container Diagram de Serenia.</i>
+  <br/><i>Imagen 14. Container Diagram de Serenia.</i>
 
 </div><br>
 
@@ -3067,7 +3078,7 @@ Como evidencia complementaria de esta organización modular, se presenta a conti
 <div align="center">
 
 ![Component Diagram - API REST de Serenia](assets/img/software-architecture/api-component.png)
-  <br/><i>Imagen 13. Component Diagram del contenedor API REST, organizado por bounded context.</i>
+  <br/><i>Imagen 15. Component Diagram del contenedor API REST, organizado por bounded context.</i>
 
 </div>
 
@@ -3083,12 +3094,12 @@ En esta sección se presenta el *Deployment Diagram*, el cual muestra la distrib
 <div align="center">
 
 ![Deployment Diagram - Serenia](assets/img/software-architecture/deployment-diagram.png)
-  <br/><i>Imagen 14. Deployment Diagram de Serenia.</i>
+  <br/><i>Imagen 16. Deployment Diagram de Serenia.</i>
 
 </div>
 <br>
 
-Como se observa en el diagrama, cada uno de los containers de Serenia se despliega sobre un proveedor de infraestructura distinto. La **Aplicación Móvil** se distribuye y se prueba en los dispositivos Android/iOS del adulto mayor y del cuidador a distancia a través de **Firebase**, específicamente mediante **Firebase App Distribution**, lo que permite instalar y validar la aplicación en distintos dispositivos de prueba antes de su lanzamiento. La **Landing Page Web**, al ser un sitio estático, se aloja en **Netlify**, como servicio de hosting/CDN independiente del backend. La **API REST**, correspondiente al monolito modular desarrollado en Spring Boot, se despliega en **Microsoft Azure**, específicamente en un **Azure Web App Service**, mientras que la **Base de Datos MySQL** se aloja en **Microsoft Azure Cloud **, dentro del mismo proveedor cloud que la API, lo que favorece una comunicación de baja latencia entre ambos containers. La Aplicación Móvil y la Landing Page Web realizan peticiones a la API REST vía HTTPS/JSON, y esta a su vez lee y escribe información en la base de datos utilizando el protocolo SQL/TCP.
+Como se observa en el diagrama, cada uno de los containers de Serenia se despliega sobre un proveedor de infraestructura distinto. La **Aplicación Móvil** se distribuye y se prueba en los dispositivos Android/iOS del adulto mayor y del cuidador a distancia a través de **Firebase**, específicamente mediante **Firebase App Distribution**, lo que permite instalar y validar la aplicación en distintos dispositivos de prueba antes de su lanzamiento. La **Landing Page Web**, al ser un sitio estático, se aloja en **Netlify**, como servicio de hosting/CDN independiente del backend. La **API REST**, correspondiente al monolito modular desarrollado en Spring Boot, se despliega en **Microsoft Azure**, específicamente en un **Azure Web App Service**, mientras que la **Base de Datos MySQL** se aloja en **Microsoft Azure Cloud**, dentro del mismo proveedor cloud que la API, lo que favorece una comunicación de baja latencia entre ambos containers. La Aplicación Móvil y la Landing Page Web realizan peticiones a la API REST vía HTTPS/JSON, y esta a su vez lee y escribe información en la base de datos utilizando el protocolo SQL/TCP.
 
 <br>
 
