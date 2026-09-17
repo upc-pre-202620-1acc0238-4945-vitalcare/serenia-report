@@ -3266,6 +3266,10 @@ Adicionalmente, los diagramas identificaron con precisión los tres puntos de in
 
 #### 2.5.1.3. Bounded Context Canvases
 
+Con los bounded contexts identificados y sus flujos de colaboración visualizados, el equipo procedió a diseñar cada uno de ellos mediante la técnica del Bounded Context Canvas. A diferencia de las secciones anteriores, cuyo propósito fue descubrir y validar las fronteras, esta busca definir el contrato de diseño de cada contexto: su razón de existir, las reglas de negocio que encapsula, los mensajes que expone y las dependencias que mantiene con los demás.
+
+Los contextos se presentan por orden de importancia, iniciando por los clasificados como Core, continuando con los Supporting y cerrando con el Generic.
+
 <br>
 
 ### 2.5.2. Context Mapping
