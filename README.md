@@ -3430,7 +3430,41 @@ En esta capa se representan las reglas de negocio propias de la identidad de un 
 
 #### 2.6.1.2. Interface Layer
 
-<br>
+Clases que exponen el bounded context hacia el exterior y traducen las peticiones entrantes al lenguaje del dominio.
+
+**Sub-capa REST — Controllers**
+
+| Nombre | Endpoints | Descripción |
+| --- | --- | --- |
+| UsersController | POST /users, GET /users/{id}, PUT /users/{id}/photo, PUT /users/{id}/profile, PUT /users/{id}/password | Punto de entrada de las operaciones de registro, consulta y gestión de perfil. Delega en los servicios de comandos y consultas. |
+| SessionsController | POST /sessions, DELETE /sessions/{id} | Punto de entrada de la autenticación y el cierre de sesión. |
+
+**Sub-capa REST — Resources**
+
+| Nombre | Descripción |
+| --- | --- |
+| RegisterUserResource | Datos de entrada del registro, incluido el rol solicitado. |
+| UserResource | Representación pública de una cuenta, sin datos sensibles. |
+| SignInResource | Credenciales enviadas para solicitar una sesión. |
+| AuthenticatedUserResource | Token de sesión emitido junto con los datos del usuario autenticado. |
+| UpdateUserPhotoResource | Datos de entrada para actualizar la fotografía de perfil. |
+| UpdateProfileDataResource | Datos de entrada para actualizar los datos personales. |
+| ChangePasswordResource | Datos de entrada para el cambio de contraseña. |
+| SessionResource | Representación de una sesión vigente y su dispositivo asociado. |
+
+**Sub-capa REST — Transform**
+
+| Nombre | Descripción |
+| --- | --- |
+| UserResourceFromEntityAssembler | Convierte el aggregate `User` en su representación REST. |
+| AuthenticatedUserResourceFromEntityAssembler | Combina usuario y token emitido en un único recurso de respuesta. |
+| SessionResourceFromEntityAssembler | Convierte la entidad `Session` en su representación REST. |
+| RegisterOlderAdultCommandFromResourceAssembler | Convierte la petición de registro en el comando de adulto mayor. |
+| RegisterDistantRelativeCommandFromResourceAssembler | Convierte la petición de registro en el comando de familiar a distancia. |
+| SignInCommandFromResourceAssembler | Convierte las credenciales recibidas en el comando de autenticación. |
+| UpdateUserPhotoCommandFromResourceAssembler | Convierte la petición de fotografía en su comando. |
+| UpdateProfileDataCommandFromResourceAssembler | Convierte la petición de datos personales en su comando. |
+| ChangePasswordCommandFromResourceAssembler | Convierte la petición de cambio de contraseña en su comando. |
 
 #### 2.6.1.3. Application Layer
 
