@@ -2891,6 +2891,83 @@ En esta sección se presentan los requisitos identificados para Serenia a partir
   </tr>
 </table>
 
+#### Spike Stories
+
+**SP01 - Spike: Investigar la Integración de Firebase Cloud Messaging para Notificaciones Push en la Plataforma Serenia**
+
+<u>Contexto</u>
+
+La plataforma Serenia consta de una aplicación móvil nativa Android construida con Kotlin y Jetpack Compose dirigida al adulto mayor, una aplicación móvil multiplataforma construida con Flutter y Dart dirigida al familiar, y un backend Spring Boot con Java para servicios web RESTful, desplegado sobre Azure App Service con una base de datos MySQL Flexible Server.
+
+El equipo requiere un mecanismo de notificaciones push para tres funcionalidades críticas del producto: el recordatorio programado del check-in diario (US04), la alerta de emergencia generada por el botón de auxilio (US13 y US14) y la alerta por inactividad del check-in (US16). La necesidad surge porque estas funcionalidades no pueden depender de que el usuario tenga la aplicación abierta, y el consumo periódico de la API desde el cliente resulta inviable en términos de batería y consumo de datos para un uso diario sostenido.
+
+<u>Spike Story</u> <br>
+Como equipo de desarrollo (Android, Flutter y backend), quiero investigar y prototipar la integración de Firebase Cloud Messaging en la aplicación Android con Kotlin, la aplicación Flutter y el backend Spring Boot de la plataforma Serenia, para que podamos entender las implicaciones técnicas, los riesgos potenciales y el esfuerzo requerido para implementar las notificaciones de check-in, inactividad y emergencia.
+
+<u>Criterios de Aceptación</u>
+
+1. Revisión de documentación de Firebase Cloud Messaging
+- Dado que el equipo necesita comprender las capacidades de FCM para el envío de notificaciones a dispositivos móviles,
+- Cuando el desarrollador revisa la documentación oficial de Firebase Cloud Messaging,
+- Entonces el desarrollador identifica y documenta el tipo de mensaje más adecuado (notification message, data message o mensaje combinado) para cada caso de uso de Serenia en un informe compartido.
+
+2. Evaluación de compatibilidad con la aplicación Android
+- Dado que la aplicación del adulto mayor está construida con Kotlin y Jetpack Compose,
+- Cuando el desarrollador evalúa la integración del SDK de Firebase para Android,
+- Entonces el desarrollador documenta los requisitos de integración.
+
+3. Evaluación de compatibilidad con la aplicación Flutter
+- Dado que la aplicación del familiar está construida con Flutter y Dart,
+- Cuando el desarrollador evalúa la integración del paquete firebase_messaging,
+- Entonces el desarrollador documenta los requisitos de integración en el informe.
+
+4. Evaluación de compatibilidad del backend
+- Dado que el backend está construido con Spring Boot y Java sobre Azure App Service,
+- Cuando el desarrollador evalúa la integración del Firebase Admin SDK para Java,
+- Entonces el desarrollador documenta los requisitos de integración en el informe.
+
+5. Análisis de gestión de tokens de dispositivo
+- Dado que cada instalación de la aplicación genera un token de registro que puede rotar,
+- Cuando el desarrollador analiza el ciclo de vida de los tokens y su almacenamiento en el backend,
+- Entonces el desarrollador documenta la estrategia de registro, actualización y depuración de tokens inválidos en el informe.
+
+6. Identificación de implicaciones de seguridad y privacidad
+- Dado que las notificaciones de Serenia transportan información sensible sobre el bienestar de una persona,
+- Cuando el desarrollador analiza los riesgos asociados (contenido visible en la pantalla de bloqueo, resguardo de credenciales de servicio, envío dirigido únicamente a familiares vinculados),
+- Entonces el desarrollador incluye un resumen de riesgos y sus medidas de mitigación en el informe.
+
+7. Evaluación de latencia de entrega para el caso de emergencia
+- Dado que la alerta de auxilio debe alcanzar al familiar de forma prácticamente inmediata según NF02,
+- Cuando el desarrollador mide el tiempo transcurrido entre el disparo desde el backend y la recepción en el dispositivo del familiar,
+- Entonces el desarrollador documenta los tiempos observados y cualquier limitación identificada en el informe.
+
+8. Identificación de dependencias y costos
+- Dado que el proyecto se despliega sobre Azure con crédito estudiantil limitado,
+- Cuando el desarrollador investiga las configuraciones y los límites del plan gratuito de Firebase,
+- Entonces el desarrollador lista las dependencias requeridas y señala cualquier costo asociado en el informe.
+
+9. Prototipo de la integración de FCM
+- Dado que es necesario validar la viabilidad técnica de Firebase Cloud Messaging,
+- Cuando el desarrollador construye un proof-of-concept mínimo que envía una notificación desde un endpoint de Spring Boot y la recibe en la aplicación Android y en la aplicación Flutter,
+- Entonces el PoC es funcional, está registrado en una rama del repositorio y se referencia en el informe.
+
+10. Estimación de esfuerzo
+- Dado que el equipo necesita dimensionar la implementación completa,
+- Cuando el desarrollador desglosa la integración en tareas de Android, Flutter y backend a partir de los hallazgos del Spike,
+- Entonces el desarrollador proporciona una estimación aproximada en puntos de historia para las historias US04, US13, US14 y US16 en el informe.
+
+11. Documentación y difusión de hallazgos
+- Dado que el Spike está completo,
+- Cuando el desarrollador compila todos los hallazgos en un informe compartido,
+- Entonces el informe incluye ventajas, desventajas, enfoque recomendado y cualquier bloqueador, y es revisado en una reunión de equipo o sesión de refinamiento.
+
+<u>Definition of Done (DoD)</u>
+- El código del PoC está registrado en una rama del repositorio.
+- El informe se comparte y revisa en una reunión de equipo o sesión de refinamiento del backlog.
+- Los hallazgos se utilizan para crear o refinar historias de implementación en el backlog.
+- El Spike está limitado a 8-16 horas y se completa dentro del sprint.
+
+
 ### 2.4.2. Impact Mapping
 
 En esta sección se presenta el Impact Mapping de Serenia, una herramienta visual que nos permite alinear las funcionalidades del producto con los objetivos estratégicos del negocio y las necesidades de nuestros usuarios. Este mapa asegura que cada User Story desarrollada contribuya directamente a generar un cambio de comportamiento positivo (Impact) en nuestros segmentos (Actors) para alcanzar una meta medible (Business Goal).
