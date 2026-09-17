@@ -3238,6 +3238,10 @@ Este escenario resuelve el caso en que el adulto mayor reporta malestar durante 
 
 Wellbeing Monitoring evalúa el historial de check-ins del adulto mayor (1) y, al identificar un patrón sostenido de malestar, lo comunica a Alerts and Safety (2). Este último clasifica la alerta de bienestar según su severidad (3), envía una sugerencia de acción al familiar a distancia (4) y registra la confirmación de atención por parte de este (5).
 
+El modelado de los flujos de mensajes permitió comprobar que la descomposición propuesta resiste la ejecución de los casos de negocio reales de Serenia. Las tres historias muestran una cadena de colaboración coherente: Care Circle origina el vínculo familiar del que dependen todas las comunicaciones posteriores, Daily Check-in captura la señal diaria, Wellbeing Monitoring la acumula e interpreta, y Alerts and Safety actúa únicamente cuando esa interpretación lo amerita. Cada contexto recibe lo que necesita para cumplir su responsabilidad y ninguno requiere asumir la de otro, lo que confirma que las fronteras trazadas son operativas y no solo conceptuales.
+
+Adicionalmente, los diagramas identificaron con precisión los tres puntos de integración del sistema —identidad registrada, check-in registrado y patrón de malestar detectado—, que constituyen el insumo directo para definir los patrones de relación entre contextos.
+
 <br>
 
 #### 2.5.1.3. Bounded Context Canvases
