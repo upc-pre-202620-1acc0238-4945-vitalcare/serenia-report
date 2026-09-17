@@ -3663,7 +3663,7 @@ El bounded context **Alerts and Safety** es responsable de garantizar que el fam
 
 | Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
 |---|---|---|---|---|
-| Command | TriggerEmergencyAlertCommand | Comando para registrar la activación del botón de auxilio | Representar la intención del adulto mayor de solicitar ayuda inmediata, creando un Alert de tipo EMERGENCY | Usado en la implementación del servicio de comandos de alertas |
+| Command | TriggerEmergencyAlertCommand | Comando para registrar la activación del botón de auxilio | Representar la intención del adulto mayor de solicitar ayuda inmediata, creando un Alert de tipo EMERGENCY solo si existen familiares vinculados registrados localmente | Usado en la implementación del servicio de comandos de alertas |
 | Command | OpenInactivityWindowCommand | Comando para abrir una ventana de inactividad | Representar la intención de iniciar el plazo de espera tras un check-in no respondido | Ejecutado por el consumer del evento `UnansweredCheckIn` de Daily Check-in |
 | Command | SendInactivityReminderCommand | Comando para enviar un recordatorio de contacto al adulto mayor | Representar la intención de notificarlo antes de que la ventana de inactividad expire | Usado en la implementación del servicio de comandos de alertas |
 | Command | CloseInactivityWindowCommand | Comando para cerrar una ventana de inactividad sin escalamiento | Representar la intención de finalizar la ventana cuando el adulto mayor retoma actividad antes de que expire | Usado en la implementación del servicio de comandos de alertas |
