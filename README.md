@@ -3294,6 +3294,10 @@ Los contextos se presentan por orden de importancia, iniciando por los clasifica
 
 <br>
 
+La elaboración de los seis canvases permitió pasar de una descripción de los bounded contexts a una definición formal de su contrato de diseño. Al exigir que cada contexto declarara explícitamente las reglas de negocio que encapsula y los mensajes que expone, el ejercicio hizo evidente que ninguna regla del dominio quedó sin un contexto responsable y que ningún contexto aplica reglas que correspondan a otro.
+
+<br>
+
 ### 2.5.2. Context Mapping
 
 A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety, Social Companionship), el equipo elaboró un Context Map para visualizar y explicar las relaciones estructurales entre ellos, revisando la información recolectada en las etapas previas de investigación para producir el diseño candidato.
