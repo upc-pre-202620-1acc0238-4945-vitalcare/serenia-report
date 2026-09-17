@@ -3741,25 +3741,149 @@ Diagrama de clases de la capa Domain: En esta imagen se muestran las clases del 
 
 ### 2.6.6. Bounded Context: Alerts & Safety
 
+El bounded context **Alerts and Safety** es responsable de garantizar que el familiar a distancia sea informado cuando la situación del adulto mayor lo amerite: ante una emergencia declarada explícitamente por el propio adulto mayor, ante una ausencia prolongada de respuesta al check-in diario, o ante un patrón sostenido de malestar detectado por **Wellbeing Monitoring**. A continuación se presenta el diseño táctico propuesto por el equipo para este bounded context, aplicando Domain-Driven Design.
+
 <br>
 
 #### 2.6.6.1. Domain Layer
+
+**Sub-capa Model - Aggregates:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Aggregate | EmergencyAlert | Entidad que representa una alerta de emergencia activada por el adulto mayor o generada por escalamiento | Mantener el ciclo de vida de una emergencia (creación, despacho, confirmación y resolución) como entidad del dominio | Relacionado con el bounded context Care Circle (destinatarios del despacho) y con InactivityAlert (origen cuando la alerta escala por inactividad no atendida) |
+| Aggregate | InactivityAlert | Entidad que representa una alerta generada por ausencia de respuesta al check-in diario dentro del plazo | Registrar la detección de inactividad, el recordatorio de contacto enviado y, de ser necesario, la escalación hacia una emergencia | Relacionado con el bounded context Daily Check-in (origen del evento de check-in no respondido) y con EmergencyAlert (destino en caso de escalamiento) |
+| Aggregate | ActionSuggestion | Entidad que representa una recomendación de acción enviada al familiar ante un patrón de malestar sostenido | Clasificar la severidad del patrón recibido y mantener el registro de la sugerencia hasta la confirmación de atención por parte del familiar | Relacionado con el bounded context Wellbeing Monitoring (origen del patrón de malestar detectado) |
+
+<br>
+
+**Sub-capa Model - Commands:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Command | TriggerEmergencyAlertCommand | Comando para registrar la activación del botón de auxilio | Representar la intención del adulto mayor de solicitar ayuda inmediata | Usado en la implementación del servicio de comandos de alertas |
+| Command | DispatchEmergencyAlertCommand | Comando para notificar la emergencia a los familiares vinculados | Representar la intención de despachar la alerta una vez confirmado que existen familiares vinculados | Ejecutado automáticamente por una policy tras el evento `EmergencyAlertRaised` |
+| Command | AcknowledgeEmergencyAlertCommand | Comando para marcar una alerta de emergencia como reconocida | Representar la intención del familiar de confirmar que tomó conocimiento de la emergencia | Usado en la implementación del servicio de comandos de alertas |
+| Command | ResolveEmergencyAlertCommand | Comando para cerrar una alerta de emergencia atendida | Representar la intención del familiar de marcar la emergencia como resuelta | Usado en la implementación del servicio de comandos de alertas |
+| Command | EvaluateInactivityCommand | Comando para evaluar si la ausencia de respuesta al check-in constituye inactividad | Representar la intención de procesar el check-in no respondido considerando si existe una pausa activa | Ejecutado por el consumer del evento `UnansweredCheckIn` de Daily Check-in |
+| Command | RaiseInactivityAlertCommand | Comando para generar la alerta de inactividad | Representar la intención de crear la alerta una vez confirmada la inactividad | Ejecutado automáticamente por una policy tras el evento `InactivityDetected` |
+| Command | SendContactReminderCommand | Comando para enviar un recordatorio de contacto al adulto mayor | Representar la intención de notificar al adulto mayor antes de escalar la alerta a emergencia | Usado en la implementación del servicio de comandos de alertas |
+| Command | AcknowledgeInactivityAlertCommand | Comando para marcar una alerta de inactividad como reconocida | Representar la intención del familiar de confirmar que tomó conocimiento de la inactividad | Usado en la implementación del servicio de comandos de alertas |
+| Command | ResolveInactivityAlertCommand | Comando para cerrar una alerta de inactividad atendida | Representar la intención del familiar de marcar la inactividad como resuelta | Usado en la implementación del servicio de comandos de alertas |
+| Command | EscalateToEmergencyAlertCommand | Comando para escalar una alerta de inactividad no atendida a una emergencia | Representar la intención de convertir la inactividad en emergencia tras vencer la ventana sin respuesta al recordatorio de contacto | Ejecutado automáticamente por una policy; desencadena `TriggerEmergencyAlertCommand` |
+| Command | ClassifySeverityCommand | Comando para clasificar la severidad de un patrón de malestar recibido | Representar la intención de asignar un nivel de severidad al patrón notificado por Wellbeing Monitoring | Ejecutado por el consumer del evento `DiscomfortPatternDetected` de Wellbeing Monitoring |
+| Command | IssueActionSuggestionCommand | Comando para enviar la sugerencia de acción al familiar | Representar la intención de notificar al familiar con una recomendación de acompañamiento | Ejecutado automáticamente por una policy tras `ClassifySeverityCommand` |
+| Command | ConfirmSuggestionAttentionCommand | Comando para registrar la confirmación de atención de una sugerencia | Representar la intención del familiar de confirmar que atendió la sugerencia de acción | Usado en la implementación del servicio de comandos de alertas |
+
+<br>
+
+**Sub-capa Model - Queries:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Query | GetEmergencyAlertByIdQuery | Consulta para obtener una alerta de emergencia por su identificador | Representar la intención de obtener el detalle de una emergencia específica | Usado en la implementación del servicio de consultas |
+| Query | GetEmergencyAlertsByOlderAdultIdQuery | Consulta para obtener las alertas de emergencia de un adulto mayor | Representar la intención de listar el historial de emergencias asociado a un adulto mayor | Usado en la implementación del servicio de consultas |
+| Query | GetInactivityAlertsByOlderAdultIdQuery | Consulta para obtener las alertas de inactividad de un adulto mayor | Representar la intención de listar el historial de alertas de inactividad asociado a un adulto mayor | Usado en la implementación del servicio de consultas |
+| Query | GetActionSuggestionsByOlderAdultIdQuery | Consulta para obtener las sugerencias de acción de un adulto mayor | Representar la intención de listar las recomendaciones enviadas al familiar para un adulto mayor específico | Usado en la implementación del servicio de consultas |
+
+<br>
+
+**Sub-capa Repositories:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Interface | IEmergencyAlertRepository | Repositorio para operaciones de persistencia del modelo EmergencyAlert | Definir contratos para operaciones CRUD sobre las alertas de emergencia | Implementado en la capa de Infrastructure |
+| Interface | IInactivityAlertRepository | Repositorio para operaciones de persistencia del modelo InactivityAlert | Definir contratos para operaciones CRUD sobre las alertas de inactividad | Implementado en la capa de Infrastructure |
+| Interface | IActionSuggestionRepository | Repositorio para operaciones de persistencia del modelo ActionSuggestion | Definir contratos para operaciones CRUD sobre las sugerencias de acción | Implementado en la capa de Infrastructure |
+
+<br>
+
+**Sub-capa Services:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Interface | IAlertCommandService | Servicio para métodos de comandos de alertas y sugerencias | Estipular una estructura clara a seguir para operaciones de escritura sobre emergencias, inactividad y sugerencias | Usado en la capa "Application" para implementar los métodos dados |
+| Interface | IAlertQueryService | Servicio para métodos de consulta de alertas y sugerencias | Estipular una estructura clara a seguir para operaciones de lectura | Usado en la capa "Application" para la implementación de los métodos |
 
 <br>
 
 #### 2.6.6.2. Interface Layer
 
+**Sub-capa REST - Resources:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Resource | EmergencyAlertResource | Estructura de datos de alerta de emergencia para API | Representar y exponer datos de una emergencia de forma accesible y estructurada para el cliente | Usado en controladores para estructurar respuestas de alertas de emergencia |
+| Resource | InactivityAlertResource | Estructura de datos de alerta de inactividad para API | Representar y exponer datos de una alerta de inactividad de forma accesible para el cliente | Usado en controladores para estructurar respuestas de alertas de inactividad |
+| Resource | ActionSuggestionResource | Estructura de datos de sugerencia de acción para API | Representar y exponer datos de una sugerencia de forma accesible para el cliente | Usado en controladores para estructurar respuestas de sugerencias de acción |
+| Resource | TriggerEmergencyAlertResource | Estructura de petición para activar una emergencia | Representar datos de entrada necesarios para solicitar la activación del botón de auxilio | Usado en controlador para procesar peticiones de activación |
+| Resource | AcknowledgeEmergencyAlertResource | Estructura de petición para reconocer una emergencia | Representar datos necesarios para identificar y marcar como reconocida una alerta de emergencia | Usado en controlador para procesar peticiones de reconocimiento |
+| Resource | ConfirmSuggestionAttentionResource | Estructura de petición para confirmar la atención de una sugerencia | Representar datos necesarios para identificar y marcar como atendida una sugerencia de acción | Usado en controlador para procesar peticiones de confirmación |
+
+<br>
+
+**Sub-capa REST - Transform:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Assembler | EmergencyAlertResourceFromEntityAssembler | Transformador de entidad EmergencyAlert a EmergencyAlertResource | Convertir la entidad del dominio a su representación REST correspondiente | Usado en controladores para transformar respuestas |
+| Assembler | InactivityAlertResourceFromEntityAssembler | Transformador de entidad InactivityAlert a InactivityAlertResource | Convertir la entidad del dominio a su representación REST correspondiente | Usado en controladores para transformar respuestas |
+| Assembler | TriggerEmergencyAlertCommandFromResourceAssembler | Transformador de TriggerEmergencyAlertResource a TriggerEmergencyAlertCommand | Convertir la petición REST a comando del dominio | Usado en controlador para procesar peticiones de activación |
+| Assembler | ConfirmSuggestionAttentionCommandFromResourceAssembler | Transformador de ConfirmSuggestionAttentionResource a ConfirmSuggestionAttentionCommand | Convertir la petición REST a comando del dominio | Usado en controlador para procesar peticiones de confirmación |
+
+<br>
+
+**Sub-capa ACL - Consumers:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Consumer | UnansweredCheckInConsumer | Consumidor interno del evento de dominio UnansweredCheckIn | Escuchar, dentro del monolito modular, el evento publicado por el módulo Daily Check-in para desencadenar el `EvaluateInactivityCommand` correspondiente | Usado como puente entre el bounded context Daily Check-in y Alerts and Safety |
+| Consumer | DiscomfortPatternDetectedConsumer | Consumidor interno del evento de dominio DiscomfortPatternDetected | Escuchar, dentro del monolito modular, el evento publicado por el módulo Wellbeing Monitoring para desencadenar el `ClassifySeverityCommand` correspondiente | Usado como puente entre el bounded context Wellbeing Monitoring y Alerts and Safety |
+
 <br>
 
 #### 2.6.6.3. Application Layer
+
+**Sub-capa Internal - CommandServices:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| CommandHandler | AlertCommandService | Implementación de comandos de alertas y sugerencias | Implementar los métodos para activar, despachar, reconocer, resolver y escalar alertas, así como clasificar y confirmar sugerencias de acción, publicando los eventos de dominio correspondientes | Implementa los métodos de la interface IAlertCommandService en la capa de "Services" |
+
+<br>
+
+**Sub-capa Internal - QueryServices:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| QueryHandler | AlertQueryService | Implementación de consultas de alertas y sugerencias | Implementar los métodos para las consultas de emergencias, alertas de inactividad y sugerencias de acción | Implementa los métodos de la interface IAlertQueryService en la capa de "Services" |
 
 <br>
 
 #### 2.6.6.4 Infrastructure Layer
 
+**Sub-capa Persistence - Repositories:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Repository | EmergencyAlertRepository | Repositorio para uso del modelo "EmergencyAlert" | Acceder y manipular datos persistidos de alertas de emergencia en la base de datos | Usado en la capa "Application" para implementar operaciones CRUD de emergencias |
+| Repository | InactivityAlertRepository | Repositorio para uso del modelo "InactivityAlert" | Acceder y manipular datos persistidos de alertas de inactividad en la base de datos | Usado en la capa "Application" para implementar operaciones CRUD de alertas de inactividad |
+| Repository | ActionSuggestionRepository | Repositorio para uso del modelo "ActionSuggestion" | Acceder y manipular datos persistidos de sugerencias de acción en la base de datos | Usado en la capa "Application" para implementar operaciones CRUD de sugerencias |
+
 <br>
 
 #### 2.6.6.5. Bounded Context Software Architecture Component Level Diagrams
+
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Alerts and Safety, elaborado con la herramienta Structurizr. El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: el `AlertController` como punto de entrada de las peticiones REST; los *Resources* (`EmergencyAlertResource`, `InactivityAlertResource`, `ActionSuggestionResource`, `TriggerEmergencyAlertResource`, `AcknowledgeEmergencyAlertResource`, `ConfirmSuggestionAttentionResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y las entidades de dominio `EmergencyAlert`, `InactivityAlert` y `ActionSuggestion`; los *Commands* y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `AlertCommandService` y `AlertQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IAlertCommandService` e `IAlertQueryService`; y finalmente `IEmergencyAlertRepository`, `IInactivityAlertRepository` e `IActionSuggestionRepository`, implementados por sus respectivos repositorios concretos, que gestionan la persistencia de los tres aggregates. Se incluye además `UnansweredCheckInConsumer` y `DiscomfortPatternDetectedConsumer`, componentes que escuchan los eventos `UnansweredCheckIn` (publicado por Daily Check-in) y `DiscomfortPatternDetected` (publicado por Wellbeing Monitoring), respectivamente, para desencadenar la evaluación de inactividad y la clasificación de severidad.
+
+<br>
+
+<div align="center">
+
+![Component Diagram - Alerts and Safety](assets/img/bounded-context/alerts-safety/alerts-safety-diagram.png)
+  <br/><i>Imagen 20. Component Diagram del Bounded Context Alerts and Safety.</i>
+
+</div>
 
 <br>
 
@@ -3769,10 +3893,73 @@ Diagrama de clases de la capa Domain: En esta imagen se muestran las clases del 
 
 ##### 2.6.6.6.1. Bounded Context Domain Layer Class Diagrams
 
+Diagrama de clases de la capa Domain: en esta imagen se muestran las clases del dominio Alerts and Safety, que incluyen `EmergencyAlert`, `InactivityAlert` y `ActionSuggestion` como aggregate roots, los Commands para las operaciones de activación, despacho, reconocimiento, resolución y escalamiento de alertas, así como para la clasificación y confirmación de sugerencias, las Queries para las consultas de historial por adulto mayor, e interfaces para los servicios de dominio con sus respectivas implementaciones.
+
+<br>
+<div align="center">
+
+![Domain Layer Class Diagram - Alerts and Safety](assets/img/bounded-context/alerts-safety/alerts-safety-class-diagram.png)
+  <br/><i>Imagen 21. Domain Layer Class Diagram del Bounded Context Alerts and Safety.</i>
+
+</div>
+
 <br>
 
 ##### 2.6.6.6.2. Bounded Context Database Design Diagram
 
+<br>
+
+**Tabla `emergency_alerts`:**
+
+| Nombre | Descripción |
+|---|---|
+| ema_id | Identificador único del registro, clave primaria de la tabla (prefijo `ema` de `emergency_alerts`). |
+| ema_created_at | Fecha y hora en que se creó el registro. |
+| ema_updated_at | Fecha y hora de la última actualización del registro. |
+| ema_older_adult_id | Identificador del adulto mayor que activó o generó la emergencia (referencia al bounded context IAM). |
+| ema_source | Origen de la emergencia (HELP_BUTTON, INACTIVITY_ESCALATION). |
+| ema_status | Estado actual de la emergencia (RAISED, DISPATCHED, ACKNOWLEDGED, RESOLVED). |
+| ema_dispatched_at | Fecha y hora en que la emergencia fue despachada a los familiares vinculados. |
+| ema_acknowledged_at | Fecha y hora en que un familiar reconoció la emergencia. |
+| ema_resolved_at | Fecha y hora en que la emergencia fue marcada como resuelta. |
+
+<br>
+
+**Tabla `inactivity_alerts`:**
+
+| Nombre | Descripción |
+|---|---|
+| ina_id | Identificador único del registro, clave primaria de la tabla (prefijo `ina` de `inactivity_alerts`). |
+| ina_created_at | Fecha y hora en que se creó el registro. |
+| ina_older_adult_id | Identificador del adulto mayor que no respondió el check-in dentro del plazo (referencia al bounded context IAM). |
+| ina_status | Estado actual de la alerta (RAISED, REMINDER_SENT, ACKNOWLEDGED, RESOLVED, ESCALATED). |
+| ina_reminder_sent_at | Fecha y hora en que se envió el recordatorio de contacto al adulto mayor. |
+| ina_acknowledged_at | Fecha y hora en que un familiar reconoció la alerta de inactividad. |
+| ina_resolved_at | Fecha y hora en que la alerta fue marcada como resuelta. |
+| ina_escalated_ema_id | Llave foránea hacia `emergency_alerts.ema_id`; referencia la emergencia generada si la alerta escaló por falta de respuesta al recordatorio. |
+
+<br>
+
+**Tabla `action_suggestions`:**
+
+| Nombre | Descripción |
+|---|---|
+| acs_id | Identificador único del registro, clave primaria de la tabla (prefijo `acs` de `action_suggestions`). |
+| acs_created_at | Fecha y hora en que se creó el registro. |
+| acs_older_adult_id | Identificador del adulto mayor sobre el que se detectó el patrón de malestar (referencia al bounded context IAM). |
+| acs_severity | Nivel de severidad asignado al patrón de malestar (LOW, MEDIUM, HIGH). |
+| acs_recommended_action | Descripción de la acción de acompañamiento recomendada al familiar. |
+| acs_attention_confirmed | Indica si el familiar confirmó haber atendido la sugerencia. |
+| acs_attention_confirmed_at | Fecha y hora en que se confirmó la atención de la sugerencia. |
+
+<br>
+
+<div align="center">
+
+![Database Design Diagram - Alerts and Safety](assets/img/bounded-context/alerts-safety/alerts-safety-database-diagram.png)
+  <br/><i>Imagen 22. Database Design Diagram del Bounded Context Alerts and Safety.</i>
+
+</div>
 <br>
 
 # Capítulo III: Solution UI/UX Design
