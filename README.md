@@ -1,50 +1,33 @@
-<div align="center">
 
-<img src="assets/img/cover/upc-logo.png" alt="UPC Logo" width="70"/>
-
-Universidad Peruana de Ciencias Aplicadas
-
-Carrera de Ingeniería de Software
-
-**1ACC0238**
-
-**Aplicaciones para Dispositivos Móviles**
-
-NRC: **4945**
-
-### Informe del Trabajo Final
-
-Docente: **Mayta Guillermo, Jorge Luis**
-
+<p align="center"><img src="assets/img/cover/upc-logo.png" alt="UPC Logo" width="65"/></p>
+<p align="center"><strong>Universidad Peruana de Ciencias Aplicadas</strong></p>
+<p align="center"><strong>Carrera de Ingeniería de Software</strong></p>
 <br>
-
-Equipo
-
-**VitalCare**
-
-Proyecto
-
-**Serenia**
-
+<p align="center"><strong>1ACC0238</strong></p>
+<p align="center"><strong>Aplicaciones para Dispositivos Móviles</strong></p>
+<p align="center">NRC</p>
+<p align="center"><strong>4945</strong></p>
+<h2 align="center">Informe del Trabajo Final</h2>
+<p align="center">Docente</p>
+<p align="center"><strong>Mayta Guillermo, Jorge Luis</strong></p>
 <br>
-
-Integrantes
-
-| Código | Apellidos y Nombres |
-|---|---|
-| u202414802 | Contreras Torres, Arturo Valentino |
-| u202414970 | Gallardo Morales, Carla Alejandra |
-| u202012001 | García Paredes, Victor Manuel |
-| u202410239 | Salinas Guzman, Brianna Cristina |
-| u202418645 | Sandoval Aiquipa, Kelber Yamir |
-
+<p align="center">Equipo</p>
+<p align="center"><strong>VitalCare</strong></p>
+<p align="center">Proyecto</p>
+<p align="center"><strong>Serenia</strong></p>
 <br>
-
-**Período 2026-20**
-
-**Septiembre 2026**
-
-</div>
+<p align="center"><strong>Integrantes</strong></p>
+<table align="center">
+  <tr><th>Código</th><th>Apellidos y nombres</th></tr>
+  <tr><td>u202414802</td><td>Contreras Torres, Arturo Valentino</td></tr>
+  <tr><td>u202414970</td><td>Gallardo Morales, Carla Alejandra</td></tr>
+  <tr><td>u202012001</td><td>García Paredes, Victor Manuel</td></tr>
+  <tr><td>u202410239</td><td>Salinas Guzman, Brianna Cristina</td></tr>
+  <tr><td>u202418645</td><td>Sandoval Aiquipa, Kelber Yamir</td></tr>
+</table>
+<br>
+<p align="center"><strong>Período 202620</strong></p>
+<p align="center"><strong>Septiembre 2026</strong></p>
 
 <br>
 
