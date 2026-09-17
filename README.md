@@ -3484,7 +3484,32 @@ Clases que orquestan los flujos del contexto, coordinando el aggregate, los repo
 
 #### 2.6.1.4 Infrastructure Layer
 
-<br>
+Clases que resuelven el acceso a la base de datos y a los mecanismos técnicos de seguridad, implementando las abstracciones definidas en el dominio.
+
+**Sub-capa Persistence — Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| UserRepository | Persiste y recupera el aggregate `User` junto con sus sesiones sobre las tablas `users` y `sessions`, resolviendo además la búsqueda por correo y por token de sesión. | Implementa `IUserRepository`; usado por la capa Application. |
+
+**Sub-capa Persistence — Mappers**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| UserPersistenceMapper | Traduce entre el aggregate `User` y su representación en base de datos, evitando que el modelo de persistencia se filtre al dominio. | Usado por `UserRepository`. |
+
+**Sub-capa Security — Services**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| BCryptPasswordHashingService | Cifra las contraseñas y verifica credenciales mediante el algoritmo BCrypt. | Implementa `IPasswordHashingService`. |
+| JwtTokenService | Genera los tokens de sesión, calcula su expiración y produce el hash que se almacena en la tabla `sessions`. | Implementa `ITokenService`. |
+
+**Sub-capa Messaging — Publishers**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| DomainEventPublisherAdapter | Publica los eventos de dominio del contexto dentro del monolito modular para que otros módulos reaccionen a ellos. | Implementa `IDomainEventPublisher`. |
 
 #### 2.6.1.5. Bounded Context Software Architecture Component Level Diagrams
 
