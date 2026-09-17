@@ -3214,6 +3214,12 @@ Al finalizar, el equipo aplicó una verificación del lenguaje ubicuo sobre cada
 
 #### 2.5.1.2. Domain Message Flows Modeling
 
+Una vez delimitados los bounded contexts candidatos, el equipo desarrolló una sesión de Domain Message Flows Modeling con el fin de visualizar cómo deben colaborar dichos contextos para resolver los casos de negocio que enfrentan los usuarios del sistema. Mientras que la sesión anterior respondió dónde trazar las fronteras, esta buscó responder qué mensajes deben cruzarlas.
+
+La técnica aplicada fue Domain Storytelling, empleando la herramienta Egon.io. La notación representa cada escenario mediante actores, objetos de trabajo y actividades numeradas que se leen como oraciones completas, lo que permite validar el flujo con lenguaje natural del dominio. El equipo introdujo una variante deliberada sobre la notación clásica: además de los actores humanos, cada bounded context fue modelado como un actor de tipo sistema. De esta forma, toda flecha que va de un contexto a otro constituye un mensaje de dominio explícito, y el diagrama evidencia directamente la colaboración entre fronteras en lugar de tratar al sistema como una caja negra.
+
+La selección de escenarios no buscó cobertura funcional completa, sino aquellos casos en los que más de un bounded context debe intervenir para resolver una necesidad del usuario. Bajo ese criterio se modelaron tres domain stories, cada una correspondiente a un escenario de camino feliz. Los casos de rechazo y las variantes excepcionales quedaron fuera del alcance, ya que en Domain Storytelling cada variación constituye una historia independiente y no una ramificación del mismo diagrama.
+
 <br>
 
 #### 2.5.1.3. Bounded Context Canvases
