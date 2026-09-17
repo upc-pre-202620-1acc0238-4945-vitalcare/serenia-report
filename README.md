@@ -3468,7 +3468,19 @@ Clases que exponen el bounded context hacia el exterior y traducen las peticione
 
 #### 2.6.1.3. Application Layer
 
-<br>
+Clases que orquestan los flujos del contexto, coordinando el aggregate, los repositorios y los servicios de seguridad.
+
+**Sub-capa Internal — CommandServices**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| UserCommandService | Ejecuta los siete comandos del contexto: valida la unicidad del correo, delega el cifrado de contraseñas, invoca los métodos del aggregate `User`, persiste el resultado y publica los eventos de dominio correspondientes. | Implementa `IUserCommandService`; usa `IUserRepository`, `IPasswordHashingService`, `ITokenService` e `IDomainEventPublisher`. |
+
+**Sub-capa Internal — QueryServices**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| UserQueryService | Resuelve las consultas de cuentas y sesiones, devolviendo el aggregate o sus sesiones vigentes sin modificar el estado. | Implementa `IUserQueryService`; usa `IUserRepository`. |
 
 #### 2.6.1.4 Infrastructure Layer
 
