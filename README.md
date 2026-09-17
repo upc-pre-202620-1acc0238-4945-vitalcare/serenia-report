@@ -3298,7 +3298,9 @@ Como se observa en el diagrama, cada uno de los containers de Serenia se desplie
 ## 2.6. Tactical-Level Domain-Driven Design
 ### 2.6.1. Bounded Context: Identity & Access Context
 
-<br>
+El bounded context Identity & Access concentra todo lo relacionado con la identidad de las personas que usan Serenia: el registro diferenciado de adultos mayores y familiares a distancia, el inicio y cierre de sesión, la actualización de los datos de perfil y el cambio de contraseña. Es un contexto genérico: sus reglas son estándar y no se derivan del negocio del cuidado, pero ningún otro contexto puede operar sin él, ya que toda acción del sistema se atribuye a un usuario autenticado y a un rol determinado.
+
+Su modelo gira en torno a un único aggregate, `User`, que es la raíz responsable de garantizar la consistencia de las credenciales, el estado de la cuenta y las sesiones abiertas de una misma persona. El rol se fija en el momento del registro y determina a qué aplicación accede el usuario. Al completarse el registro de un adulto mayor, el contexto publica el evento correspondiente, que habilita la creación posterior de su círculo de cuidado.
 
 #### 2.6.1.1. Domain Layer
 
