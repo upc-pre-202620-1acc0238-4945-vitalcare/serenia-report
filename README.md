@@ -3220,6 +3220,12 @@ La técnica aplicada fue Domain Storytelling, empleando la herramienta Egon.io. 
 
 La selección de escenarios no buscó cobertura funcional completa, sino aquellos casos en los que más de un bounded context debe intervenir para resolver una necesidad del usuario. Bajo ese criterio se modelaron tres domain stories, cada una correspondiente a un escenario de camino feliz. Los casos de rechazo y las variantes excepcionales quedaron fuera del alcance, ya que en Domain Storytelling cada variación constituye una historia independiente y no una ramificación del mismo diagrama.
 
+**Domain Story 1: Registro y vinculación familiar**
+
+Este escenario resuelve el caso en que un adulto mayor se registra en Serenia y habilita a un familiar a distancia para acceder a su estado. Es la historia que da origen a toda relación posterior en el sistema: sin un vínculo familiar establecido, ningún otro flujo puede ejecutarse.
+
+El adulto mayor crea su cuenta en Identity & Access (1), el cual comunica la identidad registrada a Care Circle (2). Care Circle genera entonces un código de invitación y lo entrega al adulto mayor (3), quien se lo transmite al familiar a distancia por un medio ajeno al sistema (4). El familiar crea su propia cuenta en Identity & Access (5), ingresa el código de invitación en Care Circle (6) y recibe la confirmación del vínculo familiar establecido (7).
+
 <br>
 
 #### 2.5.1.3. Bounded Context Canvases
