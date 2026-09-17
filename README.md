@@ -2967,6 +2967,78 @@ Como equipo de desarrollo (Android, Flutter y backend), quiero investigar y prot
 - Los hallazgos se utilizan para crear o refinar historias de implementación en el backlog.
 - El Spike está limitado a 8-16 horas y se completa dentro del sprint.
 
+<br>
+
+**SP02 - Spike: Investigar la Grabación, Almacenamiento y Reproducción de Mensajes de Audio en la Plataforma Serenia**
+
+<u>Contexto</u>
+
+La plataforma Serenia contempla una funcionalidad de mensajería de audio asíncrona que permite al adulto mayor grabar un mensaje breve desde la aplicación Android construida con Kotlin y Jetpack Compose, y al familiar reproducirlo desde la aplicación Flutter. El backend Spring Boot con Java expone los servicios RESTful correspondientes y se despliega sobre Azure App Service con una base de datos MySQL Flexible Server.
+
+Esta funcionalidad, descrita en las historias US09, US10 y TS06, introduce el manejo de archivos binarios, lo cual no forma parte de las operaciones CRUD habituales del resto del sistema. El equipo debe resolver decisiones que afectan directamente al diagrama de despliegue y al diseño de la infraestructura: el formato y códec de grabación, el mecanismo de subida hacia el backend, la ubicación física del archivo (sistema de archivos del App Service frente a Azure Blob Storage) y el mecanismo de reproducción desde la aplicación Flutter.
+
+<u>Spike Story</u> <br>
+Como equipo de desarrollo (Android, Flutter y backend), quiero investigar y prototipar la grabación, subida, almacenamiento y reproducción de mensajes de audio en la plataforma Serenia, para que podamos determinar el enfoque de almacenamiento más adecuado y estimar el esfuerzo requerido para implementar la funcionalidad de mensajería de audio.
+
+<u>Criterios de Aceptación</u>
+
+1. Evaluación de alternativas de grabación en Android
+- Dado que la aplicación del adulto mayor está construida con Kotlin y Jetpack Compose,
+- Cuando el desarrollador evalúa las APIs de grabación disponibles y los formatos y códecs soportados,
+- Entonces el desarrollador documenta la configuración recomendada de formato, códec, tasa de bits y canales, junto con el tamaño estimado por minuto de audio, en un informe compartido.
+
+2. Análisis de gestión de permisos de micrófono
+- Dado que la grabación requiere el permiso de micrófono en tiempo de ejecución,
+- Cuando el desarrollador analiza el flujo de solicitud de permisos y los escenarios de denegación,
+- Entonces el desarrollador documenta el flujo recomendado, considerando la simplicidad requerida por el perfil de usuario adulto mayor, en el informe.
+
+3. Evaluación del mecanismo de subida al backend
+- Dado que el backend está construido con Spring Boot y Java,
+- Cuando el desarrollador evalúa la recepción de archivos mediante solicitudes multipart en endpoints de Spring MVC,
+- Entonces el desarrollador documenta la configuración requerida, incluyendo los límites de tamaño de archivo y la validación de tipo de contenido, en el informe.
+
+4. Comparación de alternativas de almacenamiento
+- Dado que el archivo de audio debe persistir de forma accesible para la aplicación del familiar,
+- Cuando el desarrollador compara el almacenamiento en el sistema de archivos del App Service frente a Azure Blob Storage,
+- Entonces el desarrollador documenta las ventajas, desventajas, implicaciones de costo y el impacto de cada alternativa sobre el diagrama de despliegue en el informe.
+
+5. Evaluación de reproducción desde la aplicación Flutter
+- Dado que la aplicación del familiar está construida con Flutter y Dart,
+- Cuando el desarrollador evalúa los paquetes de reproducción de audio disponibles y el soporte de reproducción por streaming,
+- Entonces el desarrollador documenta el paquete recomendado y los requisitos que debe cumplir el endpoint del backend para permitir el desplazamiento dentro del audio en el informe.
+
+6. Identificación de implicaciones de seguridad y privacidad
+- Dado que los mensajes de audio contienen información personal del adulto mayor,
+- Cuando el desarrollador analiza los riesgos de acceso no autorizado a los archivos almacenados,
+- Entonces el desarrollador documenta la estrategia de control de acceso, alineada con el criterio establecido en NF03, en el informe.
+
+7. Identificación de dependencias y costos
+- Dado que el proyecto se despliega sobre Azure con crédito estudiantil limitado,
+- Cuando el desarrollador estima el volumen de almacenamiento y el tráfico de salida generados por un uso académico de la funcionalidad,
+- Entonces el desarrollador lista las dependencias requeridas y el costo estimado de cada alternativa de almacenamiento en el informe.
+
+8. Prototipo del flujo completo de audio
+- Dado que es necesario validar la viabilidad técnica del flujo de extremo a extremo,
+- Cuando el desarrollador construye un proof-of-concept mínimo que graba un audio en la aplicación Android, lo sube mediante un endpoint de Spring Boot y lo reproduce desde la aplicación Flutter,
+- Entonces el PoC es funcional, está registrado en una rama del repositorio y se referencia en el informe.
+
+9. Estimación de esfuerzo
+- Dado que el equipo necesita dimensionar la implementación completa,
+- Cuando el desarrollador desglosa la funcionalidad en tareas de Android, Flutter y backend a partir de los hallazgos del Spike,
+- Entonces el desarrollador proporciona una estimación aproximada en puntos de historia para las historias US09, US10 y TS06 en el informe.
+
+10. Documentación y difusión de hallazgos
+- Dado que el Spike está completo,
+- Cuando el desarrollador compila todos los hallazgos en un informe compartido,
+- Entonces el informe incluye la alternativa de almacenamiento recomendada con su justificación, y es revisado en una reunión de equipo o sesión de refinamiento.
+
+<u>Definition of Done (DoD)</u>
+- El código del PoC está registrado en una rama del repositorio.
+- El informe se comparte y revisa en una reunión de equipo o sesión de refinamiento del backlog.
+- La alternativa de almacenamiento seleccionada se refleja en el diagrama de despliegue del proyecto.
+- El Spike está limitado a 8-16 horas y se completa dentro del sprint.
+
+<br>
 
 ### 2.4.2. Impact Mapping
 
