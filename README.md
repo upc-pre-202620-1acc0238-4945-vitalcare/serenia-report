@@ -3304,7 +3304,129 @@ Su modelo gira en torno a un único aggregate, `User`, que es la raíz responsab
 
 #### 2.6.1.1. Domain Layer
 
-<br>
+En esta capa se representan las reglas de negocio propias de la identidad de un usuario, sin dependencia de frameworks de persistencia, red ni interfaz.
+
+**Sub-capa Model — Aggregates**
+
+`User` (Aggregate Root): representa la cuenta de una persona en Serenia, sea adulto mayor o familiar a distancia. Controla la validez de sus credenciales, el estado de la cuenta y el ciclo de vida de sus sesiones.
+
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | UserId | private | Identificador único de la cuenta. |
+| email | EmailAddress | private | Correo electrónico único con el que el usuario inicia sesión. |
+| passwordHash | PasswordHash | private | Representación cifrada de la contraseña; nunca almacena el valor en claro. |
+| role | UserRole | private | Rol asignado en el registro; determina la aplicación a la que accede. |
+| fullName | PersonName | private | Nombre completo del usuario. |
+| phoneNumber | PhoneNumber | private | Número de contacto, opcional. |
+| birthDate | LocalDate | private | Fecha de nacimiento, opcional. |
+| photoUrl | String | private | Ubicación de la fotografía de perfil, opcional. |
+| locale | LocaleCode | private | Idioma y región de la interfaz. |
+| status | AccountStatus | private | Estado de la cuenta: activa, suspendida o eliminada. |
+| sessions | List\<Session\> | private | Sesiones abiertas o históricas de la cuenta. |
+| createdAt | LocalDateTime | private | Fecha y hora de creación de la cuenta. |
+| updatedAt | LocalDateTime | private | Fecha y hora de la última modificación. |
+
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| registerOlderAdult(email, passwordHash, fullName, locale) | public (static) | Crea una cuenta con rol de adulto mayor a partir de datos ya validados. |
+| registerDistantRelative(email, passwordHash, fullName, locale) | public (static) | Crea una cuenta con rol de familiar a distancia. |
+| openSession(tokenHash, deviceInfo, expiresAt) | public | Abre una nueva sesión para la cuenta y la incorpora al aggregate. |
+| closeSession(sessionId) | public | Revoca la sesión indicada y la marca como cerrada. |
+| updatePhoto(photoUrl) | public | Reemplaza la fotografía de perfil del usuario. |
+| updateProfileData(fullName, phoneNumber, birthDate, locale) | public | Actualiza los datos personales de la cuenta. |
+| changePassword(newPasswordHash) | public | Sustituye la contraseña cifrada de la cuenta. |
+| activeSessions() | public | Devuelve las sesiones vigentes, sin revocar ni expiradas. |
+| isActive() | public | Indica si la cuenta se encuentra en estado activo. |
+| ensureActive() | private | Impide ejecutar operaciones sobre una cuenta suspendida o eliminada. |
+
+**Sub-capa Model — Entities**
+
+`Session`: representa un periodo de acceso autenticado de un usuario desde un dispositivo. Pertenece al aggregate `User` y no se manipula fuera de él.
+
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | SessionId | private | Identificador único de la sesión. |
+| tokenHash | TokenHash | private | Representación cifrada del token entregado al cliente. |
+| deviceInfo | DeviceInfo | private | Descripción del dispositivo desde el que se inició la sesión. |
+| issuedAt | LocalDateTime | private | Fecha y hora de emisión del token. |
+| expiresAt | LocalDateTime | private | Fecha y hora en que el token deja de ser válido. |
+| revokedAt | LocalDateTime | private | Fecha y hora del cierre de sesión, si ocurrió. |
+
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| revoke(revokedAt) | public | Marca la sesión como cerrada en el instante indicado. |
+| isExpired(referenceTime) | public | Indica si el token ya superó su fecha de expiración. |
+| isActive(referenceTime) | public | Indica si la sesión sigue vigente: no revocada y no expirada. |
+
+**Sub-capa Model — Value Objects**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| UserId | value: UUID | Identidad inmutable de una cuenta. |
+| SessionId | value: UUID | Identidad inmutable de una sesión. |
+| EmailAddress | value: String | Correo electrónico validado en formato y longitud máxima. |
+| PasswordHash | value: String | Contraseña ya cifrada; impide que el dominio maneje texto plano. |
+| TokenHash | value: String | Token de sesión cifrado, nunca almacenado en claro. |
+| PersonName | value: String | Nombre completo con validación de obligatoriedad y longitud. |
+| PhoneNumber | value: String | Número telefónico validado en formato. |
+| LocaleCode | value: String | Código de idioma y región de la interfaz. |
+| DeviceInfo | value: String | Descripción del dispositivo asociado a una sesión. |
+
+**Sub-capa Model — Enumerations**
+
+| Nombre | Valores | Descripción |
+| --- | --- | --- |
+| UserRole | OLDER_ADULT, DISTANT_RELATIVE | Rol del usuario, definido en el registro e inmutable. |
+| AccountStatus | ACTIVE, SUSPENDED, DELETED | Estado del ciclo de vida de la cuenta. |
+
+**Sub-capa Model — Commands**
+
+| Nombre | Descripción |
+| --- | --- |
+| RegisterOlderAdultCommand | Intención de crear una cuenta con rol de adulto mayor. |
+| RegisterDistantRelativeCommand | Intención de crear una cuenta con rol de familiar a distancia. |
+| SignInCommand | Intención de autenticar a un usuario y abrir una sesión. |
+| SignOutCommand | Intención de cerrar una sesión vigente. |
+| UpdateUserPhotoCommand | Intención de actualizar la fotografía de perfil. |
+| UpdateProfileDataCommand | Intención de actualizar los datos personales del perfil. |
+| ChangePasswordCommand | Intención de reemplazar la contraseña de la cuenta. |
+
+**Sub-capa Model — Queries**
+
+| Nombre | Descripción |
+| --- | --- |
+| GetUserByIdQuery | Consulta de una cuenta por su identificador. |
+| GetUserByEmailQuery | Consulta de una cuenta por su correo electrónico. |
+| GetUserBySessionTokenQuery | Consulta de la cuenta asociada a un token de sesión vigente. |
+| GetActiveSessionsByUserIdQuery | Consulta de las sesiones vigentes de una cuenta. |
+
+**Sub-capa Model — Events**
+
+| Nombre | Descripción |
+| --- | --- |
+| OlderAdultRegistered | Se creó una cuenta con rol de adulto mayor. |
+| DistantRelativeRegistered | Se creó una cuenta con rol de familiar a distancia. |
+| UserLoggedIn | Un usuario se autenticó correctamente y abrió una sesión. |
+| UserSessionClosed | Un usuario cerró su sesión de forma explícita. |
+| UserPhotoUpdated | Se actualizó la fotografía de perfil de un usuario. |
+| ProfileDataUpdated | Se actualizaron los datos personales de un usuario. |
+| PasswordChanged | Se modificó la contraseña de una cuenta. |
+
+**Sub-capa Repositories**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | IUserRepository | save(user), findById(userId), findByEmail(email), existsByEmail(email), findBySessionTokenHash(tokenHash), findAll() | Contrato de persistencia del aggregate `User` junto con sus sesiones. Se implementa en Infrastructure. |
+
+**Sub-capa Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | IUserCommandService | handle(RegisterOlderAdultCommand), handle(RegisterDistantRelativeCommand), handle(SignInCommand), handle(SignOutCommand), handle(UpdateUserPhotoCommand), handle(UpdateProfileDataCommand), handle(ChangePasswordCommand) | Contrato de las operaciones de escritura del contexto. |
+| Interface | IUserQueryService | handle(GetUserByIdQuery), handle(GetUserByEmailQuery), handle(GetUserBySessionTokenQuery), handle(GetActiveSessionsByUserIdQuery) | Contrato de las operaciones de lectura del contexto. |
+| Interface | IPasswordHashingService | hash(rawPassword), matches(rawPassword, passwordHash) | Abstracción del cifrado y verificación de contraseñas; mantiene el dominio libre de librerías de seguridad. |
+| Interface | ITokenService | generate(userId, role), hash(token), expirationOf(token) | Abstracción de la generación y el cifrado de tokens de sesión. |
+| Interface | IDomainEventPublisher | publish(event) | Abstracción para publicar los eventos de dominio hacia los demás módulos. |
 
 #### 2.6.1.2. Interface Layer
 
