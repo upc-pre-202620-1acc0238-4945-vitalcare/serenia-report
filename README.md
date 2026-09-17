@@ -3773,7 +3773,7 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 <div align="center">
 
 ![Component Diagram - Alerts and Safety](assets/img/bounded-context/alerts-safety/alerts-safety-diagram.png)
-  <br/><i>Imagen 20. Component Diagram del Bounded Context Alerts and Safety.</i>
+  <br/><i>Imagen X. Component Diagram del Bounded Context Alerts and Safety.</i>
 
 </div>
 
@@ -3791,7 +3791,7 @@ Diagrama de clases de la capa Domain: en esta imagen se muestran las clases del 
 <div align="center">
 
 ![Domain Layer Class Diagram - Alerts and Safety](assets/img/bounded-context/alerts-safety/alerts-safety-class-diagram.png)
-  <br/><i>Imagen 21. Domain Layer Class Diagram del Bounded Context Alerts and Safety.</i>
+  <br/><i>Imagen X. Domain Layer Class Diagram del Bounded Context Alerts and Safety.</i>
 
 </div>
 
@@ -3811,7 +3811,7 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 <div align="center">
 
 ![Database Design Diagram - Alerts and Safety](assets/img/bounded-context/alerts-safety/alerts-safety-database-diagram.png)
-  <br/><i>Imagen 22. Database Design Diagram del Bounded Context Alerts and Safety.</i>
+  <br/><i>Imagen X. Database Design Diagram del Bounded Context Alerts and Safety.</i>
 
 </div>
 <br>
