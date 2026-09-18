@@ -3051,7 +3051,10 @@ A partir del dominio modelado en el Big Picture EventStorming, el equipo desarro
 
 La técnica aplicada fue start-with-value. En lugar de descomponer el timeline de forma secuencial, el equipo partió de la pregunta sobre qué partes del dominio concentran el mayor valor para el negocio, entendiendo por valor aquello que sostiene directamente la propuesta diferencial de Serenia: reemplazar la común llamada telefónica por un acompañamiento emocional sostenido y verificable a distancia.
 
+<br>
+
 El proceso se desarrolló en tres momentos:
+
 
 **Identificación del core.** El equipo recorrió el muro marcando los eventos sin los cuales la propuesta de valor de Serenia deja de existir. De este recorrido surgieron tres núcleos: los eventos de registro y respuesta del check-in diario, que son el mecanismo por el cual el adulto mayor comunica su estado sin sentirse vigilado; los eventos de interpretación de patrones de bienestar, que convierten esas respuestas en información valiosa para el familiar a distancia; y los eventos de alerta ante emergencia o inactividad prolongada, que son la garantía de tranquilidad que el familiar a distancia está comprando. Estos tres núcleos se delimitaron primero, por ser los que concentran la lógica de negocio propia del producto.
 
@@ -3061,54 +3064,71 @@ El proceso se desarrolló en tres momentos:
 
 El resultado de la sesión fuerons seis bounded contexts candidatos, clasificados según su aporte de valor:
 
-**Daily Check-in - Core** <br>
+<br>
+
+
+### Daily Check-in - Core <br>
 Es el mecanismo primario por el cual Serenia genera valor diferencial: convierte una interacción emocional cotidiana en una señal estructurada, sin que el adulto mayor sienta que está siendo monitoreado clínicamente. Sin este contexto no existe el dato que el resto del sistema necesita para funcionar.
 
+<br>
 <div align="center">
   <img src="assets/img/event-storming/daily-check-in.png" alt="Daily Check-in - Bounded Context" width="700"/>
+  <br/><i>Imagen 12. Daily Check-in - Bounded Context Core identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
-**Wellbeing Monitoring - Core** <br>
+### Wellbeing Monitoring - Core <br>
 Es el contexto que interpreta las señales del check-in y las convierte en información para la familia a distancia. Concentra la lógica del negocio más distintiva de Serenia: distinguir un mal día puntual de un patrón de deterioro sostenido, evitando tanto la falsa alarma como la negligencia.
 
+<br>
 <div align="center">
   <img src="assets/img/event-storming/wellbeing-monitoring.png" alt="Wellbeing Monitoring - Bounded Context" width="700"/>
+  <br/><i>Imagen 13. Wellbeing Monitoring - Bounded Context Core identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
-**Alerts & Safety - Core** <br>
+### Alerts & Safety - Core <br>
 Es la garantía de tranquilidad que sostiene la decisión de compra del familiar a distancia. Sin una respuesta confiable ante inactividad o emergencia, el resto de la propuesta de valor pierde sustento, porque el familiar seguiría necesitando de llamar por su cuenta ante cualquier duda.
 
+<br>
 <div align="center">
   <img src="assets/img/event-storming/alerts-and-safety.png" alt="Alerts & Safety - Bounded Context" width="700"/>
+  <br/><i>Imagen 14. Alerts & Safety - Bounded Context Core identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
-**Care Circle - Supporting** <br>
+### Care Circle - Supporting <br>
 No genera valor por sí solo, pero es indispensable para que el core opere: sin un vínculo familiar establecido no hay a quién notificar ni con quién compartir el estado del adulto mayor. Se mantiene separado del core porque administra estructura de relación (vínculos, turnos, notas compartidas), no interpretación de bienestar.
 
+<br>
 <div align="center">
   <img src="assets/img/event-storming/care-circle.png" alt="Care Circle - Bounded Context" width="700"/>
+  <br/><i>Imagen 15. Care Circle - Bounded Context Supporting identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
-**Social Companionship - Supporting** <br>
+### Social Companionship - Supporting <br>
 Complementa la experiencia de acompañamiento con mensajería de audio, fotos y recordatorios sociales, pero ninguno de sus eventos produce una señal que el sistema evalúe ni deriva en alerta. Aporta valor percibido, no valor operativo.
 
+<br>
 <div align="center">
   <img src="assets/img/event-storming/social-companionship.png" alt="Social Companionship - Bounded Context" width="700"/>
+  <br/><i>Imagen 16. Social Companionship - Bounded Context Supporting identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
-**Identity & Access - Generic** <br>
+### Identity & Access - Generic <br>
 Resuelve un problema estándar (registro, autenticación, gestión de sesión) con reglas de negocio genéricas que no cambian por ser Serenia. Es indispensable para que exista cualquier otro contexto, pero no distingue a Serenia de ninguna otra aplicación.
 
+<br>
 <div align="center">
   <img src="assets/img/event-storming/identity-and-access-context.png" alt="IAM - Bounded Context" width="700"/>
+  <br/><i>Imagen 17. Identity & Access - Bounded Context Generic identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
-Al finalizar, el equipo aplicó una verificación del lenguaje ubicuo sobre cada frontera, comprobando que ningún término tuviera dos significados dentro de un mismo contexto. Esta revisión confirmó, por ejemplo, la separación entre Daily Check-in y Wellbeing Monitoring. Otra discusión del equipo fue la frontera entre Daily Check-in y Social Companionship, por compartir ambos la dimensión emocional de la interacción; se resolvió mantenerlas separadas sobre la base de que únicamente el check-on produce una señal que el sistema evalúa, mientras que el acompañamiento social no está sujeto a ninguna evaluación.
+Al finalizar, el equipo aplicó una verificación del lenguaje ubicuo sobre cada frontera, comprobando que ningún término tuviera dos significados dentro de un mismo contexto. Esta revisión confirmó, por ejemplo, la separación entre Daily Check-in y Wellbeing Monitoring. Otra discusión del equipo fue la frontera entre Daily Check-in y Social Companionship, por compartir ambos la dimensión emocional de la interacción; se resolvió mantenerlas separadas sobre la base de que únicamente el check-in produce una señal que el sistema evalúa, mientras que el acompañamiento social no está sujeto a ninguna evaluación.
 
-**EventStorming Serenia**
+## EventStorming Serenia
 
+<br>
 <div align="center">
   <img src="assets/img/event-storming/event-storming-serenia.png" alt="EventStorming - Serenia" width="700"/>
+  <br/><i>Imagen 18. Candidate Context Discovery completo del dominio de Serenia.</i>
 </div>
 
 <br>
@@ -3127,9 +3147,14 @@ La selección de escenarios no buscó cobertura funcional completa, sino aquello
 
 Este escenario resuelve el caso en que un adulto mayor se registra en Serenia y habilita a un familiar a distancia para acceder a su estado. Es la historia que da origen a toda relación posterior en el sistema: sin un vínculo familiar establecido, ningún otro flujo puede ejecutarse.
 
+<br>
+
 <div align="center">
   <img src="assets/img/domain-message-flows-modeling/domain-story-1.png" alt="Domain Story 1" width="700"/>
-</div> 
+  <br/><i>Imagen 19. Domain Story 1 - Registro y vinculación familiar.</i>
+</div>
+
+<br>
 
 El adulto mayor crea su cuenta en Identity & Access (1), el cual comunica la identidad registrada a Care Circle (2). Care Circle genera entonces un código de invitación y lo entrega al adulto mayor (3), quien se lo transmite al familiar a distancia por un medio ajeno al sistema (4). El familiar crea su propia cuenta en Identity & Access (5), ingresa el código de invitación en Care Circle (6) y recibe la confirmación del vínculo familiar establecido (7).
 
@@ -3139,9 +3164,13 @@ El adulto mayor crea su cuenta en Identity & Access (1), el cual comunica la ide
 
 Este escenario representa la operación cotidiana de Serenia y el caso de uso que sostiene su propuesta de valor: el adulto mayor comunica su bienestar sin necesidad de una llamada, y el familiar a distancia lo verifica sin necesidad de interrumpirlo.
 
+<br>
+
 <div align="center">
   <img src="assets/img/domain-message-flows-modeling/domain-story-2.png" alt="Domain Story 2" width="700"/>
-</div> 
+  <br/><i>Imagen 20. Domain Story 2 - Check-in diario y consulta del estado.</i>
+</div>
+<br>
 
 Daily Check-in envía la pregunta diaria al adulto mayor (1), quien responde el check-in (2). Daily Check-in comunica entonces el check-in registrado a Wellbeing Monitoring (3), que lo incorpora al historial del adulto mayor. Posteriormente, el familiar a distancia consulta el resumen de estado (4) y Wellbeing Monitoring se lo muestra (5).
 
@@ -3151,9 +3180,13 @@ Daily Check-in envía la pregunta diaria al adulto mayor (1), quien responde el 
 
 Este escenario resuelve el caso en que el adulto mayor reporta malestar durante varios días consecutivos sin que ello constituya una emergencia. Es el flujo que distingue a Serenia de una aplicación de alertas reactivas, ya que actúa sobre una tendencia y no sobre un evento aislado.
 
+<br>
+
 <div align="center">
   <img src="assets/img/domain-message-flows-modeling/domain-story-3.png" alt="Domain Story 3" width="700"/>
-</div> 
+  <br/><i>Imagen 21. Domain Story 3 - Detección de un patrón de malestar.</i>
+</div>
+<br>
 
 Wellbeing Monitoring evalúa el historial de check-ins del adulto mayor (1) y, al identificar un patrón sostenido de malestar, lo comunica a Alerts and Safety (2). Este último clasifica la alerta de bienestar según su severidad (3), envía una sugerencia de acción al familiar a distancia (4) y registra la confirmación de atención por parte de este (5).
 
@@ -3206,7 +3239,7 @@ A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-
 <div align="center">
 
 ![Context Map - Serenia](assets/img/context-mapping/context-map.png)
-  <br/><i>Imagen 12. Context Mapping Diagram.</i>
+  <br/><i>Imagen 22. Context Mapping Diagram.</i>
 </div>
 
 **URL del tablero en Miro:** https://miro.com/app/board/uXjVHm8lGW8=/
@@ -3238,7 +3271,7 @@ En esta sección se presenta el *System Context Diagram*, primer nivel del C4 Mo
 <div align="center">
 
 ![System Context Diagram - Serenia](assets/img/software-architecture/context-diagram.png)
-  <br/><i>Imagen 13. System Context Diagram de Serenia.</i>
+  <br/><i>Imagen 23. System Context Diagram de Serenia.</i>
 
 </div>
 
@@ -3257,7 +3290,7 @@ En esta sección se presenta el *Container Diagram*, segundo nivel del C4 Model,
 <div align="center">
 
 ![Container Diagram - Serenia](assets/img/software-architecture/container-diagram.png)
-  <br/><i>Imagen 14. Container Diagram de Serenia.</i>
+  <br/><i>Imagen 24. Container Diagram de Serenia.</i>
 
 </div><br>
 
@@ -3270,7 +3303,7 @@ Como evidencia complementaria de esta organización modular, se presenta a conti
 <div align="center">
 
 ![Component Diagram - API REST de Serenia](assets/img/software-architecture/api-component.png)
-  <br/><i>Imagen 15. Component Diagram del contenedor API REST, organizado por bounded context.</i>
+  <br/><i>Imagen 25. Component Diagram del contenedor API REST, organizado por bounded context.</i>
 
 </div>
 
@@ -3286,7 +3319,7 @@ En esta sección se presenta el *Deployment Diagram*, el cual muestra la distrib
 <div align="center">
 
 ![Deployment Diagram - Serenia](assets/img/software-architecture/deployment-diagram.png)
-  <br/><i>Imagen 16. Deployment Diagram de Serenia.</i>
+  <br/><i>Imagen 26. Deployment Diagram de Serenia.</i>
 
 </div>
 <br>
