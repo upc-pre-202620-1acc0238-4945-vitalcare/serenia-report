@@ -3513,11 +3513,15 @@ Clases que resuelven el acceso a la base de datos y a los mecanismos técnicos d
 
 #### 2.6.1.5. Bounded Context Software Architecture Component Level Diagrams
 
-<br>
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Identity & Access, elaborado con la herramienta Structurizr. El diagrama descompone el módulo de identidad dentro del container API REST y muestra cómo sus componentes se distribuyen entre las cuatro capas del diseño táctico, respetando la regla de dependencia unidireccional hacia el dominio.
+
+El flujo de entrada llega desde la Aplicación Móvil hacia los dos componentes de la capa Interface: `UsersController`, que atiende el registro, la consulta de cuentas y las operaciones de perfil, y `SessionsController`, que atiende la autenticación y el cierre de sesión. Ambos delegan en la capa Application, donde `UserCommandService` resuelve las operaciones de escritura y `UserQueryService` las de lectura.
+
+En el centro del diagrama se ubica el aggregate `User`, junto con la entidad `Session` que contiene, los Commands y Queries que expresan las intenciones del contexto y los Domain Events que se publican al completarse cada operación. Alrededor del aggregate se muestran las abstracciones que el dominio declara y que ninguna capa superior implementa: `IUserRepository`, `IPasswordHashingService`, `ITokenService` e `IDomainEventPublisher`.
+
+La capa Infrastructure aparece en el extremo opuesto, con las implementaciones concretas de esas abstracciones: `UserRepository`, que persiste el aggregate sobre las tablas `users` y `sessions` apoyándose en `UserPersistenceMapper`; `BCryptPasswordHashingService`, encargado del cifrado y la verificación de credenciales; `JwtTokenService`, que emite los tokens de sesión y calcula su hash; y `DomainEventPublisherAdapter`, que publica los eventos de dominio dentro del monolito modular para que otros módulos reaccionen a ellos. Las flechas evidencian que las dependencias apuntan siempre hacia el dominio y que ningún componente de Interface accede directamente a la base de datos.
 
 #### 2.6.1.6. Bounded Context Software Architecture Code Level Diagrams
-
-<br>
 
 ##### 2.6.1.6.1. Bounded Context Domain Layer Class Diagrams
 
