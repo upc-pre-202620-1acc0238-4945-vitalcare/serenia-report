@@ -3777,7 +3777,88 @@ Clases que resuelven el acceso a la base de datos y a los mecanismos técnicos d
 
 ##### 2.6.2.6.2. Bounded Context Database Design Diagram
 
+El diagrama de base de datos presenta los objetos que permiten la persistencia del bounded context **Care Circle** sobre el motor MySQL. El contexto se materializa en cinco tablas que corresponden al aggregate root care_circles y a las entidades que este contiene: invitation_codes, family_links, care_shifts y shared_notes.
+
+**Tabla care_circles**
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | uuid | PK | Identificador único del círculo de cuidado. |
+| older_adult_id | uuid | NOT NULL, UNIQUE, FK → users.id | Adulto mayor dueño del círculo. Relación 1-1 con la cuenta. |
+| created_at | timestamp | NOT NULL | Fecha y hora de creación del círculo. |
+
+Esta tabla es el aggregate root del bounded context. Se crea automáticamente al registrar un adulto mayor y actúa como punto de entrada para todas las demás entidades del contexto. Incluye un índice único sobre `older_adult_id` que garantiza a nivel de base de datos que cada adulto mayor posee exactamente un círculo.
+
+***Tabla invitation_codes***
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | uuid | PK | Identificador único del código de invitación. |
+| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que da acceso este código. |
+| code | varchar(12) | NOT NULL, UNIQUE | Código alfanumérico en mayúscula (6-12 chars) compartido con el familiar. |
+| status | invitation_status | NOT NULL, DEFAULT 'PENDING' | Estado del código: pendiente, usado o expirado. |
+| created_at | timestamp | NOT NULL | Fecha y hora de generación del código. |
+| expires_at | timestamp | NOT NULL | Fecha y hora de vencimiento. Siempre posterior a created_at. |
+| used_at | timestamp | — | Momento en que fue canjeado. Nulo si status ≠ USED. |
+| used_by_user_id | uuid | FK → users.id | Familiar que redimió el código. Nulo si status ≠ USED. |
+
+La tabla incluye un índice único sobre `code` y un índice sobre `status` que optimiza la consulta de códigos vigentes.
+
+
+***Tabla family_links***
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | uuid | PK | Identificador único del vínculo familiar. |
+| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que pertenece el vínculo. |
+| relative_id | uuid | NOT NULL, FK → users.id | Familiar vinculado al círculo. |
+| invitation_code_id | uuid | NOT NULL, FK → invitation_codes.id | Código que originó el vínculo. Permite trazabilidad de auditoría. |
+| relationship_label | relationship_label | NOT NULL | Tipo de parentesco: hijo, hija, nieto, sobrino, etc. |
+| status | link_status | NOT NULL, DEFAULT 'ACTIVE' | Estado del vínculo: activo o revocado. |
+| linked_at | timestamp | NOT NULL | Momento en que se canjeó el código de invitación. |
+| revoked_at | timestamp | — | Momento de la revocación. Nulo si status = ACTIVE. |
+| revoked_by | uuid | FK → users.id | Actor que ejecutó la revocación. Nulo si status = ACTIVE. |
+
+Incluye un índice único compuesto sobre `(care_circle_id, relative_id)` que impide que un familiar se vincule más de una vez al mismo círculo, e índices sobre `relative_id` y `status` para optimizar las consultas frecuentes.
+
+***Tabla care_shifts***
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | uuid | PK | Identificador único del turno. |
+| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que pertenece el turno. |
+| relative_id | uuid | NOT NULL, FK → users.id | Familiar responsable del día. Se actualiza al reasignar. |
+| shift_date | date | NOT NULL | Día calendario en que el familiar está de turno. |
+| assigned_by | uuid | NOT NULL, FK → users.id | Familiar que realizó la última asignación o reasignación. |
+| created_at | timestamp | NOT NULL | Fecha y hora de la asignación inicial. |
+| updated_at | timestamp | NOT NULL | Fecha y hora de la última reasignación. Siempre ≥ created_at. |
+
+Incluye un índice único compuesto sobre `(care_circle_id, shift_date)` que garantiza que solo un familiar puede estar asignado por día dentro de un mismo círculo.
+
+***Tabla shared_notes***
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | uuid | PK | Identificador único de la nota. |
+| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que pertenece la nota. |
+| author_id | uuid | NOT NULL, FK → users.id | Familiar que redactó la nota. |
+| content | text | NOT NULL | Contenido de la nota. No puede ser texto vacío. |
+| created_at | timestamp | NOT NULL | Fecha y hora de creación de la nota. |
+| updated_at | timestamp | — | Fecha y hora de la última edición. Nulo si nunca fue editada. |
+
+Incluye índices sobre `care_circle_id` y `author_id` que optimizan la consulta de notas por círculo y por autor respectivamente.
+
+***Relaciones entre tablas***
+
+`care_circles` se relaciona de uno a muchos con `invitation_codes`, `family_links`, `care_shifts` y `shared_notes`: un círculo puede contener varios registros de cada tipo, mientras que cada registro pertenece obligatoriamente a un único círculo. A su vez, `family_links` referencia a `invitation_codes` mediante `invitation_code_id`, registrando el código exacto que originó cada vínculo. Las columnas `relative_id`, `used_by_user_id`, `revoked_by`, `assigned_by` y `author_id` referencian a `users`, que es la tabla del bounded context Identity & Access y actúa como referencia externa en este contexto.
+
 <br>
+
+<div align="center">
+
+![Database Design Diagram -Care Circle](assets/img/bounded-context/care-circle/care-circle-database.png)
+  <br/><i>Imagen X. Database Design Diagram del Bounded Context Care Circle.</i>
+
 
 ### 2.6.3. Bounded Context: Daily Check-in
 
