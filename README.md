@@ -4138,9 +4138,6 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 <br>
 
 # Conclusiones
-
-<br>
-
 ## Conclusiones y Recomendaciones
 
 <br>
@@ -4172,4 +4169,6 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 
 # Anexos
 
-<br>
+URL de la organización (Serenia):  [Organización Serenia](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare)
+
+URL del repositorio (Report):  [Repositorio Reporte](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-report)
