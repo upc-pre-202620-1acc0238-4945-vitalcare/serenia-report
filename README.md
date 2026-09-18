@@ -3708,6 +3708,20 @@ Los Resources representan los datos que entran o salen de la API, sin exponer di
 
 #### 2.6.2.3. Application Layer
 
+Clases que orquestan los flujos del contexto, coordinando los aggregates, los repositorios y la publicación de eventos de dominio.
+
+**Sub-capa Internal - CommandServices**
+
+| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
+|---|---|---|
+| **CareCircleCommandService** | Ejecuta los comandos del contexto relacionados con la creación y gestión del Care Circle, generación y canje de códigos de invitación, establecimiento y revocación de vínculos familiares, asignación y reasignación de turnos de cuidado, y creación y edición de notas compartidas. Valida las reglas de negocio, invoca los métodos de los aggregates, persiste los cambios y publica los eventos de dominio correspondientes. | Implementa ICareCircleCommandService; usa ICareCircleRepository, IFamilyLinkRepository, ICareShiftRepository, ISharedNoteRepository e IDomainEventPublisher. |
+
+**Sub-capa Internal - QueryServices**
+
+| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
+|---|---|---|
+| **CareCircleQueryService** | Resuelve las consultas de los Care Circle, sus miembros, vínculos familiares, turnos de cuidado y notas compartidas, devolviendo la información necesaria para las vistas sin modificar el estado del dominio. | Implementa ICareCircleQueryService; usa ICareCircleRepository, IFamilyLinkRepository, ICareShiftRepository e ISharedNoteRepository. |
+
 <br>
 
 #### 2.6.2.4 Infrastructure Layer
