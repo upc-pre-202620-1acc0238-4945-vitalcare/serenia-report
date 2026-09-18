@@ -3530,9 +3530,17 @@ La capa Infrastructure aparece en el extremo opuesto, con las implementaciones c
 
 #### 2.6.1.6. Bounded Context Software Architecture Code Level Diagrams
 
+En esta sección se presentan los diagramas de mayor nivel de detalle sobre la implementación del bounded context Identity & Access. Se incluye el diagrama de clases de la capa Domain y el diagrama de diseño de base de datos correspondiente a las tablas que dan persistencia al aggregate.
+
 ##### 2.6.1.6.1. Bounded Context Domain Layer Class Diagrams
 
-<br>
+El diagrama de clases representa la capa Domain del bounded context Identity & Access, elaborado con la herramienta UML correspondiente. En él se muestran las clases, interfaces y enumeraciones del dominio junto con sus atributos, métodos y el scope de cada miembro.
+
+El elemento central es `User`, el aggregate root del contexto. Sus atributos son privados y solo se modifican a través de sus métodos públicos, lo que garantiza que ninguna regla de identidad pueda vulnerarse desde fuera del aggregate. `User` mantiene una relación de composición con `Session`, con multiplicidad 1 a 0..*: una cuenta puede tener varias sesiones a lo largo del tiempo y ninguna sesión existe de forma independiente de la cuenta que la originó. Por ello, la apertura y la revocación de sesiones se realizan mediante los métodos `openSession` y `closeSession` del aggregate, y no sobre la entidad directamente.
+
+Los value objects aparecen relacionados con `User` y con `Session` por composición, cada uno con multiplicidad 1, salvo aquellos que corresponden a datos opcionales de la cuenta. Estos tipos encapsulan las validaciones de formato y evitan la obsesión por primitivos: el dominio nunca maneja un correo, una contraseña o un token como cadenas simples. Las enumeraciones `UserRole` y `AccountStatus` se asocian también a `User` con multiplicidad 1, y expresan respectivamente el rol inmutable definido en el registro y el estado del ciclo de vida de la cuenta.
+
+El diagrama incluye además los Commands y Queries que expresan las intenciones de escritura y lectura del contexto, y los Domain Events que el aggregate registra al completarse cada operación. Finalmente se muestran las abstracciones declaradas por el dominio: `IUserRepository`, que define el contrato de persistencia del aggregate; `IUserCommandService` e `IUserQueryService`, que definen las operaciones de escritura y lectura; e `IPasswordHashingService`, `ITokenService` e `IDomainEventPublisher`, que aíslan al dominio de los mecanismos técnicos de cifrado, emisión de tokens y publicación de eventos. Ninguna de estas interfaces depende de las capas superiores, de modo que las dependencias apuntan siempre hacia el dominio.
 
 ##### 2.6.1.6.2. Bounded Context Database Design Diagram
 
