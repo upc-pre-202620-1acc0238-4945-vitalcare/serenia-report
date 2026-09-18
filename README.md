@@ -3542,6 +3542,13 @@ Los value objects aparecen relacionados con `User` y con `Session` por composici
 
 El diagrama incluye además los Commands y Queries que expresan las intenciones de escritura y lectura del contexto, y los Domain Events que el aggregate registra al completarse cada operación. Finalmente se muestran las abstracciones declaradas por el dominio: `IUserRepository`, que define el contrato de persistencia del aggregate; `IUserCommandService` e `IUserQueryService`, que definen las operaciones de escritura y lectura; e `IPasswordHashingService`, `ITokenService` e `IDomainEventPublisher`, que aíslan al dominio de los mecanismos técnicos de cifrado, emisión de tokens y publicación de eventos. Ninguna de estas interfaces depende de las capas superiores, de modo que las dependencias apuntan siempre hacia el dominio.
 
+<div align="center">
+
+![Domain Layer Class Diagram - Identity and Access](assets/img/bounded-context/identity-and-access/IdentityAndAccessDomainLayer.png)
+  <br/><i>Imagen X. Domain Layer Class Diagram del Bounded Context Identity and Access.</i>
+
+</div>
+
 ##### 2.6.1.6.2. Bounded Context Database Design Diagram
 
 <br>
