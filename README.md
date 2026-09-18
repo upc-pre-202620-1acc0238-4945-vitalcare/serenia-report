@@ -3521,6 +3521,13 @@ En el centro del diagrama se ubica el aggregate `User`, junto con la entidad `Se
 
 La capa Infrastructure aparece en el extremo opuesto, con las implementaciones concretas de esas abstracciones: `UserRepository`, que persiste el aggregate sobre las tablas `users` y `sessions` apoyándose en `UserPersistenceMapper`; `BCryptPasswordHashingService`, encargado del cifrado y la verificación de credenciales; `JwtTokenService`, que emite los tokens de sesión y calcula su hash; y `DomainEventPublisherAdapter`, que publica los eventos de dominio dentro del monolito modular para que otros módulos reaccionen a ellos. Las flechas evidencian que las dependencias apuntan siempre hacia el dominio y que ningún componente de Interface accede directamente a la base de datos.
 
+<div align="center">
+
+![Component Diagram - Identity and Access](assets/img/bounded-context/identity-and-access/identity-and-access-c4.png)
+  <br/><i>Imagen X. Component Diagram del Bounded Context Identity and Access.</i>
+
+</div>
+
 #### 2.6.1.6. Bounded Context Software Architecture Code Level Diagrams
 
 ##### 2.6.1.6.1. Bounded Context Domain Layer Class Diagrams
