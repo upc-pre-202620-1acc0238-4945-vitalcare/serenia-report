@@ -188,9 +188,6 @@ URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vi
         - [2.6.6.6.2. Bounded Context Database Design Diagram](#26662-bounded-context-database-design-diagram)
 - [Conclusiones](#conclusiones)
   - [Conclusiones y Recomendaciones](#conclusionesyrecomendaciones)
-  - [Video App Validation](#video-app-validation)
-  - [Video About the product](#video-about-the-product)
-  - [Video About the team](#video-about-the-team)
 - [Glosario](#glosario)
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
@@ -4145,18 +4142,6 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 <br>
 
 ## Conclusiones y Recomendaciones
-
-<br>
-
-## Video App Validation
-
-<br>
-
-## Video About the product
-
-<br>
-
-## Video About the team
 
 <br>
 
