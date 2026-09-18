@@ -3657,6 +3657,52 @@ Existe una relación de uno a muchos entre `users` y `sessions`: una cuenta pued
 <br>
 
 #### 2.6.2.2. Interface Layer
+Clases que exponen el bounded context hacia el exterior y traducen las peticiones entrantes al lenguaje del dominio.
+
+**Sub-capa Rest - Controllers**
+
+| **Nombre** | **Endpoints** | **Descripción** |
+|---|---|---|
+| **CareCirclesController** | POST /care-circles <br> GET /care-circles/{id} | Punto de entrada para la creación y consulta de un círculo de cuidado. Delega en los servicios de comandos y consultas correspondientes. |
+| **FamilyLinksController** | POST /care-circles/{id}/invitation-code <br> POST /family-links/redeem <br> DELETE /care-circles/{id}/family-links/{userId} | Punto de entrada para generar códigos de invitación, establecer vínculos familiares mediante el canje de invitaciones y revocar vínculos existentes. |
+| **CareShiftsController** | POST /care-circles/{id}/shifts <br> PUT /care-circles/{id}/shifts/{shiftId} | Punto de entrada para la asignación y reasignación de turnos de cuidado dentro de un Care Circle. |
+| **SharedNotesController** | POST /care-circles/{id}/shared-notes <br>PUT /care-circles/{id}/shared-notes/{noteId} | Punto de entrada para crear y editar notas compartidas entre los miembros del Care Circle. |
+
+**Sub-capa Rest - Resources**
+
+Los Resources representan los datos que entran o salen de la API, sin exponer directamente las entidades o agregados del dominio.
+
+| **Nombre** | **Descripción** |
+|---|---|
+| **CreateCareCircleResource** | Datos de entrada necesarios para crear un nuevo Care Circle. |
+| **CareCircleResource** | Representación pública de un Care Circle y su información relevante para los usuarios. |
+| **GenerateInvitationCodeResource** | Datos necesarios para solicitar la generación de un código de invitación para incorporar un familiar al Care Circle. |
+| **InvitationCodeResource** | Representación del código de invitación generado y la información asociada a su vigencia. |
+| **RedeemInvitationCodeResource** | Código de invitación enviado por un usuario para solicitar su incorporación al Care Circle. |
+| **FamilyLinkResource** | Representación de un vínculo familiar establecido entre un miembro y el Care Circle. |
+| **AssignCareShiftResource** | Datos de entrada necesarios para asignar un turno de cuidado a un miembro del Care Circle. |
+| **CareShiftResource** | Representación de un turno de cuidado asignado dentro del Care Circle. |
+| **ReassignCareShiftResource** | Datos necesarios para modificar el miembro responsable de un turno de cuidado existente. |
+| **CreateSharedNoteResource** | Datos de entrada para crear una nota compartida dentro del Care Circle. |
+| **SharedNoteResource** | Representación de una nota compartida y sus datos relevantes. |
+| **EditSharedNoteResource** | Datos de entrada para modificar el contenido de una nota compartida existente. |
+
+**Sub-Capa Rest - Transform**
+
+| **Nombre** | **Descripción** |
+|---|---|
+| **CareCircleResourceFromEntityAssembler** | Convierte el aggregate CareCircle en su representación REST. |
+| **FamilyLinkResourceFromEntityAssembler** | Convierte la entidad FamilyLink en su representación REST. |
+| **CareShiftResourceFromEntityAssembler** | Convierte la entidad CareShift en su representación REST. |
+| **SharedNoteResourceFromEntityAssembler** | Convierte la entidad SharedNote en su representación REST. |
+| **CreateCareCircleCommandFromResourceAssembler** | Convierte la petición de creación del Care Circle en el comando correspondiente. |
+| **GenerateInvitationCodeCommandFromResourceAssembler** | Convierte la petición de generación de código de invitación en el comando correspondiente. |
+| **RedeemInvitationCodeCommandFromResourceAssembler** | Convierte el código recibido en el comando para canjear la invitación. |
+| **RevokeFamilyLinkCommandFromResourceAssembler** | Convierte la petición de revocación de un vínculo familiar en su comando correspondiente. |
+| **AssignCareShiftCommandFromResourceAssembler** | Convierte la petición de asignación de un turno en el comando correspondiente. |
+| **ReassignCareShiftCommandFromResourceAssembler** | Convierte la petición de reasignación de un turno en el comando correspondiente. |
+| **CreateSharedNoteCommandFromResourceAssembler** | Convierte la petición de creación de una nota compartida en el comando correspondiente. |
+| **EditSharedNoteCommandFromResourceAssembler** | Convierte la petición de edición de una nota compartida en el comando correspondiente. |
 
 <br>
 
