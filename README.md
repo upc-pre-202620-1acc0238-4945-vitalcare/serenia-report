@@ -81,6 +81,11 @@ Los mensajes de commit siguieron la convención `docs:` para la redacción de se
 
 La distribución del trabajo se coordinó en ClickUp, donde cada sección del Capítulo I y II se registró como una tarea con la descripción tomada del enunciado del curso, mientras que las User Stories y el Sprint Backlog oficiales se gestionaron en Trello.
 
+<p align="center">
+  <img src="assets/img/project-report-collaboration-insights/insights-av1.png" alt="AV1 Insights" width="900"/>
+    <br/><i>Imagen X. Insights de la Primera Entrega (AV1)</i>
+</p>
+
 <br>
 
 ---
