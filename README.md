@@ -4204,6 +4204,30 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 
 # Glosario
 
+- **ACL (Anti-Corruption Layer):** Capa de traducción que aísla el modelo de dominio de los modelos externos (DTOs de red o de base de datos local), evitando que estructuras ajenas al negocio contaminen las capas superiores.
+- **Aggregate root:** Entidad raíz dentro de un bounded context que controla la consistencia interna del conjunto de objetos que agrupa; ninguna entidad interna debe modificarse sin pasar por ella.
+- **Big Picture Event Storming:** Técnica colaborativa de exploración de dominio en la que el equipo mapea eventos significativos del negocio y sus relaciones para obtener una visión general de alto nivel.
+- **Bounded Context:** Límite explícito dentro del cual un modelo de dominio y su lenguaje ubicuo tienen un significado consistente y sin ambigüedad.
+- **Clean Architecture:** Estilo arquitectónico que organiza el código en capas concéntricas (dominio, aplicación, infraestructura, presentación) donde las dependencias siempre apuntan hacia el núcleo del negocio.
+- **Dependency Injection (DI):** Patrón mediante el cual las dependencias de un objeto se proveen externamente en lugar de ser instanciadas internamente, facilitando pruebas y desacoplamiento.
+- **Design Thinking:** Metodología centrada en el usuario que guía el proceso de identificación de necesidades y generación de soluciones a través de fases de empatía, definición, ideación, prototipado y validación.
+- **Domain layer:** Capa central de la arquitectura que contiene las reglas de negocio puras, sin dependencias de frameworks externos.
+- **DTO (Data Transfer Object):** Estructura de datos usada para transportar información entre capas o servicios, sin lógica de negocio.
+- **Empathy Map:** Artefacto visual que organiza las observaciones del equipo sobre un User Persona (qué dice, piensa, siente, hace) para identificar necesidades y puntos de dolor.
+- **i18n (Internationalization):** Práctica de diseñar una aplicación para que pueda adaptarse a distintos idiomas y regiones sin cambios estructurales en el código.
+- **Jetpack Compose:** Framework declarativo de UI para Android usado en la capa de presentación para construir pantallas y componentes reutilizables.
+- **Kotlin Multiplatform (KMP):** Tecnología que permite compartir código Kotlin entre distintas plataformas (Android e iOS), usada para la app complementaria de familiares.
+- **Needfinding:** Fase del proceso de Design Thinking dedicada a la investigación y análisis de las necesidades reales de los usuarios mediante entrevistas y artefactos de análisis.
+- **Product Backlog:** Lista priorizada de funcionalidades, historias de usuario y mejoras pendientes de un proyecto.
+- **Repository (interfaz):** Contrato que define las operaciones de lectura/escritura sobre entidades del dominio, sin exponer detalles de la implementación.
+- **Retrofit:** Librería de Android para consumir servicios web REST, usada en la capa de infraestructura para las llamadas de red.
+- **Sprint:** Ciclo de tiempo fijo en el que un equipo Scrum desarrolla un incremento de producto.
+- **Use Case / Interactor:** Componente de la capa de aplicación que representa una acción específica del usuario, orquestando las reglas del dominio para cumplirla.
+- **User Journey Map:** Representación visual del recorrido end-to-end de un usuario al interactuar con un producto o servicio.
+- **User Persona:** Arquetipo ficticio que representa a un segmento de usuarios, construido a partir de datos demográficos, conductuales y de entrevistas.
+- **Value Object:** Tipo inmutable que encapsula validaciones y no tiene identidad propia; dos instancias con los mismos valores se consideran iguales.
+- **ViewModel:** Componente de la capa de presentación que captura interacciones del usuario, invoca casos de uso y expone el estado de la UI de forma inmutable.
+
 <br>
 
 # Bibliografía
