@@ -3817,123 +3817,237 @@ Clases que resuelven el acceso a la base de datos y a los mecanismos técnicos d
 
 ### 2.6.4. Bounded Context: Wellbeing Monitoring
 
-El bounded context **Wellbeing Monitoring** es responsable de interpretar el historial de check-ins registrados por el módulo **Daily Check-in** para generar un **Wellbeing Insight** del adulto mayor: detectar si existe un patrón de incomodidad sostenido (*Discomfort Pattern Detected*) o una mejora en la tendencia de bienestar (*Wellbeing Trend Improved*), y reaccionar en consecuencia emitiendo una sugerencia de bienestar (*Wellbeing Suggestion*) o registrando un pequeño logro (*Small Win*) para el cuidador a distancia. El diseño táctico presentado a continuación está alineado directamente con los eventos de dominio levantados en la sesión de EventStorming del bounded context (ver imagen).
+El bounded context **Wellbeing Monitoring** es responsable de interpretar los check-ins registrados por el módulo **Daily Check-in** para producir el estado de bienestar del adulto mayor: registra cada estado de ánimo derivado de un check-in respondido (`WellbeingEntry`), genera el resumen diario que ve el cuidador a distancia (`StatusSummary`), detecta patrones sostenidos de malestar o de mejora en la tendencia (`WellbeingPattern`) y registra pequeños logros (`SmallWin`) cuando corresponde. A diferencia de otros contextos, no mantiene un agregado único: cada uno de estos cuatro conceptos es una raíz de agregado independiente, alineada 1 a 1 con las tablas `wellbeing_entries`, `status_summaries`, `small_wins` y `wellbeing_patterns` del diseño de base de datos oficial del equipo. El diseño táctico presentado a continuación está alineado directamente con los eventos de dominio levantados en la sesión de EventStorming del bounded context (ver imagen).
 
 <br>
 
 #### 2.6.4.1. Domain Layer
 
-**Sub-capa Model - Aggregates:**
+En esta capa se representan las reglas de negocio propias del bienestar del adulto mayor, sin dependencia de frameworks de persistencia, red ni interfaz.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Aggregate | WellbeingInsight | Entidad que representa la interpretación acumulada del bienestar de un adulto mayor, incluyendo el patrón de incomodidad o mejora de tendencia detectado más recientemente | Ser el punto de entrada para evaluar el historial de check-ins y mantener la integridad del estado de bienestar como entidad del dominio | Relacionado con el bounded context Daily Check-in (origen del historial de check-ins) y Alerts and Safety (destino de las sugerencias de bienestar emitidas) |
+**Sub-capa Model — Aggregates**
 
-<br>
+`WellbeingEntry` (Aggregate Root): representa el registro del estado de ánimo del adulto mayor derivado de un check-in respondido.
 
-**Sub-capa Model - Commands:**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | WellbeingEntryId | private | Identificador único del registro de bienestar. |
+| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el registro. |
+| checkInId | CheckInId | private | Identificador del check-in del cual se derivó este registro. |
+| mood | MoodLevel | private | Nivel de ánimo reportado en el check-in. |
+| moodScore | MoodScore | private | Puntaje numérico asociado al nivel de ánimo reportado. |
+| recordedAt | LocalDateTime | private | Fecha y hora en que se registró el estado de ánimo. |
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Command | EvaluateWellbeingPatternCommand | Comando para evaluar el patrón de bienestar de un adulto mayor (evento de dominio *Evaluate Wellbeing Pattern*) | Representar la intención de analizar el historial de check-ins disponible y determinar si corresponde un *Discomfort Pattern Detected* o un *Wellbeing Trend Improved* | Usado en la implementación del servicio de comandos de bienestar |
-| Command | IssueWellbeingSuggestionCommand | Comando para emitir una sugerencia de bienestar (evento de dominio *Issue Wellbeing Suggestion*) | Representar la intención de emitir una sugerencia de bienestar cuando `EvaluateWellbeingPatternCommand` detecta un patrón de incomodidad | Usado en la implementación del servicio de comandos de bienestar |
-| Command | RecordSmallWinCommand | Comando para registrar un pequeño logro (evento de dominio *Record Small Win*) | Representar la intención de registrar un pequeño logro cuando `EvaluateWellbeingPatternCommand` detecta una mejora en la tendencia de bienestar | Usado en la implementación del servicio de comandos de bienestar |
-| Command | DismissWellbeingSuggestionCommand | Comando para descartar una sugerencia de bienestar (evento de dominio *Dismiss Wellbeing Suggestion*) | Representar la intención del cuidador a distancia de descartar una sugerencia de bienestar previamente emitida | Usado en la implementación del servicio de comandos de bienestar |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| recordFrom(checkInId, olderAdultId, mood, moodScore) | public (static) | Crea un nuevo registro de bienestar a partir de un check-in respondido. |
+| moodValue() | public | Devuelve el nivel de ánimo registrado. |
 
-<br>
+`WellbeingPattern` (Aggregate Root): representa un patrón detectado en el historial de check-ins de un adulto mayor, de malestar sostenido o de mejora en la tendencia de bienestar.
 
-**Sub-capa Model - Queries:**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | WellbeingPatternId | private | Identificador único del patrón detectado. |
+| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el patrón. |
+| type | PatternType | private | Tipo de patrón detectado: malestar sostenido o mejora. |
+| consecutiveDays | Integer | private | Cantidad de días consecutivos que sostienen el patrón. |
+| startDate | LocalDate | private | Fecha de inicio del periodo evaluado. |
+| endDate | LocalDate | private | Fecha de fin del periodo evaluado. |
+| detectedAt | LocalDateTime | private | Fecha y hora en que se detectó el patrón. |
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Query | GetWellbeingInsightByOlderAdultIdQuery | Consulta para obtener el wellbeing insight por identificador del adulto mayor | Representar la intención de obtener el estado de bienestar actual de un adulto mayor específico | Usado en la implementación del servicio de consultas |
-| Query | GetWellbeingSuggestionsViewQuery | Consulta para obtener la vista de sugerencias de bienestar (evento de dominio *Wellbeing Suggestions View*) | Representar la intención del cuidador a distancia de visualizar las sugerencias de bienestar vigentes de un adulto mayor | Usado en la implementación del servicio de consultas |
-| Query | GetWellbeingTrendHistoryQuery | Consulta para obtener el historial de tendencias de bienestar | Representar la intención de obtener las tendencias calculadas para un adulto mayor en un rango de periodos | Usado en la implementación del servicio de consultas |
-| Query | GetAllWellbeingInsightsQuery | Consulta para obtener todos los wellbeing insights | Representar la intención de obtener la lista completa de wellbeing insights registrados | Usado en la implementación del servicio de consultas |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| detect(olderAdultId, type, consecutiveDays, startDate, endDate) | public (static) | Crea un nuevo patrón a partir del análisis del historial de check-ins. |
+| isDiscomfort() | public | Indica si el patrón corresponde a malestar sostenido. |
+| isImprovement() | public | Indica si el patrón corresponde a una mejora de tendencia. |
 
-<br>
+`SmallWin` (Aggregate Root): representa un pequeño logro del adulto mayor, generado a partir de una mejora detectada en su tendencia de bienestar y compartido con el cuidador a distancia.
 
-**Sub-capa Repositories:**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | SmallWinId | private | Identificador único del pequeño logro. |
+| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el logro. |
+| checkInId | CheckInId | private | Identificador del check-in del cual se derivó el logro, cuando aplica. |
+| description | SmallWinDescription | private | Descripción del pequeño logro. |
+| recordedAt | LocalDateTime | private | Fecha y hora en que se registró el logro. |
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Interface | IWellbeingInsightRepository | Repositorio para operaciones de persistencia del modelo WellbeingInsight | Definir contratos para operaciones CRUD sobre los wellbeing insights | Implementado en la capa de Infrastructure |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| recordFrom(olderAdultId, checkInId, description) | public (static) | Crea un nuevo pequeño logro a partir de una mejora detectada. |
 
-<br>
+`StatusSummary` (Aggregate Root): representa el resumen diario del estado del adulto mayor, mostrado al cuidador a distancia como una vista consolidada del día.
 
-**Sub-capa Services:**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | StatusSummaryId | private | Identificador único del resumen. |
+| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el resumen. |
+| summaryDate | LocalDate | private | Fecha a la que corresponde el resumen. |
+| mood | MoodLevel | private | Estado de ánimo predominante del día resumido. |
+| hasAnswered | Boolean | private | Indica si el adulto mayor respondió su check-in ese día. |
+| highlight | String | private | Dato destacado del día, mostrado al cuidador a distancia. |
+| generatedAt | LocalDateTime | private | Fecha y hora en que se generó el resumen. |
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Interface | IWellbeingCommandService | Servicio para métodos de comandos de bienestar | Estipular una estructura clara a seguir para operaciones de escritura (evaluación de patrones, emisión de sugerencias, registro de logros) | Usado en la capa "Application" para implementar los métodos dados |
-| Interface | IWellbeingQueryService | Servicio para métodos de consulta de bienestar | Estipular una estructura clara a seguir para operaciones de lectura | Usado en la capa "Application" para la implementación de los métodos |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| generateFor(olderAdultId, summaryDate, mood, hasAnswered, highlight) | public (static) | Genera o actualiza el resumen diario de un adulto mayor. |
+
+**Sub-capa Model — Value Objects**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| WellbeingEntryId | value: UUID | Identidad inmutable de un registro de bienestar. |
+| WellbeingPatternId | value: UUID | Identidad inmutable de un patrón detectado. |
+| SmallWinId | value: UUID | Identidad inmutable de un pequeño logro. |
+| StatusSummaryId | value: UUID | Identidad inmutable de un resumen diario. |
+| MoodScore | value: Integer | Puntaje numérico de bienestar, validado dentro de un rango permitido. |
+| SmallWinDescription | value: String | Descripción del pequeño logro, con validación de longitud máxima. |
+
+**Sub-capa Model — Enumerations**
+
+| Nombre | Valores | Descripción |
+| --- | --- | --- |
+| MoodLevel | VERY_LOW, LOW, NEUTRAL, GOOD, VERY_GOOD | Nivel de ánimo reportado en un check-in. |
+| PatternType | SUSTAINED_DISCOMFORT, IMPROVEMENT | Tipo de patrón detectado en el historial de check-ins de un adulto mayor. |
+
+**Sub-capa Model — Commands**
+
+| Nombre | Descripción |
+| --- | --- |
+| RecordWellbeingEntryCommand | Intención de registrar el estado de ánimo derivado de un check-in respondido. |
+| DetectWellbeingPatternCommand | Intención de analizar el historial de check-ins de un adulto mayor y determinar si existe un patrón de malestar sostenido o de mejora. |
+| RecordSmallWinCommand | Intención de registrar un pequeño logro a partir de una mejora detectada. |
+| GenerateStatusSummaryCommand | Intención de generar o actualizar el resumen diario del estado de un adulto mayor. |
+
+**Sub-capa Model — Queries**
+
+| Nombre | Descripción |
+| --- | --- |
+| GetWellbeingEntriesByOlderAdultIdQuery | Consulta del historial de registros de bienestar de un adulto mayor. |
+| GetWellbeingPatternsByOlderAdultIdQuery | Consulta de los patrones detectados para un adulto mayor. |
+| GetSmallWinsByOlderAdultIdQuery | Consulta de los pequeños logros registrados para un adulto mayor. |
+| GetStatusSummaryByDateQuery | Consulta del resumen diario de un adulto mayor en una fecha específica. |
+| GetLatestStatusSummaryQuery | Consulta del resumen diario más reciente de un adulto mayor. |
+
+**Sub-capa Model — Events**
+
+| Nombre | Descripción |
+| --- | --- |
+| WellbeingEntryRecorded | Se registró el estado de ánimo derivado de un check-in respondido. |
+| SustainedDiscomfortPatternDetected | Se detectó un patrón de malestar sostenido en el historial de check-ins. |
+| WellbeingImprovementPatternDetected | Se detectó una mejora en la tendencia de bienestar. |
+| SmallWinRecorded | Se registró un pequeño logro del adulto mayor. |
+| StatusSummaryGenerated | Se generó o actualizó el resumen diario del estado de un adulto mayor. |
+
+**Sub-capa Repositories**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | IWellbeingEntryRepository | save(entry), findById(id), findByOlderAdultId(olderAdultId), findByCheckInId(checkInId) | Contrato de persistencia del aggregate `WellbeingEntry`. Se implementa en Infrastructure. |
+| Interface | IWellbeingPatternRepository | save(pattern), findById(id), findByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `WellbeingPattern`. |
+| Interface | ISmallWinRepository | save(smallWin), findById(id), findByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `SmallWin`. |
+| Interface | IStatusSummaryRepository | save(summary), findByOlderAdultIdAndDate(olderAdultId, date), findLatestByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `StatusSummary`. |
+
+**Sub-capa Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | IWellbeingCommandService | handle(RecordWellbeingEntryCommand), handle(DetectWellbeingPatternCommand), handle(RecordSmallWinCommand), handle(GenerateStatusSummaryCommand) | Contrato de las operaciones de escritura del contexto. |
+| Interface | IWellbeingQueryService | handle(GetWellbeingEntriesByOlderAdultIdQuery), handle(GetWellbeingPatternsByOlderAdultIdQuery), handle(GetSmallWinsByOlderAdultIdQuery), handle(GetStatusSummaryByDateQuery), handle(GetLatestStatusSummaryQuery) | Contrato de las operaciones de lectura del contexto. |
+| Interface | IDomainEventPublisher | publish(event) | Abstracción para publicar los eventos de dominio hacia los demás módulos, compartida con los demás bounded contexts. |
 
 <br>
 
 #### 2.6.4.2. Interface Layer
 
-**Sub-capa REST - Resources:**
+Clases que exponen el bounded context hacia el exterior y traducen las peticiones entrantes al lenguaje del dominio.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Resource | WellbeingInsightResource | Estructura de datos de wellbeing insight para API | Representar y exponer datos del wellbeing insight de forma accesible y estructurada para el cliente | Usado en controladores para estructurar respuestas de wellbeing insight |
-| Resource | WellbeingSuggestionsViewResource | Estructura de datos de la vista de sugerencias de bienestar para API | Representar y exponer las sugerencias de bienestar vigentes de forma accesible para el cliente | Usado en controladores para estructurar la respuesta de `Wellbeing Suggestions View` |
-| Resource | WellbeingTrendResource | Estructura de datos de tendencia de bienestar para API | Representar y exponer una tendencia calculada de forma accesible para el cliente | Usado en controladores para estructurar respuestas de historial de tendencias |
-| Resource | DismissWellbeingSuggestionResource | Estructura de petición para descartar una sugerencia de bienestar | Representar datos necesarios para identificar y marcar como descartada una sugerencia de bienestar | Usado en controlador para procesar peticiones de descarte |
+**Sub-capa REST — Controllers**
 
-<br>
+| Nombre | Endpoints | Descripción |
+| --- | --- | --- |
+| WellbeingEntriesController | GET /wellbeing-entries?olderAdultId={id} | Punto de entrada de consulta del historial de registros de bienestar de un adulto mayor. |
+| WellbeingPatternsController | GET /wellbeing-patterns?olderAdultId={id} | Punto de entrada de consulta de los patrones detectados. |
+| SmallWinsController | GET /small-wins?olderAdultId={id}, POST /small-wins | Punto de entrada de consulta y registro manual de pequeños logros. |
+| StatusSummariesController | GET /status-summaries/latest?olderAdultId={id}, GET /status-summaries?olderAdultId={id}&date={date} | Punto de entrada de consulta del resumen diario del adulto mayor. |
 
-**Sub-capa REST - Transform:**
+**Sub-capa REST — Resources**
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Assembler | WellbeingInsightResourceFromEntityAssembler | Transformador de entidad WellbeingInsight a WellbeingInsightResource | Convertir la entidad del dominio a su representación REST correspondiente | Usado en controladores para transformar respuestas |
-| Assembler | WellbeingSuggestionsViewResourceFromEntityAssembler | Transformador del read model de sugerencias vigentes a WellbeingSuggestionsViewResource | Convertir el read model del dominio a su representación REST correspondiente | Usado en controladores para transformar la respuesta de `Wellbeing Suggestions View` |
-| Assembler | WellbeingTrendResourceFromEntityAssembler | Transformador de entidad WellbeingTrend a WellbeingTrendResource | Convertir la entidad del dominio a su representación REST correspondiente | Usado en controladores para transformar respuestas |
-| Assembler | DismissWellbeingSuggestionCommandFromResourceAssembler | Transformador de DismissWellbeingSuggestionResource a DismissWellbeingSuggestionCommand | Convertir la petición REST a comando del dominio | Usado en controlador para procesar peticiones de descarte |
+| Nombre | Descripción |
+| --- | --- |
+| WellbeingEntryResource | Representación pública de un registro de bienestar. |
+| WellbeingPatternResource | Representación pública de un patrón detectado. |
+| SmallWinResource | Representación pública de un pequeño logro. |
+| RecordSmallWinResource | Datos de entrada para registrar manualmente un pequeño logro. |
+| StatusSummaryResource | Representación pública del resumen diario de un adulto mayor. |
 
-<br>
+**Sub-capa REST — Transform**
 
-**Sub-capa ACL - Consumers:**
+| Nombre | Descripción |
+| --- | --- |
+| WellbeingEntryResourceFromEntityAssembler | Convierte el aggregate `WellbeingEntry` en su representación REST. |
+| WellbeingPatternResourceFromEntityAssembler | Convierte el aggregate `WellbeingPattern` en su representación REST. |
+| SmallWinResourceFromEntityAssembler | Convierte el aggregate `SmallWin` en su representación REST. |
+| RecordSmallWinCommandFromResourceAssembler | Convierte la petición de registro manual en el comando `RecordSmallWinCommand`. |
+| StatusSummaryResourceFromEntityAssembler | Convierte el aggregate `StatusSummary` en su representación REST. |
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Consumer | CheckInRecordedConsumer | Consumidor interno del evento de dominio CheckInRecorded | Escuchar, dentro del monolito modular, el evento publicado por el módulo Daily Check-in para desencadenar el `EvaluateWellbeingPatternCommand` correspondiente | Usado como puente entre el bounded context Daily Check-in y Wellbeing Monitoring |
+**Sub-capa ACL — Consumers**
+
+| Nombre | Descripción |
+| --- | --- |
+| CheckInAnsweredConsumer | Escucha, dentro del monolito modular, el evento `CheckInAnswered` publicado por Daily Check-in y desencadena `RecordWellbeingEntryCommand`, `DetectWellbeingPatternCommand` y `GenerateStatusSummaryCommand`. |
 
 <br>
 
 #### 2.6.4.3. Application Layer
 
-**Sub-capa Internal - CommandServices:**
+Clases que orquestan los flujos del contexto, coordinando los cuatro aggregates y sus repositorios.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| CommandHandler | WellbeingCommandService | Implementación de comandos de bienestar | Implementar los métodos para evaluar el patrón de bienestar y publicar los eventos `DiscomfortPatternDetected` o `WellbeingTrendImproved`, emitir sugerencias (`WellbeingSuggestionIssued`), registrar pequeños logros (`SmallWinRecorded`) y descartar sugerencias (`WellbeingSuggestionDismissed`) | Implementa los métodos de la interface IWellbeingCommandService en la capa de "Services" |
+**Sub-capa Internal — CommandServices**
 
-<br>
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| WellbeingCommandService | Ejecuta los cuatro comandos del contexto: registra el estado de ánimo derivado de un check-in, analiza el historial para detectar patrones, registra pequeños logros y genera el resumen diario, publicando los eventos de dominio correspondientes en cada caso. | Implementa `IWellbeingCommandService`; usa `IWellbeingEntryRepository`, `IWellbeingPatternRepository`, `ISmallWinRepository`, `IStatusSummaryRepository` e `IDomainEventPublisher`. |
 
-**Sub-capa Internal - QueryServices:**
+**Sub-capa Internal — QueryServices**
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| QueryHandler | WellbeingQueryService | Implementación de consultas de bienestar | Implementar los métodos para las consultas de wellbeing insights, tendencias y la vista de sugerencias de bienestar | Implementa los métodos de la interface IWellbeingQueryService en la capa de "Services" |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| WellbeingQueryService | Resuelve las consultas de registros de bienestar, patrones, pequeños logros y resúmenes diarios, sin modificar el estado. | Implementa `IWellbeingQueryService`; usa los cuatro repositorios del contexto. |
 
 <br>
 
 #### 2.6.4.4 Infrastructure Layer
 
-**Sub-capa Persistence - Repositories:**
+Clases que resuelven el acceso a la base de datos y a los mecanismos de mensajería, implementando las abstracciones definidas en el dominio.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Repository | WellbeingInsightRepository | Repositorio para uso del modelo "WellbeingInsight" | Acceder y manipular datos persistidos de wellbeing insights, sus tendencias, sugerencias y pequeños logros en la base de datos | Usado en la capa "Application" para implementar operaciones CRUD de wellbeing insights |
+**Sub-capa Persistence — Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| WellbeingEntryRepository | Persiste y recupera el aggregate `WellbeingEntry` sobre la tabla `wellbeing_entries`. | Implementa `IWellbeingEntryRepository`. |
+| WellbeingPatternRepository | Persiste y recupera el aggregate `WellbeingPattern` sobre la tabla `wellbeing_patterns`. | Implementa `IWellbeingPatternRepository`. |
+| SmallWinRepository | Persiste y recupera el aggregate `SmallWin` sobre la tabla `small_wins`. | Implementa `ISmallWinRepository`. |
+| StatusSummaryRepository | Persiste y recupera el aggregate `StatusSummary` sobre la tabla `status_summaries`. | Implementa `IStatusSummaryRepository`. |
+
+**Sub-capa Persistence — Mappers**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| WellbeingPersistenceMapper | Traduce entre los cuatro aggregates del contexto y su representación en base de datos, evitando que el modelo de persistencia se filtre al dominio. | Usado por los cuatro repositorios de Infrastructure. |
+
+**Sub-capa Messaging — Consumers**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInAnsweredConsumerAdapter | Se suscribe al evento `CheckInAnswered` publicado por Daily Check-in dentro del monolito modular y lo traduce en la invocación de los comandos del contexto. | Implementa `CheckInAnsweredConsumer`; usado por la capa Interface. |
 
 <br>
 
 #### 2.6.4.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Wellbeing Monitoring, elaborado con la herramienta Structurizr. El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: el `WellbeingController` como punto de entrada de las peticiones REST; los *Resources* (`WellbeingInsightResource`, `WellbeingSuggestionsViewResource`, `WellbeingTrendResource`, `DismissWellbeingSuggestionResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y la entidad de dominio `WellbeingInsight`; los *Commands* (`EvaluateWellbeingPatternCommand`, `IssueWellbeingSuggestionCommand`, `RecordSmallWinCommand`, `DismissWellbeingSuggestionCommand`) y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `WellbeingCommandService` y `WellbeingQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IWellbeingCommandService` e `IWellbeingQueryService`; y finalmente `IWellbeingInsightRepository`, implementado por `WellbeingInsightRepository`, que gestiona la persistencia del agregado. Se incluye además `CheckInRecordedConsumer`, componente que escucha el evento `CheckInRecorded` publicado por el bounded context Daily Check-in para desencadenar la evaluación de un nuevo wellbeing insight.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Wellbeing Monitoring, elaborado con la herramienta Structurizr. El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: los cuatro *Controllers* (`WellbeingEntriesController`, `WellbeingPatternsController`, `SmallWinsController`, `StatusSummariesController`) como puntos de entrada de las peticiones REST; los *Resources* (`WellbeingEntryResource`, `WellbeingPatternResource`, `SmallWinResource`, `RecordSmallWinResource`, `StatusSummaryResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y los cuatro aggregates del dominio (`WellbeingEntry`, `WellbeingPattern`, `SmallWin`, `StatusSummary`); los *Commands* (`RecordWellbeingEntryCommand`, `DetectWellbeingPatternCommand`, `RecordSmallWinCommand`, `GenerateStatusSummaryCommand`) y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `WellbeingCommandService` y `WellbeingQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IWellbeingCommandService` e `IWellbeingQueryService`; y finalmente los cuatro repositorios (`IWellbeingEntryRepository`, `IWellbeingPatternRepository`, `ISmallWinRepository`, `IStatusSummaryRepository`), cada uno implementado por su respectiva clase de Infrastructure, que gestionan la persistencia de cada aggregate. Se incluye además `CheckInAnsweredConsumer`, componente que escucha el evento `CheckInAnswered` publicado por el bounded context Daily Check-in para desencadenar el registro de una nueva entrada de bienestar, la detección de patrones y la generación del resumen diario.
 
+<br>
 <div align="center">
 
 ![Component Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-diagram.png)
@@ -3947,16 +4061,15 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 
 ##### 2.6.4.6.1. Bounded Context Domain Layer Class Diagrams
 
-Diagrama de clases de la capa Domain: En esta imagen se muestran las clases del dominio Wellbeing Monitoring que incluyen `WellbeingInsight` como aggregate root, Commands para las operaciones de evaluación de patrones, emisión de sugerencias y registro de pequeños logros, Queries para las consultas de información de bienestar, e interfaces para los servicios de dominio con sus respectivas implementaciones. El diagrama fue elaborado en PlantUML.
-
-<div align="center">
-
-![Domain Layer Class Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-class-diagram.png)
-  <br/><i>Imagen 28. Domain Layer Class Diagram del Bounded Context Wellbeing Monitoring.</i>
-
-</div>
+Diagrama de clases de la capa Domain: En esta imagen se muestran las clases del dominio Wellbeing Monitoring, compuesto por cuatro aggregate roots independientes (`WellbeingEntry`, `WellbeingPattern`, `SmallWin`, `StatusSummary`, alineados 1 a 1 con las tablas del diseño de base de datos oficial), los Commands y Queries asociados a cada uno, y las interfaces `IWellbeingCommandService`, `IWellbeingQueryService` e `IWellbeingEntryRepository`/`IWellbeingPatternRepository`/`ISmallWinRepository`/`IStatusSummaryRepository` con sus respectivas implementaciones. El diagrama fue elaborado en PlantUML.
 
 <br>
+<div align="center">
+
+![Class Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-class-diagram.png)
+  <br/><i>Imagen 28. Class Diagram del Bounded Context Wellbeing Monitoring.</i>
+
+</div>
 
 <br>
 
