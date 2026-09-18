@@ -3858,6 +3858,7 @@ Incluye índices sobre `care_circle_id` y `author_id` que optimizan la consulta 
 
 ![Database Design Diagram -Care Circle](assets/img/bounded-context/care-circle/care-circle-database.png)
   <br/><i>Imagen X. Database Design Diagram del Bounded Context Care Circle.</i>
+</div>
 
 
 ### 2.6.3. Bounded Context: Daily Check-in
@@ -4223,6 +4224,54 @@ Diagrama de base de datos: En esta imagen se muestra el diseño de las tablas co
 <br>
 
 #### 2.6.5.2. Interface Layer
+
+
+Clases que exponen el bounded context hacia el exterior y traducen las peticiones entrantes al lenguaje del dominio.
+
+***Sub-capa REST — Controllers***
+
+| Nombre | Endpoints | Descripción |
+|---|---|---|
+| AudioMessagesController | POST /care-circles/{careCircleId}/audio-messages, POST /care-circles/{careCircleId}/audio-messages/{messageId}/share, DELETE /care-circles/{careCircleId}/audio-messages/{messageId}, PUT /care-circles/{careCircleId}/audio-messages/{messageId}/play | Punto de entrada de las operaciones de grabación, compartición, descarte y reproducción de mensajes de audio. Delega en los servicios de comandos y consultas. |
+| PhotoMessagesController | POST /care-circles/{careCircleId}/photo-messages, GET /care-circles/{careCircleId}/photo-messages/{messageId} | Punto de entrada de las operaciones de compartición y visualización de mensajes de foto. Delega en los servicios de comandos y consultas. |
+| SocialRemindersController | POST /care-circles/{careCircleId}/social-reminders, PUT /care-circles/{careCircleId}/social-reminders/{reminderId}/complete, DELETE /care-circles/{careCircleId}/social-reminders/{reminderId} | Punto de entrada de las operaciones de programación, completado y cancelación de recordatorios sociales. Delega en los servicios de comandos. |
+
+***Sub-capa REST — Resources***
+
+| Nombre | Descripción |
+|---|---|
+| RecordAudioMessageResource | Datos de entrada para iniciar la grabación de un mensaje de audio. |
+| AudioMessageResource | Representación pública de un mensaje de audio, incluida su URL de reproducción. |
+| ShareAudioMessageResource | Datos de entrada para compartir un mensaje de audio grabado con el destinatario. |
+| SharePhotoMessageResource | Datos de entrada para compartir una foto con el círculo de cuidado. |
+| PhotoMessageResource | Representación pública de un mensaje de foto, incluida su URL de visualización. |
+| ScheduleSocialReminderResource | Datos de entrada para programar un recordatorio social, incluidos título, descripción y fecha. |
+| SocialReminderResource | Representación pública de un recordatorio social y su estado actual. |
+
+***Sub-capa REST — Transform***
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageResourceFromEntityAssembler | Convierte la entidad AudioMessage en su representación REST. |
+| PhotoMessageResourceFromEntityAssembler | Convierte la entidad PhotoMessage en su representación REST. |
+| SocialReminderResourceFromEntityAssembler | Convierte la entidad SocialReminder en su representación REST. |
+| RecordAudioMessageCommandFromResourceAssembler | Convierte la petición de grabación en el comando de dominio correspondiente. |
+| ShareAudioMessageCommandFromResourceAssembler | Convierte la petición de compartición de audio en su comando de dominio. |
+| SharePhotoMessageCommandFromResourceAssembler | Convierte la petición de compartición de foto en su comando de dominio. |
+| ScheduleSocialReminderCommandFromResourceAssembler | Convierte la petición de programación en el comando de recordatorio social. |
+
+***Sub-capa ACL***
+
+| Nombre | Descripción |
+|---|---|
+| CareCircleContextFacade | Puerto de salida que define el contrato de los datos que Social Companionship necesita del bounded context Care Circle. |
+| UserContextFacade | Puerto de salida que define el contrato de los datos que Social Companionship necesita del bounded context Identity & Access. |
+| CareCircleContextFacadeImpl | Implementación HTTP del CareCircleContextFacade. Llama a los endpoints del bounded context Care Circle y traduce la respuesta al modelo interno. |
+| UserContextFacadeImpl | Implementación HTTP del UserContextFacade. Llama a los endpoints del bounded context Identity & Access y traduce la respuesta al modelo interno. |
+| ExternalCareCircleMemberResource | Representación de la respuesta externa del bounded context Care Circle al consultar los miembros de un círculo. |
+| ExternalUserResource | Representación de la respuesta externa del bounded context Identity & Access al consultar datos de un usuario. |
+| CareCircleMemberFromExternalResourceAssembler | Traduce el ExternalCareCircleMemberResource al value object interno del dominio de Social Companionship. |
+| UserFromExternalResourceAssembler | Traduce el ExternalUserResource al value object interno del dominio de Social Companionship. |
 
 <br>
 
