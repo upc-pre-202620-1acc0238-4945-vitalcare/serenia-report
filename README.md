@@ -3549,7 +3549,48 @@ El diagrama incluye además los Commands y Queries que expresan las intenciones 
 
 </div>
 
+<br>
+
 ##### 2.6.1.6.2. Bounded Context Database Design Diagram
+
+El diagrama de base de datos presenta los objetos que permiten la persistencia del bounded context Identity & Access sobre el motor MySQL. El contexto se materializa en dos tablas, `users` y `sessions`, que corresponden respectivamente al aggregate root `User` y a la entidad `Session` que este contiene.
+
+**Tabla `users`**
+
+| Columna | Tipo | Constraints | Descripción |
+| --- | --- | --- | --- |
+| id | uuid | PK | Identificador único de la cuenta. |
+| email | varchar(160) | NOT NULL, UNIQUE | Correo electrónico con el que el usuario inicia sesión. |
+| password_hash | varchar(255) | NOT NULL | Contraseña cifrada de la cuenta. |
+| role | user_role | NOT NULL | Rol del usuario: adulto mayor o familiar a distancia. |
+| full_name | varchar(120) | NOT NULL | Nombre completo del usuario. |
+| phone_number | varchar(20) | — | Número de contacto del usuario. |
+| birth_date | date | — | Fecha de nacimiento del usuario. |
+| photo_url | varchar(500) | — | Ubicación de la fotografía de perfil del usuario. |
+| locale | varchar(10) | NOT NULL, DEFAULT 'es_419' | Idioma y región de la interfaz. |
+| status | account_status | NOT NULL, DEFAULT 'ACTIVE' | Estado de la cuenta: activa, suspendida o eliminada. |
+| created_at | timestamp | NOT NULL | Fecha y hora de creación de la cuenta. |
+| updated_at | timestamp | NOT NULL | Fecha y hora de la última modificación. |
+
+La tabla incluye un índice único sobre `email`, que garantiza a nivel de base de datos la regla de unicidad de cuentas, y un índice sobre `role`, que optimiza las consultas que filtran usuarios según el tipo de aplicación a la que acceden.
+
+**Tabla `sessions`**
+
+| Columna | Tipo | Constraints | Descripción |
+| --- | --- | --- | --- |
+| id | uuid | PK | Identificador único de la sesión. |
+| user_id | uuid | NOT NULL, FK → users.id | Cuenta a la que pertenece la sesión. |
+| token_hash | varchar(255) | NOT NULL | Token de sesión cifrado entregado al cliente. |
+| device_info | varchar(200) | — | Descripción del dispositivo desde el que se inició la sesión. |
+| issued_at | timestamp | NOT NULL | Fecha y hora de emisión del token. |
+| expires_at | timestamp | NOT NULL | Fecha y hora en que el token deja de ser válido. |
+| revoked_at | timestamp | — | Fecha y hora del cierre de sesión, si este ocurrió. |
+
+La tabla cuenta con un índice sobre `user_id`, que soporta la consulta de las sesiones vigentes de una cuenta.
+
+**Relación entre tablas**
+
+Existe una relación de uno a muchos entre `users` y `sessions`: una cuenta puede tener cero o varias sesiones registradas, mientras que toda sesión pertenece obligatoriamente a una única cuenta. Esta relación se implementa mediante la clave foránea `sessions.user_id`, que referencia a `users.id` y que refleja en la base de datos la composición definida en el modelo de dominio entre el aggregate `User` y la entidad `Session`.
 
 <br>
 
