@@ -3331,37 +3331,306 @@ Como se observa en el diagrama, cada uno de los containers de Serenia se desplie
 ## 2.6. Tactical-Level Domain-Driven Design
 ### 2.6.1. Bounded Context: Identity & Access Context
 
-<br>
+El bounded context Identity & Access concentra todo lo relacionado con la identidad de las personas que usan Serenia: el registro diferenciado de adultos mayores y familiares a distancia, el inicio y cierre de sesión, la actualización de los datos de perfil y el cambio de contraseña. Es un contexto genérico: sus reglas son estándar y no se derivan del negocio del cuidado, pero ningún otro contexto puede operar sin él, ya que toda acción del sistema se atribuye a un usuario autenticado y a un rol determinado.
+
+Su modelo gira en torno a un único aggregate, `User`, que es la raíz responsable de garantizar la consistencia de las credenciales, el estado de la cuenta y las sesiones abiertas de una misma persona. El rol se fija en el momento del registro y determina a qué aplicación accede el usuario. Al completarse el registro de un adulto mayor, el contexto publica el evento correspondiente, que habilita la creación posterior de su círculo de cuidado.
 
 #### 2.6.1.1. Domain Layer
 
-<br>
+En esta capa se representan las reglas de negocio propias de la identidad de un usuario, sin dependencia de frameworks de persistencia, red ni interfaz.
+
+**Sub-capa Model — Aggregates**
+
+`User` (Aggregate Root): representa la cuenta de una persona en Serenia, sea adulto mayor o familiar a distancia. Controla la validez de sus credenciales, el estado de la cuenta y el ciclo de vida de sus sesiones.
+
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | UserId | private | Identificador único de la cuenta. |
+| email | EmailAddress | private | Correo electrónico único con el que el usuario inicia sesión. |
+| passwordHash | PasswordHash | private | Representación cifrada de la contraseña; nunca almacena el valor en claro. |
+| role | UserRole | private | Rol asignado en el registro; determina la aplicación a la que accede. |
+| fullName | PersonName | private | Nombre completo del usuario. |
+| phoneNumber | PhoneNumber | private | Número de contacto, opcional. |
+| birthDate | LocalDate | private | Fecha de nacimiento, opcional. |
+| photoUrl | String | private | Ubicación de la fotografía de perfil, opcional. |
+| locale | LocaleCode | private | Idioma y región de la interfaz. |
+| status | AccountStatus | private | Estado de la cuenta: activa, suspendida o eliminada. |
+| sessions | List\<Session\> | private | Sesiones abiertas o históricas de la cuenta. |
+| createdAt | LocalDateTime | private | Fecha y hora de creación de la cuenta. |
+| updatedAt | LocalDateTime | private | Fecha y hora de la última modificación. |
+
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| registerOlderAdult(email, passwordHash, fullName, locale) | public (static) | Crea una cuenta con rol de adulto mayor a partir de datos ya validados. |
+| registerDistantRelative(email, passwordHash, fullName, locale) | public (static) | Crea una cuenta con rol de familiar a distancia. |
+| openSession(tokenHash, deviceInfo, expiresAt) | public | Abre una nueva sesión para la cuenta y la incorpora al aggregate. |
+| closeSession(sessionId) | public | Revoca la sesión indicada y la marca como cerrada. |
+| updatePhoto(photoUrl) | public | Reemplaza la fotografía de perfil del usuario. |
+| updateProfileData(fullName, phoneNumber, birthDate, locale) | public | Actualiza los datos personales de la cuenta. |
+| changePassword(newPasswordHash) | public | Sustituye la contraseña cifrada de la cuenta. |
+| activeSessions() | public | Devuelve las sesiones vigentes, sin revocar ni expiradas. |
+| isActive() | public | Indica si la cuenta se encuentra en estado activo. |
+| ensureActive() | private | Impide ejecutar operaciones sobre una cuenta suspendida o eliminada. |
+
+**Sub-capa Model — Entities**
+
+`Session`: representa un periodo de acceso autenticado de un usuario desde un dispositivo. Pertenece al aggregate `User` y no se manipula fuera de él.
+
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | SessionId | private | Identificador único de la sesión. |
+| tokenHash | TokenHash | private | Representación cifrada del token entregado al cliente. |
+| deviceInfo | DeviceInfo | private | Descripción del dispositivo desde el que se inició la sesión. |
+| issuedAt | LocalDateTime | private | Fecha y hora de emisión del token. |
+| expiresAt | LocalDateTime | private | Fecha y hora en que el token deja de ser válido. |
+| revokedAt | LocalDateTime | private | Fecha y hora del cierre de sesión, si ocurrió. |
+
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| revoke(revokedAt) | public | Marca la sesión como cerrada en el instante indicado. |
+| isExpired(referenceTime) | public | Indica si el token ya superó su fecha de expiración. |
+| isActive(referenceTime) | public | Indica si la sesión sigue vigente: no revocada y no expirada. |
+
+**Sub-capa Model — Value Objects**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| UserId | value: UUID | Identidad inmutable de una cuenta. |
+| SessionId | value: UUID | Identidad inmutable de una sesión. |
+| EmailAddress | value: String | Correo electrónico validado en formato y longitud máxima. |
+| PasswordHash | value: String | Contraseña ya cifrada; impide que el dominio maneje texto plano. |
+| TokenHash | value: String | Token de sesión cifrado, nunca almacenado en claro. |
+| PersonName | value: String | Nombre completo con validación de obligatoriedad y longitud. |
+| PhoneNumber | value: String | Número telefónico validado en formato. |
+| LocaleCode | value: String | Código de idioma y región de la interfaz. |
+| DeviceInfo | value: String | Descripción del dispositivo asociado a una sesión. |
+
+**Sub-capa Model — Enumerations**
+
+| Nombre | Valores | Descripción |
+| --- | --- | --- |
+| UserRole | OLDER_ADULT, DISTANT_RELATIVE | Rol del usuario, definido en el registro e inmutable. |
+| AccountStatus | ACTIVE, SUSPENDED, DELETED | Estado del ciclo de vida de la cuenta. |
+
+**Sub-capa Model — Commands**
+
+| Nombre | Descripción |
+| --- | --- |
+| RegisterOlderAdultCommand | Intención de crear una cuenta con rol de adulto mayor. |
+| RegisterDistantRelativeCommand | Intención de crear una cuenta con rol de familiar a distancia. |
+| SignInCommand | Intención de autenticar a un usuario y abrir una sesión. |
+| SignOutCommand | Intención de cerrar una sesión vigente. |
+| UpdateUserPhotoCommand | Intención de actualizar la fotografía de perfil. |
+| UpdateProfileDataCommand | Intención de actualizar los datos personales del perfil. |
+| ChangePasswordCommand | Intención de reemplazar la contraseña de la cuenta. |
+
+**Sub-capa Model — Queries**
+
+| Nombre | Descripción |
+| --- | --- |
+| GetUserByIdQuery | Consulta de una cuenta por su identificador. |
+| GetUserByEmailQuery | Consulta de una cuenta por su correo electrónico. |
+| GetUserBySessionTokenQuery | Consulta de la cuenta asociada a un token de sesión vigente. |
+| GetActiveSessionsByUserIdQuery | Consulta de las sesiones vigentes de una cuenta. |
+
+**Sub-capa Model — Events**
+
+| Nombre | Descripción |
+| --- | --- |
+| OlderAdultRegistered | Se creó una cuenta con rol de adulto mayor. |
+| DistantRelativeRegistered | Se creó una cuenta con rol de familiar a distancia. |
+| UserLoggedIn | Un usuario se autenticó correctamente y abrió una sesión. |
+| UserSessionClosed | Un usuario cerró su sesión de forma explícita. |
+| UserPhotoUpdated | Se actualizó la fotografía de perfil de un usuario. |
+| ProfileDataUpdated | Se actualizaron los datos personales de un usuario. |
+| PasswordChanged | Se modificó la contraseña de una cuenta. |
+
+**Sub-capa Repositories**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | IUserRepository | save(user), findById(userId), findByEmail(email), existsByEmail(email), findBySessionTokenHash(tokenHash), findAll() | Contrato de persistencia del aggregate `User` junto con sus sesiones. Se implementa en Infrastructure. |
+
+**Sub-capa Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | IUserCommandService | handle(RegisterOlderAdultCommand), handle(RegisterDistantRelativeCommand), handle(SignInCommand), handle(SignOutCommand), handle(UpdateUserPhotoCommand), handle(UpdateProfileDataCommand), handle(ChangePasswordCommand) | Contrato de las operaciones de escritura del contexto. |
+| Interface | IUserQueryService | handle(GetUserByIdQuery), handle(GetUserByEmailQuery), handle(GetUserBySessionTokenQuery), handle(GetActiveSessionsByUserIdQuery) | Contrato de las operaciones de lectura del contexto. |
+| Interface | IPasswordHashingService | hash(rawPassword), matches(rawPassword, passwordHash) | Abstracción del cifrado y verificación de contraseñas; mantiene el dominio libre de librerías de seguridad. |
+| Interface | ITokenService | generate(userId, role), hash(token), expirationOf(token) | Abstracción de la generación y el cifrado de tokens de sesión. |
+| Interface | IDomainEventPublisher | publish(event) | Abstracción para publicar los eventos de dominio hacia los demás módulos. |
 
 #### 2.6.1.2. Interface Layer
 
-<br>
+Clases que exponen el bounded context hacia el exterior y traducen las peticiones entrantes al lenguaje del dominio.
+
+**Sub-capa REST — Controllers**
+
+| Nombre | Endpoints | Descripción |
+| --- | --- | --- |
+| UsersController | POST /users, GET /users/{id}, PUT /users/{id}/photo, PUT /users/{id}/profile, PUT /users/{id}/password | Punto de entrada de las operaciones de registro, consulta y gestión de perfil. Delega en los servicios de comandos y consultas. |
+| SessionsController | POST /sessions, DELETE /sessions/{id} | Punto de entrada de la autenticación y el cierre de sesión. |
+
+**Sub-capa REST — Resources**
+
+| Nombre | Descripción |
+| --- | --- |
+| RegisterUserResource | Datos de entrada del registro, incluido el rol solicitado. |
+| UserResource | Representación pública de una cuenta, sin datos sensibles. |
+| SignInResource | Credenciales enviadas para solicitar una sesión. |
+| AuthenticatedUserResource | Token de sesión emitido junto con los datos del usuario autenticado. |
+| UpdateUserPhotoResource | Datos de entrada para actualizar la fotografía de perfil. |
+| UpdateProfileDataResource | Datos de entrada para actualizar los datos personales. |
+| ChangePasswordResource | Datos de entrada para el cambio de contraseña. |
+| SessionResource | Representación de una sesión vigente y su dispositivo asociado. |
+
+**Sub-capa REST — Transform**
+
+| Nombre | Descripción |
+| --- | --- |
+| UserResourceFromEntityAssembler | Convierte el aggregate `User` en su representación REST. |
+| AuthenticatedUserResourceFromEntityAssembler | Combina usuario y token emitido en un único recurso de respuesta. |
+| SessionResourceFromEntityAssembler | Convierte la entidad `Session` en su representación REST. |
+| RegisterOlderAdultCommandFromResourceAssembler | Convierte la petición de registro en el comando de adulto mayor. |
+| RegisterDistantRelativeCommandFromResourceAssembler | Convierte la petición de registro en el comando de familiar a distancia. |
+| SignInCommandFromResourceAssembler | Convierte las credenciales recibidas en el comando de autenticación. |
+| UpdateUserPhotoCommandFromResourceAssembler | Convierte la petición de fotografía en su comando. |
+| UpdateProfileDataCommandFromResourceAssembler | Convierte la petición de datos personales en su comando. |
+| ChangePasswordCommandFromResourceAssembler | Convierte la petición de cambio de contraseña en su comando. |
 
 #### 2.6.1.3. Application Layer
 
-<br>
+Clases que orquestan los flujos del contexto, coordinando el aggregate, los repositorios y los servicios de seguridad.
+
+**Sub-capa Internal — CommandServices**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| UserCommandService | Ejecuta los siete comandos del contexto: valida la unicidad del correo, delega el cifrado de contraseñas, invoca los métodos del aggregate `User`, persiste el resultado y publica los eventos de dominio correspondientes. | Implementa `IUserCommandService`; usa `IUserRepository`, `IPasswordHashingService`, `ITokenService` e `IDomainEventPublisher`. |
+
+**Sub-capa Internal — QueryServices**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| UserQueryService | Resuelve las consultas de cuentas y sesiones, devolviendo el aggregate o sus sesiones vigentes sin modificar el estado. | Implementa `IUserQueryService`; usa `IUserRepository`. |
 
 #### 2.6.1.4 Infrastructure Layer
 
-<br>
+Clases que resuelven el acceso a la base de datos y a los mecanismos técnicos de seguridad, implementando las abstracciones definidas en el dominio.
+
+**Sub-capa Persistence — Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| UserRepository | Persiste y recupera el aggregate `User` junto con sus sesiones sobre las tablas `users` y `sessions`, resolviendo además la búsqueda por correo y por token de sesión. | Implementa `IUserRepository`; usado por la capa Application. |
+
+**Sub-capa Persistence — Mappers**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| UserPersistenceMapper | Traduce entre el aggregate `User` y su representación en base de datos, evitando que el modelo de persistencia se filtre al dominio. | Usado por `UserRepository`. |
+
+**Sub-capa Security — Services**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| BCryptPasswordHashingService | Cifra las contraseñas y verifica credenciales mediante el algoritmo BCrypt. | Implementa `IPasswordHashingService`. |
+| JwtTokenService | Genera los tokens de sesión, calcula su expiración y produce el hash que se almacena en la tabla `sessions`. | Implementa `ITokenService`. |
+
+**Sub-capa Messaging — Publishers**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| DomainEventPublisherAdapter | Publica los eventos de dominio del contexto dentro del monolito modular para que otros módulos reaccionen a ellos. | Implementa `IDomainEventPublisher`. |
 
 #### 2.6.1.5. Bounded Context Software Architecture Component Level Diagrams
 
-<br>
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Identity & Access, elaborado con la herramienta Structurizr. El diagrama descompone el módulo de identidad dentro del container API REST y muestra cómo sus componentes se distribuyen entre las cuatro capas del diseño táctico, respetando la regla de dependencia unidireccional hacia el dominio.
+
+El flujo de entrada llega desde la Aplicación Móvil hacia los dos componentes de la capa Interface: `UsersController`, que atiende el registro, la consulta de cuentas y las operaciones de perfil, y `SessionsController`, que atiende la autenticación y el cierre de sesión. Ambos delegan en la capa Application, donde `UserCommandService` resuelve las operaciones de escritura y `UserQueryService` las de lectura.
+
+En el centro del diagrama se ubica el aggregate `User`, junto con la entidad `Session` que contiene, los Commands y Queries que expresan las intenciones del contexto y los Domain Events que se publican al completarse cada operación. Alrededor del aggregate se muestran las abstracciones que el dominio declara y que ninguna capa superior implementa: `IUserRepository`, `IPasswordHashingService`, `ITokenService` e `IDomainEventPublisher`.
+
+La capa Infrastructure aparece en el extremo opuesto, con las implementaciones concretas de esas abstracciones: `UserRepository`, que persiste el aggregate sobre las tablas `users` y `sessions` apoyándose en `UserPersistenceMapper`; `BCryptPasswordHashingService`, encargado del cifrado y la verificación de credenciales; `JwtTokenService`, que emite los tokens de sesión y calcula su hash; y `DomainEventPublisherAdapter`, que publica los eventos de dominio dentro del monolito modular para que otros módulos reaccionen a ellos. Las flechas evidencian que las dependencias apuntan siempre hacia el dominio y que ningún componente de Interface accede directamente a la base de datos.
+
+<div align="center">
+
+![Component Diagram - Identity and Access](assets/img/bounded-context/identity-and-access/identity-and-access-c4.png)
+  <br/><i>Imagen X. Component Diagram del Bounded Context Identity and Access.</i>
+
+</div>
 
 #### 2.6.1.6. Bounded Context Software Architecture Code Level Diagrams
 
-<br>
+En esta sección se presentan los diagramas de mayor nivel de detalle sobre la implementación del bounded context Identity & Access. Se incluye el diagrama de clases de la capa Domain y el diagrama de diseño de base de datos correspondiente a las tablas que dan persistencia al aggregate.
 
 ##### 2.6.1.6.1. Bounded Context Domain Layer Class Diagrams
+
+El diagrama de clases representa la capa Domain del bounded context Identity & Access, elaborado con la herramienta UML correspondiente. En él se muestran las clases, interfaces y enumeraciones del dominio junto con sus atributos, métodos y el scope de cada miembro.
+
+El elemento central es `User`, el aggregate root del contexto. Sus atributos son privados y solo se modifican a través de sus métodos públicos, lo que garantiza que ninguna regla de identidad pueda vulnerarse desde fuera del aggregate. `User` mantiene una relación de composición con `Session`, con multiplicidad 1 a 0..*: una cuenta puede tener varias sesiones a lo largo del tiempo y ninguna sesión existe de forma independiente de la cuenta que la originó. Por ello, la apertura y la revocación de sesiones se realizan mediante los métodos `openSession` y `closeSession` del aggregate, y no sobre la entidad directamente.
+
+Los value objects aparecen relacionados con `User` y con `Session` por composición, cada uno con multiplicidad 1, salvo aquellos que corresponden a datos opcionales de la cuenta. Estos tipos encapsulan las validaciones de formato y evitan la obsesión por primitivos: el dominio nunca maneja un correo, una contraseña o un token como cadenas simples. Las enumeraciones `UserRole` y `AccountStatus` se asocian también a `User` con multiplicidad 1, y expresan respectivamente el rol inmutable definido en el registro y el estado del ciclo de vida de la cuenta.
+
+El diagrama incluye además los Commands y Queries que expresan las intenciones de escritura y lectura del contexto, y los Domain Events que el aggregate registra al completarse cada operación. Finalmente se muestran las abstracciones declaradas por el dominio: `IUserRepository`, que define el contrato de persistencia del aggregate; `IUserCommandService` e `IUserQueryService`, que definen las operaciones de escritura y lectura; e `IPasswordHashingService`, `ITokenService` e `IDomainEventPublisher`, que aíslan al dominio de los mecanismos técnicos de cifrado, emisión de tokens y publicación de eventos. Ninguna de estas interfaces depende de las capas superiores, de modo que las dependencias apuntan siempre hacia el dominio.
+
+<div align="center">
+
+![Domain Layer Class Diagram - Identity and Access](assets/img/bounded-context/identity-and-access/identity-and-access-domain-layer.png)
+  <br/><i>Imagen X. Domain Layer Class Diagram del Bounded Context Identity and Access.</i>
+
+</div>
 
 <br>
 
 ##### 2.6.1.6.2. Bounded Context Database Design Diagram
+
+El diagrama de base de datos presenta los objetos que permiten la persistencia del bounded context Identity & Access sobre el motor MySQL. El contexto se materializa en dos tablas, `users` y `sessions`, que corresponden respectivamente al aggregate root `User` y a la entidad `Session` que este contiene.
+
+**Tabla `users`**
+
+| Columna | Tipo | Constraints | Descripción |
+| --- | --- | --- | --- |
+| id | uuid | PK | Identificador único de la cuenta. |
+| email | varchar(160) | NOT NULL, UNIQUE | Correo electrónico con el que el usuario inicia sesión. |
+| password_hash | varchar(255) | NOT NULL | Contraseña cifrada de la cuenta. |
+| role | user_role | NOT NULL | Rol del usuario: adulto mayor o familiar a distancia. |
+| full_name | varchar(120) | NOT NULL | Nombre completo del usuario. |
+| phone_number | varchar(20) | — | Número de contacto del usuario. |
+| birth_date | date | — | Fecha de nacimiento del usuario. |
+| photo_url | varchar(500) | — | Ubicación de la fotografía de perfil del usuario. |
+| locale | varchar(10) | NOT NULL, DEFAULT 'es_419' | Idioma y región de la interfaz. |
+| status | account_status | NOT NULL, DEFAULT 'ACTIVE' | Estado de la cuenta: activa, suspendida o eliminada. |
+| created_at | timestamp | NOT NULL | Fecha y hora de creación de la cuenta. |
+| updated_at | timestamp | NOT NULL | Fecha y hora de la última modificación. |
+
+La tabla incluye un índice único sobre `email`, que garantiza a nivel de base de datos la regla de unicidad de cuentas, y un índice sobre `role`, que optimiza las consultas que filtran usuarios según el tipo de aplicación a la que acceden.
+
+**Tabla `sessions`**
+
+| Columna | Tipo | Constraints | Descripción |
+| --- | --- | --- | --- |
+| id | uuid | PK | Identificador único de la sesión. |
+| user_id | uuid | NOT NULL, FK → users.id | Cuenta a la que pertenece la sesión. |
+| token_hash | varchar(255) | NOT NULL | Token de sesión cifrado entregado al cliente. |
+| device_info | varchar(200) | — | Descripción del dispositivo desde el que se inició la sesión. |
+| issued_at | timestamp | NOT NULL | Fecha y hora de emisión del token. |
+| expires_at | timestamp | NOT NULL | Fecha y hora en que el token deja de ser válido. |
+| revoked_at | timestamp | — | Fecha y hora del cierre de sesión, si este ocurrió. |
+
+La tabla cuenta con un índice sobre `user_id`, que soporta la consulta de las sesiones vigentes de una cuenta.
+
+**Relación entre tablas**
+
+Existe una relación de uno a muchos entre `users` y `sessions`: una cuenta puede tener cero o varias sesiones registradas, mientras que toda sesión pertenece obligatoriamente a una única cuenta. Esta relación se implementa mediante la clave foránea `sessions.user_id`, que referencia a `users.id` y que refleja en la base de datos la composición definida en el modelo de dominio entre el aggregate `User` y la entidad `Session`.
+
+<div align="center">
+
+![Database Design Diagram - Identity and Access](assets/img/bounded-context/identity-and-access/identity-and-access-db-diagram.png)
+  <br/><i>Imagen X. Database Design Diagram del Bounded Context Identity and Access.</i>
+
+</div>
 
 <br>
 
