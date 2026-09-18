@@ -3726,6 +3726,31 @@ Clases que orquestan los flujos del contexto, coordinando los aggregates, los re
 
 #### 2.6.2.4 Infrastructure Layer
 
+Clases que resuelven el acceso a la base de datos y a los mecanismos técnicos de persistencia y mensajería, implementando las abstracciones definidas en el dominio.
+
+**Sub-capa Persistence — Repositories**
+
+| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
+|---|---|---|
+| **CareCircleRepository** | Persiste y recupera los aggregates CareCircle, incluyendo la información necesaria para consultar sus miembros y configuración del círculo. Resuelve las operaciones de creación y consulta de los Care Circle. | Implementa ICareCircleRepository; usado por la capa Application. |
+| **FamilyLinkRepository** | Persiste y recupera los vínculos familiares establecidos entre los usuarios y un CareCircle, incluyendo la información necesaria para establecer y revocar dichos vínculos. | Implementa IFamilyLinkRepository; usado por la capa Application. |
+| **CareShiftRepository** | Persiste y recupera los turnos de cuidado asociados a un CareCircle, permitiendo consultar y modificar las asignaciones de los miembros. | Implementa ICareShiftRepository; usado por la capa Application. |
+| **SharedNoteRepository** | Persiste y recupera las notas compartidas pertenecientes a un CareCircle, permitiendo consultar y actualizar su contenido. | Implementa ISharedNoteRepository; usado por la capa Application. |
+
+**Sub-capa Persistence — Mappers**
+
+| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
+|---|---|---|
+| **CareCirclePersistenceMapper** | Traduce entre el aggregate CareCircle y su representación en base de datos, evitando que el modelo de persistencia se filtre al dominio. | Usado por CareCircleRepository. |
+| **FamilyLinkPersistenceMapper** | Traduce entre la entidad FamilyLink y su representación en base de datos, manteniendo separado el modelo de persistencia del modelo de dominio. | Usado por FamilyLinkRepository. |
+| **CareShiftPersistenceMapper** | Traduce entre la entidad CareShift y su representación en base de datos. | Usado por CareShiftRepository. |
+| **SharedNotePersistenceMapper** | Traduce entre la entidad SharedNote y su representación en base de datos. | Usado por SharedNoteRepository. |
+
+**Sub-capa Messaging — Publishers**
+
+| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
+|---|---|---|
+| **DomainEventPublisherAdapter** | Publica los eventos de dominio generados por las operaciones de Care Circle dentro del monolito modular, permitiendo que otros módulos reaccionen a eventos como la creación del Care Circle, establecimiento del vínculo familiar, asignación de turnos o creación de notas compartidas. | Implementa IDomainEventPublisher. |
 <br>
 
 #### 2.6.2.5. Bounded Context Software Architecture Component Level Diagrams
