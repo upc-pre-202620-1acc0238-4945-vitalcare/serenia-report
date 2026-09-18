@@ -280,8 +280,11 @@ Ser admitido en una maestría de Arquitectura de Software dentro de los 2 años 
 **Gallardo Morales, Carla Alejandra**
 
 <u> *Objetivo SMART 1:* </u> <br>
+Obtener mi título universitario y conseguir, dentro de los 2 años posteriores a mi graduación, una oportunidad laboral en una empresa extranjera como desarrolladora backend, fortaleciendo continuamente mis conocimientos mediante cursos de actualización y proyectos personales relacionados con tecnologías como .NET, Azure, Python y desarrollo de software, con el propósito de adquirir experiencia y posteriormente postular a empresas tecnológicas internacionales como IBM, Google o Microsoft.
 
 <u> *Objetivo SMART 2:* </u> <br>
+Conseguir, durante los 2 años posteriores a mi graduación, una beca para realizar una maestría en el extranjero, priorizando universidades ubicadas en centros tecnológicos como Seattle, Estados Unidos, y completar dicha formación para ampliar mis conocimientos en desarrollo de software y tecnologías emergentes, fortalecer mi perfil profesional y acceder posteriormente a oportunidades laborales en empresas tecnológicas internacionales.
+
 
 **García Paredes, Victor Manuel**
 
@@ -3028,12 +3031,14 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 | 42 | US24 | Presentación del modelo de dos aplicaciones | 1 | Sprint 3 |
 | 43 | US26 | Sección institucional de la startup | 1 | Sprint 3 |
 | 44 | US27 | Envío de fotografía al adulto mayor | 2 | Sprint 3 |
+| 45| SP01 | Integración de Firebase Cloud Messaging | 5 | Sprint 3 |
+| 46 | SP02 | Grabación, almacenamiento y reproducción de audio | 5 | Sprint 3 |
 
 <br>
 
 <div align="center">
 
-![product backlog](assets/img/product-backlog/product-backlog-trello.png)
+![product backlog](assets/img/product-backlog/product-backlog.png)
   <br/><i>Imagen 11. Captura de Product Backlog en Trello.</i>
 
 </div>
