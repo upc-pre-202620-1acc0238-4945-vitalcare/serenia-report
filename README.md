@@ -220,22 +220,28 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <td>
             <b>Contreras Torres, Arturo Valentino</b><br>
             <u>AV1</u><br>
+            Estudié Domain-Driven Design estratégico para liderar el EventStorming y las User Stories del equipo, y apliqué técnicas de entrevista para definir los segmentos objetivo y el perfil de la solución.
             <br><br>
             <b>Gallardo Morales, Carla Alejandra</b><br>
             <u>AV1</u><br>
+            Aprendí y apliqué técnicas de UX Research —User Personas y User Journey Mapping— a partir del análisis de entrevistas, e incorporé prácticas ágiles al estructurar el Product Backlog priorizado.
             <br><br>
             <b>García Paredes, Victor Manuel</b><br>
             <u>AV1</u><br>
+            Asimilé el proceso Lean UX para formular hipótesis validables antes de diseñar la solución, y apliqué modelado de dominio en el Big Picture EventStorming y el Context Mapping.
             <br><br>
             <b>Salinas Guzman, Brianna Cristina</b><br>
             <u>AV1</u><br>
+            Incorporé el modelo C4 para documentar la arquitectura por niveles de abstracción, y apliqué técnicas de investigación en el análisis competitivo y en la problemática sustentada con fuentes.
             <br><br>
             <b>Sandoval Aiquipa, Kelber Yamir</b><br>
             <u>AV1</u><br>
+            Apliqué herramientas nuevas de diseño centrado en el usuario, como el Empathy Mapping y el Impact Mapping, para traducir las necesidades detectadas en entrevistas en objetivos del producto.
             <br><br>
         </td>
         <td>
             <u>AV1</u><br>
+            El equipo incorporó marcos que no conocía previamente —Lean UX, Needfinding, Domain-Driven Design, EventStorming y el modelo C4—; cada integrante estudió por su cuenta la técnica asignada y la explicó al resto, convirtiendo el aprendizaje individual en conocimiento compartido. Además, sustentamos las decisiones del proyecto con técnicas de investigación como entrevistas y análisis competitivo, en lugar de basarnos en supuestos.
         </td>
     </tr>
       <tr>
@@ -243,22 +249,28 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
       <td>
             <b>Contreras Torres, Arturo Valentino</b><br>
             <u>AV1</u><br>
+            Identifico la arquitectura de software como mi área de crecimiento; mi plan es profundizar en Clean Architecture y DDD aplicados a backend para sustentar decisiones técnicas con criterio propio.
             <br><br>
             <b>Gallardo Morales, Carla Alejandra</b><br>
             <u>AV1</u><br>
+            Reconozco que necesito fortalecer la investigación de usuarios y la gestión de producto; mi plan es seguir formándome en UX Research y validar mis supuestos con usuarios reales en cada entregable.
             <br><br>
             <b>García Paredes, Victor Manuel</b><br>
             <u>AV1</u><br>
+            Mi área de interés es el diseño e integración de sistemas; mi plan es continuar estudiando patrones de integración entre contextos para aplicarlos en los siguientes entregables.
             <br><br>
             <b>Salinas Guzman, Brianna Cristina</b><br>
             <u>AV1</u><br>
+            Identifico la arquitectura de software y la infraestructura en la nube como mi área de crecimiento; mi plan es formarme en servicios cloud y documentación arquitectónica.
             <br><br>
             <b>Sandoval Aiquipa, Kelber Yamir</b><br>
             <u>AV1</u><br>
+            Reconozco que las herramientas de análisis cambian constantemente; mi plan es seguir aprendiendo metodologías de descubrimiento de producto y modelado de requisitos y aplicarlas de forma continua.
             <br><br>
         </td>
         <td>
             <u>AV1</u><br>
+            El entregable evidenció que lo visto en clase no basta para sostener un proyecto real: cada técnica exigió estudio adicional del responsable y aprendizaje entre pares. A partir de ello, cada integrante identificó un área concreta de crecimiento profesional y un plan de formación alineado a ella, asumiendo el aprendizaje permanente como una condición del ejercicio profesional y no como una etapa que termina con el curso.
         </td>
     </tr>
 </table>
