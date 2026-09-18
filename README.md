@@ -3544,7 +3544,7 @@ El diagrama incluye además los Commands y Queries que expresan las intenciones 
 
 <div align="center">
 
-![Domain Layer Class Diagram - Identity and Access](assets/img/bounded-context/identity-and-access/IdentityAndAccessDomainLayer.png)
+![Domain Layer Class Diagram - Identity and Access](assets/img/bounded-context/identity-and-access/identity-and-access-domain-layer.png)
   <br/><i>Imagen X. Domain Layer Class Diagram del Bounded Context Identity and Access.</i>
 
 </div>
@@ -3591,6 +3591,13 @@ La tabla cuenta con un índice sobre `user_id`, que soporta la consulta de las s
 **Relación entre tablas**
 
 Existe una relación de uno a muchos entre `users` y `sessions`: una cuenta puede tener cero o varias sesiones registradas, mientras que toda sesión pertenece obligatoriamente a una única cuenta. Esta relación se implementa mediante la clave foránea `sessions.user_id`, que referencia a `users.id` y que refleja en la base de datos la composición definida en el modelo de dominio entre el aggregate `User` y la entidad `Session`.
+
+<div align="center">
+
+![Database Design Diagram - Identity and Access](assets/img/bounded-context/identity-and-access/identity-and-access-db-diagram.png)
+  <br/><i>Imagen X. Database Design Diagram del Bounded Context Identity and Access.</i>
+
+</div>
 
 <br>
 
