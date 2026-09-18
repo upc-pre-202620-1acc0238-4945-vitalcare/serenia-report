@@ -3203,7 +3203,7 @@ Como se observa en el diagrama, cada uno de los containers de Serenia se desplie
 
 ### 2.6.4. Bounded Context: Wellbeing Monitoring
 
-El bounded context **Wellbeing Monitoring** es responsable de interpretar el historial de check-ins registrados por el módulo **Daily Check-in** para generar tendencias de bienestar del adulto mayor, detectar patrones de riesgo y notificar dichos patrones al bounded context **Alerts and Safety**. A continuación se presenta el diseño táctico propuesto por el equipo para este bounded context, aplicando Domain-Driven Design.
+El bounded context **Wellbeing Monitoring** es responsable de interpretar el historial de check-ins registrados por el módulo **Daily Check-in** para generar un **Wellbeing Insight** del adulto mayor: detectar si existe un patrón de incomodidad sostenido (*Discomfort Pattern Detected*) o una mejora en la tendencia de bienestar (*Wellbeing Trend Improved*), y reaccionar en consecuencia emitiendo una sugerencia de bienestar (*Wellbeing Suggestion*) o registrando un pequeño logro (*Small Win*) para el cuidador a distancia. El diseño táctico presentado a continuación está alineado directamente con los eventos de dominio levantados en la sesión de EventStorming del bounded context (ver imagen).
 
 <br>
 
@@ -3213,7 +3213,7 @@ El bounded context **Wellbeing Monitoring** es responsable de interpretar el his
 
 | Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
 |---|---|---|---|---|
-| Aggregate | WellbeingProfile | Entidad que representa el perfil de bienestar acumulado de un adulto mayor | Ser el punto de entrada para registrar check-ins, calcular tendencias y mantener la integridad del estado de bienestar como entidad del dominio | Relacionado con el bounded context Daily Check-in (origen del historial de check-ins) y Alerts and Safety (destino de los patrones de riesgo detectados) |
+| Aggregate | WellbeingInsight | Entidad que representa la interpretación acumulada del bienestar de un adulto mayor, incluyendo el patrón de incomodidad o mejora de tendencia detectado más recientemente | Ser el punto de entrada para evaluar el historial de check-ins y mantener la integridad del estado de bienestar como entidad del dominio | Relacionado con el bounded context Daily Check-in (origen del historial de check-ins) y Alerts and Safety (destino de las sugerencias de bienestar emitidas) |
 
 <br>
 
@@ -3221,9 +3221,10 @@ El bounded context **Wellbeing Monitoring** es responsable de interpretar el his
 
 | Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
 |---|---|---|---|---|
-| Command | EvaluateWellbeingTrendCommand | Comando para evaluar la tendencia de bienestar de un adulto mayor | Representar la intención de recalcular la tendencia de bienestar a partir del historial de check-ins disponible | Usado en la implementación del servicio de comandos de bienestar |
-| Command | DetectRiskPatternCommand | Comando para ejecutar la detección de patrones de riesgo | Representar la intención de analizar las tendencias registradas y determinar si existe un patrón de riesgo | Usado en la implementación del servicio de comandos de bienestar |
-| Command | AcknowledgeRiskPatternCommand | Comando para marcar un patrón de riesgo como revisado | Representar la intención de que el equipo de Alerts and Safety confirme la revisión de un patrón de riesgo notificado | Usado en la implementación del servicio de comandos de bienestar |
+| Command | EvaluateWellbeingPatternCommand | Comando para evaluar el patrón de bienestar de un adulto mayor (evento de dominio *Evaluate Wellbeing Pattern*) | Representar la intención de analizar el historial de check-ins disponible y determinar si corresponde un *Discomfort Pattern Detected* o un *Wellbeing Trend Improved* | Usado en la implementación del servicio de comandos de bienestar |
+| Command | IssueWellbeingSuggestionCommand | Comando para emitir una sugerencia de bienestar (evento de dominio *Issue Wellbeing Suggestion*) | Representar la intención de emitir una sugerencia de bienestar cuando `EvaluateWellbeingPatternCommand` detecta un patrón de incomodidad | Usado en la implementación del servicio de comandos de bienestar |
+| Command | RecordSmallWinCommand | Comando para registrar un pequeño logro (evento de dominio *Record Small Win*) | Representar la intención de registrar un pequeño logro cuando `EvaluateWellbeingPatternCommand` detecta una mejora en la tendencia de bienestar | Usado en la implementación del servicio de comandos de bienestar |
+| Command | DismissWellbeingSuggestionCommand | Comando para descartar una sugerencia de bienestar (evento de dominio *Dismiss Wellbeing Suggestion*) | Representar la intención del cuidador a distancia de descartar una sugerencia de bienestar previamente emitida | Usado en la implementación del servicio de comandos de bienestar |
 
 <br>
 
@@ -3231,10 +3232,10 @@ El bounded context **Wellbeing Monitoring** es responsable de interpretar el his
 
 | Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
 |---|---|---|---|---|
-| Query | GetWellbeingProfileByOlderAdultIdQuery | Consulta para obtener el perfil de bienestar por identificador del adulto mayor | Representar la intención de obtener el estado de bienestar actual de un adulto mayor específico | Usado en la implementación del servicio de consultas |
+| Query | GetWellbeingInsightByOlderAdultIdQuery | Consulta para obtener el wellbeing insight por identificador del adulto mayor | Representar la intención de obtener el estado de bienestar actual de un adulto mayor específico | Usado en la implementación del servicio de consultas |
+| Query | GetWellbeingSuggestionsViewQuery | Consulta para obtener la vista de sugerencias de bienestar (evento de dominio *Wellbeing Suggestions View*) | Representar la intención del cuidador a distancia de visualizar las sugerencias de bienestar vigentes de un adulto mayor | Usado en la implementación del servicio de consultas |
 | Query | GetWellbeingTrendHistoryQuery | Consulta para obtener el historial de tendencias de bienestar | Representar la intención de obtener las tendencias calculadas para un adulto mayor en un rango de periodos | Usado en la implementación del servicio de consultas |
-| Query | GetRiskPatternsByOlderAdultIdQuery | Consulta para obtener los patrones de riesgo detectados | Representar la intención de obtener los patrones de riesgo asociados a un adulto mayor específico | Usado en la implementación del servicio de consultas |
-| Query | GetAllWellbeingProfilesQuery | Consulta para obtener todos los perfiles de bienestar | Representar la intención de obtener la lista completa de perfiles de bienestar registrados | Usado en la implementación del servicio de consultas |
+| Query | GetAllWellbeingInsightsQuery | Consulta para obtener todos los wellbeing insights | Representar la intención de obtener la lista completa de wellbeing insights registrados | Usado en la implementación del servicio de consultas |
 
 <br>
 
@@ -3242,7 +3243,7 @@ El bounded context **Wellbeing Monitoring** es responsable de interpretar el his
 
 | Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
 |---|---|---|---|---|
-| Interface | IWellbeingProfileRepository | Repositorio para operaciones de persistencia del modelo WellbeingProfile | Definir contratos para operaciones CRUD sobre los perfiles de bienestar | Implementado en la capa de Infrastructure |
+| Interface | IWellbeingInsightRepository | Repositorio para operaciones de persistencia del modelo WellbeingInsight | Definir contratos para operaciones CRUD sobre los wellbeing insights | Implementado en la capa de Infrastructure |
 
 <br>
 
@@ -3250,7 +3251,7 @@ El bounded context **Wellbeing Monitoring** es responsable de interpretar el his
 
 | Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
 |---|---|---|---|---|
-| Interface | IWellbeingCommandService | Servicio para métodos de comandos de bienestar | Estipular una estructura clara a seguir para operaciones de escritura (evaluación de tendencias y detección de riesgo) | Usado en la capa "Application" para implementar los métodos dados |
+| Interface | IWellbeingCommandService | Servicio para métodos de comandos de bienestar | Estipular una estructura clara a seguir para operaciones de escritura (evaluación de patrones, emisión de sugerencias, registro de logros) | Usado en la capa "Application" para implementar los métodos dados |
 | Interface | IWellbeingQueryService | Servicio para métodos de consulta de bienestar | Estipular una estructura clara a seguir para operaciones de lectura | Usado en la capa "Application" para la implementación de los métodos |
 
 <br>
@@ -3261,11 +3262,10 @@ El bounded context **Wellbeing Monitoring** es responsable de interpretar el his
 
 | Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
 |---|---|---|---|---|
-| Resource | WellbeingProfileResource | Estructura de datos de perfil de bienestar para API | Representar y exponer datos del perfil de bienestar de forma accesible y estructurada para el cliente | Usado en controladores para estructurar respuestas de perfil de bienestar |
+| Resource | WellbeingInsightResource | Estructura de datos de wellbeing insight para API | Representar y exponer datos del wellbeing insight de forma accesible y estructurada para el cliente | Usado en controladores para estructurar respuestas de wellbeing insight |
+| Resource | WellbeingSuggestionsViewResource | Estructura de datos de la vista de sugerencias de bienestar para API | Representar y exponer las sugerencias de bienestar vigentes de forma accesible para el cliente | Usado en controladores para estructurar la respuesta de `Wellbeing Suggestions View` |
 | Resource | WellbeingTrendResource | Estructura de datos de tendencia de bienestar para API | Representar y exponer una tendencia calculada de forma accesible para el cliente | Usado en controladores para estructurar respuestas de historial de tendencias |
-| Resource | RiskPatternResource | Estructura de datos de patrón de riesgo para API | Representar y exponer un patrón de riesgo detectado de forma accesible para el cliente | Usado en controladores para estructurar respuestas de patrones de riesgo |
-| Resource | EvaluateWellbeingTrendResource | Estructura de petición para evaluar la tendencia de bienestar | Representar datos de entrada necesarios para solicitar el recálculo de una tendencia | Usado en controlador para procesar peticiones de evaluación |
-| Resource | AcknowledgeRiskPatternResource | Estructura de petición para confirmar la revisión de un patrón de riesgo | Representar datos necesarios para identificar y marcar como revisado un patrón de riesgo | Usado en controlador para procesar peticiones de confirmación |
+| Resource | DismissWellbeingSuggestionResource | Estructura de petición para descartar una sugerencia de bienestar | Representar datos necesarios para identificar y marcar como descartada una sugerencia de bienestar | Usado en controlador para procesar peticiones de descarte |
 
 <br>
 
@@ -3273,10 +3273,10 @@ El bounded context **Wellbeing Monitoring** es responsable de interpretar el his
 
 | Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
 |---|---|---|---|---|
-| Assembler | WellbeingProfileResourceFromEntityAssembler | Transformador de entidad WellbeingProfile a WellbeingProfileResource | Convertir la entidad del dominio a su representación REST correspondiente | Usado en controladores para transformar respuestas |
+| Assembler | WellbeingInsightResourceFromEntityAssembler | Transformador de entidad WellbeingInsight a WellbeingInsightResource | Convertir la entidad del dominio a su representación REST correspondiente | Usado en controladores para transformar respuestas |
+| Assembler | WellbeingSuggestionsViewResourceFromEntityAssembler | Transformador del read model de sugerencias vigentes a WellbeingSuggestionsViewResource | Convertir el read model del dominio a su representación REST correspondiente | Usado en controladores para transformar la respuesta de `Wellbeing Suggestions View` |
 | Assembler | WellbeingTrendResourceFromEntityAssembler | Transformador de entidad WellbeingTrend a WellbeingTrendResource | Convertir la entidad del dominio a su representación REST correspondiente | Usado en controladores para transformar respuestas |
-| Assembler | EvaluateWellbeingTrendCommandFromResourceAssembler | Transformador de EvaluateWellbeingTrendResource a EvaluateWellbeingTrendCommand | Convertir la petición REST a comando del dominio | Usado en controlador para procesar peticiones de evaluación |
-| Assembler | AcknowledgeRiskPatternCommandFromResourceAssembler | Transformador de AcknowledgeRiskPatternResource a AcknowledgeRiskPatternCommand | Convertir la petición REST a comando del dominio | Usado en controlador para procesar peticiones de confirmación |
+| Assembler | DismissWellbeingSuggestionCommandFromResourceAssembler | Transformador de DismissWellbeingSuggestionResource a DismissWellbeingSuggestionCommand | Convertir la petición REST a comando del dominio | Usado en controlador para procesar peticiones de descarte |
 
 <br>
 
@@ -3284,7 +3284,7 @@ El bounded context **Wellbeing Monitoring** es responsable de interpretar el his
 
 | Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
 |---|---|---|---|---|
-| Consumer | CheckInRecordedConsumer | Consumidor interno del evento de dominio CheckInRecorded | Escuchar, dentro del monolito modular, el evento publicado por el módulo Daily Check-in para desencadenar el `EvaluateWellbeingTrendCommand` correspondiente | Usado como puente entre el bounded context Daily Check-in y Wellbeing Monitoring |
+| Consumer | CheckInRecordedConsumer | Consumidor interno del evento de dominio CheckInRecorded | Escuchar, dentro del monolito modular, el evento publicado por el módulo Daily Check-in para desencadenar el `EvaluateWellbeingPatternCommand` correspondiente | Usado como puente entre el bounded context Daily Check-in y Wellbeing Monitoring |
 
 <br>
 
@@ -3294,7 +3294,7 @@ El bounded context **Wellbeing Monitoring** es responsable de interpretar el his
 
 | Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
 |---|---|---|---|---|
-| CommandHandler | WellbeingCommandService | Implementación de comandos de bienestar | Implementar los métodos para evaluar tendencias, detectar patrones de riesgo y publicar el evento `RiskPatternDetected` | Implementa los métodos de la interface IWellbeingCommandService en la capa de "Services" |
+| CommandHandler | WellbeingCommandService | Implementación de comandos de bienestar | Implementar los métodos para evaluar el patrón de bienestar y publicar los eventos `DiscomfortPatternDetected` o `WellbeingTrendImproved`, emitir sugerencias (`WellbeingSuggestionIssued`), registrar pequeños logros (`SmallWinRecorded`) y descartar sugerencias (`WellbeingSuggestionDismissed`) | Implementa los métodos de la interface IWellbeingCommandService en la capa de "Services" |
 
 <br>
 
@@ -3302,7 +3302,7 @@ El bounded context **Wellbeing Monitoring** es responsable de interpretar el his
 
 | Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
 |---|---|---|---|---|
-| QueryHandler | WellbeingQueryService | Implementación de consultas de bienestar | Implementar los métodos para las consultas de perfiles, tendencias y patrones de riesgo | Implementa los métodos de la interface IWellbeingQueryService en la capa de "Services" |
+| QueryHandler | WellbeingQueryService | Implementación de consultas de bienestar | Implementar los métodos para las consultas de wellbeing insights, tendencias y la vista de sugerencias de bienestar | Implementa los métodos de la interface IWellbeingQueryService en la capa de "Services" |
 
 <br>
 
@@ -3312,20 +3312,18 @@ El bounded context **Wellbeing Monitoring** es responsable de interpretar el his
 
 | Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
 |---|---|---|---|---|
-| Repository | WellbeingProfileRepository | Repositorio para uso del modelo "WellbeingProfile" | Acceder y manipular datos persistidos de perfiles de bienestar y sus tendencias en la base de datos | Usado en la capa "Application" para implementar operaciones CRUD de perfiles de bienestar |
+| Repository | WellbeingInsightRepository | Repositorio para uso del modelo "WellbeingInsight" | Acceder y manipular datos persistidos de wellbeing insights, sus tendencias, sugerencias y pequeños logros en la base de datos | Usado en la capa "Application" para implementar operaciones CRUD de wellbeing insights |
 
 <br>
 
 #### 2.6.4.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Wellbeing Monitoring, elaborado con la herramienta Structurizr. El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: el `WellbeingController` como punto de entrada de las peticiones REST; los *Resources* (`WellbeingProfileResource`, `WellbeingTrendResource`, `RiskPatternResource`, `EvaluateWellbeingTrendResource`, `AcknowledgeRiskPatternResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y la entidad de dominio `WellbeingProfile`; los *Commands* y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `WellbeingCommandService` y `WellbeingQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IWellbeingCommandService` e `IWellbeingQueryService`; y finalmente `IWellbeingProfileRepository`, implementado por `WellbeingProfileRepository`, que gestiona la persistencia del agregado. Se incluye además `CheckInRecordedConsumer`, componente que escucha el evento `CheckInRecorded` publicado por el bounded context Daily Check-in para desencadenar la evaluación de una nueva tendencia de bienestar.
-
-<br>
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Wellbeing Monitoring, elaborado con la herramienta Structurizr. El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: el `WellbeingController` como punto de entrada de las peticiones REST; los *Resources* (`WellbeingInsightResource`, `WellbeingSuggestionsViewResource`, `WellbeingTrendResource`, `DismissWellbeingSuggestionResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y la entidad de dominio `WellbeingInsight`; los *Commands* (`EvaluateWellbeingPatternCommand`, `IssueWellbeingSuggestionCommand`, `RecordSmallWinCommand`, `DismissWellbeingSuggestionCommand`) y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `WellbeingCommandService` y `WellbeingQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IWellbeingCommandService` e `IWellbeingQueryService`; y finalmente `IWellbeingInsightRepository`, implementado por `WellbeingInsightRepository`, que gestiona la persistencia del agregado. Se incluye además `CheckInRecordedConsumer`, componente que escucha el evento `CheckInRecorded` publicado por el bounded context Daily Check-in para desencadenar la evaluación de un nuevo wellbeing insight.
 
 <div align="center">
 
 ![Component Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-diagram.png)
-  <br/><i>Imagen 17. Component Diagram del Bounded Context Wellbeing Monitoring.</i>
+  <br/><i>Imagen 24: Component Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
 
@@ -3335,69 +3333,76 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 
 ##### 2.6.4.6.1. Bounded Context Domain Layer Class Diagrams
 
-Diagrama de clases de la capa Domain: En esta imagen se muestran las clases del dominio Wellbeing Monitoring que incluyen `WellbeingProfile` como aggregate root, Commands para las operaciones de evaluación de tendencias y gestión de patrones de riesgo, Queries para las consultas de información de bienestar, e interfaces para los servicios de dominio con sus respectivas implementaciones.
+Diagrama de clases de la capa Domain: En esta imagen se muestran las clases del dominio Wellbeing Monitoring que incluyen `WellbeingInsight` como aggregate root, Commands para las operaciones de evaluación de patrones, emisión de sugerencias y registro de pequeños logros, Queries para las consultas de información de bienestar, e interfaces para los servicios de dominio con sus respectivas implementaciones. El diagrama fue elaborado en PlantUML.
 
-<br>
 <div align="center">
 
 ![Domain Layer Class Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-class-diagram.png)
-  <br/><i>Imagen 18. Domain Layer Class Diagram del Bounded Context Wellbeing Monitoring.</i>
+  <br/><i>Imagen 25: Domain Layer Class Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
+
+<br>
 
 <br>
 
 ##### 2.6.4.6.2. Bounded Context Database Design Diagram
 
-<br>
+Diagrama de base de datos: En esta imagen se muestra el diseño de las tablas correspondientes al Bounded Context Wellbeing Monitoring, compuesto por `wellbeing_entries` (registro de estado de ánimo asociado a cada check-in), `status_summaries` (resumen diario del estado del adulto mayor), `small_wins` (historial de pequeños logros registrados) y `wellbeing_patterns` (patrones de malestar sostenido o mejora detectados en el historial de check-ins), relacionadas mediante llaves foráneas hacia `users` (Identity & Access) y `check_ins` (Daily Check-in). Los nombres de las columnas siguen la convención de nomenclatura del equipo, prefijando cada campo con el código de 3 letras de su tabla (`wbe`, `sts`, `smw`, `wbp`).
 
-**Tabla `wellbeing_profiles`:**
-
-| Nombre | Descripción |
-|---|---|
-| wbp_id | Identificador único del registro, clave primaria de la tabla (prefijo `wbp` de `wellbeing_profiles`). |
-| wbp_created_at | Fecha y hora en que se creó el registro. |
-| wbp_updated_at | Fecha y hora de la última actualización del registro. |
-| wbp_older_adult_id | Identificador del adulto mayor al que pertenece el perfil de bienestar (referencia al bounded context IAM). |
-| wbp_current_risk_level | Nivel de riesgo actual del perfil (LOW, MEDIUM, HIGH, CRITICAL). |
-| wbp_last_evaluated_at | Fecha y hora de la última evaluación de tendencia realizada sobre el perfil. |
-
-<br>
-
-**Tabla `wellbeing_trends`:**
+**Tabla `wellbeing_entries`:**
 
 | Nombre | Descripción |
 |---|---|
-| wbt_id | Identificador único del registro, clave primaria de la tabla (prefijo `wbt` de `wellbeing_trends`). |
-| wbt_created_at | Fecha y hora en que se creó el registro. |
-| wbt_wbp_id | Llave foránea hacia `wellbeing_profiles.wbp_id`; identifica el perfil de bienestar al que pertenece la tendencia calculada. |
-| wbt_period | Periodo sobre el cual se calculó la tendencia (WEEKLY, MONTHLY). |
-| wbt_score | Puntaje numérico de bienestar calculado para el periodo (0-100). |
-| wbt_generated_at | Fecha y hora en que se generó la tendencia. |
+| wbe_id | Identificador único del registro, clave primaria de la tabla (prefijo `wbe` de `wellbeing_entries`). |
+| wbe_older_adult_id | Llave foránea hacia `users.id`; identifica al adulto mayor al que pertenece el registro de estado de ánimo. |
+| wbe_check_in_id | Llave foránea hacia `check_ins.id`; identifica el check-in del cual se derivó este registro de estado de ánimo. |
+| wbe_mood | Nivel de ánimo reportado en el check-in (VERY_LOW, LOW, NEUTRAL, GOOD, VERY_GOOD). |
+| wbe_mood_score | Puntaje numérico asociado al nivel de ánimo reportado. |
+| wbe_recorded_at | Fecha y hora en que se registró el estado de ánimo. |
 
-<br>
-
-**Tabla `risk_patterns`:**
+**Tabla `status_summaries`:**
 
 | Nombre | Descripción |
 |---|---|
-| rsp_id | Identificador único del registro, clave primaria de la tabla (prefijo `rsp` de `risk_patterns`). |
-| rsp_created_at | Fecha y hora en que se creó el registro. |
-| rsp_wbp_id | Llave foránea hacia `wellbeing_profiles.wbp_id`; identifica el perfil de bienestar al que pertenece el patrón de riesgo detectado. |
-| rsp_risk_level | Nivel de riesgo del patrón detectado (LOW, MEDIUM, HIGH, CRITICAL). |
-| rsp_description | Descripción del patrón de riesgo, generada a partir del análisis del historial de check-ins. |
-| rsp_detected_at | Fecha y hora en que se detectó el patrón de riesgo. |
-| rsp_acknowledged | Indica si el patrón de riesgo detectado ya fue revisado por el equipo de Alerts and Safety. |
-| rsp_acknowledged_at | Fecha y hora en que se confirmó la revisión del patrón de riesgo. |
+| sts_id | Identificador único del registro, clave primaria de la tabla (prefijo `sts` de `status_summaries`). |
+| sts_older_adult_id | Llave foránea hacia `users.id`; identifica al adulto mayor al que pertenece el resumen diario. |
+| sts_summary_date | Fecha a la que corresponde el resumen de estado. |
+| sts_mood | Estado de ánimo predominante del día resumido. |
+| sts_has_answered | Indica si el adulto mayor respondió su check-in ese día. |
+| sts_highlight | Dato destacado del día, mostrado al cuidador a distancia. |
+| sts_generated_at | Fecha y hora en que se generó el resumen. |
+
+**Tabla `small_wins`:**
+
+| Nombre | Descripción |
+|---|---|
+| smw_id | Identificador único del registro, clave primaria de la tabla (prefijo `smw` de `small_wins`). |
+| smw_older_adult_id | Llave foránea hacia `users.id`; identifica al adulto mayor al que pertenece el pequeño logro registrado. |
+| smw_check_in_id | Llave foránea hacia `check_ins.id`; identifica el check-in del cual se derivó el pequeño logro, cuando aplica. |
+| smw_description | Descripción del pequeño logro, generada a partir de una mejora detectada en el patrón de bienestar. |
+| smw_recorded_at | Fecha y hora en que se registró el pequeño logro. |
+
+**Tabla `wellbeing_patterns`:**
+
+| Nombre | Descripción |
+|---|---|
+| wbp_id | Identificador único del registro, clave primaria de la tabla (prefijo `wbp` de `wellbeing_patterns`). |
+| wbp_older_adult_id | Llave foránea hacia `users.id`; identifica al adulto mayor al que pertenece el patrón detectado. |
+| wbp_type | Tipo de patrón detectado en el historial de check-ins (SUSTAINED_DISCOMFORT, IMPROVEMENT). |
+| wbp_consecutive_days | Cantidad de días consecutivos que sostienen el patrón detectado. |
+| wbp_start_date | Fecha de inicio del periodo en que se detectó el patrón. |
+| wbp_end_date | Fecha de fin del periodo en que se detectó el patrón. |
+| wbp_detected_at | Fecha y hora en que se detectó el patrón. |
 
 <br>
-
 <div align="center">
 
 ![Database Design Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-database-diagram.png)
-  <br/><i>Imagen 19: Database Design Diagram del Bounded Context Wellbeing Monitoring.</i>
+  <br/><i>Imagen 26: Database Design Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
+
 <br>
 
 
