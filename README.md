@@ -75,6 +75,16 @@ El informe del proyecto fue desarrollado de manera colaborativa por el equipo me
 URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-report <br>
 
 **Primera Entrega (AV1)**
+Para esta entrega el equipo trabajó el informe directamente en Markdown sobre el repositorio `serenia-report`, aplicando GitFlow y Conventional Commits. Se mantuvo `main` como rama estable de entrega y `develop` como rama de integración; cada integrante avanzó sus secciones asignadas en ramas `feature/` independientes, que se incorporaron a `develop` mediante Pull Requests revisados por al menos otro miembro antes del merge. 
+
+Los mensajes de commit siguieron la convención `docs:` para la redacción de secciones y `fix:` para correcciones de contenido o formato, lo que permite rastrear en el historial qué aporte corresponde a cada artefacto del informe. 
+
+La distribución del trabajo se coordinó en ClickUp, donde cada sección del Capítulo I y II se registró como una tarea con la descripción tomada del enunciado del curso, mientras que las User Stories y el Sprint Backlog oficiales se gestionaron en Trello.
+
+<p align="center">
+  <img src="assets/img/project-report-collaboration-insights/insights-av1.png" alt="AV1 Insights" width="900"/>
+    <br/><i>Imagen X. Insights de la Primera Entrega (AV1)</i>
+</p>
 
 <br>
 
