@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentStyleType="text/css" height="1315.625px" preserveAspectRatio="none" style="width:7804px;height:1315px;background:#FFFFFF;" version="1.1" viewBox="0 0 7804 1315" width="7804.6875px" zoomAndPan="magnify"><defs/><g><!--MD5=[27f772719433d509ddbc20ff768eba08]
+cluster domain--><g id="cluster_domain"><rect fill="#F9FFF9" height="360.9375" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:2.34375;" width="7784.375" x="10.9375" y="10.9375"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-weight="bold" lengthAdjust="spacing" textLength="89.0625" x="3858.5938" y="34.3674">domain</text></g><!--MD5=[03c2ecdfa11f70b38eb496afaf3adc6b]
+cluster services--><g id="cluster_services"><rect fill="#F9FFF9" height="256.25" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:2.34375;" width="5528.125" x="2229.6875" y="78.125"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-weight="bold" lengthAdjust="spacing" textLength="104.6875" x="4941.4063" y="101.5549">services</text></g><!--MD5=[96f760269fc4f42dc47a24738b17ae1e]
+cluster repositories--><g id="cluster_repositories"><rect fill="#F9FFF9" height="256.25" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:2.34375;" width="2143.75" x="48.4375" y="78.125"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-weight="bold" lengthAdjust="spacing" textLength="150" x="1045.3125" y="101.5549">repositories</text></g><!--MD5=[5d4cd377749310b66bf14896f5cd8d9b]
+cluster model--><g id="cluster_model"><rect fill="#F9FFF9" height="896.875" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:2.34375;" width="3779.6875" x="2584.375" y="409.375"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-weight="bold" lengthAdjust="spacing" textLength="75" x="4436.7188" y="432.8049">model</text></g><!--MD5=[2a53bf55b807f27adccc2831e547688e]
+cluster aggregates--><g id="cluster_aggregates"><rect fill="#F9FFF9" height="523.4375" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:2.34375;" width="3125" x="2937.5" y="476.5625"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-weight="bold" lengthAdjust="spacing" textLength="140.625" x="4429.6875" y="499.9924">aggregates</text></g><!--MD5=[418381d2f5d776e5292a1b4b2254a977]
+cluster valueobjects--><g id="cluster_valueobjects"><rect fill="#F9FFF9" height="231.25" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:2.34375;" width="3704.6875" x="2621.875" y="1037.5"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-weight="bold" lengthAdjust="spacing" textLength="156.25" x="4396.0938" y="1060.9299">valueobjects</text></g><!--MD5=[5cf889c3e8356acac10dc65754cc8dea]
+class IAudioMessageCommandService--><g id="elem_IAudioMessageCommandService"><rect codeLine="22" fill="#FFFFFF" height="176.8555" id="IAudioMessageCommandService" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="773.4375" x="6958.5938" y="132.8125"/><ellipse cx="7162.1094" cy="157.8125" fill="#B4A7E5" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M7155.7373,151.1963 L7155.7373,147.8271 L7167.2852,147.8271 L7167.2852,151.1963 L7163.4277,151.1963 L7163.4277,163.8184 L7167.2852,163.8184 L7167.2852,167.1875 L7155.7373,167.1875 L7155.7373,163.8184 L7159.5947,163.8184 L7159.5947,151.1963 L7155.7373,151.1963 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-style="italic" lengthAdjust="spacing" textLength="353.125" x="7194.1406" y="165.3854">IAudioMessageCommandService</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="6960.1563" x2="7730.4688" y1="182.8125" y2="182.8125"/><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="6960.1563" x2="7730.4688" y1="195.3125" y2="195.3125"/><ellipse cx="6975.7813" cy="216.6382" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="732.8125" x="6989.8438" y="221.8674">handle(command: RecordAudioMessageCommand): AudioMessage</text><ellipse cx="6975.7813" cy="242.1021" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="601.5625" x="6989.8438" y="247.3312">handle(command: ShareAudioMessageCommand): void</text><ellipse cx="6975.7813" cy="267.5659" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="620.3125" x="6989.8438" y="272.7951">handle(command: DiscardAudioMessageCommand): void</text><ellipse cx="6975.7813" cy="293.0298" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="581.25" x="6989.8438" y="298.259">handle(command: PlayAudioMessageCommand): void</text></g><!--MD5=[dbe0b292bb0fe408a5216e083bea3330]
+class IAudioMessageQueryService--><g id="elem_IAudioMessageQueryService"><rect codeLine="29" fill="#FFFFFF" height="100.4639" id="IAudioMessageQueryService" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="812.5" x="6090.625" y="171.0938"/><ellipse cx="6337.1094" cy="196.0938" fill="#B4A7E5" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M6330.7373,189.4775 L6330.7373,186.1084 L6342.2852,186.1084 L6342.2852,189.4775 L6338.4277,189.4775 L6338.4277,202.0996 L6342.2852,202.0996 L6342.2852,205.4688 L6330.7373,205.4688 L6330.7373,202.0996 L6334.5947,202.0996 L6334.5947,189.4775 L6330.7373,189.4775 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-style="italic" lengthAdjust="spacing" textLength="306.25" x="6369.1406" y="203.6667">IAudioMessageQueryService</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="6092.1875" x2="6901.5625" y1="221.0938" y2="221.0938"/><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="6092.1875" x2="6901.5625" y1="233.5938" y2="233.5938"/><ellipse cx="6107.8125" cy="254.9194" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="771.875" x="6121.875" y="260.1486">handle(query: GetAudioMessageByIdQuery): Optional&lt;AudioMessage&gt;</text></g><!--MD5=[c1f20be3bf1685b253bfd2fa5130fd7e]
+class IPhotoMessageCommandService--><g id="elem_IPhotoMessageCommandService"><rect codeLine="33" fill="#FFFFFF" height="100.4639" id="IPhotoMessageCommandService" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="764.0625" x="5271.0938" y="171.0938"/><ellipse cx="5468.3594" cy="196.0938" fill="#B4A7E5" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M5461.9873,189.4775 L5461.9873,186.1084 L5473.5352,186.1084 L5473.5352,189.4775 L5469.6777,189.4775 L5469.6777,202.0996 L5473.5352,202.0996 L5473.5352,205.4688 L5461.9873,205.4688 L5461.9873,202.0996 L5465.8447,202.0996 L5465.8447,189.4775 L5461.9873,189.4775 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-style="italic" lengthAdjust="spacing" textLength="356.25" x="5500.3906" y="203.6667">IPhotoMessageCommandService</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="5272.6563" x2="6033.5938" y1="221.0938" y2="221.0938"/><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="5272.6563" x2="6033.5938" y1="233.5938" y2="233.5938"/><ellipse cx="5288.2813" cy="254.9194" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="723.4375" x="5302.3438" y="260.1486">handle(command: SharePhotoMessageCommand): PhotoMessage</text></g><!--MD5=[b7f0adc5876346b1ebafc96b5364c335]
+class IPhotoMessageQueryService--><g id="elem_IPhotoMessageQueryService"><rect codeLine="37" fill="#FFFFFF" height="100.4639" id="IPhotoMessageQueryService" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="818.75" x="4396.875" y="171.0938"/><ellipse cx="4644.9219" cy="196.0938" fill="#B4A7E5" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M4638.5498,189.4775 L4638.5498,186.1084 L4650.0977,186.1084 L4650.0977,189.4775 L4646.2402,189.4775 L4646.2402,202.0996 L4650.0977,202.0996 L4650.0977,205.4688 L4638.5498,205.4688 L4638.5498,202.0996 L4642.4072,202.0996 L4642.4072,189.4775 L4638.5498,189.4775 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-style="italic" lengthAdjust="spacing" textLength="309.375" x="4676.9531" y="203.6667">IPhotoMessageQueryService</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="4398.4375" x2="5214.0625" y1="221.0938" y2="221.0938"/><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="4398.4375" x2="5214.0625" y1="233.5938" y2="233.5938"/><ellipse cx="4414.0625" cy="254.9194" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="778.125" x="4428.125" y="260.1486">handle(query: GetPhotoMessageByIdQuery): Optional&lt;PhotoMessage&gt;</text></g><!--MD5=[6ee8590a4fe00f0e9663d968dc3eaa5b]
+class ISocialReminderCommandService--><g id="elem_ISocialReminderCommandService"><rect codeLine="41" fill="#FFFFFF" height="151.3916" id="ISocialReminderCommandService" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="812.5" x="3529.6875" y="145.3125"/><ellipse cx="3748.8281" cy="170.3125" fill="#B4A7E5" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M3742.4561,163.6963 L3742.4561,160.3271 L3754.0039,160.3271 L3754.0039,163.6963 L3750.1465,163.6963 L3750.1465,176.3184 L3754.0039,176.3184 L3754.0039,179.6875 L3742.4561,179.6875 L3742.4561,176.3184 L3746.3135,176.3184 L3746.3135,163.6963 L3742.4561,163.6963 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-style="italic" lengthAdjust="spacing" textLength="360.9375" x="3780.8594" y="177.8854">ISocialReminderCommandService</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="3531.25" x2="4340.625" y1="195.3125" y2="195.3125"/><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="3531.25" x2="4340.625" y1="207.8125" y2="207.8125"/><ellipse cx="3546.875" cy="229.1382" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="771.875" x="3560.9375" y="234.3674">handle(command: ScheduleSocialReminderCommand): SocialReminder</text><ellipse cx="3546.875" cy="254.6021" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="651.5625" x="3560.9375" y="259.8312">handle(command: CompleteSocialReminderCommand): void</text><ellipse cx="3546.875" cy="280.0659" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="620.3125" x="3560.9375" y="285.2951">handle(command: CancelSocialReminderCommand): void</text></g><!--MD5=[050c2440f829ed12ff3de8851f2ad7cf]
+class ISocialReminderQueryService--><g id="elem_ISocialReminderQueryService"><rect codeLine="47" fill="#FFFFFF" height="100.4639" id="ISocialReminderQueryService" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="828.125" x="2646.875" y="171.0938"/><ellipse cx="2897.2656" cy="196.0938" fill="#B4A7E5" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M2890.8936,189.4775 L2890.8936,186.1084 L2902.4414,186.1084 L2902.4414,189.4775 L2898.584,189.4775 L2898.584,202.0996 L2902.4414,202.0996 L2902.4414,205.4688 L2890.8936,205.4688 L2890.8936,202.0996 L2894.751,202.0996 L2894.751,189.4775 L2890.8936,189.4775 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-style="italic" lengthAdjust="spacing" textLength="314.0625" x="2929.2969" y="203.6667">ISocialReminderQueryService</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="2648.4375" x2="3473.4375" y1="221.0938" y2="221.0938"/><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="2648.4375" x2="3473.4375" y1="233.5938" y2="233.5938"/><ellipse cx="2664.0625" cy="254.9194" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="787.5" x="2678.125" y="260.1486">handle(query: GetSocialRemindersByCircleQuery): List&lt;SocialReminder&gt;</text></g><!--MD5=[b489b7b4150d048a76515d586f94bf60]
+class IDomainEventPublisher--><g id="elem_IDomainEventPublisher"><rect codeLine="51" fill="#FFFFFF" height="100.4639" id="IDomainEventPublisher" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="337.5" x="2254.6875" y="171.0938"/><ellipse cx="2295.7031" cy="196.0938" fill="#B4A7E5" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M2289.3311,189.4775 L2289.3311,186.1084 L2300.8789,186.1084 L2300.8789,189.4775 L2297.0215,189.4775 L2297.0215,202.0996 L2300.8789,202.0996 L2300.8789,205.4688 L2289.3311,205.4688 L2289.3311,202.0996 L2293.1885,202.0996 L2293.1885,189.4775 L2289.3311,189.4775 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-style="italic" lengthAdjust="spacing" textLength="248.4375" x="2321.4844" y="203.6667">IDomainEventPublisher</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="2256.25" x2="2590.625" y1="221.0938" y2="221.0938"/><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="2256.25" x2="2590.625" y1="233.5938" y2="233.5938"/><ellipse cx="2271.875" cy="254.9194" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="296.875" x="2285.9375" y="260.1486">publish(event: Object): void</text></g><!--MD5=[b495276eec474517aec3de853d9ec302]
+class IAudioMessageRepository--><g id="elem_IAudioMessageRepository"><rect codeLine="58" fill="#FFFFFF" height="176.8555" id="IAudioMessageRepository" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="657.8125" x="1508.5938" y="132.8125"/><ellipse cx="1691.0156" cy="157.8125" fill="#B4A7E5" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M1684.6436,151.1963 L1684.6436,147.8271 L1696.1914,147.8271 L1696.1914,151.1963 L1692.334,151.1963 L1692.334,163.8184 L1696.1914,163.8184 L1696.1914,167.1875 L1684.6436,167.1875 L1684.6436,163.8184 L1688.501,163.8184 L1688.501,151.1963 L1684.6436,151.1963 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-style="italic" lengthAdjust="spacing" textLength="279.6875" x="1723.0469" y="165.3854">IAudioMessageRepository</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="1510.1563" x2="2164.8438" y1="182.8125" y2="182.8125"/><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="1510.1563" x2="2164.8438" y1="195.3125" y2="195.3125"/><ellipse cx="1525.7813" cy="216.6382" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="570.3125" x="1539.8438" y="221.8674">save(audioMessage: AudioMessage): AudioMessage</text><ellipse cx="1525.7813" cy="242.1021" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="610.9375" x="1539.8438" y="247.3312">findById(id: AudioMessageId): Optional&lt;AudioMessage&gt;</text><ellipse cx="1525.7813" cy="267.5659" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="617.1875" x="1539.8438" y="272.7951">findByCareCircleId(id: CareCircleId): List&lt;AudioMessage&gt;</text><ellipse cx="1525.7813" cy="293.0298" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="353.125" x="1539.8438" y="298.259">delete(id: AudioMessageId): void</text></g><!--MD5=[1125e3820ad2dd9e3ab25b1bd0af842e]
+class IPhotoMessageRepository--><g id="elem_IPhotoMessageRepository"><rect codeLine="65" fill="#FFFFFF" height="125.9277" id="IPhotoMessageRepository" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="657.8125" x="796.0938" y="157.8125"/><ellipse cx="976.9531" cy="182.8125" fill="#B4A7E5" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M970.5811,176.1963 L970.5811,172.8271 L982.1289,172.8271 L982.1289,176.1963 L978.2715,176.1963 L978.2715,188.8184 L982.1289,188.8184 L982.1289,192.1875 L970.5811,192.1875 L970.5811,188.8184 L974.4385,188.8184 L974.4385,176.1963 L970.5811,176.1963 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-style="italic" lengthAdjust="spacing" textLength="282.8125" x="1008.9844" y="190.3854">IPhotoMessageRepository</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="797.6563" x2="1452.3438" y1="207.8125" y2="207.8125"/><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="797.6563" x2="1452.3438" y1="220.3125" y2="220.3125"/><ellipse cx="813.2813" cy="241.6382" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="581.25" x="827.3438" y="246.8674">save(photoMessage: PhotoMessage): PhotoMessage</text><ellipse cx="813.2813" cy="267.1021" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="617.1875" x="827.3438" y="272.3312">findById(id: PhotoMessageId): Optional&lt;PhotoMessage&gt;</text></g><!--MD5=[1385893fbd6d967408c131a0804832d2]
+class ISocialReminderRepository--><g id="elem_ISocialReminderRepository"><rect codeLine="70" fill="#FFFFFF" height="151.3916" id="ISocialReminderRepository" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="667.1875" x="74.2188" y="145.3125"/><ellipse cx="257.4219" cy="170.3125" fill="#B4A7E5" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M251.0498,163.6963 L251.0498,160.3271 L262.5977,160.3271 L262.5977,163.6963 L258.7402,163.6963 L258.7402,176.3184 L262.5977,176.3184 L262.5977,179.6875 L251.0498,179.6875 L251.0498,176.3184 L254.9072,176.3184 L254.9072,163.6963 L251.0498,163.6963 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="21.875" font-style="italic" lengthAdjust="spacing" textLength="287.5" x="289.4531" y="177.8854">ISocialReminderRepository</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="75.7813" x2="739.8438" y1="195.3125" y2="195.3125"/><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="75.7813" x2="739.8438" y1="207.8125" y2="207.8125"/><ellipse cx="91.4063" cy="229.1382" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="525" x="105.4688" y="234.3674">save(reminder: SocialReminder): SocialReminder</text><ellipse cx="91.4063" cy="254.6021" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="626.5625" x="105.4688" y="259.8312">findById(id: SocialReminderId): Optional&lt;SocialReminder&gt;</text><ellipse cx="91.4063" cy="280.0659" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="625" x="105.4688" y="285.2951">findByCareCircleId(id: CareCircleId): List&lt;SocialReminder&gt;</text></g><!--MD5=[f3b14c42bd846bb4f5d93c15ed046653]
+class AudioMessage--><g id="elem_AudioMessage"><rect codeLine="86" fill="#FFFFFF" height="444.4092" id="AudioMessage" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="785.9375" x="5250.7813" y="531.25"/><ellipse cx="5551.9531" cy="562.7075" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M5556.5918,571.521 Q5555.6885,571.9849 5554.6875,572.2046 Q5553.6865,572.4487 5552.5879,572.4487 Q5548.6816,572.4487 5546.6064,569.8853 Q5544.5557,567.2974 5544.5557,562.4146 Q5544.5557,557.5317 5546.6064,554.9438 Q5548.6816,552.356 5552.5879,552.356 Q5553.6865,552.356 5554.6875,552.6001 Q5555.7129,552.8442 5556.5918,553.3081 L5556.5918,557.5562 Q5555.6152,556.6528 5554.6875,556.2378 Q5553.7598,555.7983 5552.7832,555.7983 Q5550.6836,555.7983 5549.6094,557.4829 Q5548.5352,559.1431 5548.5352,562.4146 Q5548.5352,565.686 5549.6094,567.3706 Q5550.6836,569.0308 5552.7832,569.0308 Q5553.7598,569.0308 5554.6875,568.6157 Q5555.6152,568.1763 5556.5918,567.2729 L5556.5918,571.521 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacing" textLength="176.5625" x="5580.8594" y="556.4667">«Aggregate Root»</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="159.375" x="5589.4531" y="581.1935">AudioMessage</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="5252.3438" x2="6035.1563" y1="594.165" y2="594.165"/><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="5263.2813" y="610.8032"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="210.9375" x="5282.0313" y="620.7199">id: AudioMessageId</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="5263.2813" y="636.2671"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="267.1875" x="5282.0313" y="646.1838">careCircleId: CareCircleId</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="5263.2813" y="661.731"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="206.25" x="5282.0313" y="671.6476">senderId: SenderId</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="5263.2813" y="687.1948"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="190.625" x="5282.0313" y="697.1115">audioUrl: AudioUrl</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="5263.2813" y="712.6587"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="309.375" x="5282.0313" y="722.5754">status: AudioMessageStatus</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="5263.2813" y="738.1226"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="293.75" x="5282.0313" y="748.0392">recordedAt: LocalDateTime</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="5263.2813" y="763.5864"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="270.3125" x="5282.0313" y="773.5031">sharedAt: LocalDateTime</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="5263.2813" y="789.0503"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="301.5625" x="5282.0313" y="798.967">discardedAt: LocalDateTime</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="5252.3438" x2="6035.1563" y1="810.376" y2="810.376"/><ellipse cx="5267.9688" cy="831.7017" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="745.3125" x="5282.0313" y="836.9308">record(careCircleId: CareCircleId, senderId: SenderId): AudioMessage</text><ellipse cx="5267.9688" cy="857.1655" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="134.375" x="5282.0313" y="862.3947">share(): void</text><ellipse cx="5267.9688" cy="882.6294" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="151.5625" x="5282.0313" y="887.8586">discard(): void</text><ellipse cx="5267.9688" cy="908.0933" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="115.625" x="5282.0313" y="913.3224">play(): void</text><ellipse cx="5267.9688" cy="933.5571" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="212.5" x="5282.0313" y="938.7863">isShared(): Boolean</text><ellipse cx="5267.9688" cy="959.021" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="245.3125" x="5282.0313" y="964.2502">isDiscarded(): Boolean</text></g><!--MD5=[2af0aec30a821204df59cc67832d8c7c]
+class PhotoMessage--><g id="elem_PhotoMessage"><rect codeLine="103" fill="#FFFFFF" height="266.1621" id="PhotoMessage" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="779.6875" x="4416.4063" y="620.3125"/><ellipse cx="4714.4531" cy="651.77" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M4719.0918,660.5835 Q4718.1885,661.0474 4717.1875,661.2671 Q4716.1865,661.5112 4715.0879,661.5112 Q4711.1816,661.5112 4709.1064,658.9478 Q4707.0557,656.3599 4707.0557,651.4771 Q4707.0557,646.5942 4709.1064,644.0063 Q4711.1816,641.4185 4715.0879,641.4185 Q4716.1865,641.4185 4717.1875,641.6626 Q4718.2129,641.9067 4719.0918,642.3706 L4719.0918,646.6187 Q4718.1152,645.7153 4717.1875,645.3003 Q4716.2598,644.8608 4715.2832,644.8608 Q4713.1836,644.8608 4712.1094,646.5454 Q4711.0352,648.2056 4711.0352,651.4771 Q4711.0352,654.7485 4712.1094,656.4331 Q4713.1836,658.0933 4715.2832,658.0933 Q4716.2598,658.0933 4717.1875,657.6782 Q4718.1152,657.2388 4719.0918,656.3354 L4719.0918,660.5835 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacing" textLength="176.5625" x="4743.3594" y="645.5292">«Aggregate Root»</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="162.5" x="4750.3906" y="670.256">PhotoMessage</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="4417.9688" x2="5194.5313" y1="683.2275" y2="683.2275"/><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="4428.9063" y="699.8657"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="214.0625" x="4447.6563" y="709.7824">id: PhotoMessageId</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="4428.9063" y="725.3296"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="267.1875" x="4447.6563" y="735.2463">careCircleId: CareCircleId</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="4428.9063" y="750.7935"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="206.25" x="4447.6563" y="760.7101">senderId: SenderId</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="4428.9063" y="776.2573"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="198.4375" x="4447.6563" y="786.174">photoUrl: PhotoUrl</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="4428.9063" y="801.7212"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="312.5" x="4447.6563" y="811.6379">status: PhotoMessageStatus</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="4428.9063" y="827.1851"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="270.3125" x="4447.6563" y="837.1017">sharedAt: LocalDateTime</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="4417.9688" x2="5194.5313" y1="848.5107" y2="848.5107"/><ellipse cx="4433.5938" cy="869.8364" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="739.0625" x="4447.6563" y="875.0656">share(careCircleId: CareCircleId, senderId: SenderId): PhotoMessage</text></g><!--MD5=[5cc8f237529c74e6529216646af160bb]
+class SocialReminder--><g id="elem_SocialReminder"><rect codeLine="113" fill="#FFFFFF" height="444.4092" id="SocialReminder" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="1398.4375" x="2963.2813" y="531.25"/><ellipse cx="3570.7031" cy="562.7075" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M3575.3418,571.521 Q3574.4385,571.9849 3573.4375,572.2046 Q3572.4365,572.4487 3571.3379,572.4487 Q3567.4316,572.4487 3565.3564,569.8853 Q3563.3057,567.2974 3563.3057,562.4146 Q3563.3057,557.5317 3565.3564,554.9438 Q3567.4316,552.356 3571.3379,552.356 Q3572.4365,552.356 3573.4375,552.6001 Q3574.4629,552.8442 3575.3418,553.3081 L3575.3418,557.5562 Q3574.3652,556.6528 3573.4375,556.2378 Q3572.5098,555.7983 3571.5332,555.7983 Q3569.4336,555.7983 3568.3594,557.4829 Q3567.2852,559.1431 3567.2852,562.4146 Q3567.2852,565.686 3568.3594,567.3706 Q3569.4336,569.0308 3571.5332,569.0308 Q3572.5098,569.0308 3573.4375,568.6157 Q3574.3652,568.1763 3575.3418,567.2729 L3575.3418,571.521 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacing" textLength="176.5625" x="3599.6094" y="556.4667">«Aggregate Root»</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="167.1875" x="3604.2969" y="581.1935">SocialReminder</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="2964.8438" x2="4360.1563" y1="594.165" y2="594.165"/><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="2975.7813" y="610.8032"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="218.75" x="2994.5313" y="620.7199">id: SocialReminderId</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="2975.7813" y="636.2671"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="267.1875" x="2994.5313" y="646.1838">careCircleId: CareCircleId</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="2975.7813" y="661.731"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="206.25" x="2994.5313" y="671.6476">creatorId: SenderId</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="2975.7813" y="687.1948"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="203.125" x="2994.5313" y="697.1115">title: ReminderTitle</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="2975.7813" y="712.6587"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="362.5" x="2994.5313" y="722.5754">description: ReminderDescription</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="2975.7813" y="738.1226"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="346.875" x="2994.5313" y="748.0392">scheduledDate: ScheduledDate</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="2975.7813" y="763.5864"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="317.1875" x="2994.5313" y="773.5031">status: SocialReminderStatus</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="2975.7813" y="789.0503"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="278.125" x="2994.5313" y="798.967">createdAt: LocalDateTime</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="2975.7813" y="814.5142"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="310.9375" x="2994.5313" y="824.4308">completedAt: LocalDateTime</text><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="2975.7813" y="839.978"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="298.4375" x="2994.5313" y="849.8947">cancelledAt: LocalDateTime</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="2964.8438" x2="4360.1563" y1="861.3037" y2="861.3037"/><ellipse cx="2980.4688" cy="882.6294" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="1357.8125" x="2994.5313" y="887.8586">schedule(careCircleId: CareCircleId, creatorId: SenderId, title: ReminderTitle, scheduledDate: ScheduledDate): SocialReminder</text><ellipse cx="2980.4688" cy="908.0933" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="175" x="2994.5313" y="913.3224">complete(): void</text><ellipse cx="2980.4688" cy="933.5571" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="143.75" x="2994.5313" y="938.7863">cancel(): void</text><ellipse cx="2980.4688" cy="959.021" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="225" x="2994.5313" y="964.2502">isPending(): Boolean</text></g><!--MD5=[6baf76b2c505b777d2cbb02f6c8ce3c5]
+class AudioMessageId--><g id="elem_AudioMessageId"><rect codeLine="133" fill="#FFFFFF" height="113.3789" id="AudioMessageId" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="228.125" x="5490.625" y="1110.9375"/><ellipse cx="5514.0625" cy="1142.395" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M5518.7012,1151.2085 Q5517.7979,1151.6724 5516.7969,1151.8921 Q5515.7959,1152.1362 5514.6973,1152.1362 Q5510.791,1152.1362 5508.7158,1149.5728 Q5506.665,1146.9849 5506.665,1142.1021 Q5506.665,1137.2192 5508.7158,1134.6313 Q5510.791,1132.0435 5514.6973,1132.0435 Q5515.7959,1132.0435 5516.7969,1132.2876 Q5517.8223,1132.5317 5518.7012,1132.9956 L5518.7012,1137.2437 Q5517.7246,1136.3403 5516.7969,1135.9253 Q5515.8691,1135.4858 5514.8926,1135.4858 Q5512.793,1135.4858 5511.7188,1137.1704 Q5510.6445,1138.8306 5510.6445,1142.1021 Q5510.6445,1145.3735 5511.7188,1147.0581 Q5512.793,1148.7183 5514.8926,1148.7183 Q5515.8691,1148.7183 5516.7969,1148.3032 Q5517.7246,1147.8638 5518.7012,1146.9604 L5518.7012,1151.2085 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacing" textLength="140.625" x="5554.6875" y="1136.1542">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="178.125" x="5535.9375" y="1160.881">AudioMessageId</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="5492.1875" x2="5717.1875" y1="1173.8525" y2="1173.8525"/><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="5503.125" y="1190.4907"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="123.4375" x="5521.875" y="1200.4074">value: UUID</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="5492.1875" x2="5717.1875" y1="1211.8164" y2="1211.8164"/></g><!--MD5=[9b24a4092bff224b661ff1929918cf4c]
+class PhotoMessageId--><g id="elem_PhotoMessageId"><rect codeLine="137" fill="#FFFFFF" height="113.3789" id="PhotoMessageId" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="231.25" x="4953.125" y="1110.9375"/><ellipse cx="4976.5625" cy="1142.395" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M4981.2012,1151.2085 Q4980.2979,1151.6724 4979.2969,1151.8921 Q4978.2959,1152.1362 4977.1973,1152.1362 Q4973.291,1152.1362 4971.2158,1149.5728 Q4969.165,1146.9849 4969.165,1142.1021 Q4969.165,1137.2192 4971.2158,1134.6313 Q4973.291,1132.0435 4977.1973,1132.0435 Q4978.2959,1132.0435 4979.2969,1132.2876 Q4980.3223,1132.5317 4981.2012,1132.9956 L4981.2012,1137.2437 Q4980.2246,1136.3403 4979.2969,1135.9253 Q4978.3691,1135.4858 4977.3926,1135.4858 Q4975.293,1135.4858 4974.2188,1137.1704 Q4973.1445,1138.8306 4973.1445,1142.1021 Q4973.1445,1145.3735 4974.2188,1147.0581 Q4975.293,1148.7183 4977.3926,1148.7183 Q4978.3691,1148.7183 4979.2969,1148.3032 Q4980.2246,1147.8638 4981.2012,1146.9604 L4981.2012,1151.2085 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacing" textLength="140.625" x="5018.75" y="1136.1542">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="181.25" x="4998.4375" y="1160.881">PhotoMessageId</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="4954.6875" x2="5182.8125" y1="1173.8525" y2="1173.8525"/><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="4965.625" y="1190.4907"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="123.4375" x="4984.375" y="1200.4074">value: UUID</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="4954.6875" x2="5182.8125" y1="1211.8164" y2="1211.8164"/></g><!--MD5=[3626e511af244ba37cb611b7b8929645]
+class SocialReminderId--><g id="elem_SocialReminderId"><rect codeLine="141" fill="#FFFFFF" height="113.3789" id="SocialReminderId" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="235.9375" x="2647.6563" y="1110.9375"/><ellipse cx="2671.0938" cy="1142.395" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M2675.7324,1151.2085 Q2674.8291,1151.6724 2673.8281,1151.8921 Q2672.8271,1152.1362 2671.7285,1152.1362 Q2667.8223,1152.1362 2665.7471,1149.5728 Q2663.6963,1146.9849 2663.6963,1142.1021 Q2663.6963,1137.2192 2665.7471,1134.6313 Q2667.8223,1132.0435 2671.7285,1132.0435 Q2672.8271,1132.0435 2673.8281,1132.2876 Q2674.8535,1132.5317 2675.7324,1132.9956 L2675.7324,1137.2437 Q2674.7559,1136.3403 2673.8281,1135.9253 Q2672.9004,1135.4858 2671.9238,1135.4858 Q2669.8242,1135.4858 2668.75,1137.1704 Q2667.6758,1138.8306 2667.6758,1142.1021 Q2667.6758,1145.3735 2668.75,1147.0581 Q2669.8242,1148.7183 2671.9238,1148.7183 Q2672.9004,1148.7183 2673.8281,1148.3032 Q2674.7559,1147.8638 2675.7324,1146.9604 L2675.7324,1151.2085 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacing" textLength="140.625" x="2715.625" y="1136.1542">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="185.9375" x="2692.9688" y="1160.881">SocialReminderId</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="2649.2188" x2="2882.0313" y1="1173.8525" y2="1173.8525"/><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="2660.1563" y="1190.4907"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="123.4375" x="2678.9063" y="1200.4074">value: UUID</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="2649.2188" x2="2882.0313" y1="1211.8164" y2="1211.8164"/></g><!--MD5=[844021b0fea739b4b47dc466c5997aad]
+class CareCircleId--><g id="elem_CareCircleId"><rect codeLine="145" fill="#FFFFFF" height="113.3789" id="CareCircleId" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="184.375" x="4714.0625" y="1110.9375"/><ellipse cx="4737.5" cy="1142.395" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M4742.1387,1151.2085 Q4741.2354,1151.6724 4740.2344,1151.8921 Q4739.2334,1152.1362 4738.1348,1152.1362 Q4734.2285,1152.1362 4732.1533,1149.5728 Q4730.1025,1146.9849 4730.1025,1142.1021 Q4730.1025,1137.2192 4732.1533,1134.6313 Q4734.2285,1132.0435 4738.1348,1132.0435 Q4739.2334,1132.0435 4740.2344,1132.2876 Q4741.2598,1132.5317 4742.1387,1132.9956 L4742.1387,1137.2437 Q4741.1621,1136.3403 4740.2344,1135.9253 Q4739.3066,1135.4858 4738.3301,1135.4858 Q4736.2305,1135.4858 4735.1563,1137.1704 Q4734.082,1138.8306 4734.082,1142.1021 Q4734.082,1145.3735 4735.1563,1147.0581 Q4736.2305,1148.7183 4738.3301,1148.7183 Q4739.3066,1148.7183 4740.2344,1148.3032 Q4741.1621,1147.8638 4742.1387,1146.9604 L4742.1387,1151.2085 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacing" textLength="140.625" x="4756.25" y="1136.1542">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="128.125" x="4762.5" y="1160.881">CareCircleId</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="4715.625" x2="4896.875" y1="1173.8525" y2="1173.8525"/><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="4726.5625" y="1190.4907"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="123.4375" x="4745.3125" y="1200.4074">value: UUID</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="4715.625" x2="4896.875" y1="1211.8164" y2="1211.8164"/></g><!--MD5=[488e980cc47054f2762e2add78b72824]
+class SenderId--><g id="elem_SenderId"><rect codeLine="149" fill="#FFFFFF" height="113.3789" id="SenderId" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="184.375" x="4475" y="1110.9375"/><ellipse cx="4498.4375" cy="1142.395" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M4503.0762,1151.2085 Q4502.1729,1151.6724 4501.1719,1151.8921 Q4500.1709,1152.1362 4499.0723,1152.1362 Q4495.166,1152.1362 4493.0908,1149.5728 Q4491.04,1146.9849 4491.04,1142.1021 Q4491.04,1137.2192 4493.0908,1134.6313 Q4495.166,1132.0435 4499.0723,1132.0435 Q4500.1709,1132.0435 4501.1719,1132.2876 Q4502.1973,1132.5317 4503.0762,1132.9956 L4503.0762,1137.2437 Q4502.0996,1136.3403 4501.1719,1135.9253 Q4500.2441,1135.4858 4499.2676,1135.4858 Q4497.168,1135.4858 4496.0938,1137.1704 Q4495.0195,1138.8306 4495.0195,1142.1021 Q4495.0195,1145.3735 4496.0938,1147.0581 Q4497.168,1148.7183 4499.2676,1148.7183 Q4500.2441,1148.7183 4501.1719,1148.3032 Q4502.0996,1147.8638 4503.0762,1146.9604 L4503.0762,1151.2085 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacing" textLength="140.625" x="4517.1875" y="1136.1542">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="96.875" x="4539.0625" y="1160.881">SenderId</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="4476.5625" x2="4657.8125" y1="1173.8525" y2="1173.8525"/><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="4487.5" y="1190.4907"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="123.4375" x="4506.25" y="1200.4074">value: UUID</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="4476.5625" x2="4657.8125" y1="1211.8164" y2="1211.8164"/></g><!--MD5=[d3402cc8ad8b21009cd9db4ff697309a]
+class AudioUrl--><g id="elem_AudioUrl"><rect codeLine="153" fill="#FFFFFF" height="138.8428" id="AudioUrl" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="195.3125" x="6105.4688" y="1098.4375"/><ellipse cx="6133.8281" cy="1129.895" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M6138.4668,1138.7085 Q6137.5635,1139.1724 6136.5625,1139.3921 Q6135.5615,1139.6362 6134.4629,1139.6362 Q6130.5566,1139.6362 6128.4814,1137.0728 Q6126.4307,1134.4849 6126.4307,1129.6021 Q6126.4307,1124.7192 6128.4814,1122.1313 Q6130.5566,1119.5435 6134.4629,1119.5435 Q6135.5615,1119.5435 6136.5625,1119.7876 Q6137.5879,1120.0317 6138.4668,1120.4956 L6138.4668,1124.7437 Q6137.4902,1123.8403 6136.5625,1123.4253 Q6135.6348,1122.9858 6134.6582,1122.9858 Q6132.5586,1122.9858 6131.4844,1124.6704 Q6130.4102,1126.3306 6130.4102,1129.6021 Q6130.4102,1132.8735 6131.4844,1134.5581 Q6132.5586,1136.2183 6134.6582,1136.2183 Q6135.6348,1136.2183 6136.5625,1135.8032 Q6137.4902,1135.3638 6138.4668,1134.4604 L6138.4668,1138.7085 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacing" textLength="140.625" x="6153.6719" y="1123.6542">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="89.0625" x="6179.4531" y="1148.381">AudioUrl</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="6107.0313" x2="6299.2188" y1="1161.3525" y2="1161.3525"/><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="6117.9688" y="1177.9907"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="132.8125" x="6136.7188" y="1187.9074">value: String</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="6107.0313" x2="6299.2188" y1="1199.3164" y2="1199.3164"/><ellipse cx="6122.6563" cy="1220.6421" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="154.6875" x="6136.7188" y="1225.8713">validate(): void</text></g><!--MD5=[c637bfecdd654e1424deb5b47409f88b]
+class PhotoUrl--><g id="elem_PhotoUrl"><rect codeLine="158" fill="#FFFFFF" height="138.8428" id="PhotoUrl" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="195.3125" x="5239.8438" y="1098.4375"/><ellipse cx="5268.2031" cy="1129.895" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M5272.8418,1138.7085 Q5271.9385,1139.1724 5270.9375,1139.3921 Q5269.9365,1139.6362 5268.8379,1139.6362 Q5264.9316,1139.6362 5262.8564,1137.0728 Q5260.8057,1134.4849 5260.8057,1129.6021 Q5260.8057,1124.7192 5262.8564,1122.1313 Q5264.9316,1119.5435 5268.8379,1119.5435 Q5269.9365,1119.5435 5270.9375,1119.7876 Q5271.9629,1120.0317 5272.8418,1120.4956 L5272.8418,1124.7437 Q5271.8652,1123.8403 5270.9375,1123.4253 Q5270.0098,1122.9858 5269.0332,1122.9858 Q5266.9336,1122.9858 5265.8594,1124.6704 Q5264.7852,1126.3306 5264.7852,1129.6021 Q5264.7852,1132.8735 5265.8594,1134.5581 Q5266.9336,1136.2183 5269.0332,1136.2183 Q5270.0098,1136.2183 5270.9375,1135.8032 Q5271.8652,1135.3638 5272.8418,1134.4604 L5272.8418,1138.7085 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacing" textLength="140.625" x="5288.0469" y="1123.6542">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="92.1875" x="5312.2656" y="1148.381">PhotoUrl</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="5241.4063" x2="5433.5938" y1="1161.3525" y2="1161.3525"/><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="5252.3438" y="1177.9907"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="132.8125" x="5271.0938" y="1187.9074">value: String</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="5241.4063" x2="5433.5938" y1="1199.3164" y2="1199.3164"/><ellipse cx="5257.0313" cy="1220.6421" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="154.6875" x="5271.0938" y="1225.8713">validate(): void</text></g><!--MD5=[de0c99fb1a73c2e119f06d66fa2f264c]
+class ReminderTitle--><g id="elem_ReminderTitle"><rect codeLine="163" fill="#FFFFFF" height="138.8428" id="ReminderTitle" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="200" x="3884.375" y="1098.4375"/><ellipse cx="3907.8125" cy="1129.895" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M3912.4512,1138.7085 Q3911.5479,1139.1724 3910.5469,1139.3921 Q3909.5459,1139.6362 3908.4473,1139.6362 Q3904.541,1139.6362 3902.4658,1137.0728 Q3900.415,1134.4849 3900.415,1129.6021 Q3900.415,1124.7192 3902.4658,1122.1313 Q3904.541,1119.5435 3908.4473,1119.5435 Q3909.5459,1119.5435 3910.5469,1119.7876 Q3911.5723,1120.0317 3912.4512,1120.4956 L3912.4512,1124.7437 Q3911.4746,1123.8403 3910.5469,1123.4253 Q3909.6191,1122.9858 3908.6426,1122.9858 Q3906.543,1122.9858 3905.4688,1124.6704 Q3904.3945,1126.3306 3904.3945,1129.6021 Q3904.3945,1132.8735 3905.4688,1134.5581 Q3906.543,1136.2183 3908.6426,1136.2183 Q3909.6191,1136.2183 3910.5469,1135.8032 Q3911.4746,1135.3638 3912.4512,1134.4604 L3912.4512,1138.7085 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacing" textLength="140.625" x="3934.375" y="1123.6542">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="150" x="3929.6875" y="1148.381">ReminderTitle</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="3885.9375" x2="4082.8125" y1="1161.3525" y2="1161.3525"/><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="3896.875" y="1177.9907"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="132.8125" x="3915.625" y="1187.9074">value: String</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="3885.9375" x2="4082.8125" y1="1199.3164" y2="1199.3164"/><ellipse cx="3901.5625" cy="1220.6421" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="154.6875" x="3915.625" y="1225.8713">validate(): void</text></g><!--MD5=[e6cac52886b67859068c151833cf8587]
+class ReminderDescription--><g id="elem_ReminderDescription"><rect codeLine="168" fill="#FFFFFF" height="113.3789" id="ReminderDescription" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="278.125" x="3551.5625" y="1110.9375"/><ellipse cx="3575" cy="1142.395" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M3579.6387,1151.2085 Q3578.7354,1151.6724 3577.7344,1151.8921 Q3576.7334,1152.1362 3575.6348,1152.1362 Q3571.7285,1152.1362 3569.6533,1149.5728 Q3567.6025,1146.9849 3567.6025,1142.1021 Q3567.6025,1137.2192 3569.6533,1134.6313 Q3571.7285,1132.0435 3575.6348,1132.0435 Q3576.7334,1132.0435 3577.7344,1132.2876 Q3578.7598,1132.5317 3579.6387,1132.9956 L3579.6387,1137.2437 Q3578.6621,1136.3403 3577.7344,1135.9253 Q3576.8066,1135.4858 3575.8301,1135.4858 Q3573.7305,1135.4858 3572.6563,1137.1704 Q3571.582,1138.8306 3571.582,1142.1021 Q3571.582,1145.3735 3572.6563,1147.0581 Q3573.7305,1148.7183 3575.8301,1148.7183 Q3576.8066,1148.7183 3577.7344,1148.3032 Q3578.6621,1147.8638 3579.6387,1146.9604 L3579.6387,1151.2085 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacing" textLength="140.625" x="3640.625" y="1136.1542">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="228.125" x="3596.875" y="1160.881">ReminderDescription</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="3553.125" x2="3828.125" y1="1173.8525" y2="1173.8525"/><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="3564.0625" y="1190.4907"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="132.8125" x="3582.8125" y="1200.4074">value: String</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="3553.125" x2="3828.125" y1="1211.8164" y2="1211.8164"/></g><!--MD5=[6614e6cb8bab9314d251507a6554c40c]
+class ScheduledDate--><g id="elem_ScheduledDate"><rect codeLine="172" fill="#FFFFFF" height="138.8428" id="ScheduledDate" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="217.1875" x="3278.9063" y="1098.4375"/><ellipse cx="3302.3438" cy="1129.895" fill="#ADD1B2" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M3306.9824,1138.7085 Q3306.0791,1139.1724 3305.0781,1139.3921 Q3304.0771,1139.6362 3302.9785,1139.6362 Q3299.0723,1139.6362 3296.9971,1137.0728 Q3294.9463,1134.4849 3294.9463,1129.6021 Q3294.9463,1124.7192 3296.9971,1122.1313 Q3299.0723,1119.5435 3302.9785,1119.5435 Q3304.0771,1119.5435 3305.0781,1119.7876 Q3306.1035,1120.0317 3306.9824,1120.4956 L3306.9824,1124.7437 Q3306.0059,1123.8403 3305.0781,1123.4253 Q3304.1504,1122.9858 3303.1738,1122.9858 Q3301.0742,1122.9858 3300,1124.6704 Q3298.9258,1126.3306 3298.9258,1129.6021 Q3298.9258,1132.8735 3300,1134.5581 Q3301.0742,1136.2183 3303.1738,1136.2183 Q3304.1504,1136.2183 3305.0781,1135.8032 Q3306.0059,1135.3638 3306.9824,1134.4604 L3306.9824,1138.7085 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="18.75" font-style="italic" lengthAdjust="spacing" textLength="140.625" x="3337.5" y="1123.6542">«value object»</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="167.1875" x="3324.2188" y="1148.381">ScheduledDate</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="3280.4688" x2="3494.5313" y1="1161.3525" y2="1161.3525"/><rect fill="none" height="9.375" style="stroke:#C82930;stroke-width:1.5625;" width="9.375" x="3291.4063" y="1177.9907"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="176.5625" x="3310.1563" y="1187.9074">value: LocalDate</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="3280.4688" x2="3494.5313" y1="1199.3164" y2="1199.3164"/><ellipse cx="3296.0938" cy="1220.6421" fill="#84BE84" rx="4.6875" ry="4.6875" style="stroke:#038048;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="154.6875" x="3310.1563" y="1225.8713">validate(): void</text></g><!--MD5=[84c4b5d3123e2a558393d00d443a9454]
+class AudioMessageStatus--><g id="elem_AudioMessageStatus"><rect codeLine="177" fill="#FFFFFF" height="151.3916" id="AudioMessageStatus" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="278.125" x="5773.4375" y="1092.1875"/><ellipse cx="5796.875" cy="1117.1875" fill="#EB937F" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M5803.2959,1126.5625 L5791.2354,1126.5625 L5791.2354,1107.2021 L5803.2959,1107.2021 L5803.2959,1110.5713 L5795.0684,1110.5713 L5795.0684,1114.7461 L5802.5146,1114.7461 L5802.5146,1118.1152 L5795.0684,1118.1152 L5795.0684,1123.1934 L5803.2959,1123.1934 L5803.2959,1126.5625 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="228.125" x="5818.75" y="1124.7604">AudioMessageStatus</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="5775" x2="6050" y1="1142.1875" y2="1142.1875"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="126.5625" x="5782.8125" y="1168.7424">RECORDED</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="90.625" x="5782.8125" y="1194.2062">SHARED</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="129.6875" x="5782.8125" y="1219.6701">DISCARDED</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="5775" x2="6050" y1="1231.0791" y2="1231.0791"/></g><!--MD5=[9b2709aff449b3f6c5f4dab36d93d3c0]
+class PhotoMessageStatus--><g id="elem_PhotoMessageStatus"><rect codeLine="183" fill="#FFFFFF" height="100.4639" id="PhotoMessageStatus" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="281.25" x="4139.0625" y="1117.9688"/><ellipse cx="4162.5" cy="1142.9688" fill="#EB937F" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M4168.9209,1152.3438 L4156.8604,1152.3438 L4156.8604,1132.9834 L4168.9209,1132.9834 L4168.9209,1136.3525 L4160.6934,1136.3525 L4160.6934,1140.5273 L4168.1396,1140.5273 L4168.1396,1143.8965 L4160.6934,1143.8965 L4160.6934,1148.9746 L4168.9209,1148.9746 L4168.9209,1152.3438 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="231.25" x="4184.375" y="1150.5417">PhotoMessageStatus</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="4140.625" x2="4418.75" y1="1167.9688" y2="1167.9688"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="90.625" x="4148.4375" y="1194.5236">SHARED</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="4140.625" x2="4418.75" y1="1205.9326" y2="1205.9326"/></g><!--MD5=[491d999d897dacc8ad9199fe1cdbc182]
+class SocialReminderStatus--><g id="elem_SocialReminderStatus"><rect codeLine="187" fill="#FFFFFF" height="151.3916" id="SocialReminderStatus" rx="3.9063" ry="3.9063" style="stroke:#6A9E6A;stroke-width:0.78125;" width="285.9375" x="2938.2813" y="1092.1875"/><ellipse cx="2961.7188" cy="1117.1875" fill="#EB937F" rx="17.1875" ry="17.1875" style="stroke:#181818;stroke-width:1.5625;"/><path d="M2968.1396,1126.5625 L2956.0791,1126.5625 L2956.0791,1107.2021 L2968.1396,1107.2021 L2968.1396,1110.5713 L2959.9121,1110.5713 L2959.9121,1114.7461 L2967.3584,1114.7461 L2967.3584,1118.1152 L2959.9121,1118.1152 L2959.9121,1123.1934 L2968.1396,1123.1934 L2968.1396,1126.5625 Z " fill="#000000"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="235.9375" x="2983.5938" y="1124.7604">SocialReminderStatus</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="2939.8438" x2="3222.6563" y1="1142.1875" y2="1142.1875"/><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="98.4375" x="2947.6563" y="1168.7424">PENDING</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="135.9375" x="2947.6563" y="1194.2062">COMPLETED</text><text fill="#000000" font-family="sans-serif" font-size="21.875" lengthAdjust="spacing" textLength="128.125" x="2947.6563" y="1219.6701">CANCELLED</text><line style="stroke:#6A9E6A;stroke-width:0.78125;" x1="2939.8438" x2="3222.6563" y1="1231.0791" y2="1231.0791"/></g><!--MD5=[146bd10011d9043ea30f9675165ac6a0]
+link IAudioMessageCommandService to AudioMessage--><g id="link_IAudioMessageCommandService_AudioMessage"><path codeLine="199" d="M6958.1563,306.25 C6458.6406,306.25 5653.125,306.25 5653.125,306.25 C5653.125,306.25 5653.125,523.1875 5653.125,523.1875 " fill="none" id="IAudioMessageCommandService-to-AudioMessage" style="stroke:#555555;stroke-width:1.5625;stroke-dasharray:7.0,7.0;"/><polygon fill="#555555" points="5653.125,531,5659.375,516.9375,5653.125,523.1875,5646.875,516.9375,5653.125,531" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="46.875" x="6148.7344" y="300.1045">uses</text></g><!--MD5=[fc0c7f3179b2474863b622097f03452b]
+link IAudioMessageQueryService to AudioMessage--><g id="link_IAudioMessageQueryService_AudioMessage"><path codeLine="200" d="M6098.0469,271.4844 C6098.0469,390.6094 6098.0469,679.6875 6098.0469,679.6875 C6098.0469,679.6875 6044.5938,679.6875 6044.5938,679.6875 " fill="none" id="IAudioMessageQueryService-to-AudioMessage" style="stroke:#555555;stroke-width:1.5625;stroke-dasharray:7.0,7.0;"/><polygon fill="#555555" points="6036.7813,679.6875,6050.8438,685.9375,6044.5938,679.6875,6050.8438,673.4375,6036.7813,679.6875" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="46.875" x="6049.6094" y="496.167">uses</text></g><!--MD5=[bd87bab435ef564f006180972de5e305]
+link IPhotoMessageCommandService to PhotoMessage--><g id="link_IPhotoMessageCommandService_PhotoMessage"><path codeLine="201" d="M5270.8281,221.875 C5254.7813,221.875 5245.3125,221.875 5245.3125,221.875 C5245.3125,221.875 5245.3125,753.125 5245.3125,753.125 C5245.3125,753.125 5204.0313,753.125 5204.0313,753.125 " fill="none" id="IPhotoMessageCommandService-to-PhotoMessage" style="stroke:#555555;stroke-width:1.5625;stroke-dasharray:7.0,7.0;"/><polygon fill="#555555" points="5196.2188,753.125,5210.2813,759.375,5204.0313,753.125,5210.2813,746.875,5196.2188,753.125" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="46.875" x="5196.875" y="489.2295">uses</text></g><!--MD5=[0732faee7cb69806bd03f96f45185d11]
+link IPhotoMessageQueryService to PhotoMessage--><g id="link_IPhotoMessageQueryService_PhotoMessage"><path codeLine="202" d="M4936.2031,271.1406 C4936.2031,271.1406 4936.2031,612.4688 4936.2031,612.4688 " fill="none" id="IPhotoMessageQueryService-to-PhotoMessage" style="stroke:#555555;stroke-width:1.5625;stroke-dasharray:7.0,7.0;"/><polygon fill="#555555" points="4936.2031,620.2813,4942.4531,606.2188,4936.2031,612.4688,4929.9531,606.2188,4936.2031,620.2813" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="46.875" x="4887.7656" y="435.667">uses</text></g><!--MD5=[6f7f265a1173c081f8b870abf92b0b18]
+link ISocialReminderCommandService to SocialReminder--><g id="link_ISocialReminderCommandService_SocialReminder"><path codeLine="203" d="M3935.9375,297.3281 C3935.9375,297.3281 3935.9375,523.1406 3935.9375,523.1406 " fill="none" id="ISocialReminderCommandService-to-SocialReminder" style="stroke:#555555;stroke-width:1.5625;stroke-dasharray:7.0,7.0;"/><polygon fill="#555555" points="3935.9375,530.9531,3942.1875,516.8906,3935.9375,523.1406,3929.6875,516.8906,3935.9375,530.9531" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="46.875" x="3887.5" y="404.0889">uses</text></g><!--MD5=[6b1e8969f4bfc33f21340f53ea7033aa]
+link ISocialReminderQueryService to SocialReminder--><g id="link_ISocialReminderQueryService_SocialReminder"><path codeLine="204" d="M3219.1406,271.1406 C3219.1406,271.1406 3219.1406,523.125 3219.1406,523.125 " fill="none" id="ISocialReminderQueryService-to-SocialReminder" style="stroke:#555555;stroke-width:1.5625;stroke-dasharray:7.0,7.0;"/><polygon fill="#555555" points="3219.1406,530.9375,3225.3906,516.875,3219.1406,523.125,3212.8906,516.875,3219.1406,530.9375" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="46.875" x="3170.7031" y="390.9951">uses</text></g><!--MD5=[8fa560be44d0cc36f17f84416415654f]
+link IAudioMessageRepository to AudioMessage--><g id="link_IAudioMessageRepository_AudioMessage"><path codeLine="206" d="M2166.5313,301.5625 C3023.9688,301.5625 5260.9375,301.5625 5260.9375,301.5625 C5260.9375,301.5625 5260.9375,522.8438 5260.9375,522.8438 " fill="none" id="IAudioMessageRepository-to-AudioMessage" style="stroke:#555555;stroke-width:1.5625;stroke-dasharray:7.0,7.0;"/><polygon fill="#555555" points="5260.9375,530.6563,5267.1875,516.5938,5260.9375,522.8438,5254.6875,516.5938,5260.9375,530.6563" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="78.125" x="3744.6875" y="321.9795">persists</text></g><!--MD5=[c7d27e7e035f2372118ac73a9ce591c3]
+link IPhotoMessageRepository to PhotoMessage--><g id="link_IPhotoMessageRepository_PhotoMessage"><path codeLine="207" d="M1125,284.6719 C1125,342.9844 1125,420.3125 1125,420.3125 C1125,420.3125 4676.2969,420.3125 4676.2969,420.3125 C4676.2969,420.3125 4676.2969,612.3438 4676.2969,612.3438 " fill="none" id="IPhotoMessageRepository-to-PhotoMessage" style="stroke:#555555;stroke-width:1.5625;stroke-dasharray:7.0,7.0;"/><polygon fill="#555555" points="4676.2969,620.1563,4682.5469,606.0938,4676.2969,612.3438,4670.0469,606.0938,4676.2969,620.1563" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="78.125" x="2849.1563" y="414.167">persists</text></g><!--MD5=[e13267e04cfd41a29dc7805891a8baa9]
+link ISocialReminderRepository to SocialReminder--><g id="link_ISocialReminderRepository_SocialReminder"><path codeLine="208" d="M407.8125,297.3437 C407.8125,427.7344 407.8125,679.6875 407.8125,679.6875 C407.8125,679.6875 2954.9688,679.6875 2954.9688,679.6875 " fill="none" id="ISocialReminderRepository-to-SocialReminder" style="stroke:#555555;stroke-width:1.5625;stroke-dasharray:7.0,7.0;"/><polygon fill="#555555" points="2962.7813,679.6875,2948.7188,673.4375,2954.9688,679.6875,2948.7188,685.9375,2962.7813,679.6875" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="78.125" x="1410.5313" y="673.542">persists</text></g><!--MD5=[e705cc00ccfd8c6fccfed59ded920663]
+reverse link AudioMessage to AudioMessageId--><g id="link_AudioMessage_AudioMessageId"><path codeLine="210" d="M5604.6875,995.4375 C5604.6875,995.4375 5604.6875,1110.625 5604.6875,1110.625 " fill="none" id="AudioMessage-backto-AudioMessageId" style="stroke:#555555;stroke-width:1.5625;"/><polygon fill="#555555" points="5604.6875,975.125,5598.4375,984.5,5604.6875,993.875,5610.9375,984.5,5604.6875,975.125" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="12.5" x="5591.0742" y="1093.8196">1</text></g><!--MD5=[07817b3ce49541d181a41a68c2dd6032]
+reverse link AudioMessage to CareCircleId--><g id="link_AudioMessage_CareCircleId"><path codeLine="211" d="M5230.0469,957.8125 C5230.0469,957.8125 4852.3438,957.8125 4852.3438,957.8125 C4852.3438,957.8125 4852.3438,1048.3125 4852.3438,1110.5469 " fill="none" id="AudioMessage-backto-CareCircleId" style="stroke:#555555;stroke-width:1.5625;"/><polygon fill="#555555" points="5250.3594,957.8125,5240.9844,951.5625,5231.6094,957.8125,5240.9844,964.0625,5250.3594,957.8125" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="12.5" x="4846.9409" y="1093.7276">1</text></g><!--MD5=[f0769687447fff2ac73924b243f8cf78]
+reverse link AudioMessage to SenderId--><g id="link_AudioMessage_SenderId"><path codeLine="212" d="M5230.1875,921.875 C5230.1875,921.875 4613.2813,921.875 4613.2813,921.875 C4613.2813,921.875 4613.2813,1038.1875 4613.2813,1110.8906 " fill="none" id="AudioMessage-backto-SenderId" style="stroke:#555555;stroke-width:1.5625;"/><polygon fill="#555555" points="5250.5,921.875,5241.125,915.625,5231.75,921.875,5241.125,928.125,5250.5,921.875" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="12.5" x="4608.1274" y="1093.7054">1</text></g><!--MD5=[90d5ad1d45b0698b340925c19198457a]
+reverse link AudioMessage to AudioUrl--><g id="link_AudioMessage_AudioUrl"><path codeLine="213" d="M6057.125,828.125 C6057.125,828.125 6203.125,828.125 6203.125,828.125 C6203.125,828.125 6203.125,998.9531 6203.125,1098.375 " fill="none" id="AudioMessage-backto-AudioUrl" style="stroke:#555555;stroke-width:1.5625;"/><polygon fill="#555555" points="6036.8125,828.125,6046.1875,834.375,6055.5625,828.125,6046.1875,821.875,6036.8125,828.125" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="12.5" x="6189.668" y="1081.3738">1</text></g><!--MD5=[ca711ee99f62de0b4ff6a1398567e469]
+reverse link AudioMessage to AudioMessageStatus--><g id="link_AudioMessage_AudioMessageStatus"><path codeLine="214" d="M5905.0781,995.4375 C5905.0781,995.4375 5905.0781,1091.7813 5905.0781,1091.7813 " fill="none" id="AudioMessage-backto-AudioMessageStatus" style="stroke:#555555;stroke-width:1.5625;"/><polygon fill="#555555" points="5905.0781,975.125,5898.8281,984.5,5905.0781,993.875,5911.3281,984.5,5905.0781,975.125" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="12.5" x="5890.6555" y="1074.8631">1</text></g><!--MD5=[1171aed2e7023c97df90a92ff691ae6e]
+reverse link PhotoMessage to PhotoMessageId--><g id="link_PhotoMessage_PhotoMessageId"><path codeLine="216" d="M5068.75,906.4063 C5068.75,906.4063 5068.75,1110.7813 5068.75,1110.7813 " fill="none" id="PhotoMessage-backto-PhotoMessageId" style="stroke:#555555;stroke-width:1.5625;"/><polygon fill="#555555" points="5068.75,886.0938,5062.5,895.4688,5068.75,904.8438,5075,895.4688,5068.75,886.0938" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="12.5" x="5055.0977" y="1093.5758">1</text></g><!--MD5=[0dc7bff93537c6962301c37aa64f438a]
+reverse link PhotoMessage to CareCircleId--><g id="link_PhotoMessage_CareCircleId"><path codeLine="217" d="M4806.25,906.4063 C4806.25,906.4063 4806.25,1110.7813 4806.25,1110.7813 " fill="none" id="PhotoMessage-backto-CareCircleId" style="stroke:#555555;stroke-width:1.5625;"/><polygon fill="#555555" points="4806.25,886.0938,4800,895.4688,4806.25,904.8438,4812.5,895.4688,4806.25,886.0938" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="12.5" x="4792.5977" y="1093.5758">1</text></g><!--MD5=[aa810af6b0975a8fcf581de41751b12f]
+reverse link PhotoMessage to SenderId--><g id="link_PhotoMessage_SenderId"><path codeLine="218" d="M4567.1875,906.4063 C4567.1875,906.4063 4567.1875,1110.7813 4567.1875,1110.7813 " fill="none" id="PhotoMessage-backto-SenderId" style="stroke:#555555;stroke-width:1.5625;"/><polygon fill="#555555" points="4567.1875,886.0938,4560.9375,895.4688,4567.1875,904.8438,4573.4375,895.4688,4567.1875,886.0938" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="12.5" x="4553.5352" y="1093.5758">1</text></g><!--MD5=[eb44987c1329a734ef789bf0ff0d95b1]
+reverse link PhotoMessage to PhotoUrl--><g id="link_PhotoMessage_PhotoUrl"><path codeLine="219" d="M5190.2344,906.3437 C5190.2344,906.3437 5190.2344,1104.6875 5190.2344,1104.6875 C5190.2344,1104.6875 5212.4844,1104.6875 5239.6875,1104.6875 " fill="none" id="PhotoMessage-backto-PhotoUrl" style="stroke:#555555;stroke-width:1.5625;"/><polygon fill="#555555" points="5190.2344,886.0312,5183.9844,895.4062,5190.2344,904.7812,5196.4844,895.4062,5190.2344,886.0312" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="12.5" x="5215.1553" y="1091.4573">1</text></g><!--MD5=[9d4b559729d62dd39b5e0b33137c4e11]
+reverse link PhotoMessage to PhotoMessageStatus--><g id="link_PhotoMessage_PhotoMessageStatus"><path codeLine="220" d="M4447.6563,906.6563 C4447.6563,906.6563 4447.6563,1168.75 4447.6563,1168.75 C4447.6563,1168.75 4436.8281,1168.75 4420.6719,1168.75 " fill="none" id="PhotoMessage-backto-PhotoMessageStatus" style="stroke:#555555;stroke-width:1.5625;"/><polygon fill="#555555" points="4447.6563,886.3438,4441.4063,895.7188,4447.6563,905.0938,4453.9063,895.7188,4447.6563,886.3438" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="12.5" x="4432.8647" y="1163.2506">1</text></g><!--MD5=[31a0e99eb5628478c9b7b67228b36ae7]
+reverse link SocialReminder to SocialReminderId--><g id="link_SocialReminder_SocialReminderId"><path codeLine="222" d="M2942.6875,828.125 C2942.6875,828.125 2765.625,828.125 2765.625,828.125 C2765.625,828.125 2765.625,1013.3594 2765.625,1110.3125 " fill="none" id="SocialReminder-backto-SocialReminderId" style="stroke:#555555;stroke-width:1.5625;"/><polygon fill="#555555" points="2963,828.125,2953.625,821.875,2944.25,828.125,2953.625,834.375,2963,828.125" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="12.5" x="2752.0117" y="1093.4515">1</text></g><!--MD5=[56f2fbac53d11409332ca6d6e906602f]
+reverse link SocialReminder to CareCircleId--><g id="link_SocialReminder_CareCircleId"><path codeLine="223" d="M4382.6406,904.6875 C4382.6406,904.6875 4760.1563,904.6875 4760.1563,904.6875 C4760.1563,904.6875 4760.1563,1033.4063 4760.1563,1110.8438 " fill="none" id="SocialReminder-backto-CareCircleId" style="stroke:#555555;stroke-width:1.5625;"/><polygon fill="#555555" points="4362.3281,904.6875,4371.7031,910.9375,4381.0781,904.6875,4371.7031,898.4375,4362.3281,904.6875" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="12.5" x="4738.0054" y="1093.6499">1</text></g><!--MD5=[cc0618aa2bdabf9b2e16791cc14807ef]
+reverse link SocialReminder to SenderId--><g id="link_SocialReminder_SenderId"><path codeLine="224" d="M4382.4219,940.625 C4382.4219,940.625 4521.0938,940.625 4521.0938,940.625 C4521.0938,940.625 4521.0938,1043.25 4521.0938,1110.5938 " fill="none" id="SocialReminder-backto-SenderId" style="stroke:#555555;stroke-width:1.5625;"/><polygon fill="#555555" points="4362.1094,940.625,4371.4844,946.875,4380.8594,940.625,4371.4844,934.375,4362.1094,940.625" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="12.5" x="4499.27" y="1093.7828">1</text></g><!--MD5=[601421a155b1d0a613c50564aa10470f]
+reverse link SocialReminder to ReminderTitle--><g id="link_SocialReminder_ReminderTitle"><path codeLine="225" d="M3984.375,995.4375 C3984.375,995.4375 3984.375,1098.125 3984.375,1098.125 " fill="none" id="SocialReminder-backto-ReminderTitle" style="stroke:#555555;stroke-width:1.5625;"/><polygon fill="#555555" points="3984.375,975.125,3978.125,984.5,3984.375,993.875,3990.625,984.5,3984.375,975.125" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="12.5" x="3970.918" y="1081.0855">1</text></g><!--MD5=[0fb43cf3207f771b160f1d84d8bae147]
+reverse link SocialReminder to ReminderDescription--><g id="link_SocialReminder_ReminderDescription"><path codeLine="226" d="M3690.625,995.4375 C3690.625,995.4375 3690.625,1110.625 3690.625,1110.625 " fill="none" id="SocialReminder-backto-ReminderDescription" style="stroke:#555555;stroke-width:1.5625;"/><polygon fill="#555555" points="3690.625,975.125,3684.375,984.5,3690.625,993.875,3696.875,984.5,3690.625,975.125" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="37.5" x="3649.7852" y="1093.8196">0..1</text></g><!--MD5=[e8767ee93a5c4406e3f945e9deb8ac61]
+reverse link SocialReminder to ScheduledDate--><g id="link_SocialReminder_ScheduledDate"><path codeLine="227" d="M3387.5,995.4375 C3387.5,995.4375 3387.5,1098.125 3387.5,1098.125 " fill="none" id="SocialReminder-backto-ScheduledDate" style="stroke:#555555;stroke-width:1.5625;"/><polygon fill="#555555" points="3387.5,975.125,3381.25,984.5,3387.5,993.875,3393.75,984.5,3387.5,975.125" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="12.5" x="3374.043" y="1081.0855">1</text></g><!--MD5=[1aa4aebfcb324200cacc01a04f0798c9]
+reverse link SocialReminder to SocialReminderStatus--><g id="link_SocialReminder_SocialReminderStatus"><path codeLine="228" d="M3093.75,995.4375 C3093.75,995.4375 3093.75,1091.7813 3093.75,1091.7813 " fill="none" id="SocialReminder-backto-SocialReminderStatus" style="stroke:#555555;stroke-width:1.5625;"/><polygon fill="#555555" points="3093.75,975.125,3087.5,984.5,3093.75,993.875,3100,984.5,3093.75,975.125" style="stroke:#555555;stroke-width:1.5625;"/><text fill="#000000" font-family="sans-serif" font-size="20.3125" lengthAdjust="spacing" textLength="12.5" x="3082.1289" y="1074.8631">1</text></g><!--MD5=[25c45658b24c334fd8d2553f321b10da]
+@startuml
+skinparam packageStyle rectangle
+skinparam classBackgroundColor White
+skinparam classBorderColor #6A9E6A
+skinparam interfaceBackgroundColor #E8F5E9
+skinparam interfaceBorderColor #6A9E6A
+skinparam packageBorderColor #6A9E6A
+skinparam packageBackgroundColor #F9FFF9
+skinparam ArrowColor #555555
+skinparam dpi 150
+skinparam linetype ortho
+
+top to bottom direction
+
+' ═══════════════════════════════════════════════
+' DOMAIN — Services & Repositories
+' ═══════════════════════════════════════════════
+
+package "domain" {
+
+  package "services" {
+
+    interface IAudioMessageCommandService {
+      +handle(command: RecordAudioMessageCommand): AudioMessage
+      +handle(command: ShareAudioMessageCommand): void
+      +handle(command: DiscardAudioMessageCommand): void
+      +handle(command: PlayAudioMessageCommand): void
+    }
+
+    interface IAudioMessageQueryService {
+      +handle(query: GetAudioMessageByIdQuery): Optional<AudioMessage>
+    }
+
+    interface IPhotoMessageCommandService {
+      +handle(command: SharePhotoMessageCommand): PhotoMessage
+    }
+
+    interface IPhotoMessageQueryService {
+      +handle(query: GetPhotoMessageByIdQuery): Optional<PhotoMessage>
+    }
+
+    interface ISocialReminderCommandService {
+      +handle(command: ScheduleSocialReminderCommand): SocialReminder
+      +handle(command: CompleteSocialReminderCommand): void
+      +handle(command: CancelSocialReminderCommand): void
+    }
+
+    interface ISocialReminderQueryService {
+      +handle(query: GetSocialRemindersByCircleQuery): List<SocialReminder>
+    }
+
+    interface IDomainEventPublisher {
+      +publish(event: Object): void
+    }
+  }
+
+  package "repositories" {
+
+    interface IAudioMessageRepository {
+      +save(audioMessage: AudioMessage): AudioMessage
+      +findById(id: AudioMessageId): Optional<AudioMessage>
+      +findByCareCircleId(id: CareCircleId): List<AudioMessage>
+      +delete(id: AudioMessageId): void
+    }
+
+    interface IPhotoMessageRepository {
+      +save(photoMessage: PhotoMessage): PhotoMessage
+      +findById(id: PhotoMessageId): Optional<PhotoMessage>
+    }
+
+    interface ISocialReminderRepository {
+      +save(reminder: SocialReminder): SocialReminder
+      +findById(id: SocialReminderId): Optional<SocialReminder>
+      +findByCareCircleId(id: CareCircleId): List<SocialReminder>
+    }
+  }
+}
+
+' ═══════════════════════════════════════════════
+' MODEL — Aggregates & Value Objects
+' ═══════════════════════════════════════════════
+
+package "model" {
+
+  package "aggregates" {
+
+    class AudioMessage <<Aggregate Root>> {
+      -id: AudioMessageId
+      -careCircleId: CareCircleId
+      -senderId: SenderId
+      -audioUrl: AudioUrl
+      -status: AudioMessageStatus
+      -recordedAt: LocalDateTime
+      -sharedAt: LocalDateTime
+      -discardedAt: LocalDateTime
+      +record(careCircleId: CareCircleId, senderId: SenderId): AudioMessage
+      +share(): void
+      +discard(): void
+      +play(): void
+      +isShared(): Boolean
+      +isDiscarded(): Boolean
+    }
+
+    class PhotoMessage <<Aggregate Root>> {
+      -id: PhotoMessageId
+      -careCircleId: CareCircleId
+      -senderId: SenderId
+      -photoUrl: PhotoUrl
+      -status: PhotoMessageStatus
+      -sharedAt: LocalDateTime
+      +share(careCircleId: CareCircleId, senderId: SenderId): PhotoMessage
+    }
+
+    class SocialReminder <<Aggregate Root>> {
+      -id: SocialReminderId
+      -careCircleId: CareCircleId
+      -creatorId: SenderId
+      -title: ReminderTitle
+      -description: ReminderDescription
+      -scheduledDate: ScheduledDate
+      -status: SocialReminderStatus
+      -createdAt: LocalDateTime
+      -completedAt: LocalDateTime
+      -cancelledAt: LocalDateTime
+      +schedule(careCircleId: CareCircleId, creatorId: SenderId, title: ReminderTitle, scheduledDate: ScheduledDate): SocialReminder
+      +complete(): void
+      +cancel(): void
+      +isPending(): Boolean
+    }
+  }
+
+  package "valueobjects" {
+
+    class AudioMessageId <<value object>> {
+      -value: UUID
+    }
+
+    class PhotoMessageId <<value object>> {
+      -value: UUID
+    }
+
+    class SocialReminderId <<value object>> {
+      -value: UUID
+    }
+
+    class CareCircleId <<value object>> {
+      -value: UUID
+    }
+
+    class SenderId <<value object>> {
+      -value: UUID
+    }
+
+    class AudioUrl <<value object>> {
+      -value: String
+      +validate(): void
+    }
+
+    class PhotoUrl <<value object>> {
+      -value: String
+      +validate(): void
+    }
+
+    class ReminderTitle <<value object>> {
+      -value: String
+      +validate(): void
+    }
+
+    class ReminderDescription <<value object>> {
+      -value: String
+    }
+
+    class ScheduledDate <<value object>> {
+      -value: LocalDate
+      +validate(): void
+    }
+
+    enum AudioMessageStatus {
+      RECORDED
+      SHARED
+      DISCARDED
+    }
+
+    enum PhotoMessageStatus {
+      SHARED
+    }
+
+    enum SocialReminderStatus {
+      PENDING
+      COMPLETED
+      CANCELLED
+    }
+  }
+}
+
+' ═══════════════════════════════════════════════
+' RELATIONSHIPS
+' ═══════════════════════════════════════════════
+
+IAudioMessageCommandService ..> AudioMessage : uses
+IAudioMessageQueryService   ..> AudioMessage : uses
+IPhotoMessageCommandService ..> PhotoMessage : uses
+IPhotoMessageQueryService   ..> PhotoMessage : uses
+ISocialReminderCommandService ..> SocialReminder : uses
+ISocialReminderQueryService   ..> SocialReminder : uses
+
+IAudioMessageRepository   ..> AudioMessage   : persists
+IPhotoMessageRepository   ..> PhotoMessage   : persists
+ISocialReminderRepository ..> SocialReminder : persists
+
+AudioMessage *- - "1"   AudioMessageId
+AudioMessage *- - "1"   CareCircleId
+AudioMessage *- - "1"   SenderId
+AudioMessage *- - "1"   AudioUrl
+AudioMessage *- - "1"   AudioMessageStatus
+
+PhotoMessage *- - "1"   PhotoMessageId
+PhotoMessage *- - "1"   CareCircleId
+PhotoMessage *- - "1"   SenderId
+PhotoMessage *- - "1"   PhotoUrl
+PhotoMessage *- - "1"   PhotoMessageStatus
+
+SocialReminder *- - "1"    SocialReminderId
+SocialReminder *- - "1"    CareCircleId
+SocialReminder *- - "1"    SenderId
+SocialReminder *- - "1"    ReminderTitle
+SocialReminder *- - "0..1" ReminderDescription
+SocialReminder *- - "1"    ScheduledDate
+SocialReminder *- - "1"    SocialReminderStatus
+@enduml
+
+@startuml
+skinparam packageStyle rectangle
+skinparam classBackgroundColor White
+skinparam classBorderColor #6A9E6A
+skinparam interfaceBackgroundColor #E8F5E9
+skinparam interfaceBorderColor #6A9E6A
+skinparam packageBorderColor #6A9E6A
+skinparam packageBackgroundColor #F9FFF9
+skinparam ArrowColor #555555
+skinparam dpi 150
+skinparam linetype ortho
+
+top to bottom direction
+
+
+package "domain" {
+
+  package "services" {
+
+    interface IAudioMessageCommandService {
+      +handle(command: RecordAudioMessageCommand): AudioMessage
+      +handle(command: ShareAudioMessageCommand): void
+      +handle(command: DiscardAudioMessageCommand): void
+      +handle(command: PlayAudioMessageCommand): void
+    }
+
+    interface IAudioMessageQueryService {
+      +handle(query: GetAudioMessageByIdQuery): Optional<AudioMessage>
+    }
+
+    interface IPhotoMessageCommandService {
+      +handle(command: SharePhotoMessageCommand): PhotoMessage
+    }
+
+    interface IPhotoMessageQueryService {
+      +handle(query: GetPhotoMessageByIdQuery): Optional<PhotoMessage>
+    }
+
+    interface ISocialReminderCommandService {
+      +handle(command: ScheduleSocialReminderCommand): SocialReminder
+      +handle(command: CompleteSocialReminderCommand): void
+      +handle(command: CancelSocialReminderCommand): void
+    }
+
+    interface ISocialReminderQueryService {
+      +handle(query: GetSocialRemindersByCircleQuery): List<SocialReminder>
+    }
+
+    interface IDomainEventPublisher {
+      +publish(event: Object): void
+    }
+  }
+
+  package "repositories" {
+
+    interface IAudioMessageRepository {
+      +save(audioMessage: AudioMessage): AudioMessage
+      +findById(id: AudioMessageId): Optional<AudioMessage>
+      +findByCareCircleId(id: CareCircleId): List<AudioMessage>
+      +delete(id: AudioMessageId): void
+    }
+
+    interface IPhotoMessageRepository {
+      +save(photoMessage: PhotoMessage): PhotoMessage
+      +findById(id: PhotoMessageId): Optional<PhotoMessage>
+    }
+
+    interface ISocialReminderRepository {
+      +save(reminder: SocialReminder): SocialReminder
+      +findById(id: SocialReminderId): Optional<SocialReminder>
+      +findByCareCircleId(id: CareCircleId): List<SocialReminder>
+    }
+  }
+}
+
+
+package "model" {
+
+  package "aggregates" {
+
+    class AudioMessage <<Aggregate Root>> {
+      -id: AudioMessageId
+      -careCircleId: CareCircleId
+      -senderId: SenderId
+      -audioUrl: AudioUrl
+      -status: AudioMessageStatus
+      -recordedAt: LocalDateTime
+      -sharedAt: LocalDateTime
+      -discardedAt: LocalDateTime
+      +record(careCircleId: CareCircleId, senderId: SenderId): AudioMessage
+      +share(): void
+      +discard(): void
+      +play(): void
+      +isShared(): Boolean
+      +isDiscarded(): Boolean
+    }
+
+    class PhotoMessage <<Aggregate Root>> {
+      -id: PhotoMessageId
+      -careCircleId: CareCircleId
+      -senderId: SenderId
+      -photoUrl: PhotoUrl
+      -status: PhotoMessageStatus
+      -sharedAt: LocalDateTime
+      +share(careCircleId: CareCircleId, senderId: SenderId): PhotoMessage
+    }
+
+    class SocialReminder <<Aggregate Root>> {
+      -id: SocialReminderId
+      -careCircleId: CareCircleId
+      -creatorId: SenderId
+      -title: ReminderTitle
+      -description: ReminderDescription
+      -scheduledDate: ScheduledDate
+      -status: SocialReminderStatus
+      -createdAt: LocalDateTime
+      -completedAt: LocalDateTime
+      -cancelledAt: LocalDateTime
+      +schedule(careCircleId: CareCircleId, creatorId: SenderId, title: ReminderTitle, scheduledDate: ScheduledDate): SocialReminder
+      +complete(): void
+      +cancel(): void
+      +isPending(): Boolean
+    }
+  }
+
+  package "valueobjects" {
+
+    class AudioMessageId <<value object>> {
+      -value: UUID
+    }
+
+    class PhotoMessageId <<value object>> {
+      -value: UUID
+    }
+
+    class SocialReminderId <<value object>> {
+      -value: UUID
+    }
+
+    class CareCircleId <<value object>> {
+      -value: UUID
+    }
+
+    class SenderId <<value object>> {
+      -value: UUID
+    }
+
+    class AudioUrl <<value object>> {
+      -value: String
+      +validate(): void
+    }
+
+    class PhotoUrl <<value object>> {
+      -value: String
+      +validate(): void
+    }
+
+    class ReminderTitle <<value object>> {
+      -value: String
+      +validate(): void
+    }
+
+    class ReminderDescription <<value object>> {
+      -value: String
+    }
+
+    class ScheduledDate <<value object>> {
+      -value: LocalDate
+      +validate(): void
+    }
+
+    enum AudioMessageStatus {
+      RECORDED
+      SHARED
+      DISCARDED
+    }
+
+    enum PhotoMessageStatus {
+      SHARED
+    }
+
+    enum SocialReminderStatus {
+      PENDING
+      COMPLETED
+      CANCELLED
+    }
+  }
+}
+
+
+IAudioMessageCommandService ..> AudioMessage : uses
+IAudioMessageQueryService   ..> AudioMessage : uses
+IPhotoMessageCommandService ..> PhotoMessage : uses
+IPhotoMessageQueryService   ..> PhotoMessage : uses
+ISocialReminderCommandService ..> SocialReminder : uses
+ISocialReminderQueryService   ..> SocialReminder : uses
+
+IAudioMessageRepository   ..> AudioMessage   : persists
+IPhotoMessageRepository   ..> PhotoMessage   : persists
+ISocialReminderRepository ..> SocialReminder : persists
+
+AudioMessage *- - "1"   AudioMessageId
+AudioMessage *- - "1"   CareCircleId
+AudioMessage *- - "1"   SenderId
+AudioMessage *- - "1"   AudioUrl
+AudioMessage *- - "1"   AudioMessageStatus
+
+PhotoMessage *- - "1"   PhotoMessageId
+PhotoMessage *- - "1"   CareCircleId
+PhotoMessage *- - "1"   SenderId
+PhotoMessage *- - "1"   PhotoUrl
+PhotoMessage *- - "1"   PhotoMessageStatus
+
+SocialReminder *- - "1"    SocialReminderId
+SocialReminder *- - "1"    CareCircleId
+SocialReminder *- - "1"    SenderId
+SocialReminder *- - "1"    ReminderTitle
+SocialReminder *- - "0..1" ReminderDescription
+SocialReminder *- - "1"    ScheduledDate
+SocialReminder *- - "1"    SocialReminderStatus
+@enduml
+
+PlantUML version 1.2022.7(Mon Aug 22 17:01:30 UTC 2022)
+(GPL source distribution)
+Java Runtime: OpenJDK Runtime Environment
+JVM: OpenJDK 64-Bit Server VM
+Default Encoding: UTF-8
+Language: en
+Country: null
+--></g></svg>

@@ -31,7 +31,7 @@
 
 <br>
 
----
+<div style="page-break-after: always;"></div>
 
 # Registro de Versiones del Informe
 
@@ -66,7 +66,7 @@
 
 <br>
 
-  ---
+<div style="page-break-after: always;"></div>
 
 # Project Report Collaboration Insights
 
@@ -75,10 +75,22 @@ El informe del proyecto fue desarrollado de manera colaborativa por el equipo me
 URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-report <br>
 
 **Primera Entrega (AV1)**
+Para esta entrega el equipo trabajó el informe directamente en Markdown sobre el repositorio `serenia-report`, aplicando GitFlow y Conventional Commits. Se mantuvo `main` como rama estable de entrega y `develop` como rama de integración; cada integrante avanzó sus secciones asignadas en ramas `feature/` independientes, que se incorporaron a `develop` mediante Pull Requests revisados por al menos otro miembro antes del merge. 
+
+Los mensajes de commit siguieron la convención `docs:` para la redacción de secciones y `fix:` para correcciones de contenido o formato, lo que permite rastrear en el historial qué aporte corresponde a cada artefacto del informe. 
+
+La distribución del trabajo se coordinó en ClickUp, donde cada sección del Capítulo I y II se registró como una tarea con la descripción tomada del enunciado del curso, mientras que las User Stories y el Sprint Backlog oficiales se gestionaron en Trello.
+
+La Imagen 1 muestra el resumen de actividad (Pulse) del repositorio entre el 18 de agosto y el 18 de septiembre de 2026: 57 Pull Requests integrados y 157 commits realizados por los 5 integrantes del equipo.
+
+<p align="center">
+  <img src="assets/img/project-report-collaboration-insights/insights-av1.png" alt="AV1 Insights" width="900"/>
+    <br/><i>Imagen 1. Insights de la Primera Entrega (AV1)</i>
+</p>
 
 <br>
 
----
+<div style="page-break-after: always;"></div>
 
 # Contenido
 
@@ -187,14 +199,14 @@ URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vi
         - [2.6.6.6.1. Bounded Context Domain Layer Class Diagrams](#26661-bounded-context-domain-layer-class-diagrams)
         - [2.6.6.6.2. Bounded Context Database Design Diagram](#26662-bounded-context-database-design-diagram)
 - [Conclusiones](#conclusiones)
-  - [Conclusiones y Recomendaciones](#conclusionesyrecomendaciones)
+  - [Conclusiones y Recomendaciones](#conclusiones-y-recomendaciones)
 - [Glosario](#glosario)
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
 
 <br>
 
----
+<div style="page-break-after: always;"></div>
 
 # Student Outcome
 
@@ -221,7 +233,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <br><br>
             <b>Gallardo Morales, Carla Alejandra</b><br>
             <u>AV1</u><br>
-            Aprendí y apliqué técnicas de UX Research —User Personas y User Journey Mapping— a partir del análisis de entrevistas, e incorporé prácticas ágiles al estructurar el Product Backlog priorizado.
+            Aprendí y apliqué técnicas de UX Research (User Personas y User Journey Mapping) a partir del análisis de entrevistas, e incorporé prácticas ágiles al estructurar el Product Backlog priorizado.
             <br><br>
             <b>García Paredes, Victor Manuel</b><br>
             <u>AV1</u><br>
@@ -238,7 +250,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
         </td>
         <td>
             <u>AV1</u><br>
-            El equipo incorporó marcos que no conocía previamente —Lean UX, Needfinding, Domain-Driven Design, EventStorming y el modelo C4—; cada integrante estudió por su cuenta la técnica asignada y la explicó al resto, convirtiendo el aprendizaje individual en conocimiento compartido. Además, sustentamos las decisiones del proyecto con técnicas de investigación como entrevistas y análisis competitivo, en lugar de basarnos en supuestos.
+            El equipo incorporó marcos que no conocía previamente (Lean UX, Needfinding, Domain-Driven Design, EventStorming y el modelo C4); cada integrante estudió por su cuenta la técnica asignada y la explicó al resto, convirtiendo el aprendizaje individual en conocimiento compartido. Además, sustentamos las decisiones del proyecto con técnicas de investigación como entrevistas y análisis competitivo, en lugar de basarnos en supuestos.
         </td>
     </tr>
       <tr>
@@ -272,7 +284,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
     </tr>
 </table>
 
----
+<div style="page-break-after: always;"></div>
 
 # Objetivos SMART
 
@@ -326,6 +338,8 @@ Asumir un rol de liderazgo técnico o gestión de proyectos (como Tech Lead o Sc
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 # Capítulo I: Presentación
 ## 1.1. Startup Profile
 ### 1.1.1. Descripción de la Startup
@@ -336,19 +350,13 @@ VitalCare nace para sanar esta desconexión apostando por tecnología que acompa
 
 El corazón de Serenia es que cada interacción se sienta como una charla genuina y no como un chequeo médico. Incluye preguntas ligeras, un espacio para grabar anécdotas y alertas familiares que solo suenan cuando de verdad hacen falta. Queremos devolver la naturalidad al cuidado a distancia: dándole tranquilidad a la familia y respetando siempre la autonomía del adulto mayor.
 
-<br>
-
 ## Misión
 
 Dar a los adultos mayores que viven solos una forma simple y natural de comunicar su día a día, y a sus familias, la tranquilidad de saber cómo están. Reducimos la ansiedad de la distancia conectándolos desde el afecto, sin caer en el monitoreo invasivo.
 
-<br>
-
 ## Visión
 
 Ser la plataforma de compañía digital que transforme cómo las familias de Latinoamérica se cuidan a distancia. Queremos fortalecer el vínculo emocional por encima del reporte clínico, logrando que ningún adulto mayor enfrente la soledad en silencio.
-
-<br>
 
 ## Valores
 
@@ -363,8 +371,6 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
   
 - **Conexión emocional:** <br>
   Celebramos lo bueno de la rutina. Fomentamos espacios como "cuéntame algo" para registrar pequeñas victorias y reforzar el cariño diario, no solo para alertar sobre problemas.
-
-<br>
 
 ### 1.1.2. Perfiles de integrantes del equipo
 
@@ -400,7 +406,7 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
       <b>Descripción:</b><br/>
       Soy <b>Carla Alejandra Gallardo Morales</b>, tengo 19 años. Desde que me incorporé en la Universidad Peruana de Ciencias Aplicadas en el periodo 2024-01, es decir que ahora mismo estoy cursando el sexto ciclo de la carrera de Ing. de Software, he adquirido y desarrollado distintos conocimientos a cerca de la programación, específicamente en el lenguaje C++, JavaScript y TypeScript, además, de forma autodidacta y extracurricular, he profundizado en el lenguaje Python, lo que ha ampliado mi perspectiva sobre la lógica y resolución de problemas.
       <br/><br/>
-      Dentro del equipo, mi contribución se basa en el apoyo continuo del desarrollo del frontend de nuestro aplicativo mobile, asimismo ayudo en la implementación del informe de nuestro proyecto.
+      Dentro del equipo, mi contribución se basa en el apoyo continuo del desarrollo del frontend de nuestra aplicación móvil, asimismo ayudo en la implementación del informe de nuestro proyecto.
       <br/>
     </td>
   </tr>
@@ -470,8 +476,6 @@ Del lado del familiar, la aplicación ofrece un panel de estado diario que muest
 
 El diferenciador central de Serenia frente a otras soluciones de monitoreo es su enfoque en la compañía por encima de la vigilancia: el lenguaje y las interacciones evitan el tono clínico o de "reporte", priorizando el vínculo emocional cotidiano entre adulto mayor y su familia, sin descuidar la seguridad ante situaciones de emergencia.
 
-<br>
-
 ### 1.2.1. Antecedentes y problemática
 
 ## The 5W's y 2H's
@@ -494,13 +498,13 @@ Es un problema de naturaleza diaria y recurrente, no puntual: la incertidumbre y
 
 ### Why (¿Por qué?)
 
-Según la Agencia Andina (2025), citando datos del Instituto Nacional de Estadística e Informática (INEI), en Lima Metropolitana el 25,3% de los hogares jefaturados por adultos mayores (60 años a más) son unipersonales —es decir, compuestos únicamente por la persona mayor—, cifra que aumentó 2,3 puntos porcentuales respecto al mismo periodo del año anterior (Andina, 2025). Esta tendencia se ha mantenido creciente: según cifras más recientes del INEI correspondientes al tercer trimestre de 2025, reportadas por Infobae (2025), a nivel nacional el 26,9% de los hogares con jefatura de una persona adulta mayor ya son unipersonales, frente al 24,5% registrado dos años antes (Infobae, 2025). Esta creciente proporción de adultos mayores que viven solos explica por qué los familiares terminan llamando todos los días por ansiedad —no porque haya pasado algo puntual— y por qué el adulto mayor evita reportar molestias por no sentirse una carga. No existe hoy un canal intermedio entre "no comunicarse" y "llamar todos los días" que permita transmitir bienestar de forma ligera, sin fricción y sin depender de una llamada telefónica.
+Según la Agencia Andina (2025), citando datos del Instituto Nacional de Estadística e Informática (INEI), en Lima Metropolitana el 25,3% de los hogares jefaturados por adultos mayores (60 años a más) son unipersonales (es decir, compuestos únicamente por la persona mayor), cifra que aumentó 2,3 puntos porcentuales respecto al mismo periodo del año anterior (Andina, 2025). Esta tendencia se ha mantenido creciente: según cifras más recientes del INEI correspondientes al tercer trimestre de 2025, reportadas por Infobae (2025), a nivel nacional el 26,9% de los hogares con jefatura de una persona adulta mayor ya son unipersonales, frente al 24,5% registrado dos años antes (Infobae, 2025). Esta creciente proporción de adultos mayores que viven solos explica por qué los familiares terminan llamando todos los días por ansiedad (no porque haya pasado algo puntual) y por qué el adulto mayor evita reportar molestias por no sentirse una carga. No existe hoy un canal intermedio entre "no comunicarse" y "llamar todos los días" que permita transmitir bienestar de forma ligera, sin fricción y sin depender de una llamada telefónica. La literatura reciente coincide con este diagnóstico: quienes viven solos tienen menos acceso inmediato a cuidadores informales y pueden depender más del apoyo tecnológico para mantener su seguridad, su independencia y su conexión social (Xu et al., 2026). La Imagen 2 muestra la distribución de estos hogares según su área de residencia y el sexo de la persona que los encabeza.
 
 <br>
 <p align="center">
   <img src="assets/img/estadisticas/hogares-unipersonales-adulto-mayor.png" alt="Evolución del porcentaje de hogares unipersonales jefaturados por adultos mayores en el Perú, según INEI (2023-2025)" width="500">
 </p>
-<p align="center"><sub>Imagen 1. Hogares jefaturados por adultos mayores, según área de residencia y sexo. Tomado de <em>Informe Técnico: Situación de la Población Adulta Mayor</em>, por Instituto Nacional de Estadística e Informática [INEI], 2025, p. 3 (https://m.inei.gob.pe/media/MenuRecursivo/boletines/informe-tecnico_adultomayor.pdf).</sub></p>
+<p align="center"><sub>Imagen 2. Hogares jefaturados por adultos mayores, según área de residencia y sexo. Tomado de <em>Informe Técnico: Situación de la Población Adulta Mayor</em>, por Instituto Nacional de Estadística e Informática [INEI], 2025, p. 3 (https://m.inei.gob.pe/media/MenuRecursivo/boletines/informe-tecnico_adultomayor.pdf).</sub></p>
 
 ### How (¿Cómo?)
 
@@ -510,8 +514,6 @@ Se propone Serenia, una solución compuesta por dos aplicaciones móviles conect
 ### How much (¿Cuánto?)
 
 El costo de no resolver este problema no es solo emocional, sino también económico y de salud mental para quienes ejercen el rol de cuidado a distancia: el Banco Interamericano de Desarrollo (BID, 2024), en una encuesta aplicada en 25 países de América Latina y el Caribe, encontró que el 31% de los cuidadores no remunerados de personas mayores reporta síntomas de depresión y que el 44% ha tenido que dejar su empleo para poder cuidar (Banco Interamericano de Desarrollo [BID], 2024). Esto evidencia que, sin una herramienta que aligere la carga de supervisión constante, el desgaste recae de forma directa sobre la salud mental y la estabilidad laboral del familiar cuidador. Para el AV1, el alcance se limita al análisis del problema, la propuesta de valor y el diseño de la solución (sin desarrollo de código todavía), enfocado en las dos aplicaciones descritas: la app nativa para el adulto mayor y la app cross-platform para el familiar.
-
-<br>
 
 ### 1.2.2. Lean UX Process
 
@@ -528,8 +530,6 @@ Nuestro producto resolverá esta brecha **ofreciendo un check-in diario de un so
 Nuestro enfoque inicial será **adultos mayores de 60 años a más que viven solos en zonas urbanas del Perú, y sus familiares directos de 25 a 59 años que residen en una ciudad o distrito distinto**.
 
 Sabremos que hemos tenido éxito cuando veamos **una alta tasa de check-ins diarios completados por el adulto mayor, una reducción en la frecuencia de llamadas motivadas por ansiedad por parte del familiar, y un uso recurrente del panel de estado sin necesidad de soporte o intervención externa**.
-
-<br>
 
 #### 1.2.2.2. Lean UX Assumptions
 
@@ -559,8 +559,6 @@ Sabremos que hemos tenido éxito cuando veamos **una alta tasa de check-ins diar
 - Un panel de estado con alertas inteligentes (solo ante anomalías) evitará que el familiar revise la aplicación de forma ansiosa.
 - Un botón de auxilio siempre visible cubrirá el escenario de emergencia sin necesidad de vigilancia constante.
 
-<br>
-
 #### 1.2.2.3. Lean UX Hypothesis Statements
 
 1. **Check-in diario de un toque**: Creemos que lograremos *una alta tasa de adopción diaria del check-in* si *los adultos mayores que viven solos en zonas urbanas del Perú* logran *comunicar su estado de ánimo sin esfuerzo ni necesidad de dar explicaciones extensas* con *un check-in de un solo toque con preguntas ligeras y variables*.
@@ -568,15 +566,17 @@ Sabremos que hemos tenido éxito cuando veamos **una alta tasa de check-ins diar
 3. **Panel de estado con alertas inteligentes**: Creemos que lograremos *una reducción en la frecuencia de llamadas motivadas por ansiedad* si *los familiares a distancia* logran *conocer el estado de bienestar de su familiar sin necesidad de preguntar constantemente* con *un panel de estado diario que solo emite alertas cuando se detecta una anomalía*.
 4. **Botón de auxilio**: Creemos que lograremos *mayor confianza en la solución como respaldo ante emergencias* si *los adultos mayores que viven solos* logran *solicitar ayuda de forma inmediata en caso de urgencia* con *un botón de auxilio siempre visible y de fácil acceso*.
 
+La evidencia reciente respalda la dirección de estas hipótesis, aunque no las valida. En un ensayo controlado aleatorizado con 68 adultos mayores que completaron el estudio y viven en la comunidad en Japón, el uso de un robot social redujo la soledad más que en el grupo de control (Murayama & Takase, 2025). Se trata de un dispositivo distinto a Serenia, pero sugiere que una compañía digital puede reducir la soledad.
+
 <br>
 
 #### 1.2.2.4. Lean UX Canvas
 
-El Lean UX Canvas consolida el Business Problem, los Business Outcomes, los Users, los User Outcomes & Benefits, las Solutions y las Hypotheses desarrolladas en las subsecciones anteriores, junto con la identificación de la asunción de mayor riesgo (Segmento 1 adoptando el check-in diario como hábito) y el experimento de menor esfuerzo para validarla.
+El Lean UX Canvas consolida el Business Problem, los Business Outcomes, los Users, los User Outcomes & Benefits, las Solutions y las Hypotheses desarrolladas en las subsecciones anteriores, junto con la identificación de la asunción de mayor riesgo (Segmento 1 adoptando el check-in diario como hábito) y el experimento de menor esfuerzo para validarla. La Imagen 3 presenta el canvas completo.
 
 <p align="center">
   <img src="assets/img/diagrams/lean-ux-canvas.png" alt="Lean UX Canvas de Serenia" width="900"/>
-    <br/><i>Imagen 2. Lean UX Canvas.</i>
+    <br/><i>Imagen 3. Lean UX Canvas.</i>
 </p>
 
 URL del archivo en Figma: https://www.figma.com/design/MtWwz8GxmrY0eR7eyc2UC0/Lean-UX-Canvas--Serenia-?node-id=0-1
@@ -600,6 +600,8 @@ Serenia conecta a dos perfiles de usuarios clave, definidos a partir del problem
 - **Sustento:** Lima concentra el 45,4% de los migrantes internos del país por motivos laborales o educativos (Carrasco Freitas, 2026), evidenciando una alta proporción de familias separadas geográficamente. Para acortar esta distancia, la tecnología es el puente ideal: el 95,4% de hogares peruanos ya cuenta con un smartphone (OSIPTEL, 2026), con una adopción que bordea el 95% en los adultos jóvenes y de mediana edad. Así, este segmento combina perfectamente la necesidad emocional de estar presentes con la fluidez tecnológica para integrar la app en su rutina diaria.
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 # Capítulo II: Requirements Development and Software Solution Design
 ## 2.1. Competidores
@@ -768,7 +770,7 @@ A partir del análisis competitivo y el FODA desarrollado, se plantean las sigui
 
 <br>
 
-## Tácticas específicas frente a cada competidor
+#### Tácticas específicas frente a cada competidor
 
 Frente a **Snug Safety**, cuya fortaleza es el check-in diario simple y gratuito con gran base de usuarios en EE. UU., Serenia diferencia su propuesta enfocándose en el vínculo emocional (preguntas variables, mensajes de audio "cuéntame algo") y no solo en la señal de seguridad/emergencia, además de dirigirse a un mercado (Perú) donde Snug Safety no tiene presencia ni soporte en español.
 
@@ -1111,24 +1113,20 @@ Finalmente, también aparece la necesidad de contar con una solución simple y a
 ## 2.3. Needfinding
 ### 2.3.1. User Personas
 
-En esta sección se presentan los user personas construidos a partir del análisis de las entrevistas de los adultos mayores y sus familiares a distancia. Estos artefactos sintetizan patrones de comportamiento, necesidades, motivaciones y frustraciones identificadas durante la investigación, permitiendo representar de manera clara a los segmentos clave de nuestro proyecto.
+En esta sección se presentan los user personas construidos a partir del análisis de las entrevistas de los adultos mayores y sus familiares a distancia. Estos artefactos sintetizan patrones de comportamiento, necesidades, motivaciones y frustraciones identificadas durante la investigación, permitiendo representar de manera clara a los segmentos clave de nuestro proyecto. La Imagen 4 presenta el user persona del primer segmento y la Imagen 5, el del segundo.
 
 ### Segmento 1 - Adultos mayores que viven solos
 
 <div align="center">
-
-![User persona - Adultos mayores que viven solos](assets/img/user-persona/jorge-lopez-seg1.png)
-  <br/><i>Imagen 3. User Persona - Primer Segmento.</i>
-
+  <img src="assets/img/user-persona/jorge-lopez-seg1.png" alt="User persona - Adultos mayores que viven solos" width="700"/>
+  <br/><i>Imagen 4. User Persona - Primer Segmento.</i>
 </div>
 
 ### Segmento 2 - Familiares a distancia
 
 <div align="center">
-
-![User persona- Familiares a distancia](assets/img/user-persona/daniel-torres-seg2.png)
-  <br/><i>Imagen 4. User Persona - Segundo Segmento.</i>
-
+  <img src="assets/img/user-persona/daniel-torres-seg2.png" alt="User persona- Familiares a distancia" width="700"/>
+  <br/><i>Imagen 5. User Persona - Segundo Segmento.</i>
 </div>
 
 <br>
@@ -1177,14 +1175,14 @@ La principal diferencia radica en la naturaleza de su interacción; el adulto ma
 
 En esta sección se detallan los User Journey Maps en su versión "As-Is", uno por cada segmento de usuario definido. El objetivo de estos mapas es ilustrar el proceso de extremo a extremo que realizan actualmente los usuarios para intentar resolver su necesidad, evidenciando los puntos de dolor, las frustraciones y las ineficiencias que experimentan antes de la implementación de nuestra solución propuesta.
 
-A continuación, se presentan los diagramas que resumen la situación actual de los usuarios:
+A continuación, se presentan los diagramas que resumen la situación actual de los usuarios: la Imagen 6 corresponde al primer segmento y la Imagen 7, al segundo.
 
 ### Segmento 1 - Adultos mayores que viven solos
 
 <div align="center">
 
 ![journey mapping - Adultos mayores que viven solos](assets/img/user-journey-mapping/user-journey-seg1.png)
-  <br/><i>Imagen 5. User Journey Mapping - Primer Segmento.</i>
+  <br/><i>Imagen 6. User Journey Mapping - Primer Segmento.</i>
 
 </div>
 
@@ -1194,7 +1192,7 @@ A continuación, se presentan los diagramas que resumen la situación actual de 
 <div align="center">
 
 ![journey mapping - Familiares a distancia](assets/img/user-journey-mapping/user-journey-seg2.png)
-  <br/><i>Imagen 6. User Journey Mapping - Segundo Segmento.</i>
+  <br/><i>Imagen 7. User Journey Mapping - Segundo Segmento.</i>
 
 </div>
 
@@ -1202,16 +1200,16 @@ A continuación, se presentan los diagramas que resumen la situación actual de 
 
 ### 2.3.4. Empathy Mapping
 
-En esta sección, el equipo resume el proceso de elaboración de los *Empathy Maps* realizados en UXPressia para cada uno de nuestros *User Personas*[cite: 1]. Durante sesiones colaborativas, nos centramos en empatizar profundamente con nuestros dos actores principales: el adulto mayor que vive solo y su familiar a distancia. Para lograrlo, respondimos preguntas clave sobre su entorno, sus preocupaciones (Pains) y aquello que aliviaría sus frustraciones y los convencería de que nuestra aplicación es la alternativa correcta para mantener su vínculo (Gains)[cite: 1].
+En esta sección, el equipo resume el proceso de elaboración de los *Empathy Maps* realizados en UXPressia para cada uno de nuestros *User Personas*. Durante sesiones colaborativas, nos centramos en empatizar profundamente con nuestros dos actores principales: el adulto mayor que vive solo y su familiar a distancia. Para lograrlo, respondimos preguntas clave sobre su entorno, sus preocupaciones (Pains) y aquello que aliviaría sus frustraciones y los convencería de que nuestra aplicación es la alternativa correcta para mantener su vínculo (Gains).
 
-A continuación, se presentan las capturas de los mapas resultantes elaborados en la herramienta indicada:
+A continuación, se presentan las capturas de los mapas resultantes elaborados en la herramienta indicada: la Imagen 8 corresponde al primer segmento y la Imagen 9, al segundo.
 
 ### Segmento 1 - Adultos mayores que viven solos
 
 <div align="center">
 
 ![Empathy Map - Adultos mayores que viven solos](assets/img/empathy-maps/empathy-map-adulto-mayor.png)
-  <br/><i>Imagen 7. Empathy Map - Primer Segmento.</i>
+  <br/><i>Imagen 8. Empathy Map - Primer Segmento.</i>
 
 </div>
 
@@ -1221,7 +1219,7 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 <div align="center">
 
 ![Empathy Map - Familiares a distancia](assets/img/empathy-maps/empathy-map-familiar.png)
-  <br/><i>Imagen 8. Empathy Map - Segundo Segmento.</i>
+  <br/><i>Imagen 9. Empathy Map - Segundo Segmento.</i>
 
 </div>
 
@@ -1230,7 +1228,7 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 
 ### 2.3.5. Big Picture EventStorming
 
-El equipo realizó una sesión colaborativa de *Big Picture EventStorming* en Miro, con el objetivo de explorar de forma visual el dominio completo de Serenia: desde la vinculación entre el adulto mayor y su familiar, pasando por el check-in diario y su interpretación, hasta el manejo de emergencias y la compañía social. Se identificaron 45 eventos de dominio, redactados en pasado y en inglés siguiendo la convención de nomenclatura adoptada por el equipo, y se ordenaron cronológicamente para cada uno de los procesos identificados.
+El equipo realizó una sesión colaborativa de *Big Picture EventStorming* en Miro, con el objetivo de explorar de forma visual el dominio completo de Serenia: desde la vinculación entre el adulto mayor y su familiar, pasando por el check-in diario y su interpretación, hasta el manejo de emergencias y la compañía social. Se identificaron 45 eventos de dominio, redactados en pasado y en inglés siguiendo la convención de nomenclatura adoptada por el equipo, y se ordenaron cronológicamente para cada uno de los procesos identificados. La Imagen 10 muestra el tablero resultante de la sesión.
 
 <br>
 
@@ -1240,7 +1238,7 @@ URL del tablero en Miro: [https://miro.com/app/board/uXjVHmgj4G8=/](https://miro
 <div align="center">
 
 ![Big Picture EventStorming - Serenia](assets/img/big-picture-eventstorming/big-picture-eventstorming.png)
-  <br/><i>Imagen 9. Big Picture EventStorming del dominio de Serenia.</i>
+  <br/><i>Imagen 10. Big Picture EventStorming del dominio de Serenia.</i>
 
 </div>
 
@@ -1340,7 +1338,7 @@ En esta sección se presentan los requisitos identificados para Serenia a partir
   </tr>
   <tr>
     <td style="text-align: center;"><strong>EP08</strong></td>
-    <td style="text-align: center;">Experiencia Web — Landing Page</td>
+    <td style="text-align: center;">Experiencia Web, Landing Page</td>
   </tr>
   <tr>
     <td style="text-align: center;"><strong>EP09</strong></td>
@@ -2091,7 +2089,7 @@ En esta sección se presentan los requisitos identificados para Serenia a partir
     <td style="text-align: center;"><strong>US23</strong></td>
     <td style="text-align: center;">Visitante del sitio web</td>
     <td style="text-align: center;">High</td>
-    <td style="text-align: center;">EP08 – Experiencia Web — Landing Page</td>
+    <td style="text-align: center;">EP08 – Experiencia Web, Landing Page</td>
   </tr>
   <tr>
     <th>Title</th>
@@ -2124,7 +2122,7 @@ En esta sección se presentan los requisitos identificados para Serenia a partir
     <td style="text-align: center;"><strong>US24</strong></td>
     <td style="text-align: center;">Visitante del sitio web</td>
     <td style="text-align: center;">Medium</td>
-    <td style="text-align: center;">EP08 – Experiencia Web — Landing Page</td>
+    <td style="text-align: center;">EP08 – Experiencia Web, Landing Page</td>
   </tr>
   <tr>
     <th>Title</th>
@@ -2157,7 +2155,7 @@ En esta sección se presentan los requisitos identificados para Serenia a partir
     <td style="text-align: center;"><strong>US25</strong></td>
     <td style="text-align: center;">Visitante del sitio web</td>
     <td style="text-align: center;">Medium</td>
-    <td style="text-align: center;">EP08 – Experiencia Web — Landing Page</td>
+    <td style="text-align: center;">EP08 – Experiencia Web, Landing Page</td>
   </tr>
   <tr>
     <th>Title</th>
@@ -2190,7 +2188,7 @@ En esta sección se presentan los requisitos identificados para Serenia a partir
     <td style="text-align: center;"><strong>US26</strong></td>
     <td style="text-align: center;">Visitante del sitio web</td>
     <td style="text-align: center;">Low</td>
-    <td style="text-align: center;">EP08 – Experiencia Web — Landing Page</td>
+    <td style="text-align: center;">EP08 – Experiencia Web, Landing Page</td>
   </tr>
   <tr>
     <th>Title</th>
@@ -2955,7 +2953,7 @@ Como equipo de desarrollo (Android, Flutter y backend), quiero investigar y prot
 
 ### 2.4.2. Impact Mapping
 
-En esta sección se presenta el Impact Mapping de Serenia, una herramienta visual que nos permite alinear las funcionalidades del producto con los objetivos estratégicos del negocio y las necesidades de nuestros usuarios. Este mapa asegura que cada User Story desarrollada contribuya directamente a generar un cambio de comportamiento positivo (Impact) en nuestros segmentos (Actors) para alcanzar una meta medible (Business Goal).
+En esta sección se presenta el Impact Mapping de Serenia, una herramienta visual que nos permite alinear las funcionalidades del producto con los objetivos estratégicos del negocio y las necesidades de nuestros usuarios. Este mapa asegura que cada User Story desarrollada contribuya directamente a generar un cambio de comportamiento positivo (Impact) en nuestros segmentos (Actors) para alcanzar una meta medible (Business Goal). La Imagen 11, al final de esta sección, muestra el mapa completo.
 
 **Business Goal (Meta de Negocio SMART):**
 Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzamiento en Lima Metropolitana, logrando una tasa de retención del 70% mediante el uso continuo del check-in diario.
@@ -2986,13 +2984,15 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 <div align="center">
 
 ![Impact Mapping de Serenia](assets/img/diagrams/impact-mapping.png)
-  <br/><i>Imagen 10. Diagrama de Impact Mapping.</i>
+  <br/><i>Imagen 11. Diagrama de Impact Mapping.</i>
 
 </div>
 
 <br>
 
 ### 2.4.3. Product Backlog
+
+La siguiente tabla ordena las 46 historias del Product Backlog y asigna cada una a un sprint. La Imagen 12 muestra el mismo backlog en Trello, donde el equipo lo gestiona.
 
 | Orden | User Story Id | Título | Story Points (1 / 2 / 3 / 5 / 8) | Sprint |
 |---:|---|---|---:|---|
@@ -3048,7 +3048,7 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 <div align="center">
 
 ![product backlog](assets/img/product-backlog/product-backlog.png)
-  <br/><i>Imagen 11. Captura de Product Backlog en Trello.</i>
+  <br/><i>Imagen 12. Captura de Product Backlog en Trello.</i>
 
 </div>
 <br>
@@ -3059,9 +3059,118 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 
 ## 2.5. Strategic-Level Domain-Driven Design
 ### 2.5.1. EventStorming
+
+Antes de presentar los bounded contexts candidatos, esta sección muestra el camino que llevó hasta ellos. El equipo aplicó el proceso de EventStorming en diez pasos: Unstructured Exploration, Timelines, Pain Points, Pivotal Points, Commands, Policies, Read Models, External Systems, Aggregates y Bounded Contexts. Cada paso agrega una capa de información sobre el mismo modelo sin reemplazar la anterior, de modo que el último paso conserva todo lo trabajado en los nueve primeros. Las capturas provienen del tablero de Miro *Event Storming Process - 10 steps*, donde cada paso se conserva como una copia acumulada del anterior. Este enfoque de Domain-Driven Design tiene respaldo en la literatura: según una revisión sistemática reciente, facilita la descomposición de sistemas y requiere la participación de ingenieros, arquitectos y expertos del dominio (Özkan et al., 2025). Si alguna captura no se aprecia con claridad, el tablero completo puede consultarse en Miro.
+
+<br>
+
+URL del tablero en Miro: [https://miro.com/app/board/uXjVHlaGmGg=/?share_link_id=423095184184](https://miro.com/app/board/uXjVHlaGmGg=/?share_link_id=423095184184)
+
+<br>
+
+**Paso 1. Unstructured Exploration.** El punto de partida fueron los eventos de dominio de Serenia, levantados a partir del Big Picture EventStorming (sección 2.3.5), redactados en pasado y sin ningún orden, tal como surgen en una lluvia de ideas. La Imagen 13 muestra ese estado inicial: en este paso no se busca todavía una estructura, solo poner sobre el muro todo lo que ocurre en el dominio.
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-01-unstructured-exploration.png" alt="Paso 1 - Unstructured Exploration" width="700"/>
+  <br/><i>Imagen 13. Paso 1 del EventStorming: Unstructured Exploration.</i>
+</div>
+
+<br>
+
+**Paso 2. Timelines.** Los eventos se ordenaron en el tiempo y se agruparon por proceso: alta y acceso del usuario, círculo de cuidado y vínculo familiar, check-in diario, interpretación de bienestar, alertas y seguridad, y acompañamiento social. Las flechas de la Imagen 14 indican la secuencia entre eventos y las bifurcaciones, como el código de invitación que puede ser canjeado o rechazado.
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-02-timelines.png" alt="Paso 2 - Timelines" width="700"/>
+  <br/><i>Imagen 14. Paso 2 del EventStorming: Timelines.</i>
+</div>
+
+<br>
+
+**Paso 3. Pain Points.** Sobre la línea de tiempo se marcaron con stickies rosados las dudas que el dominio todavía no resuelve. El equipo no las inventó para este paso: se tomaron diez de las Open Questions de los Bounded Context Canvases (sección 2.5.1.3) y se ubicaron junto al evento al que afectan, como se ve en la Imagen 15. Entre ellas están la vigencia del código de invitación, quién puede revocar un vínculo familiar, cuántos días configuran un patrón de malestar, la duración de la ventana de inactividad y si la alerta llega a todos los familiares vinculados.
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-03-pain-points.png" alt="Paso 3 - Pain Points" width="700"/>
+  <br/><i>Imagen 15. Paso 3 del EventStorming: Pain Points.</i>
+</div>
+
+<br>
+
+**Paso 4. Pivotal Points.** Las barras verticales de la Imagen 16 marcan los eventos que cambian la fase del negocio, es decir, aquellos a partir de los cuales el sistema pasa a operar de otra manera. Fueron seis: Older Adult Registered (el usuario existe), Family Link Established (ya hay a quién notificar), Check In Answered y Check In Missed (la bifurcación entre bienestar confirmado y ausencia de respuesta), Discomfort Pattern Detected (el malestar deja de ser puntual y pasa a ser sostenido) y Emergency Alert Raised (la situación deja de ser rutinaria).
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-04-pivotal-points.png" alt="Paso 4 - Pivotal Points" width="700"/>
+  <br/><i>Imagen 16. Paso 4 del EventStorming: Pivotal Points.</i>
+</div>
+
+<br>
+
+**Paso 5. Commands.** Para cada evento se identificó el comando que lo provoca, redactado en imperativo (por ejemplo, Register Older Adult o Trigger Emergency Alert), y el actor que lo ejecuta: Older Adult, Distant Relative o el propio sistema, como ocurre con Prompt Check In. La Imagen 17 muestra los 45 comandos, en azul, con sus actores en amarillo claro. Desde este paso se retiran las flechas de la línea de tiempo para no saturar el muro.
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-05-commands.png" alt="Paso 5 - Commands" width="700"/>
+  <br/><i>Imagen 17. Paso 5 del EventStorming: Commands.</i>
+</div>
+
+<br>
+
+**Paso 6. Policies.** Las policies, en violeta, son reglas de la forma "cuando ocurre X, entonces se ejecuta Y": reaccionan a un evento y disparan un comando. El equipo identificó diez. Por ejemplo, si el check-in no fue respondido y no hay una pausa activa, se evalúa la inactividad; si se detecta un patrón de malestar, se emite una sugerencia de bienestar; y si se levanta una alerta de emergencia y hay familiares vinculados, se despacha la alerta. La Imagen 18 conecta con una flecha tres de estas policies con el comando que activan (Create Care Circle, Evaluate Wellbeing Pattern y Evaluate Inactivity). Las tres cruzan de un contexto a otro, lo que anticipa las relaciones que luego se formalizan en el Context Map (sección 2.5.2).
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-06-policies.png" alt="Paso 6 - Policies" width="700"/>
+  <br/><i>Imagen 18. Paso 6 del EventStorming: Policies.</i>
+</div>
+
+<br>
+
+**Paso 7. Read Models.** Los read models, en verde claro, representan la información o la vista que el actor necesita tener delante para decidir y ejecutar un comando. Se identificaron 24, entre ellos Registration Form View, Daily Check-in View, Family Members View, Help Button View y Alerts View, que se observan en la Imagen 19 ubicados junto al comando que alimentan.
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-07-read-models.png" alt="Paso 7 - Read Models" width="700"/>
+  <br/><i>Imagen 19. Paso 7 del EventStorming: Read Models.</i>
+</div>
+
+<br>
+
+**Paso 8. External Systems.** Los sistemas externos, en rojo, son servicios que están fuera del dominio y con los que este necesita interactuar. El único identificado hasta ahora es el Push Notification Provider, que entrega la notificación push al dispositivo del familiar cuando se despacha una alerta, por lo que la Imagen 20 lo ubica junto al evento Emergency Alert Dispatched. Es el mismo proveedor que el Context Map aísla mediante una Anti-Corruption Layer (sección 2.5.2).
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-08-external-systems.png" alt="Paso 8 - External Systems" width="700"/>
+  <br/><i>Imagen 20. Paso 8 del EventStorming: External Systems.</i>
+</div>
+
+<br>
+
+**Paso 9. Aggregates.** Los aggregates, en amarillo intenso, agrupan los comandos y eventos que modifican un mismo concepto del dominio y protegen sus reglas de consistencia. Aparecen doce en la Imagen 21: User, Care Circle, Care Shift, Shared Note, Check In, Check In Preferences, Wellbeing Insight, Emergency Alert, Inactivity Alert, Audio Message, Photo Message y Social Reminder.
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-09-aggregates.png" alt="Paso 9 - Aggregates" width="700"/>
+  <br/><i>Imagen 21. Paso 9 del EventStorming: Aggregates.</i>
+</div>
+
+<br>
+
+**Paso 10. Bounded Contexts.** Finalmente, los aggregates, comandos y eventos que comparten lenguaje y reglas se encerraron en elipses, como muestra la Imagen 22. El resultado son seis bounded contexts: Identity & Access, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts & Safety y Social Companionship. Las flechas de las policies que cruzan de una elipse a otra indican dónde los contextos deben colaborar. La sección siguiente explica cada uno de ellos y el criterio con el que se clasificó según su aporte de valor.
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-10-bounded-contexts.png" alt="Paso 10 - Bounded Contexts" width="700"/>
+  <br/><i>Imagen 22. Paso 10 del EventStorming: Bounded Contexts.</i>
+</div>
+
+<br>
+
 #### 2.5.1.1. Candidate Context Discovery
 
-A partir del dominio modelado en el Big Picture EventStorming, el equipo desarrolló una sesión de Candidate Context Discovery con el fin de identificar los bounded contexts de Serenia. La sesión se realizó en Miro sobre el muro de 46 eventos de dominio previamente levantados y tuvo una duración aproximada de 1 hora y media.
+A partir del dominio modelado en los pasos anteriores, el equipo desarrolló una sesión de Candidate Context Discovery con el fin de identificar los bounded contexts de Serenia, que corresponde al paso 10 del proceso. La sesión se realizó en Miro sobre el muro de eventos de dominio previamente levantados y tuvo una duración aproximada de 1 hora y media.
 
 La técnica aplicada fue start-with-value. En lugar de descomponer el timeline de forma secuencial, el equipo partió de la pregunta sobre qué partes del dominio concentran el mayor valor para el negocio, entendiendo por valor aquello que sostiene directamente la propuesta diferencial de Serenia: reemplazar la común llamada telefónica por un acompañamiento emocional sostenido y verificable a distancia.
 
@@ -3076,73 +3185,75 @@ El proceso se desarrolló en tres momentos:
 
 **Separación de lo genérico y lo complementario.** Finalmente, el equipo aisló los eventos que no aportan diferenciación competitiva. Por un lado, los de identidad, autenticación y gestión de perfil, que son resolubles con mecanismos estándar y cuyas reglas no cambian con el negocio de Serenia. Por otro lado, los de mensajería de audio, imágenes y recordatorios sociales, que enriquecen la experiencia de acompañamiento pero no producen ninguna señal que el sistema evalúe ni disparan ningún flujo de alerta.
 
-El resultado de la sesión fuerons seis bounded contexts candidatos, clasificados según su aporte de valor:
+El resultado de la sesión fueron seis bounded contexts candidatos, clasificados según su aporte de valor y presentados en las Imágenes 23 a 28:
 
 <br>
 
 
 ### Daily Check-in - Core <br>
-Es el mecanismo primario por el cual Serenia genera valor diferencial: convierte una interacción emocional cotidiana en una señal estructurada, sin que el adulto mayor sienta que está siendo monitoreado clínicamente. Sin este contexto no existe el dato que el resto del sistema necesita para funcionar.
+Es el mecanismo primario por el cual Serenia genera valor diferencial: convierte una interacción emocional cotidiana en una señal estructurada, sin que el adulto mayor sienta que está siendo monitoreado clínicamente. Sin este contexto no existe el dato que el resto del sistema necesita para funcionar. La Imagen 23 muestra los eventos, comandos y aggregates que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/daily-check-in.png" alt="Daily Check-in - Bounded Context" width="700"/>
-  <br/><i>Imagen 12. Daily Check-in - Bounded Context Core identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 23. Daily Check-in - Bounded Context Core identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 ### Wellbeing Monitoring - Core <br>
-Es el contexto que interpreta las señales del check-in y las convierte en información para la familia a distancia. Concentra la lógica del negocio más distintiva de Serenia: distinguir un mal día puntual de un patrón de deterioro sostenido, evitando tanto la falsa alarma como la negligencia.
+Es el contexto que interpreta las señales del check-in y las convierte en información para la familia a distancia. Concentra la lógica del negocio más distintiva de Serenia: distinguir un mal día puntual de un patrón de deterioro sostenido, evitando tanto la falsa alarma como la negligencia. La Imagen 24 muestra los elementos que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/wellbeing-monitoring.png" alt="Wellbeing Monitoring - Bounded Context" width="700"/>
-  <br/><i>Imagen 13. Wellbeing Monitoring - Bounded Context Core identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 24. Wellbeing Monitoring - Bounded Context Core identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 ### Alerts & Safety - Core <br>
-Es la garantía de tranquilidad que sostiene la decisión de compra del familiar a distancia. Sin una respuesta confiable ante inactividad o emergencia, el resto de la propuesta de valor pierde sustento, porque el familiar seguiría necesitando de llamar por su cuenta ante cualquier duda.
+Es la garantía de tranquilidad que sostiene la decisión de compra del familiar a distancia. Sin una respuesta confiable ante inactividad o emergencia, el resto de la propuesta de valor pierde sustento, porque el familiar seguiría necesitando de llamar por su cuenta ante cualquier duda. La Imagen 25 muestra los elementos que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/alerts-and-safety.png" alt="Alerts & Safety - Bounded Context" width="700"/>
-  <br/><i>Imagen 14. Alerts & Safety - Bounded Context Core identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 25. Alerts & Safety - Bounded Context Core identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 ### Care Circle - Supporting <br>
-No genera valor por sí solo, pero es indispensable para que el core opere: sin un vínculo familiar establecido no hay a quién notificar ni con quién compartir el estado del adulto mayor. Se mantiene separado del core porque administra estructura de relación (vínculos, turnos, notas compartidas), no interpretación de bienestar.
+No genera valor por sí solo, pero es indispensable para que el core opere: sin un vínculo familiar establecido no hay a quién notificar ni con quién compartir el estado del adulto mayor. Se mantiene separado del core porque administra estructura de relación (vínculos, turnos, notas compartidas), no interpretación de bienestar. La Imagen 26 muestra los elementos que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/care-circle.png" alt="Care Circle - Bounded Context" width="700"/>
-  <br/><i>Imagen 15. Care Circle - Bounded Context Supporting identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 26. Care Circle - Bounded Context Supporting identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 ### Social Companionship - Supporting <br>
-Complementa la experiencia de acompañamiento con mensajería de audio, fotos y recordatorios sociales, pero ninguno de sus eventos produce una señal que el sistema evalúe ni deriva en alerta. Aporta valor percibido, no valor operativo.
+Complementa la experiencia de acompañamiento con mensajería de audio, fotos y recordatorios sociales, pero ninguno de sus eventos produce una señal que el sistema evalúe ni deriva en alerta. Aporta valor percibido, no valor operativo. La Imagen 27 muestra los elementos que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/social-companionship.png" alt="Social Companionship - Bounded Context" width="700"/>
-  <br/><i>Imagen 16. Social Companionship - Bounded Context Supporting identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 27. Social Companionship - Bounded Context Supporting identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 ### Identity & Access - Generic <br>
-Resuelve un problema estándar (registro, autenticación, gestión de sesión) con reglas de negocio genéricas que no cambian por ser Serenia. Es indispensable para que exista cualquier otro contexto, pero no distingue a Serenia de ninguna otra aplicación.
+Resuelve un problema estándar (registro, autenticación, gestión de sesión) con reglas de negocio genéricas que no cambian por ser Serenia. Es indispensable para que exista cualquier otro contexto, pero no distingue a Serenia de ninguna otra aplicación. La Imagen 28 muestra los elementos que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/identity-and-access-context.png" alt="IAM - Bounded Context" width="700"/>
-  <br/><i>Imagen 17. Identity & Access - Bounded Context Generic identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 28. Identity & Access - Bounded Context Generic identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 Al finalizar, el equipo aplicó una verificación del lenguaje ubicuo sobre cada frontera, comprobando que ningún término tuviera dos significados dentro de un mismo contexto. Esta revisión confirmó, por ejemplo, la separación entre Daily Check-in y Wellbeing Monitoring. Otra discusión del equipo fue la frontera entre Daily Check-in y Social Companionship, por compartir ambos la dimensión emocional de la interacción; se resolvió mantenerlas separadas sobre la base de que únicamente el check-in produce una señal que el sistema evalúa, mientras que el acompañamiento social no está sujeto a ninguna evaluación.
 
 ## EventStorming Serenia
 
+La Imagen 29 reúne los seis bounded contexts en un solo tablero y muestra cómo se relacionan entre sí.
+
 <br>
 <div align="center">
   <img src="assets/img/event-storming/event-storming-serenia.png" alt="EventStorming - Serenia" width="700"/>
-  <br/><i>Imagen 18. Candidate Context Discovery completo del dominio de Serenia.</i>
+  <br/><i>Imagen 29. Candidate Context Discovery completo del dominio de Serenia.</i>
 </div>
 
 <br>
@@ -3159,13 +3270,13 @@ La selección de escenarios no buscó cobertura funcional completa, sino aquello
 
 **Domain Story 1: Registro y vinculación familiar**
 
-Este escenario resuelve el caso en que un adulto mayor se registra en Serenia y habilita a un familiar a distancia para acceder a su estado. Es la historia que da origen a toda relación posterior en el sistema: sin un vínculo familiar establecido, ningún otro flujo puede ejecutarse.
+Este escenario resuelve el caso en que un adulto mayor se registra en Serenia y habilita a un familiar a distancia para acceder a su estado. Es la historia que da origen a toda relación posterior en el sistema: sin un vínculo familiar establecido, ningún otro flujo puede ejecutarse. La Imagen 30 presenta el diagrama de esta historia.
 
 <br>
 
 <div align="center">
   <img src="assets/img/domain-message-flows-modeling/domain-story-1.png" alt="Domain Story 1" width="700"/>
-  <br/><i>Imagen 19. Domain Story 1 - Registro y vinculación familiar.</i>
+  <br/><i>Imagen 30. Domain Story 1 - Registro y vinculación familiar.</i>
 </div>
 
 <br>
@@ -3176,13 +3287,13 @@ El adulto mayor crea su cuenta en Identity & Access (1), el cual comunica la ide
 
 **Domain Story 2: Check-in diario y consulta del estado**
 
-Este escenario representa la operación cotidiana de Serenia y el caso de uso que sostiene su propuesta de valor: el adulto mayor comunica su bienestar sin necesidad de una llamada, y el familiar a distancia lo verifica sin necesidad de interrumpirlo.
+Este escenario representa la operación cotidiana de Serenia y el caso de uso que sostiene su propuesta de valor: el adulto mayor comunica su bienestar sin necesidad de una llamada, y el familiar a distancia lo verifica sin necesidad de interrumpirlo. La Imagen 31 presenta el diagrama de esta historia.
 
 <br>
 
 <div align="center">
   <img src="assets/img/domain-message-flows-modeling/domain-story-2.png" alt="Domain Story 2" width="700"/>
-  <br/><i>Imagen 20. Domain Story 2 - Check-in diario y consulta del estado.</i>
+  <br/><i>Imagen 31. Domain Story 2 - Check-in diario y consulta del estado.</i>
 </div>
 <br>
 
@@ -3192,13 +3303,13 @@ Daily Check-in envía la pregunta diaria al adulto mayor (1), quien responde el 
 
 **Domain Story 3: Detección de un patrón de malestar**
 
-Este escenario resuelve el caso en que el adulto mayor reporta malestar durante varios días consecutivos sin que ello constituya una emergencia. Es el flujo que distingue a Serenia de una aplicación de alertas reactivas, ya que actúa sobre una tendencia y no sobre un evento aislado.
+Este escenario resuelve el caso en que el adulto mayor reporta malestar durante varios días consecutivos sin que ello constituya una emergencia. Es el flujo que distingue a Serenia de una aplicación de alertas reactivas, ya que actúa sobre una tendencia y no sobre un evento aislado. La Imagen 32 presenta el diagrama de esta historia.
 
 <br>
 
 <div align="center">
   <img src="assets/img/domain-message-flows-modeling/domain-story-3.png" alt="Domain Story 3" width="700"/>
-  <br/><i>Imagen 21. Domain Story 3 - Detección de un patrón de malestar.</i>
+  <br/><i>Imagen 32. Domain Story 3 - Detección de un patrón de malestar.</i>
 </div>
 <br>
 
@@ -3208,7 +3319,7 @@ Wellbeing Monitoring evalúa el historial de check-ins del adulto mayor (1) y, a
 
 El modelado de los flujos de mensajes permitió comprobar que la descomposición propuesta resiste la ejecución de los casos de negocio reales de Serenia. Las tres historias muestran una cadena de colaboración coherente: Care Circle origina el vínculo familiar del que dependen todas las comunicaciones posteriores, Daily Check-in captura la señal diaria, Wellbeing Monitoring la acumula e interpreta, y Alerts and Safety actúa únicamente cuando esa interpretación lo amerita. Cada contexto recibe lo que necesita para cumplir su responsabilidad y ninguno requiere asumir la de otro, lo que confirma que las fronteras trazadas son operativas y no solo conceptuales.
 
-Adicionalmente, los diagramas identificaron con precisión los tres puntos de integración del sistema —identidad registrada, check-in registrado y patrón de malestar detectado—, que constituyen el insumo directo para definir los patrones de relación entre contextos.
+Adicionalmente, los diagramas identificaron con precisión los tres puntos de integración del sistema (identidad registrada, check-in registrado y patrón de malestar detectado), que constituyen el insumo directo para definir los patrones de relación entre contextos.
 
 <br>
 
@@ -3218,27 +3329,27 @@ Con los bounded contexts identificados y sus flujos de colaboración visualizado
 
 Los contextos se presentan por orden de importancia, iniciando por los clasificados como Core, continuando con los Supporting y cerrando con el Generic.
 
-<table> <tr><th colspan="2">Bounded Context Canvas 1 — Daily Check-in</th></tr> <tr><td><b>Purpose</b></td><td>Permitir que el adulto mayor comunique su bienestar cotidiano mediante una interacción de un solo toque, sin necesidad de una llamada telefónica ni de dar explicaciones extensas, preservando su autonomía y evitando que la interacción se perciba como vigilancia clínica.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Core — es el mecanismo primario de generación de valor.<br><b>Business Model:</b> Engagement Creator — el adulto mayor no paga por esta funcionalidad, pero su uso sostenido es la condición de todo lo demás.<br><b>Evolution:</b> Custom Built — existen check-ins en otras soluciones, pero Serenia los diferencia por su tono no clínico y su variabilidad.</td></tr> <tr><td><b>Domain Roles</b></td><td>Execution context — ejecuta el ciclo diario de captura de respuesta. No interpreta ni acumula: esa responsabilidad corresponde a Wellbeing Monitoring.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Check-in response (Command) — Older Adult, interacción directa de UI<br>Pausa de preguntas activada (Command) — Older Adult, interacción directa de UI<br>Family link established (Event) — Care Circle, Published Language</td></tr> <tr><td><b>Outbound Communication</b></td><td>Daily question (Event) — Older Adult, interacción directa de UI<br>Registered check-in (Event) — Wellbeing Monitoring, Customer/Supplier<br>Unanswered check-in (Event) — Alerts and Safety, Customer/Supplier</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Check-in:</b> respuesta diaria del adulto mayor sobre su estado.<br><b>Daily Question:</b> estímulo variable que inicia el check-in.<br><b>Time Limit Window:</b> plazo desde el horario configurado dentro del cual se espera la respuesta.<br><b>Daily Pause:</b> suspensión voluntaria del check-in por el día en curso.</td></tr> <tr><td><b>Business Decisions</b></td><td>El check-in se responde con un solo toque, sin formularios ni campos adicionales (US03).<br>El adulto mayor puede activar la pausa de preguntas para el día en curso; en ese caso no se evalúa la ausencia de respuesta (US16).<br>La pregunta diaria es variable y de tono de compañía, no clínico.</td></tr> <tr><td><b>Assumptions</b></td><td>El adulto mayor dispone de un smartphone táctil y puede realizar interacciones simples sin asistencia.<br>El horario de la pregunta diaria es configurable por el adulto mayor.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Tasa de check-ins diarios completados.<br>Frecuencia de uso de la pausa de preguntas.<br>Tiempo promedio entre el envío de la pregunta y la respuesta.</td></tr> <tr><td><b>Open Questions</b></td><td>¿La pregunta diaria varía en contenido o únicamente en horario de aparición?<br>¿Existe un número máximo de recordatorios si el adulto mayor abre la aplicación pero no responde?</td></tr> </table>
+<table> <tr><th colspan="2">Bounded Context Canvas 1: Daily Check-in</th></tr> <tr><td><b>Purpose</b></td><td>Permitir que el adulto mayor comunique su bienestar cotidiano mediante una interacción de un solo toque, sin necesidad de una llamada telefónica ni de dar explicaciones extensas, preservando su autonomía y evitando que la interacción se perciba como vigilancia clínica.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Core ( es el mecanismo primario de generación de valor.<br><b>Business Model:</b> Engagement Creator ) el adulto mayor no paga por esta funcionalidad, pero su uso sostenido es la condición de todo lo demás.<br><b>Evolution:</b> Custom Built ( existen check-ins en otras soluciones, pero Serenia los diferencia por su tono no clínico y su variabilidad.</td></tr> <tr><td><b>Domain Roles</b></td><td>Execution context ) ejecuta el ciclo diario de captura de respuesta. No interpreta ni acumula: esa responsabilidad corresponde a Wellbeing Monitoring.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Check-in response (Command): Older Adult, interacción directa de UI<br>Pausa de preguntas activada (Command): Older Adult, interacción directa de UI<br>Family link established (Event): Care Circle, Published Language</td></tr> <tr><td><b>Outbound Communication</b></td><td>Daily question (Event): Older Adult, interacción directa de UI<br>Registered check-in (Event): Wellbeing Monitoring, Customer/Supplier<br>Unanswered check-in (Event): Alerts and Safety, Customer/Supplier</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Check-in:</b> respuesta diaria del adulto mayor sobre su estado.<br><b>Daily Question:</b> estímulo variable que inicia el check-in.<br><b>Time Limit Window:</b> plazo desde el horario configurado dentro del cual se espera la respuesta.<br><b>Daily Pause:</b> suspensión voluntaria del check-in por el día en curso.</td></tr> <tr><td><b>Business Decisions</b></td><td>El check-in se responde con un solo toque, sin formularios ni campos adicionales (US03).<br>El adulto mayor puede activar la pausa de preguntas para el día en curso; en ese caso no se evalúa la ausencia de respuesta (US16).<br>La pregunta diaria es variable y de tono de compañía, no clínico.</td></tr> <tr><td><b>Assumptions</b></td><td>El adulto mayor dispone de un smartphone táctil y puede realizar interacciones simples sin asistencia.<br>El horario de la pregunta diaria es configurable por el adulto mayor.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Tasa de check-ins diarios completados.<br>Frecuencia de uso de la pausa de preguntas.<br>Tiempo promedio entre el envío de la pregunta y la respuesta.</td></tr> <tr><td><b>Open Questions</b></td><td>¿La pregunta diaria varía en contenido o únicamente en horario de aparición?<br>¿Existe un número máximo de recordatorios si el adulto mayor abre la aplicación pero no responde?</td></tr> </table>
 
 <br>
 
-<table> <tr><th colspan="2">Bounded Context Canvas 2 — Wellbeing Monitoring</th></tr> <tr><td><b>Purpose</b></td><td>Convertir las respuestas diarias del adulto mayor en información significativa para el familiar a distancia, distinguiendo un mal día puntual de un patrón sostenido de deterioro, de modo que el familiar conozca su estado sin necesidad de interrumpirlo.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Core — concentra la lógica de negocio más distintiva de Serenia.<br><b>Business Model:</b> Revenue Generator — el panel de estado y el historial constituyen el núcleo de las funciones familiares del modelo freemium.<br><b>Evolution:</b> Custom Built — la interpretación emocional no clínica de patrones no tiene equivalente estandarizado.</td></tr> <tr><td><b>Domain Roles</b></td><td>Analysis context — recibe señales, las acumula y las interpreta para producir información derivada. No ejecuta acciones sobre el usuario.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Registered check-in (Event) — Daily Check-in, Customer/Supplier<br>Status summary request (Query) — Distant Relative, interacción directa de UI<br>Check-in history request (Query) — Distant Relative, interacción directa de UI<br>Family link established (Event) — Care Circle, Published Language</td></tr> <tr><td><b>Outbound Communication</b></td><td>Status summary (Query response) — Distant Relative, interacción directa de UI<br>Discomfort pattern detected (Event) — Alerts and Safety, Customer/Supplier</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Check-in History:</b> secuencia ordenada de respuestas del adulto mayor.<br><b>Status Summary:</b> vista del día en curso que consulta el familiar.<br><b>Discomfort Pattern:</b> tendencia sostenida de respuestas negativas en días consecutivos.<br><b>Small Win:</b> actividad positiva registrada en un check-in.</td></tr> <tr><td><b>Business Decisions</b></td><td>Un patrón de malestar requiere varios días consecutivos de reporte negativo; una respuesta aislada no lo constituye (US18).<br>El historial se presenta ordenado por fecha y no se limita al día en curso (US17).<br>Se registran también las actividades positivas, de modo que el familiar no reciba únicamente señales negativas (US19).</td></tr> <tr><td><b>Assumptions</b></td><td>El familiar revisa el panel de estado con frecuencia suficiente como para que la consulta bajo demanda sea adecuada y no se requiera notificación activa.<br>La información de vinculación familiar se encuentra disponible localmente por propagación desde Care Circle.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Frecuencia de consulta del panel de estado por familiar.<br>Proporción de patrones detectados que derivan en atención efectiva del familiar.<br>Reducción de llamadas motivadas por ansiedad reportadas por los usuarios.</td></tr> <tr><td><b>Open Questions</b></td><td>¿Cuántos días consecutivos configuran un patrón de malestar?<br>¿El umbral es fijo o se ajusta al comportamiento habitual de cada adulto mayor?</td></tr> </table>
+<table> <tr><th colspan="2">Bounded Context Canvas 2: Wellbeing Monitoring</th></tr> <tr><td><b>Purpose</b></td><td>Convertir las respuestas diarias del adulto mayor en información significativa para el familiar a distancia, distinguiendo un mal día puntual de un patrón sostenido de deterioro, de modo que el familiar conozca su estado sin necesidad de interrumpirlo.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Core ( concentra la lógica de negocio más distintiva de Serenia.<br><b>Business Model:</b> Revenue Generator ) el panel de estado y el historial constituyen el núcleo de las funciones familiares del modelo freemium.<br><b>Evolution:</b> Custom Built ( la interpretación emocional no clínica de patrones no tiene equivalente estandarizado.</td></tr> <tr><td><b>Domain Roles</b></td><td>Analysis context ) recibe señales, las acumula y las interpreta para producir información derivada. No ejecuta acciones sobre el usuario.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Registered check-in (Event): Daily Check-in, Customer/Supplier<br>Status summary request (Query): Distant Relative, interacción directa de UI<br>Check-in history request (Query): Distant Relative, interacción directa de UI<br>Family link established (Event): Care Circle, Published Language</td></tr> <tr><td><b>Outbound Communication</b></td><td>Status summary (Query response): Distant Relative, interacción directa de UI<br>Discomfort pattern detected (Event): Alerts and Safety, Customer/Supplier</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Check-in History:</b> secuencia ordenada de respuestas del adulto mayor.<br><b>Status Summary:</b> vista del día en curso que consulta el familiar.<br><b>Discomfort Pattern:</b> tendencia sostenida de respuestas negativas en días consecutivos.<br><b>Small Win:</b> actividad positiva registrada en un check-in.</td></tr> <tr><td><b>Business Decisions</b></td><td>Un patrón de malestar requiere varios días consecutivos de reporte negativo; una respuesta aislada no lo constituye (US18).<br>El historial se presenta ordenado por fecha y no se limita al día en curso (US17).<br>Se registran también las actividades positivas, de modo que el familiar no reciba únicamente señales negativas (US19).</td></tr> <tr><td><b>Assumptions</b></td><td>El familiar revisa el panel de estado con frecuencia suficiente como para que la consulta bajo demanda sea adecuada y no se requiera notificación activa.<br>La información de vinculación familiar se encuentra disponible localmente por propagación desde Care Circle.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Frecuencia de consulta del panel de estado por familiar.<br>Proporción de patrones detectados que derivan en atención efectiva del familiar.<br>Reducción de llamadas motivadas por ansiedad reportadas por los usuarios.</td></tr> <tr><td><b>Open Questions</b></td><td>¿Cuántos días consecutivos configuran un patrón de malestar?<br>¿El umbral es fijo o se ajusta al comportamiento habitual de cada adulto mayor?</td></tr> </table>
 
 <br>
 
-<table> <tr><th colspan="2">Bounded Context Canvas 3 — Alerts and Safety</th></tr> <tr><td><b>Purpose</b></td><td>Garantizar que el familiar a distancia sea informado cuando la situación del adulto mayor lo amerite, ya sea por ausencia prolongada de respuesta, por un patrón de malestar sostenido o por una emergencia declarada, de modo que no necesite verificar por su cuenta ante cada duda.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Core — es la garantía de tranquilidad que sostiene la decisión de adopción del familiar.<br><b>Business Model:</b> Revenue Generator — las alertas selectivas forman parte de las funciones familiares de pago.<br><b>Evolution:</b> Product — existen soluciones de alerta de emergencia en el mercado, aunque sin la selectividad que Serenia propone.</td></tr> <tr><td><b>Domain Roles</b></td><td>Execution context con rol de notificación — aplica reglas de escalamiento y decide a quién y cuándo notificar.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Unanswered check-in (Event) — Daily Check-in, Customer/Supplier<br>Discomfort pattern detected (Event) — Wellbeing Monitoring, Customer/Supplier<br>Emergency alert triggered (Command) — Older Adult, interacción directa de UI<br>Alert attention confirmed (Command) — Distant Relative, interacción directa de UI<br>Family link established (Event) — Care Circle, Published Language</td></tr> <tr><td><b>Outbound Communication</b></td><td>Action suggestion (Event) — Distant Relative, interacción directa de UI<br>Inactivity alert (Event) — Distant Relative, interacción directa de UI<br>Emergency alert (Event) — Distant Relative, interacción directa de UI<br>Contact reminder (Event) — Older Adult, interacción directa de UI</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Inactivity Alert:</b> notificación generada por ausencia de check-in dentro del plazo.<br><b>Emergency Alert:</b> notificación iniciada explícitamente por el adulto mayor.<br><b>Inactivity Window:</b> plazo que transcurre antes de escalar una ausencia de respuesta.<br><b>Suggested Action:</b> recomendación dirigida al familiar ante un patrón de malestar.<br><b>Severity:</b> nivel asignado a una alerta según su origen y urgencia.</td></tr> <tr><td><b>Business Decisions</b></td><td>La alerta de inactividad se genera solo si el check-in no fue respondido dentro del tiempo límite y la pausa de preguntas no está activa (US16).<br>Una alerta de emergencia dirigida a un adulto mayor sin familiares vinculados no puede procesarse (TS08).<br>La alerta escala a emergencia únicamente tras vencer la ventana de inactividad sin respuesta al recordatorio de contacto.</td></tr> <tr><td><b>Assumptions</b></td><td>El familiar tiene las notificaciones habilitadas en su dispositivo.<br>La lista de familiares vinculados se encuentra disponible localmente por propagación desde Care Circle, sin requerir consulta síncrona.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Proporción de alertas confirmadas como atendidas por el familiar.<br>Tasa de falsos positivos reportados.<br>Tiempo entre la generación de la alerta y su atención.</td></tr> <tr><td><b>Open Questions</b></td><td>¿Cuál es la duración de la ventana de inactividad y es configurable por el familiar?<br>¿Todos los familiares vinculados reciben la alerta simultáneamente o se respeta el turno de atención vigente?</td></tr> </table>
+<table> <tr><th colspan="2">Bounded Context Canvas 3: Alerts and Safety</th></tr> <tr><td><b>Purpose</b></td><td>Garantizar que el familiar a distancia sea informado cuando la situación del adulto mayor lo amerite, ya sea por ausencia prolongada de respuesta, por un patrón de malestar sostenido o por una emergencia declarada, de modo que no necesite verificar por su cuenta ante cada duda.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Core ( es la garantía de tranquilidad que sostiene la decisión de adopción del familiar.<br><b>Business Model:</b> Revenue Generator ) las alertas selectivas forman parte de las funciones familiares de pago.<br><b>Evolution:</b> Product ( existen soluciones de alerta de emergencia en el mercado, aunque sin la selectividad que Serenia propone.</td></tr> <tr><td><b>Domain Roles</b></td><td>Execution context con rol de notificación ) aplica reglas de escalamiento y decide a quién y cuándo notificar.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Unanswered check-in (Event): Daily Check-in, Customer/Supplier<br>Discomfort pattern detected (Event): Wellbeing Monitoring, Customer/Supplier<br>Emergency alert triggered (Command): Older Adult, interacción directa de UI<br>Alert attention confirmed (Command): Distant Relative, interacción directa de UI<br>Family link established (Event): Care Circle, Published Language</td></tr> <tr><td><b>Outbound Communication</b></td><td>Action suggestion (Event): Distant Relative, interacción directa de UI<br>Inactivity alert (Event): Distant Relative, interacción directa de UI<br>Emergency alert (Event): Distant Relative, interacción directa de UI<br>Contact reminder (Event): Older Adult, interacción directa de UI</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Inactivity Alert:</b> notificación generada por ausencia de check-in dentro del plazo.<br><b>Emergency Alert:</b> notificación iniciada explícitamente por el adulto mayor.<br><b>Inactivity Window:</b> plazo que transcurre antes de escalar una ausencia de respuesta.<br><b>Suggested Action:</b> recomendación dirigida al familiar ante un patrón de malestar.<br><b>Severity:</b> nivel asignado a una alerta según su origen y urgencia.</td></tr> <tr><td><b>Business Decisions</b></td><td>La alerta de inactividad se genera solo si el check-in no fue respondido dentro del tiempo límite y la pausa de preguntas no está activa (US16).<br>Una alerta de emergencia dirigida a un adulto mayor sin familiares vinculados no puede procesarse (TS08).<br>La alerta escala a emergencia únicamente tras vencer la ventana de inactividad sin respuesta al recordatorio de contacto.</td></tr> <tr><td><b>Assumptions</b></td><td>El familiar tiene las notificaciones habilitadas en su dispositivo.<br>La lista de familiares vinculados se encuentra disponible localmente por propagación desde Care Circle, sin requerir consulta síncrona.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Proporción de alertas confirmadas como atendidas por el familiar.<br>Tasa de falsos positivos reportados.<br>Tiempo entre la generación de la alerta y su atención.</td></tr> <tr><td><b>Open Questions</b></td><td>¿Cuál es la duración de la ventana de inactividad y es configurable por el familiar?<br>¿Todos los familiares vinculados reciben la alerta simultáneamente o se respeta el turno de atención vigente?</td></tr> </table>
 
 <br>
 
-<table> <tr><th colspan="2">Bounded Context Canvas 4 — Care Circle</th></tr> <tr><td><b>Purpose</b></td><td>Establecer y administrar la relación entre el adulto mayor y sus familiares a distancia, determinando quiénes están vinculados a él, quién asume el turno de atención y qué información comparten entre sí, de modo que los demás contextos sepan a quién corresponde informar.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Supporting — no genera valor por sí solo, pero ningún contexto Core puede operar sin él.<br><b>Business Model:</b> Engagement Creator — la coordinación entre familiares incrementa el uso pero no se cobra de forma directa.<br><b>Evolution:</b> Custom Built — la estructura del círculo de cuidado responde a la dinámica familiar específica que Serenia atiende.</td></tr> <tr><td><b>Domain Roles</b></td><td>Registry context — mantiene y publica la estructura de relaciones. No interpreta información de bienestar ni emite alertas.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Registered identity (Event) — Identity &amp; Access, Conformist<br>Invitation code entered (Command) — Distant Relative, interacción directa de UI<br>Care shift assigned (Command) — Distant Relative, interacción directa de UI<br>Shared note added (Command) — Distant Relative, interacción directa de UI</td></tr> <tr><td><b>Outbound Communication</b></td><td>Invitation code (Event) — Older Adult, interacción directa de UI<br>Family link established (Event) — Daily Check-in, Wellbeing Monitoring, Alerts and Safety y Social Companionship, Published Language<br>Care shift confirmation (Event) — Distant Relative, interacción directa de UI</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Care Circle:</b> conjunto de familiares vinculados a un adulto mayor.<br><b>Family Link:</b> relación establecida entre la cuenta de un familiar y la de un adulto mayor.<br><b>Invitation Code:</b> credencial de un solo uso generada por el adulto mayor para habilitar un vínculo.<br><b>Care Shift:</b> responsabilidad de seguimiento asignada a un familiar para una fecha determinada.</td></tr> <tr><td><b>Business Decisions</b></td><td>El código de invitación es generado por el adulto mayor y corresponde a un solo uso; un código ya utilizado o expirado no permite vinculación (US02).<br>Una fecha admite un único turno de atención asignado; un segundo intento sobre la misma fecha se rechaza (US20).<br>Un adulto mayor puede tener varios familiares vinculados simultáneamente.</td></tr> <tr><td><b>Assumptions</b></td><td>La transmisión del código de invitación del adulto mayor al familiar ocurre por un canal externo al sistema.<br>El adulto mayor es siempre quien origina el vínculo, nunca el familiar.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Proporción de códigos de invitación generados que derivan en un vínculo efectivo.<br>Número promedio de familiares vinculados por adulto mayor.<br>Frecuencia de uso de la asignación de turnos.</td></tr> <tr><td><b>Open Questions</b></td><td>¿El código de invitación tiene un plazo de expiración definido?<br>¿Puede un vínculo familiar ser revocado y por quién?</td></tr> </table>
+<table> <tr><th colspan="2">Bounded Context Canvas 4: Care Circle</th></tr> <tr><td><b>Purpose</b></td><td>Establecer y administrar la relación entre el adulto mayor y sus familiares a distancia, determinando quiénes están vinculados a él, quién asume el turno de atención y qué información comparten entre sí, de modo que los demás contextos sepan a quién corresponde informar.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Supporting ( no genera valor por sí solo, pero ningún contexto Core puede operar sin él.<br><b>Business Model:</b> Engagement Creator ) la coordinación entre familiares incrementa el uso pero no se cobra de forma directa.<br><b>Evolution:</b> Custom Built ( la estructura del círculo de cuidado responde a la dinámica familiar específica que Serenia atiende.</td></tr> <tr><td><b>Domain Roles</b></td><td>Registry context ) mantiene y publica la estructura de relaciones. No interpreta información de bienestar ni emite alertas.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Registered identity (Event): Identity &amp; Access, Shared Kernel<br>Invitation code entered (Command): Distant Relative, interacción directa de UI<br>Care shift assigned (Command): Distant Relative, interacción directa de UI<br>Shared note added (Command): Distant Relative, interacción directa de UI</td></tr> <tr><td><b>Outbound Communication</b></td><td>Invitation code (Event): Older Adult, interacción directa de UI<br>Family link established (Event): Daily Check-in, Wellbeing Monitoring, Alerts and Safety y Social Companionship, Published Language<br>Care shift confirmation (Event): Distant Relative, interacción directa de UI</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Care Circle:</b> conjunto de familiares vinculados a un adulto mayor.<br><b>Family Link:</b> relación establecida entre la cuenta de un familiar y la de un adulto mayor.<br><b>Invitation Code:</b> credencial de un solo uso generada por el adulto mayor para habilitar un vínculo.<br><b>Care Shift:</b> responsabilidad de seguimiento asignada a un familiar para una fecha determinada.</td></tr> <tr><td><b>Business Decisions</b></td><td>El código de invitación es generado por el adulto mayor y corresponde a un solo uso; un código ya utilizado o expirado no permite vinculación (US02).<br>Una fecha admite un único turno de atención asignado; un segundo intento sobre la misma fecha se rechaza (US20).<br>Un adulto mayor puede tener varios familiares vinculados simultáneamente.</td></tr> <tr><td><b>Assumptions</b></td><td>La transmisión del código de invitación del adulto mayor al familiar ocurre por un canal externo al sistema.<br>El adulto mayor es siempre quien origina el vínculo, nunca el familiar.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Proporción de códigos de invitación generados que derivan en un vínculo efectivo.<br>Número promedio de familiares vinculados por adulto mayor.<br>Frecuencia de uso de la asignación de turnos.</td></tr> <tr><td><b>Open Questions</b></td><td>¿El código de invitación tiene un plazo de expiración definido?<br>¿Puede un vínculo familiar ser revocado y por quién?</td></tr> </table>
 
 <br>
 
-<table> <tr><th colspan="2">Bounded Context Canvas 5 — Social Companionship</th></tr> <tr><td><b>Purpose</b></td><td>Enriquecer la relación entre el adulto mayor y su familia mediante intercambios afectivos ligeros —mensajes de audio, fotografías y recordatorios sociales— que refuercen el sentido de compañía más allá de la verificación de bienestar.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Supporting — aporta valor percibido pero no valor operativo; ninguna de sus interacciones produce señal evaluable.<br><b>Business Model:</b> Engagement Creator — incrementa la frecuencia de uso sin constituir en sí mismo una fuente de ingreso.<br><b>Evolution:</b> Product — la mensajería multimedia es una capacidad ampliamente disponible en el mercado.</td></tr> <tr><td><b>Domain Roles</b></td><td>Communication context — transporta contenido entre personas sin interpretarlo ni evaluarlo.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Audio message sent (Command) — Distant Relative y Older Adult, interacción directa de UI<br>Photo shared (Command) — Distant Relative, interacción directa de UI<br>Family link established (Event) — Care Circle, Published Language</td></tr> <tr><td><b>Outbound Communication</b></td><td>Message delivered (Event) — Older Adult y Distant Relative, interacción directa de UI<br>Social reminder (Event) — Older Adult, interacción directa de UI</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Audio Message:</b> grabación de voz enviada entre miembros del círculo de cuidado.<br><b>Social Reminder:</b> aviso de una fecha o evento familiar relevante.<br><b>Reaction:</b> respuesta breve a un mensaje recibido.</td></tr> <tr><td><b>Business Decisions</b></td><td>Solo pueden intercambiar mensajes los miembros de un mismo círculo de cuidado.<br>Ningún contenido intercambiado en este contexto se evalúa, interpreta ni deriva en alerta.</td></tr> <tr><td><b>Assumptions</b></td><td>El adulto mayor sabe grabar y reproducir un mensaje de audio sin asistencia.<br>El volumen de contenido multimedia no requiere políticas de retención específicas en esta etapa.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Frecuencia de mensajes intercambiados por círculo de cuidado.<br>Proporción de mensajes recibidos que obtienen respuesta o reacción.</td></tr> <tr><td><b>Open Questions</b></td><td>¿Existe un límite de duración o tamaño para los mensajes de audio y las fotografías?<br>¿Los recordatorios sociales son creados manualmente por el familiar o se derivan de fechas registradas en el perfil?</td></tr> </table>
+<table> <tr><th colspan="2">Bounded Context Canvas 5: Social Companionship</th></tr> <tr><td><b>Purpose</b></td><td>Enriquecer la relación entre el adulto mayor y su familia mediante intercambios afectivos ligeros (mensajes de audio, fotografías y recordatorios sociales) que refuercen el sentido de compañía más allá de la verificación de bienestar.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Supporting ( aporta valor percibido pero no valor operativo; ninguna de sus interacciones produce señal evaluable.<br><b>Business Model:</b> Engagement Creator ) incrementa la frecuencia de uso sin constituir en sí mismo una fuente de ingreso.<br><b>Evolution:</b> Product ( la mensajería multimedia es una capacidad ampliamente disponible en el mercado.</td></tr> <tr><td><b>Domain Roles</b></td><td>Communication context ) transporta contenido entre personas sin interpretarlo ni evaluarlo.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Audio message sent (Command): Distant Relative y Older Adult, interacción directa de UI<br>Photo shared (Command): Distant Relative, interacción directa de UI<br>Family link established (Event): Care Circle, Published Language</td></tr> <tr><td><b>Outbound Communication</b></td><td>Message delivered (Event): Older Adult y Distant Relative, interacción directa de UI<br>Social reminder (Event): Older Adult, interacción directa de UI</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Audio Message:</b> grabación de voz enviada entre miembros del círculo de cuidado.<br><b>Social Reminder:</b> aviso de una fecha o evento familiar relevante.<br><b>Reaction:</b> respuesta breve a un mensaje recibido.</td></tr> <tr><td><b>Business Decisions</b></td><td>Solo pueden intercambiar mensajes los miembros de un mismo círculo de cuidado.<br>Ningún contenido intercambiado en este contexto se evalúa, interpreta ni deriva en alerta.</td></tr> <tr><td><b>Assumptions</b></td><td>El adulto mayor sabe grabar y reproducir un mensaje de audio sin asistencia.<br>El volumen de contenido multimedia no requiere políticas de retención específicas en esta etapa.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Frecuencia de mensajes intercambiados por círculo de cuidado.<br>Proporción de mensajes recibidos que obtienen respuesta o reacción.</td></tr> <tr><td><b>Open Questions</b></td><td>¿Existe un límite de duración o tamaño para los mensajes de audio y las fotografías?<br>¿Los recordatorios sociales son creados manualmente por el familiar o se derivan de fechas registradas en el perfil?</td></tr> </table>
 
 <br>
 
-<table> <tr><th colspan="2">Bounded Context Canvas 6 — Identity & Access</th></tr> <tr><td><b>Purpose</b></td><td>Administrar el registro, la autenticación y la sesión de los usuarios de Serenia, garantizando que cada persona acceda únicamente a la información que le corresponde según su rol y sus vínculos establecidos.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Generic — resuelve un problema estándar cuyas reglas no cambian por tratarse de Serenia.<br><b>Business Model:</b> Compliance Enforcer — protege los datos de los usuarios y la responsabilidad legal del producto.<br><b>Evolution:</b> Commodity — existen soluciones altamente estandarizadas para esta capacidad.</td></tr> <tr><td><b>Domain Roles</b></td><td>Gatekeeper context — valida credenciales y autoriza accesos. No participa en ninguna regla de negocio del dominio de cuidado.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Account creation (Command) — Older Adult y Distant Relative, interacción directa de UI<br>Session request (Command) — Older Adult y Distant Relative, interacción directa de UI<br>Profile update (Command) — Older Adult y Distant Relative, interacción directa de UI</td></tr> <tr><td><b>Outbound Communication</b></td><td>Registered identity (Event) — Care Circle, Published Language<br>Session token (Query response) — Older Adult y Distant Relative, interacción directa de UI</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Account:</b> registro de un usuario en el sistema.<br><b>Session:</b> periodo de acceso autenticado.<br><b>Profile:</b> datos personales asociados a una cuenta.<br><b>Role:</b> tipo de usuario, adulto mayor o familiar a distancia.</td></tr> <tr><td><b>Business Decisions</b></td><td>El registro se rechaza si existen campos obligatorios vacíos o con formato incorrecto (US01).<br>Una solicitud de sesión con credenciales inválidas se rechaza sin revelar cuál de los campos es incorrecto (TS02).<br>El rol del usuario se define en el momento del registro y determina la aplicación a la que accede.</td></tr> <tr><td><b>Assumptions</b></td><td>El registro no requiere verificación mediante código enviado por correo electrónico o mensaje de texto en esta etapa del producto.<br>Un usuario mantiene un único rol durante toda la vida de su cuenta.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Tasa de registros completados respecto de los iniciados.<br>Proporción de intentos de sesión fallidos.<br>Frecuencia de solicitudes de recuperación de acceso.</td></tr> <tr><td><b>Open Questions</b></td><td>¿Se contempla incorporar verificación de identidad en una fase posterior del producto?<br>¿Cómo se gestiona la recuperación de acceso para un adulto mayor con baja familiaridad digital?</td></tr> </table>
+<table> <tr><th colspan="2">Bounded Context Canvas 6: Identity & Access</th></tr> <tr><td><b>Purpose</b></td><td>Administrar el registro, la autenticación y la sesión de los usuarios de Serenia, garantizando que cada persona acceda únicamente a la información que le corresponde según su rol y sus vínculos establecidos.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Generic ( resuelve un problema estándar cuyas reglas no cambian por tratarse de Serenia.<br><b>Business Model:</b> Compliance Enforcer ) protege los datos de los usuarios y la responsabilidad legal del producto.<br><b>Evolution:</b> Commodity ( existen soluciones altamente estandarizadas para esta capacidad.</td></tr> <tr><td><b>Domain Roles</b></td><td>Gatekeeper context ) valida credenciales y autoriza accesos. No participa en ninguna regla de negocio del dominio de cuidado.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Account creation (Command): Older Adult y Distant Relative, interacción directa de UI<br>Session request (Command): Older Adult y Distant Relative, interacción directa de UI<br>Profile update (Command): Older Adult y Distant Relative, interacción directa de UI</td></tr> <tr><td><b>Outbound Communication</b></td><td>Registered identity (Event): Care Circle, Published Language<br>Session token (Query response): Older Adult y Distant Relative, interacción directa de UI</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Account:</b> registro de un usuario en el sistema.<br><b>Session:</b> periodo de acceso autenticado.<br><b>Profile:</b> datos personales asociados a una cuenta.<br><b>Role:</b> tipo de usuario, adulto mayor o familiar a distancia.</td></tr> <tr><td><b>Business Decisions</b></td><td>El registro se rechaza si existen campos obligatorios vacíos o con formato incorrecto (US01).<br>Una solicitud de sesión con credenciales inválidas se rechaza sin revelar cuál de los campos es incorrecto (TS02).<br>El rol del usuario se define en el momento del registro y determina la aplicación a la que accede.</td></tr> <tr><td><b>Assumptions</b></td><td>El registro no requiere verificación mediante código enviado por correo electrónico o mensaje de texto en esta etapa del producto.<br>Un usuario mantiene un único rol durante toda la vida de su cuenta.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Tasa de registros completados respecto de los iniciados.<br>Proporción de intentos de sesión fallidos.<br>Frecuencia de solicitudes de recuperación de acceso.</td></tr> <tr><td><b>Open Questions</b></td><td>¿Se contempla incorporar verificación de identidad en una fase posterior del producto?<br>¿Cómo se gestiona la recuperación de acceso para un adulto mayor con baja familiaridad digital?</td></tr> </table>
 
 <br>
 
@@ -3248,12 +3359,12 @@ La elaboración de los seis canvases permitió pasar de una descripción de los 
 
 ### 2.5.2. Context Mapping
 
-A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety, Social Companionship), el equipo elaboró un Context Map para visualizar y explicar las relaciones estructurales entre ellos, revisando la información recolectada en las etapas previas de investigación para producir el diseño candidato.
+A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety, Social Companionship), el equipo elaboró un Context Map para visualizar y explicar las relaciones estructurales entre ellos, revisando la información recolectada en las etapas previas de investigación para producir el diseño candidato. La Imagen 33 muestra el Context Map resultante.
 
 <div align="center">
 
 ![Context Map - Serenia](assets/img/context-mapping/context-map.png)
-  <br/><i>Imagen 22. Context Mapping Diagram.</i>
+  <br/><i>Imagen 33. Context Mapping Diagram.</i>
 </div>
 
 **URL del tablero en Miro:** https://miro.com/app/board/uXjVHm8lGW8=/
@@ -3279,13 +3390,13 @@ A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-
 
 #### 2.5.3.1. Software Architecture Context Level Diagrams
 
-En esta sección se presenta el *System Context Diagram*, primer nivel del C4 Model, elaborado en Structurizr. Este diagrama muestra al sistema Serenia como una única caja central, rodeada de los usuarios y de los sistemas externos con los que interactúa, sin entrar en detalles internos de la solución.
+En esta sección se presenta el *System Context Diagram*, primer nivel del C4 Model, elaborado en Structurizr. Este diagrama muestra al sistema Serenia como una única caja central, rodeada de los usuarios y de los sistemas externos con los que interactúa, sin entrar en detalles internos de la solución. La Imagen 34 presenta el diagrama.
 
 <br>
 <div align="center">
 
 ![System Context Diagram - Serenia](assets/img/software-architecture/context-diagram.png)
-  <br/><i>Imagen 23. System Context Diagram de Serenia.</i>
+  <br/><i>Imagen 34. System Context Diagram de Serenia.</i>
 
 </div>
 
@@ -3297,27 +3408,27 @@ Como se observa en el diagrama, el sistema Serenia interactúa con dos tipos de 
 
 #### 2.5.3.2. Software Architecture Container Level Diagrams
 
-En esta sección se presenta el *Container Diagram*, segundo nivel del C4 Model, el cual descompone al sistema Serenia en los grandes bloques tecnológicos (aplicaciones, servicios y almacenes de datos) que lo conforman, indicando la tecnología empleada en cada uno y la forma en que se comunican entre sí.
+En esta sección se presenta el *Container Diagram*, segundo nivel del C4 Model, el cual descompone al sistema Serenia en los grandes bloques tecnológicos (aplicaciones, servicios y almacenes de datos) que lo conforman, indicando la tecnología empleada en cada uno y la forma en que se comunican entre sí. La Imagen 35 presenta el diagrama.
 
 
 <br>
 <div align="center">
 
 ![Container Diagram - Serenia](assets/img/software-architecture/container-diagram.png)
-  <br/><i>Imagen 24. Container Diagram de Serenia.</i>
+  <br/><i>Imagen 35. Container Diagram de Serenia.</i>
 
 </div><br>
 
-El diagrama evidencia los principales contenedores de la solución: la **aplicación móvil** (consumida por el adulto mayor y el cuidador a distancia), la **landing page web** (donde se presenta el producto y sus planes a nuevos usuarios), la **API REST** desarrollada en **Spring Boot** —implementada como un **monolito modular**, organizado internamente en un módulo por cada bounded context identificado en el Big Picture EventStorming (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety y Social Companionship), la **base de datos MySQL** donde se persiste, en esquemas separados por bounded context, la información de cuentas, círculos familiares, check-ins y alertas, y el **servicio de notificaciones push** (proveedor aún por definir por el equipo), encargado de entregar en tiempo real las alertas de emergencia y los recordatorios sociales. Todos los contenedores de cliente (móvil y web) se comunican con la API REST mediante peticiones HTTPS/JSON. La composición interna de dicho monolito por módulos se detalla más adelante en los *Component Level Diagrams* de cada bounded context.
+El diagrama evidencia los principales contenedores de la solución: la **aplicación móvil** (consumida por el adulto mayor y el cuidador a distancia), la **landing page web** (donde se presenta el producto y sus planes a nuevos usuarios), la **API REST** desarrollada en **Spring Boot**, implementada como un **monolito modular**, organizado internamente en un módulo por cada bounded context identificado en el Big Picture EventStorming (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety y Social Companionship), la **base de datos MySQL** donde se persiste, en esquemas separados por bounded context, la información de cuentas, círculos familiares, check-ins y alertas, y el **servicio de notificaciones push** (proveedor aún por definir por el equipo), encargado de entregar en tiempo real las alertas de emergencia y los recordatorios sociales. Todos los contenedores de cliente (móvil y web) se comunican con la API REST mediante peticiones HTTPS/JSON. La composición interna de dicho monolito por módulos se detalla más adelante en los *Component Level Diagrams* de cada bounded context. Una revisión sistemática reciente identifica como motivos de adopción del monolito modular el despliegue simplificado, la mantenibilidad y la menor sobrecarga de orquestación, y advierte de la dificultad de definir correctamente los bounded contexts (Al-Qora'n & Al-Said Ahmad, 2025).
 
-Como evidencia complementaria de esta organización modular, se presenta a continuación el diagrama de componentes interno del contenedor API REST, elaborado también en Structurizr, que muestra los módulos correspondientes a cada bounded context y sus relaciones de dependencia:
+Como evidencia complementaria de esta organización modular, se presenta a continuación, en la Imagen 36, el diagrama de componentes interno del contenedor API REST, elaborado también en Structurizr, que muestra los módulos correspondientes a cada bounded context y sus relaciones de dependencia:
 
 <br>
 
 <div align="center">
 
 ![Component Diagram - API REST de Serenia](assets/img/software-architecture/api-component.png)
-  <br/><i>Imagen 25. Component Diagram del contenedor API REST, organizado por bounded context.</i>
+  <br/><i>Imagen 36. Component Diagram del contenedor API REST, organizado por bounded context.</i>
 
 </div>
 
@@ -3327,13 +3438,13 @@ Como se observa, el módulo **IAM** valida la identidad y los permisos que consu
 
 #### 2.5.3.3. Software Architecture Deployment Diagrams
 
-En esta sección se presenta el *Deployment Diagram*, el cual muestra la distribución física del sistema, destacando cómo los contenedores de software descritos en la sección anterior se despliegan sobre el hardware y los entornos correspondientes. Este diagrama visualiza los dispositivos, servidores, redes y demás nodos físicos que alojan el software, así como las relaciones y dependencias entre ellos.
+En esta sección se presenta el *Deployment Diagram*, el cual muestra la distribución física del sistema, destacando cómo los contenedores de software descritos en la sección anterior se despliegan sobre el hardware y los entornos correspondientes. Este diagrama visualiza los dispositivos, servidores, redes y demás nodos físicos que alojan el software, así como las relaciones y dependencias entre ellos. La Imagen 37 presenta el diagrama.
 
 <br>
 <div align="center">
 
 ![Deployment Diagram - Serenia](assets/img/software-architecture/deployment-diagram.png)
-  <br/><i>Imagen 26. Deployment Diagram de Serenia.</i>
+  <br/><i>Imagen 37. Deployment Diagram de Serenia.</i>
 
 </div>
 <br>
@@ -3353,7 +3464,7 @@ Su modelo gira en torno a un único aggregate, `User`, que es la raíz responsab
 
 En esta capa se representan las reglas de negocio propias de la identidad de un usuario, sin dependencia de frameworks de persistencia, red ni interfaz.
 
-**Sub-capa Model — Aggregates**
+**Sub-capa Model: Aggregates**
 
 `User` (Aggregate Root): representa la cuenta de una persona en Serenia, sea adulto mayor o familiar a distancia. Controla la validez de sus credenciales, el estado de la cuenta y el ciclo de vida de sus sesiones.
 
@@ -3386,7 +3497,7 @@ En esta capa se representan las reglas de negocio propias de la identidad de un 
 | isActive() | public | Indica si la cuenta se encuentra en estado activo. |
 | ensureActive() | private | Impide ejecutar operaciones sobre una cuenta suspendida o eliminada. |
 
-**Sub-capa Model — Entities**
+**Sub-capa Model: Entities**
 
 `Session`: representa un periodo de acceso autenticado de un usuario desde un dispositivo. Pertenece al aggregate `User` y no se manipula fuera de él.
 
@@ -3405,7 +3516,7 @@ En esta capa se representan las reglas de negocio propias de la identidad de un 
 | isExpired(referenceTime) | public | Indica si el token ya superó su fecha de expiración. |
 | isActive(referenceTime) | public | Indica si la sesión sigue vigente: no revocada y no expirada. |
 
-**Sub-capa Model — Value Objects**
+**Sub-capa Model: Value Objects**
 
 | Nombre | Atributos | Descripción |
 | --- | --- | --- |
@@ -3419,14 +3530,14 @@ En esta capa se representan las reglas de negocio propias de la identidad de un 
 | LocaleCode | value: String | Código de idioma y región de la interfaz. |
 | DeviceInfo | value: String | Descripción del dispositivo asociado a una sesión. |
 
-**Sub-capa Model — Enumerations**
+**Sub-capa Model: Enumerations**
 
 | Nombre | Valores | Descripción |
 | --- | --- | --- |
 | UserRole | OLDER_ADULT, DISTANT_RELATIVE | Rol del usuario, definido en el registro e inmutable. |
 | AccountStatus | ACTIVE, SUSPENDED, DELETED | Estado del ciclo de vida de la cuenta. |
 
-**Sub-capa Model — Commands**
+**Sub-capa Model: Commands**
 
 | Nombre | Descripción |
 | --- | --- |
@@ -3438,7 +3549,7 @@ En esta capa se representan las reglas de negocio propias de la identidad de un 
 | UpdateProfileDataCommand | Intención de actualizar los datos personales del perfil. |
 | ChangePasswordCommand | Intención de reemplazar la contraseña de la cuenta. |
 
-**Sub-capa Model — Queries**
+**Sub-capa Model: Queries**
 
 | Nombre | Descripción |
 | --- | --- |
@@ -3447,7 +3558,7 @@ En esta capa se representan las reglas de negocio propias de la identidad de un 
 | GetUserBySessionTokenQuery | Consulta de la cuenta asociada a un token de sesión vigente. |
 | GetActiveSessionsByUserIdQuery | Consulta de las sesiones vigentes de una cuenta. |
 
-**Sub-capa Model — Events**
+**Sub-capa Model: Events**
 
 | Nombre | Descripción |
 | --- | --- |
@@ -3471,7 +3582,7 @@ En esta capa se representan las reglas de negocio propias de la identidad de un 
 | --- | --- | --- | --- |
 | Interface | IUserCommandService | handle(RegisterOlderAdultCommand), handle(RegisterDistantRelativeCommand), handle(SignInCommand), handle(SignOutCommand), handle(UpdateUserPhotoCommand), handle(UpdateProfileDataCommand), handle(ChangePasswordCommand) | Contrato de las operaciones de escritura del contexto. |
 | Interface | IUserQueryService | handle(GetUserByIdQuery), handle(GetUserByEmailQuery), handle(GetUserBySessionTokenQuery), handle(GetActiveSessionsByUserIdQuery) | Contrato de las operaciones de lectura del contexto. |
-| Interface | IPasswordHashingService | hash(rawPassword), matches(rawPassword, passwordHash) | Abstracción del cifrado y verificación de contraseñas; mantiene el dominio libre de librerías de seguridad. |
+| Interface | IPasswordHashingService | hash(rawPassword), matches(rawPassword, passwordHash) | Abstracción del cifrado y verificación de contraseñas; mantiene el dominio libre de bibliotecas de seguridad. |
 | Interface | ITokenService | generate(userId, role), hash(token), expirationOf(token) | Abstracción de la generación y el cifrado de tokens de sesión. |
 | Interface | IDomainEventPublisher | publish(event) | Abstracción para publicar los eventos de dominio hacia los demás módulos. |
 
@@ -3479,14 +3590,14 @@ En esta capa se representan las reglas de negocio propias de la identidad de un 
 
 Clases que exponen el bounded context hacia el exterior y traducen las peticiones entrantes al lenguaje del dominio.
 
-**Sub-capa REST — Controllers**
+**Sub-capa REST: Controllers**
 
 | Nombre | Endpoints | Descripción |
 | --- | --- | --- |
 | UsersController | POST /users, GET /users/{id}, PUT /users/{id}/photo, PUT /users/{id}/profile, PUT /users/{id}/password | Punto de entrada de las operaciones de registro, consulta y gestión de perfil. Delega en los servicios de comandos y consultas. |
 | SessionsController | POST /sessions, DELETE /sessions/{id} | Punto de entrada de la autenticación y el cierre de sesión. |
 
-**Sub-capa REST — Resources**
+**Sub-capa REST: Resources**
 
 | Nombre | Descripción |
 | --- | --- |
@@ -3499,7 +3610,7 @@ Clases que exponen el bounded context hacia el exterior y traducen las peticione
 | ChangePasswordResource | Datos de entrada para el cambio de contraseña. |
 | SessionResource | Representación de una sesión vigente y su dispositivo asociado. |
 
-**Sub-capa REST — Transform**
+**Sub-capa REST: Transform**
 
 | Nombre | Descripción |
 | --- | --- |
@@ -3517,13 +3628,13 @@ Clases que exponen el bounded context hacia el exterior y traducen las peticione
 
 Clases que orquestan los flujos del contexto, coordinando el aggregate, los repositorios y los servicios de seguridad.
 
-**Sub-capa Internal — CommandServices**
+**Sub-capa Internal: CommandServices**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
 | UserCommandService | Ejecuta los siete comandos del contexto: valida la unicidad del correo, delega el cifrado de contraseñas, invoca los métodos del aggregate `User`, persiste el resultado y publica los eventos de dominio correspondientes. | Implementa `IUserCommandService`; usa `IUserRepository`, `IPasswordHashingService`, `ITokenService` e `IDomainEventPublisher`. |
 
-**Sub-capa Internal — QueryServices**
+**Sub-capa Internal: QueryServices**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
@@ -3533,26 +3644,26 @@ Clases que orquestan los flujos del contexto, coordinando el aggregate, los repo
 
 Clases que resuelven el acceso a la base de datos y a los mecanismos técnicos de seguridad, implementando las abstracciones definidas en el dominio.
 
-**Sub-capa Persistence — Repositories**
+**Sub-capa Persistence: Repositories**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
 | UserRepository | Persiste y recupera el aggregate `User` junto con sus sesiones sobre las tablas `users` y `sessions`, resolviendo además la búsqueda por correo y por token de sesión. | Implementa `IUserRepository`; usado por la capa Application. |
 
-**Sub-capa Persistence — Mappers**
+**Sub-capa Persistence: Mappers**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
 | UserPersistenceMapper | Traduce entre el aggregate `User` y su representación en base de datos, evitando que el modelo de persistencia se filtre al dominio. | Usado por `UserRepository`. |
 
-**Sub-capa Security — Services**
+**Sub-capa Security: Services**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
 | BCryptPasswordHashingService | Cifra las contraseñas y verifica credenciales mediante el algoritmo BCrypt. | Implementa `IPasswordHashingService`. |
 | JwtTokenService | Genera los tokens de sesión, calcula su expiración y produce el hash que se almacena en la tabla `sessions`. | Implementa `ITokenService`. |
 
-**Sub-capa Messaging — Publishers**
+**Sub-capa Messaging: Publishers**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
@@ -3560,7 +3671,7 @@ Clases que resuelven el acceso a la base de datos y a los mecanismos técnicos d
 
 #### 2.6.1.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Identity & Access, elaborado con la herramienta Structurizr. El diagrama descompone el módulo de identidad dentro del container API REST y muestra cómo sus componentes se distribuyen entre las cuatro capas del diseño táctico, respetando la regla de dependencia unidireccional hacia el dominio.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Identity & Access, elaborado con la herramienta Structurizr (Imagen 38). El diagrama descompone el módulo de identidad dentro del container API REST y muestra cómo sus componentes se distribuyen entre las cuatro capas del diseño táctico, respetando la regla de dependencia unidireccional hacia el dominio.
 
 El flujo de entrada llega desde la Aplicación Móvil hacia los dos componentes de la capa Interface: `UsersController`, que atiende el registro, la consulta de cuentas y las operaciones de perfil, y `SessionsController`, que atiende la autenticación y el cierre de sesión. Ambos delegan en la capa Application, donde `UserCommandService` resuelve las operaciones de escritura y `UserQueryService` las de lectura.
 
@@ -3571,7 +3682,7 @@ La capa Infrastructure aparece en el extremo opuesto, con las implementaciones c
 <div align="center">
 
 ![Component Diagram - Identity and Access](assets/img/bounded-context/identity-and-access/identity-and-access-c4.png)
-  <br/><i>Imagen X. Component Diagram del Bounded Context Identity and Access.</i>
+  <br/><i>Imagen 38. Component Diagram del Bounded Context Identity and Access.</i>
 
 </div>
 
@@ -3581,7 +3692,7 @@ En esta sección se presentan los diagramas de mayor nivel de detalle sobre la i
 
 ##### 2.6.1.6.1. Bounded Context Domain Layer Class Diagrams
 
-El diagrama de clases representa la capa Domain del bounded context Identity & Access, elaborado con la herramienta UML correspondiente. En él se muestran las clases, interfaces y enumeraciones del dominio junto con sus atributos, métodos y el scope de cada miembro.
+El diagrama de clases representa la capa Domain del bounded context Identity & Access, elaborado con la herramienta UML correspondiente (Imagen 39). En él se muestran las clases, interfaces y enumeraciones del dominio junto con sus atributos, métodos y el scope de cada miembro.
 
 El elemento central es `User`, el aggregate root del contexto. Sus atributos son privados y solo se modifican a través de sus métodos públicos, lo que garantiza que ninguna regla de identidad pueda vulnerarse desde fuera del aggregate. `User` mantiene una relación de composición con `Session`, con multiplicidad 1 a 0..*: una cuenta puede tener varias sesiones a lo largo del tiempo y ninguna sesión existe de forma independiente de la cuenta que la originó. Por ello, la apertura y la revocación de sesiones se realizan mediante los métodos `openSession` y `closeSession` del aggregate, y no sobre la entidad directamente.
 
@@ -3592,7 +3703,7 @@ El diagrama incluye además los Commands y Queries que expresan las intenciones 
 <div align="center">
 
 ![Domain Layer Class Diagram - Identity and Access](assets/img/bounded-context/identity-and-access/identity-and-access-domain-layer.png)
-  <br/><i>Imagen X. Domain Layer Class Diagram del Bounded Context Identity and Access.</i>
+  <br/><i>Imagen 39. Domain Layer Class Diagram del Bounded Context Identity and Access.</i>
 
 </div>
 
@@ -3600,7 +3711,7 @@ El diagrama incluye además los Commands y Queries que expresan las intenciones 
 
 ##### 2.6.1.6.2. Bounded Context Database Design Diagram
 
-El diagrama de base de datos presenta los objetos que permiten la persistencia del bounded context Identity & Access sobre el motor MySQL. El contexto se materializa en dos tablas, `users` y `sessions`, que corresponden respectivamente al aggregate root `User` y a la entidad `Session` que este contiene.
+El diagrama de base de datos (Imagen 40) presenta los objetos que permiten la persistencia del bounded context Identity & Access sobre el motor MySQL. El contexto se materializa en dos tablas, `users` y `sessions`, que corresponden respectivamente al aggregate root `User` y a la entidad `Session` que este contiene.
 
 **Tabla `users`**
 
@@ -3611,9 +3722,9 @@ El diagrama de base de datos presenta los objetos que permiten la persistencia d
 | password_hash | varchar(255) | NOT NULL | Contraseña cifrada de la cuenta. |
 | role | user_role | NOT NULL | Rol del usuario: adulto mayor o familiar a distancia. |
 | full_name | varchar(120) | NOT NULL | Nombre completo del usuario. |
-| phone_number | varchar(20) | — | Número de contacto del usuario. |
-| birth_date | date | — | Fecha de nacimiento del usuario. |
-| photo_url | varchar(500) | — | Ubicación de la fotografía de perfil del usuario. |
+| phone_number | varchar(20) | - | Número de contacto del usuario. |
+| birth_date | date | - | Fecha de nacimiento del usuario. |
+| photo_url | varchar(500) | - | Ubicación de la fotografía de perfil del usuario. |
 | locale | varchar(10) | NOT NULL, DEFAULT 'es_419' | Idioma y región de la interfaz. |
 | status | account_status | NOT NULL, DEFAULT 'ACTIVE' | Estado de la cuenta: activa, suspendida o eliminada. |
 | created_at | timestamp | NOT NULL | Fecha y hora de creación de la cuenta. |
@@ -3628,10 +3739,10 @@ La tabla incluye un índice único sobre `email`, que garantiza a nivel de base 
 | id | uuid | PK | Identificador único de la sesión. |
 | user_id | uuid | NOT NULL, FK → users.id | Cuenta a la que pertenece la sesión. |
 | token_hash | varchar(255) | NOT NULL | Token de sesión cifrado entregado al cliente. |
-| device_info | varchar(200) | — | Descripción del dispositivo desde el que se inició la sesión. |
+| device_info | varchar(200) | - | Descripción del dispositivo desde el que se inició la sesión. |
 | issued_at | timestamp | NOT NULL | Fecha y hora de emisión del token. |
 | expires_at | timestamp | NOT NULL | Fecha y hora en que el token deja de ser válido. |
-| revoked_at | timestamp | — | Fecha y hora del cierre de sesión, si este ocurrió. |
+| revoked_at | timestamp | - | Fecha y hora del cierre de sesión, si este ocurrió. |
 
 La tabla cuenta con un índice sobre `user_id`, que soporta la consulta de las sesiones vigentes de una cuenta.
 
@@ -3642,7 +3753,7 @@ Existe una relación de uno a muchos entre `users` y `sessions`: una cuenta pued
 <div align="center">
 
 ![Database Design Diagram - Identity and Access](assets/img/bounded-context/identity-and-access/identity-and-access-db-diagram.png)
-  <br/><i>Imagen X. Database Design Diagram del Bounded Context Identity and Access.</i>
+  <br/><i>Imagen 40. Database Design Diagram del Bounded Context Identity and Access.</i>
 
 </div>
 
@@ -3653,6 +3764,63 @@ Existe una relación de uno a muchos entre `users` y `sessions`: una cuenta pued
 <br>
 
 #### 2.6.2.1. Domain Layer
+
+En esta capa se definen las reglas de negocio para la formación y gestión de la red de apoyo del adulto mayor. Conforme al EventStorming, el dominio se divide en tres *Aggregate Roots* independientes para evitar bloqueos transaccionales innecesarios.
+
+**Sub-capa Model - Aggregates y Entities:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Aggregate | CareCircle | Entidad raíz que administra la membresía del círculo de cuidado. | Mantener la integridad de los vínculos familiares y los códigos de invitación. | Relacionado con el módulo Identity & Access. |
+| Entity | InvitationCode | Código temporal generado para agregar familiares. | Garantizar que un código se redima una sola vez o expire. | Pertenece al aggregate CareCircle. |
+| Entity | FamilyLink | Relación activa o revocada entre el adulto mayor y un cuidador. | Representar la autorización de un familiar sobre un adulto mayor. | Pertenece al aggregate CareCircle. |
+| Aggregate | CareShift | Entidad raíz que gestiona los turnos de cuidado diarios. | Garantizar que no haya colisiones de responsabilidad en una misma fecha. | Referencia al CareCircle. |
+| Aggregate | SharedNote | Entidad raíz que gestiona la bitácora colaborativa. | Almacenar y exponer información de contexto compartida por los miembros. | Referencia al CareCircle. |
+
+**Sub-capa Model - Commands:**
+
+| Tipo | Nombre | Descripción |
+|---|---|---|
+| Command | CreateCareCircleCommand | Intención de inicializar el círculo de cuidado tras el registro. |
+| Command | GenerateInvitationCodeCommand | Intención de crear un código temporal para invitar a un familiar. |
+| Command | RedeemInvitationCodeCommand | Intención de un familiar de unirse al círculo usando un código válido. |
+| Command | RevokeFamilyLinkCommand | Intención de eliminar el acceso de un familiar al círculo. |
+| Command | AssignCareShiftCommand | Intención de asignar un turno de cuidado en una fecha específica. |
+| Command | ReassignCareShiftCommand | Intención de cambiar al responsable de un turno de cuidado existente. |
+| Command | CreateSharedNoteCommand | Intención de añadir un apunte a la bitácora colaborativa. |
+| Command | EditSharedNoteCommand | Intención de modificar el contenido de una nota compartida existente. |
+
+**Sub-capa Model - Events:**
+
+| Tipo | Nombre | Descripción |
+|---|---|---|
+| Event | CareCircleCreated | Se inicializó el círculo de cuidado. |
+| Event | InvitationCodeGenerated | Se generó un nuevo código de invitación temporal. |
+| Event | InvitationCodeRedeemed | Un código fue canjeado con éxito. |
+| Event | FamilyLinkEstablished | Se estableció el vínculo (Consumido por otros contextos para autorizar accesos). |
+| Event | FamilyLinkRevoked | Se eliminó el acceso de un familiar. |
+| Event | CareShiftAssigned | Se registró un nuevo turno de cuidado. |
+| Event | CareShiftReassigned | Se actualizó el responsable de un turno. |
+| Event | SharedNoteCreated | Se añadió una nota al círculo. |
+| Event | SharedNoteEdited | Se modificó una nota existente. |
+
+**Sub-capa Model - Queries:**
+
+| Tipo | Nombre | Descripción |
+|---|---|---|
+| Query | GetCareCircleByIdQuery | Obtener la estructura y miembros de un círculo. |
+| Query | GetCareShiftsByDateQuery | Obtener el calendario de turnos. |
+| Query | GetSharedNotesQuery | Obtener la bitácora de notas compartidas. |
+
+**Sub-capa Repositories y Services (Interfaces):**
+
+| Tipo | Nombre | Descripción |
+|---|---|---|
+| Interface | ICareCircleRepository | Contrato de persistencia para el agregado CareCircle. |
+| Interface | ICareShiftRepository | Contrato de persistencia para el agregado CareShift. |
+| Interface | ISharedNoteRepository | Contrato de persistencia para el agregado SharedNote. |
+| Interface | ICareCircleCommandService | Contrato de operaciones de escritura del dominio. |
+| Interface | ICareCircleQueryService | Contrato de operaciones de lectura del dominio. |
 
 <br>
 
@@ -3726,183 +3894,500 @@ Clases que orquestan los flujos del contexto, coordinando los aggregates, los re
 
 #### 2.6.2.4 Infrastructure Layer
 
+Clases que resuelven el acceso a la base de datos y a los mecanismos técnicos de persistencia y mensajería, implementando las abstracciones definidas en el dominio.
+
+**Sub-capa Persistence: Repositories**
+
+| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
+|---|---|---|
+| **CareCircleRepository** | Persiste y recupera los aggregates CareCircle, incluyendo la información necesaria para consultar sus miembros y configuración del círculo. Resuelve las operaciones de creación y consulta de los Care Circle. | Implementa ICareCircleRepository; usado por la capa Application. |
+| **FamilyLinkRepository** | Persiste y recupera los vínculos familiares establecidos entre los usuarios y un CareCircle, incluyendo la información necesaria para establecer y revocar dichos vínculos. | Implementa IFamilyLinkRepository; usado por la capa Application. |
+| **CareShiftRepository** | Persiste y recupera los turnos de cuidado asociados a un CareCircle, permitiendo consultar y modificar las asignaciones de los miembros. | Implementa ICareShiftRepository; usado por la capa Application. |
+| **SharedNoteRepository** | Persiste y recupera las notas compartidas pertenecientes a un CareCircle, permitiendo consultar y actualizar su contenido. | Implementa ISharedNoteRepository; usado por la capa Application. |
+
+**Sub-capa Persistence: Mappers**
+
+| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
+|---|---|---|
+| **CareCirclePersistenceMapper** | Traduce entre el aggregate CareCircle y su representación en base de datos, evitando que el modelo de persistencia se filtre al dominio. | Usado por CareCircleRepository. |
+| **FamilyLinkPersistenceMapper** | Traduce entre la entidad FamilyLink y su representación en base de datos, manteniendo separado el modelo de persistencia del modelo de dominio. | Usado por FamilyLinkRepository. |
+| **CareShiftPersistenceMapper** | Traduce entre la entidad CareShift y su representación en base de datos. | Usado por CareShiftRepository. |
+| **SharedNotePersistenceMapper** | Traduce entre la entidad SharedNote y su representación en base de datos. | Usado por SharedNoteRepository. |
+
+**Sub-capa Messaging: Publishers**
+
+| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
+|---|---|---|
+| **DomainEventPublisherAdapter** | Publica los eventos de dominio generados por las operaciones de Care Circle dentro del monolito modular, permitiendo que otros módulos reaccionen a eventos como la creación del Care Circle, establecimiento del vínculo familiar, asignación de turnos o creación de notas compartidas. | Implementa IDomainEventPublisher. |
 <br>
 
 #### 2.6.2.5. Bounded Context Software Architecture Component Level Diagrams
+
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Care Circle, elaborado en Structurizr (Imagen 41). El diagrama detalla la arquitectura interna: los *Controllers* como puntos de entrada REST; los *Resources* y *Assemblers* para transformación de datos; los servicios de aplicación (`CareCircleCommandService`, `CareCircleQueryService`); y el acceso a datos mediante los 3 repositorios definidos en el dominio (`CareCircleRepository`, `CareShiftRepository`, `SharedNoteRepository`).
+
+<div align="center">
+
+![Component Diagram - Care Circle](assets/img/bounded-context/care-circle/care-circle-component-diagram.png)
+  <br/><i>Imagen 41. Component Diagram del Bounded Context Care Circle.</i>
+
+</div>
 
 <br>
 
 #### 2.6.2.6. Bounded Context Software Architecture Code Level Diagrams
 
-<br>
-
 ##### 2.6.2.6.1. Bounded Context Domain Layer Class Diagrams
+
+El siguiente diagrama de clases UML (Imagen 42) representa la capa de dominio. Acatando el EventStorming, se visualizan los tres Aggregate Roots principales: `CareCircle`, `CareShift` y `SharedNote`. Se detallan las interfaces de los servicios de aplicación y repositorios que orquestan la lógica.
+
+<div align="center">
+
+![Class Diagram - Care Circle](assets/img/bounded-context/care-circle/care-circle-class-diagram.png)
+  <br/><i>Imagen 42. Domain Layer Class Diagram del Bounded Context Care Circle.</i>
+
+</div>
 
 <br>
 
 ##### 2.6.2.6.2. Bounded Context Database Design Diagram
 
+El diagrama de base de datos (Imagen 43) presenta los objetos que permiten la persistencia del bounded context **Care Circle** sobre el motor MySQL. El contexto se materializa en cinco tablas que corresponden al aggregate root care_circles y a las entidades que este contiene: invitation_codes, family_links, care_shifts y shared_notes.
+
+**Tabla care_circles**
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | uuid | PK | Identificador único del círculo de cuidado. |
+| older_adult_id | uuid | NOT NULL, UNIQUE, FK → users.id | Adulto mayor dueño del círculo. Relación 1-1 con la cuenta. |
+| created_at | timestamp | NOT NULL | Fecha y hora de creación del círculo. |
+
+Esta tabla es el aggregate root del bounded context. Se crea automáticamente al registrar un adulto mayor y actúa como punto de entrada para todas las demás entidades del contexto. Incluye un índice único sobre `older_adult_id` que garantiza a nivel de base de datos que cada adulto mayor posee exactamente un círculo.
+
+***Tabla invitation_codes***
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | uuid | PK | Identificador único del código de invitación. |
+| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que da acceso este código. |
+| code | varchar(12) | NOT NULL, UNIQUE | Código alfanumérico en mayúscula (6-12 chars) compartido con el familiar. |
+| status | invitation_status | NOT NULL, DEFAULT 'PENDING' | Estado del código: pendiente, usado o expirado. |
+| created_at | timestamp | NOT NULL | Fecha y hora de generación del código. |
+| expires_at | timestamp | NOT NULL | Fecha y hora de vencimiento. Siempre posterior a created_at. |
+| used_at | timestamp | - | Momento en que fue canjeado. Nulo si status ≠ USED. |
+| used_by_user_id | uuid | FK → users.id | Familiar que redimió el código. Nulo si status ≠ USED. |
+
+La tabla incluye un índice único sobre `code` y un índice sobre `status` que optimiza la consulta de códigos vigentes.
+
+
+***Tabla family_links***
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | uuid | PK | Identificador único del vínculo familiar. |
+| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que pertenece el vínculo. |
+| relative_id | uuid | NOT NULL, FK → users.id | Familiar vinculado al círculo. |
+| invitation_code_id | uuid | NOT NULL, FK → invitation_codes.id | Código que originó el vínculo. Permite trazabilidad de auditoría. |
+| relationship_label | relationship_label | NOT NULL | Tipo de parentesco: hijo, hija, nieto, sobrino, etc. |
+| status | link_status | NOT NULL, DEFAULT 'ACTIVE' | Estado del vínculo: activo o revocado. |
+| linked_at | timestamp | NOT NULL | Momento en que se canjeó el código de invitación. |
+| revoked_at | timestamp | - | Momento de la revocación. Nulo si status = ACTIVE. |
+| revoked_by | uuid | FK → users.id | Actor que ejecutó la revocación. Nulo si status = ACTIVE. |
+
+Incluye un índice único compuesto sobre `(care_circle_id, relative_id)` que impide que un familiar se vincule más de una vez al mismo círculo, e índices sobre `relative_id` y `status` para optimizar las consultas frecuentes.
+
+***Tabla care_shifts***
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | uuid | PK | Identificador único del turno. |
+| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que pertenece el turno. |
+| relative_id | uuid | NOT NULL, FK → users.id | Familiar responsable del día. Se actualiza al reasignar. |
+| shift_date | date | NOT NULL | Día calendario en que el familiar está de turno. |
+| assigned_by | uuid | NOT NULL, FK → users.id | Familiar que realizó la última asignación o reasignación. |
+| created_at | timestamp | NOT NULL | Fecha y hora de la asignación inicial. |
+| updated_at | timestamp | NOT NULL | Fecha y hora de la última reasignación. Siempre ≥ created_at. |
+
+Incluye un índice único compuesto sobre `(care_circle_id, shift_date)` que garantiza que solo un familiar puede estar asignado por día dentro de un mismo círculo.
+
+***Tabla shared_notes***
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | uuid | PK | Identificador único de la nota. |
+| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que pertenece la nota. |
+| author_id | uuid | NOT NULL, FK → users.id | Familiar que redactó la nota. |
+| content | text | NOT NULL | Contenido de la nota. No puede ser texto vacío. |
+| created_at | timestamp | NOT NULL | Fecha y hora de creación de la nota. |
+| updated_at | timestamp | - | Fecha y hora de la última edición. Nulo si nunca fue editada. |
+
+Incluye índices sobre `care_circle_id` y `author_id` que optimizan la consulta de notas por círculo y por autor respectivamente.
+
+***Relaciones entre tablas***
+
+`care_circles` se relaciona de uno a muchos con `invitation_codes`, `family_links`, `care_shifts` y `shared_notes`: un círculo puede contener varios registros de cada tipo, mientras que cada registro pertenece obligatoriamente a un único círculo. A su vez, `family_links` referencia a `invitation_codes` mediante `invitation_code_id`, registrando el código exacto que originó cada vínculo. Las columnas `relative_id`, `used_by_user_id`, `revoked_by`, `assigned_by` y `author_id` referencian a `users`, que es la tabla del bounded context Identity & Access y actúa como referencia externa en este contexto.
+
 <br>
 
+<div align="center">
+
+![Database Design Diagram -Care Circle](assets/img/bounded-context/care-circle/care-circle-database.png)
+  <br/><i>Imagen 43. Database Design Diagram del Bounded Context Care Circle.</i>
+</div>
+
 ### 2.6.3. Bounded Context: Daily Check-in
+
+El bounded context **Daily Check-in** es el mecanismo principal de recolección de datos. Su responsabilidad es capturar el estado diario del adulto mayor mediante preguntas ligeras, así como administrar las preferencias del usuario (horarios, pausas y modos de interfaz). Conforme al EventStorming, este contexto divide su dominio en dos agregados principales: `CheckIn` y `CheckInPreferences`.
 
 <br>
 
 #### 2.6.3.1. Domain Layer
 
+**Sub-capa Model - Aggregates y Entities:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
+|---|---|---|---|---|
+| Aggregate | CheckIn | Registro histórico de la interacción diaria. | Controlar el ciclo de vida del check-in (PENDING, ANSWERED o MISSED) y capturar el nivel de ánimo. | Publica eventos para Wellbeing Monitoring y Alerts & Safety. |
+| Aggregate | CheckInPreferences | Preferencias y configuración de la experiencia por usuario. | Administrar horarios, activación de pausas diarias y el modo de interfaz simplificado. | Referencia a la cuenta del usuario. |
+| Entity | QuestionPause | Historial de días pausados voluntariamente. | Evitar alertas de inactividad durante la fecha pausada. | Pertenece al agregado CheckInPreferences. |
+
+**Sub-capa Model - Commands:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal |
+|---|---|---|---|
+| Command | PromptCheckInCommand | Comando interno del sistema. | Generar y enviar la pregunta del día al usuario. |
+| Command | AnswerCheckInCommand | Comando del adulto mayor. | Registrar la respuesta con el estado de ánimo (`MoodLevel`). |
+| Command | ExpireCheckInCommand | Comando interno de tiempo. | Cambiar el estado a MISSED al vencer el tiempo límite. |
+| Command | ScheduleCheckInCommand | Comando de configuración. | Establecer la hora preferida del recordatorio. |
+| Command | ActivateDailyPauseCommand | Comando de configuración. | Pausar las interacciones para el día actual. |
+| Command | EnableSimplifiedModeCommand | Comando de accesibilidad. | Activar o desactivar el modo simplificado de UI. |
+
+**Sub-capa Model - Events y Queries:**
+
+| Tipo | Nombre | Descripción |
+|---|---|---|
+| Event | CheckInAnswered | Informa a *Wellbeing Monitoring* para evaluación de patrones. |
+| Event | CheckInMissed | Informa a *Alerts & Safety* para abrir ventana de inactividad. |
+| Query | GetTodayCheckInQuery | Recuperar el check-in activo del día para la interfaz. |
+
+**Sub-capa Repositories y Services (Interfaces):**
+
+| Tipo | Nombre | Descripción |
+|---|---|---|
+| Interface | ICheckInRepository | Contrato CRUD para el registro diario de interacciones. |
+| Interface | ICheckInPreferencesRepository | Contrato CRUD para horarios, pausas y modos visuales. |
+| Interface | IDailyCheckInCommandService | Contrato para orquestar los comandos de respuesta y preferencias. |
+| Interface | IDailyCheckInQueryService | Contrato para la lectura de estado y configuración. |
+
 <br>
 
 #### 2.6.3.2. Interface Layer
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal |
+|---|---|---|---|
+| Controller | CheckInsController | REST API para interacciones. | Endpoints GET/POST para responder el check-in diario. |
+| Controller | PreferencesController | REST API para configuración. | Endpoints PUT/POST para horarios, pausas y modo simplificado. |
+| Assembler | Assemblers | Transformadores de datos. | Mapear los JSON a Commands/Queries del dominio. |
 
 <br>
 
 #### 2.6.3.3. Application Layer
 
+| Tipo | Nombre | Descripción | Responsabilidad Principal |
+|---|---|---|---|
+| Service | DailyCheckInCommandService | Ejecutor de casos de uso de escritura. | Valida invariantes, modifica los agregados `CheckIn` o `CheckInPreferences` y publica los eventos de dominio. |
+| Service | DailyCheckInQueryService | Ejecutor de casos de uso de lectura. | Devuelve los recursos de lectura sin alterar estado. |
+
 <br>
 
 #### 2.6.3.4 Infrastructure Layer
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal |
+|---|---|---|---|
+| Repository | CheckInRepository | Implementación persistencia. | Persistir las interacciones diarias en la BD. |
+| Repository | CheckInPreferencesRepository | Implementación persistencia. | Persistir horarios, pausas y flags de UI en la BD. |
 
 <br>
 
 #### 2.6.3.5. Bounded Context Software Architecture Component Level Diagrams
 
+Este diagrama C4 (Imagen 44) muestra al Adulto Mayor interactuando con los *Controllers* (`CheckInsController`, `PreferencesController`), quienes delegan en los *Services* y *Repositories* definidos por la arquitectura limpia. Se destacan las conexiones con la Base de Datos.
+
+<div align="center">
+
+![Component Diagram - Daily Check-in](assets/img/bounded-context/daily-check-in/daily-check-in-component-diagram.png)
+  <br/><i>Imagen 44. Component Diagram del Bounded Context Daily Check-in.</i>
+
+</div>
+
 <br>
 
 #### 2.6.3.6. Bounded Context Software Architecture Code Level Diagrams
 
-<br>
-
 ##### 2.6.3.6.1. Bounded Context Domain Layer Class Diagrams
+
+El diagrama UML (Imagen 45) consolida los requisitos tácticos obtenidos del EventStorming. Presenta a `CheckIn` y `CheckInPreferences` como los dos Aggregate Roots, acompañados de sus respectivas interfaces de persistencia y comandos de usuario/sistema.
+
+<div align="center">
+
+![Class Diagram - Daily Check-in](assets/img/bounded-context/daily-check-in/daily-check-in-class-diagram.png)
+  <br/><i>Imagen 45. Domain Layer Class Diagram del Bounded Context Daily Check-in.</i>
+
+</div>
 
 <br>
 
 ##### 2.6.3.6.2. Bounded Context Database Design Diagram
 
-<br>
+El diseño de base de datos transaccional para Daily Check-in (Imagen 46) incluye las siguientes tablas referenciando al contexto de Identidad:
+- **check_in_questions:** Catálogo base de preguntas rotativas.
+- **check_in_schedules:** Horario de recordatorio y flag de modo simplificado por usuario.
+- **check_ins:** Tabla que materializa el agregado `CheckIn`, registrando la pregunta, el estado (`PENDING`, `ANSWERED`, `MISSED`) y el nivel de ánimo.
+- **question_pauses:** Historial de días en los que el usuario eligió voluntariamente no interactuar.
+
+<div align="center">
+
+![Database Diagram - Daily Check-in](assets/img/bounded-context/daily-check-in/daily-check-in-db-diagram.png)
+  <br/><i>Imagen 46. Database Design Diagram del Bounded Context Daily Check-in.</i>
+
+</div>
 
 ### 2.6.4. Bounded Context: Wellbeing Monitoring
 
-El bounded context **Wellbeing Monitoring** es responsable de interpretar el historial de check-ins registrados por el módulo **Daily Check-in** para generar un **Wellbeing Insight** del adulto mayor: detectar si existe un patrón de incomodidad sostenido (*Discomfort Pattern Detected*) o una mejora en la tendencia de bienestar (*Wellbeing Trend Improved*), y reaccionar en consecuencia emitiendo una sugerencia de bienestar (*Wellbeing Suggestion*) o registrando un pequeño logro (*Small Win*) para el cuidador a distancia. El diseño táctico presentado a continuación está alineado directamente con los eventos de dominio levantados en la sesión de EventStorming del bounded context (ver imagen).
+El bounded context **Wellbeing Monitoring** es responsable de interpretar los check-ins registrados por el módulo **Daily Check-in** para producir el estado de bienestar del adulto mayor: registra cada estado de ánimo derivado de un check-in respondido (`WellbeingEntry`), genera el resumen diario que ve el cuidador a distancia (`StatusSummary`), detecta patrones sostenidos de malestar o de mejora en la tendencia (`WellbeingPattern`) y registra pequeños logros (`SmallWin`) cuando corresponde. A diferencia de otros contextos, no mantiene un agregado único: cada uno de estos cuatro conceptos es una raíz de agregado independiente, alineada 1 a 1 con las tablas `wellbeing_entries`, `status_summaries`, `small_wins` y `wellbeing_patterns` del diseño de base de datos oficial del equipo. El diseño táctico presentado a continuación está alineado directamente con los eventos de dominio levantados en la sesión de EventStorming del bounded context (ver imagen).
 
 <br>
 
 #### 2.6.4.1. Domain Layer
 
-**Sub-capa Model - Aggregates:**
+En esta capa se representan las reglas de negocio propias del bienestar del adulto mayor, sin dependencia de frameworks de persistencia, red ni interfaz.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Aggregate | WellbeingInsight | Entidad que representa la interpretación acumulada del bienestar de un adulto mayor, incluyendo el patrón de incomodidad o mejora de tendencia detectado más recientemente | Ser el punto de entrada para evaluar el historial de check-ins y mantener la integridad del estado de bienestar como entidad del dominio | Relacionado con el bounded context Daily Check-in (origen del historial de check-ins) y Alerts and Safety (destino de las sugerencias de bienestar emitidas) |
+**Sub-capa Model: Aggregates**
 
-<br>
+`WellbeingEntry` (Aggregate Root): representa el registro del estado de ánimo del adulto mayor derivado de un check-in respondido.
 
-**Sub-capa Model - Commands:**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | WellbeingEntryId | private | Identificador único del registro de bienestar. |
+| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el registro. |
+| checkInId | CheckInId | private | Identificador del check-in del cual se derivó este registro. |
+| mood | MoodLevel | private | Nivel de ánimo reportado en el check-in. |
+| moodScore | MoodScore | private | Puntaje numérico asociado al nivel de ánimo reportado. |
+| recordedAt | LocalDateTime | private | Fecha y hora en que se registró el estado de ánimo. |
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Command | EvaluateWellbeingPatternCommand | Comando para evaluar el patrón de bienestar de un adulto mayor (evento de dominio *Evaluate Wellbeing Pattern*) | Representar la intención de analizar el historial de check-ins disponible y determinar si corresponde un *Discomfort Pattern Detected* o un *Wellbeing Trend Improved* | Usado en la implementación del servicio de comandos de bienestar |
-| Command | IssueWellbeingSuggestionCommand | Comando para emitir una sugerencia de bienestar (evento de dominio *Issue Wellbeing Suggestion*) | Representar la intención de emitir una sugerencia de bienestar cuando `EvaluateWellbeingPatternCommand` detecta un patrón de incomodidad | Usado en la implementación del servicio de comandos de bienestar |
-| Command | RecordSmallWinCommand | Comando para registrar un pequeño logro (evento de dominio *Record Small Win*) | Representar la intención de registrar un pequeño logro cuando `EvaluateWellbeingPatternCommand` detecta una mejora en la tendencia de bienestar | Usado en la implementación del servicio de comandos de bienestar |
-| Command | DismissWellbeingSuggestionCommand | Comando para descartar una sugerencia de bienestar (evento de dominio *Dismiss Wellbeing Suggestion*) | Representar la intención del cuidador a distancia de descartar una sugerencia de bienestar previamente emitida | Usado en la implementación del servicio de comandos de bienestar |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| recordFrom(checkInId, olderAdultId, mood, moodScore) | public (static) | Crea un nuevo registro de bienestar a partir de un check-in respondido. |
+| moodValue() | public | Devuelve el nivel de ánimo registrado. |
 
-<br>
+`WellbeingPattern` (Aggregate Root): representa un patrón detectado en el historial de check-ins de un adulto mayor, de malestar sostenido o de mejora en la tendencia de bienestar.
 
-**Sub-capa Model - Queries:**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | WellbeingPatternId | private | Identificador único del patrón detectado. |
+| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el patrón. |
+| type | PatternType | private | Tipo de patrón detectado: malestar sostenido o mejora. |
+| consecutiveDays | Integer | private | Cantidad de días consecutivos que sostienen el patrón. |
+| startDate | LocalDate | private | Fecha de inicio del periodo evaluado. |
+| endDate | LocalDate | private | Fecha de fin del periodo evaluado. |
+| detectedAt | LocalDateTime | private | Fecha y hora en que se detectó el patrón. |
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Query | GetWellbeingInsightByOlderAdultIdQuery | Consulta para obtener el wellbeing insight por identificador del adulto mayor | Representar la intención de obtener el estado de bienestar actual de un adulto mayor específico | Usado en la implementación del servicio de consultas |
-| Query | GetWellbeingSuggestionsViewQuery | Consulta para obtener la vista de sugerencias de bienestar (evento de dominio *Wellbeing Suggestions View*) | Representar la intención del cuidador a distancia de visualizar las sugerencias de bienestar vigentes de un adulto mayor | Usado en la implementación del servicio de consultas |
-| Query | GetWellbeingTrendHistoryQuery | Consulta para obtener el historial de tendencias de bienestar | Representar la intención de obtener las tendencias calculadas para un adulto mayor en un rango de periodos | Usado en la implementación del servicio de consultas |
-| Query | GetAllWellbeingInsightsQuery | Consulta para obtener todos los wellbeing insights | Representar la intención de obtener la lista completa de wellbeing insights registrados | Usado en la implementación del servicio de consultas |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| detect(olderAdultId, type, consecutiveDays, startDate, endDate) | public (static) | Crea un nuevo patrón a partir del análisis del historial de check-ins. |
+| isDiscomfort() | public | Indica si el patrón corresponde a malestar sostenido. |
+| isImprovement() | public | Indica si el patrón corresponde a una mejora de tendencia. |
 
-<br>
+`SmallWin` (Aggregate Root): representa un pequeño logro del adulto mayor, generado a partir de una mejora detectada en su tendencia de bienestar y compartido con el cuidador a distancia.
 
-**Sub-capa Repositories:**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | SmallWinId | private | Identificador único del pequeño logro. |
+| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el logro. |
+| checkInId | CheckInId | private | Identificador del check-in del cual se derivó el logro, cuando aplica. |
+| description | SmallWinDescription | private | Descripción del pequeño logro. |
+| recordedAt | LocalDateTime | private | Fecha y hora en que se registró el logro. |
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Interface | IWellbeingInsightRepository | Repositorio para operaciones de persistencia del modelo WellbeingInsight | Definir contratos para operaciones CRUD sobre los wellbeing insights | Implementado en la capa de Infrastructure |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| recordFrom(olderAdultId, checkInId, description) | public (static) | Crea un nuevo pequeño logro a partir de una mejora detectada. |
 
-<br>
+`StatusSummary` (Aggregate Root): representa el resumen diario del estado del adulto mayor, mostrado al cuidador a distancia como una vista consolidada del día.
 
-**Sub-capa Services:**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | StatusSummaryId | private | Identificador único del resumen. |
+| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el resumen. |
+| summaryDate | LocalDate | private | Fecha a la que corresponde el resumen. |
+| mood | MoodLevel | private | Estado de ánimo predominante del día resumido. |
+| hasAnswered | Boolean | private | Indica si el adulto mayor respondió su check-in ese día. |
+| highlight | String | private | Dato destacado del día, mostrado al cuidador a distancia. |
+| generatedAt | LocalDateTime | private | Fecha y hora en que se generó el resumen. |
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Interface | IWellbeingCommandService | Servicio para métodos de comandos de bienestar | Estipular una estructura clara a seguir para operaciones de escritura (evaluación de patrones, emisión de sugerencias, registro de logros) | Usado en la capa "Application" para implementar los métodos dados |
-| Interface | IWellbeingQueryService | Servicio para métodos de consulta de bienestar | Estipular una estructura clara a seguir para operaciones de lectura | Usado en la capa "Application" para la implementación de los métodos |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| generateFor(olderAdultId, summaryDate, mood, hasAnswered, highlight) | public (static) | Genera o actualiza el resumen diario de un adulto mayor. |
+
+**Sub-capa Model: Value Objects**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| WellbeingEntryId | value: UUID | Identidad inmutable de un registro de bienestar. |
+| WellbeingPatternId | value: UUID | Identidad inmutable de un patrón detectado. |
+| SmallWinId | value: UUID | Identidad inmutable de un pequeño logro. |
+| StatusSummaryId | value: UUID | Identidad inmutable de un resumen diario. |
+| MoodScore | value: Integer | Puntaje numérico de bienestar, validado dentro de un rango permitido. |
+| SmallWinDescription | value: String | Descripción del pequeño logro, con validación de longitud máxima. |
+
+**Sub-capa Model: Enumerations**
+
+| Nombre | Valores | Descripción |
+| --- | --- | --- |
+| MoodLevel | VERY_LOW, LOW, NEUTRAL, GOOD, VERY_GOOD | Nivel de ánimo reportado en un check-in. |
+| PatternType | SUSTAINED_DISCOMFORT, IMPROVEMENT | Tipo de patrón detectado en el historial de check-ins de un adulto mayor. |
+
+**Sub-capa Model: Commands**
+
+| Nombre | Descripción |
+| --- | --- |
+| RecordWellbeingEntryCommand | Intención de registrar el estado de ánimo derivado de un check-in respondido. |
+| DetectWellbeingPatternCommand | Intención de analizar el historial de check-ins de un adulto mayor y determinar si existe un patrón de malestar sostenido o de mejora. |
+| RecordSmallWinCommand | Intención de registrar un pequeño logro a partir de una mejora detectada. |
+| GenerateStatusSummaryCommand | Intención de generar o actualizar el resumen diario del estado de un adulto mayor. |
+
+**Sub-capa Model: Queries**
+
+| Nombre | Descripción |
+| --- | --- |
+| GetWellbeingEntriesByOlderAdultIdQuery | Consulta del historial de registros de bienestar de un adulto mayor. |
+| GetWellbeingPatternsByOlderAdultIdQuery | Consulta de los patrones detectados para un adulto mayor. |
+| GetSmallWinsByOlderAdultIdQuery | Consulta de los pequeños logros registrados para un adulto mayor. |
+| GetStatusSummaryByDateQuery | Consulta del resumen diario de un adulto mayor en una fecha específica. |
+| GetLatestStatusSummaryQuery | Consulta del resumen diario más reciente de un adulto mayor. |
+
+**Sub-capa Model: Events**
+
+| Nombre | Descripción |
+| --- | --- |
+| WellbeingEntryRecorded | Se registró el estado de ánimo derivado de un check-in respondido. |
+| SustainedDiscomfortPatternDetected | Se detectó un patrón de malestar sostenido en el historial de check-ins. |
+| WellbeingImprovementPatternDetected | Se detectó una mejora en la tendencia de bienestar. |
+| SmallWinRecorded | Se registró un pequeño logro del adulto mayor. |
+| StatusSummaryGenerated | Se generó o actualizó el resumen diario del estado de un adulto mayor. |
+
+**Sub-capa Repositories**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | IWellbeingEntryRepository | save(entry), findById(id), findByOlderAdultId(olderAdultId), findByCheckInId(checkInId) | Contrato de persistencia del aggregate `WellbeingEntry`. Se implementa en Infrastructure. |
+| Interface | IWellbeingPatternRepository | save(pattern), findById(id), findByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `WellbeingPattern`. |
+| Interface | ISmallWinRepository | save(smallWin), findById(id), findByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `SmallWin`. |
+| Interface | IStatusSummaryRepository | save(summary), findByOlderAdultIdAndDate(olderAdultId, date), findLatestByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `StatusSummary`. |
+
+**Sub-capa Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | IWellbeingCommandService | handle(RecordWellbeingEntryCommand), handle(DetectWellbeingPatternCommand), handle(RecordSmallWinCommand), handle(GenerateStatusSummaryCommand) | Contrato de las operaciones de escritura del contexto. |
+| Interface | IWellbeingQueryService | handle(GetWellbeingEntriesByOlderAdultIdQuery), handle(GetWellbeingPatternsByOlderAdultIdQuery), handle(GetSmallWinsByOlderAdultIdQuery), handle(GetStatusSummaryByDateQuery), handle(GetLatestStatusSummaryQuery) | Contrato de las operaciones de lectura del contexto. |
+| Interface | IDomainEventPublisher | publish(event) | Abstracción para publicar los eventos de dominio hacia los demás módulos, compartida con los demás bounded contexts. |
 
 <br>
 
 #### 2.6.4.2. Interface Layer
 
-**Sub-capa REST - Resources:**
+Clases que exponen el bounded context hacia el exterior y traducen las peticiones entrantes al lenguaje del dominio.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Resource | WellbeingInsightResource | Estructura de datos de wellbeing insight para API | Representar y exponer datos del wellbeing insight de forma accesible y estructurada para el cliente | Usado en controladores para estructurar respuestas de wellbeing insight |
-| Resource | WellbeingSuggestionsViewResource | Estructura de datos de la vista de sugerencias de bienestar para API | Representar y exponer las sugerencias de bienestar vigentes de forma accesible para el cliente | Usado en controladores para estructurar la respuesta de `Wellbeing Suggestions View` |
-| Resource | WellbeingTrendResource | Estructura de datos de tendencia de bienestar para API | Representar y exponer una tendencia calculada de forma accesible para el cliente | Usado en controladores para estructurar respuestas de historial de tendencias |
-| Resource | DismissWellbeingSuggestionResource | Estructura de petición para descartar una sugerencia de bienestar | Representar datos necesarios para identificar y marcar como descartada una sugerencia de bienestar | Usado en controlador para procesar peticiones de descarte |
+**Sub-capa REST: Controllers**
 
-<br>
+| Nombre | Endpoints | Descripción |
+| --- | --- | --- |
+| WellbeingEntriesController | GET /wellbeing-entries?olderAdultId={id} | Punto de entrada de consulta del historial de registros de bienestar de un adulto mayor. |
+| WellbeingPatternsController | GET /wellbeing-patterns?olderAdultId={id} | Punto de entrada de consulta de los patrones detectados. |
+| SmallWinsController | GET /small-wins?olderAdultId={id}, POST /small-wins | Punto de entrada de consulta y registro manual de pequeños logros. |
+| StatusSummariesController | GET /status-summaries/latest?olderAdultId={id}, GET /status-summaries?olderAdultId={id}&date={date} | Punto de entrada de consulta del resumen diario del adulto mayor. |
 
-**Sub-capa REST - Transform:**
+**Sub-capa REST: Resources**
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Assembler | WellbeingInsightResourceFromEntityAssembler | Transformador de entidad WellbeingInsight a WellbeingInsightResource | Convertir la entidad del dominio a su representación REST correspondiente | Usado en controladores para transformar respuestas |
-| Assembler | WellbeingSuggestionsViewResourceFromEntityAssembler | Transformador del read model de sugerencias vigentes a WellbeingSuggestionsViewResource | Convertir el read model del dominio a su representación REST correspondiente | Usado en controladores para transformar la respuesta de `Wellbeing Suggestions View` |
-| Assembler | WellbeingTrendResourceFromEntityAssembler | Transformador de entidad WellbeingTrend a WellbeingTrendResource | Convertir la entidad del dominio a su representación REST correspondiente | Usado en controladores para transformar respuestas |
-| Assembler | DismissWellbeingSuggestionCommandFromResourceAssembler | Transformador de DismissWellbeingSuggestionResource a DismissWellbeingSuggestionCommand | Convertir la petición REST a comando del dominio | Usado en controlador para procesar peticiones de descarte |
+| Nombre | Descripción |
+| --- | --- |
+| WellbeingEntryResource | Representación pública de un registro de bienestar. |
+| WellbeingPatternResource | Representación pública de un patrón detectado. |
+| SmallWinResource | Representación pública de un pequeño logro. |
+| RecordSmallWinResource | Datos de entrada para registrar manualmente un pequeño logro. |
+| StatusSummaryResource | Representación pública del resumen diario de un adulto mayor. |
 
-<br>
+**Sub-capa REST: Transform**
 
-**Sub-capa ACL - Consumers:**
+| Nombre | Descripción |
+| --- | --- |
+| WellbeingEntryResourceFromEntityAssembler | Convierte el aggregate `WellbeingEntry` en su representación REST. |
+| WellbeingPatternResourceFromEntityAssembler | Convierte el aggregate `WellbeingPattern` en su representación REST. |
+| SmallWinResourceFromEntityAssembler | Convierte el aggregate `SmallWin` en su representación REST. |
+| RecordSmallWinCommandFromResourceAssembler | Convierte la petición de registro manual en el comando `RecordSmallWinCommand`. |
+| StatusSummaryResourceFromEntityAssembler | Convierte el aggregate `StatusSummary` en su representación REST. |
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Consumer | CheckInRecordedConsumer | Consumidor interno del evento de dominio CheckInRecorded | Escuchar, dentro del monolito modular, el evento publicado por el módulo Daily Check-in para desencadenar el `EvaluateWellbeingPatternCommand` correspondiente | Usado como puente entre el bounded context Daily Check-in y Wellbeing Monitoring |
+**Sub-capa ACL: Consumers**
+
+| Nombre | Descripción |
+| --- | --- |
+| CheckInAnsweredConsumer | Escucha, dentro del monolito modular, el evento `CheckInAnswered` publicado por Daily Check-in y desencadena `RecordWellbeingEntryCommand`, `DetectWellbeingPatternCommand` y `GenerateStatusSummaryCommand`. |
 
 <br>
 
 #### 2.6.4.3. Application Layer
 
-**Sub-capa Internal - CommandServices:**
+Clases que orquestan los flujos del contexto, coordinando los cuatro aggregates y sus repositorios.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| CommandHandler | WellbeingCommandService | Implementación de comandos de bienestar | Implementar los métodos para evaluar el patrón de bienestar y publicar los eventos `DiscomfortPatternDetected` o `WellbeingTrendImproved`, emitir sugerencias (`WellbeingSuggestionIssued`), registrar pequeños logros (`SmallWinRecorded`) y descartar sugerencias (`WellbeingSuggestionDismissed`) | Implementa los métodos de la interface IWellbeingCommandService en la capa de "Services" |
+**Sub-capa Internal: CommandServices**
 
-<br>
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| WellbeingCommandService | Ejecuta los cuatro comandos del contexto: registra el estado de ánimo derivado de un check-in, analiza el historial para detectar patrones, registra pequeños logros y genera el resumen diario, publicando los eventos de dominio correspondientes en cada caso. | Implementa `IWellbeingCommandService`; usa `IWellbeingEntryRepository`, `IWellbeingPatternRepository`, `ISmallWinRepository`, `IStatusSummaryRepository` e `IDomainEventPublisher`. |
 
-**Sub-capa Internal - QueryServices:**
+**Sub-capa Internal: QueryServices**
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| QueryHandler | WellbeingQueryService | Implementación de consultas de bienestar | Implementar los métodos para las consultas de wellbeing insights, tendencias y la vista de sugerencias de bienestar | Implementa los métodos de la interface IWellbeingQueryService en la capa de "Services" |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| WellbeingQueryService | Resuelve las consultas de registros de bienestar, patrones, pequeños logros y resúmenes diarios, sin modificar el estado. | Implementa `IWellbeingQueryService`; usa los cuatro repositorios del contexto. |
 
 <br>
 
 #### 2.6.4.4 Infrastructure Layer
 
-**Sub-capa Persistence - Repositories:**
+Clases que resuelven el acceso a la base de datos y a los mecanismos de mensajería, implementando las abstracciones definidas en el dominio.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Repository | WellbeingInsightRepository | Repositorio para uso del modelo "WellbeingInsight" | Acceder y manipular datos persistidos de wellbeing insights, sus tendencias, sugerencias y pequeños logros en la base de datos | Usado en la capa "Application" para implementar operaciones CRUD de wellbeing insights |
+**Sub-capa Persistence: Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| WellbeingEntryRepository | Persiste y recupera el aggregate `WellbeingEntry` sobre la tabla `wellbeing_entries`. | Implementa `IWellbeingEntryRepository`. |
+| WellbeingPatternRepository | Persiste y recupera el aggregate `WellbeingPattern` sobre la tabla `wellbeing_patterns`. | Implementa `IWellbeingPatternRepository`. |
+| SmallWinRepository | Persiste y recupera el aggregate `SmallWin` sobre la tabla `small_wins`. | Implementa `ISmallWinRepository`. |
+| StatusSummaryRepository | Persiste y recupera el aggregate `StatusSummary` sobre la tabla `status_summaries`. | Implementa `IStatusSummaryRepository`. |
+
+**Sub-capa Persistence: Mappers**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| WellbeingPersistenceMapper | Traduce entre los cuatro aggregates del contexto y su representación en base de datos, evitando que el modelo de persistencia se filtre al dominio. | Usado por los cuatro repositorios de Infrastructure. |
+
+**Sub-capa Messaging: Consumers**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInAnsweredConsumerAdapter | Se suscribe al evento `CheckInAnswered` publicado por Daily Check-in dentro del monolito modular y lo traduce en la invocación de los comandos del contexto. | Implementa `CheckInAnsweredConsumer`; usado por la capa Interface. |
 
 <br>
 
 #### 2.6.4.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Wellbeing Monitoring, elaborado con la herramienta Structurizr. El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: el `WellbeingController` como punto de entrada de las peticiones REST; los *Resources* (`WellbeingInsightResource`, `WellbeingSuggestionsViewResource`, `WellbeingTrendResource`, `DismissWellbeingSuggestionResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y la entidad de dominio `WellbeingInsight`; los *Commands* (`EvaluateWellbeingPatternCommand`, `IssueWellbeingSuggestionCommand`, `RecordSmallWinCommand`, `DismissWellbeingSuggestionCommand`) y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `WellbeingCommandService` y `WellbeingQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IWellbeingCommandService` e `IWellbeingQueryService`; y finalmente `IWellbeingInsightRepository`, implementado por `WellbeingInsightRepository`, que gestiona la persistencia del agregado. Se incluye además `CheckInRecordedConsumer`, componente que escucha el evento `CheckInRecorded` publicado por el bounded context Daily Check-in para desencadenar la evaluación de un nuevo wellbeing insight.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Wellbeing Monitoring, elaborado con la herramienta Structurizr (Imagen 47). El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: los cuatro *Controllers* (`WellbeingEntriesController`, `WellbeingPatternsController`, `SmallWinsController`, `StatusSummariesController`) como puntos de entrada de las peticiones REST; los *Resources* (`WellbeingEntryResource`, `WellbeingPatternResource`, `SmallWinResource`, `RecordSmallWinResource`, `StatusSummaryResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y los cuatro aggregates del dominio (`WellbeingEntry`, `WellbeingPattern`, `SmallWin`, `StatusSummary`); los *Commands* (`RecordWellbeingEntryCommand`, `DetectWellbeingPatternCommand`, `RecordSmallWinCommand`, `GenerateStatusSummaryCommand`) y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `WellbeingCommandService` y `WellbeingQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IWellbeingCommandService` e `IWellbeingQueryService`; y finalmente los cuatro repositorios (`IWellbeingEntryRepository`, `IWellbeingPatternRepository`, `ISmallWinRepository`, `IStatusSummaryRepository`), cada uno implementado por su respectiva clase de Infrastructure, que gestionan la persistencia de cada aggregate. Se incluye además `CheckInAnsweredConsumer`, componente que escucha el evento `CheckInAnswered` publicado por el bounded context Daily Check-in para desencadenar el registro de una nueva entrada de bienestar, la detección de patrones y la generación del resumen diario.
 
+<br>
 <div align="center">
 
 ![Component Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-diagram.png)
-  <br/><i>Imagen 27. Component Diagram del Bounded Context Wellbeing Monitoring.</i>
+  <br/><i>Imagen 47. Component Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
 
@@ -3912,22 +4397,21 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 
 ##### 2.6.4.6.1. Bounded Context Domain Layer Class Diagrams
 
-Diagrama de clases de la capa Domain: En esta imagen se muestran las clases del dominio Wellbeing Monitoring que incluyen `WellbeingInsight` como aggregate root, Commands para las operaciones de evaluación de patrones, emisión de sugerencias y registro de pequeños logros, Queries para las consultas de información de bienestar, e interfaces para los servicios de dominio con sus respectivas implementaciones. El diagrama fue elaborado en PlantUML.
+Diagrama de clases de la capa Domain: en la Imagen 48 se muestran las clases del dominio Wellbeing Monitoring, compuesto por cuatro aggregate roots independientes (`WellbeingEntry`, `WellbeingPattern`, `SmallWin`, `StatusSummary`, alineados 1 a 1 con las tablas del diseño de base de datos oficial), los Commands y Queries asociados a cada uno, y las interfaces `IWellbeingCommandService`, `IWellbeingQueryService` e `IWellbeingEntryRepository`/`IWellbeingPatternRepository`/`ISmallWinRepository`/`IStatusSummaryRepository` con sus respectivas implementaciones. El diagrama fue elaborado en PlantUML.
 
+<br>
 <div align="center">
 
-![Domain Layer Class Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-class-diagram.png)
-  <br/><i>Imagen 28. Domain Layer Class Diagram del Bounded Context Wellbeing Monitoring.</i>
+![Class Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-class-diagram.png)
+  <br/><i>Imagen 48. Class Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
 
 <br>
 
-<br>
-
 ##### 2.6.4.6.2. Bounded Context Database Design Diagram
 
-Diagrama de base de datos: En esta imagen se muestra el diseño de las tablas correspondientes al Bounded Context Wellbeing Monitoring, compuesto por `wellbeing_entries` (registro de estado de ánimo asociado a cada check-in), `status_summaries` (resumen diario del estado del adulto mayor), `small_wins` (historial de pequeños logros registrados) y `wellbeing_patterns` (patrones de malestar sostenido o mejora detectados en el historial de check-ins), relacionadas mediante llaves foráneas hacia `users` (Identity & Access) y `check_ins` (Daily Check-in). Los nombres de las columnas siguen la convención de nomenclatura del equipo, prefijando cada campo con el código de 3 letras de su tabla (`wbe`, `sts`, `smw`, `wbp`).
+Diagrama de base de datos: en la Imagen 49 se muestra el diseño de las tablas correspondientes al Bounded Context Wellbeing Monitoring, compuesto por `wellbeing_entries` (registro de estado de ánimo asociado a cada check-in), `status_summaries` (resumen diario del estado del adulto mayor), `small_wins` (historial de pequeños logros registrados) y `wellbeing_patterns` (patrones de malestar sostenido o mejora detectados en el historial de check-ins), relacionadas mediante llaves foráneas hacia `users` (Identity & Access) y `check_ins` (Daily Check-in). Los nombres de las columnas siguen la convención de nomenclatura del equipo, prefijando cada campo con el código de 3 letras de su tabla (`wbe`, `sts`, `smw`, `wbp`).
 
 **Tabla `wellbeing_entries`:**
 
@@ -3978,7 +4462,7 @@ Diagrama de base de datos: En esta imagen se muestra el diseño de las tablas co
 <div align="center">
 
 ![Database Design Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-database-diagram.png)
-  <br/><i>Imagen 29. Database Design Diagram del Bounded Context Wellbeing Monitoring.</i>
+  <br/><i>Imagen 49. Database Design Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
 
@@ -3987,37 +4471,313 @@ Diagrama de base de datos: En esta imagen se muestra el diseño de las tablas co
 
 ### 2.6.5. Bounded Context: Social Companionship
 
+Social Companionship es el bounded context que sostiene el vínculo emocional entre el adulto mayor y sus familiares, sin ningún fin de monitoreo. Cubre la grabación y envío de mensajes de audio del adulto mayor hacia el familiar, la reproducción de esos audios, y la gestión de recordatorios de contacto social como llamar a una amistad o asistir a una actividad, incluyendo posponerlos o marcarlos como completados.
 <br>
 
 #### 2.6.5.1. Domain Layer
+
+Clases que representan el núcleo del negocio. No depende de ninguna otra capa; es el centro del que todo lo demás depende.
+
+**Sub-capa Domain Model: Aggregates**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessage | Aggregate root del flujo de mensajes de audio. Gestiona su ciclo de vida: grabado, compartido y descartado. |
+| PhotoMessage | Aggregate root del flujo de mensajes de foto. Gestiona su compartición y visualización dentro del círculo. |
+| SocialReminder | Aggregate root de los recordatorios sociales. Gestiona su ciclo de vida: pendiente, completado y cancelado. |
+
+**Sub-capa Domain Model: Value Objects**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageId | Identificador único de un mensaje de audio. Evita el uso de UUID primitivo en el dominio. |
+| PhotoMessageId | Identificador único de un mensaje de foto. |
+| SocialReminderId | Identificador único de un recordatorio social. |
+| CareCircleId | Referencia al círculo de cuidado al que pertenece el mensaje o recordatorio. Identifica el contexto sin acoplarse a su modelo. |
+| SenderId | Identificador del familiar que originó el mensaje o el recordatorio. |
+| AudioUrl | URL de reproducción del archivo de audio. Encapsula validación de formato. |
+| PhotoUrl | URL de visualización de la foto. Encapsula validación de formato. |
+| AudioMessageStatus | Estado del mensaje de audio: RECORDED, SHARED o DISCARDED. |
+| PhotoMessageStatus | Estado del mensaje de foto: SHARED. |
+| SocialReminderStatus | Estado del recordatorio: PENDING, COMPLETED o CANCELLED. |
+| ReminderTitle | Título del recordatorio. No puede ser cadena vacía. |
+| ReminderDescription | Descripción opcional del recordatorio. |
+| ScheduledDate | Fecha programada del recordatorio. Debe ser posterior al momento de creación. |
+
+**Sub-capa Domain Model: Commands**
+
+| Nombre | Descripción |
+|---|---|
+| RecordAudioMessageCommand | Intención de iniciar la grabación de un mensaje de audio. |
+| ShareAudioMessageCommand | Intención de compartir un audio ya grabado con el destinatario del círculo. |
+| DiscardAudioMessageCommand | Intención de descartar un mensaje de audio antes de compartirlo. |
+| PlayAudioMessageCommand | Intención de registrar la reproducción de un mensaje de audio. |
+| SharePhotoMessageCommand | Intención de compartir una foto con el círculo de cuidado. |
+| ScheduleSocialReminderCommand | Intención de programar un recordatorio social con título, descripción y fecha. |
+| CompleteSocialReminderCommand | Intención de marcar un recordatorio como completado. |
+| CancelSocialReminderCommand | Intención de cancelar un recordatorio pendiente. |
+
+**Sub-capa Domain Model: Queries**
+
+| Nombre | Descripción |
+|---|---|
+| GetAudioMessageByIdQuery | Consulta para obtener un mensaje de audio por su identificador. |
+| GetPhotoMessageByIdQuery | Consulta para obtener un mensaje de foto por su identificador. |
+| GetSocialRemindersByCircleQuery | Consulta para obtener los recordatorios activos de un círculo de cuidado. |
+
+**Sub-capa Domain Model: Events**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageRecordedEvent | Se emite cuando un mensaje de audio es grabado exitosamente. |
+| AudioMessageSharedEvent | Se emite cuando un mensaje de audio es compartido con el destinatario. |
+| AudioMessageDiscardedEvent | Se emite cuando un mensaje de audio es descartado antes de compartirse. |
+| AudioMessagePlayedEvent | Se emite cuando un mensaje de audio es reproducido. |
+| PhotoMessageSharedEvent | Se emite cuando una foto es compartida con el círculo de cuidado. |
+| SocialReminderScheduledEvent | Se emite cuando un recordatorio social es programado. |
+| SocialReminderCompletedEvent | Se emite cuando un recordatorio es marcado como completado. |
+| SocialReminderCancelledEvent | Se emite cuando un recordatorio pendiente es cancelado. |
+
+**Sub-capa Domain Model: Services**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageCommandService | Interfaz que define los casos de uso de escritura sobre mensajes de audio. |
+| AudioMessageQueryService | Interfaz que define los casos de uso de lectura sobre mensajes de audio. |
+| PhotoMessageCommandService | Interfaz que define los casos de uso de escritura sobre mensajes de foto. |
+| PhotoMessageQueryService | Interfaz que define los casos de uso de lectura sobre mensajes de foto. |
+| SocialReminderCommandService | Interfaz que define los casos de uso de escritura sobre recordatorios sociales. |
+| SocialReminderQueryService | Interfaz que define los casos de uso de lectura sobre recordatorios sociales. |
+
+**Sub-capa Domain Model: Repositories**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageRepository | Puerto de salida que define las operaciones de persistencia para mensajes de audio. La implementación vive en la capa de infraestructura. |
+| PhotoMessageRepository | Puerto de salida que define las operaciones de persistencia para mensajes de foto. |
+| SocialReminderRepository | Puerto de salida que define las operaciones de persistencia para recordatorios sociales. |
 
 <br>
 
 #### 2.6.5.2. Interface Layer
 
+
+Clases que exponen el bounded context hacia el exterior y traducen las peticiones entrantes al lenguaje del dominio.
+
+***Sub-capa REST: Controllers***
+
+| Nombre | Endpoints | Descripción |
+|---|---|---|
+| AudioMessagesController | POST /care-circles/{careCircleId}/audio-messages, POST /care-circles/{careCircleId}/audio-messages/{messageId}/share, DELETE /care-circles/{careCircleId}/audio-messages/{messageId}, PUT /care-circles/{careCircleId}/audio-messages/{messageId}/play | Punto de entrada de las operaciones de grabación, compartición, descarte y reproducción de mensajes de audio. Delega en los servicios de comandos y consultas. |
+| PhotoMessagesController | POST /care-circles/{careCircleId}/photo-messages, GET /care-circles/{careCircleId}/photo-messages/{messageId} | Punto de entrada de las operaciones de compartición y visualización de mensajes de foto. Delega en los servicios de comandos y consultas. |
+| SocialRemindersController | POST /care-circles/{careCircleId}/social-reminders, PUT /care-circles/{careCircleId}/social-reminders/{reminderId}/complete, DELETE /care-circles/{careCircleId}/social-reminders/{reminderId} | Punto de entrada de las operaciones de programación, completado y cancelación de recordatorios sociales. Delega en los servicios de comandos. |
+
+***Sub-capa REST: Resources***
+
+| Nombre | Descripción |
+|---|---|
+| RecordAudioMessageResource | Datos de entrada para iniciar la grabación de un mensaje de audio. |
+| AudioMessageResource | Representación pública de un mensaje de audio, incluida su URL de reproducción. |
+| ShareAudioMessageResource | Datos de entrada para compartir un mensaje de audio grabado con el destinatario. |
+| SharePhotoMessageResource | Datos de entrada para compartir una foto con el círculo de cuidado. |
+| PhotoMessageResource | Representación pública de un mensaje de foto, incluida su URL de visualización. |
+| ScheduleSocialReminderResource | Datos de entrada para programar un recordatorio social, incluidos título, descripción y fecha. |
+| SocialReminderResource | Representación pública de un recordatorio social y su estado actual. |
+
+***Sub-capa REST: Transform***
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageResourceFromEntityAssembler | Convierte la entidad AudioMessage en su representación REST. |
+| PhotoMessageResourceFromEntityAssembler | Convierte la entidad PhotoMessage en su representación REST. |
+| SocialReminderResourceFromEntityAssembler | Convierte la entidad SocialReminder en su representación REST. |
+| RecordAudioMessageCommandFromResourceAssembler | Convierte la petición de grabación en el comando de dominio correspondiente. |
+| ShareAudioMessageCommandFromResourceAssembler | Convierte la petición de compartición de audio en su comando de dominio. |
+| SharePhotoMessageCommandFromResourceAssembler | Convierte la petición de compartición de foto en su comando de dominio. |
+| ScheduleSocialReminderCommandFromResourceAssembler | Convierte la petición de programación en el comando de recordatorio social. |
+
+***Sub-capa ACL***
+
+| Nombre | Descripción |
+|---|---|
+| CareCircleContextFacade | Puerto de salida que define el contrato de los datos que Social Companionship necesita del bounded context Care Circle. |
+| UserContextFacade | Puerto de salida que define el contrato de los datos que Social Companionship necesita del bounded context Identity & Access. |
+| CareCircleContextFacadeImpl | Implementación HTTP del CareCircleContextFacade. Llama a los endpoints del bounded context Care Circle y traduce la respuesta al modelo interno. |
+| UserContextFacadeImpl | Implementación HTTP del UserContextFacade. Llama a los endpoints del bounded context Identity & Access y traduce la respuesta al modelo interno. |
+| ExternalCareCircleMemberResource | Representación de la respuesta externa del bounded context Care Circle al consultar los miembros de un círculo. |
+| ExternalUserResource | Representación de la respuesta externa del bounded context Identity & Access al consultar datos de un usuario. |
+| CareCircleMemberFromExternalResourceAssembler | Traduce el ExternalCareCircleMemberResource al value object interno del dominio de Social Companionship. |
+| UserFromExternalResourceAssembler | Traduce el ExternalUserResource al value object interno del dominio de Social Companionship. |
+
 <br>
 
 #### 2.6.5.3. Application Layer
+
+Clases que implementan los casos de uso del dominio. Orquesta los agregados, repositorios y eventos definidos en la capa de dominio sin contener lógica de negocio propia.
+
+**Sub-capa Application: Command Services**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageCommandServiceImpl | Implementa AudioMessageCommandService. Orquesta la grabación, compartición, descarte y reproducción de mensajes de audio. |
+| PhotoMessageCommandServiceImpl | Implementa PhotoMessageCommandService. Orquesta la compartición de mensajes de foto dentro del círculo. |
+| SocialReminderCommandServiceImpl | Implementa SocialReminderCommandService. Orquesta la programación, completado y cancelación de recordatorios sociales. |
+
+**Sub-capa Application: Query Services**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageQueryServiceImpl | Implementa AudioMessageQueryService. Resuelve las consultas de mensajes de audio por identificador. |
+| PhotoMessageQueryServiceImpl | Implementa PhotoMessageQueryService. Resuelve las consultas de mensajes de foto por identificador. |
+| SocialReminderQueryServiceImpl | Implementa SocialReminderQueryService. Resuelve las consultas de recordatorios activos de un círculo de cuidado. |
 
 <br>
 
 #### 2.6.5.4 Infrastructure Layer
 
+
+Clases que implementan los detalles técnicos de persistencia y comunicación externa. Depende del dominio pero nunca al revés: toda referencia apunta hacia adentro.
+
+**Sub-capa Persistence: Room Entities**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageEntity | Clase anotada con `@Entity` que representa la tabla `audio_messages` en SQLite. Contiene los campos de persistencia del agregado `AudioMessage`. |
+| PhotoMessageEntity | Clase anotada con `@Entity` que representa la tabla `photo_messages` en SQLite. Contiene los campos de persistencia del agregado `PhotoMessage`. |
+| SocialReminderEntity | Clase anotada con `@Entity` que representa la tabla `social_reminders` en SQLite. Contiene los campos de persistencia del agregado `SocialReminder`. |
+
+**Sub-capa Persistence: Room DAOs**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageDao | Interfaz anotada con `@Dao` que define las operaciones de acceso a datos de bajo nivel para mensajes de audio. |
+| PhotoMessageDao | Interfaz anotada con `@Dao` que define las operaciones de acceso a datos de bajo nivel para mensajes de foto. |
+| SocialReminderDao | Interfaz anotada con `@Dao` que define las operaciones de acceso a datos para recordatorios sociales, incluyendo consulta por círculo de cuidado y estado activo. |
+
+**Sub-capa Persistence: Repository Implementations**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageRepositoryImpl | Implementa AudioMessageRepository del dominio. Traduce entre el modelo de dominio y la entidad JPA usando los assemblers de persistencia. |
+| PhotoMessageRepositoryImpl | Implementa PhotoMessageRepository del dominio. |
+| SocialReminderRepositoryImpl | Implementa SocialReminderRepository del dominio. |
+
+**Sub-capa Persistence: Transform**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageEntityFromModelAssembler | Convierte el agregado AudioMessage del dominio en su entidad de persistencia AudioMessageEntity. |
+| AudioMessageModelFromEntityAssembler | Convierte la entidad de persistencia AudioMessageEntity en el agregado AudioMessage del dominio. |
+| PhotoMessageEntityFromModelAssembler | Convierte el agregado PhotoMessage en su entidad de persistencia. |
+| PhotoMessageModelFromEntityAssembler | Convierte la entidad de persistencia PhotoMessageEntity en el agregado PhotoMessage. |
+| SocialReminderEntityFromModelAssembler | Convierte el agregado SocialReminder en su entidad de persistencia. |
+| SocialReminderModelFromEntityAssembler | Convierte la entidad de persistencia SocialReminderEntity en el agregado SocialReminder. |
+
 <br>
 
 #### 2.6.5.5. Bounded Context Software Architecture Component Level Diagrams
 
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Social Companionship, elaborado con la herramienta Structurizr (Imagen 50). El diagrama descompone el módulo de acompañamiento social dentro del container API REST y muestra cómo sus componentes se distribuyen entre las cuatro capas del diseño táctico, respetando la regla de dependencia unidireccional hacia el dominio.
+
+El flujo de entrada llega desde la Aplicación Móvil hacia los tres componentes de la capa Interface: AudioMessagesController, que atiende la grabación, compartición, descarte y reproducción de mensajes de audio; PhotoMessagesController, que atiende la compartición y visualización de mensajes de foto; y SocialRemindersController, que atiende la programación, completado y cancelación de recordatorios sociales. Los tres delegan en la capa Application, donde los servicios de comando resuelven las operaciones de escritura y los servicios de consulta las de lectura, uno por cada aggregate del contexto.
+
+En el centro del diagrama se ubican los tres aggregates: AudioMessage, PhotoMessage y SocialReminder, junto con los Commands y Queries que expresan las intenciones del contexto y los Domain Events que se publican al completarse cada operación. Alrededor de los aggregates se muestran las abstracciones que el dominio declara y que ninguna capa superior implementa: IAudioMessageRepository, IPhotoMessageRepository, ISocialReminderRepository e IDomainEventPublisher.
+
+La capa Infrastructure aparece en el extremo opuesto, con las implementaciones concretas de esas abstracciones: AudioMessageRepository, PhotoMessageRepository y SocialReminderRepository, que persisten cada aggregate sobre SQLite apoyándose en sus respectivos mappers de persistencia; y DomainEventPublisherAdapter, que publica los eventos de dominio dentro del monolito modular para que otros módulos reaccionen a ellos. Las flechas evidencian que las dependencias apuntan siempre hacia el dominio y que ningún componente de Interface accede directamente a la base de datos.
+
+<div align="center">
+
+![DComponent Level- Social Companionship](assets/img/bounded-context/social-companionship/social-companionship-components.png)
+  <br/><i>Imagen 50. Component Level Diagram del Bounded Context Social Companionship.</i>
+
+</div>
 <br>
 
 #### 2.6.5.6. Bounded Context Software Architecture Code Level Diagrams
 
+En esta sección se presentan los diagramas de mayor nivel de detalle sobre la implementación del bounded context Social Companionship. Se incluye el diagrama de clases de la capa Domain y el diagrama de diseño de base de datos correspondiente a las tablas que dan persistencia al aggregate.
 <br>
 
 ##### 2.6.5.6.1. Bounded Context Domain Layer Class Diagrams
 
+El diagrama de clases representa la capa Domain del bounded context Social Companionship, elaborado con la herramienta PlantUML (Imagen 51). En él se muestran las clases, interfaces y enumeraciones del dominio junto con sus atributos, métodos y el scope de cada miembro.
+
+Los elementos centrales son los tres aggregate roots del contexto: AudioMessage, PhotoMessage y SocialReminder. Sus atributos son privados y solo se modifican a través de sus métodos públicos, lo que garantiza que ninguna regla del ciclo de vida de un mensaje o recordatorio pueda vulnerarse desde fuera del aggregate. AudioMessage gestiona los estados RECORDED, SHARED y DISCARDED mediante los métodos record, share, discard y play. PhotoMessage encapsula el acto de compartir una foto dentro del círculo. SocialReminder gestiona los estados PENDING, COMPLETED y CANCELLED mediante los métodos schedule, complete y cancel.
+
+Los value objects aparecen relacionados con cada aggregate por composición con multiplicidad 1, salvo ReminderDescription, que es opcional y se relaciona con multiplicidad 0..1. Estos tipos encapsulan las validaciones de formato y evitan la obsesión por primitivos: el dominio nunca maneja una URL de audio, un título de recordatorio o una fecha programada como cadenas o primitivos simples. Las enumeraciones AudioMessageStatus, PhotoMessageStatus y SocialReminderStatus se asocian también a sus respectivos aggregates con multiplicidad 1 y expresan el estado del ciclo de vida de cada uno.
+
+El diagrama incluye además los Commands y Queries que expresan las intenciones de escritura y lectura del contexto, y los Domain Events que cada aggregate registra al completarse cada operación. Finalmente se muestran las abstracciones declaradas por el dominio: IAudioMessageRepository, IPhotoMessageRepository e ISocialReminderRepository, que definen los contratos de persistencia de cada aggregate; IAudioMessageCommandService, IPhotoMessageCommandService e ISocialReminderCommandService, que definen las operaciones de escritura; IAudioMessageQueryService, IPhotoMessageQueryService e ISocialReminderQueryService, que definen las operaciones de lectura; e IDomainEventPublisher, que aísla al dominio del mecanismo técnico de publicación de eventos. Ninguna de estas interfaces depende de las capas superiores, de modo que las dependencias apuntan siempre hacia el dominio.
+
+<div align="center">
+
+![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/social-companionship.svg)
+![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/social-companionship_class3.svg)
+![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/social-companionship_class2.svg)
+  <br/><i>Imagen 51. Class Diagram del Bounded Context Social Companionship.</i>
+
+</div>
 <br>
 
 ##### 2.6.5.6.2. Bounded Context Database Design Diagram
+
+El diagrama de base de datos (Imagen 52) presenta los objetos que permiten la persistencia del bounded context **Social Companionship** sobre el motor SQLite. El contexto se materializa en tres tablas que corresponden a los tres aggregates roots del dominio: `audio_messages`, `photo_messages` y `social_reminders`.
+
+**Tabla audio_messages**
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | uuid | PK | Identificador único del mensaje de audio. |
+| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo de cuidado al que pertenece el mensaje. |
+| sender_id | uuid | NOT NULL, FK → users.id | Usuario que grabó el mensaje. |
+| audio_url | varchar(500) | NOT NULL | URL de acceso al archivo de audio grabado. |
+| status | audio_message_status | NOT NULL, DEFAULT 'RECORDED' | Estado del mensaje: grabado, compartido o descartado. |
+| recorded_at | timestamp | NOT NULL | Fecha y hora en que se inició la grabación. |
+| shared_at | timestamp | - | Momento en que fue compartido. Nulo si status ≠ SHARED. |
+| discarded_at | timestamp | - | Momento en que fue descartado. Nulo si status ≠ DISCARDED. |
+
+Esta tabla es el aggregate root del flujo de mensajes de audio. Registra el ciclo de vida completo del mensaje desde su grabación hasta su compartición o descarte. Las columnas `shared_at` y `discarded_at` son mutuamente excluyentes: solo una puede estar poblada según el valor de `status`. Incluye un índice sobre `care_circle_id` para optimizar la consulta de mensajes por círculo.
+
+**Tabla photo_messages**
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | uuid | PK | Identificador único del mensaje de foto. |
+| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo de cuidado al que pertenece el mensaje. |
+| sender_id | uuid | NOT NULL, FK → users.id | Usuario que compartió la foto. |
+| photo_url | varchar(500) | NOT NULL | URL de acceso a la imagen compartida. |
+| status | photo_message_status | NOT NULL, DEFAULT 'SHARED' | Estado del mensaje: compartido. |
+| shared_at | timestamp | NOT NULL | Fecha y hora en que la foto fue compartida con el círculo. |
+
+Esta tabla es el aggregate root del flujo de mensajes de foto. A diferencia de los mensajes de audio, una foto se comparte directamente sin pasar por un estado intermedio de grabación, por lo que su ciclo de vida es más simple. Incluye un índice sobre `care_circle_id` para optimizar la consulta de fotos por círculo.
+
+**Tabla social_reminders**
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | uuid | PK | Identificador único del recordatorio. |
+| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo de cuidado al que pertenece el recordatorio. |
+| creator_id | uuid | NOT NULL, FK → users.id | Usuario que programó el recordatorio. |
+| title | varchar(200) | NOT NULL | Título del recordatorio. No puede ser cadena vacía. |
+| description | text | - | Descripción opcional del recordatorio. |
+| scheduled_date | date | NOT NULL | Fecha en que debe ejecutarse el recordatorio. Posterior a la fecha de creación. |
+| status | social_reminder_status | NOT NULL, DEFAULT 'PENDING' | Estado del recordatorio: pendiente, completado o cancelado. |
+| created_at | timestamp | NOT NULL | Fecha y hora de creación del recordatorio. |
+| completed_at | timestamp | - | Momento en que fue completado. Nulo si status ≠ COMPLETED. |
+| cancelled_at | timestamp | - | Momento en que fue cancelado. Nulo si status ≠ CANCELLED. |
+
+Esta tabla es el aggregate root del flujo de recordatorios sociales. Gestiona el ciclo de vida del recordatorio desde su programación hasta su completado o cancelación. Las columnas `completed_at` y `cancelled_at` son mutuamente excluyentes según el valor de `status`. Incluye índices sobre `care_circle_id` y `status` para optimizar las consultas de recordatorios activos por círculo.
+
+
+**Relaciones entre tablas**
+
+Las tres tablas referencian a `care_circles`, que es el aggregate root del bounded context Care Circle y actúa como punto de entrada contextual: todo mensaje de audio, mensaje de foto o recordatorio social existe dentro de un círculo de cuidado concreto. Las columnas `sender_id` y `creator_id` referencian a `users`, que es la tabla del bounded context Identity & Access y actúa como referencia externa en este contexto. Ninguna de las tres tablas se relaciona entre sí, ya que representan flujos de dominio independientes dentro del mismo bounded context.
+
+<div align="center">
+
+![Database Diagram - Social companionship](assets/img/bounded-context/social-companionship/database-diagram.png)
+  <br/><i>Imagen 52. Database Design Diagram del Bounded Context Social Companionship.</i>
+
+</div>
 
 <br>
 
@@ -4147,14 +4907,14 @@ El bounded context **Alerts and Safety** es responsable de garantizar que el fam
 
 #### 2.6.6.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Alerts and Safety, elaborado con la herramienta Structurizr. El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: el `AlertController` como punto de entrada de las peticiones REST; los *Resources* (`AlertResource`, `TriggerEmergencyAlertResource`, `ConfirmAlertAttentionResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y la entidad de dominio `Alert`; los *Commands* y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `AlertCommandService` y `AlertQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IAlertCommandService` e `IAlertQueryService`; y finalmente `IAlertRepository` e `IInactivityWindowRepository`, implementados por sus respectivos repositorios concretos, que gestionan la persistencia de los dos aggregates. Se incluye además `UnansweredCheckInConsumer`, `DiscomfortPatternDetectedConsumer` y `FamilyLinkEstablishedConsumer`, componentes que escuchan los eventos `UnansweredCheckIn` (publicado por Daily Check-in), `DiscomfortPatternDetected` (publicado por Wellbeing Monitoring) y `FamilyLinkEstablished` (publicado por Care Circle), respectivamente, para desencadenar la apertura de la ventana de inactividad, la generación de un Alert de tipo WELLBEING y el mantenimiento local de la referencia de familiares vinculados, esta última sin requerir consulta síncrona a Care Circle al momento de notificar un Alert.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Alerts and Safety, elaborado con la herramienta Structurizr (Imagen 53). El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: el `AlertController` como punto de entrada de las peticiones REST; los *Resources* (`AlertResource`, `TriggerEmergencyAlertResource`, `ConfirmAlertAttentionResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y la entidad de dominio `Alert`; los *Commands* y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `AlertCommandService` y `AlertQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IAlertCommandService` e `IAlertQueryService`; y finalmente `IAlertRepository` e `IInactivityWindowRepository`, implementados por sus respectivos repositorios concretos, que gestionan la persistencia de los dos aggregates. Se incluye además `UnansweredCheckInConsumer`, `DiscomfortPatternDetectedConsumer` y `FamilyLinkEstablishedConsumer`, componentes que escuchan los eventos `UnansweredCheckIn` (publicado por Daily Check-in), `DiscomfortPatternDetected` (publicado por Wellbeing Monitoring) y `FamilyLinkEstablished` (publicado por Care Circle), respectivamente, para desencadenar la apertura de la ventana de inactividad, la generación de un Alert de tipo WELLBEING y el mantenimiento local de la referencia de familiares vinculados, esta última sin requerir consulta síncrona a Care Circle al momento de notificar un Alert.
 
 <br>
 
 <div align="center">
 
 ![Component Diagram - Alerts and Safety](assets/img/bounded-context/alerts-safety/alerts-safety-diagram.png)
-  <br/><i>Imagen X. Component Diagram del Bounded Context Alerts and Safety.</i>
+  <br/><i>Imagen 53. Component Diagram del Bounded Context Alerts and Safety.</i>
 
 </div>
 
@@ -4166,13 +4926,13 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 
 ##### 2.6.6.6.1. Bounded Context Domain Layer Class Diagrams
 
-Diagrama de clases de la capa Domain: en esta imagen se muestran las clases del dominio Alerts and Safety, que incluyen `Alert` (con sus entidades internas `AlertNotification` y `AlertAttention`) e `InactivityWindow` como aggregate roots, los Commands para las operaciones de activación, apertura, recordatorio, escalamiento, notificación, confirmación y cierre, las Queries para las consultas de historial por adulto mayor, e interfaces para los servicios de dominio con sus respectivas implementaciones.
+Diagrama de clases de la capa Domain: en la Imagen 54 se muestran las clases del dominio Alerts and Safety, que incluyen `Alert` (con sus entidades internas `AlertNotification` y `AlertAttention`) e `InactivityWindow` como aggregate roots, los Commands para las operaciones de activación, apertura, recordatorio, escalamiento, notificación, confirmación y cierre, las Queries para las consultas de historial por adulto mayor, e interfaces para los servicios de dominio con sus respectivas implementaciones.
 
 <br>
 <div align="center">
 
 ![Domain Layer Class Diagram - Alerts and Safety](assets/img/bounded-context/alerts-safety/alerts-safety-class-diagram.png)
-  <br/><i>Imagen X. Domain Layer Class Diagram del Bounded Context Alerts and Safety.</i>
+  <br/><i>Imagen 54. Domain Layer Class Diagram del Bounded Context Alerts and Safety.</i>
 
 </div>
 
@@ -4180,7 +4940,7 @@ Diagrama de clases de la capa Domain: en esta imagen se muestran las clases del 
 
 ##### 2.6.6.6.2. Bounded Context Database Design Diagram
 
-A continuación se presentan las tablas del bounded context Alerts and Safety, a partir del diagrama de base de datos consolidado por el equipo:
+A continuación se presentan las tablas del bounded context Alerts and Safety, a partir del diagrama de base de datos consolidado por el equipo (Imagen 55):
 
 - **inactivity_windows:** Temporizadores que miden el silencio antes de escalar a una alarma real. Atributos: `id`, `older_adult_id`, `check_in_id`, `opened_at`, `expires_at`, `reminder_sent_at`, `escalated_at`, `status`.
 - **alerts:** Incidentes críticos generados por el botón de pánico, inactividad o patrones negativos. Atributos: `id`, `older_adult_id`, `type`, `severity`, `status`, `pattern_id`, `inactivity_window_id`, `triggered_at`, `closed_at`.
@@ -4192,15 +4952,39 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 <div align="center">
 
 ![Database Design Diagram - Alerts and Safety](assets/img/bounded-context/alerts-safety/alerts-safety-database-diagram.png)
-  <br/><i>Imagen X. Database Design Diagram del Bounded Context Alerts and Safety.</i>
+  <br/><i>Imagen 55. Database Design Diagram del Bounded Context Alerts and Safety.</i>
 
 </div>
 <br>
 
+<div style="page-break-after: always;"></div>
+
 # Conclusiones
 ## Conclusiones y Recomendaciones
 
-<br>
+Esta primera entrega abarca el análisis del problema, la propuesta de valor y el diseño de la solución. Todavía no hay desarrollo de código ni pruebas con usuarios sobre el producto, por lo que las conclusiones contrastan lo planteado en el proceso de Lean UX (sección 1.2.2) con lo encontrado en las entrevistas de descubrimiento (sección 2.2), y las recomendaciones señalan lo que debe validarse en las siguientes entregas.
+
+**Conclusiones**
+
+1. **El problema planteado se confirma, y se observa desde los dos lados.** El Problem Statement describe la ausencia de un canal ligero entre "no comunicarse" y "llamar todos los días". En las entrevistas, los 4 familiares a distancia se preocupan cuando no pueden verificar cómo está el adulto mayor, y los 3 adultos mayores evitan contar sus problemas para no preocupar a sus familiares. Ambos segmentos sufren el mismo vacío desde extremos opuestos, lo que respalda una solución de dos aplicaciones conectadas. La muestra es pequeña (7 entrevistas), por lo que estos resultados orientan el diseño pero no permiten generalizar.
+
+2. **Los assumptions de usuario se cumplen en su mayoría, con dos matices.** Los 3 adultos mayores cuentan con smartphone, tal como se asumió, pero los 3 reportan dificultades con funciones nuevas o con la lentitud de las aplicaciones. Esto exige mantener el check-in de un solo toque y el modo simplificado, y no dar por hecho que sabrán resolver cualquier interacción. Por otro lado, la desconfianza hacia soluciones de vigilancia se confirmó en el segmento de familiares (2 de 4 la expresaron de forma directa), mientras que en los adultos mayores el freno observado fue el temor a ser una carga, más que a ser vigilados.
+
+3. **Los Hypothesis Statements siguen sin validarse.** Las cuatro hipótesis (adopción diaria del check-in, "cuéntame algo", panel de estado con alertas selectivas y botón de auxilio) y sus criterios de éxito (alta tasa de check-ins, menos llamadas por ansiedad y uso recurrente del panel) requieren observar el uso real del producto. Las entrevistas de descubrimiento muestran que la necesidad existe, pero no demuestran adopción. La asunción de mayor riesgo continúa siendo que el Segmento 1 adopte el check-in diario como hábito, tal como se señaló en el Lean UX Canvas. Una revisión reciente indica que el uso sostenido de aplicaciones móviles de salud depende sobre todo de motivos intrínsecos, como la autonomía, la competencia y la relación con otras personas (Baykoca et al., 2026), lo que refuerza la decisión de mantener el check-in simple.
+
+4. **El modelado estratégico dio como resultado seis bounded contexts con fronteras justificadas.** El proceso de EventStorming en diez pasos (sección 2.5.1) permitió delimitar tres contextos Core (Daily Check-in, Wellbeing Monitoring y Alerts & Safety), dos Supporting (Care Circle y Social Companionship) y uno Generic (Identity & Access). Los tres Core coinciden con la propuesta de valor: capturar la señal diaria, interpretarla y alertar cuando corresponde. El Context Map (sección 2.5.2) formaliza sus relaciones con un Shared Kernel mínimo (Account ID y Role), relaciones Customer/Supplier entre los demás contextos y una Anti-Corruption Layer frente al proveedor externo de notificaciones push.
+
+5. **El diseño es coherente entre sus artefactos, pero deja decisiones abiertas.** Diez de las preguntas abiertas de los Bounded Context Canvases (por ejemplo, la vigencia del código de invitación, quién revoca un vínculo, cuántos días forman un patrón de malestar y cuánto dura la ventana de inactividad) se llevaron al EventStorming como pain points (paso 3) y siguen sin respuesta definitiva. El Product Backlog de 46 ítems distribuidos en tres sprints (sección 2.4.3) y la arquitectura de monolito modular con un módulo por bounded context (sección 2.5.3) son consistentes con esa delimitación.
+
+**Recomendaciones**
+
+1. **Validar primero la asunción de mayor riesgo.** En las entrevistas de validación (Capítulo IV), medir con usuarios reales de ambos segmentos si el adulto mayor responde el check-in diario de forma sostenida. Los criterios de éxito del Problem Statement deben convertirse en métricas concretas antes de esas sesiones.
+
+2. **Resolver las preguntas abiertas antes de implementar el contexto que las contiene.** Las que afectan al Sprint 1 son la vigencia y la revocación de vínculos (US02, TS03) y a quién se notifica ante una emergencia (US14). Las que afectan al Sprint 2 son la ventana de inactividad (US16) y los días que configuran un patrón de malestar (US18).
+
+3. **Mantener el orden de construcción del Product Backlog.** El Sprint 1 concentra el núcleo mínimo (registro, vínculo familiar, check-in, botón de auxilio y recepción de alertas), el Sprint 2 agrega la interpretación de bienestar, las alertas por inactividad y los turnos de atención, y el Sprint 3 completa Social Companionship (recordatorios sociales y fotografías), agrega las notas compartidas e integra las notificaciones push (SP01). Este orden respeta que Identity & Access y Care Circle son prerequisitos de los demás contextos.
+
+4. **Tratar la accesibilidad y la privacidad como requisitos de primer nivel.** Dado que los 3 adultos mayores reportaron dificultades tecnológicas, conviene probar la interfaz con ellos desde el primer prototipo (NF01, NF04, US08). Un estudio con personas en edad de jubilación coincide en que las aplicaciones de salud requieren interfaces intuitivas y tutoriales iniciales que compensen la limitada alfabetización digital (Collazo-Castiñeira et al., 2025). Dado que 2 de 4 familiares desconfían de la vigilancia, las alertas deben mantenerse selectivas y el producto debe dejar claro qué información se comparte (NF03).
 
 # Glosario
 
@@ -4220,7 +5004,7 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 - **Needfinding:** Fase del proceso de Design Thinking dedicada a la investigación y análisis de las necesidades reales de los usuarios mediante entrevistas y artefactos de análisis.
 - **Product Backlog:** Lista priorizada de funcionalidades, historias de usuario y mejoras pendientes de un proyecto.
 - **Repository (interfaz):** Contrato que define las operaciones de lectura/escritura sobre entidades del dominio, sin exponer detalles de la implementación.
-- **Retrofit:** Librería de Android para consumir servicios web REST, usada en la capa de infraestructura para las llamadas de red.
+- **Retrofit:** Biblioteca de Android para consumir servicios web REST, usada en la capa de infraestructura para las llamadas de red.
 - **Sprint:** Ciclo de tiempo fijo en el que un equipo Scrum desarrolla un incremento de producto.
 - **Use Case / Interactor:** Componente de la capa de aplicación que representa una acción específica del usuario, orquestando las reglas del dominio para cumplirla.
 - **User Journey Map:** Representación visual del recorrido end-to-end de un usuario al interactuar con un producto o servicio.
@@ -4230,16 +5014,17 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 
 <br>
 
+<div style="page-break-after: always;"></div>
+
 # Bibliografía
 
-> Agencia Andina. (2025, 26 de marzo). *INEI: En Lima Metropolitana, uno de cada cuatro adulto mayor vive solo*. Andina. https://andina.pe/agencia/noticia-inei-lima-metropolitana-uno-cada-cuatro-adulto-mayor-vive-solo-1023716.aspx
+**Dominio de negocio**
 
+> Agencia Andina. (2025, 26 de marzo). *INEI: En Lima Metropolitana, uno de cada cuatro adulto mayor vive solo*. Andina. https://andina.pe/agencia/noticia-inei-lima-metropolitana-uno-cada-cuatro-adulto-mayor-vive-solo-1023716.aspx
 
 > Banco Interamericano de Desarrollo. (2024). *Cuidadoras de personas mayores: sobrecargadas y mal pagadas. Evidencia de una encuesta del Banco Interamericano de Desarrollo en América Latina y el Caribe* (Versión 1). https://publications.iadb.org/publications/spanish/document/Cuidadoras-de-personas-mayores-sobrecargadas-y-mal-pagadas-evidencia-de-una-encuesta-del-Banco-Interamericano-de-Desarrollo-en-America-Latina-y-el-Caribe.-Version-1-junio-2024.pdf
 
 > Carrasco Freitas, M. (2026, 29 de mayo). Lima es el principal destino migratorio: más de 3 millones de peruanos llegaron desde otras regiones, según Censo 2025. Infobae. https://www.infobae.com/peru/2026/05/29/lima-es-el-principal-destrino-migratorio-mas-de-3-millones-de-peruanos-llegaron-desde-otras-regiones-segun-censo-2025/
-
-> Gothelf, J., & Seiden, J. (2021). *Lean UX: Designing great products with agile teams* (3rd ed.). O'Reilly Media. https://www.oreilly.com/library/view/lean-ux-3rd/9781098116293/
 
 > Infobae. (2025, 31 de diciembre). *Las familias peruanas con adultos mayores en el hogar creció en el tercer trimestre de 2025*. Infobae Perú. https://www.infobae.com/peru/2025/12/31/las-familias-peruanas-con-adultos-mayores-en-el-hogar-crecio-en-2025/
 
@@ -4247,9 +5032,29 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 
 > Instituto Nacional de Estadística e Informática. (2025b). Estadísticas de las tecnologías de información y comunicación en los hogares: informe técnico, enero-febrero-marzo 2025. https://www.inei.gob.pe/media/MenuRecursivo/boletines/informe-tecnico_tecnologiasdelainformacion_ene_feb_mar2025.pdf
 
+> Murayama, H., & Takase, M. (2025). Evaluating the effectiveness of digital social robots in reducing loneliness among community-dwelling older adults in Japan: Randomized controlled trial and qualitative analysis. *JMIR Aging*, *8*(1), Article e74422. https://doi.org/10.2196/74422
+
 > Organismo Supervisor de Inversión Privada en Telecomunicaciones. (2026). Erestel 2025: cada vez más hogares peruanos cuentan con un smartphone. https://www.osiptel.gob.pe/portal-del-usuario/noticias/erestel-2025-cada-vez-m%C3%A1s-hogares-peruanos-cuentan-con-un-smartphone-cu%C3%A1ntos-tienen/
 
+> Xu, W., Yang, B., & Teerawichitchainan, B. (2026). Digital technologies in care for older adults living alone: A scoping review. *Innovation in Aging*, *10*(7), Article igag048. https://doi.org/10.1093/geroni/igag048
+
+**Métodos y técnicas de ingeniería de software**
+
+> Al-Qora'n, L. F., & Al-Said Ahmad, A. (2025). Modular monolith architecture in cloud environments: A systematic literature review. *Future Internet*, *17*(11), Article 496. https://doi.org/10.3390/fi17110496
+
+> Gothelf, J., & Seiden, J. (2021). *Lean UX: Designing great products with agile teams* (3rd ed.). O'Reilly Media. https://www.oreilly.com/library/view/lean-ux-3rd/9781098116293/
+
+> Özkan, O., Babur, Ö., & van den Brand, M. (2025). Domain-driven design in software development: A systematic literature review on implementation, challenges, and effectiveness. *Journal of Systems and Software*, *230*, Article 112537. https://doi.org/10.1016/j.jss.2025.112537
+
+**Lenguajes, frameworks y herramientas (aplicaciones móviles)**
+
+> Baykoca, J., Hurtado Barbeito, G., Pearce, C. J., Milne-Ives, M., Hudson, J., Norton, S., & Moss-Morris, R. (2026). Mechanisms of engagement with mobile health apps for adults with long-term conditions: Overview of systematic reviews. *JMIR mHealth and uHealth*, *14*(1), Article e88382. https://doi.org/10.2196/88382
+
+> Collazo-Castiñeira, P., Rodríguez-Rey, R., Cruz-Jentoft, A. J., Ben Allouch, S., Eglseer, D., Schoufour, J., Topinková, E., Weijs, P. J. M., Boirie, Y., & Sánchez-Izquierdo, M. (2025). Tailoring mHealth for healthy aging: Focus group study with retirement-age adults. *JMIR mHealth and uHealth*, *13*, Article e70051. https://doi.org/10.2196/70051
+
 <br>
+
+<div style="page-break-after: always;"></div>
 
 # Anexos
 
