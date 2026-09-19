@@ -3664,48 +3664,62 @@ Existe una relación de uno a muchos entre `users` y `sessions`: una cuenta pued
 
 #### 2.6.2.1. Domain Layer
 
-En esta capa se definen las reglas de negocio para la formación y gestión de la red de apoyo del adulto mayor, sin conocer detalles de autenticación, persistencia ni interfaces.
+En esta capa se definen las reglas de negocio para la formación y gestión de la red de apoyo del adulto mayor. Conforme al EventStorming, el dominio se divide en tres *Aggregate Roots* independientes para evitar bloqueos transaccionales innecesarios.
 
 **Sub-capa Model - Aggregates y Entities:**
 
 | Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
 |---|---|---|---|---|
-| Aggregate | CareCircle | Entidad raíz que agrupa a todos los familiares vinculados a un adulto mayor. | Mantener la integridad de la red de cuidado y coordinar la validación de vínculos. | Relacionado con el módulo Identity & Access (referencia al usuario). |
-| Entity | InvitationCode | Código temporal generado para agregar familiares. | Garantizar que un código solo pueda usarse una vez y dentro de su tiempo de vigencia. | Pertenece al aggregate CareCircle. |
-| Entity | FamilyLink | Relación activa entre el adulto mayor y un cuidador. | Validar si un familiar tiene autorización para acceder a los datos del adulto mayor. | Pertenece al aggregate CareCircle. |
-| Entity | CareShift | Asignación de días de responsabilidad por familiar. | Prevenir que dos familiares se asignen el mismo turno de cuidado en el mismo día. | Pertenece al aggregate CareCircle. |
-| Entity | SharedNote | Bitácora colaborativa de contexto familiar. | Almacenar información compartida por los miembros del círculo. | Pertenece al aggregate CareCircle. |
+| Aggregate | CareCircle | Entidad raíz que administra la membresía del círculo de cuidado. | Mantener la integridad de los vínculos familiares y los códigos de invitación. | Relacionado con el módulo Identity & Access. |
+| Entity | InvitationCode | Código temporal generado para agregar familiares. | Garantizar que un código se redima una sola vez o expire. | Pertenece al aggregate CareCircle. |
+| Entity | FamilyLink | Relación activa o revocada entre el adulto mayor y un cuidador. | Representar la autorización de un familiar sobre un adulto mayor. | Pertenece al aggregate CareCircle. |
+| Aggregate | CareShift | Entidad raíz que gestiona los turnos de cuidado diarios. | Garantizar que no haya colisiones de responsabilidad en una misma fecha. | Referencia al CareCircle. |
+| Aggregate | SharedNote | Entidad raíz que gestiona la bitácora colaborativa. | Almacenar y exponer información de contexto compartida por los miembros. | Referencia al CareCircle. |
 
 **Sub-capa Model - Commands:**
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal |
-|---|---|---|---|
-| Command | CreateCareCircleCommand | Comando para inicializar el círculo de cuidado. | Representar la intención de crear un círculo tras el registro de un adulto mayor. |
-| Command | GenerateInvitationCodeCommand | Comando para generar código de invitación. | Representar la intención del adulto mayor de invitar a un familiar. |
-| Command | RedeemInvitationCodeCommand | Comando para canjear un código de invitación. | Representar la intención de un familiar de unirse al círculo usando un código válido. |
-| Command | AssignCareShiftCommand | Comando para asignar un turno de cuidado. | Representar la intención de un familiar de tomar responsabilidad en una fecha específica. |
-| Command | CreateSharedNoteCommand | Comando para crear una nota compartida. | Representar la intención de añadir un apunte a la bitácora colaborativa. |
-
-**Sub-capa Model - Queries:**
-
-| Tipo | Nombre | Descripción | Responsabilidad Principal |
-|---|---|---|---|
-| Query | GetCareCircleByOlderAdultIdQuery | Consulta para obtener el círculo de un adulto mayor. | Representar la intención de cargar la red de apoyo y sus miembros vinculados. |
-| Query | GetCareShiftsByDateQuery | Consulta de turnos de cuidado por fecha. | Representar la intención de saber qué familiar está a cargo hoy. |
-
-**Sub-capa Repositories y Services (Interfaces):**
-
-| Tipo | Nombre | Descripción | Responsabilidad Principal |
-|---|---|---|---|
-| Interface | ICareCircleRepository | Repositorio de CareCircle. | Definir los contratos de persistencia para el agregado y sus entidades internas. |
-| Interface | ICareCircleCommandService | Servicio de comandos. | Estipular las operaciones de escritura (generar código, vincular familiar, asignar turno). |
-| Interface | ICareCircleQueryService | Servicio de consultas. | Estipular las operaciones de lectura (ver miembros, ver turnos). |
+| Tipo | Nombre | Descripción |
+|---|---|---|
+| Command | CreateCareCircleCommand | Intención de inicializar el círculo de cuidado tras el registro. |
+| Command | GenerateInvitationCodeCommand | Intención de crear un código temporal para invitar a un familiar. |
+| Command | RedeemInvitationCodeCommand | Intención de un familiar de unirse al círculo usando un código válido. |
+| Command | RevokeFamilyLinkCommand | Intención de eliminar el acceso de un familiar al círculo. |
+| Command | AssignCareShiftCommand | Intención de asignar un turno de cuidado en una fecha específica. |
+| Command | ReassignCareShiftCommand | Intención de cambiar al responsable de un turno de cuidado existente. |
+| Command | CreateSharedNoteCommand | Intención de añadir un apunte a la bitácora colaborativa. |
+| Command | EditSharedNoteCommand | Intención de modificar el contenido de una nota compartida existente. |
 
 **Sub-capa Model - Events:**
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal |
-|---|---|---|---|
-| Event | FamilyLinkEstablished | Evento de dominio de vinculación. | Informar al resto de contextos que un nuevo familiar tiene autorización para acceder a los datos del adulto mayor. |
+| Tipo | Nombre | Descripción |
+|---|---|---|
+| Event | CareCircleCreated | Se inicializó el círculo de cuidado. |
+| Event | InvitationCodeGenerated | Se generó un nuevo código de invitación temporal. |
+| Event | InvitationCodeRedeemed | Un código fue canjeado con éxito. |
+| Event | FamilyLinkEstablished | Se estableció el vínculo (Consumido por otros contextos para autorizar accesos). |
+| Event | FamilyLinkRevoked | Se eliminó el acceso de un familiar. |
+| Event | CareShiftAssigned | Se registró un nuevo turno de cuidado. |
+| Event | CareShiftReassigned | Se actualizó el responsable de un turno. |
+| Event | SharedNoteCreated | Se añadió una nota al círculo. |
+| Event | SharedNoteEdited | Se modificó una nota existente. |
+
+**Sub-capa Model - Queries:**
+
+| Tipo | Nombre | Descripción |
+|---|---|---|
+| Query | GetCareCircleByIdQuery | Obtener la estructura y miembros de un círculo. |
+| Query | GetCareShiftsByDateQuery | Obtener el calendario de turnos. |
+| Query | GetSharedNotesQuery | Obtener la bitácora de notas compartidas. |
+
+**Sub-capa Repositories y Services (Interfaces):**
+
+| Tipo | Nombre | Descripción |
+|---|---|---|
+| Interface | ICareCircleRepository | Contrato de persistencia para el agregado CareCircle. |
+| Interface | ICareShiftRepository | Contrato de persistencia para el agregado CareShift. |
+| Interface | ISharedNoteRepository | Contrato de persistencia para el agregado SharedNote. |
+| Interface | ICareCircleCommandService | Contrato de operaciones de escritura del dominio. |
+| Interface | ICareCircleQueryService | Contrato de operaciones de lectura del dominio. |
 
 <br>
 
@@ -3805,9 +3819,10 @@ Clases que resuelven el acceso a la base de datos y a los mecanismos técnicos d
 |---|---|---|
 | **DomainEventPublisherAdapter** | Publica los eventos de dominio generados por las operaciones de Care Circle dentro del monolito modular, permitiendo que otros módulos reaccionen a eventos como la creación del Care Circle, establecimiento del vínculo familiar, asignación de turnos o creación de notas compartidas. | Implementa IDomainEventPublisher. |
 <br>
+
 #### 2.6.2.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Care Circle, elaborado en Structurizr. El diagrama detalla la arquitectura interna estructurada por capas: los *Controllers* como puntos de entrada REST (`CareCirclesController`, `FamilyLinksController`, `CareShiftsController`, `SharedNotesController`); los *Resources* y *Assemblers* encargados de la transformación de datos para la API; los servicios de aplicación (`CareCircleCommandService`, `CareCircleQueryService`) que implementan las interfaces del dominio; y el acceso a datos mediante `CareCircleRepository`. Se incluye también el `RegisteredIdentityConsumer`, que reacciona a los eventos publicados por el módulo externo Identity & Access para inicializar el círculo de cuidado.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Care Circle, elaborado en Structurizr. El diagrama detalla la arquitectura interna: los *Controllers* como puntos de entrada REST; los *Resources* y *Assemblers* para transformación de datos; los servicios de aplicación (`CareCircleCommandService`, `CareCircleQueryService`); y el acceso a datos mediante los 3 repositorios definidos en el dominio (`CareCircleRepository`, `CareShiftRepository`, `SharedNoteRepository`).
 
 <div align="center">
 
@@ -3822,7 +3837,7 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 
 ##### 2.6.2.6.1. Bounded Context Domain Layer Class Diagrams
 
-El siguiente diagrama de clases UML representa la capa de dominio del contexto Care Circle. Se ilustra la relación de composición entre el aggregate root `CareCircle` y sus entidades internas (`FamilyLink`, `InvitationCode`, `CareShift`, `SharedNote`). Se han incorporado las reglas de trazabilidad exigidas por el dominio, como el registro de quién asigna un turno (`assignedBy`), qué código generó un vínculo (`invitationCodeId`) y quién lo revocó (`revokedBy`). Asimismo, se detallan las interfaces de los servicios de aplicación (`ICareCircleCommandService`, `ICareCircleQueryService`) y sus implementaciones, las cuales orquestan la lógica interactuando con la interfaz del repositorio (`ICareCircleRepository`).
+El siguiente diagrama de clases UML representa la capa de dominio. Acatando el EventStorming, se visualizan los tres Aggregate Roots principales: `CareCircle`, `CareShift` y `SharedNote`. Se detallan las interfaces de los servicios de aplicación y repositorios que orquestan la lógica.
 
 <div align="center">
 
@@ -3920,97 +3935,81 @@ Incluye índices sobre `care_circle_id` y `author_id` que optimizan la consulta 
 
 ### 2.6.3. Bounded Context: Daily Check-in
 
-El bounded context **Daily Check-in** es el mecanismo principal de recolección de datos de Serenia. Su responsabilidad es interactuar con el adulto mayor diariamente para capturar su estado de bienestar mediante preguntas rotativas y ligeras. Asimismo, gestiona los horarios preferidos de notificación, los tiempos límite de respuesta y las pausas voluntarias del usuario. Este contexto actúa exclusivamente como un recolector (Execution Context); no interpreta tendencias ni genera alertas, sino que publica eventos de dominio para que los contextos de *Wellbeing Monitoring* y *Alerts & Safety* reaccionen según corresponda.
+El bounded context **Daily Check-in** es el mecanismo principal de recolección de datos. Su responsabilidad es capturar el estado diario del adulto mayor mediante preguntas ligeras, así como administrar las preferencias del usuario (horarios, pausas y modos de interfaz). Conforme al EventStorming, este contexto divide su dominio en dos agregados principales: `CheckIn` y `CheckInPreferences`.
 
 <br>
 
 #### 2.6.3.1. Domain Layer
 
-En la capa de dominio se encapsula toda la lógica de negocio y las invariantes relacionadas con la captura del estado diario del adulto mayor.
-
 **Sub-capa Model - Aggregates y Entities:**
 
 | Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
 |---|---|---|---|---|
-| Aggregate | CheckIn | Registro histórico de interacción diaria. | Almacenar el nivel de ánimo reportado, la nota opcional y controlar el ciclo de vida del check-in (PENDING, ANSWERED o MISSED). | Publica eventos para Wellbeing y Alerts. Relacionado con CheckInQuestion. |
-| Aggregate | CheckInSchedule | Horarios y configuración por usuario. | Determinar la hora exacta de la notificación diaria, zona horaria y el límite de espera (time limit). | Referencia al usuario (OlderAdultId). |
-| Entity | CheckInQuestion | Catálogo de preguntas rotativas. | Proveer el texto y el tono conversacional para que el check-in no sea monótono. | Asociado al CheckIn generado. |
-| Entity | QuestionPause | Historial de días pausados voluntariamente. | Evitar la generación de preguntas y alertas de inactividad durante la fecha elegida por el adulto mayor. | Referencia al usuario. |
+| Aggregate | CheckIn | Registro histórico de la interacción diaria. | Controlar el ciclo de vida del check-in (PENDING, ANSWERED o MISSED) y capturar el nivel de ánimo. | Publica eventos para Wellbeing Monitoring y Alerts & Safety. |
+| Aggregate | CheckInPreferences | Preferencias y configuración de la experiencia por usuario. | Administrar horarios, activación de pausas diarias y el modo de interfaz simplificado. | Referencia a la cuenta del usuario. |
+| Entity | QuestionPause | Historial de días pausados voluntariamente. | Evitar alertas de inactividad durante la fecha pausada. | Pertenece al agregado CheckInPreferences. |
 
 **Sub-capa Model - Commands:**
 
 | Tipo | Nombre | Descripción | Responsabilidad Principal |
 |---|---|---|---|
-| Command | AnswerCheckInCommand | Comando para registrar una respuesta. | Representar la intención del adulto mayor de reportar su nivel de ánimo (`MoodLevel`). |
-| Command | ConfigureScheduleCommand | Comando para configurar el horario. | Establecer o actualizar la hora preferida del recordatorio diario y la zona horaria. |
-| Command | PauseQuestionsCommand | Comando para pausar el check-in. | Representar la intención de no recibir interacciones durante el día actual. |
-| Command | MarkCheckInMissedCommand | Comando interno de expiración. | Cambiar el estado a MISSED cuando vence el tiempo límite sin respuesta. |
+| Command | PromptCheckInCommand | Comando interno del sistema. | Generar y enviar la pregunta del día al usuario. |
+| Command | AnswerCheckInCommand | Comando del adulto mayor. | Registrar la respuesta con el estado de ánimo (`MoodLevel`). |
+| Command | ExpireCheckInCommand | Comando interno de tiempo. | Cambiar el estado a MISSED al vencer el tiempo límite. |
+| Command | ScheduleCheckInCommand | Comando de configuración. | Establecer la hora preferida del recordatorio. |
+| Command | ActivateDailyPauseCommand | Comando de configuración. | Pausar las interacciones para el día actual. |
+| Command | EnableSimplifiedModeCommand | Comando de accesibilidad. | Activar o desactivar el modo simplificado de UI. |
 
-**Sub-capa Model - Queries:**
+**Sub-capa Model - Events y Queries:**
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal |
-|---|---|---|---|
-| Query | GetTodayCheckInQuery | Consulta de estado del día. | Recuperar el check-in pendiente o completado de la fecha actual para la interfaz. |
-| Query | GetCheckInScheduleQuery | Consulta de configuración. | Obtener las preferencias de horario del usuario. |
+| Tipo | Nombre | Descripción |
+|---|---|---|
+| Event | CheckInAnswered | Informa a *Wellbeing Monitoring* para evaluación de patrones. |
+| Event | CheckInMissed | Informa a *Alerts & Safety* para abrir ventana de inactividad. |
+| Query | GetTodayCheckInQuery | Recuperar el check-in activo del día para la interfaz. |
 
 **Sub-capa Repositories y Services (Interfaces):**
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal |
-|---|---|---|---|
-| Interface | ICheckInRepository | Repositorio de CheckIn. | Definir operaciones CRUD para el registro diario. |
-| Interface | ICheckInScheduleRepository | Repositorio de Schedule. | Definir operaciones CRUD para la configuración de horarios y pausas. |
-| Interface | IDailyCheckInCommandService | Servicio de aplicación de comandos. | Contrato para procesar respuestas, configurar horarios y pausas. |
-| Interface | IDailyCheckInQueryService | Servicio de aplicación de consultas. | Contrato para lectura de pendientes y configuraciones. |
-
-**Sub-capa Model - Events:**
-
-| Tipo | Nombre | Descripción | Responsabilidad Principal |
-|---|---|---|---|
-| Event | CheckInAnswered | Evento de respuesta registrada. | Informar a *Wellbeing Monitoring* para que evalúe y acumule el dato en el historial. |
-| Event | UnansweredCheckIn | Evento de tiempo expirado. | Informar a *Alerts & Safety* para que inicie la ventana de inactividad (temporizador de alerta). |
+| Tipo | Nombre | Descripción |
+|---|---|---|
+| Interface | ICheckInRepository | Contrato CRUD para el registro diario de interacciones. |
+| Interface | ICheckInPreferencesRepository | Contrato CRUD para horarios, pausas y modos visuales. |
+| Interface | IDailyCheckInCommandService | Contrato para orquestar los comandos de respuesta y preferencias. |
+| Interface | IDailyCheckInQueryService | Contrato para la lectura de estado y configuración. |
 
 <br>
 
 #### 2.6.3.2. Interface Layer
 
-**Sub-capa REST - Controllers & Resources:**
-
 | Tipo | Nombre | Descripción | Responsabilidad Principal |
 |---|---|---|---|
-| Controller | CheckInsController | Punto de entrada REST para el check-in. | Exponer el endpoint GET para ver la pregunta de hoy y POST para enviar la respuesta. |
-| Controller | SchedulesController | Punto de entrada REST para configuración. | Exponer endpoints PUT para actualizar el horario y crear pausas de preguntas. |
-| Resource | AnswerCheckInResource | Estructura de datos de entrada (DTO). | Transportar el nivel de ánimo (`MoodLevel`) desde la aplicación móvil. |
-| Assembler | DailyCheckInAssembler | Transformador de datos. | Convertir los Resources JSON en Commands del dominio y viceversa. |
-| Consumer | FamilyLinkEstablishedConsumer | Consumidor asíncrono (ACL). | Escuchar cuando *Care Circle* establece un vínculo para activar el cronograma del adulto mayor. |
+| Controller | CheckInsController | REST API para interacciones. | Endpoints GET/POST para responder el check-in diario. |
+| Controller | PreferencesController | REST API para configuración. | Endpoints PUT/POST para horarios, pausas y modo simplificado. |
+| Assembler | Assemblers | Transformadores de datos. | Mapear los JSON a Commands/Queries del dominio. |
 
 <br>
 
 #### 2.6.3.3. Application Layer
 
-**Sub-capa Internal - Services:**
-
 | Tipo | Nombre | Descripción | Responsabilidad Principal |
 |---|---|---|---|
-| Service | DailyCheckInCommandService | Implementación de comandos. | Valida reglas de negocio (ej. que no se responda un check-in vencido), actualiza el Aggregate y publica eventos de dominio. |
-| Service | DailyCheckInQueryService | Implementación de consultas. | Recupera datos para la vista sin modificar estado. |
+| Service | DailyCheckInCommandService | Ejecutor de casos de uso de escritura. | Valida invariantes, modifica los agregados `CheckIn` o `CheckInPreferences` y publica los eventos de dominio. |
+| Service | DailyCheckInQueryService | Ejecutor de casos de uso de lectura. | Devuelve los recursos de lectura sin alterar estado. |
 
 <br>
 
 #### 2.6.3.4 Infrastructure Layer
 
-**Sub-capa Persistence & Messaging:**
-
 | Tipo | Nombre | Descripción | Responsabilidad Principal |
 |---|---|---|---|
-| Repository | CheckInRepository | Repositorio concreto de persistencia. | Operar sobre las tablas de MySQL mediante ORM o sentencias preparadas. |
-| Repository | CheckInScheduleRepository | Repositorio concreto de configuración. | Acceder a las tablas de horarios y pausas. |
-| Publisher | DomainEventPublisherAdapter | Adaptador de mensajería interna. | Propagar los eventos del dominio al bus interno (Event Bus) para los demás módulos. |
+| Repository | CheckInRepository | Implementación persistencia. | Persistir las interacciones diarias en la BD. |
+| Repository | CheckInPreferencesRepository | Implementación persistencia. | Persistir horarios, pausas y flags de UI en la BD. |
 
 <br>
 
 #### 2.6.3.5. Bounded Context Software Architecture Component Level Diagrams
 
-En el siguiente Component Diagram C4 se ilustra la arquitectura de Daily Check-in. El adulto mayor interactúa a través de los *Controllers* (`CheckInsController`, `SchedulesController`), los cuales utilizan *Assemblers* para transformar los datos y delegar el flujo a los *Application Services* (`DailyCheckInCommandService`, `DailyCheckInQueryService`). Estos servicios orquestan los agregados y persisten el estado a través de los *Repositories*. Finalmente, las acciones clave publican eventos hacia el sistema mediante el *DomainEventPublisher*.
+Este diagrama C4 muestra al Adulto Mayor interactuando con los *Controllers* (`CheckInsController`, `PreferencesController`), quienes delegan en los *Services* y *Repositories* definidos por la arquitectura limpia. Se destacan las conexiones con la Base de Datos.
 
 <div align="center">
 
@@ -4025,7 +4024,7 @@ En el siguiente Component Diagram C4 se ilustra la arquitectura de Daily Check-i
 
 ##### 2.6.3.6.1. Bounded Context Domain Layer Class Diagrams
 
-El diagrama de clases UML expone el modelo estricto de la capa de dominio. Muestra al agregado principal `CheckIn` y su relación con `CheckInQuestion` y las enumeraciones `CheckInStatus` y `MoodLevel`. Se destacan explícitamente las interfaces de los servicios (`IDailyCheckInCommandService`, `IDailyCheckInQueryService`) y repositorios (`ICheckInRepository`, `ICheckInScheduleRepository`), cumpliendo el principio de inversión de dependencias.
+El diagrama UML consolida los requerimientos tácticos obtenidos del EventStorming. Presenta a `CheckIn` y `CheckInPreferences` como los dos Aggregate Roots, acompañados de sus respectivas interfaces de persistencia y comandos de usuario/sistema.
 
 <div align="center">
 
@@ -4038,10 +4037,10 @@ El diagrama de clases UML expone el modelo estricto de la capa de dominio. Muest
 
 ##### 2.6.3.6.2. Bounded Context Database Design Diagram
 
-Conforme al diseño relacional DBML, el contexto persiste su información en cuatro tablas:
+El diseño de base de datos transaccional para Daily Check-in incluye las siguientes tablas referenciando al contexto de Identidad:
 - **check_in_questions:** Catálogo base de preguntas rotativas.
-- **check_in_schedules:** Reglas de horario, zonas y tiempos límite de respuesta personalizados.
-- **check_ins:** Registro histórico de cada interacción diaria, con fechas de programación y respuesta, y el ánimo capturado.
+- **check_in_schedules:** Horario de recordatorio y flag de modo simplificado por usuario.
+- **check_ins:** Tabla que materializa el agregado `CheckIn`, registrando la pregunta, el estado (`PENDING`, `ANSWERED`, `MISSED`) y el nivel de ánimo.
 - **question_pauses:** Historial de días en los que el usuario eligió voluntariamente no interactuar.
 
 <div align="center">
