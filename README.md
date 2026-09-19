@@ -3069,9 +3069,118 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 
 ## 2.5. Strategic-Level Domain-Driven Design
 ### 2.5.1. EventStorming
+
+Antes de presentar los bounded contexts candidatos, esta sección muestra el camino que llevó hasta ellos. El equipo aplicó el proceso de EventStorming en diez pasos: Unstructured Exploration, Timelines, Pain Points, Pivotal Points, Commands, Policies, Read Models, External Systems, Aggregates y Bounded Contexts. Cada paso agrega una capa de información sobre el mismo modelo sin reemplazar la anterior, de modo que el último paso conserva todo lo trabajado en los nueve primeros. Las capturas provienen del tablero de Miro *Event Storming Process - 10 steps*, donde cada paso se conserva como una copia acumulada del anterior. Si alguna captura no se aprecia con claridad, el tablero completo puede consultarse en Miro.
+
+<br>
+
+URL del tablero en Miro: [https://miro.com/app/board/uXjVHlaGmGg=/?share_link_id=423095184184](https://miro.com/app/board/uXjVHlaGmGg=/?share_link_id=423095184184)
+
+<br>
+
+**Paso 1. Unstructured Exploration.** El punto de partida fueron los eventos de dominio de Serenia, levantados a partir del Big Picture EventStorming (sección 2.3.5), redactados en pasado y sin ningún orden, tal como surgen en una lluvia de ideas. La Imagen X muestra ese estado inicial: en este paso no se busca todavía una estructura, solo poner sobre el muro todo lo que ocurre en el dominio.
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-01-unstructured-exploration.png" alt="Paso 1 - Unstructured Exploration" width="700"/>
+  <br/><i>Imagen X. Paso 1 del EventStorming: Unstructured Exploration.</i>
+</div>
+
+<br>
+
+**Paso 2. Timelines.** Los eventos se ordenaron en el tiempo y se agruparon por proceso: alta y acceso del usuario, círculo de cuidado y vínculo familiar, check-in diario, interpretación de bienestar, alertas y seguridad, y acompañamiento social. Las flechas de la Imagen X indican la secuencia entre eventos y las bifurcaciones, como el código de invitación que puede ser canjeado o rechazado.
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-02-timelines.png" alt="Paso 2 - Timelines" width="700"/>
+  <br/><i>Imagen X. Paso 2 del EventStorming: Timelines.</i>
+</div>
+
+<br>
+
+**Paso 3. Pain Points.** Sobre la línea de tiempo se marcaron con stickies rosados las dudas que el dominio todavía no resuelve. El equipo no las inventó para este paso: se tomaron diez de las Open Questions de los Bounded Context Canvases (sección 2.5.1.3) y se ubicaron junto al evento al que afectan, como se ve en la Imagen X. Entre ellas están la vigencia del código de invitación, quién puede revocar un vínculo familiar, cuántos días configuran un patrón de malestar, la duración de la ventana de inactividad y si la alerta llega a todos los familiares vinculados.
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-03-pain-points.png" alt="Paso 3 - Pain Points" width="700"/>
+  <br/><i>Imagen X. Paso 3 del EventStorming: Pain Points.</i>
+</div>
+
+<br>
+
+**Paso 4. Pivotal Points.** Las barras verticales de la Imagen X marcan los eventos que cambian la fase del negocio, es decir, aquellos a partir de los cuales el sistema pasa a operar de otra manera. Fueron seis: Older Adult Registered (el usuario existe), Family Link Established (ya hay a quién notificar), Check In Answered y Check In Missed (la bifurcación entre bienestar confirmado y ausencia de respuesta), Discomfort Pattern Detected (el malestar deja de ser puntual y pasa a ser sostenido) y Emergency Alert Raised (la situación deja de ser rutinaria).
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-04-pivotal-points.png" alt="Paso 4 - Pivotal Points" width="700"/>
+  <br/><i>Imagen X. Paso 4 del EventStorming: Pivotal Points.</i>
+</div>
+
+<br>
+
+**Paso 5. Commands.** Para cada evento se identificó el comando que lo provoca, redactado en imperativo (por ejemplo, Register Older Adult o Trigger Emergency Alert), y el actor que lo ejecuta: Older Adult, Distant Relative o el propio sistema, como ocurre con Prompt Check In. La Imagen X muestra los 45 comandos, en azul, con sus actores en amarillo claro. Desde este paso se retiran las flechas de la línea de tiempo para no saturar el muro.
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-05-commands.png" alt="Paso 5 - Commands" width="700"/>
+  <br/><i>Imagen X. Paso 5 del EventStorming: Commands.</i>
+</div>
+
+<br>
+
+**Paso 6. Policies.** Las policies, en violeta, son reglas de la forma "cuando ocurre X, entonces se ejecuta Y": reaccionan a un evento y disparan un comando. El equipo identificó diez. Por ejemplo, si el check-in no fue respondido y no hay una pausa activa, se evalúa la inactividad; si se detecta un patrón de malestar, se emite una sugerencia de bienestar; y si se levanta una alerta de emergencia y hay familiares vinculados, se despacha la alerta. La Imagen X conecta con una flecha tres de estas policies con el comando que activan (Create Care Circle, Evaluate Wellbeing Pattern y Evaluate Inactivity). Las tres cruzan de un contexto a otro, lo que anticipa las relaciones que luego se formalizan en el Context Map (sección 2.5.2).
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-06-policies.png" alt="Paso 6 - Policies" width="700"/>
+  <br/><i>Imagen X. Paso 6 del EventStorming: Policies.</i>
+</div>
+
+<br>
+
+**Paso 7. Read Models.** Los read models, en verde claro, representan la información o la vista que el actor necesita tener delante para decidir y ejecutar un comando. Se identificaron 24, entre ellos Registration Form View, Daily Check-in View, Family Members View, Help Button View y Alerts View, que se observan en la Imagen X ubicados junto al comando que alimentan.
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-07-read-models.png" alt="Paso 7 - Read Models" width="700"/>
+  <br/><i>Imagen X. Paso 7 del EventStorming: Read Models.</i>
+</div>
+
+<br>
+
+**Paso 8. External Systems.** Los sistemas externos, en rojo, son servicios que están fuera del dominio y con los que este necesita interactuar. El único identificado hasta ahora es el Push Notification Provider, que entrega la notificación push al dispositivo del familiar cuando se despacha una alerta, por lo que la Imagen X lo ubica junto al evento Emergency Alert Dispatched. Es el mismo proveedor que el Context Map aísla mediante una Anti-Corruption Layer (sección 2.5.2).
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-08-external-systems.png" alt="Paso 8 - External Systems" width="700"/>
+  <br/><i>Imagen X. Paso 8 del EventStorming: External Systems.</i>
+</div>
+
+<br>
+
+**Paso 9. Aggregates.** Los aggregates, en amarillo intenso, agrupan los comandos y eventos que modifican un mismo concepto del dominio y protegen sus reglas de consistencia. Aparecen doce en la Imagen X: User, Care Circle, Care Shift, Shared Note, Check In, Check In Preferences, Wellbeing Insight, Emergency Alert, Inactivity Alert, Audio Message, Photo Message y Social Reminder.
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-09-aggregates.png" alt="Paso 9 - Aggregates" width="700"/>
+  <br/><i>Imagen X. Paso 9 del EventStorming: Aggregates.</i>
+</div>
+
+<br>
+
+**Paso 10. Bounded Contexts.** Finalmente, los aggregates, comandos y eventos que comparten lenguaje y reglas se encerraron en elipses, como muestra la Imagen X. El resultado son seis bounded contexts: Identity & Access, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts & Safety y Social Companionship. Las flechas de las policies que cruzan de una elipse a otra indican dónde los contextos deben colaborar. La sección siguiente explica cada uno de ellos y el criterio con el que se clasificó según su aporte de valor.
+
+<br>
+<div align="center">
+  <img src="assets/img/event-storming/paso-10-bounded-contexts.png" alt="Paso 10 - Bounded Contexts" width="700"/>
+  <br/><i>Imagen X. Paso 10 del EventStorming: Bounded Contexts.</i>
+</div>
+
+<br>
+
 #### 2.5.1.1. Candidate Context Discovery
 
-A partir del dominio modelado en el Big Picture EventStorming, el equipo desarrolló una sesión de Candidate Context Discovery con el fin de identificar los bounded contexts de Serenia. La sesión se realizó en Miro sobre el muro de 46 eventos de dominio previamente levantados y tuvo una duración aproximada de 1 hora y media.
+A partir del dominio modelado en los pasos anteriores, el equipo desarrolló una sesión de Candidate Context Discovery con el fin de identificar los bounded contexts de Serenia, que corresponde al paso 10 del proceso. La sesión se realizó en Miro sobre el muro de eventos de dominio previamente levantados y tuvo una duración aproximada de 1 hora y media.
 
 La técnica aplicada fue start-with-value. En lugar de descomponer el timeline de forma secuencial, el equipo partió de la pregunta sobre qué partes del dominio concentran el mayor valor para el negocio, entendiendo por valor aquello que sostiene directamente la propuesta diferencial de Serenia: reemplazar la común llamada telefónica por un acompañamiento emocional sostenido y verificable a distancia.
 
