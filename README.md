@@ -770,7 +770,7 @@ A partir del análisis competitivo y el FODA desarrollado, se plantean las sigui
 
 <br>
 
-## Tácticas específicas frente a cada competidor
+#### Tácticas específicas frente a cada competidor
 
 Frente a **Snug Safety**, cuya fortaleza es el check-in diario simple y gratuito con gran base de usuarios en EE. UU., Serenia diferencia su propuesta enfocándose en el vínculo emocional (preguntas variables, mensajes de audio "cuéntame algo") y no solo en la señal de seguridad/emergencia, además de dirigirse a un mercado (Perú) donde Snug Safety no tiene presencia ni soporte en español.
 
@@ -1118,19 +1118,15 @@ En esta sección se presentan los user personas construidos a partir del anális
 ### Segmento 1 - Adultos mayores que viven solos
 
 <div align="center">
-
-![User persona - Adultos mayores que viven solos](assets/img/user-persona/jorge-lopez-seg1.png)
+  <img src="assets/img/user-persona/jorge-lopez-seg1.png" alt="User persona - Adultos mayores que viven solos" width="700"/>
   <br/><i>Imagen 4. User Persona - Primer Segmento.</i>
-
 </div>
 
 ### Segmento 2 - Familiares a distancia
 
 <div align="center">
-
-![User persona- Familiares a distancia](assets/img/user-persona/daniel-torres-seg2.png)
+  <img src="assets/img/user-persona/daniel-torres-seg2.png" alt="User persona- Familiares a distancia" width="700"/>
   <br/><i>Imagen 5. User Persona - Segundo Segmento.</i>
-
 </div>
 
 <br>
@@ -4990,8 +4986,6 @@ Esta primera entrega abarca el análisis del problema, la propuesta de valor y e
 
 4. **Tratar la accesibilidad y la privacidad como requisitos de primer nivel.** Dado que los 3 adultos mayores reportaron dificultades tecnológicas, conviene probar la interfaz con ellos desde el primer prototipo (NF01, NF04, US08). Un estudio con personas en edad de jubilación coincide en que las aplicaciones de salud requieren interfaces intuitivas y tutoriales iniciales que compensen la limitada alfabetización digital (Collazo-Castiñeira et al., 2025). Dado que 2 de 4 familiares desconfían de la vigilancia, las alertas deben mantenerse selectivas y el producto debe dejar claro qué información se comparte (NF03).
 
-<br>
-
 <div style="page-break-after: always;"></div>
 
 # Glosario
@@ -5068,4 +5062,4 @@ Esta primera entrega abarca el análisis del problema, la propuesta de valor y e
 
 URL de la organización (Serenia):  [Organización Serenia](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare)
 
-URL del repositorio (Report):  [Repositorio Reporte](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-repor
+URL del repositorio (Report):  [Repositorio Reporte](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-report)
