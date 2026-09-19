@@ -4724,7 +4724,9 @@ El diagrama incluye además los Commands y Queries que expresan las intenciones 
 
 <div align="center">
 
-![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/social-class-diagram.svg)
+![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/social-companionship.svg)
+![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/social-companionship_class3.svg)
+![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/social-companionship_class2.svg)
   <br/><i>Imagen X. Class Diagram del Bounded Context Social Companionship.</i>
 
 </div>
