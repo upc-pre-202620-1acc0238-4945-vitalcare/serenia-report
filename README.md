@@ -4986,8 +4986,6 @@ Esta primera entrega abarca el análisis del problema, la propuesta de valor y e
 
 4. **Tratar la accesibilidad y la privacidad como requisitos de primer nivel.** Dado que los 3 adultos mayores reportaron dificultades tecnológicas, conviene probar la interfaz con ellos desde el primer prototipo (NF01, NF04, US08). Un estudio con personas en edad de jubilación coincide en que las aplicaciones de salud requieren interfaces intuitivas y tutoriales iniciales que compensen la limitada alfabetización digital (Collazo-Castiñeira et al., 2025). Dado que 2 de 4 familiares desconfían de la vigilancia, las alertas deben mantenerse selectivas y el producto debe dejar claro qué información se comparte (NF03).
 
-<div style="page-break-after: always;"></div>
-
 # Glosario
 
 - **ACL (Anti-Corruption Layer):** Capa de traducción que aísla el modelo de dominio de los modelos externos (DTOs de red o de base de datos local), evitando que estructuras ajenas al negocio contaminen las capas superiores.
