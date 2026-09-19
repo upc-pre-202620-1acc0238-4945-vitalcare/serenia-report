@@ -4734,6 +4734,65 @@ El diagrama incluye además los Commands y Queries que expresan las intenciones 
 
 ##### 2.6.5.6.2. Bounded Context Database Design Diagram
 
+El diagrama de base de datos presenta los objetos que permiten la persistencia del bounded context **Social Companionship** sobre el motor SQLite. El contexto se materializa en tres tablas que corresponden a los tres aggregates roots del dominio: `audio_messages`, `photo_messages` y `social_reminders`.
+
+**Tabla audio_messages**
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | uuid | PK | Identificador único del mensaje de audio. |
+| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo de cuidado al que pertenece el mensaje. |
+| sender_id | uuid | NOT NULL, FK → users.id | Usuario que grabó el mensaje. |
+| audio_url | varchar(500) | NOT NULL | URL de acceso al archivo de audio grabado. |
+| status | audio_message_status | NOT NULL, DEFAULT 'RECORDED' | Estado del mensaje: grabado, compartido o descartado. |
+| recorded_at | timestamp | NOT NULL | Fecha y hora en que se inició la grabación. |
+| shared_at | timestamp | — | Momento en que fue compartido. Nulo si status ≠ SHARED. |
+| discarded_at | timestamp | — | Momento en que fue descartado. Nulo si status ≠ DISCARDED. |
+
+Esta tabla es el aggregate root del flujo de mensajes de audio. Registra el ciclo de vida completo del mensaje desde su grabación hasta su compartición o descarte. Las columnas `shared_at` y `discarded_at` son mutuamente excluyentes: solo una puede estar poblada según el valor de `status`. Incluye un índice sobre `care_circle_id` para optimizar la consulta de mensajes por círculo.
+
+**Tabla photo_messages**
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | uuid | PK | Identificador único del mensaje de foto. |
+| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo de cuidado al que pertenece el mensaje. |
+| sender_id | uuid | NOT NULL, FK → users.id | Usuario que compartió la foto. |
+| photo_url | varchar(500) | NOT NULL | URL de acceso a la imagen compartida. |
+| status | photo_message_status | NOT NULL, DEFAULT 'SHARED' | Estado del mensaje: compartido. |
+| shared_at | timestamp | NOT NULL | Fecha y hora en que la foto fue compartida con el círculo. |
+
+Esta tabla es el aggregate root del flujo de mensajes de foto. A diferencia de los mensajes de audio, una foto se comparte directamente sin pasar por un estado intermedio de grabación, por lo que su ciclo de vida es más simple. Incluye un índice sobre `care_circle_id` para optimizar la consulta de fotos por círculo.
+
+**Tabla social_reminders**
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | uuid | PK | Identificador único del recordatorio. |
+| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo de cuidado al que pertenece el recordatorio. |
+| creator_id | uuid | NOT NULL, FK → users.id | Usuario que programó el recordatorio. |
+| title | varchar(200) | NOT NULL | Título del recordatorio. No puede ser cadena vacía. |
+| description | text | — | Descripción opcional del recordatorio. |
+| scheduled_date | date | NOT NULL | Fecha en que debe ejecutarse el recordatorio. Posterior a la fecha de creación. |
+| status | social_reminder_status | NOT NULL, DEFAULT 'PENDING' | Estado del recordatorio: pendiente, completado o cancelado. |
+| created_at | timestamp | NOT NULL | Fecha y hora de creación del recordatorio. |
+| completed_at | timestamp | — | Momento en que fue completado. Nulo si status ≠ COMPLETED. |
+| cancelled_at | timestamp | — | Momento en que fue cancelado. Nulo si status ≠ CANCELLED. |
+
+Esta tabla es el aggregate root del flujo de recordatorios sociales. Gestiona el ciclo de vida del recordatorio desde su programación hasta su completado o cancelación. Las columnas `completed_at` y `cancelled_at` son mutuamente excluyentes según el valor de `status`. Incluye índices sobre `care_circle_id` y `status` para optimizar las consultas de recordatorios activos por círculo.
+
+
+**Relaciones entre tablas**
+
+Las tres tablas referencian a `care_circles`, que es el aggregate root del bounded context Care Circle y actúa como punto de entrada contextual: todo mensaje de audio, mensaje de foto o recordatorio social existe dentro de un círculo de cuidado concreto. Las columnas `sender_id` y `creator_id` referencian a `users`, que es la tabla del bounded context Identity & Access y actúa como referencia externa en este contexto. Ninguna de las tres tablas se relaciona entre sí, ya que representan flujos de dominio independientes dentro del mismo bounded context.
+
+<div align="center">
+
+![Database Diagram - Social companionship](assets/img/bounded-context/social-companionship/database-diagram.png)
+  <br/><i>Imagen 27. Database Diagram del Bounded Context Social companionship.</i>
+
+</div>
+
 <br>
 
 ### 2.6.6. Bounded Context: Alerts & Safety
