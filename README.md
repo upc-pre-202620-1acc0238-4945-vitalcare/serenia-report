@@ -350,19 +350,13 @@ VitalCare nace para sanar esta desconexión apostando por tecnología que acompa
 
 El corazón de Serenia es que cada interacción se sienta como una charla genuina y no como un chequeo médico. Incluye preguntas ligeras, un espacio para grabar anécdotas y alertas familiares que solo suenan cuando de verdad hacen falta. Queremos devolver la naturalidad al cuidado a distancia: dándole tranquilidad a la familia y respetando siempre la autonomía del adulto mayor.
 
-<br>
-
 ## Misión
 
 Dar a los adultos mayores que viven solos una forma simple y natural de comunicar su día a día, y a sus familias, la tranquilidad de saber cómo están. Reducimos la ansiedad de la distancia conectándolos desde el afecto, sin caer en el monitoreo invasivo.
 
-<br>
-
 ## Visión
 
 Ser la plataforma de compañía digital que transforme cómo las familias de Latinoamérica se cuidan a distancia. Queremos fortalecer el vínculo emocional por encima del reporte clínico, logrando que ningún adulto mayor enfrente la soledad en silencio.
-
-<br>
 
 ## Valores
 
@@ -377,8 +371,6 @@ Ser la plataforma de compañía digital que transforme cómo las familias de Lat
   
 - **Conexión emocional:** <br>
   Celebramos lo bueno de la rutina. Fomentamos espacios como "cuéntame algo" para registrar pequeñas victorias y reforzar el cariño diario, no solo para alertar sobre problemas.
-
-<br>
 
 ### 1.1.2. Perfiles de integrantes del equipo
 
@@ -484,8 +476,6 @@ Del lado del familiar, la aplicación ofrece un panel de estado diario que muest
 
 El diferenciador central de Serenia frente a otras soluciones de monitoreo es su enfoque en la compañía por encima de la vigilancia: el lenguaje y las interacciones evitan el tono clínico o de "reporte", priorizando el vínculo emocional cotidiano entre adulto mayor y su familia, sin descuidar la seguridad ante situaciones de emergencia.
 
-<br>
-
 ### 1.2.1. Antecedentes y problemática
 
 ## The 5W's y 2H's
@@ -525,8 +515,6 @@ Se propone Serenia, una solución compuesta por dos aplicaciones móviles conect
 
 El costo de no resolver este problema no es solo emocional, sino también económico y de salud mental para quienes ejercen el rol de cuidado a distancia: el Banco Interamericano de Desarrollo (BID, 2024), en una encuesta aplicada en 25 países de América Latina y el Caribe, encontró que el 31% de los cuidadores no remunerados de personas mayores reporta síntomas de depresión y que el 44% ha tenido que dejar su empleo para poder cuidar (Banco Interamericano de Desarrollo [BID], 2024). Esto evidencia que, sin una herramienta que aligere la carga de supervisión constante, el desgaste recae de forma directa sobre la salud mental y la estabilidad laboral del familiar cuidador. Para el AV1, el alcance se limita al análisis del problema, la propuesta de valor y el diseño de la solución (sin desarrollo de código todavía), enfocado en las dos aplicaciones descritas: la app nativa para el adulto mayor y la app cross-platform para el familiar.
 
-<br>
-
 ### 1.2.2. Lean UX Process
 
 Esta sección desarrolla el Lean UX Process aplicado al dominio del problema de Serenia, siguiendo la metodología de Lean UX (Gothelf & Seiden, 2021). Se parte de un Problem Statement único para todo el proyecto, se derivan los Assumptions organizados según los cinco tipos propuestos por Lean UX, se construyen los Hypothesis Statements correspondientes a cada Feature Assumption, y finalmente se consolida todo en un Lean UX Canvas.
@@ -542,8 +530,6 @@ Nuestro producto resolverá esta brecha **ofreciendo un check-in diario de un so
 Nuestro enfoque inicial será **adultos mayores de 60 años a más que viven solos en zonas urbanas del Perú, y sus familiares directos de 25 a 59 años que residen en una ciudad o distrito distinto**.
 
 Sabremos que hemos tenido éxito cuando veamos **una alta tasa de check-ins diarios completados por el adulto mayor, una reducción en la frecuencia de llamadas motivadas por ansiedad por parte del familiar, y un uso recurrente del panel de estado sin necesidad de soporte o intervención externa**.
-
-<br>
 
 #### 1.2.2.2. Lean UX Assumptions
 
@@ -572,8 +558,6 @@ Sabremos que hemos tenido éxito cuando veamos **una alta tasa de check-ins diar
 - Un espacio de "cuéntame algo" (audio corto) permitirá capturar momentos cotidianos que fortalezcan el vínculo familiar.
 - Un panel de estado con alertas inteligentes (solo ante anomalías) evitará que el familiar revise la aplicación de forma ansiosa.
 - Un botón de auxilio siempre visible cubrirá el escenario de emergencia sin necesidad de vigilancia constante.
-
-<br>
 
 #### 1.2.2.3. Lean UX Hypothesis Statements
 
