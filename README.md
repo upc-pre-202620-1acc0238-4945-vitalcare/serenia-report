@@ -81,9 +81,11 @@ Los mensajes de commit siguieron la convención `docs:` para la redacción de se
 
 La distribución del trabajo se coordinó en ClickUp, donde cada sección del Capítulo I y II se registró como una tarea con la descripción tomada del enunciado del curso, mientras que las User Stories y el Sprint Backlog oficiales se gestionaron en Trello.
 
+La Imagen 1 muestra el resumen de actividad (Pulse) del repositorio entre el 18 de agosto y el 18 de septiembre de 2026: 57 Pull Requests integrados y 157 commits realizados por los 5 integrantes del equipo.
+
 <p align="center">
   <img src="assets/img/project-report-collaboration-insights/insights-av1.png" alt="AV1 Insights" width="900"/>
-    <br/><i>Imagen X. Insights de la Primera Entrega (AV1)</i>
+    <br/><i>Imagen 1. Insights de la Primera Entrega (AV1)</i>
 </p>
 
 <br>
@@ -504,13 +506,13 @@ Es un problema de naturaleza diaria y recurrente, no puntual: la incertidumbre y
 
 ### Why (¿Por qué?)
 
-Según la Agencia Andina (2025), citando datos del Instituto Nacional de Estadística e Informática (INEI), en Lima Metropolitana el 25,3% de los hogares jefaturados por adultos mayores (60 años a más) son unipersonales —es decir, compuestos únicamente por la persona mayor—, cifra que aumentó 2,3 puntos porcentuales respecto al mismo periodo del año anterior (Andina, 2025). Esta tendencia se ha mantenido creciente: según cifras más recientes del INEI correspondientes al tercer trimestre de 2025, reportadas por Infobae (2025), a nivel nacional el 26,9% de los hogares con jefatura de una persona adulta mayor ya son unipersonales, frente al 24,5% registrado dos años antes (Infobae, 2025). Esta creciente proporción de adultos mayores que viven solos explica por qué los familiares terminan llamando todos los días por ansiedad —no porque haya pasado algo puntual— y por qué el adulto mayor evita reportar molestias por no sentirse una carga. No existe hoy un canal intermedio entre "no comunicarse" y "llamar todos los días" que permita transmitir bienestar de forma ligera, sin fricción y sin depender de una llamada telefónica.
+Según la Agencia Andina (2025), citando datos del Instituto Nacional de Estadística e Informática (INEI), en Lima Metropolitana el 25,3% de los hogares jefaturados por adultos mayores (60 años a más) son unipersonales —es decir, compuestos únicamente por la persona mayor—, cifra que aumentó 2,3 puntos porcentuales respecto al mismo periodo del año anterior (Andina, 2025). Esta tendencia se ha mantenido creciente: según cifras más recientes del INEI correspondientes al tercer trimestre de 2025, reportadas por Infobae (2025), a nivel nacional el 26,9% de los hogares con jefatura de una persona adulta mayor ya son unipersonales, frente al 24,5% registrado dos años antes (Infobae, 2025). Esta creciente proporción de adultos mayores que viven solos explica por qué los familiares terminan llamando todos los días por ansiedad —no porque haya pasado algo puntual— y por qué el adulto mayor evita reportar molestias por no sentirse una carga. No existe hoy un canal intermedio entre "no comunicarse" y "llamar todos los días" que permita transmitir bienestar de forma ligera, sin fricción y sin depender de una llamada telefónica. La Imagen 2 muestra la distribución de estos hogares según su área de residencia y el sexo de la persona que los encabeza.
 
 <br>
 <p align="center">
   <img src="assets/img/estadisticas/hogares-unipersonales-adulto-mayor.png" alt="Evolución del porcentaje de hogares unipersonales jefaturados por adultos mayores en el Perú, según INEI (2023-2025)" width="500">
 </p>
-<p align="center"><sub>Imagen 1. Hogares jefaturados por adultos mayores, según área de residencia y sexo. Tomado de <em>Informe Técnico: Situación de la Población Adulta Mayor</em>, por Instituto Nacional de Estadística e Informática [INEI], 2025, p. 3 (https://m.inei.gob.pe/media/MenuRecursivo/boletines/informe-tecnico_adultomayor.pdf).</sub></p>
+<p align="center"><sub>Imagen 2. Hogares jefaturados por adultos mayores, según área de residencia y sexo. Tomado de <em>Informe Técnico: Situación de la Población Adulta Mayor</em>, por Instituto Nacional de Estadística e Informática [INEI], 2025, p. 3 (https://m.inei.gob.pe/media/MenuRecursivo/boletines/informe-tecnico_adultomayor.pdf).</sub></p>
 
 ### How (¿Cómo?)
 
@@ -582,11 +584,11 @@ Sabremos que hemos tenido éxito cuando veamos **una alta tasa de check-ins diar
 
 #### 1.2.2.4. Lean UX Canvas
 
-El Lean UX Canvas consolida el Business Problem, los Business Outcomes, los Users, los User Outcomes & Benefits, las Solutions y las Hypotheses desarrolladas en las subsecciones anteriores, junto con la identificación de la asunción de mayor riesgo (Segmento 1 adoptando el check-in diario como hábito) y el experimento de menor esfuerzo para validarla.
+El Lean UX Canvas consolida el Business Problem, los Business Outcomes, los Users, los User Outcomes & Benefits, las Solutions y las Hypotheses desarrolladas en las subsecciones anteriores, junto con la identificación de la asunción de mayor riesgo (Segmento 1 adoptando el check-in diario como hábito) y el experimento de menor esfuerzo para validarla. La Imagen 3 presenta el canvas completo.
 
 <p align="center">
   <img src="assets/img/diagrams/lean-ux-canvas.png" alt="Lean UX Canvas de Serenia" width="900"/>
-    <br/><i>Imagen 2. Lean UX Canvas.</i>
+    <br/><i>Imagen 3. Lean UX Canvas.</i>
 </p>
 
 URL del archivo en Figma: https://www.figma.com/design/MtWwz8GxmrY0eR7eyc2UC0/Lean-UX-Canvas--Serenia-?node-id=0-1
@@ -1121,14 +1123,14 @@ Finalmente, también aparece la necesidad de contar con una solución simple y a
 ## 2.3. Needfinding
 ### 2.3.1. User Personas
 
-En esta sección se presentan los user personas construidos a partir del análisis de las entrevistas de los adultos mayores y sus familiares a distancia. Estos artefactos sintetizan patrones de comportamiento, necesidades, motivaciones y frustraciones identificadas durante la investigación, permitiendo representar de manera clara a los segmentos clave de nuestro proyecto.
+En esta sección se presentan los user personas construidos a partir del análisis de las entrevistas de los adultos mayores y sus familiares a distancia. Estos artefactos sintetizan patrones de comportamiento, necesidades, motivaciones y frustraciones identificadas durante la investigación, permitiendo representar de manera clara a los segmentos clave de nuestro proyecto. La Imagen 4 presenta el user persona del primer segmento y la Imagen 5, el del segundo.
 
 ### Segmento 1 - Adultos mayores que viven solos
 
 <div align="center">
 
 ![User persona - Adultos mayores que viven solos](assets/img/user-persona/jorge-lopez-seg1.png)
-  <br/><i>Imagen 3. User Persona - Primer Segmento.</i>
+  <br/><i>Imagen 4. User Persona - Primer Segmento.</i>
 
 </div>
 
@@ -1137,7 +1139,7 @@ En esta sección se presentan los user personas construidos a partir del anális
 <div align="center">
 
 ![User persona- Familiares a distancia](assets/img/user-persona/daniel-torres-seg2.png)
-  <br/><i>Imagen 4. User Persona - Segundo Segmento.</i>
+  <br/><i>Imagen 5. User Persona - Segundo Segmento.</i>
 
 </div>
 
@@ -1187,14 +1189,14 @@ La principal diferencia radica en la naturaleza de su interacción; el adulto ma
 
 En esta sección se detallan los User Journey Maps en su versión "As-Is", uno por cada segmento de usuario definido. El objetivo de estos mapas es ilustrar el proceso de extremo a extremo que realizan actualmente los usuarios para intentar resolver su necesidad, evidenciando los puntos de dolor, las frustraciones y las ineficiencias que experimentan antes de la implementación de nuestra solución propuesta.
 
-A continuación, se presentan los diagramas que resumen la situación actual de los usuarios:
+A continuación, se presentan los diagramas que resumen la situación actual de los usuarios: la Imagen 6 corresponde al primer segmento y la Imagen 7, al segundo.
 
 ### Segmento 1 - Adultos mayores que viven solos
 
 <div align="center">
 
 ![journey mapping - Adultos mayores que viven solos](assets/img/user-journey-mapping/user-journey-seg1.png)
-  <br/><i>Imagen 5. User Journey Mapping - Primer Segmento.</i>
+  <br/><i>Imagen 6. User Journey Mapping - Primer Segmento.</i>
 
 </div>
 
@@ -1204,7 +1206,7 @@ A continuación, se presentan los diagramas que resumen la situación actual de 
 <div align="center">
 
 ![journey mapping - Familiares a distancia](assets/img/user-journey-mapping/user-journey-seg2.png)
-  <br/><i>Imagen 6. User Journey Mapping - Segundo Segmento.</i>
+  <br/><i>Imagen 7. User Journey Mapping - Segundo Segmento.</i>
 
 </div>
 
@@ -1214,14 +1216,14 @@ A continuación, se presentan los diagramas que resumen la situación actual de 
 
 En esta sección, el equipo resume el proceso de elaboración de los *Empathy Maps* realizados en UXPressia para cada uno de nuestros *User Personas*[cite: 1]. Durante sesiones colaborativas, nos centramos en empatizar profundamente con nuestros dos actores principales: el adulto mayor que vive solo y su familiar a distancia. Para lograrlo, respondimos preguntas clave sobre su entorno, sus preocupaciones (Pains) y aquello que aliviaría sus frustraciones y los convencería de que nuestra aplicación es la alternativa correcta para mantener su vínculo (Gains)[cite: 1].
 
-A continuación, se presentan las capturas de los mapas resultantes elaborados en la herramienta indicada:
+A continuación, se presentan las capturas de los mapas resultantes elaborados en la herramienta indicada: la Imagen 8 corresponde al primer segmento y la Imagen 9, al segundo.
 
 ### Segmento 1 - Adultos mayores que viven solos
 
 <div align="center">
 
 ![Empathy Map - Adultos mayores que viven solos](assets/img/empathy-maps/empathy-map-adulto-mayor.png)
-  <br/><i>Imagen 7. Empathy Map - Primer Segmento.</i>
+  <br/><i>Imagen 8. Empathy Map - Primer Segmento.</i>
 
 </div>
 
@@ -1231,7 +1233,7 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 <div align="center">
 
 ![Empathy Map - Familiares a distancia](assets/img/empathy-maps/empathy-map-familiar.png)
-  <br/><i>Imagen 8. Empathy Map - Segundo Segmento.</i>
+  <br/><i>Imagen 9. Empathy Map - Segundo Segmento.</i>
 
 </div>
 
@@ -1240,7 +1242,7 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 
 ### 2.3.5. Big Picture EventStorming
 
-El equipo realizó una sesión colaborativa de *Big Picture EventStorming* en Miro, con el objetivo de explorar de forma visual el dominio completo de Serenia: desde la vinculación entre el adulto mayor y su familiar, pasando por el check-in diario y su interpretación, hasta el manejo de emergencias y la compañía social. Se identificaron 45 eventos de dominio, redactados en pasado y en inglés siguiendo la convención de nomenclatura adoptada por el equipo, y se ordenaron cronológicamente para cada uno de los procesos identificados.
+El equipo realizó una sesión colaborativa de *Big Picture EventStorming* en Miro, con el objetivo de explorar de forma visual el dominio completo de Serenia: desde la vinculación entre el adulto mayor y su familiar, pasando por el check-in diario y su interpretación, hasta el manejo de emergencias y la compañía social. Se identificaron 45 eventos de dominio, redactados en pasado y en inglés siguiendo la convención de nomenclatura adoptada por el equipo, y se ordenaron cronológicamente para cada uno de los procesos identificados. La Imagen 10 muestra el tablero resultante de la sesión.
 
 <br>
 
@@ -1250,7 +1252,7 @@ URL del tablero en Miro: [https://miro.com/app/board/uXjVHmgj4G8=/](https://miro
 <div align="center">
 
 ![Big Picture EventStorming - Serenia](assets/img/big-picture-eventstorming/big-picture-eventstorming.png)
-  <br/><i>Imagen 9. Big Picture EventStorming del dominio de Serenia.</i>
+  <br/><i>Imagen 10. Big Picture EventStorming del dominio de Serenia.</i>
 
 </div>
 
@@ -2965,7 +2967,7 @@ Como equipo de desarrollo (Android, Flutter y backend), quiero investigar y prot
 
 ### 2.4.2. Impact Mapping
 
-En esta sección se presenta el Impact Mapping de Serenia, una herramienta visual que nos permite alinear las funcionalidades del producto con los objetivos estratégicos del negocio y las necesidades de nuestros usuarios. Este mapa asegura que cada User Story desarrollada contribuya directamente a generar un cambio de comportamiento positivo (Impact) en nuestros segmentos (Actors) para alcanzar una meta medible (Business Goal).
+En esta sección se presenta el Impact Mapping de Serenia, una herramienta visual que nos permite alinear las funcionalidades del producto con los objetivos estratégicos del negocio y las necesidades de nuestros usuarios. Este mapa asegura que cada User Story desarrollada contribuya directamente a generar un cambio de comportamiento positivo (Impact) en nuestros segmentos (Actors) para alcanzar una meta medible (Business Goal). La Imagen 11, al final de esta sección, muestra el mapa completo.
 
 **Business Goal (Meta de Negocio SMART):**
 Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzamiento en Lima Metropolitana, logrando una tasa de retención del 70% mediante el uso continuo del check-in diario.
@@ -2996,13 +2998,15 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 <div align="center">
 
 ![Impact Mapping de Serenia](assets/img/diagrams/impact-mapping.png)
-  <br/><i>Imagen 10. Diagrama de Impact Mapping.</i>
+  <br/><i>Imagen 11. Diagrama de Impact Mapping.</i>
 
 </div>
 
 <br>
 
 ### 2.4.3. Product Backlog
+
+La siguiente tabla ordena las 46 historias del Product Backlog y asigna cada una a un sprint. La Imagen 12 muestra el mismo backlog en Trello, donde el equipo lo gestiona.
 
 | Orden | User Story Id | Título | Story Points (1 / 2 / 3 / 5 / 8) | Sprint |
 |---:|---|---|---:|---|
@@ -3058,7 +3062,7 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 <div align="center">
 
 ![product backlog](assets/img/product-backlog/product-backlog.png)
-  <br/><i>Imagen 11. Captura de Product Backlog en Trello.</i>
+  <br/><i>Imagen 12. Captura de Product Backlog en Trello.</i>
 
 </div>
 <br>
@@ -3078,102 +3082,102 @@ URL del tablero en Miro: [https://miro.com/app/board/uXjVHlaGmGg=/?share_link_id
 
 <br>
 
-**Paso 1. Unstructured Exploration.** El punto de partida fueron los eventos de dominio de Serenia, levantados a partir del Big Picture EventStorming (sección 2.3.5), redactados en pasado y sin ningún orden, tal como surgen en una lluvia de ideas. La Imagen X muestra ese estado inicial: en este paso no se busca todavía una estructura, solo poner sobre el muro todo lo que ocurre en el dominio.
+**Paso 1. Unstructured Exploration.** El punto de partida fueron los eventos de dominio de Serenia, levantados a partir del Big Picture EventStorming (sección 2.3.5), redactados en pasado y sin ningún orden, tal como surgen en una lluvia de ideas. La Imagen 13 muestra ese estado inicial: en este paso no se busca todavía una estructura, solo poner sobre el muro todo lo que ocurre en el dominio.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-01-unstructured-exploration.png" alt="Paso 1 - Unstructured Exploration" width="700"/>
-  <br/><i>Imagen X. Paso 1 del EventStorming: Unstructured Exploration.</i>
+  <br/><i>Imagen 13. Paso 1 del EventStorming: Unstructured Exploration.</i>
 </div>
 
 <br>
 
-**Paso 2. Timelines.** Los eventos se ordenaron en el tiempo y se agruparon por proceso: alta y acceso del usuario, círculo de cuidado y vínculo familiar, check-in diario, interpretación de bienestar, alertas y seguridad, y acompañamiento social. Las flechas de la Imagen X indican la secuencia entre eventos y las bifurcaciones, como el código de invitación que puede ser canjeado o rechazado.
+**Paso 2. Timelines.** Los eventos se ordenaron en el tiempo y se agruparon por proceso: alta y acceso del usuario, círculo de cuidado y vínculo familiar, check-in diario, interpretación de bienestar, alertas y seguridad, y acompañamiento social. Las flechas de la Imagen 14 indican la secuencia entre eventos y las bifurcaciones, como el código de invitación que puede ser canjeado o rechazado.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-02-timelines.png" alt="Paso 2 - Timelines" width="700"/>
-  <br/><i>Imagen X. Paso 2 del EventStorming: Timelines.</i>
+  <br/><i>Imagen 14. Paso 2 del EventStorming: Timelines.</i>
 </div>
 
 <br>
 
-**Paso 3. Pain Points.** Sobre la línea de tiempo se marcaron con stickies rosados las dudas que el dominio todavía no resuelve. El equipo no las inventó para este paso: se tomaron diez de las Open Questions de los Bounded Context Canvases (sección 2.5.1.3) y se ubicaron junto al evento al que afectan, como se ve en la Imagen X. Entre ellas están la vigencia del código de invitación, quién puede revocar un vínculo familiar, cuántos días configuran un patrón de malestar, la duración de la ventana de inactividad y si la alerta llega a todos los familiares vinculados.
+**Paso 3. Pain Points.** Sobre la línea de tiempo se marcaron con stickies rosados las dudas que el dominio todavía no resuelve. El equipo no las inventó para este paso: se tomaron diez de las Open Questions de los Bounded Context Canvases (sección 2.5.1.3) y se ubicaron junto al evento al que afectan, como se ve en la Imagen 15. Entre ellas están la vigencia del código de invitación, quién puede revocar un vínculo familiar, cuántos días configuran un patrón de malestar, la duración de la ventana de inactividad y si la alerta llega a todos los familiares vinculados.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-03-pain-points.png" alt="Paso 3 - Pain Points" width="700"/>
-  <br/><i>Imagen X. Paso 3 del EventStorming: Pain Points.</i>
+  <br/><i>Imagen 15. Paso 3 del EventStorming: Pain Points.</i>
 </div>
 
 <br>
 
-**Paso 4. Pivotal Points.** Las barras verticales de la Imagen X marcan los eventos que cambian la fase del negocio, es decir, aquellos a partir de los cuales el sistema pasa a operar de otra manera. Fueron seis: Older Adult Registered (el usuario existe), Family Link Established (ya hay a quién notificar), Check In Answered y Check In Missed (la bifurcación entre bienestar confirmado y ausencia de respuesta), Discomfort Pattern Detected (el malestar deja de ser puntual y pasa a ser sostenido) y Emergency Alert Raised (la situación deja de ser rutinaria).
+**Paso 4. Pivotal Points.** Las barras verticales de la Imagen 16 marcan los eventos que cambian la fase del negocio, es decir, aquellos a partir de los cuales el sistema pasa a operar de otra manera. Fueron seis: Older Adult Registered (el usuario existe), Family Link Established (ya hay a quién notificar), Check In Answered y Check In Missed (la bifurcación entre bienestar confirmado y ausencia de respuesta), Discomfort Pattern Detected (el malestar deja de ser puntual y pasa a ser sostenido) y Emergency Alert Raised (la situación deja de ser rutinaria).
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-04-pivotal-points.png" alt="Paso 4 - Pivotal Points" width="700"/>
-  <br/><i>Imagen X. Paso 4 del EventStorming: Pivotal Points.</i>
+  <br/><i>Imagen 16. Paso 4 del EventStorming: Pivotal Points.</i>
 </div>
 
 <br>
 
-**Paso 5. Commands.** Para cada evento se identificó el comando que lo provoca, redactado en imperativo (por ejemplo, Register Older Adult o Trigger Emergency Alert), y el actor que lo ejecuta: Older Adult, Distant Relative o el propio sistema, como ocurre con Prompt Check In. La Imagen X muestra los 45 comandos, en azul, con sus actores en amarillo claro. Desde este paso se retiran las flechas de la línea de tiempo para no saturar el muro.
+**Paso 5. Commands.** Para cada evento se identificó el comando que lo provoca, redactado en imperativo (por ejemplo, Register Older Adult o Trigger Emergency Alert), y el actor que lo ejecuta: Older Adult, Distant Relative o el propio sistema, como ocurre con Prompt Check In. La Imagen 17 muestra los 45 comandos, en azul, con sus actores en amarillo claro. Desde este paso se retiran las flechas de la línea de tiempo para no saturar el muro.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-05-commands.png" alt="Paso 5 - Commands" width="700"/>
-  <br/><i>Imagen X. Paso 5 del EventStorming: Commands.</i>
+  <br/><i>Imagen 17. Paso 5 del EventStorming: Commands.</i>
 </div>
 
 <br>
 
-**Paso 6. Policies.** Las policies, en violeta, son reglas de la forma "cuando ocurre X, entonces se ejecuta Y": reaccionan a un evento y disparan un comando. El equipo identificó diez. Por ejemplo, si el check-in no fue respondido y no hay una pausa activa, se evalúa la inactividad; si se detecta un patrón de malestar, se emite una sugerencia de bienestar; y si se levanta una alerta de emergencia y hay familiares vinculados, se despacha la alerta. La Imagen X conecta con una flecha tres de estas policies con el comando que activan (Create Care Circle, Evaluate Wellbeing Pattern y Evaluate Inactivity). Las tres cruzan de un contexto a otro, lo que anticipa las relaciones que luego se formalizan en el Context Map (sección 2.5.2).
+**Paso 6. Policies.** Las policies, en violeta, son reglas de la forma "cuando ocurre X, entonces se ejecuta Y": reaccionan a un evento y disparan un comando. El equipo identificó diez. Por ejemplo, si el check-in no fue respondido y no hay una pausa activa, se evalúa la inactividad; si se detecta un patrón de malestar, se emite una sugerencia de bienestar; y si se levanta una alerta de emergencia y hay familiares vinculados, se despacha la alerta. La Imagen 18 conecta con una flecha tres de estas policies con el comando que activan (Create Care Circle, Evaluate Wellbeing Pattern y Evaluate Inactivity). Las tres cruzan de un contexto a otro, lo que anticipa las relaciones que luego se formalizan en el Context Map (sección 2.5.2).
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-06-policies.png" alt="Paso 6 - Policies" width="700"/>
-  <br/><i>Imagen X. Paso 6 del EventStorming: Policies.</i>
+  <br/><i>Imagen 18. Paso 6 del EventStorming: Policies.</i>
 </div>
 
 <br>
 
-**Paso 7. Read Models.** Los read models, en verde claro, representan la información o la vista que el actor necesita tener delante para decidir y ejecutar un comando. Se identificaron 24, entre ellos Registration Form View, Daily Check-in View, Family Members View, Help Button View y Alerts View, que se observan en la Imagen X ubicados junto al comando que alimentan.
+**Paso 7. Read Models.** Los read models, en verde claro, representan la información o la vista que el actor necesita tener delante para decidir y ejecutar un comando. Se identificaron 24, entre ellos Registration Form View, Daily Check-in View, Family Members View, Help Button View y Alerts View, que se observan en la Imagen 19 ubicados junto al comando que alimentan.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-07-read-models.png" alt="Paso 7 - Read Models" width="700"/>
-  <br/><i>Imagen X. Paso 7 del EventStorming: Read Models.</i>
+  <br/><i>Imagen 19. Paso 7 del EventStorming: Read Models.</i>
 </div>
 
 <br>
 
-**Paso 8. External Systems.** Los sistemas externos, en rojo, son servicios que están fuera del dominio y con los que este necesita interactuar. El único identificado hasta ahora es el Push Notification Provider, que entrega la notificación push al dispositivo del familiar cuando se despacha una alerta, por lo que la Imagen X lo ubica junto al evento Emergency Alert Dispatched. Es el mismo proveedor que el Context Map aísla mediante una Anti-Corruption Layer (sección 2.5.2).
+**Paso 8. External Systems.** Los sistemas externos, en rojo, son servicios que están fuera del dominio y con los que este necesita interactuar. El único identificado hasta ahora es el Push Notification Provider, que entrega la notificación push al dispositivo del familiar cuando se despacha una alerta, por lo que la Imagen 20 lo ubica junto al evento Emergency Alert Dispatched. Es el mismo proveedor que el Context Map aísla mediante una Anti-Corruption Layer (sección 2.5.2).
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-08-external-systems.png" alt="Paso 8 - External Systems" width="700"/>
-  <br/><i>Imagen X. Paso 8 del EventStorming: External Systems.</i>
+  <br/><i>Imagen 20. Paso 8 del EventStorming: External Systems.</i>
 </div>
 
 <br>
 
-**Paso 9. Aggregates.** Los aggregates, en amarillo intenso, agrupan los comandos y eventos que modifican un mismo concepto del dominio y protegen sus reglas de consistencia. Aparecen doce en la Imagen X: User, Care Circle, Care Shift, Shared Note, Check In, Check In Preferences, Wellbeing Insight, Emergency Alert, Inactivity Alert, Audio Message, Photo Message y Social Reminder.
+**Paso 9. Aggregates.** Los aggregates, en amarillo intenso, agrupan los comandos y eventos que modifican un mismo concepto del dominio y protegen sus reglas de consistencia. Aparecen doce en la Imagen 21: User, Care Circle, Care Shift, Shared Note, Check In, Check In Preferences, Wellbeing Insight, Emergency Alert, Inactivity Alert, Audio Message, Photo Message y Social Reminder.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-09-aggregates.png" alt="Paso 9 - Aggregates" width="700"/>
-  <br/><i>Imagen X. Paso 9 del EventStorming: Aggregates.</i>
+  <br/><i>Imagen 21. Paso 9 del EventStorming: Aggregates.</i>
 </div>
 
 <br>
 
-**Paso 10. Bounded Contexts.** Finalmente, los aggregates, comandos y eventos que comparten lenguaje y reglas se encerraron en elipses, como muestra la Imagen X. El resultado son seis bounded contexts: Identity & Access, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts & Safety y Social Companionship. Las flechas de las policies que cruzan de una elipse a otra indican dónde los contextos deben colaborar. La sección siguiente explica cada uno de ellos y el criterio con el que se clasificó según su aporte de valor.
+**Paso 10. Bounded Contexts.** Finalmente, los aggregates, comandos y eventos que comparten lenguaje y reglas se encerraron en elipses, como muestra la Imagen 22. El resultado son seis bounded contexts: Identity & Access, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts & Safety y Social Companionship. Las flechas de las policies que cruzan de una elipse a otra indican dónde los contextos deben colaborar. La sección siguiente explica cada uno de ellos y el criterio con el que se clasificó según su aporte de valor.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-10-bounded-contexts.png" alt="Paso 10 - Bounded Contexts" width="700"/>
-  <br/><i>Imagen X. Paso 10 del EventStorming: Bounded Contexts.</i>
+  <br/><i>Imagen 22. Paso 10 del EventStorming: Bounded Contexts.</i>
 </div>
 
 <br>
@@ -3195,73 +3199,75 @@ El proceso se desarrolló en tres momentos:
 
 **Separación de lo genérico y lo complementario.** Finalmente, el equipo aisló los eventos que no aportan diferenciación competitiva. Por un lado, los de identidad, autenticación y gestión de perfil, que son resolubles con mecanismos estándar y cuyas reglas no cambian con el negocio de Serenia. Por otro lado, los de mensajería de audio, imágenes y recordatorios sociales, que enriquecen la experiencia de acompañamiento pero no producen ninguna señal que el sistema evalúe ni disparan ningún flujo de alerta.
 
-El resultado de la sesión fuerons seis bounded contexts candidatos, clasificados según su aporte de valor:
+El resultado de la sesión fueron seis bounded contexts candidatos, clasificados según su aporte de valor y presentados en las Imágenes 23 a 28:
 
 <br>
 
 
 ### Daily Check-in - Core <br>
-Es el mecanismo primario por el cual Serenia genera valor diferencial: convierte una interacción emocional cotidiana en una señal estructurada, sin que el adulto mayor sienta que está siendo monitoreado clínicamente. Sin este contexto no existe el dato que el resto del sistema necesita para funcionar.
+Es el mecanismo primario por el cual Serenia genera valor diferencial: convierte una interacción emocional cotidiana en una señal estructurada, sin que el adulto mayor sienta que está siendo monitoreado clínicamente. Sin este contexto no existe el dato que el resto del sistema necesita para funcionar. La Imagen 23 muestra los eventos, comandos y aggregates que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/daily-check-in.png" alt="Daily Check-in - Bounded Context" width="700"/>
-  <br/><i>Imagen 12. Daily Check-in - Bounded Context Core identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 23. Daily Check-in - Bounded Context Core identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 ### Wellbeing Monitoring - Core <br>
-Es el contexto que interpreta las señales del check-in y las convierte en información para la familia a distancia. Concentra la lógica del negocio más distintiva de Serenia: distinguir un mal día puntual de un patrón de deterioro sostenido, evitando tanto la falsa alarma como la negligencia.
+Es el contexto que interpreta las señales del check-in y las convierte en información para la familia a distancia. Concentra la lógica del negocio más distintiva de Serenia: distinguir un mal día puntual de un patrón de deterioro sostenido, evitando tanto la falsa alarma como la negligencia. La Imagen 24 muestra los elementos que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/wellbeing-monitoring.png" alt="Wellbeing Monitoring - Bounded Context" width="700"/>
-  <br/><i>Imagen 13. Wellbeing Monitoring - Bounded Context Core identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 24. Wellbeing Monitoring - Bounded Context Core identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 ### Alerts & Safety - Core <br>
-Es la garantía de tranquilidad que sostiene la decisión de compra del familiar a distancia. Sin una respuesta confiable ante inactividad o emergencia, el resto de la propuesta de valor pierde sustento, porque el familiar seguiría necesitando de llamar por su cuenta ante cualquier duda.
+Es la garantía de tranquilidad que sostiene la decisión de compra del familiar a distancia. Sin una respuesta confiable ante inactividad o emergencia, el resto de la propuesta de valor pierde sustento, porque el familiar seguiría necesitando de llamar por su cuenta ante cualquier duda. La Imagen 25 muestra los elementos que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/alerts-and-safety.png" alt="Alerts & Safety - Bounded Context" width="700"/>
-  <br/><i>Imagen 14. Alerts & Safety - Bounded Context Core identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 25. Alerts & Safety - Bounded Context Core identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 ### Care Circle - Supporting <br>
-No genera valor por sí solo, pero es indispensable para que el core opere: sin un vínculo familiar establecido no hay a quién notificar ni con quién compartir el estado del adulto mayor. Se mantiene separado del core porque administra estructura de relación (vínculos, turnos, notas compartidas), no interpretación de bienestar.
+No genera valor por sí solo, pero es indispensable para que el core opere: sin un vínculo familiar establecido no hay a quién notificar ni con quién compartir el estado del adulto mayor. Se mantiene separado del core porque administra estructura de relación (vínculos, turnos, notas compartidas), no interpretación de bienestar. La Imagen 26 muestra los elementos que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/care-circle.png" alt="Care Circle - Bounded Context" width="700"/>
-  <br/><i>Imagen 15. Care Circle - Bounded Context Supporting identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 26. Care Circle - Bounded Context Supporting identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 ### Social Companionship - Supporting <br>
-Complementa la experiencia de acompañamiento con mensajería de audio, fotos y recordatorios sociales, pero ninguno de sus eventos produce una señal que el sistema evalúe ni deriva en alerta. Aporta valor percibido, no valor operativo.
+Complementa la experiencia de acompañamiento con mensajería de audio, fotos y recordatorios sociales, pero ninguno de sus eventos produce una señal que el sistema evalúe ni deriva en alerta. Aporta valor percibido, no valor operativo. La Imagen 27 muestra los elementos que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/social-companionship.png" alt="Social Companionship - Bounded Context" width="700"/>
-  <br/><i>Imagen 16. Social Companionship - Bounded Context Supporting identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 27. Social Companionship - Bounded Context Supporting identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 ### Identity & Access - Generic <br>
-Resuelve un problema estándar (registro, autenticación, gestión de sesión) con reglas de negocio genéricas que no cambian por ser Serenia. Es indispensable para que exista cualquier otro contexto, pero no distingue a Serenia de ninguna otra aplicación.
+Resuelve un problema estándar (registro, autenticación, gestión de sesión) con reglas de negocio genéricas que no cambian por ser Serenia. Es indispensable para que exista cualquier otro contexto, pero no distingue a Serenia de ninguna otra aplicación. La Imagen 28 muestra los elementos que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/identity-and-access-context.png" alt="IAM - Bounded Context" width="700"/>
-  <br/><i>Imagen 17. Identity & Access - Bounded Context Generic identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 28. Identity & Access - Bounded Context Generic identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 Al finalizar, el equipo aplicó una verificación del lenguaje ubicuo sobre cada frontera, comprobando que ningún término tuviera dos significados dentro de un mismo contexto. Esta revisión confirmó, por ejemplo, la separación entre Daily Check-in y Wellbeing Monitoring. Otra discusión del equipo fue la frontera entre Daily Check-in y Social Companionship, por compartir ambos la dimensión emocional de la interacción; se resolvió mantenerlas separadas sobre la base de que únicamente el check-in produce una señal que el sistema evalúa, mientras que el acompañamiento social no está sujeto a ninguna evaluación.
 
 ## EventStorming Serenia
 
+La Imagen 29 reúne los seis bounded contexts en un solo tablero y muestra cómo se relacionan entre sí.
+
 <br>
 <div align="center">
   <img src="assets/img/event-storming/event-storming-serenia.png" alt="EventStorming - Serenia" width="700"/>
-  <br/><i>Imagen 18. Candidate Context Discovery completo del dominio de Serenia.</i>
+  <br/><i>Imagen 29. Candidate Context Discovery completo del dominio de Serenia.</i>
 </div>
 
 <br>
@@ -3278,13 +3284,13 @@ La selección de escenarios no buscó cobertura funcional completa, sino aquello
 
 **Domain Story 1: Registro y vinculación familiar**
 
-Este escenario resuelve el caso en que un adulto mayor se registra en Serenia y habilita a un familiar a distancia para acceder a su estado. Es la historia que da origen a toda relación posterior en el sistema: sin un vínculo familiar establecido, ningún otro flujo puede ejecutarse.
+Este escenario resuelve el caso en que un adulto mayor se registra en Serenia y habilita a un familiar a distancia para acceder a su estado. Es la historia que da origen a toda relación posterior en el sistema: sin un vínculo familiar establecido, ningún otro flujo puede ejecutarse. La Imagen 30 presenta el diagrama de esta historia.
 
 <br>
 
 <div align="center">
   <img src="assets/img/domain-message-flows-modeling/domain-story-1.png" alt="Domain Story 1" width="700"/>
-  <br/><i>Imagen 19. Domain Story 1 - Registro y vinculación familiar.</i>
+  <br/><i>Imagen 30. Domain Story 1 - Registro y vinculación familiar.</i>
 </div>
 
 <br>
@@ -3295,13 +3301,13 @@ El adulto mayor crea su cuenta en Identity & Access (1), el cual comunica la ide
 
 **Domain Story 2: Check-in diario y consulta del estado**
 
-Este escenario representa la operación cotidiana de Serenia y el caso de uso que sostiene su propuesta de valor: el adulto mayor comunica su bienestar sin necesidad de una llamada, y el familiar a distancia lo verifica sin necesidad de interrumpirlo.
+Este escenario representa la operación cotidiana de Serenia y el caso de uso que sostiene su propuesta de valor: el adulto mayor comunica su bienestar sin necesidad de una llamada, y el familiar a distancia lo verifica sin necesidad de interrumpirlo. La Imagen 31 presenta el diagrama de esta historia.
 
 <br>
 
 <div align="center">
   <img src="assets/img/domain-message-flows-modeling/domain-story-2.png" alt="Domain Story 2" width="700"/>
-  <br/><i>Imagen 20. Domain Story 2 - Check-in diario y consulta del estado.</i>
+  <br/><i>Imagen 31. Domain Story 2 - Check-in diario y consulta del estado.</i>
 </div>
 <br>
 
@@ -3311,13 +3317,13 @@ Daily Check-in envía la pregunta diaria al adulto mayor (1), quien responde el 
 
 **Domain Story 3: Detección de un patrón de malestar**
 
-Este escenario resuelve el caso en que el adulto mayor reporta malestar durante varios días consecutivos sin que ello constituya una emergencia. Es el flujo que distingue a Serenia de una aplicación de alertas reactivas, ya que actúa sobre una tendencia y no sobre un evento aislado.
+Este escenario resuelve el caso en que el adulto mayor reporta malestar durante varios días consecutivos sin que ello constituya una emergencia. Es el flujo que distingue a Serenia de una aplicación de alertas reactivas, ya que actúa sobre una tendencia y no sobre un evento aislado. La Imagen 32 presenta el diagrama de esta historia.
 
 <br>
 
 <div align="center">
   <img src="assets/img/domain-message-flows-modeling/domain-story-3.png" alt="Domain Story 3" width="700"/>
-  <br/><i>Imagen 21. Domain Story 3 - Detección de un patrón de malestar.</i>
+  <br/><i>Imagen 32. Domain Story 3 - Detección de un patrón de malestar.</i>
 </div>
 <br>
 
@@ -3349,7 +3355,7 @@ Los contextos se presentan por orden de importancia, iniciando por los clasifica
 
 <br>
 
-<table> <tr><th colspan="2">Bounded Context Canvas 4 — Care Circle</th></tr> <tr><td><b>Purpose</b></td><td>Establecer y administrar la relación entre el adulto mayor y sus familiares a distancia, determinando quiénes están vinculados a él, quién asume el turno de atención y qué información comparten entre sí, de modo que los demás contextos sepan a quién corresponde informar.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Supporting — no genera valor por sí solo, pero ningún contexto Core puede operar sin él.<br><b>Business Model:</b> Engagement Creator — la coordinación entre familiares incrementa el uso pero no se cobra de forma directa.<br><b>Evolution:</b> Custom Built — la estructura del círculo de cuidado responde a la dinámica familiar específica que Serenia atiende.</td></tr> <tr><td><b>Domain Roles</b></td><td>Registry context — mantiene y publica la estructura de relaciones. No interpreta información de bienestar ni emite alertas.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Registered identity (Event) — Identity &amp; Access, Conformist<br>Invitation code entered (Command) — Distant Relative, interacción directa de UI<br>Care shift assigned (Command) — Distant Relative, interacción directa de UI<br>Shared note added (Command) — Distant Relative, interacción directa de UI</td></tr> <tr><td><b>Outbound Communication</b></td><td>Invitation code (Event) — Older Adult, interacción directa de UI<br>Family link established (Event) — Daily Check-in, Wellbeing Monitoring, Alerts and Safety y Social Companionship, Published Language<br>Care shift confirmation (Event) — Distant Relative, interacción directa de UI</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Care Circle:</b> conjunto de familiares vinculados a un adulto mayor.<br><b>Family Link:</b> relación establecida entre la cuenta de un familiar y la de un adulto mayor.<br><b>Invitation Code:</b> credencial de un solo uso generada por el adulto mayor para habilitar un vínculo.<br><b>Care Shift:</b> responsabilidad de seguimiento asignada a un familiar para una fecha determinada.</td></tr> <tr><td><b>Business Decisions</b></td><td>El código de invitación es generado por el adulto mayor y corresponde a un solo uso; un código ya utilizado o expirado no permite vinculación (US02).<br>Una fecha admite un único turno de atención asignado; un segundo intento sobre la misma fecha se rechaza (US20).<br>Un adulto mayor puede tener varios familiares vinculados simultáneamente.</td></tr> <tr><td><b>Assumptions</b></td><td>La transmisión del código de invitación del adulto mayor al familiar ocurre por un canal externo al sistema.<br>El adulto mayor es siempre quien origina el vínculo, nunca el familiar.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Proporción de códigos de invitación generados que derivan en un vínculo efectivo.<br>Número promedio de familiares vinculados por adulto mayor.<br>Frecuencia de uso de la asignación de turnos.</td></tr> <tr><td><b>Open Questions</b></td><td>¿El código de invitación tiene un plazo de expiración definido?<br>¿Puede un vínculo familiar ser revocado y por quién?</td></tr> </table>
+<table> <tr><th colspan="2">Bounded Context Canvas 4 — Care Circle</th></tr> <tr><td><b>Purpose</b></td><td>Establecer y administrar la relación entre el adulto mayor y sus familiares a distancia, determinando quiénes están vinculados a él, quién asume el turno de atención y qué información comparten entre sí, de modo que los demás contextos sepan a quién corresponde informar.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Supporting — no genera valor por sí solo, pero ningún contexto Core puede operar sin él.<br><b>Business Model:</b> Engagement Creator — la coordinación entre familiares incrementa el uso pero no se cobra de forma directa.<br><b>Evolution:</b> Custom Built — la estructura del círculo de cuidado responde a la dinámica familiar específica que Serenia atiende.</td></tr> <tr><td><b>Domain Roles</b></td><td>Registry context — mantiene y publica la estructura de relaciones. No interpreta información de bienestar ni emite alertas.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Registered identity (Event) — Identity &amp; Access, Shared Kernel<br>Invitation code entered (Command) — Distant Relative, interacción directa de UI<br>Care shift assigned (Command) — Distant Relative, interacción directa de UI<br>Shared note added (Command) — Distant Relative, interacción directa de UI</td></tr> <tr><td><b>Outbound Communication</b></td><td>Invitation code (Event) — Older Adult, interacción directa de UI<br>Family link established (Event) — Daily Check-in, Wellbeing Monitoring, Alerts and Safety y Social Companionship, Published Language<br>Care shift confirmation (Event) — Distant Relative, interacción directa de UI</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Care Circle:</b> conjunto de familiares vinculados a un adulto mayor.<br><b>Family Link:</b> relación establecida entre la cuenta de un familiar y la de un adulto mayor.<br><b>Invitation Code:</b> credencial de un solo uso generada por el adulto mayor para habilitar un vínculo.<br><b>Care Shift:</b> responsabilidad de seguimiento asignada a un familiar para una fecha determinada.</td></tr> <tr><td><b>Business Decisions</b></td><td>El código de invitación es generado por el adulto mayor y corresponde a un solo uso; un código ya utilizado o expirado no permite vinculación (US02).<br>Una fecha admite un único turno de atención asignado; un segundo intento sobre la misma fecha se rechaza (US20).<br>Un adulto mayor puede tener varios familiares vinculados simultáneamente.</td></tr> <tr><td><b>Assumptions</b></td><td>La transmisión del código de invitación del adulto mayor al familiar ocurre por un canal externo al sistema.<br>El adulto mayor es siempre quien origina el vínculo, nunca el familiar.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Proporción de códigos de invitación generados que derivan en un vínculo efectivo.<br>Número promedio de familiares vinculados por adulto mayor.<br>Frecuencia de uso de la asignación de turnos.</td></tr> <tr><td><b>Open Questions</b></td><td>¿El código de invitación tiene un plazo de expiración definido?<br>¿Puede un vínculo familiar ser revocado y por quién?</td></tr> </table>
 
 <br>
 
@@ -3367,12 +3373,12 @@ La elaboración de los seis canvases permitió pasar de una descripción de los 
 
 ### 2.5.2. Context Mapping
 
-A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety, Social Companionship), el equipo elaboró un Context Map para visualizar y explicar las relaciones estructurales entre ellos, revisando la información recolectada en las etapas previas de investigación para producir el diseño candidato.
+A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety, Social Companionship), el equipo elaboró un Context Map para visualizar y explicar las relaciones estructurales entre ellos, revisando la información recolectada en las etapas previas de investigación para producir el diseño candidato. La Imagen 33 muestra el Context Map resultante.
 
 <div align="center">
 
 ![Context Map - Serenia](assets/img/context-mapping/context-map.png)
-  <br/><i>Imagen 22. Context Mapping Diagram.</i>
+  <br/><i>Imagen 33. Context Mapping Diagram.</i>
 </div>
 
 **URL del tablero en Miro:** https://miro.com/app/board/uXjVHm8lGW8=/
@@ -3398,13 +3404,13 @@ A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-
 
 #### 2.5.3.1. Software Architecture Context Level Diagrams
 
-En esta sección se presenta el *System Context Diagram*, primer nivel del C4 Model, elaborado en Structurizr. Este diagrama muestra al sistema Serenia como una única caja central, rodeada de los usuarios y de los sistemas externos con los que interactúa, sin entrar en detalles internos de la solución.
+En esta sección se presenta el *System Context Diagram*, primer nivel del C4 Model, elaborado en Structurizr. Este diagrama muestra al sistema Serenia como una única caja central, rodeada de los usuarios y de los sistemas externos con los que interactúa, sin entrar en detalles internos de la solución. La Imagen 34 presenta el diagrama.
 
 <br>
 <div align="center">
 
 ![System Context Diagram - Serenia](assets/img/software-architecture/context-diagram.png)
-  <br/><i>Imagen 23. System Context Diagram de Serenia.</i>
+  <br/><i>Imagen 34. System Context Diagram de Serenia.</i>
 
 </div>
 
@@ -3416,27 +3422,27 @@ Como se observa en el diagrama, el sistema Serenia interactúa con dos tipos de 
 
 #### 2.5.3.2. Software Architecture Container Level Diagrams
 
-En esta sección se presenta el *Container Diagram*, segundo nivel del C4 Model, el cual descompone al sistema Serenia en los grandes bloques tecnológicos (aplicaciones, servicios y almacenes de datos) que lo conforman, indicando la tecnología empleada en cada uno y la forma en que se comunican entre sí.
+En esta sección se presenta el *Container Diagram*, segundo nivel del C4 Model, el cual descompone al sistema Serenia en los grandes bloques tecnológicos (aplicaciones, servicios y almacenes de datos) que lo conforman, indicando la tecnología empleada en cada uno y la forma en que se comunican entre sí. La Imagen 35 presenta el diagrama.
 
 
 <br>
 <div align="center">
 
 ![Container Diagram - Serenia](assets/img/software-architecture/container-diagram.png)
-  <br/><i>Imagen 24. Container Diagram de Serenia.</i>
+  <br/><i>Imagen 35. Container Diagram de Serenia.</i>
 
 </div><br>
 
 El diagrama evidencia los principales contenedores de la solución: la **aplicación móvil** (consumida por el adulto mayor y el cuidador a distancia), la **landing page web** (donde se presenta el producto y sus planes a nuevos usuarios), la **API REST** desarrollada en **Spring Boot** —implementada como un **monolito modular**, organizado internamente en un módulo por cada bounded context identificado en el Big Picture EventStorming (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety y Social Companionship), la **base de datos MySQL** donde se persiste, en esquemas separados por bounded context, la información de cuentas, círculos familiares, check-ins y alertas, y el **servicio de notificaciones push** (proveedor aún por definir por el equipo), encargado de entregar en tiempo real las alertas de emergencia y los recordatorios sociales. Todos los contenedores de cliente (móvil y web) se comunican con la API REST mediante peticiones HTTPS/JSON. La composición interna de dicho monolito por módulos se detalla más adelante en los *Component Level Diagrams* de cada bounded context.
 
-Como evidencia complementaria de esta organización modular, se presenta a continuación el diagrama de componentes interno del contenedor API REST, elaborado también en Structurizr, que muestra los módulos correspondientes a cada bounded context y sus relaciones de dependencia:
+Como evidencia complementaria de esta organización modular, se presenta a continuación, en la Imagen 36, el diagrama de componentes interno del contenedor API REST, elaborado también en Structurizr, que muestra los módulos correspondientes a cada bounded context y sus relaciones de dependencia:
 
 <br>
 
 <div align="center">
 
 ![Component Diagram - API REST de Serenia](assets/img/software-architecture/api-component.png)
-  <br/><i>Imagen 25. Component Diagram del contenedor API REST, organizado por bounded context.</i>
+  <br/><i>Imagen 36. Component Diagram del contenedor API REST, organizado por bounded context.</i>
 
 </div>
 
@@ -3446,13 +3452,13 @@ Como se observa, el módulo **IAM** valida la identidad y los permisos que consu
 
 #### 2.5.3.3. Software Architecture Deployment Diagrams
 
-En esta sección se presenta el *Deployment Diagram*, el cual muestra la distribución física del sistema, destacando cómo los contenedores de software descritos en la sección anterior se despliegan sobre el hardware y los entornos correspondientes. Este diagrama visualiza los dispositivos, servidores, redes y demás nodos físicos que alojan el software, así como las relaciones y dependencias entre ellos.
+En esta sección se presenta el *Deployment Diagram*, el cual muestra la distribución física del sistema, destacando cómo los contenedores de software descritos en la sección anterior se despliegan sobre el hardware y los entornos correspondientes. Este diagrama visualiza los dispositivos, servidores, redes y demás nodos físicos que alojan el software, así como las relaciones y dependencias entre ellos. La Imagen 37 presenta el diagrama.
 
 <br>
 <div align="center">
 
 ![Deployment Diagram - Serenia](assets/img/software-architecture/deployment-diagram.png)
-  <br/><i>Imagen 26. Deployment Diagram de Serenia.</i>
+  <br/><i>Imagen 37. Deployment Diagram de Serenia.</i>
 
 </div>
 <br>
@@ -4395,7 +4401,7 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 <div align="center">
 
 ![Component Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-diagram.png)
-  <br/><i>Imagen 27. Component Diagram del Bounded Context Wellbeing Monitoring.</i>
+  <br/><i>Imagen X. Component Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
 
@@ -4411,7 +4417,7 @@ Diagrama de clases de la capa Domain: En esta imagen se muestran las clases del 
 <div align="center">
 
 ![Class Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-class-diagram.png)
-  <br/><i>Imagen 28. Class Diagram del Bounded Context Wellbeing Monitoring.</i>
+  <br/><i>Imagen X. Class Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
 
@@ -4470,7 +4476,7 @@ Diagrama de base de datos: En esta imagen se muestra el diseño de las tablas co
 <div align="center">
 
 ![Database Design Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-database-diagram.png)
-  <br/><i>Imagen 29. Database Design Diagram del Bounded Context Wellbeing Monitoring.</i>
+  <br/><i>Imagen X. Database Design Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
 
@@ -4906,6 +4912,30 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 
 # Conclusiones
 ## Conclusiones y Recomendaciones
+
+Esta primera entrega abarca el análisis del problema, la propuesta de valor y el diseño de la solución. Todavía no hay desarrollo de código ni pruebas con usuarios sobre el producto, por lo que las conclusiones contrastan lo planteado en el proceso de Lean UX (sección 1.2.2) con lo encontrado en las entrevistas de descubrimiento (sección 2.2), y las recomendaciones señalan lo que debe validarse en las siguientes entregas.
+
+**Conclusiones**
+
+1. **El problema planteado se confirma, y se observa desde los dos lados.** El Problem Statement describe la ausencia de un canal ligero entre "no comunicarse" y "llamar todos los días". En las entrevistas, los 4 familiares a distancia se preocupan cuando no pueden verificar cómo está el adulto mayor, y los 3 adultos mayores evitan contar sus problemas para no preocupar a sus familiares. Ambos segmentos sufren el mismo vacío desde extremos opuestos, lo que respalda una solución de dos aplicaciones conectadas. La muestra es pequeña (7 entrevistas), por lo que estos resultados orientan el diseño pero no permiten generalizar.
+
+2. **Los assumptions de usuario se cumplen en su mayoría, con dos matices.** Los 3 adultos mayores cuentan con smartphone, tal como se asumió, pero los 3 reportan dificultades con funciones nuevas o con la lentitud de las aplicaciones. Esto exige mantener el check-in de un solo toque y el modo simplificado, y no dar por hecho que sabrán resolver cualquier interacción. Por otro lado, la desconfianza hacia soluciones de vigilancia se confirmó en el segmento de familiares (2 de 4 la expresaron de forma directa), mientras que en los adultos mayores el freno observado fue el temor a ser una carga, más que a ser vigilados.
+
+3. **Los Hypothesis Statements siguen sin validarse.** Las cuatro hipótesis (adopción diaria del check-in, "cuéntame algo", panel de estado con alertas selectivas y botón de auxilio) y sus criterios de éxito (alta tasa de check-ins, menos llamadas por ansiedad y uso recurrente del panel) requieren observar el uso real del producto. Las entrevistas de descubrimiento muestran que la necesidad existe, pero no demuestran adopción. La asunción de mayor riesgo continúa siendo que el Segmento 1 adopte el check-in diario como hábito, tal como se señaló en el Lean UX Canvas.
+
+4. **El modelado estratégico dio como resultado seis bounded contexts con fronteras justificadas.** El proceso de EventStorming en diez pasos (sección 2.5.1) permitió delimitar tres contextos Core (Daily Check-in, Wellbeing Monitoring y Alerts & Safety), dos Supporting (Care Circle y Social Companionship) y uno Generic (Identity & Access). Los tres Core coinciden con la propuesta de valor: capturar la señal diaria, interpretarla y alertar cuando corresponde. El Context Map (sección 2.5.2) formaliza sus relaciones con un Shared Kernel mínimo (Account ID y Role), relaciones Customer/Supplier entre los demás contextos y una Anti-Corruption Layer frente al proveedor externo de notificaciones push.
+
+5. **El diseño es coherente entre sus artefactos, pero deja decisiones abiertas.** Diez de las preguntas abiertas de los Bounded Context Canvases (por ejemplo, la vigencia del código de invitación, quién revoca un vínculo, cuántos días forman un patrón de malestar y cuánto dura la ventana de inactividad) se llevaron al EventStorming como pain points (paso 3) y siguen sin respuesta definitiva. El Product Backlog de 46 ítems distribuidos en tres sprints (sección 2.4.3) y la arquitectura de monolito modular con un módulo por bounded context (sección 2.5.3) son consistentes con esa delimitación.
+
+**Recomendaciones**
+
+1. **Validar primero la asunción de mayor riesgo.** En las entrevistas de validación (Capítulo IV), medir con usuarios reales de ambos segmentos si el adulto mayor responde el check-in diario de forma sostenida. Los criterios de éxito del Problem Statement deben convertirse en métricas concretas antes de esas sesiones.
+
+2. **Resolver las preguntas abiertas antes de implementar el contexto que las contiene.** Las que afectan al Sprint 1 son la vigencia y la revocación de vínculos (US02, TS03) y a quién se notifica ante una emergencia (US14). Las que afectan al Sprint 2 son la ventana de inactividad (US16) y los días que configuran un patrón de malestar (US18).
+
+3. **Mantener el orden de construcción del Product Backlog.** El Sprint 1 concentra el núcleo mínimo (registro, vínculo familiar, check-in, botón de auxilio y recepción de alertas), el Sprint 2 agrega la interpretación de bienestar, las alertas por inactividad y los turnos de atención, y el Sprint 3 completa Social Companionship (recordatorios sociales y fotografías), agrega las notas compartidas e integra las notificaciones push (SP01). Este orden respeta que Identity & Access y Care Circle son prerequisitos de los demás contextos.
+
+4. **Tratar la accesibilidad y la privacidad como requisitos de primer nivel.** Dado que los 3 adultos mayores reportaron dificultades tecnológicas, conviene probar la interfaz con ellos desde el primer prototipo (NF01, NF04, US08). Dado que 2 de 4 familiares desconfían de la vigilancia, las alertas deben mantenerse selectivas y el producto debe dejar claro qué información se comparte (NF03).
 
 <br>
 
