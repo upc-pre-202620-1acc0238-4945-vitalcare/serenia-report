@@ -4508,21 +4508,21 @@ Clases que implementan los casos de uso del dominio. Orquesta los agregados, rep
 
 Clases que implementan los detalles técnicos de persistencia y comunicación externa. Depende del dominio pero nunca al revés — toda referencia apunta hacia adentro.
 
-**Sub-capa Persistence — JPA Entities**
+**Sub-capa Persistence — Room Entities**
 
 | Nombre | Descripción |
 |---|---|
-| AudioMessageEntity | Representación de la tabla audio_messages en base de datos. Contiene los campos de persistencia del agregado AudioMessage. |
-| PhotoMessageEntity | Representación de la tabla photo_messages en base de datos. Contiene los campos de persistencia del agregado PhotoMessage. |
-| SocialReminderEntity | Representación de la tabla social_reminders en base de datos. Contiene los campos de persistencia del agregado SocialReminder. |
+| AudioMessageEntity | Clase anotada con `@Entity` que representa la tabla `audio_messages` en SQLite. Contiene los campos de persistencia del agregado `AudioMessage`. |
+| PhotoMessageEntity | Clase anotada con `@Entity` que representa la tabla `photo_messages` en SQLite. Contiene los campos de persistencia del agregado `PhotoMessage`. |
+| SocialReminderEntity | Clase anotada con `@Entity` que representa la tabla `social_reminders` en SQLite. Contiene los campos de persistencia del agregado `SocialReminder`. |
 
-**Sub-capa Persistence — JPA Repositories**
+**Sub-capa Persistence — Room DAOs**
 
 | Nombre | Descripción |
 |---|---|
-| AudioMessageJpaRepository | Repositorio Spring Data JPA para la entidad `AudioMessageEntity`. Expone las operaciones de acceso a datos de bajo nivel. |
-| PhotoMessageJpaRepository | Repositorio Spring Data JPA para la entidad `PhotoMessageEntity`. |
-| SocialReminderJpaRepository | Repositorio Spring Data JPA para la entidad `SocialReminderEntity`. Incluye consulta por círculo de cuidado y estado activo. |
+| AudioMessageDao | Interfaz anotada con `@Dao` que define las operaciones de acceso a datos de bajo nivel para mensajes de audio. |
+| PhotoMessageDao | Interfaz anotada con `@Dao` que define las operaciones de acceso a datos de bajo nivel para mensajes de foto. |
+| SocialReminderDao | Interfaz anotada con `@Dao` que define las operaciones de acceso a datos para recordatorios sociales, incluyendo consulta por círculo de cuidado y estado activo. |
 
 **Sub-capa Persistence — Repository Implementations**
 
