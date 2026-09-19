@@ -4538,21 +4538,21 @@ Clases que implementan los casos de uso del dominio. Orquesta los agregados, rep
 
 Clases que implementan los detalles técnicos de persistencia y comunicación externa. Depende del dominio pero nunca al revés — toda referencia apunta hacia adentro.
 
-**Sub-capa Persistence — JPA Entities**
+**Sub-capa Persistence — Room Entities**
 
 | Nombre | Descripción |
 |---|---|
-| AudioMessageEntity | Representación de la tabla audio_messages en base de datos. Contiene los campos de persistencia del agregado AudioMessage. |
-| PhotoMessageEntity | Representación de la tabla photo_messages en base de datos. Contiene los campos de persistencia del agregado PhotoMessage. |
-| SocialReminderEntity | Representación de la tabla social_reminders en base de datos. Contiene los campos de persistencia del agregado SocialReminder. |
+| AudioMessageEntity | Clase anotada con `@Entity` que representa la tabla `audio_messages` en SQLite. Contiene los campos de persistencia del agregado `AudioMessage`. |
+| PhotoMessageEntity | Clase anotada con `@Entity` que representa la tabla `photo_messages` en SQLite. Contiene los campos de persistencia del agregado `PhotoMessage`. |
+| SocialReminderEntity | Clase anotada con `@Entity` que representa la tabla `social_reminders` en SQLite. Contiene los campos de persistencia del agregado `SocialReminder`. |
 
-**Sub-capa Persistence — JPA Repositories**
+**Sub-capa Persistence — Room DAOs**
 
 | Nombre | Descripción |
 |---|---|
-| AudioMessageJpaRepository | Repositorio Spring Data JPA para la entidad `AudioMessageEntity`. Expone las operaciones de acceso a datos de bajo nivel. |
-| PhotoMessageJpaRepository | Repositorio Spring Data JPA para la entidad `PhotoMessageEntity`. |
-| SocialReminderJpaRepository | Repositorio Spring Data JPA para la entidad `SocialReminderEntity`. Incluye consulta por círculo de cuidado y estado activo. |
+| AudioMessageDao | Interfaz anotada con `@Dao` que define las operaciones de acceso a datos de bajo nivel para mensajes de audio. |
+| PhotoMessageDao | Interfaz anotada con `@Dao` que define las operaciones de acceso a datos de bajo nivel para mensajes de foto. |
+| SocialReminderDao | Interfaz anotada con `@Dao` que define las operaciones de acceso a datos para recordatorios sociales, incluyendo consulta por círculo de cuidado y estado activo. |
 
 **Sub-capa Persistence — Repository Implementations**
 
@@ -4577,10 +4577,25 @@ Clases que implementan los detalles técnicos de persistencia y comunicación ex
 
 #### 2.6.5.5. Bounded Context Software Architecture Component Level Diagrams
 
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Social Companionship, elaborado con la herramienta Structurizr. El diagrama descompone el módulo de acompañamiento social dentro del container API REST y muestra cómo sus componentes se distribuyen entre las cuatro capas del diseño táctico, respetando la regla de dependencia unidireccional hacia el dominio.
+
+El flujo de entrada llega desde la Aplicación Móvil hacia los tres componentes de la capa Interface: AudioMessagesController, que atiende la grabación, compartición, descarte y reproducción de mensajes de audio; PhotoMessagesController, que atiende la compartición y visualización de mensajes de foto; y SocialRemindersController, que atiende la programación, completado y cancelación de recordatorios sociales. Los tres delegan en la capa Application, donde los servicios de comando resuelven las operaciones de escritura y los servicios de consulta las de lectura, uno por cada aggregate del contexto.
+
+En el centro del diagrama se ubican los tres aggregates: AudioMessage, PhotoMessage y SocialReminder, junto con los Commands y Queries que expresan las intenciones del contexto y los Domain Events que se publican al completarse cada operación. Alrededor de los aggregates se muestran las abstracciones que el dominio declara y que ninguna capa superior implementa: IAudioMessageRepository, IPhotoMessageRepository, ISocialReminderRepository e IDomainEventPublisher.
+
+La capa Infrastructure aparece en el extremo opuesto, con las implementaciones concretas de esas abstracciones: AudioMessageRepository, PhotoMessageRepository y SocialReminderRepository, que persisten cada aggregate sobre SQLite apoyándose en sus respectivos mappers de persistencia; y DomainEventPublisherAdapter, que publica los eventos de dominio dentro del monolito modular para que otros módulos reaccionen a ellos. Las flechas evidencian que las dependencias apuntan siempre hacia el dominio y que ningún componente de Interface accede directamente a la base de datos.
+
+<div align="center">
+
+![DComponent Level- Social Companionship](assets/img/bounded-context/social-companionship/SocialCompanionshipComponents.png)
+  <br/><i>Imagen X. Component Level Diagram del Bounded Context Social Companionship.</i>
+
+</div>
 <br>
 
 #### 2.6.5.6. Bounded Context Software Architecture Code Level Diagrams
 
+En esta sección se presentan los diagramas de mayor nivel de detalle sobre la implementación del bounded context Social Companionship. Se incluye el diagrama de clases de la capa Domain y el diagrama de diseño de base de datos correspondiente a las tablas que dan persistencia al aggregate.
 <br>
 
 ##### 2.6.5.6.1. Bounded Context Domain Layer Class Diagrams
