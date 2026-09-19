@@ -4341,9 +4341,91 @@ Diagrama de base de datos: En esta imagen se muestra el diseño de las tablas co
 
 ### 2.6.5. Bounded Context: Social Companionship
 
+Social Companionship es el bounded context que sostiene el vínculo emocional entre el adulto mayor y sus familiares, sin ningún fin de monitoreo. Cubre la grabación y envío de mensajes de audio del adulto mayor hacia el familiar, la reproducción de esos audios, y la gestión de recordatorios de contacto social como llamar a una amistad o asistir a una actividad — incluyendo posponerlos o marcarlos como completados.
 <br>
 
 #### 2.6.5.1. Domain Layer
+
+Clases que representan el núcleo del negocio. No depende de ninguna otra capa — es el centro del que todo lo demás depende.
+
+**Sub-capa Domain Model — Aggregates**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessage | Aggregate root del flujo de mensajes de audio. Gestiona su ciclo de vida: grabado, compartido y descartado. |
+| PhotoMessage | Aggregate root del flujo de mensajes de foto. Gestiona su compartición y visualización dentro del círculo. |
+| SocialReminder | Aggregate root de los recordatorios sociales. Gestiona su ciclo de vida: pendiente, completado y cancelado. |
+
+**Sub-capa Domain Model — Value Objects**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageId | Identificador único de un mensaje de audio. Evita el uso de UUID primitivo en el dominio. |
+| PhotoMessageId | Identificador único de un mensaje de foto. |
+| SocialReminderId | Identificador único de un recordatorio social. |
+| CareCircleId | Referencia al círculo de cuidado al que pertenece el mensaje o recordatorio. Identifica el contexto sin acoplarse a su modelo. |
+| SenderId | Identificador del familiar que originó el mensaje o el recordatorio. |
+| AudioUrl | URL de reproducción del archivo de audio. Encapsula validación de formato. |
+| PhotoUrl | URL de visualización de la foto. Encapsula validación de formato. |
+| AudioMessageStatus | Estado del mensaje de audio: RECORDED, SHARED o DISCARDED. |
+| PhotoMessageStatus | Estado del mensaje de foto: SHARED. |
+| SocialReminderStatus | Estado del recordatorio: PENDING, COMPLETED o CANCELLED. |
+| ReminderTitle | Título del recordatorio. No puede ser cadena vacía. |
+| ReminderDescription | Descripción opcional del recordatorio. |
+| ScheduledDate | Fecha programada del recordatorio. Debe ser posterior al momento de creación. |
+
+**Sub-capa Domain Model — Commands**
+
+| Nombre | Descripción |
+|---|---|
+| RecordAudioMessageCommand | Intención de iniciar la grabación de un mensaje de audio. |
+| ShareAudioMessageCommand | Intención de compartir un audio ya grabado con el destinatario del círculo. |
+| DiscardAudioMessageCommand | Intención de descartar un mensaje de audio antes de compartirlo. |
+| PlayAudioMessageCommand | Intención de registrar la reproducción de un mensaje de audio. |
+| SharePhotoMessageCommand | Intención de compartir una foto con el círculo de cuidado. |
+| ScheduleSocialReminderCommand | Intención de programar un recordatorio social con título, descripción y fecha. |
+| CompleteSocialReminderCommand | Intención de marcar un recordatorio como completado. |
+| CancelSocialReminderCommand | Intención de cancelar un recordatorio pendiente. |
+
+**Sub-capa Domain Model — Queries**
+
+| Nombre | Descripción |
+|---|---|
+| GetAudioMessageByIdQuery | Consulta para obtener un mensaje de audio por su identificador. |
+| GetPhotoMessageByIdQuery | Consulta para obtener un mensaje de foto por su identificador. |
+| GetSocialRemindersByCircleQuery | Consulta para obtener los recordatorios activos de un círculo de cuidado. |
+
+**Sub-capa Domain Model — Events**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageRecordedEvent | Se emite cuando un mensaje de audio es grabado exitosamente. |
+| AudioMessageSharedEvent | Se emite cuando un mensaje de audio es compartido con el destinatario. |
+| AudioMessageDiscardedEvent | Se emite cuando un mensaje de audio es descartado antes de compartirse. |
+| AudioMessagePlayedEvent | Se emite cuando un mensaje de audio es reproducido. |
+| PhotoMessageSharedEvent | Se emite cuando una foto es compartida con el círculo de cuidado. |
+| SocialReminderScheduledEvent | Se emite cuando un recordatorio social es programado. |
+| SocialReminderCompletedEvent | Se emite cuando un recordatorio es marcado como completado. |
+| SocialReminderCancelledEvent | Se emite cuando un recordatorio pendiente es cancelado. |
+
+**Sub-capa Domain Model — Services**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageCommandService | Interfaz que define los casos de uso de escritura sobre mensajes de audio. |
+| AudioMessageQueryService | Interfaz que define los casos de uso de lectura sobre mensajes de audio. |
+| PhotoMessageCommandService | Interfaz que define los casos de uso de escritura sobre mensajes de foto. |
+| PhotoMessageQueryService | Interfaz que define los casos de uso de lectura sobre mensajes de foto. |
+| SocialReminderCommandService | Interfaz que define los casos de uso de escritura sobre recordatorios sociales. |
+| SocialReminderQueryService | Interfaz que define los casos de uso de lectura sobre recordatorios sociales. |
+
+**Sub-capa Domain Model — Repositories**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageRepository | Puerto de salida que define las operaciones de persistencia para mensajes de audio. La implementación vive en la capa de infraestructura. |
+| PhotoMessageRepository | Puerto de salida que define las operaciones de persistencia para mensajes de foto. |
+| SocialReminderRepository | Puerto de salida que define las operaciones de persistencia para recordatorios sociales. |
 
 <br>
 
