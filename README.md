@@ -4586,7 +4586,7 @@ La capa Infrastructure aparece en el extremo opuesto, con las implementaciones c
 
 <div align="center">
 
-![DComponent Level- Social Companionship](assets/img/bounded-context/social-companionship/SocialCompanionshipComponents.png)
+![DComponent Level- Social Companionship](assets/img/bounded-context/social-companionship/social-companionship-components.png)
   <br/><i>Imagen X. Component Level Diagram del Bounded Context Social Companionship.</i>
 
 </div>
@@ -4599,6 +4599,20 @@ En esta sección se presentan los diagramas de mayor nivel de detalle sobre la i
 
 ##### 2.6.5.6.1. Bounded Context Domain Layer Class Diagrams
 
+El diagrama de clases representa la capa Domain del bounded context Social Companionship, elaborado con la herramienta PlantUML. En él se muestran las clases, interfaces y enumeraciones del dominio junto con sus atributos, métodos y el scope de cada miembro.
+
+Los elementos centrales son los tres aggregate roots del contexto: AudioMessage, PhotoMessage y SocialReminder. Sus atributos son privados y solo se modifican a través de sus métodos públicos, lo que garantiza que ninguna regla del ciclo de vida de un mensaje o recordatorio pueda vulnerarse desde fuera del aggregate. AudioMessage gestiona los estados RECORDED, SHARED y DISCARDED mediante los métodos record, share, discard y play. PhotoMessage encapsula el acto de compartir una foto dentro del círculo. SocialReminder gestiona los estados PENDING, COMPLETED y CANCELLED mediante los métodos schedule, complete y cancel.
+
+Los value objects aparecen relacionados con cada aggregate por composición con multiplicidad 1, salvo ReminderDescription, que es opcional y se relaciona con multiplicidad 0..1. Estos tipos encapsulan las validaciones de formato y evitan la obsesión por primitivos: el dominio nunca maneja una URL de audio, un título de recordatorio o una fecha programada como cadenas o primitivos simples. Las enumeraciones AudioMessageStatus, PhotoMessageStatus y SocialReminderStatus se asocian también a sus respectivos aggregates con multiplicidad 1 y expresan el estado del ciclo de vida de cada uno.
+
+El diagrama incluye además los Commands y Queries que expresan las intenciones de escritura y lectura del contexto, y los Domain Events que cada aggregate registra al completarse cada operación. Finalmente se muestran las abstracciones declaradas por el dominio: IAudioMessageRepository, IPhotoMessageRepository e ISocialReminderRepository, que definen los contratos de persistencia de cada aggregate; IAudioMessageCommandService, IPhotoMessageCommandService e ISocialReminderCommandService, que definen las operaciones de escritura; IAudioMessageQueryService, IPhotoMessageQueryService e ISocialReminderQueryService, que definen las operaciones de lectura; e IDomainEventPublisher, que aísla al dominio del mecanismo técnico de publicación de eventos. Ninguna de estas interfaces depende de las capas superiores, de modo que las dependencias apuntan siempre hacia el dominio.
+
+<div align="center">
+
+![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/social-class-diagram.svg)
+  <br/><i>Imagen X. Class Diagram del Bounded Context Social Companionship.</i>
+
+</div>
 <br>
 
 ##### 2.6.5.6.2. Bounded Context Database Design Diagram
