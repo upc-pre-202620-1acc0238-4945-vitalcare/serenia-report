@@ -3805,10 +3805,9 @@ Clases que resuelven el acceso a la base de datos y a los mecanismos técnicos d
 |---|---|---|
 | **DomainEventPublisherAdapter** | Publica los eventos de dominio generados por las operaciones de Care Circle dentro del monolito modular, permitiendo que otros módulos reaccionen a eventos como la creación del Care Circle, establecimiento del vínculo familiar, asignación de turnos o creación de notas compartidas. | Implementa IDomainEventPublisher. |
 <br>
-
 #### 2.6.2.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Care Circle, elaborado en Structurizr. El diagrama detalla la arquitectura interna estructurada por capas: los *Controllers* como puntos de entrada REST (`CareCirclesController`, `FamilyLinksController`); los *Resources* y *Assemblers* para transformación de datos; los servicios de aplicación (`CareCircleCommandService`, `CareCircleQueryService`) y sus interfaces; y el acceso a datos mediante `CareCircleRepository`. Se incluye también el `RegisteredIdentityConsumer`, que reacciona a los eventos del módulo IAM.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Care Circle, elaborado en Structurizr. El diagrama detalla la arquitectura interna estructurada por capas: los *Controllers* como puntos de entrada REST (`CareCirclesController`, `FamilyLinksController`, `CareShiftsController`, `SharedNotesController`); los *Resources* y *Assemblers* encargados de la transformación de datos para la API; los servicios de aplicación (`CareCircleCommandService`, `CareCircleQueryService`) que implementan las interfaces del dominio; y el acceso a datos mediante `CareCircleRepository`. Se incluye también el `RegisteredIdentityConsumer`, que reacciona a los eventos publicados por el módulo externo Identity & Access para inicializar el círculo de cuidado.
 
 <div align="center">
 
@@ -3823,7 +3822,7 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 
 ##### 2.6.2.6.1. Bounded Context Domain Layer Class Diagrams
 
-El diagrama de clases UML muestra las dependencias internas de la capa de dominio. Se expone la interfaz `ICareCircleCommandService` y `ICareCircleQueryService` junto a sus implementaciones. El agregado raíz `CareCircle` gestiona el ciclo de vida de `FamilyLink`, `InvitationCode`, `CareShift` y `SharedNote`. También se detallan las enumeraciones de estado como `LinkStatus` y `InvitationStatus`.
+El siguiente diagrama de clases UML representa la capa de dominio del contexto Care Circle. Se ilustra la relación de composición entre el aggregate root `CareCircle` y sus entidades internas (`FamilyLink`, `InvitationCode`, `CareShift`, `SharedNote`). Se han incorporado las reglas de trazabilidad exigidas por el dominio, como el registro de quién asigna un turno (`assignedBy`), qué código generó un vínculo (`invitationCodeId`) y quién lo revocó (`revokedBy`). Asimismo, se detallan las interfaces de los servicios de aplicación (`ICareCircleCommandService`, `ICareCircleQueryService`) y sus implementaciones, las cuales orquestan la lógica interactuando con la interfaz del repositorio (`ICareCircleRepository`).
 
 <div align="center">
 
