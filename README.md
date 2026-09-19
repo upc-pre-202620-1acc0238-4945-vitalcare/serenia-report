@@ -4483,9 +4483,65 @@ Clases que exponen el bounded context hacia el exterior y traducen las peticione
 
 #### 2.6.5.3. Application Layer
 
+Clases que implementan los casos de uso del dominio. Orquesta los agregados, repositorios y eventos definidos en la capa de dominio sin contener lógica de negocio propia.
+
+**Sub-capa Application — Command Services**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageCommandServiceImpl | Implementa AudioMessageCommandService. Orquesta la grabación, compartición, descarte y reproducción de mensajes de audio. |
+| PhotoMessageCommandServiceImpl | Implementa PhotoMessageCommandService. Orquesta la compartición de mensajes de foto dentro del círculo. |
+| SocialReminderCommandServiceImpl | Implementa SocialReminderCommandService. Orquesta la programación, completado y cancelación de recordatorios sociales. |
+
+**Sub-capa Application — Query Services**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageQueryServiceImpl | Implementa AudioMessageQueryService. Resuelve las consultas de mensajes de audio por identificador. |
+| PhotoMessageQueryServiceImpl | Implementa PhotoMessageQueryService. Resuelve las consultas de mensajes de foto por identificador. |
+| SocialReminderQueryServiceImpl | Implementa SocialReminderQueryService. Resuelve las consultas de recordatorios activos de un círculo de cuidado. |
+
 <br>
 
 #### 2.6.5.4 Infrastructure Layer
+
+
+Clases que implementan los detalles técnicos de persistencia y comunicación externa. Depende del dominio pero nunca al revés — toda referencia apunta hacia adentro.
+
+**Sub-capa Persistence — JPA Entities**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageEntity | Representación de la tabla audio_messages en base de datos. Contiene los campos de persistencia del agregado AudioMessage. |
+| PhotoMessageEntity | Representación de la tabla photo_messages en base de datos. Contiene los campos de persistencia del agregado PhotoMessage. |
+| SocialReminderEntity | Representación de la tabla social_reminders en base de datos. Contiene los campos de persistencia del agregado SocialReminder. |
+
+**Sub-capa Persistence — JPA Repositories**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageJpaRepository | Repositorio Spring Data JPA para la entidad `AudioMessageEntity`. Expone las operaciones de acceso a datos de bajo nivel. |
+| PhotoMessageJpaRepository | Repositorio Spring Data JPA para la entidad `PhotoMessageEntity`. |
+| SocialReminderJpaRepository | Repositorio Spring Data JPA para la entidad `SocialReminderEntity`. Incluye consulta por círculo de cuidado y estado activo. |
+
+**Sub-capa Persistence — Repository Implementations**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageRepositoryImpl | Implementa AudioMessageRepository del dominio. Traduce entre el modelo de dominio y la entidad JPA usando los assemblers de persistencia. |
+| PhotoMessageRepositoryImpl | Implementa PhotoMessageRepository del dominio. |
+| SocialReminderRepositoryImpl | Implementa SocialReminderRepository del dominio. |
+
+**Sub-capa Persistence — Transform**
+
+| Nombre | Descripción |
+|---|---|
+| AudioMessageEntityFromModelAssembler | Convierte el agregado AudioMessage del dominio en su entidad de persistencia AudioMessageEntity. |
+| AudioMessageModelFromEntityAssembler | Convierte la entidad de persistencia AudioMessageEntity en el agregado AudioMessage del dominio. |
+| PhotoMessageEntityFromModelAssembler | Convierte el agregado PhotoMessage en su entidad de persistencia. |
+| PhotoMessageModelFromEntityAssembler | Convierte la entidad de persistencia PhotoMessageEntity en el agregado PhotoMessage. |
+| SocialReminderEntityFromModelAssembler | Convierte el agregado SocialReminder en su entidad de persistencia. |
+| SocialReminderModelFromEntityAssembler | Convierte la entidad de persistencia SocialReminderEntity en el agregado SocialReminder. |
 
 <br>
 
