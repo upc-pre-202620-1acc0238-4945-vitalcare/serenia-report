@@ -3918,72 +3918,99 @@ Incluye índices sobre `care_circle_id` y `author_id` que optimizan la consulta 
   <br/><i>Imagen X. Database Design Diagram del Bounded Context Care Circle.</i>
 </div>
 
-
 ### 2.6.3. Bounded Context: Daily Check-in
 
-El bounded context **Daily Check-in** es el corazón funcional del lado del adulto mayor. Su responsabilidad es capturar el estado diario del usuario mediante preguntas ligeras y rotativas, manejar recordatorios programados, modos simplificados y pausas voluntarias. No interpreta patrones ni genera alertas clínicas; simplemente recolecta la señal emocional y la publica.
+El bounded context **Daily Check-in** es el mecanismo principal de recolección de datos de Serenia. Su responsabilidad es interactuar con el adulto mayor diariamente para capturar su estado de bienestar mediante preguntas rotativas y ligeras. Asimismo, gestiona los horarios preferidos de notificación, los tiempos límite de respuesta y las pausas voluntarias del usuario. Este contexto actúa exclusivamente como un recolector (Execution Context); no interpreta tendencias ni genera alertas, sino que publica eventos de dominio para que los contextos de *Wellbeing Monitoring* y *Alerts & Safety* reaccionen según corresponda.
 
 <br>
 
 #### 2.6.3.1. Domain Layer
 
+En la capa de dominio se encapsula toda la lógica de negocio y las invariantes relacionadas con la captura del estado diario del adulto mayor.
+
 **Sub-capa Model - Aggregates y Entities:**
 
 | Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
 |---|---|---|---|---|
-| Aggregate | CheckIn | Registro histórico de interacción diaria. | Almacenar el nivel de ánimo reportado y controlar si el estado es PENDING, ANSWERED o MISSED. | Relacionado con Wellbeing Monitoring. |
-| Aggregate | CheckInSchedule | Horarios y tiempos límite. | Determinar en qué momento se debe generar la pregunta del día. | Vinculado al usuario. |
-| Entity | CheckInQuestion | Catálogo de preguntas rotativas. | Proveer la pregunta y tono para el check-in. | Relacionado con CheckIn. |
-| Entity | QuestionPause | Historial de pausas voluntarias. | Evitar alertas de inactividad durante días pausados. | Relacionado con el usuario. |
+| Aggregate | CheckIn | Registro histórico de interacción diaria. | Almacenar el nivel de ánimo reportado, la nota opcional y controlar el ciclo de vida del check-in (PENDING, ANSWERED o MISSED). | Publica eventos para Wellbeing y Alerts. Relacionado con CheckInQuestion. |
+| Aggregate | CheckInSchedule | Horarios y configuración por usuario. | Determinar la hora exacta de la notificación diaria, zona horaria y el límite de espera (time limit). | Referencia al usuario (OlderAdultId). |
+| Entity | CheckInQuestion | Catálogo de preguntas rotativas. | Proveer el texto y el tono conversacional para que el check-in no sea monótono. | Asociado al CheckIn generado. |
+| Entity | QuestionPause | Historial de días pausados voluntariamente. | Evitar la generación de preguntas y alertas de inactividad durante la fecha elegida por el adulto mayor. | Referencia al usuario. |
 
-**Sub-capa Model - Commands, Queries, Services y Events:**
+**Sub-capa Model - Commands:**
 
-| Tipo | Nombre | Descripción |
-|---|---|---|
-| Command | AnswerCheckInCommand | Intención del adulto mayor de registrar su estado de ánimo. |
-| Command | ConfigureScheduleCommand | Intención de establecer la hora del recordatorio diario. |
-| Query | GetTodayCheckInQuery | Intención de recuperar la pregunta activa del día. |
-| Interface | ICheckInCommandService | Contrato para procesar respuestas y horarios. |
-| Interface | ICheckInQueryService | Contrato para leer los check-ins pendientes. |
-| Interface | ICheckInRepository | Contrato de persistencia para el agregado CheckIn. |
-| Event | CheckInAnswered | Publicado al registrar respuesta. Consumido por Wellbeing Monitoring. |
-| Event | UnansweredCheckIn | Publicado al vencer el tiempo. Consumido por Alerts & Safety. |
+| Tipo | Nombre | Descripción | Responsabilidad Principal |
+|---|---|---|---|
+| Command | AnswerCheckInCommand | Comando para registrar una respuesta. | Representar la intención del adulto mayor de reportar su nivel de ánimo (`MoodLevel`). |
+| Command | ConfigureScheduleCommand | Comando para configurar el horario. | Establecer o actualizar la hora preferida del recordatorio diario y la zona horaria. |
+| Command | PauseQuestionsCommand | Comando para pausar el check-in. | Representar la intención de no recibir interacciones durante el día actual. |
+| Command | MarkCheckInMissedCommand | Comando interno de expiración. | Cambiar el estado a MISSED cuando vence el tiempo límite sin respuesta. |
+
+**Sub-capa Model - Queries:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal |
+|---|---|---|---|
+| Query | GetTodayCheckInQuery | Consulta de estado del día. | Recuperar el check-in pendiente o completado de la fecha actual para la interfaz. |
+| Query | GetCheckInScheduleQuery | Consulta de configuración. | Obtener las preferencias de horario del usuario. |
+
+**Sub-capa Repositories y Services (Interfaces):**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal |
+|---|---|---|---|
+| Interface | ICheckInRepository | Repositorio de CheckIn. | Definir operaciones CRUD para el registro diario. |
+| Interface | ICheckInScheduleRepository | Repositorio de Schedule. | Definir operaciones CRUD para la configuración de horarios y pausas. |
+| Interface | IDailyCheckInCommandService | Servicio de aplicación de comandos. | Contrato para procesar respuestas, configurar horarios y pausas. |
+| Interface | IDailyCheckInQueryService | Servicio de aplicación de consultas. | Contrato para lectura de pendientes y configuraciones. |
+
+**Sub-capa Model - Events:**
+
+| Tipo | Nombre | Descripción | Responsabilidad Principal |
+|---|---|---|---|
+| Event | CheckInAnswered | Evento de respuesta registrada. | Informar a *Wellbeing Monitoring* para que evalúe y acumule el dato en el historial. |
+| Event | UnansweredCheckIn | Evento de tiempo expirado. | Informar a *Alerts & Safety* para que inicie la ventana de inactividad (temporizador de alerta). |
 
 <br>
 
 #### 2.6.3.2. Interface Layer
 
+**Sub-capa REST - Controllers & Resources:**
+
 | Tipo | Nombre | Descripción | Responsabilidad Principal |
 |---|---|---|---|
-| Controller | CheckInsController | Controlador REST de Check-ins. | Exponer endpoints GET/POST para responder check-ins. |
-| Controller | SchedulesController | Controlador REST de horarios. | Exponer endpoints para configurar hora de notificación. |
-| Resource | AnswerCheckInResource | Estructura de datos para API. | DTO que transporta el nivel de ánimo seleccionado. |
-| Assembler | AnswerCheckInCommandAssembler | Transformador de datos. | Convierte el Resource REST al Command de dominio. |
-| Consumer | FamilyLinkEstablishedConsumer | Consumidor de eventos internos. | Activar las notificaciones al tener al menos un familiar vinculado. |
+| Controller | CheckInsController | Punto de entrada REST para el check-in. | Exponer el endpoint GET para ver la pregunta de hoy y POST para enviar la respuesta. |
+| Controller | SchedulesController | Punto de entrada REST para configuración. | Exponer endpoints PUT para actualizar el horario y crear pausas de preguntas. |
+| Resource | AnswerCheckInResource | Estructura de datos de entrada (DTO). | Transportar el nivel de ánimo (`MoodLevel`) desde la aplicación móvil. |
+| Assembler | DailyCheckInAssembler | Transformador de datos. | Convertir los Resources JSON en Commands del dominio y viceversa. |
+| Consumer | FamilyLinkEstablishedConsumer | Consumidor asíncrono (ACL). | Escuchar cuando *Care Circle* establece un vínculo para activar el cronograma del adulto mayor. |
 
 <br>
 
 #### 2.6.3.3. Application Layer
 
+**Sub-capa Internal - Services:**
+
 | Tipo | Nombre | Descripción | Responsabilidad Principal |
 |---|---|---|---|
-| Service | DailyCheckInCommandService | Implementación de comandos. | Ejecutar reglas de negocio al responder un check-in y publicar eventos. |
-| Service | DailyCheckInQueryService | Implementación de consultas. | Recuperar los datos de la base de datos sin modificar estado. |
+| Service | DailyCheckInCommandService | Implementación de comandos. | Valida reglas de negocio (ej. que no se responda un check-in vencido), actualiza el Aggregate y publica eventos de dominio. |
+| Service | DailyCheckInQueryService | Implementación de consultas. | Recupera datos para la vista sin modificar estado. |
 
 <br>
 
 #### 2.6.3.4 Infrastructure Layer
 
+**Sub-capa Persistence & Messaging:**
+
 | Tipo | Nombre | Descripción | Responsabilidad Principal |
 |---|---|---|---|
-| Repository | CheckInRepository | Implementación persistencia. | Operar sobre la tabla de MySQL para leer/guardar el estado del Check-in. |
-| Publisher | DomainEventPublisherAdapter | Adaptador de mensajería interna. | Propagar los eventos `CheckInAnswered` hacia el bus. |
+| Repository | CheckInRepository | Repositorio concreto de persistencia. | Operar sobre las tablas de MySQL mediante ORM o sentencias preparadas. |
+| Repository | CheckInScheduleRepository | Repositorio concreto de configuración. | Acceder a las tablas de horarios y pausas. |
+| Publisher | DomainEventPublisherAdapter | Adaptador de mensajería interna. | Propagar los eventos del dominio al bus interno (Event Bus) para los demás módulos. |
 
 <br>
 
 #### 2.6.3.5. Bounded Context Software Architecture Component Level Diagrams
 
-Este diagrama C4 ilustra la arquitectura de componentes de Daily Check-in. El Adulto Mayor interactúa con los *Controllers* (CheckInsController, SchedulesController). Estos delegan la lógica a los *Services* (DailyCheckInCommandService, DailyCheckInQueryService). El repositorio gestiona la persistencia del agregado *CheckIn* hacia la base de datos, y los *Consumers* permiten comunicación asíncrona con el módulo de Care Circle.
+En el siguiente Component Diagram C4 se ilustra la arquitectura de Daily Check-in. El adulto mayor interactúa a través de los *Controllers* (`CheckInsController`, `SchedulesController`), los cuales utilizan *Assemblers* para transformar los datos y delegar el flujo a los *Application Services* (`DailyCheckInCommandService`, `DailyCheckInQueryService`). Estos servicios orquestan los agregados y persisten el estado a través de los *Repositories*. Finalmente, las acciones clave publican eventos hacia el sistema mediante el *DomainEventPublisher*.
 
 <div align="center">
 
@@ -3998,7 +4025,7 @@ Este diagrama C4 ilustra la arquitectura de componentes de Daily Check-in. El Ad
 
 ##### 2.6.3.6.1. Bounded Context Domain Layer Class Diagrams
 
-El diagrama de clases UML muestra las dependencias y jerarquías del dominio de Daily Check-in. Destacan las interfaces `IDailyCheckInCommandService` y su respectiva implementación. El agregado `CheckIn` controla estados (`CheckInStatus`) y estados de ánimo (`MoodLevel`).
+El diagrama de clases UML expone el modelo estricto de la capa de dominio. Muestra al agregado principal `CheckIn` y su relación con `CheckInQuestion` y las enumeraciones `CheckInStatus` y `MoodLevel`. Se destacan explícitamente las interfaces de los servicios (`IDailyCheckInCommandService`, `IDailyCheckInQueryService`) y repositorios (`ICheckInRepository`, `ICheckInScheduleRepository`), cumpliendo el principio de inversión de dependencias.
 
 <div align="center">
 
@@ -4011,7 +4038,11 @@ El diagrama de clases UML muestra las dependencias y jerarquías del dominio de 
 
 ##### 2.6.3.6.2. Bounded Context Database Design Diagram
 
-Según el diseño DBML, el contexto persiste en las tablas: `check_in_questions` (catálogo base), `check_in_schedules` (horario de notificación), `check_ins` (registro individual diario) y `question_pauses` (historial de pausas). 
+Conforme al diseño relacional DBML, el contexto persiste su información en cuatro tablas:
+- **check_in_questions:** Catálogo base de preguntas rotativas.
+- **check_in_schedules:** Reglas de horario, zonas y tiempos límite de respuesta personalizados.
+- **check_ins:** Registro histórico de cada interacción diaria, con fechas de programación y respuesta, y el ánimo capturado.
+- **question_pauses:** Historial de días en los que el usuario eligió voluntariamente no interactuar.
 
 <div align="center">
 
