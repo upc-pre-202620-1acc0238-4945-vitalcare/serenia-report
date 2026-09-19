@@ -698,7 +698,7 @@ Esta sección tiene como objetivo profundizar en el conocimiento de los competid
   <tr>
     <td rowspan="5" align="center"><b>Análisis<br/>SWOT</b></td>
     <td colspan="5">
-      Realice esto para su startup y sus competidores.
+      Serenia y competidores
     </td>
   </tr>
   <tr>
@@ -5000,7 +5000,6 @@ Esta primera entrega abarca el análisis del problema, la propuesta de valor y e
 - **Empathy Map:** Artefacto visual que organiza las observaciones del equipo sobre un User Persona (qué dice, piensa, siente, hace) para identificar necesidades y puntos de dolor.
 - **i18n (Internationalization):** Práctica de diseñar una aplicación para que pueda adaptarse a distintos idiomas y regiones sin cambios estructurales en el código.
 - **Jetpack Compose:** Framework declarativo de UI para Android usado en la capa de presentación para construir pantallas y componentes reutilizables.
-- **Kotlin Multiplatform (KMP):** Tecnología que permite compartir código Kotlin entre distintas plataformas (Android e iOS), usada para la app complementaria de familiares.
 - **Needfinding:** Fase del proceso de Design Thinking dedicada a la investigación y análisis de las necesidades reales de los usuarios mediante entrevistas y artefactos de análisis.
 - **Product Backlog:** Lista priorizada de funcionalidades, historias de usuario y mejoras pendientes de un proyecto.
 - **Repository (interfaz):** Contrato que define las operaciones de lectura/escritura sobre entidades del dominio, sin exponer detalles de la implementación.
