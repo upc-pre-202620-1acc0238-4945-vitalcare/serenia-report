@@ -3691,7 +3691,7 @@ Clases que resuelven el acceso a la base de datos y a los mecanismos técnicos d
 
 #### 2.6.1.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Identity & Access, elaborado con la herramienta Structurizr. El diagrama descompone el módulo de identidad dentro del container API REST y muestra cómo sus componentes se distribuyen entre las cuatro capas del diseño táctico, respetando la regla de dependencia unidireccional hacia el dominio.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Identity & Access, elaborado con la herramienta Structurizr (Imagen 38). El diagrama descompone el módulo de identidad dentro del container API REST y muestra cómo sus componentes se distribuyen entre las cuatro capas del diseño táctico, respetando la regla de dependencia unidireccional hacia el dominio.
 
 El flujo de entrada llega desde la Aplicación Móvil hacia los dos componentes de la capa Interface: `UsersController`, que atiende el registro, la consulta de cuentas y las operaciones de perfil, y `SessionsController`, que atiende la autenticación y el cierre de sesión. Ambos delegan en la capa Application, donde `UserCommandService` resuelve las operaciones de escritura y `UserQueryService` las de lectura.
 
@@ -3702,7 +3702,7 @@ La capa Infrastructure aparece en el extremo opuesto, con las implementaciones c
 <div align="center">
 
 ![Component Diagram - Identity and Access](assets/img/bounded-context/identity-and-access/identity-and-access-c4.png)
-  <br/><i>Imagen X. Component Diagram del Bounded Context Identity and Access.</i>
+  <br/><i>Imagen 38. Component Diagram del Bounded Context Identity and Access.</i>
 
 </div>
 
@@ -3712,7 +3712,7 @@ En esta sección se presentan los diagramas de mayor nivel de detalle sobre la i
 
 ##### 2.6.1.6.1. Bounded Context Domain Layer Class Diagrams
 
-El diagrama de clases representa la capa Domain del bounded context Identity & Access, elaborado con la herramienta UML correspondiente. En él se muestran las clases, interfaces y enumeraciones del dominio junto con sus atributos, métodos y el scope de cada miembro.
+El diagrama de clases representa la capa Domain del bounded context Identity & Access, elaborado con la herramienta UML correspondiente (Imagen 39). En él se muestran las clases, interfaces y enumeraciones del dominio junto con sus atributos, métodos y el scope de cada miembro.
 
 El elemento central es `User`, el aggregate root del contexto. Sus atributos son privados y solo se modifican a través de sus métodos públicos, lo que garantiza que ninguna regla de identidad pueda vulnerarse desde fuera del aggregate. `User` mantiene una relación de composición con `Session`, con multiplicidad 1 a 0..*: una cuenta puede tener varias sesiones a lo largo del tiempo y ninguna sesión existe de forma independiente de la cuenta que la originó. Por ello, la apertura y la revocación de sesiones se realizan mediante los métodos `openSession` y `closeSession` del aggregate, y no sobre la entidad directamente.
 
@@ -3723,7 +3723,7 @@ El diagrama incluye además los Commands y Queries que expresan las intenciones 
 <div align="center">
 
 ![Domain Layer Class Diagram - Identity and Access](assets/img/bounded-context/identity-and-access/identity-and-access-domain-layer.png)
-  <br/><i>Imagen X. Domain Layer Class Diagram del Bounded Context Identity and Access.</i>
+  <br/><i>Imagen 39. Domain Layer Class Diagram del Bounded Context Identity and Access.</i>
 
 </div>
 
@@ -3731,7 +3731,7 @@ El diagrama incluye además los Commands y Queries que expresan las intenciones 
 
 ##### 2.6.1.6.2. Bounded Context Database Design Diagram
 
-El diagrama de base de datos presenta los objetos que permiten la persistencia del bounded context Identity & Access sobre el motor MySQL. El contexto se materializa en dos tablas, `users` y `sessions`, que corresponden respectivamente al aggregate root `User` y a la entidad `Session` que este contiene.
+El diagrama de base de datos (Imagen 40) presenta los objetos que permiten la persistencia del bounded context Identity & Access sobre el motor MySQL. El contexto se materializa en dos tablas, `users` y `sessions`, que corresponden respectivamente al aggregate root `User` y a la entidad `Session` que este contiene.
 
 **Tabla `users`**
 
@@ -3773,7 +3773,7 @@ Existe una relación de uno a muchos entre `users` y `sessions`: una cuenta pued
 <div align="center">
 
 ![Database Design Diagram - Identity and Access](assets/img/bounded-context/identity-and-access/identity-and-access-db-diagram.png)
-  <br/><i>Imagen X. Database Design Diagram del Bounded Context Identity and Access.</i>
+  <br/><i>Imagen 40. Database Design Diagram del Bounded Context Identity and Access.</i>
 
 </div>
 
@@ -3943,12 +3943,12 @@ Clases que resuelven el acceso a la base de datos y a los mecanismos técnicos d
 
 #### 2.6.2.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Care Circle, elaborado en Structurizr. El diagrama detalla la arquitectura interna: los *Controllers* como puntos de entrada REST; los *Resources* y *Assemblers* para transformación de datos; los servicios de aplicación (`CareCircleCommandService`, `CareCircleQueryService`); y el acceso a datos mediante los 3 repositorios definidos en el dominio (`CareCircleRepository`, `CareShiftRepository`, `SharedNoteRepository`).
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Care Circle, elaborado en Structurizr (Imagen 41). El diagrama detalla la arquitectura interna: los *Controllers* como puntos de entrada REST; los *Resources* y *Assemblers* para transformación de datos; los servicios de aplicación (`CareCircleCommandService`, `CareCircleQueryService`); y el acceso a datos mediante los 3 repositorios definidos en el dominio (`CareCircleRepository`, `CareShiftRepository`, `SharedNoteRepository`).
 
 <div align="center">
 
 ![Component Diagram - Care Circle](assets/img/bounded-context/care-circle/care-circle-component-diagram.png)
-  <br/><i>Imagen X. Component Diagram del Bounded Context Care Circle.</i>
+  <br/><i>Imagen 41. Component Diagram del Bounded Context Care Circle.</i>
 
 </div>
 
@@ -3958,12 +3958,12 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 
 ##### 2.6.2.6.1. Bounded Context Domain Layer Class Diagrams
 
-El siguiente diagrama de clases UML representa la capa de dominio. Acatando el EventStorming, se visualizan los tres Aggregate Roots principales: `CareCircle`, `CareShift` y `SharedNote`. Se detallan las interfaces de los servicios de aplicación y repositorios que orquestan la lógica.
+El siguiente diagrama de clases UML (Imagen 42) representa la capa de dominio. Acatando el EventStorming, se visualizan los tres Aggregate Roots principales: `CareCircle`, `CareShift` y `SharedNote`. Se detallan las interfaces de los servicios de aplicación y repositorios que orquestan la lógica.
 
 <div align="center">
 
 ![Class Diagram - Care Circle](assets/img/bounded-context/care-circle/care-circle-class-diagram.png)
-  <br/><i>Imagen X. Domain Layer Class Diagram del Bounded Context Care Circle.</i>
+  <br/><i>Imagen 42. Domain Layer Class Diagram del Bounded Context Care Circle.</i>
 
 </div>
 
@@ -3971,7 +3971,7 @@ El siguiente diagrama de clases UML representa la capa de dominio. Acatando el E
 
 ##### 2.6.2.6.2. Bounded Context Database Design Diagram
 
-El diagrama de base de datos presenta los objetos que permiten la persistencia del bounded context **Care Circle** sobre el motor MySQL. El contexto se materializa en cinco tablas que corresponden al aggregate root care_circles y a las entidades que este contiene: invitation_codes, family_links, care_shifts y shared_notes.
+El diagrama de base de datos (Imagen 43) presenta los objetos que permiten la persistencia del bounded context **Care Circle** sobre el motor MySQL. El contexto se materializa en cinco tablas que corresponden al aggregate root care_circles y a las entidades que este contiene: invitation_codes, family_links, care_shifts y shared_notes.
 
 **Tabla care_circles**
 
@@ -4051,7 +4051,7 @@ Incluye índices sobre `care_circle_id` y `author_id` que optimizan la consulta 
 <div align="center">
 
 ![Database Design Diagram -Care Circle](assets/img/bounded-context/care-circle/care-circle-database.png)
-  <br/><i>Imagen X. Database Design Diagram del Bounded Context Care Circle.</i>
+  <br/><i>Imagen 43. Database Design Diagram del Bounded Context Care Circle.</i>
 </div>
 
 ### 2.6.3. Bounded Context: Daily Check-in
@@ -4130,12 +4130,12 @@ El bounded context **Daily Check-in** es el mecanismo principal de recolección 
 
 #### 2.6.3.5. Bounded Context Software Architecture Component Level Diagrams
 
-Este diagrama C4 muestra al Adulto Mayor interactuando con los *Controllers* (`CheckInsController`, `PreferencesController`), quienes delegan en los *Services* y *Repositories* definidos por la arquitectura limpia. Se destacan las conexiones con la Base de Datos.
+Este diagrama C4 (Imagen 44) muestra al Adulto Mayor interactuando con los *Controllers* (`CheckInsController`, `PreferencesController`), quienes delegan en los *Services* y *Repositories* definidos por la arquitectura limpia. Se destacan las conexiones con la Base de Datos.
 
 <div align="center">
 
 ![Component Diagram - Daily Check-in](assets/img/bounded-context/daily-check-in/daily-check-in-component-diagram.png)
-  <br/><i>Imagen X. Component Diagram del Bounded Context Daily Check-in.</i>
+  <br/><i>Imagen 44. Component Diagram del Bounded Context Daily Check-in.</i>
 
 </div>
 
@@ -4145,12 +4145,12 @@ Este diagrama C4 muestra al Adulto Mayor interactuando con los *Controllers* (`C
 
 ##### 2.6.3.6.1. Bounded Context Domain Layer Class Diagrams
 
-El diagrama UML consolida los requisitos tácticos obtenidos del EventStorming. Presenta a `CheckIn` y `CheckInPreferences` como los dos Aggregate Roots, acompañados de sus respectivas interfaces de persistencia y comandos de usuario/sistema.
+El diagrama UML (Imagen 45) consolida los requisitos tácticos obtenidos del EventStorming. Presenta a `CheckIn` y `CheckInPreferences` como los dos Aggregate Roots, acompañados de sus respectivas interfaces de persistencia y comandos de usuario/sistema.
 
 <div align="center">
 
 ![Class Diagram - Daily Check-in](assets/img/bounded-context/daily-check-in/daily-check-in-class-diagram.png)
-  <br/><i>Imagen X. Domain Layer Class Diagram del Bounded Context Daily Check-in.</i>
+  <br/><i>Imagen 45. Domain Layer Class Diagram del Bounded Context Daily Check-in.</i>
 
 </div>
 
@@ -4158,7 +4158,7 @@ El diagrama UML consolida los requisitos tácticos obtenidos del EventStorming. 
 
 ##### 2.6.3.6.2. Bounded Context Database Design Diagram
 
-El diseño de base de datos transaccional para Daily Check-in incluye las siguientes tablas referenciando al contexto de Identidad:
+El diseño de base de datos transaccional para Daily Check-in (Imagen 46) incluye las siguientes tablas referenciando al contexto de Identidad:
 - **check_in_questions:** Catálogo base de preguntas rotativas.
 - **check_in_schedules:** Horario de recordatorio y flag de modo simplificado por usuario.
 - **check_ins:** Tabla que materializa el agregado `CheckIn`, registrando la pregunta, el estado (`PENDING`, `ANSWERED`, `MISSED`) y el nivel de ánimo.
@@ -4167,7 +4167,7 @@ El diseño de base de datos transaccional para Daily Check-in incluye las siguie
 <div align="center">
 
 ![Database Diagram - Daily Check-in](assets/img/bounded-context/daily-check-in/daily-check-in-db-diagram.png)
-  <br/><i>Imagen X. Database Design Diagram del Bounded Context Daily Check-in.</i>
+  <br/><i>Imagen 46. Database Design Diagram del Bounded Context Daily Check-in.</i>
 
 </div>
 
@@ -4401,13 +4401,13 @@ Clases que resuelven el acceso a la base de datos y a los mecanismos de mensajer
 
 #### 2.6.4.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Wellbeing Monitoring, elaborado con la herramienta Structurizr. El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: los cuatro *Controllers* (`WellbeingEntriesController`, `WellbeingPatternsController`, `SmallWinsController`, `StatusSummariesController`) como puntos de entrada de las peticiones REST; los *Resources* (`WellbeingEntryResource`, `WellbeingPatternResource`, `SmallWinResource`, `RecordSmallWinResource`, `StatusSummaryResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y los cuatro aggregates del dominio (`WellbeingEntry`, `WellbeingPattern`, `SmallWin`, `StatusSummary`); los *Commands* (`RecordWellbeingEntryCommand`, `DetectWellbeingPatternCommand`, `RecordSmallWinCommand`, `GenerateStatusSummaryCommand`) y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `WellbeingCommandService` y `WellbeingQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IWellbeingCommandService` e `IWellbeingQueryService`; y finalmente los cuatro repositorios (`IWellbeingEntryRepository`, `IWellbeingPatternRepository`, `ISmallWinRepository`, `IStatusSummaryRepository`), cada uno implementado por su respectiva clase de Infrastructure, que gestionan la persistencia de cada aggregate. Se incluye además `CheckInAnsweredConsumer`, componente que escucha el evento `CheckInAnswered` publicado por el bounded context Daily Check-in para desencadenar el registro de una nueva entrada de bienestar, la detección de patrones y la generación del resumen diario.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Wellbeing Monitoring, elaborado con la herramienta Structurizr (Imagen 47). El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: los cuatro *Controllers* (`WellbeingEntriesController`, `WellbeingPatternsController`, `SmallWinsController`, `StatusSummariesController`) como puntos de entrada de las peticiones REST; los *Resources* (`WellbeingEntryResource`, `WellbeingPatternResource`, `SmallWinResource`, `RecordSmallWinResource`, `StatusSummaryResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y los cuatro aggregates del dominio (`WellbeingEntry`, `WellbeingPattern`, `SmallWin`, `StatusSummary`); los *Commands* (`RecordWellbeingEntryCommand`, `DetectWellbeingPatternCommand`, `RecordSmallWinCommand`, `GenerateStatusSummaryCommand`) y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `WellbeingCommandService` y `WellbeingQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IWellbeingCommandService` e `IWellbeingQueryService`; y finalmente los cuatro repositorios (`IWellbeingEntryRepository`, `IWellbeingPatternRepository`, `ISmallWinRepository`, `IStatusSummaryRepository`), cada uno implementado por su respectiva clase de Infrastructure, que gestionan la persistencia de cada aggregate. Se incluye además `CheckInAnsweredConsumer`, componente que escucha el evento `CheckInAnswered` publicado por el bounded context Daily Check-in para desencadenar el registro de una nueva entrada de bienestar, la detección de patrones y la generación del resumen diario.
 
 <br>
 <div align="center">
 
 ![Component Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-diagram.png)
-  <br/><i>Imagen X. Component Diagram del Bounded Context Wellbeing Monitoring.</i>
+  <br/><i>Imagen 47. Component Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
 
@@ -4417,13 +4417,13 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 
 ##### 2.6.4.6.1. Bounded Context Domain Layer Class Diagrams
 
-Diagrama de clases de la capa Domain: En esta imagen se muestran las clases del dominio Wellbeing Monitoring, compuesto por cuatro aggregate roots independientes (`WellbeingEntry`, `WellbeingPattern`, `SmallWin`, `StatusSummary`, alineados 1 a 1 con las tablas del diseño de base de datos oficial), los Commands y Queries asociados a cada uno, y las interfaces `IWellbeingCommandService`, `IWellbeingQueryService` e `IWellbeingEntryRepository`/`IWellbeingPatternRepository`/`ISmallWinRepository`/`IStatusSummaryRepository` con sus respectivas implementaciones. El diagrama fue elaborado en PlantUML.
+Diagrama de clases de la capa Domain: en la Imagen 48 se muestran las clases del dominio Wellbeing Monitoring, compuesto por cuatro aggregate roots independientes (`WellbeingEntry`, `WellbeingPattern`, `SmallWin`, `StatusSummary`, alineados 1 a 1 con las tablas del diseño de base de datos oficial), los Commands y Queries asociados a cada uno, y las interfaces `IWellbeingCommandService`, `IWellbeingQueryService` e `IWellbeingEntryRepository`/`IWellbeingPatternRepository`/`ISmallWinRepository`/`IStatusSummaryRepository` con sus respectivas implementaciones. El diagrama fue elaborado en PlantUML.
 
 <br>
 <div align="center">
 
 ![Class Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-class-diagram.png)
-  <br/><i>Imagen X. Class Diagram del Bounded Context Wellbeing Monitoring.</i>
+  <br/><i>Imagen 48. Class Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
 
@@ -4431,7 +4431,7 @@ Diagrama de clases de la capa Domain: En esta imagen se muestran las clases del 
 
 ##### 2.6.4.6.2. Bounded Context Database Design Diagram
 
-Diagrama de base de datos: En esta imagen se muestra el diseño de las tablas correspondientes al Bounded Context Wellbeing Monitoring, compuesto por `wellbeing_entries` (registro de estado de ánimo asociado a cada check-in), `status_summaries` (resumen diario del estado del adulto mayor), `small_wins` (historial de pequeños logros registrados) y `wellbeing_patterns` (patrones de malestar sostenido o mejora detectados en el historial de check-ins), relacionadas mediante llaves foráneas hacia `users` (Identity & Access) y `check_ins` (Daily Check-in). Los nombres de las columnas siguen la convención de nomenclatura del equipo, prefijando cada campo con el código de 3 letras de su tabla (`wbe`, `sts`, `smw`, `wbp`).
+Diagrama de base de datos: en la Imagen 49 se muestra el diseño de las tablas correspondientes al Bounded Context Wellbeing Monitoring, compuesto por `wellbeing_entries` (registro de estado de ánimo asociado a cada check-in), `status_summaries` (resumen diario del estado del adulto mayor), `small_wins` (historial de pequeños logros registrados) y `wellbeing_patterns` (patrones de malestar sostenido o mejora detectados en el historial de check-ins), relacionadas mediante llaves foráneas hacia `users` (Identity & Access) y `check_ins` (Daily Check-in). Los nombres de las columnas siguen la convención de nomenclatura del equipo, prefijando cada campo con el código de 3 letras de su tabla (`wbe`, `sts`, `smw`, `wbp`).
 
 **Tabla `wellbeing_entries`:**
 
@@ -4482,7 +4482,7 @@ Diagrama de base de datos: En esta imagen se muestra el diseño de las tablas co
 <div align="center">
 
 ![Database Design Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-database-diagram.png)
-  <br/><i>Imagen X. Database Design Diagram del Bounded Context Wellbeing Monitoring.</i>
+  <br/><i>Imagen 49. Database Design Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
 
@@ -4491,14 +4491,14 @@ Diagrama de base de datos: En esta imagen se muestra el diseño de las tablas co
 
 ### 2.6.5. Bounded Context: Social Companionship
 
-Social Companionship es el bounded context que sostiene el vínculo emocional entre el adulto mayor y sus familiares, sin ningún fin de monitoreo. Cubre la grabación y envío de mensajes de audio del adulto mayor hacia el familiar, la reproducción de esos audios, y la gestión de recordatorios de contacto social como llamar a una amistad o asistir a una actividad — incluyendo posponerlos o marcarlos como completados.
+Social Companionship es el bounded context que sostiene el vínculo emocional entre el adulto mayor y sus familiares, sin ningún fin de monitoreo. Cubre la grabación y envío de mensajes de audio del adulto mayor hacia el familiar, la reproducción de esos audios, y la gestión de recordatorios de contacto social como llamar a una amistad o asistir a una actividad, incluyendo posponerlos o marcarlos como completados.
 <br>
 
 #### 2.6.5.1. Domain Layer
 
-Clases que representan el núcleo del negocio. No depende de ninguna otra capa — es el centro del que todo lo demás depende.
+Clases que representan el núcleo del negocio. No depende de ninguna otra capa; es el centro del que todo lo demás depende.
 
-**Sub-capa Domain Model — Aggregates**
+**Sub-capa Domain Model: Aggregates**
 
 | Nombre | Descripción |
 |---|---|
@@ -4506,7 +4506,7 @@ Clases que representan el núcleo del negocio. No depende de ninguna otra capa �
 | PhotoMessage | Aggregate root del flujo de mensajes de foto. Gestiona su compartición y visualización dentro del círculo. |
 | SocialReminder | Aggregate root de los recordatorios sociales. Gestiona su ciclo de vida: pendiente, completado y cancelado. |
 
-**Sub-capa Domain Model — Value Objects**
+**Sub-capa Domain Model: Value Objects**
 
 | Nombre | Descripción |
 |---|---|
@@ -4524,7 +4524,7 @@ Clases que representan el núcleo del negocio. No depende de ninguna otra capa �
 | ReminderDescription | Descripción opcional del recordatorio. |
 | ScheduledDate | Fecha programada del recordatorio. Debe ser posterior al momento de creación. |
 
-**Sub-capa Domain Model — Commands**
+**Sub-capa Domain Model: Commands**
 
 | Nombre | Descripción |
 |---|---|
@@ -4537,7 +4537,7 @@ Clases que representan el núcleo del negocio. No depende de ninguna otra capa �
 | CompleteSocialReminderCommand | Intención de marcar un recordatorio como completado. |
 | CancelSocialReminderCommand | Intención de cancelar un recordatorio pendiente. |
 
-**Sub-capa Domain Model — Queries**
+**Sub-capa Domain Model: Queries**
 
 | Nombre | Descripción |
 |---|---|
@@ -4545,7 +4545,7 @@ Clases que representan el núcleo del negocio. No depende de ninguna otra capa �
 | GetPhotoMessageByIdQuery | Consulta para obtener un mensaje de foto por su identificador. |
 | GetSocialRemindersByCircleQuery | Consulta para obtener los recordatorios activos de un círculo de cuidado. |
 
-**Sub-capa Domain Model — Events**
+**Sub-capa Domain Model: Events**
 
 | Nombre | Descripción |
 |---|---|
@@ -4558,7 +4558,7 @@ Clases que representan el núcleo del negocio. No depende de ninguna otra capa �
 | SocialReminderCompletedEvent | Se emite cuando un recordatorio es marcado como completado. |
 | SocialReminderCancelledEvent | Se emite cuando un recordatorio pendiente es cancelado. |
 
-**Sub-capa Domain Model — Services**
+**Sub-capa Domain Model: Services**
 
 | Nombre | Descripción |
 |---|---|
@@ -4569,7 +4569,7 @@ Clases que representan el núcleo del negocio. No depende de ninguna otra capa �
 | SocialReminderCommandService | Interfaz que define los casos de uso de escritura sobre recordatorios sociales. |
 | SocialReminderQueryService | Interfaz que define los casos de uso de lectura sobre recordatorios sociales. |
 
-**Sub-capa Domain Model — Repositories**
+**Sub-capa Domain Model: Repositories**
 
 | Nombre | Descripción |
 |---|---|
@@ -4584,7 +4584,7 @@ Clases que representan el núcleo del negocio. No depende de ninguna otra capa �
 
 Clases que exponen el bounded context hacia el exterior y traducen las peticiones entrantes al lenguaje del dominio.
 
-***Sub-capa REST — Controllers***
+***Sub-capa REST: Controllers***
 
 | Nombre | Endpoints | Descripción |
 |---|---|---|
@@ -4592,7 +4592,7 @@ Clases que exponen el bounded context hacia el exterior y traducen las peticione
 | PhotoMessagesController | POST /care-circles/{careCircleId}/photo-messages, GET /care-circles/{careCircleId}/photo-messages/{messageId} | Punto de entrada de las operaciones de compartición y visualización de mensajes de foto. Delega en los servicios de comandos y consultas. |
 | SocialRemindersController | POST /care-circles/{careCircleId}/social-reminders, PUT /care-circles/{careCircleId}/social-reminders/{reminderId}/complete, DELETE /care-circles/{careCircleId}/social-reminders/{reminderId} | Punto de entrada de las operaciones de programación, completado y cancelación de recordatorios sociales. Delega en los servicios de comandos. |
 
-***Sub-capa REST — Resources***
+***Sub-capa REST: Resources***
 
 | Nombre | Descripción |
 |---|---|
@@ -4604,7 +4604,7 @@ Clases que exponen el bounded context hacia el exterior y traducen las peticione
 | ScheduleSocialReminderResource | Datos de entrada para programar un recordatorio social, incluidos título, descripción y fecha. |
 | SocialReminderResource | Representación pública de un recordatorio social y su estado actual. |
 
-***Sub-capa REST — Transform***
+***Sub-capa REST: Transform***
 
 | Nombre | Descripción |
 |---|---|
@@ -4635,7 +4635,7 @@ Clases que exponen el bounded context hacia el exterior y traducen las peticione
 
 Clases que implementan los casos de uso del dominio. Orquesta los agregados, repositorios y eventos definidos en la capa de dominio sin contener lógica de negocio propia.
 
-**Sub-capa Application — Command Services**
+**Sub-capa Application: Command Services**
 
 | Nombre | Descripción |
 |---|---|
@@ -4643,7 +4643,7 @@ Clases que implementan los casos de uso del dominio. Orquesta los agregados, rep
 | PhotoMessageCommandServiceImpl | Implementa PhotoMessageCommandService. Orquesta la compartición de mensajes de foto dentro del círculo. |
 | SocialReminderCommandServiceImpl | Implementa SocialReminderCommandService. Orquesta la programación, completado y cancelación de recordatorios sociales. |
 
-**Sub-capa Application — Query Services**
+**Sub-capa Application: Query Services**
 
 | Nombre | Descripción |
 |---|---|
@@ -4656,9 +4656,9 @@ Clases que implementan los casos de uso del dominio. Orquesta los agregados, rep
 #### 2.6.5.4 Infrastructure Layer
 
 
-Clases que implementan los detalles técnicos de persistencia y comunicación externa. Depende del dominio pero nunca al revés — toda referencia apunta hacia adentro.
+Clases que implementan los detalles técnicos de persistencia y comunicación externa. Depende del dominio pero nunca al revés: toda referencia apunta hacia adentro.
 
-**Sub-capa Persistence — Room Entities**
+**Sub-capa Persistence: Room Entities**
 
 | Nombre | Descripción |
 |---|---|
@@ -4666,7 +4666,7 @@ Clases que implementan los detalles técnicos de persistencia y comunicación ex
 | PhotoMessageEntity | Clase anotada con `@Entity` que representa la tabla `photo_messages` en SQLite. Contiene los campos de persistencia del agregado `PhotoMessage`. |
 | SocialReminderEntity | Clase anotada con `@Entity` que representa la tabla `social_reminders` en SQLite. Contiene los campos de persistencia del agregado `SocialReminder`. |
 
-**Sub-capa Persistence — Room DAOs**
+**Sub-capa Persistence: Room DAOs**
 
 | Nombre | Descripción |
 |---|---|
@@ -4674,7 +4674,7 @@ Clases que implementan los detalles técnicos de persistencia y comunicación ex
 | PhotoMessageDao | Interfaz anotada con `@Dao` que define las operaciones de acceso a datos de bajo nivel para mensajes de foto. |
 | SocialReminderDao | Interfaz anotada con `@Dao` que define las operaciones de acceso a datos para recordatorios sociales, incluyendo consulta por círculo de cuidado y estado activo. |
 
-**Sub-capa Persistence — Repository Implementations**
+**Sub-capa Persistence: Repository Implementations**
 
 | Nombre | Descripción |
 |---|---|
@@ -4682,7 +4682,7 @@ Clases que implementan los detalles técnicos de persistencia y comunicación ex
 | PhotoMessageRepositoryImpl | Implementa PhotoMessageRepository del dominio. |
 | SocialReminderRepositoryImpl | Implementa SocialReminderRepository del dominio. |
 
-**Sub-capa Persistence — Transform**
+**Sub-capa Persistence: Transform**
 
 | Nombre | Descripción |
 |---|---|
@@ -4697,7 +4697,7 @@ Clases que implementan los detalles técnicos de persistencia y comunicación ex
 
 #### 2.6.5.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Social Companionship, elaborado con la herramienta Structurizr. El diagrama descompone el módulo de acompañamiento social dentro del container API REST y muestra cómo sus componentes se distribuyen entre las cuatro capas del diseño táctico, respetando la regla de dependencia unidireccional hacia el dominio.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Social Companionship, elaborado con la herramienta Structurizr (Imagen 50). El diagrama descompone el módulo de acompañamiento social dentro del container API REST y muestra cómo sus componentes se distribuyen entre las cuatro capas del diseño táctico, respetando la regla de dependencia unidireccional hacia el dominio.
 
 El flujo de entrada llega desde la Aplicación Móvil hacia los tres componentes de la capa Interface: AudioMessagesController, que atiende la grabación, compartición, descarte y reproducción de mensajes de audio; PhotoMessagesController, que atiende la compartición y visualización de mensajes de foto; y SocialRemindersController, que atiende la programación, completado y cancelación de recordatorios sociales. Los tres delegan en la capa Application, donde los servicios de comando resuelven las operaciones de escritura y los servicios de consulta las de lectura, uno por cada aggregate del contexto.
 
@@ -4708,7 +4708,7 @@ La capa Infrastructure aparece en el extremo opuesto, con las implementaciones c
 <div align="center">
 
 ![DComponent Level- Social Companionship](assets/img/bounded-context/social-companionship/social-companionship-components.png)
-  <br/><i>Imagen X. Component Level Diagram del Bounded Context Social Companionship.</i>
+  <br/><i>Imagen 50. Component Level Diagram del Bounded Context Social Companionship.</i>
 
 </div>
 <br>
@@ -4720,7 +4720,7 @@ En esta sección se presentan los diagramas de mayor nivel de detalle sobre la i
 
 ##### 2.6.5.6.1. Bounded Context Domain Layer Class Diagrams
 
-El diagrama de clases representa la capa Domain del bounded context Social Companionship, elaborado con la herramienta PlantUML. En él se muestran las clases, interfaces y enumeraciones del dominio junto con sus atributos, métodos y el scope de cada miembro.
+El diagrama de clases representa la capa Domain del bounded context Social Companionship, elaborado con la herramienta PlantUML (Imagen 51). En él se muestran las clases, interfaces y enumeraciones del dominio junto con sus atributos, métodos y el scope de cada miembro.
 
 Los elementos centrales son los tres aggregate roots del contexto: AudioMessage, PhotoMessage y SocialReminder. Sus atributos son privados y solo se modifican a través de sus métodos públicos, lo que garantiza que ninguna regla del ciclo de vida de un mensaje o recordatorio pueda vulnerarse desde fuera del aggregate. AudioMessage gestiona los estados RECORDED, SHARED y DISCARDED mediante los métodos record, share, discard y play. PhotoMessage encapsula el acto de compartir una foto dentro del círculo. SocialReminder gestiona los estados PENDING, COMPLETED y CANCELLED mediante los métodos schedule, complete y cancel.
 
@@ -4733,14 +4733,14 @@ El diagrama incluye además los Commands y Queries que expresan las intenciones 
 ![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/social-companionship.svg)
 ![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/social-companionship_class3.svg)
 ![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/social-companionship_class2.svg)
-  <br/><i>Imagen X. Class Diagram del Bounded Context Social Companionship.</i>
+  <br/><i>Imagen 51. Class Diagram del Bounded Context Social Companionship.</i>
 
 </div>
 <br>
 
 ##### 2.6.5.6.2. Bounded Context Database Design Diagram
 
-El diagrama de base de datos presenta los objetos que permiten la persistencia del bounded context **Social Companionship** sobre el motor SQLite. El contexto se materializa en tres tablas que corresponden a los tres aggregates roots del dominio: `audio_messages`, `photo_messages` y `social_reminders`.
+El diagrama de base de datos (Imagen 52) presenta los objetos que permiten la persistencia del bounded context **Social Companionship** sobre el motor SQLite. El contexto se materializa en tres tablas que corresponden a los tres aggregates roots del dominio: `audio_messages`, `photo_messages` y `social_reminders`.
 
 **Tabla audio_messages**
 
@@ -4752,8 +4752,8 @@ El diagrama de base de datos presenta los objetos que permiten la persistencia d
 | audio_url | varchar(500) | NOT NULL | URL de acceso al archivo de audio grabado. |
 | status | audio_message_status | NOT NULL, DEFAULT 'RECORDED' | Estado del mensaje: grabado, compartido o descartado. |
 | recorded_at | timestamp | NOT NULL | Fecha y hora en que se inició la grabación. |
-| shared_at | timestamp | — | Momento en que fue compartido. Nulo si status ≠ SHARED. |
-| discarded_at | timestamp | — | Momento en que fue descartado. Nulo si status ≠ DISCARDED. |
+| shared_at | timestamp | - | Momento en que fue compartido. Nulo si status ≠ SHARED. |
+| discarded_at | timestamp | - | Momento en que fue descartado. Nulo si status ≠ DISCARDED. |
 
 Esta tabla es el aggregate root del flujo de mensajes de audio. Registra el ciclo de vida completo del mensaje desde su grabación hasta su compartición o descarte. Las columnas `shared_at` y `discarded_at` son mutuamente excluyentes: solo una puede estar poblada según el valor de `status`. Incluye un índice sobre `care_circle_id` para optimizar la consulta de mensajes por círculo.
 
@@ -4778,12 +4778,12 @@ Esta tabla es el aggregate root del flujo de mensajes de foto. A diferencia de l
 | care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo de cuidado al que pertenece el recordatorio. |
 | creator_id | uuid | NOT NULL, FK → users.id | Usuario que programó el recordatorio. |
 | title | varchar(200) | NOT NULL | Título del recordatorio. No puede ser cadena vacía. |
-| description | text | — | Descripción opcional del recordatorio. |
+| description | text | - | Descripción opcional del recordatorio. |
 | scheduled_date | date | NOT NULL | Fecha en que debe ejecutarse el recordatorio. Posterior a la fecha de creación. |
 | status | social_reminder_status | NOT NULL, DEFAULT 'PENDING' | Estado del recordatorio: pendiente, completado o cancelado. |
 | created_at | timestamp | NOT NULL | Fecha y hora de creación del recordatorio. |
-| completed_at | timestamp | — | Momento en que fue completado. Nulo si status ≠ COMPLETED. |
-| cancelled_at | timestamp | — | Momento en que fue cancelado. Nulo si status ≠ CANCELLED. |
+| completed_at | timestamp | - | Momento en que fue completado. Nulo si status ≠ COMPLETED. |
+| cancelled_at | timestamp | - | Momento en que fue cancelado. Nulo si status ≠ CANCELLED. |
 
 Esta tabla es el aggregate root del flujo de recordatorios sociales. Gestiona el ciclo de vida del recordatorio desde su programación hasta su completado o cancelación. Las columnas `completed_at` y `cancelled_at` son mutuamente excluyentes según el valor de `status`. Incluye índices sobre `care_circle_id` y `status` para optimizar las consultas de recordatorios activos por círculo.
 
@@ -4795,7 +4795,7 @@ Las tres tablas referencian a `care_circles`, que es el aggregate root del bound
 <div align="center">
 
 ![Database Diagram - Social companionship](assets/img/bounded-context/social-companionship/database-diagram.png)
-  <br/><i>Imagen 27. Database Diagram del Bounded Context Social companionship.</i>
+  <br/><i>Imagen 52. Database Design Diagram del Bounded Context Social Companionship.</i>
 
 </div>
 
@@ -4927,14 +4927,14 @@ El bounded context **Alerts and Safety** es responsable de garantizar que el fam
 
 #### 2.6.6.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Alerts and Safety, elaborado con la herramienta Structurizr. El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: el `AlertController` como punto de entrada de las peticiones REST; los *Resources* (`AlertResource`, `TriggerEmergencyAlertResource`, `ConfirmAlertAttentionResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y la entidad de dominio `Alert`; los *Commands* y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `AlertCommandService` y `AlertQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IAlertCommandService` e `IAlertQueryService`; y finalmente `IAlertRepository` e `IInactivityWindowRepository`, implementados por sus respectivos repositorios concretos, que gestionan la persistencia de los dos aggregates. Se incluye además `UnansweredCheckInConsumer`, `DiscomfortPatternDetectedConsumer` y `FamilyLinkEstablishedConsumer`, componentes que escuchan los eventos `UnansweredCheckIn` (publicado por Daily Check-in), `DiscomfortPatternDetected` (publicado por Wellbeing Monitoring) y `FamilyLinkEstablished` (publicado por Care Circle), respectivamente, para desencadenar la apertura de la ventana de inactividad, la generación de un Alert de tipo WELLBEING y el mantenimiento local de la referencia de familiares vinculados, esta última sin requerir consulta síncrona a Care Circle al momento de notificar un Alert.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Alerts and Safety, elaborado con la herramienta Structurizr (Imagen 53). El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: el `AlertController` como punto de entrada de las peticiones REST; los *Resources* (`AlertResource`, `TriggerEmergencyAlertResource`, `ConfirmAlertAttentionResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y la entidad de dominio `Alert`; los *Commands* y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `AlertCommandService` y `AlertQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IAlertCommandService` e `IAlertQueryService`; y finalmente `IAlertRepository` e `IInactivityWindowRepository`, implementados por sus respectivos repositorios concretos, que gestionan la persistencia de los dos aggregates. Se incluye además `UnansweredCheckInConsumer`, `DiscomfortPatternDetectedConsumer` y `FamilyLinkEstablishedConsumer`, componentes que escuchan los eventos `UnansweredCheckIn` (publicado por Daily Check-in), `DiscomfortPatternDetected` (publicado por Wellbeing Monitoring) y `FamilyLinkEstablished` (publicado por Care Circle), respectivamente, para desencadenar la apertura de la ventana de inactividad, la generación de un Alert de tipo WELLBEING y el mantenimiento local de la referencia de familiares vinculados, esta última sin requerir consulta síncrona a Care Circle al momento de notificar un Alert.
 
 <br>
 
 <div align="center">
 
 ![Component Diagram - Alerts and Safety](assets/img/bounded-context/alerts-safety/alerts-safety-diagram.png)
-  <br/><i>Imagen X. Component Diagram del Bounded Context Alerts and Safety.</i>
+  <br/><i>Imagen 53. Component Diagram del Bounded Context Alerts and Safety.</i>
 
 </div>
 
@@ -4946,13 +4946,13 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 
 ##### 2.6.6.6.1. Bounded Context Domain Layer Class Diagrams
 
-Diagrama de clases de la capa Domain: en esta imagen se muestran las clases del dominio Alerts and Safety, que incluyen `Alert` (con sus entidades internas `AlertNotification` y `AlertAttention`) e `InactivityWindow` como aggregate roots, los Commands para las operaciones de activación, apertura, recordatorio, escalamiento, notificación, confirmación y cierre, las Queries para las consultas de historial por adulto mayor, e interfaces para los servicios de dominio con sus respectivas implementaciones.
+Diagrama de clases de la capa Domain: en la Imagen 54 se muestran las clases del dominio Alerts and Safety, que incluyen `Alert` (con sus entidades internas `AlertNotification` y `AlertAttention`) e `InactivityWindow` como aggregate roots, los Commands para las operaciones de activación, apertura, recordatorio, escalamiento, notificación, confirmación y cierre, las Queries para las consultas de historial por adulto mayor, e interfaces para los servicios de dominio con sus respectivas implementaciones.
 
 <br>
 <div align="center">
 
 ![Domain Layer Class Diagram - Alerts and Safety](assets/img/bounded-context/alerts-safety/alerts-safety-class-diagram.png)
-  <br/><i>Imagen X. Domain Layer Class Diagram del Bounded Context Alerts and Safety.</i>
+  <br/><i>Imagen 54. Domain Layer Class Diagram del Bounded Context Alerts and Safety.</i>
 
 </div>
 
@@ -4960,7 +4960,7 @@ Diagrama de clases de la capa Domain: en esta imagen se muestran las clases del 
 
 ##### 2.6.6.6.2. Bounded Context Database Design Diagram
 
-A continuación se presentan las tablas del bounded context Alerts and Safety, a partir del diagrama de base de datos consolidado por el equipo:
+A continuación se presentan las tablas del bounded context Alerts and Safety, a partir del diagrama de base de datos consolidado por el equipo (Imagen 55):
 
 - **inactivity_windows:** Temporizadores que miden el silencio antes de escalar a una alarma real. Atributos: `id`, `older_adult_id`, `check_in_id`, `opened_at`, `expires_at`, `reminder_sent_at`, `escalated_at`, `status`.
 - **alerts:** Incidentes críticos generados por el botón de pánico, inactividad o patrones negativos. Atributos: `id`, `older_adult_id`, `type`, `severity`, `status`, `pattern_id`, `inactivity_window_id`, `triggered_at`, `closed_at`.
@@ -4972,7 +4972,7 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 <div align="center">
 
 ![Database Design Diagram - Alerts and Safety](assets/img/bounded-context/alerts-safety/alerts-safety-database-diagram.png)
-  <br/><i>Imagen X. Database Design Diagram del Bounded Context Alerts and Safety.</i>
+  <br/><i>Imagen 55. Database Design Diagram del Bounded Context Alerts and Safety.</i>
 
 </div>
 <br>
