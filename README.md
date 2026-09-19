@@ -3070,7 +3070,11 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 ## 2.5. Strategic-Level Domain-Driven Design
 ### 2.5.1. EventStorming
 
-Antes de presentar los bounded contexts candidatos, esta sección muestra el camino que llevó hasta ellos. El equipo aplicó el proceso de EventStorming en diez pasos: Unstructured Exploration, Timelines, Pain Points, Pivotal Points, Commands, Policies, Read Models, External Systems, Aggregates y Bounded Contexts. Cada paso agrega una capa de información sobre el mismo modelo sin reemplazar la anterior, de modo que el último paso conserva todo lo trabajado en los nueve primeros. Las capturas provienen del tablero de Miro *Event Storming Process - 10 steps*, donde cada paso se conserva como una copia acumulada del anterior.
+Antes de presentar los bounded contexts candidatos, esta sección muestra el camino que llevó hasta ellos. El equipo aplicó el proceso de EventStorming en diez pasos: Unstructured Exploration, Timelines, Pain Points, Pivotal Points, Commands, Policies, Read Models, External Systems, Aggregates y Bounded Contexts. Cada paso agrega una capa de información sobre el mismo modelo sin reemplazar la anterior, de modo que el último paso conserva todo lo trabajado en los nueve primeros. Las capturas provienen del tablero de Miro *Event Storming Process - 10 steps*, donde cada paso se conserva como una copia acumulada del anterior. Si alguna captura no se aprecia con claridad, el tablero completo puede consultarse en Miro.
+
+<br>
+
+URL del tablero en Miro: [https://miro.com/app/board/uXjVHlaGmGg=/?share_link_id=423095184184](https://miro.com/app/board/uXjVHlaGmGg=/?share_link_id=423095184184)
 
 <br>
 
@@ -3176,7 +3180,7 @@ Antes de presentar los bounded contexts candidatos, esta sección muestra el cam
 
 #### 2.5.1.1. Candidate Context Discovery
 
-A partir del dominio modelado en el Big Picture EventStorming, el equipo desarrolló una sesión de Candidate Context Discovery con el fin de identificar los bounded contexts de Serenia. La sesión se realizó en Miro sobre el muro de 46 eventos de dominio previamente levantados y tuvo una duración aproximada de 1 hora y media.
+A partir del dominio modelado en los pasos anteriores, el equipo desarrolló una sesión de Candidate Context Discovery con el fin de identificar los bounded contexts de Serenia, que corresponde al paso 10 del proceso. La sesión se realizó en Miro sobre el muro de eventos de dominio previamente levantados y tuvo una duración aproximada de 1 hora y media.
 
 La técnica aplicada fue start-with-value. En lugar de descomponer el timeline de forma secuencial, el equipo partió de la pregunta sobre qué partes del dominio concentran el mayor valor para el negocio, entendiendo por valor aquello que sostiene directamente la propuesta diferencial de Serenia: reemplazar la común llamada telefónica por un acompañamiento emocional sostenido y verificable a distancia.
 
