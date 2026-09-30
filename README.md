@@ -27,7 +27,7 @@
 </table>
 <br>
 <p align="center"><strong>Período 202620</strong></p>
-<p align="center"><strong>Septiembre 2026</strong></p>
+<p align="center"><strong>Octubre 2026</strong></p>
 
 <br>
 
@@ -62,6 +62,30 @@
       Capítulo II: Requirements Development and Software Solution Design <br>
     </td>
   </tr>
+  <tr>
+    <td><b>Segunda Entrega (TB1)</b></td>
+    <td>8/10/2026</td>
+    <td>
+      Contreras Torres, Arturo Valentino <br>
+      <p></p>
+      Gallardo Morales, Carla Alejandra <br>
+      <p></p>
+      García Paredes, Victor Manuel <br>
+      <p></p>
+      Salinas Guzman, Brianna Cristina <br>
+      <p></p>
+      Sandoval Aiquipa, Kelber Yamir <br>
+    </td>
+    <td>
+      Corrección del reporte
+      Mejora de artefactos
+      Nueva versión desplegada de Landing Page <br>
+      Primera versión desplegada de Web Services <br>
+      Primera versión de Android Application <br>
+      Capítulo III: Solution UI/UX Design <br>
+      Capítulo IV: Product Implementation & Validation (Sprint 1) <br>
+    </td>
+  </tr>
   </table>
 
 <br>
@@ -72,9 +96,16 @@
 
 El informe del proyecto fue desarrollado de manera colaborativa por el equipo mediante repositorios de GitHub creados para la gestión del Project Report y de los diferentes componentes del proyecto. Estos repositorios contienen los archivos del informe, diagramas, evidencias, wireframes, mockups y el historial de versiones correspondiente a cada entrega.
 
-URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-report <br>
+URL del repositorio (Report): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-report
+
+URL del repositorio (Web Services): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-web-services
+
+URL del repositorio (App Native): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-app-native
+
+URL del repositorio (Website): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website
 
 **Primera Entrega (AV1)**
+
 Para esta entrega el equipo trabajó el informe directamente en Markdown sobre el repositorio `serenia-report`, aplicando GitFlow y Conventional Commits. Se mantuvo `main` como rama estable de entrega y `develop` como rama de integración; cada integrante avanzó sus secciones asignadas en ramas `feature/` independientes, que se incorporaron a `develop` mediante Pull Requests revisados por al menos otro miembro antes del merge. 
 
 Los mensajes de commit siguieron la convención `docs:` para la redacción de secciones y `fix:` para correcciones de contenido o formato, lo que permite rastrear en el historial qué aporte corresponde a cada artefacto del informe. 
@@ -89,6 +120,15 @@ La Imagen 1 muestra el resumen de actividad (Pulse) del repositorio entre el 18 
 </p>
 
 <br>
+
+**Segunda Entrega (TB1)**
+
+
+
+<p align="center">
+  <img src="" alt="TB1 Insights" width="900"/>
+    <br/><i>Imagen X. Insights de la Segunda Entrega (TB1)</i>
+</p>
 
 <div style="page-break-after: always;"></div>
 
@@ -198,6 +238,47 @@ La Imagen 1 muestra el resumen de actividad (Pulse) del repositorio entre el 18 
       - [2.6.6.6. Bounded Context Software Architecture Code Level Diagrams](#2666-bounded-context-software-architecture-code-level-diagrams)
         - [2.6.6.6.1. Bounded Context Domain Layer Class Diagrams](#26661-bounded-context-domain-layer-class-diagrams)
         - [2.6.6.6.2. Bounded Context Database Design Diagram](#26662-bounded-context-database-design-diagram)
+        - [Capítulo III: Solution UI/UX Design](#capítulo-iii-solution-uiux-design)
+  - [3.1. Product design](#31-product-design)
+    - [3.1.1. Style Guidelines](#311-style-guidelines)
+      - [3.1.1.1. General Style Guidelines](#3111-general-style-guidelines)
+    - [3.1.2. Information Architecture](#312-information-architecture)
+      - [3.1.2.1. Organization Systems](#3121-organization-systems)
+      - [3.1.2.2. Labelling Systems](#3122-labelling-systems)
+      - [3.1.2.3. SEO Tags and Meta Tags](#3123-seo-tags-and-meta-tags)
+      - [3.1.2.4. Searching Systems](#3124-searching-systems)
+      - [3.1.2.5. Navigation Systems](#3125-navigation-systems)
+    - [3.1.3. Landing Page UI Design](#313-landing-page-ui-design)
+      - [3.1.3.1. Landing Page Wireframe](#3131-landing-page-wireframe)
+      - [3.1.3.2. Landing Page Mock-up](#3132-landing-page-mock-up)
+    - [3.1.4. Mobile Applications UX/UI Design](#314-mobile-applications-uxui-design)
+      - [3.1.4.1. Mobile Applications Wireframes](#3141-mobile-applications-wireframes)
+      - [3.1.4.2. Mobile Applications Wireflow Diagrams](#3142-mobile-applications-wireflow-diagrams)
+      - [3.1.4.3. Mobile Applications Mock-ups](#3143-mobile-applications-mock-ups)
+      - [3.1.4.4. Mobile Applications User Flow Diagrams](#3144-mobile-applications-user-flow-diagrams)
+      - [3.1.4.5. Mobile Applications Prototyping](#3145-mobile-applications-prototyping)
+- [Capítulo IV: Product Implementation & Validation](#capítulo-iv-product-implementation--validation)
+  - [4. Product Implementation & Validation](#4-product-implementation--validation)
+  - [4.1. Software Configuration Management](#41-software-configuration-management)
+    - [4.1.1. Software Development Environment Configuration](#411-software-development-environment-configuration)
+    - [4.1.2. Source Code Management](#412-source-code-management)
+    - [4.1.3. Source Code Style Guide & Conventions](#413-source-code-style-guide--conventions)
+    - [4.1.4. Software Deployment Configuration](#414-software-deployment-configuration)
+  - [4.2. Landing Page & Mobile Application Implementation](#42-landing-page--mobile-application-implementation)
+    - [4.2.1. Sprint 1](#421-sprint-1)
+      - [4.2.1.1. Sprint Planning 1](#4211-sprint-planning-1)
+      - [4.2.1.2. Aspect Leaders and Collaborators](#4212-aspect-leaders-and-collaborators)
+      - [4.2.1.3. Sprint Backlog 1](#4213-sprint-backlog-1)
+      - [4.2.1.4. Development Evidence for Sprint Review](#4214-development-evidence-for-sprint-review)
+      - [4.2.1.5. Testing Suite Evidence for Sprint Review](#4215-testing-suite-evidence-for-sprint-review)
+      - [4.2.1.6. Execution Evidence for Sprint Review](#4216-execution-evidence-for-sprint-review)
+      - [4.2.1.7. Services Documentation Evidence for Sprint Review](#4217-services-documentation-evidence-for-sprint-review)
+      - [4.2.1.8. Software Deployment Evidence for Sprint Review](#4218-software-deployment-evidence-for-sprint-review)
+      - [4.2.1.9. Team Collaboration Insights during Sprint](#4219-team-collaboration-insights-during-sprint)
+  - [4.3. Validation Interviews](#43-validation-interviews)
+    - [4.3.1. Diseño de Entrevistas](#431-diseño-de-entrevistas)
+    - [4.3.2. Registro de Entrevistas](#432-registro-de-entrevistas)
+    - [4.3.3. Evaluaciones según heurísticas](#433-evaluaciones-según-heurísticas)
 - [Conclusiones](#conclusiones)
   - [Conclusiones y Recomendaciones](#conclusiones-y-recomendaciones)
 - [Glosario](#glosario)
@@ -231,26 +312,37 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>AV1</u><br>
             Estudié Domain-Driven Design estratégico para liderar el EventStorming y las User Stories del equipo, y apliqué técnicas de entrevista para definir los segmentos objetivo y el perfil de la solución.
             <br><br>
+            <u>TB1</u><br>
+            <br><br>
             <b>Gallardo Morales, Carla Alejandra</b><br>
             <u>AV1</u><br>
             Aprendí y apliqué técnicas de UX Research (User Personas y User Journey Mapping) a partir del análisis de entrevistas, e incorporé prácticas ágiles al estructurar el Product Backlog priorizado.
+            <br><br>
+            <u>TB1</u><br>
             <br><br>
             <b>García Paredes, Victor Manuel</b><br>
             <u>AV1</u><br>
             Asimilé el proceso Lean UX para formular hipótesis validables antes de diseñar la solución, y apliqué modelado de dominio en el Big Picture EventStorming y el Context Mapping.
             <br><br>
+            <u>TB1</u><br>
+            <br><br>
             <b>Salinas Guzman, Brianna Cristina</b><br>
             <u>AV1</u><br>
             Incorporé el modelo C4 para documentar la arquitectura por niveles de abstracción, y apliqué técnicas de investigación en el análisis competitivo y en la problemática sustentada con fuentes.
+            <br><br>
+            <u>TB1</u><br>
             <br><br>
             <b>Sandoval Aiquipa, Kelber Yamir</b><br>
             <u>AV1</u><br>
             Apliqué herramientas nuevas de diseño centrado en el usuario, como el Empathy Mapping y el Impact Mapping, para traducir las necesidades detectadas en entrevistas en objetivos del producto.
             <br><br>
+            <u>TB1</u><br>
+            <br><br>
         </td>
         <td>
             <u>AV1</u><br>
-            El equipo incorporó marcos que no conocía previamente (Lean UX, Needfinding, Domain-Driven Design, EventStorming y el modelo C4); cada integrante estudió por su cuenta la técnica asignada y la explicó al resto, convirtiendo el aprendizaje individual en conocimiento compartido. Además, sustentamos las decisiones del proyecto con técnicas de investigación como entrevistas y análisis competitivo, en lugar de basarnos en supuestos.
+            El equipo incorporó marcos que no conocía previamente (Lean UX, Needfinding, Domain-Driven Design, EventStorming y el modelo C4); cada integrante estudió por su cuenta la técnica asignada y la explicó al resto, convirtiendo el aprendizaje individual en conocimiento compartido. Además, sustentamos las decisiones del proyecto con técnicas de investigación como entrevistas y análisis competitivo, en lugar de basarnos en supuestos. <br><br>
+            <u>TB1</u><br>
         </td>
     </tr>
       <tr>
@@ -260,26 +352,37 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>AV1</u><br>
             Identifico la arquitectura de software como mi área de crecimiento; mi plan es profundizar en Clean Architecture y DDD aplicados a backend para sustentar decisiones técnicas con criterio propio.
             <br><br>
+            <u>TB1</u><br>
+            <br><br>
             <b>Gallardo Morales, Carla Alejandra</b><br>
             <u>AV1</u><br>
             Reconozco que necesito fortalecer la investigación de usuarios y la gestión de producto; mi plan es seguir formándome en UX Research y validar mis supuestos con usuarios reales en cada entregable.
+            <br><br>
+            <u>TB1</u><br>
             <br><br>
             <b>García Paredes, Victor Manuel</b><br>
             <u>AV1</u><br>
             Mi área de interés es el diseño e integración de sistemas; mi plan es continuar estudiando patrones de integración entre contextos para aplicarlos en los siguientes entregables.
             <br><br>
+            <u>TB1</u><br>
+            <br><br>
             <b>Salinas Guzman, Brianna Cristina</b><br>
             <u>AV1</u><br>
             Identifico la arquitectura de software y la infraestructura en la nube como mi área de crecimiento; mi plan es formarme en servicios cloud y documentación arquitectónica.
+            <br><br>
+            <u>TB1</u><br>
             <br><br>
             <b>Sandoval Aiquipa, Kelber Yamir</b><br>
             <u>AV1</u><br>
             Reconozco que las herramientas de análisis cambian constantemente; mi plan es seguir aprendiendo metodologías de descubrimiento de producto y modelado de requisitos y aplicarlas de forma continua.
             <br><br>
+            <u>TB1</u><br>
+            <br><br>
         </td>
         <td>
             <u>AV1</u><br>
-            El entregable evidenció que lo visto en clase no basta para sostener un proyecto real: cada técnica exigió estudio adicional del responsable y aprendizaje entre pares. A partir de ello, cada integrante identificó un área concreta de crecimiento profesional y un plan de formación alineado a ella, asumiendo el aprendizaje permanente como una condición del ejercicio profesional y no como una etapa que termina con el curso.
+            El entregable evidenció que lo visto en clase no basta para sostener un proyecto real: cada técnica exigió estudio adicional del responsable y aprendizaje entre pares. A partir de ello, cada integrante identificó un área concreta de crecimiento profesional y un plan de formación alineado a ella, asumiendo el aprendizaje permanente como una condición del ejercicio profesional y no como una etapa que termina con el curso. <br><br>
+            <u>TB1</u><br>
         </td>
     </tr>
 </table>
@@ -4959,6 +5062,49 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 
 <div style="page-break-after: always;"></div>
 
+# Capítulo III: Solution UI/UX Design
+## 3.1. Product design
+### 3.1.1. Style Guidelines
+#### 3.1.1.1. General Style Guidelines
+### 3.1.2. Information Architecture
+#### 3.1.2.1. Organization Systems
+#### 3.1.2.2. Labelling Systems
+#### 3.1.2.3. SEO Tags and Meta Tags
+#### 3.1.2.4. Searching Systems
+#### 3.1.2.5. Navigation Systems
+### 3.1.3. Landing Page UI Design
+#### 3.1.3.1. Landing Page Wireframe
+#### 3.1.3.2. Landing Page Mock-up
+### 3.1.4. Mobile Applications UX/UI Design
+#### 3.1.4.1. Mobile Applications Wireframes
+#### 3.1.4.2. Mobile Applications Wireflow Diagrams
+#### 3.1.4.3. Mobile Applications Mock-ups
+#### 3.1.4.4. Mobile Applications User Flow Diagrams
+#### 3.1.4.5. Mobile Applications Prototyping
+
+# Capítulo IV: Product Implementation & Validation
+## 4. Product Implementation & Validation
+## 4.1. Software Configuration Management
+### 4.1.1. Software Development Environment Configuration
+### 4.1.2. Source Code Management
+### 4.1.3. Source Code Style Guide & Conventions
+### 4.1.4. Software Deployment Configuration
+## 4.2. Landing Page & Mobile Application Implementation
+### 4.2.1. Sprint 1
+#### 4.2.1.1. Sprint Planning 1
+#### 4.2.1.2. Aspect Leaders and Collaborators
+#### 4.2.1.3. Sprint Backlog 1
+#### 4.2.1.4. Development Evidence for Sprint Review
+#### 4.2.1.5. Testing Suite Evidence for Sprint Review
+#### 4.2.1.6. Execution Evidence for Sprint Review
+#### 4.2.1.7. Services Documentation Evidence for Sprint Review
+#### 4.2.1.8. Software Deployment Evidence for Sprint Review
+#### 4.2.1.9. Team Collaboration Insights during Sprint
+## 4.3. Validation Interviews
+### 4.3.1. Diseño de Entrevistas
+### 4.3.2. Registro de Entrevistas
+### 4.3.3. Evaluaciones según heurísticas
+
 # Conclusiones
 ## Conclusiones y Recomendaciones
 
@@ -5060,3 +5206,9 @@ Esta primera entrega abarca el análisis del problema, la propuesta de valor y e
 URL de la organización (Serenia):  [Organización Serenia](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare)
 
 URL del repositorio (Report):  [Repositorio Reporte](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-report)
+
+URL del repositorio (Web Services):  [Repositorio Web Services](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-web-services)
+
+URL del repositorio (App Native):  [Repositorio App Native](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-app-native)
+
+URL del repositorio (Website):  [Repositorio Website](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website)
