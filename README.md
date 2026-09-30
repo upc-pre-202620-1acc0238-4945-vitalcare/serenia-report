@@ -77,8 +77,8 @@
       Sandoval Aiquipa, Kelber Yamir <br>
     </td>
     <td>
-      Corrección del reporte
-      Mejora de artefactos
+      Corrección del reporte <br>
+      Mejora de artefactos <br>
       Nueva versión desplegada de Landing Page <br>
       Primera versión desplegada de Web Services <br>
       Primera versión de Android Application <br>
