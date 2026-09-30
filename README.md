@@ -62,6 +62,30 @@
       Capítulo II: Requirements Development and Software Solution Design <br>
     </td>
   </tr>
+  <tr>
+    <td><b>Segunda Entrega (TB1)</b></td>
+    <td>8/10/2026</td>
+    <td>
+      Contreras Torres, Arturo Valentino <br>
+      <p></p>
+      Gallardo Morales, Carla Alejandra <br>
+      <p></p>
+      García Paredes, Victor Manuel <br>
+      <p></p>
+      Salinas Guzman, Brianna Cristina <br>
+      <p></p>
+      Sandoval Aiquipa, Kelber Yamir <br>
+    </td>
+    <td>
+      Corrección del reporte
+      Mejora de artefactos
+      Nueva versión desplegada de Landing Page <br>
+      Primera versión desplegada de Web Services <br>
+      Primera versión de Android Application <br>
+      Capítulo III: Solution UI/UX Design <br>
+      Capítulo IV: Product Implementation & Validation (Sprint 1) <br>
+    </td>
+  </tr>
   </table>
 
 <br>
