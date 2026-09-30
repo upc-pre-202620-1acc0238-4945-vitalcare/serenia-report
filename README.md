@@ -96,9 +96,16 @@
 
 El informe del proyecto fue desarrollado de manera colaborativa por el equipo mediante repositorios de GitHub creados para la gestión del Project Report y de los diferentes componentes del proyecto. Estos repositorios contienen los archivos del informe, diagramas, evidencias, wireframes, mockups y el historial de versiones correspondiente a cada entrega.
 
-URL del repositorio (report): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-report <br>
+URL del repositorio (Report): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-report
+
+URL del repositorio (Web Services): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-web-services
+
+URL del repositorio (App Native): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-app-native
+
+URL del repositorio (Website): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website
 
 **Primera Entrega (AV1)**
+
 Para esta entrega el equipo trabajó el informe directamente en Markdown sobre el repositorio `serenia-report`, aplicando GitFlow y Conventional Commits. Se mantuvo `main` como rama estable de entrega y `develop` como rama de integración; cada integrante avanzó sus secciones asignadas en ramas `feature/` independientes, que se incorporaron a `develop` mediante Pull Requests revisados por al menos otro miembro antes del merge. 
 
 Los mensajes de commit siguieron la convención `docs:` para la redacción de secciones y `fix:` para correcciones de contenido o formato, lo que permite rastrear en el historial qué aporte corresponde a cada artefacto del informe. 
@@ -113,6 +120,15 @@ La Imagen 1 muestra el resumen de actividad (Pulse) del repositorio entre el 18 
 </p>
 
 <br>
+
+**Segunda Entrega (TB1)**
+
+
+
+<p align="center">
+  <img src="" alt="TB1 Insights" width="900"/>
+    <br/><i>Imagen X. Insights de la Segunda Entrega (TB1)</i>
+</p>
 
 <div style="page-break-after: always;"></div>
 
