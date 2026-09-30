@@ -5082,6 +5082,8 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 #### 3.1.4.4. Mobile Applications User Flow Diagrams
 #### 3.1.4.5. Mobile Applications Prototyping
 
+<div style="page-break-after: always;"></div>
+
 # Capítulo IV: Product Implementation & Validation
 ## 4. Product Implementation & Validation
 ## 4.1. Software Configuration Management
@@ -5104,6 +5106,8 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 ### 4.3.1. Diseño de Entrevistas
 ### 4.3.2. Registro de Entrevistas
 ### 4.3.3. Evaluaciones según heurísticas
+
+<div style="page-break-after: always;"></div>
 
 # Conclusiones
 ## Conclusiones y Recomendaciones
