@@ -5070,7 +5070,75 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 #### 3.1.2.1. Organization Systems
 #### 3.1.2.2. Labelling Systems
 #### 3.1.2.3. SEO Tags and Meta Tags
+
 #### 3.1.2.4. Searching Systems
+
+Un sistema de búsqueda permite al usuario encontrar información escribiendo una consulta o acotando un conjunto de resultados mediante filtros, en lugar de recorrer la estructura de navegación. En arquitectura de información, su inclusión se justifica cuando el volumen de contenido es suficientemente grande o cuando el usuario sabe de antemano qué busca; en caso contrario, agrega complejidad sin aportar valor. Por ello, el equipo no incorporó un buscador global en Serenia, sino que decidió, producto por producto, dónde la búsqueda es necesaria y dónde resulta contraproducente.
+
+<br>
+
+### Criterio de decisión. 
+Serenia atiende a dos perfiles con necesidades opuestas. El adulto mayor interactúa con pocas acciones, a diario y con baja tolerancia a la carga cognitiva y a la escritura en pantalla, por lo que cualquier campo de búsqueda sería una barrera. El familiar a distancia, en cambio, acumula con el tiempo un historial de check-ins, notas, mensajes y alertas que sí necesita consultar de forma puntual. El equipo aplicó la búsqueda únicamente en el segundo caso.
+
+<br>
+
+| Producto | ¿Incluye sistema de búsqueda? | Justificación |
+| --- | --- | --- |
+| Aplicación móvil del adulto mayor | No | Su flujo se reduce al check-in diario, el botón de ayuda y la recepción de mensajes. El contenido es mínimo y se resuelve con navegación directa; un buscador añadiría escritura y confusión a un usuario que no la necesita. |
+| Aplicación móvil del familiar a distancia | Sí, acotada por sección | Acumula historial de check-ins, notas compartidas, mensajes de audio, fotos y alertas que crecen cada día. Se ofrecen filtros y búsqueda por texto dentro de cada sección, no un buscador global. |
+| Landing page web | No | Presenta el producto y sus planes en pocas páginas, cubiertas por el menú de navegación. El descubrimiento de la landing ocurre en buscadores externos, tratado en la sección 3.1.2.3 (SEO Tags and Meta Tags). |
+
+<br>
+
+### Zonas de búsqueda en la aplicación del familiar a distancia.
+
+Cada sección de contenido define su propia zona de búsqueda, de modo que el usuario siempre sabe en qué conjunto de información está buscando.
+
+<br>
+
+| Zona | Contenido buscable | Tipo de búsqueda | Filtros disponibles | Orden por defecto |
+| --- | --- | --- | --- | --- |
+| Historial de check-ins | Check-ins del adulto mayor con su estado de ánimo y nota | Solo filtros, sin texto libre | Rango de fechas, nivel de ánimo (muy bajo, bajo, neutral, bueno, muy bueno), estado (respondido, perdido) | Más reciente primero |
+| Alertas | Alertas de inactividad, bienestar y emergencia | Solo filtros, sin texto libre | Tipo de alerta, severidad (baja, media, alta, crítica), estado (abierta, notificada, atendida, cerrada), rango de fechas | Más reciente primero |
+| Notas compartidas | Notas escritas por los integrantes del círculo familiar | Texto libre sobre el contenido de la nota | Autor, rango de fechas | Más reciente primero |
+| Mensajes | Mensajes de audio, fotos y texto entre el adulto mayor y su círculo | Solo filtros, sin texto libre | Tipo de mensaje (audio, foto, texto), remitente, rango de fechas | Más reciente primero |
+| Pequeños logros | Pequeños logros registrados por el sistema | Solo filtros, sin texto libre | Rango de fechas | Más reciente primero |
+
+<br>
+
+La búsqueda por texto libre se reserva a las notas compartidas, que es el único contenido redactado libremente por los usuarios. El resto de las secciones contiene datos estructurados (estados, tipos, severidades), para los cuales un filtro es más rápido y menos propenso a errores que escribir una consulta.
+
+<br>
+
+### Presentación de resultados.
+
+Los resultados se muestran como una lista cronológica en la misma pantalla de la sección, sin cambiar de pantalla al buscar. Los filtros aplicados quedan visibles en la parte superior como etiquetas que se pueden quitar de una en una, junto con el total de resultados encontrados (por ejemplo, "12 resultados") y un acceso de un solo toque para limpiar todos los filtros. Cada elemento del listado muestra la información mínima para identificarlo y abre su detalle al seleccionarlo. Los filtros por rango de fechas ofrecen atajos predefinidos (hoy, últimos 7 días, últimos 30 días) para evitar el ingreso manual de fechas.
+
+<br>
+
+| Zona | Cómo se muestra cada resultado | Información visible en el listado | Al seleccionarlo |
+| --- | --- | --- | --- |
+| Historial de check-ins | Tarjeta con indicador de color según el nivel de ánimo | Fecha y hora, nivel de ánimo, estado (respondido o perdido) y primera línea de la nota, si existe | Abre el detalle del check-in con la pregunta formulada y la nota completa |
+| Alertas | Tarjeta con indicador de color según la severidad | Tipo de alerta, severidad, estado y fecha y hora en que se activó | Abre el detalle de la alerta y su registro de atención |
+| Notas compartidas | Tarjeta de texto con el término buscado resaltado | Autor, fecha y extracto de la nota con la coincidencia resaltada | Abre la nota completa |
+| Mensajes | Tarjeta con ícono según el tipo de mensaje | Remitente, tipo (audio, foto o texto), fecha y hora, y duración si es audio o miniatura si es foto | Reproduce el audio, amplía la foto o abre el texto |
+| Pequeños logros | Tarjeta con la descripción del logro | Descripción y fecha en que se registró | Abre el check-in que originó el logro, cuando aplica |
+
+<br>
+
+### Resultados vacíos.
+
+Cuando una combinación de filtros no produce resultados, la sección lo comunica con un mensaje en lenguaje cotidiano y propone la acción siguiente (por ejemplo, ampliar el rango de fechas o limpiar los filtros), en lugar de mostrar una pantalla vacía.
+
+<br>
+
+### Criterios de accesibilidad.
+
+Aunque el sistema de búsqueda solo se expone al familiar a distancia, el equipo mantiene los mismos criterios de legibilidad que en el resto de la aplicación: tamaño de texto adaptable, objetivos táctiles amplios en los controles de filtro y contraste suficiente en los filtros activos.
+
+<br>
+
+
 #### 3.1.2.5. Navigation Systems
 ### 3.1.3. Landing Page UI Design
 #### 3.1.3.1. Landing Page Wireframe
