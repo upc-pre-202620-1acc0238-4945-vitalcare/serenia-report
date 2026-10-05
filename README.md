@@ -5068,6 +5068,87 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 #### 3.1.1.1. General Style Guidelines
 ### 3.1.2. Information Architecture
 #### 3.1.2.1. Organization Systems
+
+Un sistema de organización define cómo se agrupa y se ordena la información dentro de un producto para que el usuario encuentre lo que necesita sin esfuerzo. Esta sección responde dos preguntas por cada grupo de información de Serenia: con qué estructura se presenta (jerárquica, secuencial o matricial) y con qué esquema se categoriza su contenido (alfabético, cronológico, por tópicos o según la audiencia). El equipo no aplicó una única regla a todo el producto: eligió, para cada grupo, la combinación más simple posible. El criterio parte de los user personas (sección 2.3.1): el adulto mayor tiene baja tolerancia a la carga cognitiva y necesita pocas decisiones, mientras que el familiar a distancia acumula un historial que necesita recorrer en el tiempo.
+
+<br>
+
+**Criterios para elegir la estructura**
+
+| Estructura | Cuándo se aplica | Ejemplo en Serenia |
+| --- | --- | --- |
+| Jerárquica | El usuario parte de una vista general y baja al detalle de un elemento | Resumen de estado del adulto mayor que abre el detalle de su check-in |
+| Secuencial | La tarea tiene pasos ordenados que se completan de a uno | Check-in diario, con un paso por pantalla |
+| Matricial | El mismo conjunto de elementos se consulta desde más de una dimensión a la vez | Alertas filtradas por tipo, severidad y estado |
+
+<br>
+
+**Aplicación móvil del adulto mayor**
+
+La estructura se mantiene en un máximo de dos niveles desde la pantalla de inicio, en coherencia con los principios de la sección 3.1.2.5 (Navigation Systems). El botón de ayuda no pertenece a ninguna estructura: está disponible en todas las pantallas para que el adulto mayor pueda pedir auxilio sin importar dónde se encuentre.
+
+<br>
+
+| Grupo de información | Estructura | Cómo se organiza | Justificación |
+| --- | --- | --- | --- |
+| Pantalla de inicio | Jerárquica de un solo nivel | Tres acciones al mismo nivel: responder el check-in del día, abrir los mensajes de la familia y activar el botón de ayuda | Sin menús ni pestañas, el usuario solo decide entre tres opciones |
+| Check-in diario | Secuencial | Un paso por pantalla: pregunta del día, estado de ánimo, nota opcional y confirmación | Cada pantalla pide una sola decisión; el modo simplificado reduce aún más los pasos |
+| Mensajes recibidos | Jerárquica de dos niveles | Lista de mensajes de la familia y, al elegir uno, su reproducción o vista | Mantiene la profundidad máxima de dos niveles |
+| Preferencias del check-in (horario, pausa del día y modo simplificado) | Jerárquica de dos niveles | Lista corta de ajustes; cada uno abre su propio detalle | Se consultan pocas veces, por lo que no compiten con las acciones del inicio |
+
+<br>
+
+**Aplicación móvil del familiar a distancia**
+
+Esta aplicación concentra más contenido, por lo que combina las tres estructuras. Los cinco destinos de la barra de navegación inferior (Inicio, Historial, Alertas, Círculo y Mensajes) son el primer nivel de la jerarquía, y cada uno organiza su contenido con la estructura que mejor se ajusta a su uso.
+
+<br>
+
+| Grupo de información | Estructura | Cómo se organiza | Justificación |
+| --- | --- | --- | --- |
+| Inicio | Jerárquica | Tarjeta de resumen del día que abre el detalle del check-in | Responde de un vistazo si el adulto mayor está bien y permite profundizar solo si hace falta |
+| Historial de check-ins y pequeños logros | Matricial | Registro ordenado en el tiempo, combinable con filtros por rango de fechas, estado de ánimo y estado de respuesta | El mismo historial se consulta por fecha, por ánimo o por respuestas perdidas |
+| Alertas | Matricial | Alertas combinables por tipo (inactividad, bienestar o emergencia), severidad y estado de atención, con una insignia que indica las pendientes | Lo urgente debe poder aislarse rápidamente entre muchas alertas |
+| Círculo | Jerárquica | Tres pestañas internas: integrantes, turnos de atención y notas compartidas | Agrupa en un solo destino todo lo que sirve para coordinarse con los demás familiares |
+| Turnos de atención | Matricial | Calendario con los días en un eje y el familiar asignado en el otro; cada fecha admite un único turno | Evita que dos familiares se asignen el mismo día y permite ver quién cubre cada fecha |
+| Mensajes | Jerárquica | Lista de mensajes de audio, fotos y texto, y recordatorios sociales; al elegir uno se abre su detalle, con filtro por tipo | Reúne el contenido afectivo en un solo destino, separado de lo operativo |
+
+<br>
+
+**Landing page web**
+
+| Grupo de información | Estructura | Cómo se organiza | Justificación |
+| --- | --- | --- | --- |
+| Recorrido de la página | Secuencial | Propuesta de valor, modelo de dos aplicaciones, planes, sección institucional de la startup y descarga, en ese orden | Quien llega por primera vez necesita entender primero el problema y la propuesta antes de decidir descargar |
+| Menú de navegación | Jerárquica de un solo nivel | Un enlace por sección, que desplaza la página hasta ella | Permite saltar a una sección sin recorrer toda la página |
+
+<br>
+
+**Esquemas de categorización**
+
+La estructura define la forma en que se presenta cada grupo; el esquema de categorización define el criterio con el que se agrupa y se ordena su contenido. El equipo empleó los cuatro esquemas, cada uno en los lugares donde ayuda al usuario a cumplir su meta.
+
+<br>
+
+| Esquema | Dónde se aplica | Justificación | Dónde no se aplica |
+| --- | --- | --- | --- |
+| Cronológico | Historial de check-ins, alertas, mensajes, notas compartidas y pequeños logros, del más reciente al más antiguo; turnos de atención por fecha | El valor de estos datos está en su evolución en el tiempo, y coincide con el orden por defecto definido en la sección 3.1.2.4 (Searching Systems) | Pantalla de inicio y landing page, que presentan una vista actual y no un registro |
+| Por tópicos | Los cinco destinos de la barra del familiar, las pestañas del Círculo y las secciones de la landing page | Cada tópico corresponde a una meta del usuario: saber, revisar, responder, coordinarse y acompañar | Aplicación del adulto mayor, donde agrupar por tópicos añadiría menús |
+| Según audiencia | La separación en dos aplicaciones, una por tipo de usuario, y la presentación de cada aplicación en la landing page | El rol se define en el registro y determina la aplicación a la que accede la persona, de modo que cada una solo ve lo que necesita | Dentro de cada aplicación, que ya atiende a un único perfil |
+| Alfabético | Lista de integrantes del círculo familiar, ordenada por nombre | Es el único grupo en el que el usuario busca a una persona concreta por su nombre | Historial, alertas y mensajes, donde ordenar por letra rompería la secuencia en el tiempo |
+
+<br>
+
+**Alternativas descartadas**
+
+- **Un menú único con selección de rol:** se descartó porque el rol queda fijado al registrarse y determina la aplicación; mostrar a cada usuario opciones del otro perfil solo agregaría ruido.
+- **Ordenar el historial por tópicos en lugar de por tiempo:** se descartó porque el familiar busca ver cómo ha cambiado el bienestar, y eso solo se aprecia en orden cronológico.
+- **Estructura matricial en la aplicación del adulto mayor:** se descartó porque exige que el usuario combine criterios, una carga que este perfil no debe asumir.
+
+Las etiquetas que nombran cada grupo se definen en la sección 3.1.2.2 (Labelling Systems), y la forma en que el usuario se desplaza entre ellos se detalla en la sección 3.1.2.5 (Navigation Systems).
+
+<br>
+
 #### 3.1.2.2. Labelling Systems
 #### 3.1.2.3. SEO Tags and Meta Tags
 
