@@ -5073,13 +5073,13 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 #### 3.1.2.4. Searching Systems
 #### 3.1.2.5. Navigation Systems
 
-Un sistema de navegación define las acciones y técnicas que guían al usuario a través del producto: cómo se desplaza entre pantallas, cómo sabe en qué punto se encuentra y cómo regresa o avanza hacia su meta sin perderse. Para Serenia, el equipo diseñó la navegación de cada producto según las capacidades y metas de su usuario principal, y no con una estructura única para todos. El adulto mayor necesita avanzar con la menor cantidad de decisiones posible; el familiar a distancia necesita llegar rápido a información distinta según la urgencia; y el visitante de la landing page necesita entender la propuesta y llegar a la descarga.
+Un sistema de navegación define las acciones y técnicas que guían al usuario a través del producto: cómo se desplaza entre pantallas, cómo sabe en qué punto se encuentra y cómo regresa o avanza hacia su meta sin perderse. Para Serenia, el equipo diseñó la navegación de cada producto según las capacidades y metas de su usuario principal, y no con una estructura única para todos. El adulto mayor necesita avanzar con la menor cantidad de decisiones posible; el familiar a distancia necesita llegar rápido a información distinta según la urgencia; y el visitante de la landing page necesita entender la propuesta y llegar a probar la aplicación.
 
 <br>
 
 ## Principios de navegación.
 
-Todos los productos comparten cuatro criterios: pocas opciones visibles a la vez, etiquetas coherentes con las definidas en la sección 3.1.2.2 (Labelling Systems), una profundidad máxima de dos niveles desde la pantalla principal y una forma siempre disponible de volver o salir.
+Todos los productos comparten cuatro criterios: pocas opciones visibles a la vez, etiquetas coherentes con las definidas, una profundidad máxima de dos niveles desde la pantalla principal y una forma siempre disponible de volver o salir.
 
 <br>
 
@@ -5087,7 +5087,7 @@ Todos los productos comparten cuatro criterios: pocas opciones visibles a la vez
 | --- | --- | --- |
 | Aplicación móvil del adulto mayor | Pantalla de inicio única con acciones directas, sin menú | Botón de ayuda visible en todas las pantallas, flecha de retorno, flujo lineal por pasos |
 | Aplicación móvil del familiar a distancia | Barra de navegación inferior con cinco destinos | Menú de perfil, navegación local por sección, enlaces contextuales y notificaciones push con acceso directo |
-| Landing page web | Barra de navegación superior fija con anclas a secciones | Botón de descarga repetido, menú desplegable en móvil, pie de página |
+| Landing page web | Barra de navegación superior fija con anclas a secciones | Selector de idioma, botón "Probar gratis" repetido, menú adaptado a móvil, pie de página |
 
 ### Aplicación móvil del adulto mayor. 
 La navegación se reduce deliberadamente al mínimo, ya que cualquier menú agregaría decisiones a un usuario con baja familiaridad tecnológica. La pantalla de inicio presenta tres acciones de gran tamaño y se desplaza con un solo toque, sin menús ni pestañas.
@@ -5145,16 +5145,17 @@ Dentro de cada destino, la navegación local se resuelve con pestañas internas 
 
 ### Landing page web.
 
-La landing page tiene un propósito de conversión: que el visitante comprenda la propuesta de Serenia y llegue a descargar la aplicación. Se organiza como una página de desplazamiento continuo, con una barra de navegación superior fija que permanece visible mientras se recorre el contenido.
+La landing page tiene un propósito de conversión: que el visitante comprenda la propuesta de Serenia y llegue a probar la aplicación. Se organiza como una página de desplazamiento continuo, con una barra de navegación superior fija que permanece visible mientras se recorre el contenido.
 
 <br>
 
 | Elemento | Descripción |
 | --- | --- |
-| Barra de navegación superior | Contiene el logotipo (que devuelve al inicio) y enlaces de ancla a las secciones de la página: cómo funciona, beneficios y planes. Permanece fija al desplazarse. |
-| Botón de descarga | Botón destacado en la barra superior, repetido al final de las secciones principales, que dirige a las tiendas de aplicaciones. |
+| Barra de navegación superior | Contiene el logotipo (que devuelve al inicio) y cuatro enlaces de ancla a las secciones de la página: Cómo funciona, Para quién, Funciones y Planes. Permanece fija al desplazarse. |
+| Selector de idioma | Control ES / EN ubicado en la barra, que permite al visitante alternar entre español e inglés sin salir de la página. El idioma activo se resalta. |
+| Botón "Probar gratis" | Botón destacado en el extremo derecho de la barra, repetido en la portada, que lleva a la sección de Planes. Al final de la página, un llamado a la acción redirige a las tiendas de aplicaciones. |
 | Desplazamiento a secciones | Al seleccionar un enlace de la barra, la página se desplaza suavemente hasta la sección correspondiente, y el enlace de la sección visible se resalta. |
-| Menú en móvil | En pantallas pequeñas, la barra se reemplaza por un menú desplegable con los mismos enlaces, abierto desde un ícono. |
+| Adaptación a móvil | En pantallas pequeñas, la barra conserva el logotipo, el selector de idioma y el botón "Probar gratis" en la fila superior, y los enlaces de sección pasan a una fila desplazable horizontalmente debajo de ella. |
 | Pie de página | Reúne el contacto, los términos de uso y la política de privacidad, y repite los enlaces principales. |
 | Regreso al inicio | Un botón flotante permite volver al inicio de la página tras recorrer varias secciones. |
 
@@ -5162,7 +5163,7 @@ La landing page tiene un propósito de conversión: que el visitante comprenda l
 
 <div align="center">
 
-![Barra de navegación - Landing page](assets/img/navigation-systems/landing-navbar.png)
+![Barra de navegación - Landing page](assets/img/navigation-systems/landing-page-nav.png)
   <br/><i>Imagen 28: Barra de navegación superior de la landing page.</i>
 
 </div>
@@ -5182,7 +5183,7 @@ Las técnicas anteriores se combinan para que cada usuario llegue a su meta en l
 | Familiar a distancia | Saber cómo está su familiar | Inicio → Resumen de estado |
 | Familiar a distancia | Atender una alerta | Notificación push → Detalle de la alerta → Contactar al adulto mayor → Confirmar atención |
 | Familiar a distancia | Enviar un mensaje de audio | Mensajes → Nuevo mensaje → Grabar → Enviar |
-| Visitante | Descargar la aplicación | Landing page → Botón de descarga → Tienda de aplicaciones |
+| Visitante | Probar la aplicación | Landing page → Botón "Probar gratis" → Planes → Descarga en la tienda de aplicaciones |
 
 <br>
 
