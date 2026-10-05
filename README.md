@@ -2354,6 +2354,402 @@ En esta sección se presentan los requisitos identificados para Serenia a partir
     <th style="width: 35%;">Epic</th>
   </tr>
   <tr>
+    <td style="text-align: center;"><strong>US28</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP01 – Gestión de Identidad y Vínculo Familiar</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Registro de cuenta del familiar a distancia</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero registrarme en la aplicación con mis datos básicos para vincularme con mi adulto mayor y consultar su estado sin depender de una llamada.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Registro exitoso</strong><br>- <strong>Dado que</strong> el familiar ingresa a la aplicación por primera vez<br>- <strong>Cuando</strong> completa el formulario de registro con datos válidos y lo confirma<br>- <strong>Entonces</strong> el sistema crea la cuenta<br>- <strong>Y</strong> habilita el acceso a la pantalla principal<br><br><strong>Escenario 2: Datos incompletos o inválidos</strong><br>- <strong>Dado que</strong> el familiar completa el formulario de registro<br>- <strong>Cuando</strong> intenta confirmarlo con campos obligatorios vacíos o con formato incorrecto<br>- <strong>Entonces</strong> el sistema rechaza el registro<br>- <strong>Y</strong> indica los campos que requieren corrección</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US29</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo / Familiar a distancia</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP01 – Gestión de Identidad y Vínculo Familiar</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Inicio de sesión</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como usuario de la plataforma, quiero iniciar sesión con mis credenciales para acceder a mi información y a las funcionalidades que me corresponden.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Inicio de sesión exitoso</strong><br>- <strong>Dado que</strong> el usuario cuenta con una cuenta registrada<br>- <strong>Cuando</strong> ingresa sus credenciales válidas y confirma<br>- <strong>Entonces</strong> el sistema inicia la sesión<br>- <strong>Y</strong> habilita el acceso a la pantalla principal<br><br><strong>Escenario 2: Credenciales incorrectas</strong><br>- <strong>Dado que</strong> el usuario ingresa sus credenciales en el formulario de inicio de sesión<br>- <strong>Cuando</strong> las credenciales no corresponden a ninguna cuenta registrada<br>- <strong>Entonces</strong> el sistema rechaza el inicio de sesión<br>- <strong>Y</strong> informa que las credenciales no son correctas</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US30</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo / Familiar a distancia</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP01 – Gestión de Identidad y Vínculo Familiar</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Cierre de sesión</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como usuario de la plataforma, quiero cerrar mi sesión para proteger mi información cuando comparto o dejo de usar mi dispositivo.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Sesión cerrada</strong><br>- <strong>Dado que</strong> el usuario tiene una sesión activa<br>- <strong>Cuando</strong> selecciona la opción de cerrar sesión desde el menú de usuario<br>- <strong>Entonces</strong> el sistema cierra la sesión<br>- <strong>Y</strong> presenta la pantalla de inicio de sesión<br><br><strong>Escenario 2: Acceso tras el cierre de sesión</strong><br>- <strong>Dado que</strong> el usuario cerró su sesión<br>- <strong>Cuando</strong> intenta acceder a una pantalla que requiere autenticación<br>- <strong>Entonces</strong> el sistema solicita iniciar sesión nuevamente</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US31</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo / Familiar a distancia</td>
+    <td style="text-align: center;">Low</td>
+    <td style="text-align: center;">EP01 – Gestión de Identidad y Vínculo Familiar</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Edición de datos de perfil y foto</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como usuario de la plataforma, quiero actualizar mis datos de perfil y mi foto para que mi familia me identifique y mi información se mantenga vigente.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Datos de perfil actualizados</strong><br>- <strong>Dado que</strong> el usuario accede a la pantalla de su perfil<br>- <strong>Cuando</strong> modifica sus datos con valores válidos y confirma<br>- <strong>Entonces</strong> el sistema guarda los cambios<br>- <strong>Y</strong> muestra la información actualizada<br><br><strong>Escenario 2: Datos de perfil inválidos</strong><br>- <strong>Dado que</strong> el usuario modifica sus datos de perfil<br>- <strong>Cuando</strong> intenta confirmar con campos obligatorios vacíos o con formato incorrecto<br>- <strong>Entonces</strong> el sistema rechaza la actualización<br>- <strong>Y</strong> indica los campos que requieren corrección<br><br><strong>Escenario 3: Foto de perfil actualizada</strong><br>- <strong>Dado que</strong> el usuario selecciona una nueva foto de perfil<br>- <strong>Cuando</strong> confirma el cambio<br>- <strong>Entonces</strong> el sistema reemplaza la foto anterior<br>- <strong>Y</strong> la muestra en el perfil del usuario</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US32</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo / Familiar a distancia</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP01 – Gestión de Identidad y Vínculo Familiar</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Cambio de contraseña</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como usuario de la plataforma, quiero cambiar mi contraseña desde la configuración de seguridad para mantener protegida mi cuenta y los datos de mi familia.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Contraseña actualizada</strong><br>- <strong>Dado que</strong> el usuario accede a la configuración de seguridad<br>- <strong>Cuando</strong> ingresa su contraseña actual correcta y una nueva contraseña válida, y confirma<br>- <strong>Entonces</strong> el sistema actualiza la contraseña<br>- <strong>Y</strong> informa que el cambio fue exitoso<br><br><strong>Escenario 2: Contraseña actual incorrecta</strong><br>- <strong>Dado que</strong> el usuario intenta cambiar su contraseña<br>- <strong>Cuando</strong> la contraseña actual ingresada no coincide con la registrada<br>- <strong>Entonces</strong> el sistema rechaza el cambio<br>- <strong>Y</strong> mantiene la contraseña vigente</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US33</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo / Familiar a distancia</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP01 – Gestión de Identidad y Vínculo Familiar</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Revocación de vínculo familiar</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como usuario de la plataforma, quiero revocar un vínculo familiar existente para controlar quién tiene acceso a la información de bienestar del adulto mayor.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Vínculo revocado</strong><br>- <strong>Dado que</strong> existe un vínculo familiar activo entre un adulto mayor y un familiar<br>- <strong>Cuando</strong> el usuario selecciona revocarlo desde la lista de familiares vinculados y confirma<br>- <strong>Entonces</strong> el sistema elimina el vínculo<br>- <strong>Y</strong> el familiar deja de recibir alertas del adulto mayor<br><br><strong>Escenario 2: Acceso tras la revocación</strong><br>- <strong>Dado que</strong> el vínculo familiar fue revocado<br>- <strong>Cuando</strong> el familiar intenta acceder al panel de estado del adulto mayor<br>- <strong>Entonces</strong> el sistema deniega el acceso a la información solicitada</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US34</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">Low</td>
+    <td style="text-align: center;">EP04 – Recordatorios de Contacto Social</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Programación de recordatorio de contacto social</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor que vive solo, quiero programar un recordatorio para contactar a una amistad o asistir a una actividad para no olvidar mis compromisos sociales.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Recordatorio programado</strong><br>- <strong>Dado que</strong> el usuario accede a la configuración de recordatorios<br>- <strong>Cuando</strong> ingresa la descripción, la fecha y la hora del recordatorio y confirma<br>- <strong>Entonces</strong> el sistema registra el recordatorio<br>- <strong>Y</strong> lo presentará al alcanzarse la hora programada<br><br><strong>Escenario 2: Datos incompletos o inválidos</strong><br>- <strong>Dado que</strong> el usuario está programando un recordatorio<br>- <strong>Cuando</strong> intenta confirmarlo sin descripción o con una fecha y hora ya transcurridas<br>- <strong>Entonces</strong> el sistema rechaza la programación<br>- <strong>Y</strong> indica los campos que requieren corrección</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US35</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">Low</td>
+    <td style="text-align: center;">EP04 – Recordatorios de Contacto Social</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Cancelación de recordatorio de contacto social</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor que vive solo, quiero cancelar un recordatorio que ya no necesito para que la aplicación no me lo vuelva a presentar.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Recordatorio programado cancelado</strong><br>- <strong>Dado que</strong> existe un recordatorio de contacto social programado<br>- <strong>Cuando</strong> el usuario selecciona cancelarlo<br>- <strong>Entonces</strong> el sistema marca el recordatorio como cancelado<br>- <strong>Y</strong> no lo presenta al alcanzarse la hora programada<br><br><strong>Escenario 2: Recordatorio presentado cancelado</strong><br>- <strong>Dado que</strong> el sistema presentó un recordatorio de contacto social<br>- <strong>Cuando</strong> el usuario selecciona cancelarlo<br>- <strong>Entonces</strong> el sistema marca el recordatorio como cancelado<br>- <strong>Y</strong> no vuelve a presentarlo durante el día</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US36</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP07 – Coordinación entre Cuidadores Familiares</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Reasignación de turnos de atención</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero reasignar un turno de atención ya asignado para cubrir imprevistos sin dejar al adulto mayor sin seguimiento ese día.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Turno reasignado</strong><br>- <strong>Dado que</strong> existe un turno de atención asignado a un familiar para una fecha determinada<br>- <strong>Cuando</strong> se reasigna dicho turno a otro familiar vinculado y se confirma<br>- <strong>Entonces</strong> el sistema actualiza al responsable del turno<br>- <strong>Y</strong> lo hace visible para todos los familiares vinculados<br><br><strong>Escenario 2: Fecha sin turno asignado</strong><br>- <strong>Dado que</strong> una fecha no cuenta con un turno de atención asignado<br>- <strong>Cuando</strong> el familiar intenta reasignar el turno de esa fecha<br>- <strong>Entonces</strong> el sistema rechaza la reasignación<br>- <strong>Y</strong> informa que no existe un turno asignado para esa fecha</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US37</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">Low</td>
+    <td style="text-align: center;">EP06 – Panel de Estado y Alertas de Bienestar</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Descarte de sugerencias de bienestar</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero descartar una sugerencia de acción que ya atendí o que no considero necesaria para mantener visibles solo las sugerencias vigentes.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Sugerencia descartada</strong><br>- <strong>Dado que</strong> existe una sugerencia de acción activa para el familiar<br>- <strong>Cuando</strong> el familiar selecciona descartarla<br>- <strong>Entonces</strong> el sistema marca la sugerencia como descartada<br>- <strong>Y</strong> deja de mostrarla entre las sugerencias activas<br><br><strong>Escenario 2: Registros conservados</strong><br>- <strong>Dado que</strong> el familiar descartó una sugerencia de acción<br>- <strong>Cuando</strong> consulta el historial de check-ins del adulto mayor<br>- <strong>Entonces</strong> el sistema conserva todas las respuestas registradas sin modificación</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US38</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP05 – Alertas de Emergencia</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Reconocimiento de alertas</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero indicar que estoy atendiendo una alerta para que los demás familiares sepan que alguien ya está actuando.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Alerta de emergencia reconocida</strong><br>- <strong>Dado que</strong> existe una alerta de emergencia pendiente de un adulto mayor vinculado<br>- <strong>Cuando</strong> el familiar indica que la está atendiendo<br>- <strong>Entonces</strong> el sistema registra el reconocimiento con su fecha y hora<br>- <strong>Y</strong> lo hace visible para todos los familiares vinculados<br><br><strong>Escenario 2: Alerta de inactividad reconocida</strong><br>- <strong>Dado que</strong> existe una alerta de inactividad pendiente de un adulto mayor vinculado<br>- <strong>Cuando</strong> el familiar indica que la está atendiendo<br>- <strong>Entonces</strong> el sistema registra el reconocimiento con su fecha y hora<br>- <strong>Y</strong> lo hace visible para todos los familiares vinculados</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US39</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP05 – Alertas de Emergencia</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Resolución de alertas</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero marcar una alerta como resuelta una vez atendida para mantener actualizado el historial de alertas y saber cuáles siguen pendientes.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Alerta de emergencia resuelta</strong><br>- <strong>Dado que</strong> existe una alerta de emergencia reconocida por un familiar<br>- <strong>Cuando</strong> el familiar la marca como resuelta<br>- <strong>Entonces</strong> el sistema registra la resolución con su fecha y hora<br>- <strong>Y</strong> la muestra como resuelta a todos los familiares vinculados<br><br><strong>Escenario 2: Alerta de inactividad resuelta</strong><br>- <strong>Dado que</strong> existe una alerta de inactividad reconocida por un familiar<br>- <strong>Cuando</strong> el familiar la marca como resuelta<br>- <strong>Entonces</strong> el sistema registra la resolución con su fecha y hora<br>- <strong>Y</strong> la muestra como resuelta a todos los familiares vinculados</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
     <td style="text-align: center;"><strong>NF01</strong></td>
     <td style="text-align: center;">Adulto mayor que vive solo</td>
     <td style="text-align: center;">High</td>
