@@ -5257,7 +5257,98 @@ Las técnicas anteriores se combinan para que cada usuario llegue a su meta en l
 
 ### 3.1.3. Landing Page UI Design
 #### 3.1.3.1. Landing Page Wireframe
+
+El wireframe define la estructura y la jerarquía de contenido de la landing page antes de aplicar color, tipografía e identidad visual. Se elaboró en baja fidelidad para versión de escritorio y versión móvil, priorizando el orden de las secciones, la ubicación de los llamados a la acción y la legibilidad en pantallas pequeñas. La página se organiza en las siguientes secciones:
+
+<br>
+
+| Orden | Sección | Propósito | Contenido principal |
+| --- | --- | --- | --- |
+| 1 | Navbar| Orientar y ofrecer acceso permanente a las secciones y a la acción principal | Logotipo, enlaces Cómo funciona, Para quién, Funciones y Planes, selector de idioma ES / EN y botón "Probar gratis" |
+| 2 | Hero | Comunicar la propuesta de valor en pocos segundos | Titular, descripción breve, botones "Probar gratis" y "Ver cómo funciona", y una vista previa de la aplicación |
+| 3 | Qué es Serenia | Explicar la idea del producto | Texto breve sobre el acompañamiento emocional a distancia |
+| 4 | Cómo funciona | Mostrar el funcionamiento en pocos pasos | Tres pasos: check-in diario, la familia lo ve y aviso a tiempo |
+| 5 | Para quién | Identificar a los dos tipos de usuario | Una tarjeta para el adulto mayor y otra para el familiar a distancia |
+| 6 | Funciones | Presentar las funciones principales | Seis tarjetas: check-in diario, modo simplificado, mensajes de audio, círculo de cuidado, sugerencias a tiempo y pequeños logros con botón de ayuda |
+| 7 | Planes | Presentar el modelo freemium y facilitar la decisión | Plan Básico gratuito y plan(es) de suscripción, con botón de acción en cada uno |
+| 8 | Llamado final a la descarga | Cerrar con una invitación a actuar | Mensaje de cierre y botones de las tiendas de aplicaciones |
+| 9 | Footer | Reunir información legal y de contacto | Contacto, términos de uso y política de privacidad |
+
+<br>
+
+En la versión de escritorio, las secciones de Cómo funciona, Funciones y Planes se organizan en columnas, y la portada coloca el texto junto a la vista previa de la aplicación. En la versión móvil, las columnas pasan a una sola, la barra superior se compacta (logotipo, selector de idioma y botón "Probar gratis", con los enlaces de sección en una fila desplazable) y los botones se amplían para facilitar el toque.
+
+<br>
+<div align="center">
+
+**Desktop Web Browser**
+
+*Elaboración propia*
+
+![Landing Page Wireframe Desktop](assets/img/ux-design/landing-page/web-wireframe.png)
+
+<br/><i>Imagen 29: Wireframe de la landing page en versión de escritorio.</i>
+
+<br>
+
+**Mobile Web Browser**
+
+*Elaboración propia*
+
+![Landing Page Wireframe Mobile](assets/img/ux-design/landing-page/mobile-wireframe.png)
+
+<br/><i>Imagen 30: Wireframe de la landing page en versión móvil.</i>
+
+</div>
+
+<br>
+
 #### 3.1.3.2. Landing Page Mock-up
+
+El mock-up lleva el wireframe a alta fidelidad aplicando la identidad visual de Serenia. Su paleta se apoya en tonos cálidos y serenos (crema, verde salvia y durazno) y en una tipografía redondeada y legible, pensada para transmitir calma, cercanía y confianza. Los textos son de gran tamaño y con contraste suficiente, y los botones tienen áreas de toque amplias, en coherencia con la accesibilidad definida para el producto. El eslogan *"Bienestar hoy, siempre contigo"* acompaña la identidad de marca.
+
+Los elementos clave del mock-up son:
+
+<br>
+
+| Elemento | Decisión de diseño |
+| --- | --- |
+| Portada | Titular centrado en el beneficio emocional ("Saber que están bien, sin tener que llamar"), con una vista previa de la aplicación que muestra el check-in diario y la respuesta de la familia. |
+| Llamados a la acción | El botón "Probar gratis" aparece en la barra superior, en la portada y en los planes, con color de acento para distinguirse del resto de enlaces. |
+| Tarjetas | Cómo funciona y Funciones usan tarjetas de esquinas redondeadas y contenido breve, para que el recorrido se lea con rapidez. |
+| Planes | El plan Básico se muestra en un fondo claro y el plan de suscripción en un fondo de color de acento, para guiar la mirada hacia la opción de pago. |
+| Selector de idioma | El control ES / EN resalta el idioma activo con un subrayado de color. |
+
+<br>
+
+**Landing Page:** [https://sereniaa.netlify.app/](https://sereniaa.netlify.app/).
+
+<br>
+<div align="center">
+
+**Desktop Web Browser**
+
+*Elaboración propia*
+
+![Landing Page Mock-up Desktop](assets/img/ux-design/landing-page/web-mockup.png)
+
+<br/><i>Imagen 31: Mock-up de la landing page en versión de escritorio.</i>
+
+<br>
+
+**Mobile Web Browser**
+
+*Elaboración propia*
+
+![Landing Page Mock-up Mobile](assets/img/ux-design/landing-page/mobile-mockup.png)
+
+<br/><i>Imagen 32: Mock-up de la landing page en versión móvil.</i>
+
+</div>
+
+<br>
+
+
 ### 3.1.4. Mobile Applications UX/UI Design
 #### 3.1.4.1. Mobile Applications Wireframes
 #### 3.1.4.2. Mobile Applications Wireflow Diagrams
