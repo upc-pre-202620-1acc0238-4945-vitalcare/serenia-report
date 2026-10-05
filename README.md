@@ -5140,6 +5140,121 @@ Aunque el sistema de búsqueda solo se expone al familiar a distancia, el equipo
 
 
 #### 3.1.2.5. Navigation Systems
+
+Un sistema de navegación define las acciones y técnicas que guían al usuario a través del producto: cómo se desplaza entre pantallas, cómo sabe en qué punto se encuentra y cómo regresa o avanza hacia su meta sin perderse. Para Serenia, el equipo diseñó la navegación de cada producto según las capacidades y metas de su usuario principal, y no con una estructura única para todos. El adulto mayor necesita avanzar con la menor cantidad de decisiones posible; el familiar a distancia necesita llegar rápido a información distinta según la urgencia; y el visitante de la landing page necesita entender la propuesta y llegar a probar la aplicación.
+
+<br>
+
+## Principios de navegación.
+
+Todos los productos comparten cuatro criterios: pocas opciones visibles a la vez, etiquetas coherentes con las definidas, una profundidad máxima de dos niveles desde la pantalla principal y una forma siempre disponible de volver o salir.
+
+<br>
+
+| Producto | Tipo de navegación principal | Elementos de apoyo |
+| --- | --- | --- |
+| Aplicación móvil del adulto mayor | Pantalla de inicio única con acciones directas, sin menú | Botón de ayuda visible en todas las pantallas, flecha de retorno, flujo lineal por pasos |
+| Aplicación móvil del familiar a distancia | Barra de navegación inferior con cinco destinos | Menú de perfil, navegación local por sección, enlaces contextuales y notificaciones push con acceso directo |
+| Landing page web | Barra de navegación superior fija con anclas a secciones | Selector de idioma, botón "Probar gratis" repetido, menú adaptado a móvil, pie de página |
+
+### Aplicación móvil del adulto mayor. 
+La navegación se reduce deliberadamente al mínimo, ya que cualquier menú agregaría decisiones a un usuario con baja familiaridad tecnológica. La pantalla de inicio presenta tres acciones de gran tamaño y se desplaza con un solo toque, sin menús ni pestañas.
+
+<br>
+
+| Elemento | Descripción |
+| --- | --- |
+| Pantalla de inicio | Muestra únicamente tres acciones: responder el check-in del día, abrir los mensajes recibidos de la familia y activar el botón de ayuda. |
+| Botón de ayuda | Permanece visible en todas las pantallas para que el adulto mayor pueda pedir auxilio sin importar dónde se encuentre. Solicita una confirmación antes de enviar la alerta, para evitar activaciones accidentales. |
+| Flujo del check-in | Recorrido lineal de un paso por pantalla: pregunta del día, elección del estado de ánimo, nota opcional y confirmación. Cada pantalla muestra una sola decisión y una flecha para regresar al paso anterior. |
+| Modo simplificado | Reduce la cantidad de pasos y la complejidad visual del check-in, para adultos mayores con menor familiaridad tecnológica. |
+| Retorno | Toda pantalla secundaria incluye una flecha de retorno y un acceso a la pantalla de inicio. Al terminar una acción, la aplicación regresa sola al inicio con un mensaje de confirmación. |
+
+<br>
+
+### Aplicación móvil del familiar a distancia.
+Esta aplicación concentra más contenido, por lo que emplea una barra de navegación inferior con un máximo de cinco destinos, ubicada al alcance del pulgar y visible en todo momento. La pestaña activa se resalta con color y etiqueta para que el usuario siempre sepa dónde está.
+
+<br>
+
+| Destino | Contenido | Meta del usuario que atiende |
+| --- | --- | --- |
+| Inicio | Resumen de estado del adulto mayor: si respondió el check-in del día, su estado de ánimo y un dato destacado | Saber de un vistazo si su familiar está bien |
+| Historial | Registro de check-ins con filtros por fecha, ánimo y estado, y pequeños logros | Revisar cómo ha evolucionado el bienestar |
+| Alertas | Alertas de inactividad, bienestar y emergencia, con su estado de atención | Responder con rapidez ante una situación de riesgo |
+| Círculo | Integrantes del círculo familiar, turnos de cuidado y notas compartidas, organizados en pestañas internas | Coordinarse con los demás familiares |
+| Mensajes | Mensajes de audio, fotos y texto, y recordatorios sociales | Mantener el vínculo afectivo con el adulto mayor |
+
+<br>
+
+<div align="center">
+
+![Barra de navegación - Aplicación móvil del familiar a distancia](assets/img/navigation-systems/mobile-navbar.png)
+  <br/><i>Imagen 27: Barra de navegación inferior de la aplicación móvil del familiar a distancia.</i>
+
+</div>
+
+<br>
+
+El perfil y los ajustes de la cuenta no ocupan un destino de la barra: se acceden desde un ícono en la esquina superior de la pantalla de inicio, ya que se consultan con poca frecuencia. La pestaña Alertas muestra una insignia numérica cuando existen alertas sin atender, de modo que lo urgente se perciba sin tener que entrar a la sección.
+
+Dentro de cada destino, la navegación local se resuelve con pestañas internas o filtros visibles en la parte superior, como en Círculo (integrantes, turnos y notas) e Historial. Además, la aplicación ofrece enlaces contextuales que permiten saltar entre contenidos relacionados sin pasar por la barra:
+
+<br>
+
+| Desde | Hacia | Cómo se accede |
+| --- | --- | --- |
+| Tarjeta de resumen en Inicio | Detalle del check-in en Historial | Toque sobre la tarjeta |
+| Alerta de bienestar | Check-ins que originaron el patrón detectado | Enlace dentro del detalle de la alerta |
+| Alerta | Mensaje o llamada al adulto mayor | Acción directa dentro del detalle de la alerta |
+| Notificación push | Detalle de la alerta o del mensaje correspondiente | Toque sobre la notificación, que abre directamente la pantalla destino |
+
+<br>
+
+### Landing page web.
+
+La landing page tiene un propósito de conversión: que el visitante comprenda la propuesta de Serenia y llegue a probar la aplicación. Se organiza como una página de desplazamiento continuo, con una barra de navegación superior fija que permanece visible mientras se recorre el contenido.
+
+<br>
+
+| Elemento | Descripción |
+| --- | --- |
+| Barra de navegación superior | Contiene el logotipo (que devuelve al inicio) y cuatro enlaces de ancla a las secciones de la página: Cómo funciona, Para quién, Funciones y Planes. Permanece fija al desplazarse. |
+| Selector de idioma | Control ES / EN ubicado en la barra, que permite al visitante alternar entre español e inglés sin salir de la página. El idioma activo se resalta. |
+| Botón "Probar gratis" | Botón destacado en el extremo derecho de la barra, repetido en la portada, que lleva a la sección de Planes. Al final de la página, un llamado a la acción redirige a las tiendas de aplicaciones. |
+| Desplazamiento a secciones | Al seleccionar un enlace de la barra, la página se desplaza suavemente hasta la sección correspondiente, y el enlace de la sección visible se resalta. |
+| Adaptación a móvil | En pantallas pequeñas, la barra conserva el logotipo, el selector de idioma y el botón "Probar gratis" en la fila superior, y los enlaces de sección pasan a una fila desplazable horizontalmente debajo de ella. |
+| Pie de página | Reúne el contacto, los términos de uso y la política de privacidad, y repite los enlaces principales. |
+| Regreso al inicio | Un botón flotante permite volver al inicio de la página tras recorrer varias secciones. |
+
+<br>
+
+<div align="center">
+
+![Barra de navegación - Landing page](assets/img/navigation-systems/landing-page-nav.png)
+  <br/><i>Imagen 28: Barra de navegación superior de la landing page.</i>
+
+</div>
+
+<br>
+
+### Recorridos principales.
+
+Las técnicas anteriores se combinan para que cada usuario llegue a su meta en la menor cantidad de pasos posible.
+
+<br>
+
+| Usuario | Meta | Recorrido |
+| --- | --- | --- |
+| Adulto mayor | Responder su check-in del día | Inicio → Responder check-in → Estado de ánimo → Nota opcional → Confirmación |
+| Adulto mayor | Pedir ayuda | Botón de ayuda (desde cualquier pantalla) → Confirmación → Alerta enviada |
+| Familiar a distancia | Saber cómo está su familiar | Inicio → Resumen de estado |
+| Familiar a distancia | Atender una alerta | Notificación push → Detalle de la alerta → Contactar al adulto mayor → Confirmar atención |
+| Familiar a distancia | Enviar un mensaje de audio | Mensajes → Nuevo mensaje → Grabar → Enviar |
+| Visitante | Probar la aplicación | Landing page → Botón "Probar gratis" → Planes → Descarga en la tienda de aplicaciones |
+
+<br>
+
 ### 3.1.3. Landing Page UI Design
 #### 3.1.3.1. Landing Page Wireframe
 #### 3.1.3.2. Landing Page Mock-up
