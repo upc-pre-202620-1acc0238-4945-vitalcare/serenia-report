@@ -2750,6 +2750,105 @@ En esta sección se presentan los requisitos identificados para Serenia a partir
     <th style="width: 35%;">Epic</th>
   </tr>
   <tr>
+    <td style="text-align: center;"><strong>US40</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">High</td>
+    <td style="text-align: center;">EP01 – Gestión de Identidad y Vínculo Familiar</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Generación de código de invitación</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor que vive solo, quiero generar un código de invitación para compartirlo con mis familiares y decidir quiénes pueden vincularse a mi cuenta.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Código generado</strong><br>- <strong>Dado que</strong> el usuario accede a la sección de su círculo familiar<br>- <strong>Cuando</strong> solicita generar un código de invitación<br>- <strong>Entonces</strong> el sistema genera un código único<br>- <strong>Y</strong> lo muestra para que el usuario lo comparta con su familiar<br><br><strong>Escenario 2: Código expirado</strong><br>- <strong>Dado que</strong> el sistema generó un código de invitación<br>- <strong>Cuando</strong> transcurre su tiempo de vigencia sin que sea utilizado<br>- <strong>Entonces</strong> el sistema marca el código como expirado<br>- <strong>Y</strong> no permite vincular ninguna cuenta con él</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US41</strong></td>
+    <td style="text-align: center;">Adulto mayor que vive solo</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP03 – Mensajería Multimedia Asíncrona</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Visualización de fotografías recibidas</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como adulto mayor que vive solo, quiero ver las fotografías que me comparten mis familiares para sentirlos presentes en mi día a día.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Visualización exitosa</strong><br>- <strong>Dado que</strong> un familiar vinculado compartió una fotografía<br>- <strong>Cuando</strong> el usuario accede a la galería de fotografías y selecciona una<br>- <strong>Entonces</strong> el sistema muestra la fotografía seleccionada<br><br><strong>Escenario 2: Sin fotografías disponibles</strong><br>- <strong>Dado que</strong> ningún familiar vinculado ha compartido fotografías<br>- <strong>Cuando</strong> el usuario accede a la galería de fotografías<br>- <strong>Entonces</strong> el sistema informa que aún no hay fotografías disponibles</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
+    <td style="text-align: center;"><strong>US42</strong></td>
+    <td style="text-align: center;">Familiar a distancia</td>
+    <td style="text-align: center;">Medium</td>
+    <td style="text-align: center;">EP05 – Alertas de Emergencia</td>
+  </tr>
+  <tr>
+    <th>Title</th>
+    <td colspan="3"><strong>Consulta del historial de alertas</strong></td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Description</th>
+  </tr>
+  <tr>
+    <td colspan="4">Como familiar a distancia, quiero consultar las alertas de emergencia e inactividad de mi adulto mayor junto con su estado para saber qué ocurrió y cuáles siguen pendientes.</td>
+  </tr>
+  <tr>
+    <th colspan="4" style="text-align: center;">Acceptance Criteria</th>
+  </tr>
+  <tr>
+    <td colspan="4"><strong>Escenario 1: Historial disponible</strong><br>- <strong>Dado que</strong> el adulto mayor vinculado cuenta con alertas registradas<br>- <strong>Cuando</strong> el familiar accede a la vista de alertas<br>- <strong>Entonces</strong> el sistema muestra las alertas ordenadas por fecha<br>- <strong>Y</strong> indica su tipo y su estado (pendiente, reconocida o resuelta)<br><br><strong>Escenario 2: Sin alertas registradas</strong><br>- <strong>Dado que</strong> el adulto mayor vinculado no cuenta con alertas registradas<br>- <strong>Cuando</strong> el familiar accede a la vista de alertas<br>- <strong>Entonces</strong> el sistema informa que aún no existen alertas</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th style="width: 20%;">Story ID</th>
+    <th style="width: 25%;">User</th>
+    <th style="width: 20%;">Priority</th>
+    <th style="width: 35%;">Epic</th>
+  </tr>
+  <tr>
     <td style="text-align: center;"><strong>NF01</strong></td>
     <td style="text-align: center;">Adulto mayor que vive solo</td>
     <td style="text-align: center;">High</td>
