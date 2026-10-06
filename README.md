@@ -5659,6 +5659,30 @@ Las áreas táctiles se dimensionaron según la ley de Fitts: 48 dp en la app de
 </div>
 <br>
 
+**Tono de comunicación y lenguaje**
+
+Definimos la voz de Serenia con las cuatro dimensiones del tono de voz propuestas por Moran (2016):
+ 
+- **Divertido / Serio:** ligeramente hacia lo divertido, con preguntas como "¿jugaste bingo?", pero con seriedad total en situaciones de emergencia.
+- **Formal / Casual:** casual y cercano, como un familiar. Evitamos el lenguaje administrativo.
+- **Respetuoso / Irreverente:** siempre respetuoso. El adulto mayor nunca es infantilizado ni tratado como paciente.
+- **Entusiasta / Sereno:** sereno, en coherencia con el nombre de la marca. Celebra sin exclamaciones excesivas y alerta sin dramatismo.
+Usamos un español peruano cercano, con tuteo afectuoso hacia el adulto mayor y frases cortas en segunda persona. Evitamos términos como "paciente", "monitoreo" o "vigilar", y preferimos "cómo amaneciste", "cuéntame" o "tranquilidad". Por ejemplo, ante una ausencia de respuesta el mensaje al familiar es "Mamá aún no responde hoy. Quizá una llamadita le alegre la mañana", en lugar de "ALERTA: paciente sin actividad por 6 horas".
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/dimensiones-tonos.png" alt="Dimensiones de tono - Image" width="700"/>
+  <br/><i>Imagen X. Posición de Serenia en las dimensiones de tono.</i>
+</div>
+<br>
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/microcopy.png" alt="Microcopy - Image" width="700"/>
+  <br/><i>Imagen X. Ejemplos de microcopy.</i>
+</div>
+<br>
+
 ### 3.1.2. Information Architecture
 #### 3.1.2.1. Organization Systems
 
