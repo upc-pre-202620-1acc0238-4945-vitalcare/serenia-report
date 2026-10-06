@@ -5792,7 +5792,7 @@ Un sistema de búsqueda permite al usuario encontrar información escribiendo un
 
 <br>
 
-### Criterio de decisión. 
+**Criterio de decisión**
 Serenia atiende a dos perfiles con necesidades opuestas. El adulto mayor interactúa con pocas acciones, a diario y con baja tolerancia a la carga cognitiva y a la escritura en pantalla, por lo que cualquier campo de búsqueda sería una barrera. El familiar a distancia, en cambio, acumula con el tiempo un historial de check-ins, notas, mensajes y alertas que sí necesita consultar de forma puntual. El equipo aplicó la búsqueda únicamente en el segundo caso.
 
 <br>
@@ -5805,7 +5805,7 @@ Serenia atiende a dos perfiles con necesidades opuestas. El adulto mayor interac
 
 <br>
 
-### Zonas de búsqueda en la aplicación del familiar a distancia.
+**Zonas de búsqueda en la aplicación del familiar a distancia**
 
 Cada sección de contenido define su propia zona de búsqueda, de modo que el usuario siempre sabe en qué conjunto de información está buscando.
 
@@ -5825,7 +5825,7 @@ La búsqueda por texto libre se reserva a las notas compartidas, que es el únic
 
 <br>
 
-### Presentación de resultados.
+**Presentación de resultados**
 
 Los resultados se muestran como una lista cronológica en la misma pantalla de la sección, sin cambiar de pantalla al buscar. Los filtros aplicados quedan visibles en la parte superior como etiquetas que se pueden quitar de una en una, junto con el total de resultados encontrados (por ejemplo, "12 resultados") y un acceso de un solo toque para limpiar todos los filtros. Cada elemento del listado muestra la información mínima para identificarlo y abre su detalle al seleccionarlo. Los filtros por rango de fechas ofrecen atajos predefinidos (hoy, últimos 7 días, últimos 30 días) para evitar el ingreso manual de fechas.
 
@@ -5841,13 +5841,13 @@ Los resultados se muestran como una lista cronológica en la misma pantalla de l
 
 <br>
 
-### Resultados vacíos.
+**Resultados vacíos**
 
 Cuando una combinación de filtros no produce resultados, la sección lo comunica con un mensaje en lenguaje cotidiano y propone la acción siguiente (por ejemplo, ampliar el rango de fechas o limpiar los filtros), en lugar de mostrar una pantalla vacía.
 
 <br>
 
-### Criterios de accesibilidad.
+**Criterios de accesibilidad**
 
 Aunque el sistema de búsqueda solo se expone al familiar a distancia, el equipo mantiene los mismos criterios de legibilidad que en el resto de la aplicación: tamaño de texto adaptable, objetivos táctiles amplios en los controles de filtro y contraste suficiente en los filtros activos.
 
@@ -5860,7 +5860,7 @@ Un sistema de navegación define las acciones y técnicas que guían al usuario 
 
 <br>
 
-## Principios de navegación.
+**Principios de navegación**
 
 Todos los productos comparten cuatro criterios: pocas opciones visibles a la vez, etiquetas coherentes con las definidas, una profundidad máxima de dos niveles desde la pantalla principal y una forma siempre disponible de volver o salir.
 
@@ -5872,7 +5872,7 @@ Todos los productos comparten cuatro criterios: pocas opciones visibles a la vez
 | Aplicación móvil del familiar a distancia | Barra de navegación inferior con cinco destinos | Menú de perfil, navegación local por sección, enlaces contextuales y notificaciones push con acceso directo |
 | Landing page web | Barra de navegación superior fija con anclas a secciones | Selector de idioma, botón "Probar gratis" repetido, menú adaptado a móvil, pie de página |
 
-### Aplicación móvil del adulto mayor. 
+**Aplicación móvil del adulto mayor** 
 La navegación se reduce deliberadamente al mínimo, ya que cualquier menú agregaría decisiones a un usuario con baja familiaridad tecnológica. La pantalla de inicio presenta tres acciones de gran tamaño y se desplaza con un solo toque, sin menús ni pestañas.
 
 <br>
@@ -5887,7 +5887,7 @@ La navegación se reduce deliberadamente al mínimo, ya que cualquier menú agre
 
 <br>
 
-### Aplicación móvil del familiar a distancia.
+**Aplicación móvil del familiar a distancia**
 Esta aplicación concentra más contenido, por lo que emplea una barra de navegación inferior con un máximo de cinco destinos, ubicada al alcance del pulgar y visible en todo momento. La pestaña activa se resalta con color y etiqueta para que el usuario siempre sepa dónde está.
 
 <br>
@@ -5926,7 +5926,7 @@ Dentro de cada destino, la navegación local se resuelve con pestañas internas 
 
 <br>
 
-### Landing page web.
+**Landing page web**
 
 La landing page tiene un propósito de conversión: que el visitante comprenda la propuesta de Serenia y llegue a probar la aplicación. Se organiza como una página de desplazamiento continuo, con una barra de navegación superior fija que permanece visible mientras se recorre el contenido.
 
@@ -5953,7 +5953,7 @@ La landing page tiene un propósito de conversión: que el visitante comprenda l
 
 <br>
 
-### Recorridos principales.
+**Recorridos principales**
 
 Las técnicas anteriores se combinan para que cada usuario llegue a su meta en la menor cantidad de pasos posible.
 
