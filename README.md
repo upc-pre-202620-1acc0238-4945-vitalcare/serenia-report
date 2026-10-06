@@ -5093,8 +5093,8 @@ La estructura se mantiene en un máximo de dos niveles desde la pantalla de inic
 | --- | --- | --- | --- |
 | Pantalla de inicio | Jerárquica de un solo nivel | Tres acciones al mismo nivel: responder el check-in del día, abrir los mensajes de la familia y activar el botón de ayuda | Sin menús ni pestañas, el usuario solo decide entre tres opciones |
 | Check-in diario | Secuencial | Un paso por pantalla: pregunta del día, estado de ánimo, nota opcional y confirmación | Cada pantalla pide una sola decisión; el modo simplificado reduce aún más los pasos |
-| Mensajes recibidos | Jerárquica de dos niveles | Lista de mensajes de la familia y, al elegir uno, su reproducción o vista | Mantiene la profundidad máxima de dos niveles |
-| Preferencias del check-in (horario, pausa del día y modo simplificado) | Jerárquica de dos niveles | Lista corta de ajustes; cada uno abre su propio detalle | Se consultan pocas veces, por lo que no compiten con las acciones del inicio |
+| Mensajes recibidos | Jerárquica de dos niveles | Lista de mensajes y fotos de la familia y, al elegir uno, su reproducción o vista | Mantiene la profundidad máxima de dos niveles |
+| Preferencias y cuenta (horario del check-in, pausa del día, modo simplificado, perfil, contraseña y cierre de sesión) | Jerárquica de dos niveles | Lista corta de ajustes; cada uno abre su propio detalle | Se consultan pocas veces, por lo que no compiten con las acciones del inicio |
 
 <br>
 
@@ -5109,9 +5109,10 @@ Esta aplicación concentra más contenido, por lo que combina las tres estructur
 | Inicio | Jerárquica | Tarjeta de resumen del día que abre el detalle del check-in | Responde de un vistazo si el adulto mayor está bien y permite profundizar solo si hace falta |
 | Historial de check-ins y pequeños logros | Matricial | Registro ordenado en el tiempo, combinable con filtros por rango de fechas, estado de ánimo y estado de respuesta | El mismo historial se consulta por fecha, por ánimo o por respuestas perdidas |
 | Alertas | Matricial | Alertas combinables por tipo (inactividad, bienestar o emergencia), severidad y estado de atención, con una insignia que indica las pendientes | Lo urgente debe poder aislarse rápidamente entre muchas alertas |
-| Círculo | Jerárquica | Tres pestañas internas: integrantes, turnos de atención y notas compartidas | Agrupa en un solo destino todo lo que sirve para coordinarse con los demás familiares |
-| Turnos de atención | Matricial | Calendario con los días en un eje y el familiar asignado en el otro; cada fecha admite un único turno | Evita que dos familiares se asignen el mismo día y permite ver quién cubre cada fecha |
+| Círculo | Jerárquica | Tres pestañas internas: integrantes (desde donde se puede revocar un vínculo), turnos de atención y notas compartidas | Agrupa en un solo destino todo lo que sirve para coordinarse con los demás familiares |
+| Turnos de atención | Matricial | Calendario con los días en un eje y el familiar asignado en el otro; los turnos se asignan y se reasignan, y cada fecha admite un único turno | Evita que dos familiares se asignen el mismo día, permite cubrir imprevistos y muestra quién cubre cada fecha |
 | Mensajes | Jerárquica | Lista de mensajes de audio, fotos y texto, y recordatorios sociales; al elegir uno se abre su detalle, con filtro por tipo | Reúne el contenido afectivo en un solo destino, separado de lo operativo |
+| Cuenta y ajustes (perfil y foto, contraseña y cierre de sesión) | Jerárquica de dos niveles | Se accede desde el ícono de la esquina superior de Inicio, fuera de la barra inferior; cada ajuste abre su propio detalle | Se consultan pocas veces, por lo que no justifican un destino de la barra (sección 3.1.2.5) |
 
 <br>
 
@@ -5119,8 +5120,8 @@ Esta aplicación concentra más contenido, por lo que combina las tres estructur
 
 | Grupo de información | Estructura | Cómo se organiza | Justificación |
 | --- | --- | --- | --- |
-| Recorrido de la página | Secuencial | Propuesta de valor, modelo de dos aplicaciones, planes, sección institucional de la startup y descarga, en ese orden | Quien llega por primera vez necesita entender primero el problema y la propuesta antes de decidir descargar |
-| Menú de navegación | Jerárquica de un solo nivel | Un enlace por sección, que desplaza la página hasta ella | Permite saltar a una sección sin recorrer toda la página |
+| Recorrido de la página | Secuencial | Barra superior, portada con la propuesta de valor, Qué es Serenia, Cómo funciona, Para quién, Funciones, Planes, llamado final a la descarga y pie de página, en ese orden (ver wireframe en la sección 3.1.3.1) | Quien llega por primera vez necesita entender primero la propuesta y cómo funciona antes de elegir un plan y descargar |
+| Menú de navegación | Jerárquica de un solo nivel | Cuatro enlaces de ancla (Cómo funciona, Para quién, Funciones y Planes) y el botón "Probar gratis", que desplazan la página hasta su sección | Permite saltar a una sección sin recorrer toda la página |
 
 <br>
 
@@ -5134,7 +5135,7 @@ La estructura define la forma en que se presenta cada grupo; el esquema de categ
 | --- | --- | --- | --- |
 | Cronológico | Historial de check-ins, alertas, mensajes, notas compartidas y pequeños logros, del más reciente al más antiguo; turnos de atención por fecha | El valor de estos datos está en su evolución en el tiempo, y coincide con el orden por defecto definido en la sección 3.1.2.4 (Searching Systems) | Pantalla de inicio y landing page, que presentan una vista actual y no un registro |
 | Por tópicos | Los cinco destinos de la barra del familiar, las pestañas del Círculo y las secciones de la landing page | Cada tópico corresponde a una meta del usuario: saber, revisar, responder, coordinarse y acompañar | Aplicación del adulto mayor, donde agrupar por tópicos añadiría menús |
-| Según audiencia | La separación en dos aplicaciones, una por tipo de usuario, y la presentación de cada aplicación en la landing page | El rol se define en el registro y determina la aplicación a la que accede la persona, de modo que cada una solo ve lo que necesita | Dentro de cada aplicación, que ya atiende a un único perfil |
+| Según audiencia | La separación en dos aplicaciones, una por tipo de usuario, y la sección Para quién de la landing page, con una tarjeta por perfil | El rol se define en el registro y determina la aplicación a la que accede la persona, de modo que cada una solo ve lo que necesita | Dentro de cada aplicación, que ya atiende a un único perfil |
 | Alfabético | Lista de integrantes del círculo familiar, ordenada por nombre | Es el único grupo en el que el usuario busca a una persona concreta por su nombre | Historial, alertas y mensajes, donde ordenar por letra rompería la secuencia en el tiempo |
 
 <br>
