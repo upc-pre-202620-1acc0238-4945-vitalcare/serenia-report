@@ -5617,6 +5617,35 @@ Definimos dos escalas dentro de un mismo sistema. La del familiar y la web usa u
 </div>
 <br>
 
+**Colors**
+
+La paleta parte de cuatro familias con escalas tonales de 50 a 900: teal (primario, para botones y títulos), verde hoja (secundario, para estados positivos), durazno (acento, para momentos afectivos) y neutros cálidos (fondos, texto y bordes). Seguimos la proporción 60-30-10: 60 % crema y superficies, 30 % teal y 10 % durazno y verde.
+ 
+Cada color responde a una intención emocional. El teal transmite confianza sin el frío clínico del azul hospitalario, el verde evoca calma y bienestar, y el durazno aporta cercanía. Para los estados definimos cuatro colores semánticos: éxito, alerta (ámbar), auxilio o error (coral) e información. Elegimos ámbar y coral desaturados, y evitamos el rojo puro, para que las alertas llamen la atención sin generar pánico. Además, ningún estado se comunica solo con color: siempre se acompaña de texto o ícono.
+ 
+En accesibilidad, el texto principal (neutro-800 sobre crema) alcanza un contraste de 12.9:1, nivel AAA. Los colores que no cumplen para texto, como verde-500 (2.1:1) y durazno-300 (1.2:1) sobre crema, se limitan a usos decorativos. También definimos un modo de alto contraste (fondo blanco, texto negro, 21:1) que se activa desde Ajustes.
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/escalas-tonales.png" alt="Escalas Tonales - Image" width="700"/>
+  <br/><i>Imagen X. Escalas tonales de la paleta de Serenia.</i>
+</div>
+<br>
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/colores-semanticos.png" alt="Colores Semánticos - Image" width="700"/>
+  <br/><i>Imagen X. Colores semánticos.</i>
+</div>
+<br>
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/combinaciones-contraste.png" alt="Combinaciones de contraste - Image" width="700"/>
+  <br/><i>Imagen X. Combinaciones de contraste según WCAG 2.2.</i>
+</div>
+<br>
+
 ### 3.1.2. Information Architecture
 #### 3.1.2.1. Organization Systems
 
