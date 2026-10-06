@@ -6012,15 +6012,6 @@ La carpeta `dist` no forma parte del repositorio: se genera en el paso 4 y conti
 
 <br>
 
-*Aspectos por definir*
-
-| Aspecto | Situación actual |
-| --- | --- |
-| Despliegue automático | Hoy la publicación es manual desde la rama `main`. Conectar el repositorio a Netlify permitiría publicar al integrar cambios en `main`, a cambio de agregar un archivo de configuración de Netlify al repositorio |
-| Dominio propio | Los metadatos del sitio (`canonical`, Open Graph, `robots.txt` y `sitemap.xml`) apuntan a `serenia.com`, mientras que el sitio se publica en `sereniaa.netlify.app`. Hasta contar con ese dominio, las direcciones canónicas no coinciden con la dirección real |
-
-<br>
-
 **Web Services y aplicación móvil**
 
 El Deployment Diagram establece que la API REST se aloja en un Azure Web App Service, con la base de datos MySQL en Azure, y que la aplicación móvil se distribuye mediante Firebase App Distribution. Los repositorios `serenia-web-services` y `serenia-app-native` todavía no contienen el código que se desplegará, por lo que sus pasos concretos se documentarán cuando se ejecute el primer despliegue de cada uno. Para cada producto se registrarán los siguientes puntos:
