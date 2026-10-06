@@ -5563,6 +5563,9 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 El diseño de producto de Serenia define cómo se ven, se siente y se usan sus tres piezas: la aplicación para adulto mayor, la aplicación para el familiar y la landing page. Aquí se recogen las decisiones que determinan la interacción entre las personas y el sistema: cómo se organiza la información, qué funcionalidades se muestran primero y qué lenguaje visual transmite calma y cercanía.
 
 ### 3.1.1. Style Guidelines
+
+Las Style Guidelines son el repositorio visual común del equipo. Reúnen los activos, las fuentes, los colores y las reglas de uso que mantienen coherentes las tres piezas del producto, sin importar quién diseñe o desarrolle en cada interfaz.
+
 #### 3.1.1.1. General Style Guidelines
 ### 3.1.2. Information Architecture
 #### 3.1.2.1. Organization Systems
