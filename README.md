@@ -5597,6 +5597,26 @@ El isotipo aplica la ley de cierre de la Gestalt: las hojas rodean dos circulos 
 </div>
 <br>
 
+**Typography**
+
+La fuente principal es Nunito (pesos 400, 600, 700 y 800). Sus terminales redondeadas repiten la suavidad de las hojas del isotipo y ofrece buena legibilidad de números y tildes en español. La fuente secundaria es DM Mono, reservada para etiquetas, marcas de tiempo y tokens. Nunca se usa en texto corrido ni en la app del adulto mayor.
+ 
+Definimos dos escalas dentro de un mismo sistema. La del familiar y la web usa un cuerpo de 16 px. La del adulto mayor usa un cuerpo de 20 sp, con un mínimo de 18 sp y sin textos de apoyo menores a 16 sp. Con esto respondemos a la pérdida de sensibilidad visual propia de la edad. Además, mantenemos alineación a la izquierda, interlineado de 1.4 a 1.5 y un máximo de tres niveles de jerarquía por pantalla.
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/familias-tipograficas.png" alt="Familias Tipográficas - Image" width="700"/>
+  <br/><i>Imagen X. Familias tipográficas de Serenia.</i>
+</div>
+<br>
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/escala-tipografica.png" alt="Escala Tipográfica - Image" width="700"/>
+  <br/><i>Imagen X. Escala tipográfica para la app del familiar y la app del adulto mayor.</i>
+</div>
+<br>
+
 ### 3.1.2. Information Architecture
 #### 3.1.2.1. Organization Systems
 
