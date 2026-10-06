@@ -5559,6 +5559,9 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 
 # Capítulo III: Solution UI/UX Design
 ## 3.1. Product design
+
+El diseño de producto de Serenia define cómo se ven, se siente y se usan sus tres piezas: la aplicación para adulto mayor, la aplicación para el familiar y la landing page. Aquí se recogen las decisiones que determinan la interacción entre las personas y el sistema: cómo se organiza la información, qué funcionalidades se muestran primero y qué lenguaje visual transmite calma y cercanía.
+
 ### 3.1.1. Style Guidelines
 #### 3.1.1.1. General Style Guidelines
 ### 3.1.2. Information Architecture
