@@ -5567,6 +5567,138 @@ El diseño de producto de Serenia define cómo se ven, se siente y se usan sus t
 Las Style Guidelines son el repositorio visual común del equipo. Reúnen los activos, las fuentes, los colores y las reglas de uso que mantienen coherentes las tres piezas del producto, sin importar quién diseñe o desarrolle en cada interfaz.
 
 #### 3.1.1.1. General Style Guidelines
+
+Serenia cuenta con una guía de estilo visual que define su marca, tipografía, color, espaciado y tono de comunicación. La guía se basa en adaptaciones pensadas para adultos mayores y familiares.
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/general-style-guidelines-image.png" alt="General Style Guidelines - Image" width="700"/>
+  <br/><i>Imagen X. Portada de la guía "General Style Guidelines".</i>
+</div>
+<br>
+
+**Branding**
+
+Serenia busca dar a los adultos mayores que viven solos una forma simple de comunicar su día a día, y a sus familias, la tranquilidad de saber cómo están sin recurrir a un monitoreo invasivo. Su personalidad es cálida, serena, cercana, respetuosa, confiable y humana, y se apoya en cuatro valores: cercanía, autonomía, confianza y conexión emocional.
+
+El isotipo aplica la ley de cierre de la Gestalt: las hojas rodean dos circulos de distinto tamaño, que representan al adulto mayor y a su familiar bajo un mismo cuidado. El logo tiene variantes horizontal, vertical con eslogan, sobre fondo oscuro y de ícono de app, para adaptarse a cada soporte.
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/variantes-logo.png" alt="Variantes del Logo - Image" width="700"/>
+  <br/><i>Imagen X. Variantes del logo de Serenia.</i>
+</div>
+<br>
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/justificacion-isotipo-paleta.png" alt="Justificación del isotipo y la paleta - Image" width="700"/>
+  <br/><i>Imagen X. Justificación del isotipo y la paleta.</i>
+</div>
+<br>
+
+**Typography**
+
+La fuente principal es Nunito (pesos 400, 600, 700 y 800). Sus terminales redondeadas repiten la suavidad de las hojas del isotipo y ofrece buena legibilidad de números y tildes en español. La fuente secundaria es DM Mono, reservada para etiquetas, marcas de tiempo y tokens. Nunca se usa en texto corrido ni en la app del adulto mayor.
+ 
+Definimos dos escalas dentro de un mismo sistema. La del familiar y la web usa un cuerpo de 16 px. La del adulto mayor usa un cuerpo de 20 sp, con un mínimo de 18 sp y sin textos de apoyo menores a 16 sp. Con esto respondemos a la pérdida de sensibilidad visual propia de la edad. Además, mantenemos alineación a la izquierda, interlineado de 1.4 a 1.5 y un máximo de tres niveles de jerarquía por pantalla.
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/familias-tipograficas.png" alt="Familias Tipográficas - Image" width="700"/>
+  <br/><i>Imagen X. Familias tipográficas de Serenia.</i>
+</div>
+<br>
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/escala-tipografica.png" alt="Escala Tipográfica - Image" width="700"/>
+  <br/><i>Imagen X. Escala tipográfica para la app del familiar y la app del adulto mayor.</i>
+</div>
+<br>
+
+**Colors**
+
+La paleta parte de cuatro familias con escalas tonales de 50 a 900: teal (primario, para botones y títulos), verde hoja (secundario, para estados positivos), durazno (acento, para momentos afectivos) y neutros cálidos (fondos, texto y bordes). Seguimos la proporción 60-30-10: 60 % crema y superficies, 30 % teal y 10 % durazno y verde.
+ 
+Cada color responde a una intención emocional. El teal transmite confianza sin el frío clínico del azul hospitalario, el verde evoca calma y bienestar, y el durazno aporta cercanía. Para los estados definimos cuatro colores semánticos: éxito, alerta (ámbar), auxilio o error (coral) e información. Elegimos ámbar y coral desaturados, y evitamos el rojo puro, para que las alertas llamen la atención sin generar pánico. Además, ningún estado se comunica solo con color: siempre se acompaña de texto o ícono.
+ 
+En accesibilidad, el texto principal (neutro-800 sobre crema) alcanza un contraste de 12.9:1, nivel AAA. Los colores que no cumplen para texto, como verde-500 (2.1:1) y durazno-300 (1.2:1) sobre crema, se limitan a usos decorativos. También definimos un modo de alto contraste (fondo blanco, texto negro, 21:1) que se activa desde Ajustes.
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/escalas-tonales.png" alt="Escalas Tonales - Image" width="700"/>
+  <br/><i>Imagen X. Escalas tonales de la paleta de Serenia.</i>
+</div>
+<br>
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/colores-semanticos.png" alt="Colores Semánticos - Image" width="700"/>
+  <br/><i>Imagen X. Colores semánticos.</i>
+</div>
+<br>
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/combinaciones-contraste.png" alt="Combinaciones de contraste - Image" width="700"/>
+  <br/><i>Imagen X. Combinaciones de contraste según WCAG 2.2.</i>
+</div>
+<br>
+
+**Spacing y layout**
+
+El espaciado sigue una base de 4 y 8 px, con valores desde 4 px (separación ícono-texto) hasta 64 px (secciones de la landing). Los radios de borde van de 12 a 36 px, y las esquinas muy redondeadas reproducen la suavidad de las hojas.
+ 
+Las áreas táctiles se dimensionaron según la ley de Fitts: 48 dp en la app del familiar, 56 a 64 dp en la del adulto mayor y 72 dp en el botón de auxilio, para reducir errores por temblor o poca precisión motriz. El botón de auxilio siempre está visible y separado del de check-in.
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/espaciado-radios-areas.png" alt="Espacio, Radios, Areas - Image" width="700"/>
+  <br/><i>Imagen X. Espaciado, radios de borde y áreas táctiles.</i>
+</div>
+<br>
+
+**Tono de comunicación y lenguaje**
+
+Definimos la voz de Serenia con las cuatro dimensiones del tono de voz propuestas por Moran (2016):
+ 
+- **Divertido / Serio:** ligeramente hacia lo divertido, con preguntas como "¿jugaste bingo?", pero con seriedad total en situaciones de emergencia.
+- **Formal / Casual:** casual y cercano, como un familiar. Evitamos el lenguaje administrativo.
+- **Respetuoso / Irreverente:** siempre respetuoso. El adulto mayor nunca es infantilizado ni tratado como paciente.
+- **Entusiasta / Sereno:** sereno, en coherencia con el nombre de la marca. Celebra sin exclamaciones excesivas y alerta sin dramatismo.
+Usamos un español peruano cercano, con tuteo afectuoso hacia el adulto mayor y frases cortas en segunda persona. Evitamos términos como "paciente", "monitoreo" o "vigilar", y preferimos "cómo amaneciste", "cuéntame" o "tranquilidad". Por ejemplo, ante una ausencia de respuesta el mensaje al familiar es "Mamá aún no responde hoy. Quizá una llamadita le alegre la mañana", en lugar de "ALERTA: paciente sin actividad por 6 horas".
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/dimensiones-tonos.png" alt="Dimensiones de tono - Image" width="700"/>
+  <br/><i>Imagen X. Posición de Serenia en las dimensiones de tono.</i>
+</div>
+<br>
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/microcopy.png" alt="Microcopy - Image" width="700"/>
+  <br/><i>Imagen X. Ejemplos de microcopy.</i>
+</div>
+<br>
+
+**Principios de diseño aplicados**
+
+Las decisiones anteriores se sustentan en los siguientes principios:
+ 
+- **Ley de Fitts:** botones grandes para reducir errores de precisión.
+- **Ley de Hick:** el check-in ofrece solo tres respuestas de un toque, para disminuir la carga cognitiva.
+- **Gestalt:** los botones de respuesta se agrupan y se separan del botón de auxilio, y los elementos del mismo rol comparten radio y tipografía.
+- **Heurísticas de Nielsen:** lenguaje cotidiano, reconocimiento antes que recuerdo (botones con texto e ícono) y control del usuario mediante la opción "hoy no me preguntes".
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/decisiones-diseño.png" alt="Decisiones Diseño - Image" width="700"/>
+  <br/><i>Imagen X. Referencias adoptadas y adaptaciones realizadas.</i>
+</div>
+<br>
+
 ### 3.1.2. Information Architecture
 #### 3.1.2.1. Organization Systems
 
@@ -6057,6 +6189,16 @@ Esta primera entrega abarca el análisis del problema, la propuesta de valor y e
 > Baykoca, J., Hurtado Barbeito, G., Pearce, C. J., Milne-Ives, M., Hudson, J., Norton, S., & Moss-Morris, R. (2026). Mechanisms of engagement with mobile health apps for adults with long-term conditions: Overview of systematic reviews. *JMIR mHealth and uHealth*, *14*(1), Article e88382. https://doi.org/10.2196/88382
 
 > Collazo-Castiñeira, P., Rodríguez-Rey, R., Cruz-Jentoft, A. J., Ben Allouch, S., Eglseer, D., Schoufour, J., Topinková, E., Weijs, P. J. M., Boirie, Y., & Sánchez-Izquierdo, M. (2025). Tailoring mHealth for healthy aging: Focus group study with retirement-age adults. *JMIR mHealth and uHealth*, *13*, Article e70051. https://doi.org/10.2196/70051
+
+**Diseño de interfaz y experiencia de usuario**
+
+> Apple. (s. f.). *Human Interface Guidelines*. https://developer.apple.com/design/human-interface-guidelines/
+
+> Google. (s. f.). *Material Design 3*. https://m3.material.io/
+
+> Moran, K. (2016, 17 de julio). *The four dimensions of tone of voice*. Nielsen Norman Group. https://www.nngroup.com/articles/tone-of-voice-dimensions/
+
+> World Wide Web Consortium. (2023). *Web Content Accessibility Guidelines (WCAG) 2.2*. https://www.w3.org/TR/WCAG22/
 
 <br>
 
