@@ -5941,6 +5941,86 @@ Los elementos clave del mock-up son:
 ### 4.1.1. Software Development Environment Configuration
 ### 4.1.2. Source Code Management
 ### 4.1.3. Source Code Style Guide & Conventions
+
+Esta sección define cómo se nombran los elementos y cómo se escribe el código en cada lenguaje de la solución, con el fin de que cualquier integrante pueda leer y modificar el trabajo de otro sin esfuerzo. Aplica una regla común a todos los lenguajes: **todos los identificadores (clases, métodos, variables, tablas, columnas, archivos y pruebas) se escriben en inglés**, igual que los eventos y comandos definidos en el EventStorming (sección 2.5.1). El texto que ve el usuario final es la única excepción: se redacta en español y, en la landing page, se ofrece también en inglés.
+
+<br>
+
+**Lenguajes y referencias adoptadas**
+
+| Producto | Lenguaje o formato | Convención estándar adoptada | Estado |
+| --- | --- | --- | --- |
+| Landing page web | HTML, CSS y JavaScript (Vite) | [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html) y [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html) | Código disponible; descrito en esta sección |
+| Web Services | Java con Spring Boot | [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) y [Spring Boot Features](https://docs.spring.io/spring-boot/reference/features/index.html) | Reglas de nomenclatura por capa definidas; falta verificar contra el repositorio |
+| Aplicación móvil | Kotlin | [Kotlin Coding Conventions](https://kotlinlang.org/docs/coding-conventions.html) y [Android Kotlin Style Guide](https://developer.android.com/kotlin/style-guide) | Pendiente de verificar contra el repositorio |
+| Pruebas de aceptación | Gherkin (archivos .feature) | [Gherkin Reference](https://cucumber.io/docs/gherkin/reference) | Aún no existen pruebas automatizadas |
+
+<br>
+
+**Nomenclatura por capa (Web Services y aplicación móvil)**
+
+Los nombres de las clases siguen los que el equipo definió para cada bounded context en la sección 2.6, de modo que el código y el diseño usen el mismo lenguaje ubicuo. La tabla resume el patrón, con ejemplos tomados de los contextos ya documentados.
+
+<br>
+
+| Elemento | Regla | Ejemplo |
+| --- | --- | --- |
+| Aggregate y entidad | Sustantivo en singular, en PascalCase | `User`, `Alert`, `InactivityWindow` |
+| Value object | Sustantivo que describe el dato, en PascalCase | `EmailAddress`, `PasswordHash`, `DeviceInfo` |
+| Command | Verbo en imperativo, seguido del sufijo `Command` | `RegisterOlderAdultCommand`, `TriggerEmergencyAlertCommand` |
+| Query | Prefijo `Get`, seguido del criterio y del sufijo `Query` | `GetUserByIdQuery`, `GetActiveAlertsByOlderAdultIdQuery` |
+| Evento de dominio | Hecho en pasado, sin sufijo | `OlderAdultRegistered`, `FamilyLinkEstablished` |
+| Interfaz de repositorio o servicio | Prefijo `I`, seguido del nombre | `IUserRepository`, `IAlertCommandService` |
+| Implementación de servicio | Nombre de la interfaz sin el prefijo `I` | `AlertCommandService`, `AlertQueryService` |
+| Capa REST | Sufijos `Controller`, `Resource` y `Assembler` | `SessionsController`, `AlertResource`, `AlertResourceFromEntityAssembler` |
+| Consumidor de eventos de otro contexto | Evento consumido, seguido del sufijo `Consumer` | `UnansweredCheckInConsumer` |
+| Métodos y variables | camelCase, con verbos para las acciones | `openSession`, `isActive` |
+| Constantes y valores de enumeración | MAYÚSCULAS con guion bajo | `OLDER_ADULT`, `DISTANT_RELATIVE` |
+| Tablas y columnas de base de datos | snake_case; tablas en plural; claves foráneas con sufijo `_id`; marcas de tiempo con sufijo `_at` | `alert_notifications`, `older_adult_id`, `triggered_at` |
+
+<br>
+
+**Landing page: convenciones aplicadas**
+
+El sitio se construye con Vite, sin biblioteca de interfaz, por lo que sus convenciones se resumen en lo que el código ya cumple.
+
+<br>
+
+| Aspecto | Convención aplicada |
+| --- | --- |
+| Módulos | JavaScript con módulos ES (`import` y `export`), separados por responsabilidad: contenido y lógica en `main.js`, textos en inglés y español en `i18n.js` y plantillas en `templates.js` |
+| Formato | Sangría de 2 espacios, comillas simples y ninguna tabulación |
+| Declaraciones | `const` por defecto y `let` solo cuando el valor cambia; no se usa `var`; funciones flecha para la lógica |
+| Nombres | camelCase para variables y funciones (`setState`); MAYÚSCULAS con guion bajo para constantes de contenido (`NAV`, `MOODS`, `FEATURES`) |
+| Comentarios | Bloques con título para separar las partes del archivo (contenido, acciones, renderizado e idioma) y comentarios de una línea para explicar decisiones puntuales |
+| HTML | Documento con `lang="es"`; estructura semántica con `header`, `nav`, `section` y `footer`; un solo `h1`; atributos `alt` en las imágenes y atributos `aria-` en los controles interactivos |
+| Identificadores de sección | `id` en minúsculas, usados como anclas del menú: `como`, `familia`, `funciones` y `planes` |
+| Internacionalización | El español es el idioma de origen y un diccionario lo traduce al inglés; el idioma elegido se recuerda en el navegador |
+| SEO | Etiquetas `meta` de descripción, palabras clave y Open Graph, y datos estructurados, definidos en el encabezado de `index.html` |
+
+<br>
+
+**Diferencias frente a la guía y acciones previstas**
+
+El equipo revisó el código de la landing page contra las guías adoptadas y registró los puntos que todavía no las cumplen, para corregirlos en los siguientes sprints.
+
+<br>
+
+| Diferencia observada | Qué recomienda la guía | Acción prevista |
+| --- | --- | --- |
+| Gran parte del estilo está escrito como atributos `style` dentro del HTML, y varias reglas usan `!important` | Separar la presentación del contenido y evitar `!important` | Mover los estilos a clases en la hoja de estilos |
+| Algunas clases tienen nombres numerados (`hv-0`, `fc-11`) que no describen su función | Nombres de clase que expliquen su propósito, en minúsculas y con guiones | Renombrar las clases según su función, por ejemplo `card-hover` |
+| Los colores se repiten como valores fijos en el código | Definir los colores una sola vez | Declarar variables CSS para la paleta del mock-up (sección 3.1.3.2) |
+| No hay una herramienta que verifique el formato automáticamente | Verificación automática antes de integrar | Agregar un linter y un formateador al repositorio |
+
+<br>
+
+**Convenciones para pruebas de aceptación**
+
+Los archivos .feature se redactan en inglés con las palabras clave `Feature`, `Scenario`, `Given`, `When` y `Then`. Cada escenario verifica un único comportamiento y toma como base los criterios de aceptación de la historia de usuario a la que corresponde, cuyo identificador (por ejemplo, US13) se incluye en una etiqueta sobre el escenario.
+
+<br>
+
 ### 4.1.4. Software Deployment Configuration
 ## 4.2. Landing Page & Mobile Application Implementation
 ### 4.2.1. Sprint 1
