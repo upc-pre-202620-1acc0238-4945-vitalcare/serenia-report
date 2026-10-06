@@ -5571,10 +5571,29 @@ Las Style Guidelines son el repositorio visual común del equipo. Reúnen los ac
 Serenia cuenta con una guía de estilo visual que define su marca, tipografía, color, espaciado y tono de comunicación. La guía se basa en adaptaciones pensadas para adultos mayores y familiares.
 
 <br>
-
 <div align="center">
   <img src="assets/img/style-guidelines/general-style-guidelines-image.png" alt="General Style Guidelines - Image" width="700"/>
   <br/><i>Imagen X. Portada de la guía "General Style Guidelines".</i>
+</div>
+<br>
+
+**Branding**
+
+Serenia busca dar a los adultos mayores que viven solos una forma simple de comunicar su día a día, y a sus familias, la tranquilidad de saber cómo están sin recurrir a un monitoreo invasivo. Su personalidad es cálida, serena, cercana, respetuosa, confiable y humana, y se apoya en cuatro valores: cercanía, autonomía, confianza y conexión emocional.
+
+El isotipo aplica la ley de cierre de la Gestalt: las hojas rodean dos circulos de distinto tamaño, que representan al adulto mayor y a su familiar bajo un mismo cuidado. El logo tiene variantes horizontal, vertical con eslogan, sobre fondo oscuro y de ícono de app, para adaptarse a cada soporte.
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/variantes-logo.png" alt="Variantes del Logo - Image" width="700"/>
+  <br/><i>Imagen X. Variantes del logo de Serenia.</i>
+</div>
+<br>
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/justificacion-isotipo-paleta.png" alt="Justificación del isotipo y la paleta - Image" width="700"/>
+  <br/><i>Imagen X. Justificación del isotipo y la paleta.</i>
 </div>
 <br>
 
