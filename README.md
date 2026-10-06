@@ -5683,6 +5683,22 @@ Usamos un español peruano cercano, con tuteo afectuoso hacia el adulto mayor y 
 </div>
 <br>
 
+**Principios de diseño aplicados**
+
+Las decisiones anteriores se sustentan en los siguientes principios:
+ 
+- **Ley de Fitts:** botones grandes para reducir errores de precisión.
+- **Ley de Hick:** el check-in ofrece solo tres respuestas de un toque, para disminuir la carga cognitiva.
+- **Gestalt:** los botones de respuesta se agrupan y se separan del botón de auxilio, y los elementos del mismo rol comparten radio y tipografía.
+- **Heurísticas de Nielsen:** lenguaje cotidiano, reconocimiento antes que recuerdo (botones con texto e ícono) y control del usuario mediante la opción "hoy no me preguntes".
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/decisiones-diseño.png" alt="Decisiones Diseño - Image" width="700"/>
+  <br/><i>Imagen X. Referencias adoptadas y adaptaciones realizadas.</i>
+</div>
+<br>
+
 ### 3.1.2. Information Architecture
 #### 3.1.2.1. Organization Systems
 
