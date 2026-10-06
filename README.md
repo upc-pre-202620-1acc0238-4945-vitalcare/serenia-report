@@ -5646,6 +5646,19 @@ En accesibilidad, el texto principal (neutro-800 sobre crema) alcanza un contras
 </div>
 <br>
 
+**Spacing y layout**
+
+El espaciado sigue una base de 4 y 8 px, con valores desde 4 px (separación ícono-texto) hasta 64 px (secciones de la landing). Los radios de borde van de 12 a 36 px, y las esquinas muy redondeadas reproducen la suavidad de las hojas.
+ 
+Las áreas táctiles se dimensionaron según la ley de Fitts: 48 dp en la app del familiar, 56 a 64 dp en la del adulto mayor y 72 dp en el botón de auxilio, para reducir errores por temblor o poca precisión motriz. El botón de auxilio siempre está visible y separado del de check-in.
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/espaciado-radios-areas.png" alt="Espacio, Radios, Areas - Image" width="700"/>
+  <br/><i>Imagen X. Espaciado, radios de borde y áreas táctiles.</i>
+</div>
+<br>
+
 ### 3.1.2. Information Architecture
 #### 3.1.2.1. Organization Systems
 
