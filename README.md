@@ -5942,6 +5942,96 @@ Los elementos clave del mock-up son:
 ### 4.1.2. Source Code Management
 ### 4.1.3. Source Code Style Guide & Conventions
 ### 4.1.4. Software Deployment Configuration
+
+Esta sección explica cómo publicar cada producto de Serenia a partir de su repositorio de código, con los pasos suficientes para que otro integrante del equipo pueda repetir el despliegue. La evidencia de lo ejecutado en cada sprint, con sus capturas, se presenta en la sección 4.2.1.8 (Software Deployment Evidence for Sprint Review). Los tres productos de la solución se publican en plataformas distintas, como muestra el Deployment Diagram de la sección 2.5.3.3, que se repite en la Imagen X.
+
+<br>
+
+<div align="center">
+  <img src="assets/img/software-architecture/deployment-diagram.png" alt="Deployment Diagram - Serenia" width="700"/>
+  <br/><i>Imagen X. Deployment Diagram de Serenia.</i>
+</div>
+
+<br>
+
+**Resumen por producto**
+
+| Producto | Repositorio | Plataforma de despliegue | Qué se publica | Estado |
+| --- | --- | --- | --- | --- |
+| Landing page web | `serenia-website` | Netlify | La carpeta `dist`, generada con `npm run build` | Desplegada en https://sereniaa.netlify.app/ |
+| Web Services | `serenia-web-services` | Microsoft Azure (Azure Web App Service para la API y base de datos MySQL en Azure) | Por definir | Por completar cuando el repositorio contenga el código |
+| Aplicación móvil | `serenia-app-native` | Firebase App Distribution | Por definir | Por completar cuando el repositorio contenga el código |
+
+Todos los repositorios pertenecen a la organización del equipo en GitHub (https://github.com/upc-pre-202620-1acc0238-4945-vitalcare). El código que se publica proviene siempre de la rama `main`, que recibe los cambios desde `develop` mediante Pull Requests, según el flujo GitFlow adoptado por el equipo.
+
+<br>
+
+**Landing page web: despliegue en Netlify**
+
+La landing page es un sitio estático construido con Vite, sin backend, sin variables de entorno ni servicios externos: el formulario de la lista de espera valida el correo en el propio navegador y no envía datos a ningún servidor. Por eso su despliegue consiste únicamente en construir el sitio y publicar el resultado.
+
+<br>
+
+*Requisitos previos*
+
+| Requisito | Detalle |
+| --- | --- |
+| Node.js | Versión 20 LTS o superior. El repositorio no fija una versión; el mínimo que exige Vite 6 es la 18, y la construcción se verificó con la versión 24 |
+| npm | El que se instala junto con Node.js |
+| Git | Para clonar el repositorio |
+| Cuenta de Netlify | Con acceso al sitio de Serenia |
+
+<br>
+
+*Pasos*
+
+| Paso | Acción | Comando o detalle |
+| --- | --- | --- |
+| 1 | Clonar el repositorio y ubicarse en la rama `main` | `git clone https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website.git` y luego `cd serenia-website` |
+| 2 | Instalar las dependencias | `npm install` |
+| 3 | Revisar el sitio en local (opcional) | `npm run dev` abre el servidor de desarrollo |
+| 4 | Construir el sitio para producción | `npm run build`, que ejecuta `vite build` y genera la carpeta `dist` |
+| 5 | Comprobar el resultado de la construcción (opcional) | `npm run preview` sirve la carpeta `dist` en local |
+| 6 | Publicar la carpeta `dist` completa en Netlify | Arrastrarla al panel de despliegues del sitio en Netlify, o ejecutar `netlify deploy --prod --dir=dist` con la herramienta de línea de comandos de Netlify (`netlify-cli`) |
+| 7 | Verificar el despliegue | Ver la tabla siguiente |
+
+<br>
+
+La carpeta `dist` no forma parte del repositorio: se genera en el paso 4 y contiene el `index.html` final, la subcarpeta `assets` con los archivos JavaScript y CSS compilados, la subcarpeta `fonts`, los íconos del sitio, `robots.txt`, `sitemap.xml` y `site.webmanifest`. Se publica la carpeta `dist` completa; no se sube la carpeta del proyecto, cuyo código fuente (`src`) no debe quedar expuesto en el sitio.
+
+<br>
+
+*Verificación*
+
+| Comprobación | Resultado esperado |
+| --- | --- |
+| Abrir https://sereniaa.netlify.app/ | La landing page carga con sus secciones y los enlaces del menú desplazan hasta cada una |
+| Revisar el código fuente de la página | Los archivos `.js` y `.css` provienen de `/assets/` con un nombre generado por la construcción (por ejemplo, `index-C64a7uLj.js`) |
+| Abrir `/src/main.js` y `/package.json` en el sitio | Responden con un error 404, lo que confirma que solo se publicó el resultado de la construcción |
+| Cambiar el idioma entre ES y EN | El texto se traduce y el idioma elegido se conserva al recargar |
+
+<br>
+
+*Aspectos por definir*
+
+| Aspecto | Situación actual |
+| --- | --- |
+| Despliegue automático | Hoy la publicación es manual desde la rama `main`. Conectar el repositorio a Netlify permitiría publicar al integrar cambios en `main`, a cambio de agregar un archivo de configuración de Netlify al repositorio |
+| Dominio propio | Los metadatos del sitio (`canonical`, Open Graph, `robots.txt` y `sitemap.xml`) apuntan a `serenia.com`, mientras que el sitio se publica en `sereniaa.netlify.app`. Hasta contar con ese dominio, las direcciones canónicas no coinciden con la dirección real |
+
+<br>
+
+**Web Services y aplicación móvil**
+
+El Deployment Diagram establece que la API REST se aloja en un Azure Web App Service, con la base de datos MySQL en Azure, y que la aplicación móvil se distribuye mediante Firebase App Distribution. Los repositorios `serenia-web-services` y `serenia-app-native` todavía no contienen el código que se desplegará, por lo que sus pasos concretos se documentarán cuando se ejecute el primer despliegue de cada uno. Para cada producto se registrarán los siguientes puntos:
+
+| Producto | Información que se documentará |
+| --- | --- |
+| Web Services | Versión de Java y de Spring Boot, comando de construcción del archivo ejecutable, creación y configuración del Azure Web App Service, creación de la base de datos MySQL, variables de entorno requeridas (sin sus valores) y la forma de verificar que la API responde |
+| Aplicación móvil | Tecnología y versión de las herramientas de construcción, generación del instalable, creación del proyecto y del grupo de testers en Firebase App Distribution, carga de cada versión y la forma de instalarla en un dispositivo de prueba |
+
+<br>
+
 ## 4.2. Landing Page & Mobile Application Implementation
 ### 4.2.1. Sprint 1
 #### 4.2.1.1. Sprint Planning 1
