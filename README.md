@@ -5567,6 +5567,17 @@ El diseño de producto de Serenia define cómo se ven, se siente y se usan sus t
 Las Style Guidelines son el repositorio visual común del equipo. Reúnen los activos, las fuentes, los colores y las reglas de uso que mantienen coherentes las tres piezas del producto, sin importar quién diseñe o desarrolle en cada interfaz.
 
 #### 3.1.1.1. General Style Guidelines
+
+Serenia cuenta con una guía de estilo visual que define su marca, tipografía, color, espaciado y tono de comunicación. La guía se basa en adaptaciones pensadas para adultos mayores y familiares.
+
+<br>
+
+<div align="center">
+  <img src="assets/img/style-guidelines/general-style-guidelines-image.png" alt="General Style Guidelines - Image" width="700"/>
+  <br/><i>Imagen X. Portada de la guía "General Style Guidelines".</i>
+</div>
+<br>
+
 ### 3.1.2. Information Architecture
 #### 3.1.2.1. Organization Systems
 
