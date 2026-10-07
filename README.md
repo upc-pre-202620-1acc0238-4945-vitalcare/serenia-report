@@ -7126,8 +7126,6 @@ El recorrido del familiar comienza con la misma bienvenida, creación de cuenta 
 #### 3.1.4.2. Mobile Applications Wireflow Diagrams
 #### 3.1.4.3. Mobile Applications Mock-ups
 
-#### 3.1.4.3. Mobile Applications Mock-ups
-
 Los mock-ups de Serenia traducen los requisitos funcionales del proyecto en pantallas de alta fidelidad. Su objetivo es validar con el equipo la jerarquía visual, la navegación y los estados de cada pantalla antes del desarrollo.
 
 <br>
