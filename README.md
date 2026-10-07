@@ -6651,7 +6651,7 @@ La navegación se mantiene lo más simple posible, ya que cada opción adicional
 <div align="center">
 
 <img src="assets/img/navigation-systems/nav-adultomayor.png" alt="Barra de navegación - Aplicación móvil del adulto mayor" width="350">
-  <br/><i>Imagen 27: Barra de navegación inferior de la aplicación móvil del adulto mayor.</i>
+  <br/><i>Imagen X. Barra de navegación inferior de la aplicación móvil del adulto mayor.</i>
 
 </div>
 
@@ -6684,7 +6684,7 @@ Esta aplicación concentra más contenido, por lo que emplea una barra de navega
 <div align="center">
 
 <img src="assets/img/navigation-systems/nav-familiar.png" alt="Barra de navegación - Aplicación móvil del familiar a distancia" width="350">
-  <br/><i>Imagen 28: Barra de navegación inferior de la aplicación móvil del familiar a distancia.</i>
+  <br/><i>Imagen X. Barra de navegación inferior de la aplicación móvil del familiar a distancia.</i>
 
 </div>
 
@@ -6736,7 +6736,7 @@ La landing page tiene un propósito de conversión: que el visitante comprenda l
 <div align="center">
 
 ![Barra de navegación - Landing page](assets/img/navigation-systems/nav-landingpage.png)
-  <br/><i>Imagen 29: Barra de navegación superior de la landing page.</i>
+  <br/><i>Imagen X. Barra de navegación superior de la landing page.</i>
 
 </div>
 
@@ -6812,6 +6812,305 @@ En la versión de escritorio, las secciones de Cómo funciona, Funciones y Plane
 #### 3.1.3.2. Landing Page Mock-up
 ### 3.1.4. Mobile Applications UX/UI Design
 #### 3.1.4.1. Mobile Applications Wireframes
+
+#### 3.1.4.1. Mobile Applications Wireframes
+
+Los wireframes de Serenia son la versión de baja fidelidad de las pantallas de las dos aplicaciones móviles del producto: la del adulto mayor y la del familiar. Se elaboraron en escala de grises, sin color, tipografías de marca ni imágenes, para concentrar la atención en la estructura de cada pantalla, la jerarquía de la información, la ubicación de los botones y la secuencia de navegación. De este modo el equipo pudo validar la distribución y el flujo antes de definir el diseño visual que se presenta en los mock-ups.
+
+<br>
+
+
+**Criterios de elaboración** 
+
+Cada wireframe corresponde a una pantalla del prototipo y conserva sus mismos elementos y textos, representados con formas simples: bloques para tarjetas y botones, contornos para campos y chips, y una barra de navegación inferior de cuatro destinos en la aplicación del adulto mayor y de cinco en la del familiar. 
+
+<br>
+
+## Flujo del adulto mayor
+
+El recorrido del adulto mayor comienza con la bienvenida, la creación de la cuenta y el inicio de sesión. Luego accede a su aplicación, organizada en cuatro secciones: Inicio, Recordar, Familia y Cuenta. Desde el inicio responde su check-in diario con un toque, puede omitirlo si prefiere no responder y dispone del botón "Ayuda" para avisar a su familia. En las demás secciones gestiona sus recordatorios, comparte fotos y audios con su familia, consulta su círculo y su código de invitación, y administra su cuenta.
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/1.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/2.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/3.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/inicio-sesion.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/4.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/5.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/6.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/7.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/8.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/9.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/10.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/11.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/12.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/13.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/14.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/15.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/16.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/17.png)
+
+</div>
+
+<br>
+
+
+## Flujo del familiar
+
+El recorrido del familiar comienza con la misma bienvenida, creación de cuenta e inicio de sesión. Luego accede a su aplicación, organizada en cinco secciones: Inicio, Historial, Alertas, Círculo y Mensajes. En el inicio ve cómo amaneció su adulto mayor y accede al detalle de su check-in; en Historial revisa los registros anteriores y en Alertas atiende las emergencias y las inactividades. En Círculo gestiona a los familiares vinculados, los turnos de atención y las notas compartidas, y en Mensajes reproduce los audios y envía fotos.
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/1.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/2.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/3.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/inicio-sesion.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/18.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/19.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/20.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/21.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/22.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/23.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/24.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/25.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/26.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/27.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/28.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/29.png)
+
+</div>
+
+<br>
+
 #### 3.1.4.2. Mobile Applications Wireflow Diagrams
 #### 3.1.4.3. Mobile Applications Mock-ups
 
