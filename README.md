@@ -5073,7 +5073,7 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 #### 3.1.2.4. Searching Systems
 #### 3.1.2.5. Navigation Systems
 
-Un sistema de navegación define las acciones y técnicas que guían al usuario a través del producto: cómo se desplaza entre pantallas, cómo sabe en qué punto se encuentra y cómo regresa o avanza hacia su meta sin perderse. Para Serenia, el equipo diseñó la navegación de cada producto según las capacidades y metas de su usuario principal, y no con una estructura única para todos. El adulto mayor necesita avanzar con la menor cantidad de decisiones posible; el familiar a distancia necesita llegar rápido a información distinta según la urgencia; y el visitante de la landing page necesita entender la propuesta y llegar a probar la aplicación.
+Un sistema de navegación define las acciones y técnicas que guían al usuario a través del producto: cómo se desplaza entre pantallas, cómo sabe en qué punto se encuentra y cómo regresa o avanza hacia su meta sin perderse. Para Serenia, el equipo diseñó la navegación de cada producto según las capacidades y metas de su usuario principal. El adulto mayor necesita avanzar con la menor cantidad de decisiones posible; el familiar a distancia necesita llegar rápido a información distinta según la urgencia; y el visitante de la landing page necesita entender la propuesta y llegar a probar la aplicación. Las dos aplicaciones móviles comparten el mismo estilo de barra de navegación inferior, pero con destinos distintos, de modo que cada usuario encuentra solo lo que le corresponde.
 
 <br>
 
@@ -5085,61 +5085,79 @@ Todos los productos comparten cuatro criterios: pocas opciones visibles a la vez
 
 | Producto | Tipo de navegación principal | Elementos de apoyo |
 | --- | --- | --- |
-| Aplicación móvil del adulto mayor | Pantalla de inicio única con acciones directas, sin menú | Botón de ayuda visible en todas las pantallas, flecha de retorno, flujo lineal por pasos |
-| Aplicación móvil del familiar a distancia | Barra de navegación inferior con cinco destinos | Menú de perfil, navegación local por sección, enlaces contextuales y notificaciones push con acceso directo |
+| Aplicación móvil del adulto mayor | Barra de navegación inferior con cuatro destinos | Botón de ayuda visible en la pantalla de inicio, flecha de retorno en pantallas secundarias, flujos lineales por pasos |
+| Aplicación móvil del familiar a distancia | Barra de navegación inferior con cinco destinos | Acceso al perfil desde la pantalla de inicio, navegación local por sección, enlaces contextuales y notificaciones push con acceso directo |
 | Landing page web | Barra de navegación superior fija con anclas a secciones | Selector de idioma, botón "Probar gratis" repetido, menú adaptado a móvil, pie de página |
 
-### Aplicación móvil del adulto mayor. 
-La navegación se reduce deliberadamente al mínimo, ya que cualquier menú agregaría decisiones a un usuario con baja familiaridad tecnológica. La pantalla de inicio presenta tres acciones de gran tamaño y se desplaza con un solo toque, sin menús ni pestañas.
-
-<br>
-
-| Elemento | Descripción |
-| --- | --- |
-| Pantalla de inicio | Muestra únicamente tres acciones: responder el check-in del día, abrir los mensajes recibidos de la familia y activar el botón de ayuda. |
-| Botón de ayuda | Permanece visible en todas las pantallas para que el adulto mayor pueda pedir auxilio sin importar dónde se encuentre. Solicita una confirmación antes de enviar la alerta, para evitar activaciones accidentales. |
-| Flujo del check-in | Recorrido lineal de un paso por pantalla: pregunta del día, elección del estado de ánimo, nota opcional y confirmación. Cada pantalla muestra una sola decisión y una flecha para regresar al paso anterior. |
-| Modo simplificado | Reduce la cantidad de pasos y la complejidad visual del check-in, para adultos mayores con menor familiaridad tecnológica. |
-| Retorno | Toda pantalla secundaria incluye una flecha de retorno y un acceso a la pantalla de inicio. Al terminar una acción, la aplicación regresa sola al inicio con un mensaje de confirmación. |
-
-<br>
-
-### Aplicación móvil del familiar a distancia.
-Esta aplicación concentra más contenido, por lo que emplea una barra de navegación inferior con un máximo de cinco destinos, ubicada al alcance del pulgar y visible en todo momento. La pestaña activa se resalta con color y etiqueta para que el usuario siempre sepa dónde está.
-
-<br>
-
-| Destino | Contenido | Meta del usuario que atiende |
-| --- | --- | --- |
-| Inicio | Resumen de estado del adulto mayor: si respondió el check-in del día, su estado de ánimo y un dato destacado | Saber de un vistazo si su familiar está bien |
-| Historial | Registro de check-ins con filtros por fecha, ánimo y estado, y pequeños logros | Revisar cómo ha evolucionado el bienestar |
-| Alertas | Alertas de inactividad, bienestar y emergencia, con su estado de atención | Responder con rapidez ante una situación de riesgo |
-| Círculo | Integrantes del círculo familiar, turnos de cuidado y notas compartidas, organizados en pestañas internas | Coordinarse con los demás familiares |
-| Mensajes | Mensajes de audio, fotos y texto, y recordatorios sociales | Mantener el vínculo afectivo con el adulto mayor |
+### Aplicación móvil del adulto mayor.
+La navegación se mantiene lo más simple posible, ya que cada opción adicional es una decisión más para un usuario con baja familiaridad tecnológica. Por eso la aplicación usa una barra de navegación inferior con solo cuatro destinos, flotante y ubicada al alcance del pulgar. La pestaña activa se resalta con una píldora blanca que muestra el ícono y su nombre, mientras que las demás muestran solo el ícono, de modo que el usuario siempre sabe en qué sección está.
 
 <br>
 
 <div align="center">
 
-![Barra de navegación - Aplicación móvil del familiar a distancia](assets/img/navigation-systems/mobile-navbar.png)
-  <br/><i>Imagen 27: Barra de navegación inferior de la aplicación móvil del familiar a distancia.</i>
+<img src="assets/img/navigation-systems/nav-adultomayor.png" alt="Barra de navegación - Aplicación móvil del adulto mayor" width="350">
+  <br/><i>Imagen 27: Barra de navegación inferior de la aplicación móvil del adulto mayor.</i>
 
 </div>
 
 <br>
 
-El perfil y los ajustes de la cuenta no ocupan un destino de la barra: se acceden desde un ícono en la esquina superior de la pantalla de inicio, ya que se consultan con poca frecuencia. La pestaña Alertas muestra una insignia numérica cuando existen alertas sin atender, de modo que lo urgente se perciba sin tener que entrar a la sección.
+| Destino | Contenido | Meta del usuario que atiende |
+| --- | --- | --- |
+| Inicio | Saludo, pregunta del día "¿Cómo amaneciste hoy?" con tres opciones de estado de ánimo, la opción "Hoy no quiero responder" y el botón de ayuda | Responder su check-in y pedir ayuda si la necesita |
+| Recordar | Lista de recordatorios con las acciones Listo, Más tarde y descartar, y la creación de nuevos recordatorios | Acordarse de llamar a una persona o de asistir a una actividad |
+| Familia | Fotos que le enviaron sus familiares, grabación de un audio para su familia, y acceso a su círculo y a su código de invitación | Sentirse cerca de su familia y gestionar quién está vinculado |
+| Cuenta | Datos personales, hora de la pregunta diaria, modo simplificado y cambio de contraseña | Ajustar la aplicación a sus necesidades |
 
-Dentro de cada destino, la navegación local se resuelve con pestañas internas o filtros visibles en la parte superior, como en Círculo (integrantes, turnos y notas) e Historial. Además, la aplicación ofrece enlaces contextuales que permiten saltar entre contenidos relacionados sin pasar por la barra:
+<br>
+
+| Elemento | Descripción |
+| --- | --- |
+| Pantalla de inicio | Presenta la pregunta del día con tres opciones grandes y una alternativa para omitirla. Es el punto de partida y de retorno de la aplicación. |
+| Botón de ayuda | Botón flotante de gran tamaño en la pantalla de inicio. Al tocarlo, la aplicación envía la alerta a la familia y muestra una pantalla de confirmación. Si el envío falla, informa el problema y ofrece reintentar. |
+| Flujo del check-in | Recorrido corto: pregunta del día, elección del estado de ánimo y pantalla de agradecimiento. Cada pantalla muestra una sola decisión. Si el adulto mayor prefiere no responder, la aplicación registra una pausa del día y no genera alerta. |
+| Modo simplificado | Se activa desde Cuenta y muestra solo lo esencial: cómo está el usuario y el botón de ayuda. |
+| Retorno | Las pantallas secundarias incluyen un botón "Atrás". Al terminar una acción, la aplicación regresa al inicio y muestra una confirmación. |
+
+<br>
+
+### Aplicación móvil del familiar a distancia.
+Esta aplicación concentra más contenido, por lo que emplea una barra de navegación inferior con cinco destinos, con el mismo estilo flotante en verde oscuro de la aplicación del adulto mayor. La pestaña activa se resalta con una píldora blanca que incluye el ícono y la etiqueta, para que el usuario siempre sepa dónde está.
+
+<br>
+
+<div align="center">
+
+<img src="assets/img/navigation-systems/nav-familiar.png" alt="Barra de navegación - Aplicación móvil del familiar a distancia" width="350">
+  <br/><i>Imagen 28: Barra de navegación inferior de la aplicación móvil del familiar a distancia.</i>
+
+</div>
+
+<br>
+
+| Destino | Contenido | Meta del usuario que atiende |
+| --- | --- | --- |
+| Inicio | Resumen de cómo amaneció el adulto mayor, con la tarjeta del check-in del día, accesos rápidos a Historial, Alertas y Mensajes, y el turno de atención del día | Saber de un vistazo si su familiar está bien |
+| Historial | Registro de check-ins con filtros por estado de ánimo (Todos, Muy bien, Más o menos, No tan bien) | Revisar cómo ha evolucionado el bienestar |
+| Alertas | Alertas de emergencia y de inactividad, con su estado de atención | Responder con rapidez ante una situación de riesgo |
+| Círculo | Integrantes del círculo familiar, turnos de atención, notas compartidas y la opción de quitar el vínculo | Coordinarse con los demás familiares |
+| Mensajes | Audios que graba el adulto mayor y envío de fotos | Mantener el vínculo afectivo con el adulto mayor |
+
+<br>
+
+El perfil y los ajustes de la cuenta no ocupan un destino de la barra: se acceden desde la etiqueta con el nombre del usuario en la parte superior de la pantalla de inicio, ya que se consultan con poca frecuencia. La pestaña Alertas muestra una insignia numérica cuando existen alertas sin atender, de modo que lo urgente se perciba sin tener que entrar a la sección.
+
+Dentro de cada destino, la navegación local se resuelve con filtros o bloques visibles en la parte superior, como los filtros de Historial y los accesos a Turnos de atención y Notas compartidas dentro de Círculo. Además, la aplicación ofrece enlaces contextuales que permiten saltar entre contenidos relacionados sin pasar por la barra:
 
 <br>
 
 | Desde | Hacia | Cómo se accede |
 | --- | --- | --- |
-| Tarjeta de resumen en Inicio | Detalle del check-in en Historial | Toque sobre la tarjeta |
-| Alerta de bienestar | Check-ins que originaron el patrón detectado | Enlace dentro del detalle de la alerta |
-| Alerta | Mensaje o llamada al adulto mayor | Acción directa dentro del detalle de la alerta |
-| Notificación push | Detalle de la alerta o del mensaje correspondiente | Toque sobre la notificación, que abre directamente la pantalla destino |
+| Tarjeta de check-in en Inicio | Detalle del check-in | Toque sobre la tarjeta |
+| Accesos rápidos en Inicio | Historial, Alertas o Mensajes | Toque sobre el acceso rápido |
+| Lista de alertas | Detalle de la alerta con su seguimiento | Toque sobre la alerta |
+| Notificación push | Detalle de la alerta correspondiente | Toque sobre la notificación, que abre directamente la pantalla destino |
 
 <br>
 
@@ -5163,8 +5181,8 @@ La landing page tiene un propósito de conversión: que el visitante comprenda l
 
 <div align="center">
 
-![Barra de navegación - Landing page](assets/img/navigation-systems/landing-page-nav.png)
-  <br/><i>Imagen 28: Barra de navegación superior de la landing page.</i>
+![Barra de navegación - Landing page](assets/img/navigation-systems/nav-landingpage.png)
+  <br/><i>Imagen 29: Barra de navegación superior de la landing page.</i>
 
 </div>
 
@@ -5178,11 +5196,13 @@ Las técnicas anteriores se combinan para que cada usuario llegue a su meta en l
 
 | Usuario | Meta | Recorrido |
 | --- | --- | --- |
-| Adulto mayor | Responder su check-in del día | Inicio → Responder check-in → Estado de ánimo → Nota opcional → Confirmación |
-| Adulto mayor | Pedir ayuda | Botón de ayuda (desde cualquier pantalla) → Confirmación → Alerta enviada |
-| Familiar a distancia | Saber cómo está su familiar | Inicio → Resumen de estado |
-| Familiar a distancia | Atender una alerta | Notificación push → Detalle de la alerta → Contactar al adulto mayor → Confirmar atención |
-| Familiar a distancia | Enviar un mensaje de audio | Mensajes → Nuevo mensaje → Grabar → Enviar |
+| Adulto mayor | Responder su check-in del día | Inicio → Elegir cómo amaneció → Pantalla de agradecimiento |
+| Adulto mayor | Pedir ayuda | Inicio → Botón de ayuda → Alerta enviada |
+| Adulto mayor | Enviar un audio a su familia | Familia → Grabar un audio para mi familia → Hablar → Enviar a mi familia |
+| Adulto mayor | Crear un recordatorio | Recordar → Nuevo recordatorio → Guardar |
+| Familiar a distancia | Saber cómo está su familiar | Inicio → Tarjeta del check-in del día |
+| Familiar a distancia | Atender una alerta | Notificación push → Detalle de la alerta → Estoy atendiendo esta alerta |
+| Familiar a distancia | Escuchar un audio del adulto mayor | Mensajes → Audio → Reproducir |
 | Visitante | Probar la aplicación | Landing page → Botón "Probar gratis" → Planes → Descarga en la tienda de aplicaciones |
 
 <br>
