@@ -7221,6 +7221,7 @@ Esta primera entrega abarca el análisis del problema, la propuesta de valor y e
 
 # Bibliografía
 
+
 **Dominio de negocio**
 
 > Agencia Andina. (2025, 26 de marzo). *INEI: En Lima Metropolitana, uno de cada cuatro adulto mayor vive solo*. Andina. https://andina.pe/agencia/noticia-inei-lima-metropolitana-uno-cada-cuatro-adulto-mayor-vive-solo-1023716.aspx
