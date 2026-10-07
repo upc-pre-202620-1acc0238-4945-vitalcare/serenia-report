@@ -6227,12 +6227,56 @@ Diagrama de clases de la capa Domain: en la Imagen 54 se muestran las clases del
 
 ##### 2.6.6.6.2. Bounded Context Database Design Diagram
 
-A continuación se presentan las tablas del bounded context Alerts and Safety, a partir del diagrama de base de datos consolidado por el equipo (Imagen 55):
+El diagrama de base de datos (Imagen 55) presenta las tablas que permiten la persistencia del bounded context **Alerts and Safety** sobre el motor MySQL 8, a partir del esquema consolidado por el equipo. Los identificadores son UUID almacenados como `BINARY(16)` y las fechas se guardan en UTC con `DATETIME(6)`. El contexto se materializa en tres tablas: `alerts`, que guarda las alertas de ambos aggregates (`EmergencyAlert` e `InactivityAlert`) diferenciadas por la columna `type`; `alert_notifications`, que registra el aviso de una emergencia a cada familiar vinculado; y `alert_attentions`, que registra el reconocimiento y la resolución que realizan los familiares. Las claves foráneas hacia `users` (Identity & Access) y `check_ins` (Daily Check-in) apuntan a tablas de otros bounded contexts.
 
-- **inactivity_windows:** Temporizadores que miden el silencio antes de escalar a una alarma real. Atributos: `id`, `older_adult_id`, `check_in_id`, `opened_at`, `expires_at`, `reminder_sent_at`, `escalated_at`, `status`.
-- **alerts:** Incidentes críticos generados por el botón de pánico, inactividad o patrones negativos. Atributos: `id`, `older_adult_id`, `type`, `severity`, `status`, `pattern_id`, `inactivity_window_id`, `triggered_at`, `closed_at`.
-- **alert_notifications:** Trazabilidad de la entrega de notificaciones push para cada alerta. Atributos: `id`, `alert_id`, `relative_id`, `channel`, `status`, `sent_at`, `delivered_at`.
-- **alert_attentions:** Registro de resolución para saber qué familiar atendió la crisis. Atributos: `id`, `alert_id`, `relative_id`, `confirmed_at`, `resolution_note`.
+**Tabla alerts**
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | binary(16) | PK | Identificador único de la alerta. |
+| older_adult_id | binary(16) | NOT NULL, FK → users.id | Adulto mayor al que corresponde la alerta. |
+| type | alert_type | NOT NULL | Tipo de alerta: EMERGENCY o INACTIVITY. |
+| status | alert_status | NOT NULL, DEFAULT 'RAISED' | Estado de la alerta: RAISED, DISPATCHED, DISPATCH_FAILED, ACKNOWLEDGED o RESOLVED. |
+| check_in_id | binary(16) | UNIQUE, FK → check_ins.id | Check-in no respondido que originó la alerta. Solo se completa en las alertas de tipo INACTIVITY. |
+| triggered_at | datetime(6) | NOT NULL | Instante en que se generó la alerta, en UTC. |
+| resolved_at | datetime(6) | - | Instante de la resolución. Nulo mientras la alerta no se haya resuelto. |
+
+Esta tabla almacena las alertas de emergencia y de inactividad en una misma estructura, ya que ambas comparten el ciclo de reconocimiento y resolución por parte de los familiares. El índice único sobre `check_in_id` garantiza que un check-in genere a lo sumo una alerta. Incluye un índice sobre `(older_adult_id, triggered_at)` para consultar el historial de alertas de un adulto mayor ordenado por fecha, y otro sobre `(type, status)` para filtrar las alertas por tipo y estado.
+
+**Tabla alert_notifications**
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | binary(16) | PK | Identificador único de la notificación. |
+| alert_id | binary(16) | NOT NULL, FK → alerts.id | Alerta de emergencia a la que pertenece la notificación. |
+| relative_id | binary(16) | NOT NULL, FK → users.id | Familiar al que se dirige la notificación. |
+| status | delivery_status | NOT NULL, DEFAULT 'PENDING' | Estado de la notificación: PENDING, SENT, DELIVERED o FAILED. |
+| sent_at | datetime(6) | - | Instante del registro de la notificación, en UTC. |
+| delivered_at | datetime(6) | - | Instante en que la notificación quedó disponible para el familiar. Nulo mientras no se confirme. |
+
+Esta tabla registra el despacho de una emergencia a cada familiar con vínculo activo. Un índice único sobre `(alert_id, relative_id)` asegura que exista una sola notificación por familiar y alerta.
+
+**Tabla alert_attentions**
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | binary(16) | PK | Identificador único de la acción de atención. |
+| alert_id | binary(16) | NOT NULL, FK → alerts.id | Alerta sobre la que actúa el familiar. |
+| relative_id | binary(16) | NOT NULL, FK → users.id | Familiar que realizó la acción. |
+| action | attention_action | NOT NULL | Acción realizada: ACKNOWLEDGED o RESOLVED. |
+| acted_at | datetime(6) | NOT NULL | Instante de la acción, en UTC. |
+| resolution_note | varchar(300) | - | Nota que describe cómo se resolvió la alerta. Opcional y solo para la resolución. |
+
+Esta tabla deja constancia de qué familiar reconoció una alerta y cuál la resolvió, de modo que todos los familiares sepan si alguien ya está actuando. Un índice único sobre `(alert_id, action)` permite un único reconocimiento y una única resolución por alerta, por lo que si dos familiares reconocen la misma alerta a la vez, el segundo intento se rechaza.
+
+**Enumeraciones**
+
+| Nombre | Valores | Descripción |
+|---|---|---|
+| alert_type | EMERGENCY, INACTIVITY | Tipo de alerta; distingue ambos aggregates en la tabla `alerts`. |
+| alert_status | RAISED, DISPATCHED, DISPATCH_FAILED, ACKNOWLEDGED, RESOLVED | Estado de la alerta a lo largo de su ciclo de vida. |
+| delivery_status | PENDING, SENT, DELIVERED, FAILED | Estado de entrega de una notificación de emergencia. |
+| attention_action | ACKNOWLEDGED, RESOLVED | Acción de un familiar sobre una alerta. |
 
 <br>
 
