@@ -3651,6 +3651,9 @@ La siguiente tabla ordena las 46 historias del Product Backlog y asigna cada una
 | 56 | US37 | Descarte de sugerencias de bienestar | 1 | Sprint 3 |
 | 57 | US38 | Reconocimiento de alertas | 2 | Sprint 3 |
 | 58 | US39 | Resolución de alertas | 2 | Sprint 3 |
+| 59 | US40 | Generación de código de invitación | 3 | Sprint 3 |
+| 60 | US41 | Visualización de fotografías recibidas | 2 | Sprint 3 |
+| 61 | US42 | Consulta del historial de alertas | 2 | Sprint 3 |
 
 
 <br>
