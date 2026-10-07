@@ -7133,8 +7133,6 @@ Para probar la vinculación en el prototipo, el código válido es 4821 y el có
 
 <br>
 
-
-
 # Capítulo IV: Product Implementation & Validation
 ## 4. Product Implementation & Validation
 ## 4.1. Software Configuration Management
