@@ -4105,16 +4105,17 @@ En esta capa se representan las reglas de negocio propias de la identidad de un 
 | deviceInfo | DeviceInfo | private | Descripción del dispositivo desde el que se inició la sesión, opcional. |
 | issuedAt | Instant | private | Instante de emisión del token, en UTC. |
 | expiresAt | Instant | private | Instante en que el token deja de ser válido, en UTC. |
-| revokedAt | Instant | private | Instante del cierre de sesión; es nulo mientras la sesión no haya sido revocada. |
+| revokedAt | Instant | private | Instante del cierre o revocación de la sesión; es nulo mientras siga abierta. |
 
 | Método | Visibilidad | Descripción |
 | --- | --- | --- |
 | open(sessionId, userId, tokenHash, deviceInfo, issuedAt, expiresAt) | public (static) | Factory que abre una sesión, valida que la expiración sea posterior a la emisión y registra el evento `UserLoggedIn`. |
-| revoke(revokedAt) | public | Marca la sesión como cerrada y registra el evento `UserSessionClosed`; si ya estaba revocada, no realiza cambios. |
+| close(closedAt) | public | Cierra la sesión por decisión del usuario y registra el evento `UserSessionClosed`; si ya estaba cerrada, no realiza cambios. |
+| revoke(revokedAt) | public | Marca la sesión como revocada por una acción de seguridad; si ya estaba cerrada, no realiza cambios. |
 | belongsTo(userId) | public | Indica si la sesión pertenece al usuario indicado; impide cerrar sesiones ajenas. |
 | matchesToken(tokenHash) | public | Compara el hash del token presentado con el almacenado. |
 | isExpired(referenceTime) | public | Indica si el token ya superó su instante de expiración. |
-| isActive(referenceTime) | public | Indica si la sesión sigue vigente: no revocada y no expirada. |
+| isActive(referenceTime) | public | Indica si la sesión sigue vigente: no cerrada ni revocada, y no expirada. |
 
 **Sub-capa Model: Entities**
 
@@ -4154,6 +4155,7 @@ Se implementan como records inmutables que validan su contenido al construirse. 
 | UpdateUserPhotoCommand | userId, photoUrl | Intención de actualizar la fotografía de perfil. |
 | UpdateProfileDataCommand | userId, fullName, phoneNumber, birthDate, locale, timeZone | Intención de actualizar los datos personales del perfil. |
 | ChangePasswordCommand | userId, sessionId, currentPassword, newPassword | Intención de reemplazar la contraseña, previa verificación de la contraseña actual. |
+| RevokeSessionsCommand | userId, preservedSessionId | Intención de revocar las sesiones vigentes del usuario distintas a la que realizó el cambio de contraseña. |
 
 **Sub-capa Model: Queries**
 
@@ -4173,13 +4175,14 @@ Se implementan como records inmutables que validan su contenido al construirse. 
 | UserPhotoUpdated | userId, occurredAt | Se actualizó la fotografía de perfil de un usuario. |
 | ProfileDataUpdated | userId, occurredAt | Se actualizaron los datos personales de un usuario. |
 | PasswordChanged | userId, preservedSessionId, occurredAt | Se modificó la contraseña de una cuenta desde la sesión indicada. |
+| SessionsRevoked | userId, revokedSessionIds, occurredAt | Se revocaron las demás sesiones vigentes de un usuario tras el cambio de su contraseña. |
 
 **Sub-capa Repositories**
 
 | Tipo | Nombre | Métodos principales | Descripción |
 | --- | --- | --- | --- |
 | Interface | UserRepository | save(user), findById(userId), findByEmail(email), existsByEmail(email) | Contrato de persistencia del aggregate `User`. Se implementa en Infrastructure. |
-| Interface | SessionRepository | save(session), findById(sessionId), findActiveByUserId(userId, referenceTime) | Contrato de persistencia del aggregate `Session`. Se implementa en Infrastructure. |
+| Interface | SessionRepository | save(session), saveAll(sessions), findById(sessionId), findActiveByUserId(userId, referenceTime) | Contrato de persistencia del aggregate `Session`. Se implementa en Infrastructure. |
 
 **Sub-capa Services**
 
@@ -4187,7 +4190,7 @@ Se implementan como records inmutables que validan su contenido al construirse. 
 | --- | --- | --- | --- |
 | Interface | UserCommandService | handle(RegisterOlderAdultCommand), handle(RegisterDistantRelativeCommand), handle(UpdateUserPhotoCommand), handle(UpdateProfileDataCommand), handle(ChangePasswordCommand) | Contrato de las operaciones de escritura sobre las cuentas. |
 | Interface | UserQueryService | handle(GetUserByIdQuery) | Contrato de las operaciones de lectura sobre las cuentas. |
-| Interface | SessionCommandService | handle(SignInCommand), handle(SignOutCommand) | Contrato de las operaciones de autenticación y cierre de sesión. |
+| Interface | SessionCommandService | handle(SignInCommand), handle(SignOutCommand), handle(RevokeSessionsCommand) | Contrato de las operaciones de autenticación, cierre y revocación de sesiones. |
 | Interface | SessionQueryService | handle(GetActiveSessionByIdQuery) | Contrato de la lectura de sesiones vigentes. |
 
 #### 2.6.1.2. Interface Layer
@@ -4230,7 +4233,7 @@ Clases que exponen el bounded context hacia el exterior y traducen las peticione
 
 | Tipo | Nombre | Métodos principales | Descripción |
 | --- | --- | --- | --- |
-| Interface | IamContextFacade | existsActiveUserById(userId): boolean, fetchUserRoleById(userId): Optional\<String\>, fetchFullNameById(userId): Optional\<String\>, fetchTimeZoneById(userId): Optional\<String\> | Contrato que el contexto ofrece a los demás. Care Circle lo usa para validar que quien canjea un código es un familiar a distancia; Daily Check-in y Social Companionship, para obtener la zona horaria del adulto mayor; los contextos con vistas compartidas, para mostrar nombres. Recibe y devuelve tipos primitivos (`UUID`, `String`) para no exponer clases del dominio. |
+| Interface | IamContextFacade | existsActiveUserById(userId): boolean, fetchUserRoleById(userId): Optional\<String\>, fetchFullNameById(userId): Optional\<String\>, fetchTimeZoneById(userId): Optional\<String\> | Contrato que el contexto ofrece a los demás. Care Circle lo usa para validar que quien canjea un código es un familiar a distancia; Daily Check-in, Wellbeing Monitoring y Social Companionship, para obtener la zona horaria del adulto mayor; los contextos con vistas compartidas, para mostrar nombres. Recibe y devuelve tipos primitivos (`UUID`, `String`) para no exponer clases del dominio. |
 
 #### 2.6.1.3. Application Layer
 
@@ -4241,7 +4244,7 @@ Clases que orquestan los flujos del contexto, coordinando los aggregates, los re
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
 | UserCommandServiceImpl | Registra cuentas: verifica que el correo no exista, cifra la contraseña e invoca la factory del rol correspondiente. Actualiza los datos personales y la fotografía. En el cambio de contraseña verifica primero la contraseña actual y rechaza el cambio si no coincide. Tras persistir, publica los eventos acumulados por el aggregate. | Implementa `UserCommandService`; usa `UserRepository`, `HashingService` y `DomainEventPublisher`. |
-| SessionCommandServiceImpl | En el inicio de sesión busca la cuenta por correo, verifica que esté activa y valida la contraseña; si el correo no existe o la contraseña es incorrecta, devuelve el mismo error para no revelar qué correos están registrados. Luego genera el `SessionId`, emite el token con ese identificador, almacena solo su hash y abre la `Session`. En el cierre de sesión verifica que la sesión pertenezca al solicitante y la revoca. | Implementa `SessionCommandService`; usa `UserRepository`, `SessionRepository`, `HashingService`, `TokenService` y `DomainEventPublisher`. |
+| SessionCommandServiceImpl | En el inicio de sesión busca la cuenta por correo, verifica que esté activa y valida la contraseña; si el correo no existe o la contraseña es incorrecta, devuelve el mismo error para no revelar qué correos están registrados. Luego genera el `SessionId`, emite el token con ese identificador, almacena solo su hash y abre la `Session`. En el cierre de sesión verifica que la sesión pertenezca al solicitante y la cierra. En la revocación cierra las sesiones vigentes del usuario excepto la indicada y publica un único evento `SessionsRevoked` con las sesiones afectadas. | Implementa `SessionCommandService`; usa `UserRepository`, `SessionRepository`, `HashingService`, `TokenService` y `DomainEventPublisher`. |
 
 **Sub-capa Internal: QueryServices**
 
@@ -4254,7 +4257,7 @@ Clases que orquestan los flujos del contexto, coordinando los aggregates, los re
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| PasswordChangedEventHandler | Revoca todas las sesiones vigentes del usuario excepto la que realizó el cambio, de modo que un dispositivo con la contraseña anterior pierde el acceso. Se ejecuta de forma síncrona dentro de la misma transacción del cambio. | Escucha `PasswordChanged`; usa `SessionRepository`. |
+| PasswordChangedEventHandler | Solicita la revocación de las demás sesiones del usuario tras el cambio de contraseña, de modo que un dispositivo con la contraseña anterior pierde el acceso. Se ejecuta de forma síncrona dentro de la misma transacción del cambio. | Escucha `PasswordChanged`; envía `RevokeSessionsCommand`. |
 
 El evento `OlderAdultRegistered` no tiene handlers en este contexto: lo consumen Care Circle y Daily Check-in.
 
@@ -4315,7 +4318,7 @@ Clases que resuelven el acceso a la base de datos MySQL y a los mecanismos técn
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| BearerAuthorizationRequestFilter | En cada petición extrae el token del encabezado `Authorization`, valida su firma y expiración, obtiene el identificador de la sesión y comprueba que siga vigente y que el hash coincida. Si la sesión fue revocada, la petición se rechaza con 401 Unauthorized. Si es válida, registra el usuario y su rol en el contexto de seguridad sin cargar la cuenta completa. | Usa `TokenService` y `SessionQueryService`. |
+| BearerAuthorizationRequestFilter | En cada petición extrae el token del encabezado `Authorization`, valida su firma y expiración, obtiene el identificador de la sesión y comprueba que siga vigente y que el hash coincida. Si la sesión fue cerrada o revocada, la petición se rechaza con 401 Unauthorized. Si es válida, registra el usuario y su rol en el contexto de seguridad sin cargar la cuenta completa. | Usa `TokenService` y `SessionQueryService`. |
 | WebSecurityConfiguration | Configura Spring Security sin estado de servidor, deja públicas las rutas de registro, inicio de sesión y documentación, exige autenticación en el resto y registra el filtro de autorización. | Registra `BearerAuthorizationRequestFilter`. |
 
 **Sub-capa Messaging: Publishers**
@@ -4442,10 +4445,10 @@ En esta capa se representan las reglas de formación y coordinación de la red d
 | --- | --- | --- |
 | create(olderAdultId, createdAt) | public (static) | Factory que crea el círculo de un adulto mayor y registra el evento `CareCircleCreated`. |
 | generateInvitationCode(requesterId, code, createdAt, expiresAt) | public | Genera un código pendiente; solo el adulto mayor dueño puede solicitarlo. Registra el evento `InvitationCodeGenerated`. |
+| expireInvitationCode(invitationCodeId, referenceTime) | public | Marca como expirado un código pendiente cuya vigencia terminó y registra el evento `InvitationCodeExpired`. |
 | redeemInvitationCode(code, relativeId, relationshipLabel, redeemedAt) | public | Marca el código como usado por el familiar. Rechaza el canje si el código ya fue usado, si su vigencia terminó aunque aún no haya sido marcado como expirado, o si el familiar ya tiene un vínculo activo con el círculo. Registra el evento `InvitationCodeRedeemed`. |
 | establishFamilyLink(relativeId, relationshipLabel, linkedAt) | public | Crea un vínculo activo con el familiar; si existe un vínculo revocado previo, lo reactiva en lugar de crear otro. Registra el evento `FamilyLinkEstablished`. |
 | revokeFamilyLink(familyLinkId, requesterId, revokedAt) | public | Revoca un vínculo activo. El adulto mayor puede revocar cualquier vínculo de su círculo; un familiar, solo el propio. Registra el evento `FamilyLinkRevoked`. |
-| expireDueInvitationCodes(referenceTime) | public | Marca como expirados los códigos pendientes cuya vigencia terminó y registra un evento `InvitationCodeExpired` por cada uno. |
 | hasAccess(userId) | public | Indica si el usuario es el adulto mayor dueño o un familiar con vínculo activo. |
 | isActiveRelative(relativeId) | public | Indica si el familiar tiene un vínculo activo con el círculo. |
 | activeFamilyLinks() | public | Devuelve los vínculos activos del círculo. |
@@ -4464,7 +4467,7 @@ En esta capa se representan las reglas de formación y coordinación de la red d
 | Método | Visibilidad | Descripción |
 | --- | --- | --- |
 | assign(careCircleId, relativeId, shiftDate, today, createdAt) | public (static) | Factory que asigna el turno a un familiar; rechaza fechas anteriores al día actual del adulto mayor. Registra el evento `CareShiftAssigned`. |
-| reassignTo(newRelativeId, today, updatedAt) | public | Cambia el responsable del turno; rechaza turnos de fechas pasadas y reasignaciones al mismo familiar. Registra el evento `CareShiftReassigned`. |
+| reassignTo(newRelativeId, today, updatedAt) | public | Cambia el responsable del turno; rechaza turnos de fechas pasadas y reasignaciones al mismo familiar. Permite cubrir los turnos de un familiar cuyo vínculo fue revocado. Registra el evento `CareShiftReassigned`. |
 | isAssignedTo(relativeId) | public | Indica si el turno está asignado al familiar indicado. |
 
 `SharedNote` (Aggregate Root): representa una nota con información relevante sobre el adulto mayor, visible para todos los familiares del círculo.
@@ -4548,13 +4551,12 @@ Se implementan como records inmutables que validan su contenido al construirse. 
 | --- | --- | --- |
 | CreateCareCircleCommand | olderAdultId | Intención de crear el círculo de un adulto mayor recién registrado. |
 | GenerateInvitationCodeCommand | careCircleId, requesterId | Intención del adulto mayor de generar un código para invitar a un familiar. |
+| ExpireInvitationCodeCommand | careCircleId, invitationCodeId | Intención de marcar como expirado un código cuya vigencia terminó. |
 | RedeemInvitationCodeCommand | code, relativeId, relationshipLabel | Intención de un familiar de incorporarse a un círculo mediante un código. |
 | EstablishFamilyLinkCommand | careCircleId, relativeId, relationshipLabel | Intención de registrar el vínculo de un familiar tras el canje de su código. |
-| ExpireInvitationCodesCommand | referenceTime | Intención de marcar como expirados los códigos cuya vigencia terminó. |
 | RevokeFamilyLinkCommand | careCircleId, familyLinkId, requesterId | Intención de retirar el acceso de un familiar al círculo. |
 | AssignCareShiftCommand | careCircleId, relativeId, shiftDate | Intención de un familiar de asignarse el turno de una fecha. |
 | ReassignCareShiftCommand | careShiftId, newRelativeId, requesterId | Intención de cambiar el responsable de un turno existente. |
-| ReleaseCareShiftsCommand | careCircleId, relativeId | Intención de liberar los turnos pendientes de un familiar cuyo vínculo fue revocado. |
 | CreateSharedNoteCommand | careCircleId, authorId, content | Intención de registrar una nota compartida. |
 | EditSharedNoteCommand | sharedNoteId, editorId, content | Intención de modificar el contenido de una nota existente. |
 
@@ -4565,6 +4567,7 @@ Se implementan como records inmutables que validan su contenido al construirse. 
 | GetCareCircleByIdQuery | careCircleId, requesterId | Consulta de un círculo por su identificador. |
 | GetCareCircleByOlderAdultIdQuery | olderAdultId | Consulta del círculo de un adulto mayor. |
 | GetPendingInvitationCodesByCareCircleIdQuery | careCircleId, requesterId | Consulta de los códigos de invitación vigentes de un círculo. |
+| GetDueInvitationCodesQuery | referenceTime | Consulta de los códigos pendientes cuya vigencia ya terminó. |
 | GetActiveFamilyLinksByCareCircleIdQuery | careCircleId, requesterId | Consulta de los familiares con vínculo activo en un círculo. |
 | GetActiveFamilyLinksByRelativeIdQuery | relativeId | Consulta de los círculos a los que un familiar está vinculado. |
 | GetCareShiftsByDateRangeQuery | careCircleId, requesterId, fromDate, toDate | Consulta de los turnos de un círculo en un rango de fechas; con un rango de un solo día devuelve el turno vigente. |
@@ -4582,7 +4585,6 @@ Se implementan como records inmutables que validan su contenido al construirse. 
 | FamilyLinkRevoked | careCircleId, familyLinkId, relativeId, occurredAt | Se retiró el acceso de un familiar al círculo. |
 | CareShiftAssigned | careShiftId, careCircleId, relativeId, shiftDate, occurredAt | Se asignó un turno de atención. |
 | CareShiftReassigned | careShiftId, previousRelativeId, newRelativeId, occurredAt | Se cambió el responsable de un turno. |
-| CareShiftsReleased | careCircleId, relativeId, occurredAt | Se liberaron los turnos pendientes de un familiar cuyo vínculo fue revocado. |
 | SharedNoteCreated | sharedNoteId, careCircleId, authorId, occurredAt | Se registró una nota compartida. |
 | SharedNoteEdited | sharedNoteId, occurredAt | Se modificó una nota compartida. |
 
@@ -4590,17 +4592,17 @@ Se implementan como records inmutables que validan su contenido al construirse. 
 
 | Tipo | Nombre | Métodos principales | Descripción |
 | --- | --- | --- | --- |
-| Interface | CareCircleRepository | save(careCircle), findById(careCircleId), findByOlderAdultId(olderAdultId), findByInvitationCode(code), findAllByActiveRelativeId(relativeId), findAllWithDueInvitationCodes(referenceTime) | Contrato de persistencia del aggregate `CareCircle` junto con sus códigos y vínculos. Se implementa en Infrastructure. |
-| Interface | CareShiftRepository | save(careShift), findById(careShiftId), existsByCareCircleIdAndShiftDate(careCircleId, shiftDate), findAllByCareCircleIdAndShiftDateBetween(careCircleId, fromDate, toDate), findAllByRelativeIdFromDate(careCircleId, relativeId, fromDate), deleteAll(careShifts) | Contrato de persistencia del aggregate `CareShift`. Se implementa en Infrastructure. |
+| Interface | CareCircleRepository | save(careCircle), findById(careCircleId), findByOlderAdultId(olderAdultId), findByInvitationCode(code), findAllByActiveRelativeId(relativeId), findDueInvitationCodes(referenceTime) | Contrato de persistencia del aggregate `CareCircle` junto con sus códigos y vínculos. Se implementa en Infrastructure. |
+| Interface | CareShiftRepository | save(careShift), findById(careShiftId), existsByCareCircleIdAndShiftDate(careCircleId, shiftDate), findAllByCareCircleIdAndShiftDateBetween(careCircleId, fromDate, toDate) | Contrato de persistencia del aggregate `CareShift`. Se implementa en Infrastructure. |
 | Interface | SharedNoteRepository | save(sharedNote), findById(sharedNoteId), findAllByCareCircleId(careCircleId) | Contrato de persistencia del aggregate `SharedNote`. Se implementa en Infrastructure. |
 
 **Sub-capa Services**
 
 | Tipo | Nombre | Métodos principales | Descripción |
 | --- | --- | --- | --- |
-| Interface | CareCircleCommandService | handle(CreateCareCircleCommand), handle(GenerateInvitationCodeCommand), handle(RedeemInvitationCodeCommand), handle(EstablishFamilyLinkCommand), handle(ExpireInvitationCodesCommand), handle(RevokeFamilyLinkCommand) | Contrato de las operaciones de escritura sobre los círculos, sus códigos y sus vínculos. |
-| Interface | CareCircleQueryService | handle(GetCareCircleByIdQuery), handle(GetCareCircleByOlderAdultIdQuery), handle(GetPendingInvitationCodesByCareCircleIdQuery), handle(GetActiveFamilyLinksByCareCircleIdQuery), handle(GetActiveFamilyLinksByRelativeIdQuery) | Contrato de las operaciones de lectura sobre los círculos. |
-| Interface | CareShiftCommandService | handle(AssignCareShiftCommand), handle(ReassignCareShiftCommand), handle(ReleaseCareShiftsCommand) | Contrato de las operaciones de escritura sobre los turnos. |
+| Interface | CareCircleCommandService | handle(CreateCareCircleCommand), handle(GenerateInvitationCodeCommand), handle(ExpireInvitationCodeCommand), handle(RedeemInvitationCodeCommand), handle(EstablishFamilyLinkCommand), handle(RevokeFamilyLinkCommand) | Contrato de las operaciones de escritura sobre los círculos, sus códigos y sus vínculos. |
+| Interface | CareCircleQueryService | handle(GetCareCircleByIdQuery), handle(GetCareCircleByOlderAdultIdQuery), handle(GetPendingInvitationCodesByCareCircleIdQuery), handle(GetDueInvitationCodesQuery), handle(GetActiveFamilyLinksByCareCircleIdQuery), handle(GetActiveFamilyLinksByRelativeIdQuery) | Contrato de las operaciones de lectura sobre los círculos. |
+| Interface | CareShiftCommandService | handle(AssignCareShiftCommand), handle(ReassignCareShiftCommand) | Contrato de las operaciones de escritura sobre los turnos. |
 | Interface | CareShiftQueryService | handle(GetCareShiftsByDateRangeQuery) | Contrato de la lectura del calendario de turnos. |
 | Interface | SharedNoteCommandService | handle(CreateSharedNoteCommand), handle(EditSharedNoteCommand) | Contrato de las operaciones de escritura sobre las notas. |
 | Interface | SharedNoteQueryService | handle(GetSharedNotesByCareCircleIdQuery) | Contrato de la lectura de notas compartidas. |
@@ -4655,7 +4657,7 @@ Los endpoints bajo `/care-circles/{careCircleId}` responden 403 Forbidden cuando
 
 | Nombre | Descripción |
 | --- | --- |
-| InvitationCodeExpirationScheduler | Tarea periódica que envía el comando `ExpireInvitationCodesCommand` con el instante actual. |
+| InvitationCodeExpirationScheduler | Tarea periódica que consulta los códigos vencidos con `GetDueInvitationCodesQuery` y envía un `ExpireInvitationCodeCommand` por cada uno. |
 
 **Sub-capa ACL**
 
@@ -4671,15 +4673,15 @@ Clases que orquestan los flujos del contexto, coordinando los aggregates, los re
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| CareCircleCommandServiceImpl | Crea el círculo sin duplicarlo si el adulto mayor ya tiene uno. Genera códigos solicitando un valor nuevo hasta obtener uno que no exista y fija su expiración según la vigencia configurada. En el canje busca el círculo por código, verifica que el solicitante sea un familiar a distancia con cuenta activa e invoca al aggregate. Además, establece y revoca vínculos y expira los códigos vencidos. Tras persistir, publica los eventos acumulados. | Implementa `CareCircleCommandService`; usa `CareCircleRepository`, `InvitationCodeGenerator`, `ExternalIamService` y `DomainEventPublisher`. |
-| CareShiftCommandServiceImpl | Verifica que el solicitante tenga acceso al círculo y que el responsable tenga un vínculo activo; calcula el día actual en la zona horaria del adulto mayor; comprueba que la fecha no esté cubierta e invoca al aggregate. Al liberar turnos, elimina los turnos del familiar desde el día actual en adelante. | Implementa `CareShiftCommandService`; usa `CareShiftRepository`, `CareCircleRepository`, `ExternalIamService` y `DomainEventPublisher`. |
+| CareCircleCommandServiceImpl | Crea el círculo sin duplicarlo si el adulto mayor ya tiene uno. Genera códigos solicitando un valor nuevo hasta obtener uno que no exista y fija su expiración según la vigencia configurada. En el canje busca el círculo por código, verifica que el solicitante sea un familiar a distancia con cuenta activa e invoca al aggregate. Además, expira códigos vencidos y establece y revoca vínculos. Tras persistir, publica los eventos acumulados. | Implementa `CareCircleCommandService`; usa `CareCircleRepository`, `InvitationCodeGenerator`, `ExternalIamService` y `DomainEventPublisher`. |
+| CareShiftCommandServiceImpl | Verifica que el solicitante tenga acceso al círculo y que el responsable tenga un vínculo activo; calcula el día actual en la zona horaria del adulto mayor; comprueba que la fecha no esté cubierta e invoca al aggregate. | Implementa `CareShiftCommandService`; usa `CareShiftRepository`, `CareCircleRepository`, `ExternalIamService` y `DomainEventPublisher`. |
 | SharedNoteCommandServiceImpl | Verifica que el autor sea un familiar con vínculo activo antes de registrar una nota y delega en el aggregate la verificación de autoría al editarla. | Implementa `SharedNoteCommandService`; usa `SharedNoteRepository`, `CareCircleRepository` y `DomainEventPublisher`. |
 
 **Sub-capa Internal: QueryServices**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| CareCircleQueryServiceImpl | Resuelve las consultas de círculos, códigos vigentes y vínculos activos, previa verificación de acceso del solicitante. | Implementa `CareCircleQueryService`; usa `CareCircleRepository`. |
+| CareCircleQueryServiceImpl | Resuelve las consultas de círculos, códigos vigentes, códigos vencidos y vínculos activos, previa verificación de acceso del solicitante cuando la consulta proviene de un usuario. | Implementa `CareCircleQueryService`; usa `CareCircleRepository`. |
 | CareShiftQueryServiceImpl | Resuelve la consulta del calendario de turnos de un círculo, previa verificación de acceso. | Implementa `CareShiftQueryService`; usa `CareShiftRepository` y `CareCircleRepository`. |
 | SharedNoteQueryServiceImpl | Resuelve la consulta de notas compartidas de un círculo, previa verificación de acceso. | Implementa `SharedNoteQueryService`; usa `SharedNoteRepository` y `CareCircleRepository`. |
 
@@ -4689,7 +4691,6 @@ Clases que orquestan los flujos del contexto, coordinando los aggregates, los re
 | --- | --- | --- |
 | OlderAdultRegisteredEventHandler | Crea el círculo de cuidado de un adulto mayor recién registrado. Se ejecuta de forma síncrona dentro de la transacción del registro, de modo que no exista un adulto mayor sin círculo. | Escucha `OlderAdultRegistered` de Identity & Access; envía `CreateCareCircleCommand`. |
 | InvitationCodeRedeemedEventHandler | Establece el vínculo familiar tras el canje de un código. Se ejecuta en la misma transacción del canje, de modo que el consumo del código y la creación del vínculo ocurran juntos. | Escucha `InvitationCodeRedeemed`; envía `EstablishFamilyLinkCommand`. |
-| FamilyLinkRevokedEventHandler | Libera los turnos pendientes del familiar revocado, de modo que esas fechas queden sin asignar y otro familiar pueda cubrirlas. | Escucha `FamilyLinkRevoked`; envía `ReleaseCareShiftsCommand`. |
 
 **Sub-capa Internal: Outbound Services**
 
@@ -4722,7 +4723,7 @@ Clases que resuelven el acceso a la base de datos MySQL y la generación de cód
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| CareCircleJpaRepository | Interfaz de Spring Data JPA con las consultas por adulto mayor y por código, resueltas sobre los índices únicos de `older_adult_id` y `code`, además de las consultas por familiar activo y por códigos vencidos. | Extiende `JpaRepository`; usada por `CareCircleRepositoryImpl`. |
+| CareCircleJpaRepository | Interfaz de Spring Data JPA con las consultas por adulto mayor y por código, resueltas sobre los índices únicos de `older_adult_id` y `code`, además de las consultas por familiar activo y de códigos vencidos, esta última resuelta sobre el índice `(status, expires_at)`. | Extiende `JpaRepository`; usada por `CareCircleRepositoryImpl`. |
 | CareShiftJpaRepository | Interfaz de Spring Data JPA con las consultas por círculo y rango de fechas, resueltas sobre el índice único `(care_circle_id, shift_date)`. | Extiende `JpaRepository`; usada por `CareShiftRepositoryImpl`. |
 | SharedNoteJpaRepository | Interfaz de Spring Data JPA con la consulta de notas por círculo ordenadas por fecha, resuelta sobre el índice `(care_circle_id, created_at)`. | Extiende `JpaRepository`; usada por `SharedNoteRepositoryImpl`. |
 
@@ -4747,6 +4748,7 @@ Clases que resuelven el acceso a la base de datos MySQL y la generación de cód
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
 | SecureRandomInvitationCodeGenerator | Genera códigos con `SecureRandom`, un generador criptográficamente seguro, para que no puedan predecirse. | Implementa `InvitationCodeGenerator`. |
+
 #### 2.6.2.5. Bounded Context Software Architecture Component Level Diagrams
 
 En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Care Circle, elaborado en Structurizr (Imagen 41). El diagrama detalla la arquitectura interna: los *Controllers* como puntos de entrada REST; los *Resources* y *Assemblers* para transformación de datos; los servicios de aplicación (`CareCircleCommandService`, `CareCircleQueryService`); y el acceso a datos mediante los 3 repositorios definidos en el dominio (`CareCircleRepository`, `CareShiftRepository`, `SharedNoteRepository`).
@@ -4891,7 +4893,7 @@ En esta capa se representan las reglas que gobiernan la interacción diaria con 
 | initialize(olderAdultId, updatedAt) | public (static) | Factory que crea las preferencias con la hora y el plazo predeterminados y registra el evento `CheckInPreferencesInitialized`. |
 | schedule(reminderTime, updatedAt) | public | Cambia la hora del check-in; el nuevo horario se aplica a partir del siguiente check-in. Registra el evento `CheckInScheduled`. |
 | activateDailyPause(today, createdAt) | public | Pausa las preguntas del día en curso; rechaza la operación si ya están pausadas. Registra el evento `DailyPauseActivated`. |
-| resumeToday(today, resumedAt) | public | Reactiva las preguntas del día en curso; rechaza la operación si no estaban pausadas. Registra el evento `DailyCheckInResumed`. |
+| resumeToday(today, resumedAt) | public | Reactiva las preguntas del día en curso y registra el evento `DailyCheckInResumed`. |
 | resumeAfterPausedDay(today) | public | Si el día anterior terminó con las preguntas pausadas, registra el evento `DailyCheckInResumed`; en caso contrario no realiza cambios. |
 | enableSimplifiedMode(updatedAt) | public | Activa el modo simplificado y registra el evento `SimplifiedModeEnabled`, siempre que no estuviera activo. |
 | disableSimplifiedMode(updatedAt) | public | Desactiva el modo simplificado y registra el evento `SimplifiedModeDisabled`, siempre que estuviera activo. |
@@ -4984,21 +4986,24 @@ Se implementan como records inmutables que validan su contenido al construirse. 
 | InitializeCheckInPreferencesCommand | olderAdultId | Intención de crear las preferencias de un adulto mayor recién registrado. |
 | ScheduleCheckInCommand | olderAdultId, reminderTime | Intención de cambiar la hora del check-in. |
 | ActivateDailyPauseCommand | olderAdultId | Intención de pausar las preguntas del día en curso. |
-| ResumeDailyCheckInCommand | olderAdultId | Intención de reactivar las preguntas del día en curso. |
+| ResumeDailyCheckInCommand | olderAdultId | Intención de reactivar las preguntas, por decisión del adulto mayor o por el inicio de un nuevo día tras un día pausado. |
 | EnableSimplifiedModeCommand | olderAdultId | Intención de activar el modo simplificado. |
 | DisableSimplifiedModeCommand | olderAdultId | Intención de desactivar el modo simplificado. |
-| OpenDailyCheckInsCommand | referenceTime | Intención de abrir el check-in de cada adulto mayor cuyo día local ya comenzó. |
-| PromptDueCheckInsCommand | referenceTime | Intención de avisar los check-ins pendientes cuyo horario ya llegó. |
+| OpenCheckInCommand | olderAdultId | Intención de abrir el check-in del día en curso de un adulto mayor; si ya existe, no realiza cambios. |
+| PromptCheckInCommand | checkInId | Intención de avisar al adulto mayor que su check-in sigue pendiente. |
 | AnswerCheckInCommand | checkInId, olderAdultId, mood, positiveActivity | Intención del adulto mayor de responder su check-in. |
-| ExpireDueCheckInsCommand | referenceTime | Intención de cerrar los check-ins pendientes cuyo plazo venció. |
+| ExpireCheckInCommand | checkInId | Intención de cerrar un check-in pendiente cuyo plazo venció. |
 
 **Sub-capa Model: Queries**
 
 | Nombre | Atributos | Descripción |
 | --- | --- | --- |
 | GetCheckInPreferencesByOlderAdultIdQuery | olderAdultId, requesterId | Consulta de las preferencias de un adulto mayor. |
+| GetAllCheckInPreferencesQuery | — | Consulta de las preferencias de todos los adultos mayores; la usa la apertura diaria. |
 | GetTodayCheckInQuery | olderAdultId, requesterId | Consulta del check-in del día en curso y de si las preguntas están pausadas; la usan el adulto mayor para responder y el familiar para conocer su estado. |
 | GetCheckInHistoryQuery | olderAdultId, requesterId, fromDate, toDate | Consulta de los check-ins de un rango de fechas, ordenados por fecha. |
+| GetCheckInsDueForPromptQuery | referenceTime | Consulta de los check-ins pendientes, aún no avisados, cuyo horario ya llegó. |
+| GetCheckInsPastDeadlineQuery | referenceTime | Consulta de los check-ins pendientes cuyo plazo venció. |
 | GetCheckInQuestionByIdQuery | questionId | Consulta del texto de una pregunta del catálogo. |
 
 **Sub-capa Model: Events**
@@ -5030,9 +5035,9 @@ Se implementan como records inmutables que validan su contenido al construirse. 
 | Tipo | Nombre | Métodos principales | Descripción |
 | --- | --- | --- | --- |
 | Interface | CheckInPreferencesCommandService | handle(InitializeCheckInPreferencesCommand), handle(ScheduleCheckInCommand), handle(ActivateDailyPauseCommand), handle(ResumeDailyCheckInCommand), handle(EnableSimplifiedModeCommand), handle(DisableSimplifiedModeCommand) | Contrato de las operaciones de escritura sobre las preferencias. |
-| Interface | CheckInPreferencesQueryService | handle(GetCheckInPreferencesByOlderAdultIdQuery) | Contrato de la lectura de preferencias. |
-| Interface | CheckInCommandService | handle(OpenDailyCheckInsCommand), handle(PromptDueCheckInsCommand), handle(AnswerCheckInCommand), handle(ExpireDueCheckInsCommand) | Contrato de las operaciones de escritura sobre los check-ins. |
-| Interface | CheckInQueryService | handle(GetTodayCheckInQuery), handle(GetCheckInHistoryQuery) | Contrato de la lectura de check-ins. |
+| Interface | CheckInPreferencesQueryService | handle(GetCheckInPreferencesByOlderAdultIdQuery), handle(GetAllCheckInPreferencesQuery) | Contrato de la lectura de preferencias. |
+| Interface | CheckInCommandService | handle(OpenCheckInCommand), handle(PromptCheckInCommand), handle(AnswerCheckInCommand), handle(ExpireCheckInCommand) | Contrato de las operaciones de escritura sobre los check-ins. |
+| Interface | CheckInQueryService | handle(GetTodayCheckInQuery), handle(GetCheckInHistoryQuery), handle(GetCheckInsDueForPromptQuery), handle(GetCheckInsPastDeadlineQuery) | Contrato de la lectura de check-ins. |
 | Interface | CheckInQuestionQueryService | handle(GetCheckInQuestionByIdQuery) | Contrato de la lectura del catálogo de preguntas. |
 
 #### 2.6.3.2. Interface Layer
@@ -5072,7 +5077,7 @@ Las consultas de check-ins solo proceden para el propio adulto mayor o para un f
 
 | Nombre | Descripción |
 | --- | --- |
-| CheckInLifecycleScheduler | Tareas periódicas del ciclo del check-in. Cada hora envía `OpenDailyCheckInsCommand`, frecuencia suficiente porque el horario más temprano permitido es a las 06:00. Cada minuto envía `PromptDueCheckInsCommand` y `ExpireDueCheckInsCommand`. |
+| CheckInLifecycleScheduler | Tareas periódicas del ciclo del check-in. Cada hora consulta las preferencias con `GetAllCheckInPreferencesQuery` y envía un `OpenCheckInCommand` por adulto mayor, frecuencia suficiente porque el horario más temprano permitido es a las 06:00. Cada minuto consulta los check-ins por avisar y los vencidos, y envía un `PromptCheckInCommand` o un `ExpireCheckInCommand` por cada uno. |
 
 **Sub-capa ACL**
 
@@ -5088,15 +5093,15 @@ Clases que orquestan los flujos del contexto, coordinando los aggregates, los re
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| CheckInPreferencesCommandServiceImpl | Crea las preferencias sin duplicarlas si el adulto mayor ya tiene una configuración, cambia la hora y gestiona el modo simplificado. Activa y desactiva la pausa del día en curso, calculado en la zona horaria del adulto mayor. Al reactivar las preguntas, si el plazo del check-in del día ya venció, le otorga un nuevo plazo de la misma duración desde la reactivación, sin superar el fin del día local. Es la única operación que modifica ambos aggregates en una misma transacción, porque la decisión del adulto mayor debe surtir efecto de inmediato. Tras persistir, publica los eventos acumulados. | Implementa `CheckInPreferencesCommandService`; usa `CheckInPreferencesRepository`, `CheckInRepository`, `ExternalIamService` y `DomainEventPublisher`. |
-| CheckInCommandServiceImpl | Abre el check-in del día de cada adulto mayor cuya fecha local aún no tiene uno: elige la pregunta con `QuestionSelectionService`, calcula la ventana con sus preferencias y, si el día anterior terminó pausado, registra la reanudación. Avisa los check-ins pendientes cuyo horario llegó y cuyas preguntas no están pausadas; si las preguntas se reactivan después del horario, el aviso se envía en la siguiente ejecución. Registra respuestas verificando que provengan del propio adulto mayor. Al vencer un plazo, marca el check-in como no respondido; si las preguntas están pausadas, lo deja pendiente y lo marca como omitido recién cuando termina el día local. | Implementa `CheckInCommandService`; usa `CheckInRepository`, `CheckInPreferencesRepository`, `CheckInQuestionRepository`, `QuestionSelectionService`, `ExternalIamService` y `DomainEventPublisher`. |
+| CheckInPreferencesCommandServiceImpl | Crea las preferencias sin duplicarlas si el adulto mayor ya tiene una configuración, cambia la hora y gestiona el modo simplificado. Activa la pausa del día en curso, calculado en la zona horaria del adulto mayor. Al reactivar las preguntas: si el día en curso está pausado, levanta la pausa y, si el plazo del check-in ya venció, le otorga un nuevo plazo de la misma duración desde la reactivación, sin superar el fin del día local; si no está pausado pero el día anterior terminó pausado, registra la reanudación por el inicio del nuevo día; en otro caso rechaza la operación. Es la única operación que modifica ambos aggregates en una misma transacción, porque la decisión del adulto mayor debe surtir efecto de inmediato. Tras persistir, publica los eventos acumulados. | Implementa `CheckInPreferencesCommandService`; usa `CheckInPreferencesRepository`, `CheckInRepository`, `ExternalIamService` y `DomainEventPublisher`. |
+| CheckInCommandServiceImpl | Abre el check-in del día en curso del adulto mayor si aún no existe: elige la pregunta con `QuestionSelectionService`, calcula la ventana con sus preferencias y, si el día anterior terminó pausado, envía `ResumeDailyCheckInCommand`. Avisa un check-in pendiente solo si sus preguntas no están pausadas; si se reactivan después del horario, el aviso se envía en la siguiente ejecución. Registra respuestas verificando que provengan del propio adulto mayor. Al vencer el plazo, marca el check-in como no respondido; si las preguntas están pausadas, lo deja pendiente y lo marca como omitido recién cuando termina el día local. | Implementa `CheckInCommandService`; usa `CheckInRepository`, `CheckInPreferencesRepository`, `CheckInQuestionRepository`, `QuestionSelectionService`, `ExternalIamService` y `DomainEventPublisher`. |
 
 **Sub-capa Internal: QueryServices**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| CheckInPreferencesQueryServiceImpl | Resuelve la consulta de preferencias del propio adulto mayor. | Implementa `CheckInPreferencesQueryService`; usa `CheckInPreferencesRepository`. |
-| CheckInQueryServiceImpl | Resuelve el check-in del día, calculado en la zona horaria del adulto mayor, junto con el estado de la pausa, y el historial, previa verificación de que el solicitante sea el adulto mayor o un familiar con vínculo activo. | Implementa `CheckInQueryService`; usa `CheckInRepository`, `CheckInPreferencesRepository`, `ExternalIamService` y `ExternalCareCircleService`. |
+| CheckInPreferencesQueryServiceImpl | Resuelve la consulta de preferencias del propio adulto mayor y la de todas las preferencias para la apertura diaria. | Implementa `CheckInPreferencesQueryService`; usa `CheckInPreferencesRepository`. |
+| CheckInQueryServiceImpl | Resuelve el check-in del día, calculado en la zona horaria del adulto mayor, junto con el estado de la pausa, y el historial, previa verificación de que el solicitante sea el adulto mayor o un familiar con vínculo activo. También resuelve los check-ins por avisar y los vencidos para las tareas periódicas. | Implementa `CheckInQueryService`; usa `CheckInRepository`, `CheckInPreferencesRepository`, `ExternalIamService` y `ExternalCareCircleService`. |
 | CheckInQuestionQueryServiceImpl | Resuelve la consulta de una pregunta del catálogo. | Implementa `CheckInQuestionQueryService`; usa `CheckInQuestionRepository`. |
 
 **Sub-capa Internal: Event Handlers**
@@ -5202,145 +5207,139 @@ El diseño de base de datos transaccional para Daily Check-in (Imagen 46) incluy
 
 ### 2.6.4. Bounded Context: Wellbeing Monitoring
 
-El bounded context **Wellbeing Monitoring** es responsable de interpretar los check-ins registrados por el módulo **Daily Check-in** para producir el estado de bienestar del adulto mayor: registra cada estado de ánimo derivado de un check-in respondido (`WellbeingEntry`), genera el resumen diario que ve el cuidador a distancia (`StatusSummary`), detecta patrones sostenidos de malestar o de mejora en la tendencia (`WellbeingPattern`) y registra pequeños logros (`SmallWin`) cuando corresponde. A diferencia de otros contextos, no mantiene un agregado único: cada uno de estos cuatro conceptos es una raíz de agregado independiente, alineada 1 a 1 con las tablas `wellbeing_entries`, `status_summaries`, `small_wins` y `wellbeing_patterns` del diseño de base de datos oficial del equipo. El diseño táctico presentado a continuación está alineado directamente con los eventos de dominio levantados en la sesión de EventStorming del bounded context (ver imagen).
+El bounded context Wellbeing Monitoring interpreta las respuestas del check-in diario para que el familiar a distancia sepa cuándo conviene actuar y qué vale la pena celebrar. Evalúa cada check-in respondido junto con los días anteriores para detectar un malestar sostenido, emite una sugerencia de acción cuando lo detecta y registra pequeñas victorias cuando el adulto mayor tiene un buen día o comparte una actividad positiva. También permite a los familiares descartar las sugerencias que ya atendieron. Es un contexto de soporte: no recolecta datos propios, sino que transforma los datos de Daily Check-in en información útil para el familiar.
 
-<br>
+Su modelo se organiza en un único aggregate, `WellbeingInsight`, que reúne la interpretación del bienestar de un adulto mayor: los patrones de malestar, las sugerencias y las pequeñas victorias. Su identidad es la del adulto mayor y no requiere una tabla propia. Como el historial crece con cada día evaluado, el aggregate carga solo los elementos que intervienen en sus reglas: el patrón de malestar más reciente, para decidir si una racha continúa o comienza, y las sugerencias activas, para que un patrón no genere más de una sugerencia.
+
+El contexto reacciona al evento `CheckInAnswered` de Daily Check-in, del cual obtiene el estado de ánimo y la actividad del día, y consulta a ese mismo contexto los estados de ánimo de los días anteriores. Consulta a Care Circle la verificación de vínculos, para que solo los familiares vinculados vean y descarten sugerencias, y a Identity & Access la zona horaria del adulto mayor, para resolver los periodos consultados.
 
 #### 2.6.4.1. Domain Layer
 
-En esta capa se representan las reglas de negocio propias del bienestar del adulto mayor, sin dependencia de frameworks de persistencia, red ni interfaz.
+En esta capa se representan las reglas que convierten las respuestas diarias en señales de bienestar, sin dependencia de frameworks de persistencia, red ni interfaz.
 
 **Sub-capa Model: Aggregates**
 
-`WellbeingEntry` (Aggregate Root): representa el registro del estado de ánimo del adulto mayor derivado de un check-in respondido.
+`WellbeingInsight` (Aggregate Root): representa la interpretación del bienestar de un adulto mayor. Controla la detección de patrones de malestar, la emisión y el descarte de sugerencias y el registro de pequeñas victorias.
 
 | Atributo | Tipo | Visibilidad | Descripción |
 | --- | --- | --- | --- |
-| id | WellbeingEntryId | private | Identificador único del registro de bienestar. |
-| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el registro. |
-| checkInId | CheckInId | private | Identificador del check-in del cual se derivó este registro. |
-| mood | MoodLevel | private | Nivel de ánimo reportado en el check-in. |
-| moodScore | MoodScore | private | Puntaje numérico asociado al nivel de ánimo reportado. |
-| recordedAt | LocalDateTime | private | Fecha y hora en que se registró el estado de ánimo. |
+| olderAdultId | OlderAdultId | private | Adulto mayor al que corresponde la interpretación; es la identidad del aggregate. |
+| latestDiscomfortPattern | WellbeingPattern | private | Patrón de malestar más reciente; es nulo si nunca se detectó uno. |
+| activeSuggestions | List\<WellbeingSuggestion\> | private | Sugerencias vigentes, aún no descartadas. |
+| newSmallWins | List\<SmallWin\> | private | Pequeñas victorias registradas en la operación en curso; las anteriores no se cargan porque ninguna regla depende de ellas. |
 
 | Método | Visibilidad | Descripción |
 | --- | --- | --- |
-| recordFrom(checkInId, olderAdultId, mood, moodScore) | public (static) | Crea un nuevo registro de bienestar a partir de un check-in respondido. |
-| moodValue() | public | Devuelve el nivel de ánimo registrado. |
+| evaluate(checkInId, checkDate, mood, positiveActivity, recentMoods, evaluatedAt) | public | Evalúa el día respondido junto con los anteriores. Si se completan tres días consecutivos de malestar, detecta un patrón y registra el evento `DiscomfortPatternDetected`; si la racha ya tenía un patrón, lo extiende sin detectar uno nuevo. Si el día muestra bienestar positivo, registra el evento `WellbeingTrendImproved`. |
+| issueSuggestion(patternId, message, issuedAt) | public | Emite una sugerencia de acción para un patrón; rechaza una segunda sugerencia para el mismo patrón. Registra el evento `WellbeingSuggestionIssued`. |
+| recordSmallWin(checkInId, description, recordedAt) | public | Registra una pequeña victoria asociada a un check-in y el evento `SmallWinRecorded`. |
+| dismissSuggestion(suggestionId, relativeId, dismissedAt) | public | Descarta una sugerencia activa para todos los familiares y registra el evento `WellbeingSuggestionDismissed`. |
+| discomfortStreakEndingOn(date, recentMoods) | private | Cuenta los días consecutivos con ánimo bajo o muy bajo que terminan en la fecha indicada; un día sin respuesta interrumpe la racha. |
+| isPositiveDay(mood, positiveActivity) | private | Indica si el día muestra bienestar positivo: ánimo bueno o muy bueno, o una actividad positiva informada. |
 
-`WellbeingPattern` (Aggregate Root): representa un patrón detectado en el historial de check-ins de un adulto mayor, de malestar sostenido o de mejora en la tendencia de bienestar.
+**Sub-capa Model: Entities**
+
+`WellbeingPattern`: representa un periodo sostenido de malestar del adulto mayor. Pertenece al aggregate `WellbeingInsight`.
 
 | Atributo | Tipo | Visibilidad | Descripción |
 | --- | --- | --- | --- |
-| id | WellbeingPatternId | private | Identificador único del patrón detectado. |
-| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el patrón. |
-| type | PatternType | private | Tipo de patrón detectado: malestar sostenido o mejora. |
-| consecutiveDays | Integer | private | Cantidad de días consecutivos que sostienen el patrón. |
-| startDate | LocalDate | private | Fecha de inicio del periodo evaluado. |
-| endDate | LocalDate | private | Fecha de fin del periodo evaluado. |
-| detectedAt | LocalDateTime | private | Fecha y hora en que se detectó el patrón. |
+| id | WellbeingPatternId | private | Identificador único del patrón. |
+| type | PatternType | private | Tipo de patrón detectado. |
+| consecutiveDays | int | private | Cantidad de días consecutivos que sostienen el patrón. |
+| startDate | LocalDate | private | Primer día del patrón, en la zona horaria del adulto mayor. |
+| endDate | LocalDate | private | Último día del patrón, en la zona horaria del adulto mayor. |
+| detectedAt | Instant | private | Instante en que se detectó el patrón, en UTC. |
 
 | Método | Visibilidad | Descripción |
 | --- | --- | --- |
-| detect(olderAdultId, type, consecutiveDays, startDate, endDate) | public (static) | Crea un nuevo patrón a partir del análisis del historial de check-ins. |
-| isDiscomfort() | public | Indica si el patrón corresponde a malestar sostenido. |
-| isImprovement() | public | Indica si el patrón corresponde a una mejora de tendencia. |
+| extendTo(endDate) | public | Prolonga el patrón cuando la racha continúa al día siguiente y actualiza la cantidad de días. |
+| continuesOn(date) | public | Indica si la fecha indicada es el día siguiente al último día del patrón. |
 
-`SmallWin` (Aggregate Root): representa un pequeño logro del adulto mayor, generado a partir de una mejora detectada en su tendencia de bienestar y compartido con el cuidador a distancia.
+`WellbeingSuggestion`: representa una recomendación dirigida a los familiares, como llamar o visitar al adulto mayor, emitida a partir de un patrón de malestar. Pertenece al aggregate `WellbeingInsight`.
 
 | Atributo | Tipo | Visibilidad | Descripción |
 | --- | --- | --- | --- |
-| id | SmallWinId | private | Identificador único del pequeño logro. |
-| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el logro. |
-| checkInId | CheckInId | private | Identificador del check-in del cual se derivó el logro, cuando aplica. |
-| description | SmallWinDescription | private | Descripción del pequeño logro. |
-| recordedAt | LocalDateTime | private | Fecha y hora en que se registró el logro. |
+| id | WellbeingSuggestionId | private | Identificador único de la sugerencia. |
+| patternId | WellbeingPatternId | private | Patrón que originó la sugerencia. |
+| message | SuggestionMessage | private | Texto de la recomendación. |
+| status | SuggestionStatus | private | Estado de la sugerencia: activa o descartada. |
+| issuedAt | Instant | private | Instante de emisión, en UTC. |
+| dismissedBy | RelativeId | private | Familiar que descartó la sugerencia; es nulo mientras esté activa. |
+| dismissedAt | Instant | private | Instante del descarte; es nulo mientras esté activa. |
 
 | Método | Visibilidad | Descripción |
 | --- | --- | --- |
-| recordFrom(olderAdultId, checkInId, description) | public (static) | Crea un nuevo pequeño logro a partir de una mejora detectada. |
+| dismiss(relativeId, dismissedAt) | public | Marca la sugerencia como descartada. |
+| isActive() | public | Indica si la sugerencia sigue vigente. |
 
-`StatusSummary` (Aggregate Root): representa el resumen diario del estado del adulto mayor, mostrado al cuidador a distancia como una vista consolidada del día.
+`SmallWin`: representa un buen día o una actividad positiva del adulto mayor, que se muestra a los familiares para reforzar lo positivo. Pertenece al aggregate `WellbeingInsight`.
 
 | Atributo | Tipo | Visibilidad | Descripción |
 | --- | --- | --- | --- |
-| id | StatusSummaryId | private | Identificador único del resumen. |
-| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el resumen. |
-| summaryDate | LocalDate | private | Fecha a la que corresponde el resumen. |
-| mood | MoodLevel | private | Estado de ánimo predominante del día resumido. |
-| hasAnswered | Boolean | private | Indica si el adulto mayor respondió su check-in ese día. |
-| highlight | String | private | Dato destacado del día, mostrado al cuidador a distancia. |
-| generatedAt | LocalDateTime | private | Fecha y hora en que se generó el resumen. |
-
-| Método | Visibilidad | Descripción |
-| --- | --- | --- |
-| generateFor(olderAdultId, summaryDate, mood, hasAnswered, highlight) | public (static) | Genera o actualiza el resumen diario de un adulto mayor. |
+| id | SmallWinId | private | Identificador único de la pequeña victoria. |
+| checkInId | CheckInId | private | Check-in del cual proviene; cada check-in genera a lo sumo una pequeña victoria. |
+| description | SmallWinDescription | private | Actividad positiva informada o, si no la hubo, una descripción del buen día. |
+| recordedAt | Instant | private | Instante del registro, en UTC. |
 
 **Sub-capa Model: Value Objects**
 
+Se implementan como records inmutables que validan su contenido al construirse. Los límites de longitud coinciden con las columnas de la base de datos.
+
 | Nombre | Atributos | Descripción |
 | --- | --- | --- |
-| WellbeingEntryId | value: UUID | Identidad inmutable de un registro de bienestar. |
-| WellbeingPatternId | value: UUID | Identidad inmutable de un patrón detectado. |
-| SmallWinId | value: UUID | Identidad inmutable de un pequeño logro. |
-| StatusSummaryId | value: UUID | Identidad inmutable de un resumen diario. |
-| MoodScore | value: Integer | Puntaje numérico de bienestar, validado dentro de un rango permitido. |
-| SmallWinDescription | value: String | Descripción del pequeño logro, con validación de longitud máxima. |
+| WellbeingPatternId, WellbeingSuggestionId, SmallWinId | value: UUID | Identidades inmutables de las entities del contexto. |
+| OlderAdultId | value: UUID | Referencia por identidad a una cuenta de adulto mayor de Identity & Access. |
+| RelativeId | value: UUID | Referencia por identidad a una cuenta de familiar a distancia de Identity & Access. |
+| CheckInId | value: UUID | Referencia por identidad a un check-in de Daily Check-in. |
+| SuggestionMessage | value: String | Texto de la sugerencia, obligatorio y de máximo 300 caracteres. |
+| SmallWinDescription | value: String | Descripción de la pequeña victoria, obligatoria y de máximo 200 caracteres. |
 
 **Sub-capa Model: Enumerations**
 
 | Nombre | Valores | Descripción |
 | --- | --- | --- |
-| MoodLevel | VERY_LOW, LOW, NEUTRAL, GOOD, VERY_GOOD | Nivel de ánimo reportado en un check-in. |
-| PatternType | SUSTAINED_DISCOMFORT, IMPROVEMENT | Tipo de patrón detectado en el historial de check-ins de un adulto mayor. |
+| MoodLevel | VERY_LOW, LOW, NEUTRAL, GOOD, VERY_GOOD | Estado de ánimo informado en un check-in, traducido desde los valores que publica Daily Check-in. |
+| PatternType | SUSTAINED_DISCOMFORT | Tipo de patrón detectado en el historial del adulto mayor. |
+| SuggestionStatus | ACTIVE, DISMISSED | Estado de una sugerencia. |
 
 **Sub-capa Model: Commands**
 
-| Nombre | Descripción |
-| --- | --- |
-| RecordWellbeingEntryCommand | Intención de registrar el estado de ánimo derivado de un check-in respondido. |
-| DetectWellbeingPatternCommand | Intención de analizar el historial de check-ins de un adulto mayor y determinar si existe un patrón de malestar sostenido o de mejora. |
-| RecordSmallWinCommand | Intención de registrar un pequeño logro a partir de una mejora detectada. |
-| GenerateStatusSummaryCommand | Intención de generar o actualizar el resumen diario del estado de un adulto mayor. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| EvaluateWellbeingPatternCommand | olderAdultId, checkInId, checkDate, mood, positiveActivity | Intención de evaluar el bienestar a partir de un check-in respondido. |
+| IssueWellbeingSuggestionCommand | olderAdultId, patternId | Intención de emitir una sugerencia de acción a partir de un patrón de malestar. |
+| RecordSmallWinCommand | olderAdultId, checkInId, positiveActivity | Intención de registrar una pequeña victoria a partir de un día positivo. |
+| DismissWellbeingSuggestionCommand | olderAdultId, suggestionId, relativeId | Intención de un familiar de descartar una sugerencia. |
 
 **Sub-capa Model: Queries**
 
-| Nombre | Descripción |
-| --- | --- |
-| GetWellbeingEntriesByOlderAdultIdQuery | Consulta del historial de registros de bienestar de un adulto mayor. |
-| GetWellbeingPatternsByOlderAdultIdQuery | Consulta de los patrones detectados para un adulto mayor. |
-| GetSmallWinsByOlderAdultIdQuery | Consulta de los pequeños logros registrados para un adulto mayor. |
-| GetStatusSummaryByDateQuery | Consulta del resumen diario de un adulto mayor en una fecha específica. |
-| GetLatestStatusSummaryQuery | Consulta del resumen diario más reciente de un adulto mayor. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| GetActiveWellbeingSuggestionsQuery | olderAdultId, requesterId | Consulta de las sugerencias vigentes de un adulto mayor. |
+| GetSmallWinsByPeriodQuery | olderAdultId, requesterId, fromDate, toDate | Consulta de las pequeñas victorias de un periodo, ordenadas por fecha. |
 
 **Sub-capa Model: Events**
 
-| Nombre | Descripción |
-| --- | --- |
-| WellbeingEntryRecorded | Se registró el estado de ánimo derivado de un check-in respondido. |
-| SustainedDiscomfortPatternDetected | Se detectó un patrón de malestar sostenido en el historial de check-ins. |
-| WellbeingImprovementPatternDetected | Se detectó una mejora en la tendencia de bienestar. |
-| SmallWinRecorded | Se registró un pequeño logro del adulto mayor. |
-| StatusSummaryGenerated | Se generó o actualizó el resumen diario del estado de un adulto mayor. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| DiscomfortPatternDetected | olderAdultId, patternId, consecutiveDays, startDate, endDate, occurredAt | Se detectó un malestar sostenido durante varios días consecutivos. |
+| WellbeingTrendImproved | olderAdultId, checkInId, checkDate, positiveActivity, occurredAt | El día evaluado mostró bienestar positivo. |
+| WellbeingSuggestionIssued | olderAdultId, suggestionId, patternId, occurredAt | Se emitió una sugerencia de acción para los familiares. |
+| SmallWinRecorded | olderAdultId, smallWinId, checkInId, occurredAt | Se registró una pequeña victoria. |
+| WellbeingSuggestionDismissed | olderAdultId, suggestionId, relativeId, occurredAt | Un familiar descartó una sugerencia. |
 
 **Sub-capa Repositories**
 
 | Tipo | Nombre | Métodos principales | Descripción |
 | --- | --- | --- | --- |
-| Interface | IWellbeingEntryRepository | save(entry), findById(id), findByOlderAdultId(olderAdultId), findByCheckInId(checkInId) | Contrato de persistencia del aggregate `WellbeingEntry`. Se implementa en Infrastructure. |
-| Interface | IWellbeingPatternRepository | save(pattern), findById(id), findByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `WellbeingPattern`. |
-| Interface | ISmallWinRepository | save(smallWin), findById(id), findByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `SmallWin`. |
-| Interface | IStatusSummaryRepository | save(summary), findByOlderAdultIdAndDate(olderAdultId, date), findLatestByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `StatusSummary`. |
+| Interface | WellbeingInsightRepository | findByOlderAdultId(olderAdultId), save(insight), findActiveSuggestionsByOlderAdultId(olderAdultId), findSmallWinsByOlderAdultIdBetween(olderAdultId, from, to) | Contrato de persistencia del aggregate `WellbeingInsight` y de las consultas de sugerencias y pequeñas victorias. Se implementa en Infrastructure. |
 
 **Sub-capa Services**
 
 | Tipo | Nombre | Métodos principales | Descripción |
 | --- | --- | --- | --- |
-| Interface | IWellbeingCommandService | handle(RecordWellbeingEntryCommand), handle(DetectWellbeingPatternCommand), handle(RecordSmallWinCommand), handle(GenerateStatusSummaryCommand) | Contrato de las operaciones de escritura del contexto. |
-| Interface | IWellbeingQueryService | handle(GetWellbeingEntriesByOlderAdultIdQuery), handle(GetWellbeingPatternsByOlderAdultIdQuery), handle(GetSmallWinsByOlderAdultIdQuery), handle(GetStatusSummaryByDateQuery), handle(GetLatestStatusSummaryQuery) | Contrato de las operaciones de lectura del contexto. |
-| Interface | IDomainEventPublisher | publish(event) | Abstracción para publicar los eventos de dominio hacia los demás módulos, compartida con los demás bounded contexts. |
-
-<br>
+| Interface | WellbeingInsightCommandService | handle(EvaluateWellbeingPatternCommand), handle(IssueWellbeingSuggestionCommand), handle(RecordSmallWinCommand), handle(DismissWellbeingSuggestionCommand) | Contrato de las operaciones de escritura del contexto. |
+| Interface | WellbeingInsightQueryService | handle(GetActiveWellbeingSuggestionsQuery), handle(GetSmallWinsByPeriodQuery) | Contrato de las operaciones de lectura del contexto. |
 
 #### 2.6.4.2. Interface Layer
 
@@ -5350,83 +5349,88 @@ Clases que exponen el bounded context hacia el exterior y traducen las peticione
 
 | Nombre | Endpoints | Descripción |
 | --- | --- | --- |
-| WellbeingEntriesController | GET /wellbeing-entries?olderAdultId={id} | Punto de entrada de consulta del historial de registros de bienestar de un adulto mayor. |
-| WellbeingPatternsController | GET /wellbeing-patterns?olderAdultId={id} | Punto de entrada de consulta de los patrones detectados. |
-| SmallWinsController | GET /small-wins?olderAdultId={id}, POST /small-wins | Punto de entrada de consulta y registro manual de pequeños logros. |
-| StatusSummariesController | GET /status-summaries/latest?olderAdultId={id}, GET /status-summaries?olderAdultId={id}&date={date} | Punto de entrada de consulta del resumen diario del adulto mayor. |
+| WellbeingSuggestionsController | GET /api/v1/wellbeing-suggestions?olderAdultId={olderAdultId}, POST /api/v1/wellbeing-suggestions/{suggestionId}/dismiss | Punto de entrada de la consulta de sugerencias vigentes y de su descarte. El descarte responde 409 Conflict si la sugerencia ya no está activa. Ambas operaciones están reservadas a familiares con vínculo activo. |
+| SmallWinsController | GET /api/v1/small-wins?olderAdultId={olderAdultId}&from={fromDate}&to={toDate} | Punto de entrada de la consulta de pequeñas victorias de un periodo, disponible para el adulto mayor y para sus familiares vinculados. |
+
+Las operaciones responden 403 Forbidden cuando el usuario autenticado no tiene el acceso indicado.
 
 **Sub-capa REST: Resources**
 
-| Nombre | Descripción |
-| --- | --- |
-| WellbeingEntryResource | Representación pública de un registro de bienestar. |
-| WellbeingPatternResource | Representación pública de un patrón detectado. |
-| SmallWinResource | Representación pública de un pequeño logro. |
-| RecordSmallWinResource | Datos de entrada para registrar manualmente un pequeño logro. |
-| StatusSummaryResource | Representación pública del resumen diario de un adulto mayor. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| WellbeingSuggestionResource | id, olderAdultId, patternId, message, status, issuedAt | Representación de una sugerencia de acción. |
+| SmallWinResource | id, olderAdultId, checkInId, description, recordedAt | Representación de una pequeña victoria. |
 
 **Sub-capa REST: Transform**
 
 | Nombre | Descripción |
 | --- | --- |
-| WellbeingEntryResourceFromEntityAssembler | Convierte el aggregate `WellbeingEntry` en su representación REST. |
-| WellbeingPatternResourceFromEntityAssembler | Convierte el aggregate `WellbeingPattern` en su representación REST. |
-| SmallWinResourceFromEntityAssembler | Convierte el aggregate `SmallWin` en su representación REST. |
-| RecordSmallWinCommandFromResourceAssembler | Convierte la petición de registro manual en el comando `RecordSmallWinCommand`. |
-| StatusSummaryResourceFromEntityAssembler | Convierte el aggregate `StatusSummary` en su representación REST. |
-
-**Sub-capa ACL: Consumers**
-
-| Nombre | Descripción |
-| --- | --- |
-| CheckInAnsweredConsumer | Escucha, dentro del monolito modular, el evento `CheckInAnswered` publicado por Daily Check-in y desencadena `RecordWellbeingEntryCommand`, `DetectWellbeingPatternCommand` y `GenerateStatusSummaryCommand`. |
-
-<br>
+| WellbeingSuggestionResourceFromEntityAssembler | Convierte la entidad `WellbeingSuggestion` en su representación REST. |
+| SmallWinResourceFromEntityAssembler | Convierte la entidad `SmallWin` en su representación REST. |
 
 #### 2.6.4.3. Application Layer
 
-Clases que orquestan los flujos del contexto, coordinando los cuatro aggregates y sus repositorios.
+Clases que orquestan los flujos del contexto, coordinando el aggregate, su repositorio y los servicios de otros contextos.
 
-**Sub-capa Internal: CommandServices**
+**Sub-capa Internal: CommandServices (Command Handlers)**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| WellbeingCommandService | Ejecuta los cuatro comandos del contexto: registra el estado de ánimo derivado de un check-in, analiza el historial para detectar patrones, registra pequeños logros y genera el resumen diario, publicando los eventos de dominio correspondientes en cada caso. | Implementa `IWellbeingCommandService`; usa `IWellbeingEntryRepository`, `IWellbeingPatternRepository`, `ISmallWinRepository`, `IStatusSummaryRepository` e `IDomainEventPublisher`. |
+| WellbeingInsightCommandServiceImpl | Para evaluar un check-in, obtiene los estados de ánimo de los siete días previos e invoca al aggregate. Para emitir una sugerencia, redacta el mensaje con la cantidad de días del patrón. Para registrar una pequeña victoria, usa la actividad positiva informada o, si no la hubo, una descripción del buen día. Para descartar una sugerencia, verifica que el familiar tenga un vínculo activo con el adulto mayor. Tras persistir, publica los eventos acumulados. | Implementa `WellbeingInsightCommandService`; usa `WellbeingInsightRepository`, `ExternalDailyCheckInService`, `ExternalCareCircleService` y `DomainEventPublisher`. |
 
 **Sub-capa Internal: QueryServices**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| WellbeingQueryService | Resuelve las consultas de registros de bienestar, patrones, pequeños logros y resúmenes diarios, sin modificar el estado. | Implementa `IWellbeingQueryService`; usa los cuatro repositorios del contexto. |
+| WellbeingInsightQueryServiceImpl | Resuelve las sugerencias vigentes y las pequeñas victorias de un periodo, convirtiendo las fechas a instantes según la zona horaria del adulto mayor, previa verificación de acceso del solicitante. | Implementa `WellbeingInsightQueryService`; usa `WellbeingInsightRepository`, `ExternalIamService` y `ExternalCareCircleService`. |
 
-<br>
+**Sub-capa Internal: Event Handlers**
 
-#### 2.6.4.4 Infrastructure Layer
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInAnsweredEventHandler | Inicia la evaluación del bienestar cuando el adulto mayor responde su check-in. Se ejecuta en una transacción propia, después de confirmarse la respuesta, de modo que una falla en la evaluación no impida registrar el check-in. | Escucha `CheckInAnswered` de Daily Check-in; envía `EvaluateWellbeingPatternCommand`. |
+| DiscomfortPatternDetectedEventHandler | Emite la sugerencia de acción correspondiente al patrón detectado, en la misma transacción de la evaluación. | Escucha `DiscomfortPatternDetected`; envía `IssueWellbeingSuggestionCommand`. |
+| WellbeingTrendImprovedEventHandler | Registra la pequeña victoria del día positivo, en la misma transacción de la evaluación. | Escucha `WellbeingTrendImproved`; envía `RecordSmallWinCommand`. |
 
-Clases que resuelven el acceso a la base de datos y a los mecanismos de mensajería, implementando las abstracciones definidas en el dominio.
+**Sub-capa Internal: Outbound Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Class | ExternalDailyCheckInService | fetchMoods(olderAdultId, fromDate, toDate) | Consume `DailyCheckInContextFacade` y traduce los estados de ánimo a `MoodLevel`. |
+| Class | ExternalCareCircleService | isActiveRelativeOf(relativeId, olderAdultId) | Consume `CareCircleContextFacade` para verificar que un familiar esté vinculado al adulto mayor. |
+| Class | ExternalIamService | fetchTimeZone(olderAdultId) | Consume `IamContextFacade` y devuelve la zona horaria del adulto mayor como `ZoneId`. |
+
+#### 2.6.4.4. Infrastructure Layer
+
+Clases que resuelven el acceso a la base de datos MySQL, implementando las abstracciones definidas en la capa Domain.
+
+**Sub-capa Persistence: JPA Entities**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| WellbeingPatternPersistenceEntity | Representa una fila de la tabla `wellbeing_patterns`. | Usada por `WellbeingPatternJpaRepository` y `WellbeingInsightPersistenceMapper`. |
+| WellbeingSuggestionPersistenceEntity | Representa una fila de la tabla `wellbeing_suggestions`. | Usada por `WellbeingSuggestionJpaRepository` y `WellbeingInsightPersistenceMapper`. |
+| SmallWinPersistenceEntity | Representa una fila de la tabla `small_wins`. | Usada por `SmallWinJpaRepository` y `WellbeingInsightPersistenceMapper`. |
+
+**Sub-capa Persistence: JPA Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| WellbeingPatternJpaRepository | Interfaz de Spring Data JPA con la consulta del patrón más reciente de un adulto mayor, resuelta sobre el índice `(older_adult_id, detected_at)`. | Extiende `JpaRepository`; usada por `WellbeingInsightRepositoryImpl`. |
+| WellbeingSuggestionJpaRepository | Interfaz de Spring Data JPA con la consulta de sugerencias activas, resuelta sobre el índice `(older_adult_id, status)`. | Extiende `JpaRepository`; usada por `WellbeingInsightRepositoryImpl`. |
+| SmallWinJpaRepository | Interfaz de Spring Data JPA con la consulta de pequeñas victorias por periodo, resuelta sobre el índice `(older_adult_id, recorded_at)`. | Extiende `JpaRepository`; usada por `WellbeingInsightRepositoryImpl`. |
 
 **Sub-capa Persistence: Repositories**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| WellbeingEntryRepository | Persiste y recupera el aggregate `WellbeingEntry` sobre la tabla `wellbeing_entries`. | Implementa `IWellbeingEntryRepository`. |
-| WellbeingPatternRepository | Persiste y recupera el aggregate `WellbeingPattern` sobre la tabla `wellbeing_patterns`. | Implementa `IWellbeingPatternRepository`. |
-| SmallWinRepository | Persiste y recupera el aggregate `SmallWin` sobre la tabla `small_wins`. | Implementa `ISmallWinRepository`. |
-| StatusSummaryRepository | Persiste y recupera el aggregate `StatusSummary` sobre la tabla `status_summaries`. | Implementa `IStatusSummaryRepository`. |
+| WellbeingInsightRepositoryImpl | Compone el aggregate `WellbeingInsight` a partir de su patrón más reciente y sus sugerencias activas, y persiste sus cambios en las tres tablas. Si un mismo check-in se evalúa dos veces, el índice único de `small_wins.check_in_id` impide duplicar la pequeña victoria. | Implementa `WellbeingInsightRepository`; usa `WellbeingPatternJpaRepository`, `WellbeingSuggestionJpaRepository`, `SmallWinJpaRepository` y `WellbeingInsightPersistenceMapper`. |
 
 **Sub-capa Persistence: Mappers**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| WellbeingPersistenceMapper | Traduce entre los cuatro aggregates del contexto y su representación en base de datos, evitando que el modelo de persistencia se filtre al dominio. | Usado por los cuatro repositorios de Infrastructure. |
-
-**Sub-capa Messaging: Consumers**
-
-| Nombre | Responsabilidad principal | Relación con otros elementos |
-| --- | --- | --- |
-| CheckInAnsweredConsumerAdapter | Se suscribe al evento `CheckInAnswered` publicado por Daily Check-in dentro del monolito modular y lo traduce en la invocación de los comandos del contexto. | Implementa `CheckInAnsweredConsumer`; usado por la capa Interface. |
-
-<br>
+| WellbeingInsightPersistenceMapper | Traduce entre el aggregate `WellbeingInsight`, con sus patrones, sugerencias y pequeñas victorias, y sus entidades de persistencia. | Usado por `WellbeingInsightRepositoryImpl`. |
 
 #### 2.6.4.5. Bounded Context Software Architecture Component Level Diagrams
 
