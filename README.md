@@ -6808,7 +6808,7 @@ En la versión de escritorio, las secciones de Cómo funciona, Funciones y Plane
 
 ![Landing Page Wireframe Desktop](assets/img/ux-design/landing-page/web-wireframe.png)
 
-<br/><i>Imagen 29: Wireframe de la landing page en versión de escritorio.</i>
+<br/><i>Imagen X. Wireframe de la landing page en versión de escritorio.</i>
 
 <br>
 
@@ -6818,13 +6818,57 @@ En la versión de escritorio, las secciones de Cómo funciona, Funciones y Plane
 
 ![Landing Page Wireframe Mobile](assets/img/ux-design/landing-page/mobile-wireframe.png)
 
-<br/><i>Imagen 30: Wireframe de la landing page en versión móvil.</i>
+<br/><i>Imagen X. Wireframe de la landing page en versión móvil.</i>
 
 </div>
 
 <br>
 
 #### 3.1.3.2. Landing Page Mock-up
+
+El mock-up lleva el wireframe a alta fidelidad aplicando la identidad visual de Serenia. Su paleta se apoya en tonos cálidos y serenos (crema, verde salvia y durazno) y en una tipografía redondeada y legible, pensada para transmitir calma, cercanía y confianza. Los textos son de gran tamaño y con contraste suficiente, y los botones tienen áreas de toque amplias, en coherencia con la accesibilidad definida para el producto. El eslogan *"Bienestar hoy, siempre contigo"* acompaña la identidad de marca.
+
+Los elementos clave del mock-up son:
+
+<br>
+
+| Elemento | Decisión de diseño |
+| --- | --- |
+| Portada | Titular centrado en el beneficio emocional ("Saber que están bien, sin tener que llamar"), con una vista previa de la aplicación que muestra el check-in diario y la respuesta de la familia. |
+| Llamados a la acción | El botón "Probar gratis" aparece en la barra superior, en la portada y en los planes, con color de acento para distinguirse del resto de enlaces. |
+| Tarjetas | Cómo funciona y Funciones usan tarjetas de esquinas redondeadas y contenido breve, para que el recorrido se lea con rapidez. |
+| Planes | El plan Básico se muestra en un fondo claro y el plan de suscripción en un fondo de color de acento, para guiar la mirada hacia la opción de pago. |
+| Selector de idioma | El control ES / EN resalta el idioma activo con un subrayado de color. |
+
+<br>
+
+La landing page publicada puede consultarse en [sereniaa.netlify.app](https://sereniaa.netlify.app/).
+
+<br>
+<div align="center">
+
+**Desktop Web Browser**
+
+*Elaboración propia en Figma*
+
+![Landing Page Mock-up Desktop](assets/img/ux-design/landing-page/web-mockup.png)
+
+<br/><i>Imagen X. Mock-up de la landing page en versión de escritorio.</i>
+
+<br>
+
+**Mobile Web Browser**
+
+*Elaboración propia en Figma*
+
+![Landing Page Mock-up Mobile](assets/img/ux-design/landing-page/mobile-mockup.png)
+
+<br/><i>Imagen X. Mock-up de la landing page en versión móvil.</i>
+
+</div>
+
+<br>
+
 ### 3.1.4. Mobile Applications UX/UI Design
 #### 3.1.4.1. Mobile Applications Wireframes
 
