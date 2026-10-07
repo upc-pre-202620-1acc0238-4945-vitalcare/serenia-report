@@ -7145,6 +7145,18 @@ Para probar la vinculación en el prototipo, el código válido es 4821 y el có
 ## 4.2. Landing Page & Mobile Application Implementation
 ### 4.2.1. Sprint 1
 #### 4.2.1.1. Sprint Planning 1
+| **Sprint 1** | Sprint 1 |
+|---|---|
+| **Sprint Planning Background** | |
+| Date | 2026-09-23 |
+| Time | 16:00 PM |
+| Location | Universidad Peruana de Ciencias Aplicadas - Pabellon I |
+| Prepared By | Gallardo Morales, Carla Alejandra |
+| Attendees (to planning meeting) | Contreras Torres, Arturo Valentino / Gallardo Morales, Carla Alejandra /Garcia Paredes, Victor Manuel / Salinas Guzman, Brianna Cristina / Sandoval Aiquipa, Kelber Yamir
+| **Sprint Goal & User Stories** | |
+| Sprint 1 Goal | Nuestro objetivo es presentar la propuesta de valor de Serenia. Creemos brinda confianza y seguridad a los adultos mayores y a sus familiares, los cuales buscan una plataforma en la que puedan apoyarse para tener bajo supervicion a su familiar adulto mayor que vive solo|
+| Sprint 1 Velocity | 80 |
+| Sum of Story Points | 64 |
 #### 4.2.1.2. Aspect Leaders and Collaborators
 #### 4.2.1.3. Sprint Backlog 1
 #### 4.2.1.4. Development Evidence for Sprint Review
