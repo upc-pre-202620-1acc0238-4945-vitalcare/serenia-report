@@ -5836,128 +5836,250 @@ Las tres tablas referencian a `care_circles`, que es el aggregate root del bound
 
 ### 2.6.6. Bounded Context: Alerts & Safety
 
-El bounded context **Alerts and Safety** es responsable de garantizar que el familiar a distancia sea informado cuando la situación del adulto mayor lo amerite: ante una emergencia declarada explícitamente por el propio adulto mayor, ante una ausencia prolongada de respuesta al check-in diario, o ante un patrón sostenido de malestar detectado por **Wellbeing Monitoring**. A continuación se presenta el diseño táctico propuesto por el equipo para este bounded context, aplicando Domain-Driven Design, alineado con el diagrama de base de datos consolidado del equipo.
+El bounded context Alerts and Safety garantiza que los familiares a distancia se enteren cuando la situación del adulto mayor requiere su intervención. Gestiona dos tipos de alerta: la de emergencia, que el adulto mayor activa con el botón de auxilio, y la de inactividad, que se genera cuando no responde su check-in dentro del plazo. Para ambas registra quién la reconoce y quién la resuelve, de modo que todos los familiares sepan si alguien ya está actuando. Es un contexto core: concentra la función de seguridad de Serenia, de la que depende la confianza de las familias en el producto.
 
-<br>
+Su modelo se organiza en dos aggregates: `EmergencyAlert` e `InactivityAlert`. Ambos se persisten en la misma tabla, diferenciados por su tipo, y comparten el ciclo de reconocimiento y resolución por parte de los familiares. Se modelan por separado porque sus ciclos de vida difieren: la emergencia se despacha a los familiares y confirma su entrega al adulto mayor, mientras que la inactividad se origina en un check-in no respondido y queda disponible directamente en la vista de alertas.
+
+El contexto reacciona al evento `CheckInMissed` de Daily Check-in para evaluar la inactividad y consulta a Care Circle los familiares activos del adulto mayor, tanto para despachar las emergencias como para verificar que solo los familiares vinculados consulten y atiendan las alertas. Las notificaciones se registran dentro de la aplicación y se muestran en el apartado de alertas de cada familiar.
 
 #### 2.6.6.1. Domain Layer
 
-**Sub-capa Model - Aggregates:**
+En esta capa se representan las reglas de generación, despacho y atención de alertas, sin dependencia de frameworks de persistencia, red ni interfaz.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Aggregate | Alert | Entidad que representa un incidente crítico generado por el botón de auxilio, por inactividad sostenida o por un patrón de bienestar negativo | Mantener el ciclo de vida del incidente (apertura, notificación, atención y cierre), clasificando su tipo y severidad | Relacionado con Wellbeing Monitoring (origen del patrón cuando el tipo es WELLBEING) y con InactivityWindow (origen cuando el tipo es INACTIVITY) |
-| Entity | AlertNotification | Entidad que registra el envío de una notificación push de un Alert a un familiar vinculado específico | Trazar el estado de entrega de la notificación por cada familiar y canal | Pertenece al aggregate Alert; se crea una por cada familiar vinculado notificado |
-| Entity | AlertAttention | Entidad que registra la confirmación de atención de un Alert por parte de un familiar | Guardar quién atendió el incidente, cuándo y con qué nota de resolución | Pertenece al aggregate Alert |
-| Aggregate | InactivityWindow | Entidad que representa el plazo de espera entre un check-in no respondido y la eventual escalación a un Alert | Registrar la apertura de la ventana, el envío del recordatorio de contacto y, de vencer sin respuesta, marcar la escalación | Relacionado con el bounded context Daily Check-in (origen del check-in no respondido) y con Alert (destino cuando la ventana escala) |
+**Sub-capa Model: Aggregates**
 
-<br>
+`EmergencyAlert` (Aggregate Root): representa una solicitud de ayuda inmediata del adulto mayor. Controla su despacho a los familiares vinculados, la confirmación de entrega y su atención.
 
-**Sub-capa Model - Commands:**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | AlertId | private | Identificador único de la alerta. |
+| olderAdultId | OlderAdultId | private | Adulto mayor que activó el botón de auxilio. |
+| status | AlertStatus | private | Estado de la alerta. |
+| triggeredAt | Instant | private | Instante de la activación, en UTC. |
+| resolvedAt | Instant | private | Instante de la resolución; es nulo mientras la alerta no se haya resuelto. |
+| notifications | List\<AlertNotification\> | private | Notificaciones registradas para cada familiar vinculado al momento del despacho. |
+| attentions | List\<AlertAttention\> | private | Reconocimiento y resolución registrados por los familiares. |
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Command | TriggerEmergencyAlertCommand | Comando para registrar la activación del botón de auxilio | Representar la intención del adulto mayor de solicitar ayuda inmediata, creando un Alert de tipo EMERGENCY solo si existen familiares vinculados registrados localmente | Usado en la implementación del servicio de comandos de alertas |
-| Command | OpenInactivityWindowCommand | Comando para abrir una ventana de inactividad | Representar la intención de iniciar el plazo de espera tras un check-in no respondido | Ejecutado por el consumer del evento `UnansweredCheckIn` de Daily Check-in |
-| Command | SendInactivityReminderCommand | Comando para enviar un recordatorio de contacto al adulto mayor | Representar la intención de notificarlo antes de que la ventana de inactividad expire | Usado en la implementación del servicio de comandos de alertas |
-| Command | CloseInactivityWindowCommand | Comando para cerrar una ventana de inactividad sin escalamiento | Representar la intención de finalizar la ventana cuando el adulto mayor retoma actividad antes de que expire | Usado en la implementación del servicio de comandos de alertas |
-| Command | EscalateInactivityWindowCommand | Comando para escalar una ventana de inactividad vencida | Representar la intención de convertir la inactividad no atendida en un Alert de tipo INACTIVITY | Ejecutado automáticamente por una policy tras vencer la ventana sin respuesta al recordatorio |
-| Command | RaiseWellbeingAlertCommand | Comando para generar un Alert a partir de un patrón de malestar | Representar la intención de clasificar la severidad del patrón notificado por Wellbeing Monitoring y crear un Alert de tipo WELLBEING | Ejecutado por el consumer del evento `DiscomfortPatternDetected` de Wellbeing Monitoring |
-| Command | NotifyLinkedRelativesCommand | Comando para notificar un Alert a los familiares vinculados | Representar la intención de crear una AlertNotification por cada familiar vinculado y cambiar el estado del Alert a NOTIFIED | Ejecutado automáticamente por una policy tras la creación de cualquier Alert |
-| Command | ConfirmAlertAttentionCommand | Comando para registrar la atención de un Alert | Representar la intención del familiar de confirmar que atendió el incidente, creando una AlertAttention y cambiando el estado del Alert a ATTENDED | Usado en la implementación del servicio de comandos de alertas |
-| Command | CloseAlertCommand | Comando para cerrar un Alert atendido | Representar la intención del familiar de marcar el incidente como resuelto | Usado en la implementación del servicio de comandos de alertas |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| trigger(olderAdultId, triggeredAt) | public (static) | Factory que registra la activación del botón de auxilio y el evento `EmergencyAlertRaised`. |
+| dispatch(relativeIds, dispatchedAt) | public | Registra una notificación para cada familiar vinculado y registra el evento `EmergencyAlertDispatched`. Si no hay familiares vinculados, marca el despacho como fallido y registra el evento `EmergencyAlertDispatchFailed`. |
+| confirmDelivery(confirmedAt) | public | Marca las notificaciones como entregadas, de modo que la alerta queda visible para cada familiar, y registra el evento `EmergencyAlertDeliveryConfirmed`. Solo procede si la alerta fue despachada. |
+| acknowledge(relativeId, acknowledgedAt) | public | Registra que un familiar está atendiendo la emergencia y el evento `EmergencyAlertAcknowledged`. Solo procede si la alerta fue despachada y aún no ha sido reconocida. |
+| resolve(relativeId, resolutionNote, resolvedAt) | public | Marca como resuelta una emergencia previamente reconocida, guarda la nota de resolución y registra el evento `EmergencyAlertResolved`. |
+| isDeliveryConfirmed() | public | Indica si la entrega fue confirmada; con ello se informa al adulto mayor que su familia fue notificada. |
+| isOpen() | public | Indica si la alerta aún no ha sido resuelta. |
 
-<br>
+`InactivityAlert` (Aggregate Root): representa la falta de respuesta del adulto mayor a su check-in dentro del plazo. Se asocia al check-in que la originó y controla su atención.
 
-**Sub-capa Model - Queries:**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | AlertId | private | Identificador único de la alerta. |
+| olderAdultId | OlderAdultId | private | Adulto mayor que no respondió su check-in. |
+| checkInId | CheckInId | private | Check-in no respondido que originó la alerta; cada check-in genera a lo sumo una alerta. |
+| status | AlertStatus | private | Estado de la alerta. |
+| triggeredAt | Instant | private | Instante en que se generó la alerta, en UTC. |
+| resolvedAt | Instant | private | Instante de la resolución; es nulo mientras la alerta no se haya resuelto. |
+| attentions | List\<AlertAttention\> | private | Reconocimiento y resolución registrados por los familiares. |
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Query | GetAlertByIdQuery | Consulta para obtener un Alert por su identificador | Representar la intención de obtener el detalle de un incidente específico | Usado en la implementación del servicio de consultas |
-| Query | GetAlertsByOlderAdultIdQuery | Consulta para obtener los Alerts de un adulto mayor | Representar la intención de listar el historial completo de incidentes (emergencia, inactividad y bienestar) asociado a un adulto mayor | Usado en la implementación del servicio de consultas |
-| Query | GetActiveAlertsByOlderAdultIdQuery | Consulta para obtener los Alerts activos de un adulto mayor | Representar la intención de listar únicamente los incidentes que aún no han sido cerrados | Usado en la implementación del servicio de consultas |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| evaluate(alreadyRaisedForCheckIn, activeRelativeCount) | public (static) | Determina si un check-in no respondido constituye inactividad que debe alertarse: el check-in no debe tener una alerta previa y el adulto mayor debe tener al menos un familiar vinculado a quien informar. |
+| raise(olderAdultId, checkInId, raisedAt) | public (static) | Factory que genera la alerta de inactividad y registra el evento `InactivityAlertRaised`. |
+| acknowledge(relativeId, acknowledgedAt) | public | Registra que un familiar está atendiendo la alerta y el evento `InactivityAlertAcknowledged`. Solo procede si la alerta aún no ha sido reconocida. |
+| resolve(relativeId, resolutionNote, resolvedAt) | public | Marca como resuelta una alerta previamente reconocida, guarda la nota de resolución y registra el evento `InactivityAlertResolved`. |
+| isOpen() | public | Indica si la alerta aún no ha sido resuelta. |
 
-<br>
+**Sub-capa Model: Entities**
 
-**Sub-capa Repositories:**
+`AlertNotification`: representa el aviso de una alerta de emergencia dirigido a un familiar vinculado. Pertenece al aggregate `EmergencyAlert`.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Interface | IAlertRepository | Repositorio para operaciones de persistencia del modelo Alert, incluyendo sus entidades AlertNotification y AlertAttention | Definir contratos para operaciones CRUD sobre los incidentes | Implementado en la capa de Infrastructure |
-| Interface | IInactivityWindowRepository | Repositorio para operaciones de persistencia del modelo InactivityWindow | Definir contratos para operaciones CRUD sobre las ventanas de inactividad | Implementado en la capa de Infrastructure |
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | AlertNotificationId | private | Identificador único de la notificación. |
+| relativeId | RelativeId | private | Familiar al que se dirige la notificación; existe una por familiar y alerta. |
+| status | DeliveryStatus | private | Estado de la notificación: enviada o entregada. |
+| sentAt | Instant | private | Instante del registro de la notificación, en UTC. |
+| deliveredAt | Instant | private | Instante en que la notificación quedó disponible para el familiar; es nulo mientras no se confirme. |
 
-<br>
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| markAsDelivered(deliveredAt) | public | Marca la notificación como entregada. |
 
-**Sub-capa Services:**
+`AlertAttention`: representa una acción de un familiar sobre una alerta, ya sea su reconocimiento o su resolución. Pertenece a los aggregates `EmergencyAlert` e `InactivityAlert`.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Interface | IAlertCommandService | Servicio para métodos de comandos de alertas | Estipular una estructura clara a seguir para operaciones de escritura sobre incidentes y ventanas de inactividad | Usado en la capa "Application" para implementar los métodos dados |
-| Interface | IAlertQueryService | Servicio para métodos de consulta de alertas | Estipular una estructura clara a seguir para operaciones de lectura | Usado en la capa "Application" para la implementación de los métodos |
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | AlertAttentionId | private | Identificador único de la acción. |
+| relativeId | RelativeId | private | Familiar que realizó la acción. |
+| action | AttentionAction | private | Acción realizada; cada alerta admite un único reconocimiento y una única resolución. |
+| actedAt | Instant | private | Instante de la acción, en UTC. |
+| resolutionNote | ResolutionNote | private | Nota que describe cómo se resolvió la alerta, opcional y solo para la resolución. |
 
-<br>
+**Sub-capa Model: Value Objects**
+
+Se implementan como records inmutables que validan su contenido al construirse. Los límites de longitud coinciden con las columnas de la base de datos.
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| AlertId, AlertNotificationId, AlertAttentionId | value: UUID | Identidades inmutables de los aggregates y entities del contexto. |
+| OlderAdultId | value: UUID | Referencia por identidad a una cuenta de adulto mayor de Identity & Access. |
+| RelativeId | value: UUID | Referencia por identidad a una cuenta de familiar a distancia de Identity & Access. |
+| CheckInId | value: UUID | Referencia por identidad a un check-in de Daily Check-in. |
+| ResolutionNote | value: String | Nota de resolución, de máximo 300 caracteres. |
+
+**Sub-capa Model: Enumerations**
+
+| Nombre | Valores | Descripción |
+| --- | --- | --- |
+| AlertType | EMERGENCY, INACTIVITY | Tipo de alerta; distingue ambos aggregates en la persistencia. |
+| AlertStatus | RAISED, DISPATCHED, DISPATCH_FAILED, ACKNOWLEDGED, RESOLVED | Estado de la alerta. Una emergencia pasa por RAISED, DISPATCHED o DISPATCH_FAILED, ACKNOWLEDGED y RESOLVED; una inactividad, por RAISED, ACKNOWLEDGED y RESOLVED. |
+| DeliveryStatus | SENT, DELIVERED | Estado de una notificación de emergencia. |
+| AttentionAction | ACKNOWLEDGED, RESOLVED | Acción de un familiar sobre una alerta. |
+
+**Sub-capa Model: Commands**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| EvaluateInactivityCommand | olderAdultId, checkInId, checkDate | Intención de evaluar si un check-in no respondido debe generar una alerta. |
+| RaiseInactivityAlertCommand | olderAdultId, checkInId | Intención de generar una alerta de inactividad. |
+| TriggerEmergencyAlertCommand | olderAdultId | Intención del adulto mayor de solicitar ayuda inmediata. |
+| DispatchEmergencyAlertCommand | alertId | Intención de notificar una emergencia a los familiares vinculados. |
+| ConfirmEmergencyAlertDeliveryCommand | alertId | Intención de confirmar que la emergencia quedó disponible para los familiares. |
+| AcknowledgeEmergencyAlertCommand | alertId, relativeId | Intención de un familiar de indicar que está atendiendo una emergencia. |
+| AcknowledgeInactivityAlertCommand | alertId, relativeId | Intención de un familiar de indicar que está atendiendo una alerta de inactividad. |
+| ResolveEmergencyAlertCommand | alertId, relativeId, resolutionNote | Intención de un familiar de marcar una emergencia como resuelta. |
+| ResolveInactivityAlertCommand | alertId, relativeId, resolutionNote | Intención de un familiar de marcar una alerta de inactividad como resuelta. |
+
+**Sub-capa Model: Queries**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| GetAlertsByOlderAdultIdQuery | olderAdultId, requesterId | Consulta del historial de alertas de un adulto mayor, de ambos tipos, ordenadas de la más reciente a la más antigua. |
+| GetAlertByIdQuery | alertId, requesterId | Consulta del detalle de una alerta. |
+
+**Sub-capa Model: Events**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| InactivityDetected | olderAdultId, checkInId, checkDate, occurredAt | Un check-in no respondido constituye inactividad que debe alertarse. |
+| InactivityAlertRaised | alertId, olderAdultId, checkInId, occurredAt | Se generó una alerta de inactividad. |
+| EmergencyAlertRaised | alertId, olderAdultId, occurredAt | El adulto mayor activó el botón de auxilio. |
+| EmergencyAlertDispatched | alertId, olderAdultId, relativeIds, occurredAt | La emergencia se notificó a todos los familiares vinculados. |
+| EmergencyAlertDispatchFailed | alertId, olderAdultId, occurredAt | La emergencia no pudo notificarse porque el adulto mayor no tiene familiares vinculados. |
+| EmergencyAlertDeliveryConfirmed | alertId, olderAdultId, occurredAt | La emergencia quedó disponible para los familiares y se confirmó al adulto mayor. |
+| EmergencyAlertAcknowledged | alertId, relativeId, occurredAt | Un familiar indicó que está atendiendo la emergencia. |
+| InactivityAlertAcknowledged | alertId, relativeId, occurredAt | Un familiar indicó que está atendiendo la alerta de inactividad. |
+| EmergencyAlertResolved | alertId, relativeId, occurredAt | Un familiar marcó la emergencia como resuelta. |
+| InactivityAlertResolved | alertId, relativeId, occurredAt | Un familiar marcó la alerta de inactividad como resuelta. |
+
+**Sub-capa Repositories**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | EmergencyAlertRepository | save(alert), findById(alertId), findAllByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `EmergencyAlert` junto con sus notificaciones y acciones de atención. Se implementa en Infrastructure. |
+| Interface | InactivityAlertRepository | save(alert), findById(alertId), existsByCheckInId(checkInId), findAllByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `InactivityAlert` junto con sus acciones de atención. Se implementa en Infrastructure. |
+
+**Sub-capa Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | EmergencyAlertCommandService | handle(TriggerEmergencyAlertCommand), handle(DispatchEmergencyAlertCommand), handle(ConfirmEmergencyAlertDeliveryCommand), handle(AcknowledgeEmergencyAlertCommand), handle(ResolveEmergencyAlertCommand) | Contrato de las operaciones de escritura sobre las alertas de emergencia. |
+| Interface | InactivityAlertCommandService | handle(EvaluateInactivityCommand), handle(RaiseInactivityAlertCommand), handle(AcknowledgeInactivityAlertCommand), handle(ResolveInactivityAlertCommand) | Contrato de las operaciones de escritura sobre las alertas de inactividad. |
+| Interface | AlertQueryService | handle(GetAlertsByOlderAdultIdQuery), handle(GetAlertByIdQuery) | Contrato de la lectura de alertas de ambos tipos. |
 
 #### 2.6.6.2. Interface Layer
 
-**Sub-capa REST - Resources:**
+Clases que exponen el bounded context hacia el exterior y traducen las peticiones entrantes al lenguaje del dominio.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Resource | AlertResource | Estructura de datos de un Alert para API | Representar y exponer datos de un incidente (emergencia, inactividad o bienestar) de forma accesible y estructurada para el cliente | Usado en controladores para estructurar respuestas de alertas |
-| Resource | TriggerEmergencyAlertResource | Estructura de petición para activar una emergencia | Representar datos de entrada necesarios para solicitar la activación del botón de auxilio | Usado en controlador para procesar peticiones de activación |
-| Resource | ConfirmAlertAttentionResource | Estructura de petición para confirmar la atención de un Alert | Representar datos necesarios para identificar el Alert y registrar la nota de resolución | Usado en controlador para procesar peticiones de confirmación |
+**Sub-capa REST: Controllers**
 
-<br>
+| Nombre | Endpoints | Descripción |
+| --- | --- | --- |
+| EmergencyAlertsController | POST /api/v1/emergency-alerts, POST /api/v1/emergency-alerts/{alertId}/acknowledge, POST /api/v1/emergency-alerts/{alertId}/resolve | Punto de entrada de la activación del botón de auxilio, reservada al propio adulto mayor, y de la atención de emergencias por parte de los familiares. La activación responde 201 Created con el estado final de la alerta, que indica si la familia fue notificada o si el despacho falló. |
+| InactivityAlertsController | POST /api/v1/inactivity-alerts/{alertId}/acknowledge, POST /api/v1/inactivity-alerts/{alertId}/resolve | Punto de entrada de la atención de alertas de inactividad por parte de los familiares. |
+| AlertsController | GET /api/v1/alerts?olderAdultId={olderAdultId}, GET /api/v1/alerts/{alertId} | Punto de entrada de la vista de alertas, con su tipo y estado, para el adulto mayor y sus familiares vinculados. |
 
-**Sub-capa REST - Transform:**
+El reconocimiento y la resolución responden 409 Conflict cuando la alerta no admite la acción en su estado actual, por ejemplo si ya fue reconocida o si se intenta resolver sin un reconocimiento previo. Las operaciones responden 403 Forbidden cuando el usuario autenticado no es el adulto mayor ni un familiar con vínculo activo.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Assembler | AlertResourceFromEntityAssembler | Transformador de entidad Alert a AlertResource | Convertir la entidad del dominio a su representación REST correspondiente | Usado en controladores para transformar respuestas |
-| Assembler | TriggerEmergencyAlertCommandFromResourceAssembler | Transformador de TriggerEmergencyAlertResource a TriggerEmergencyAlertCommand | Convertir la petición REST a comando del dominio | Usado en controlador para procesar peticiones de activación |
-| Assembler | ConfirmAlertAttentionCommandFromResourceAssembler | Transformador de ConfirmAlertAttentionResource a ConfirmAlertAttentionCommand | Convertir la petición REST a comando del dominio | Usado en controlador para procesar peticiones de confirmación |
+**Sub-capa REST: Resources**
 
-<br>
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| AlertResource | id, olderAdultId, type, status, checkInId, triggeredAt, deliveryConfirmed, acknowledgedBy, acknowledgedAt, resolvedBy, resolvedAt, resolutionNote | Representación de una alerta de cualquier tipo, con su estado de atención. |
+| ResolveAlertResource | resolutionNote | Datos de entrada para resolver una alerta. |
 
-**Sub-capa ACL - Consumers:**
+**Sub-capa REST: Transform**
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Consumer | UnansweredCheckInConsumer | Consumidor interno del evento de dominio UnansweredCheckIn | Escuchar, dentro del monolito modular, el evento publicado por el módulo Daily Check-in para desencadenar el `OpenInactivityWindowCommand` correspondiente | Usado como puente entre el bounded context Daily Check-in y Alerts and Safety |
-| Consumer | DiscomfortPatternDetectedConsumer | Consumidor interno del evento de dominio DiscomfortPatternDetected | Escuchar, dentro del monolito modular, el evento publicado por el módulo Wellbeing Monitoring para desencadenar el `RaiseWellbeingAlertCommand` correspondiente | Usado como puente entre el bounded context Wellbeing Monitoring y Alerts and Safety |
-| Consumer | FamilyLinkEstablishedConsumer | Consumidor interno del evento de dominio FamilyLinkEstablished | Mantener localmente la referencia de familiares vinculados a cada adulto mayor, disponible por propagación desde Care Circle sin requerir consulta síncrona al momento de notificar un Alert | Usado como puente entre el bounded context Care Circle y Alerts and Safety |
-
-<br>
+| Nombre | Descripción |
+| --- | --- |
+| AlertResourceFromEntityAssembler | Convierte los aggregates `EmergencyAlert` e `InactivityAlert` en su representación REST común. |
+| ResolveEmergencyAlertCommandFromResourceAssembler | Combina la petición con la alerta y el familiar autenticado para construir el comando de resolución de emergencia. |
+| ResolveInactivityAlertCommandFromResourceAssembler | Combina la petición con la alerta y el familiar autenticado para construir el comando de resolución de inactividad. |
 
 #### 2.6.6.3. Application Layer
 
-**Sub-capa Internal - CommandServices:**
+Clases que orquestan los flujos del contexto, coordinando los aggregates, los repositorios y los servicios de otros contextos.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| CommandHandler | AlertCommandService | Implementación de comandos de alertas | Implementar los métodos para abrir, recordar, escalar y cerrar ventanas de inactividad, así como para activar, notificar, confirmar y cerrar Alerts, publicando los eventos de dominio correspondientes | Implementa los métodos de la interface IAlertCommandService en la capa de "Services" |
+**Sub-capa Internal: CommandServices (Command Handlers)**
 
-<br>
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| EmergencyAlertCommandServiceImpl | Registra la emergencia verificando que la solicite el propio adulto mayor. En el despacho obtiene los familiares con vínculo activo e invoca al aggregate; en la confirmación marca la entrega. En el reconocimiento y la resolución verifica que el familiar tenga un vínculo activo con el adulto mayor. Tras persistir, publica los eventos acumulados. | Implementa `EmergencyAlertCommandService`; usa `EmergencyAlertRepository`, `ExternalCareCircleService` y `DomainEventPublisher`. |
+| InactivityAlertCommandServiceImpl | Evalúa la inactividad consultando si el check-in ya tiene una alerta y cuántos familiares vinculados tiene el adulto mayor; cuando corresponde, publica el evento `InactivityDetected`. Genera la alerta y gestiona su reconocimiento y resolución, verificando que el familiar tenga un vínculo activo. Tras persistir, publica los eventos acumulados. | Implementa `InactivityAlertCommandService`; usa `InactivityAlertRepository`, `ExternalCareCircleService` y `DomainEventPublisher`. |
 
-**Sub-capa Internal - QueryServices:**
+**Sub-capa Internal: QueryServices**
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| QueryHandler | AlertQueryService | Implementación de consultas de alertas | Implementar los métodos para las consultas de Alerts por identificador, por adulto mayor y por estado activo | Implementa los métodos de la interface IAlertQueryService en la capa de "Services" |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| AlertQueryServiceImpl | Resuelve el historial y el detalle de alertas, combinando ambos tipos ordenados por fecha, previa verificación de que el solicitante sea el adulto mayor o un familiar con vínculo activo. | Implementa `AlertQueryService`; usa `EmergencyAlertRepository`, `InactivityAlertRepository` y `ExternalCareCircleService`. |
 
-<br>
+**Sub-capa Internal: Event Handlers**
 
-#### 2.6.6.4 Infrastructure Layer
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInMissedEventHandler | Inicia la evaluación de inactividad cuando un check-in vence sin respuesta. Se ejecuta en una transacción propia, después de confirmarse el cierre del check-in, de modo que una falla en este contexto no afecte a Daily Check-in. | Escucha `CheckInMissed` de Daily Check-in; envía `EvaluateInactivityCommand`. |
+| InactivityDetectedEventHandler | Genera la alerta de inactividad en la misma transacción de la evaluación. | Escucha `InactivityDetected`; envía `RaiseInactivityAlertCommand`. |
+| EmergencyAlertRaisedEventHandler | Despacha la emergencia a los familiares. Se ejecuta en el mismo hilo, pero en una transacción propia posterior al registro de la alerta, de modo que la emergencia queda registrada aunque el despacho falle y la respuesta al adulto mayor ya refleja el resultado. | Escucha `EmergencyAlertRaised`; envía `DispatchEmergencyAlertCommand`. |
+| EmergencyAlertDispatchedEventHandler | Confirma la entrega de la emergencia en la misma transacción del despacho. | Escucha `EmergencyAlertDispatched`; envía `ConfirmEmergencyAlertDeliveryCommand`. |
 
-**Sub-capa Persistence - Repositories:**
+**Sub-capa Internal: Outbound Services**
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Repository | AlertRepository | Repositorio para uso del modelo "Alert" | Acceder y manipular datos persistidos de alertas, notificaciones y atenciones en la base de datos | Usado en la capa "Application" para implementar operaciones CRUD de Alerts |
-| Repository | InactivityWindowRepository | Repositorio para uso del modelo "InactivityWindow" | Acceder y manipular datos persistidos de ventanas de inactividad en la base de datos | Usado en la capa "Application" para implementar operaciones CRUD de ventanas de inactividad |
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Class | ExternalCareCircleService | fetchActiveRelativeIds(olderAdultId), isActiveRelativeOf(relativeId, olderAdultId) | Consume `CareCircleContextFacade` para obtener los familiares vinculados y verificar vínculos. |
 
-<br>
+#### 2.6.6.4. Infrastructure Layer
 
+Clases que resuelven el acceso a la base de datos MySQL, implementando las abstracciones definidas en la capa Domain.
+
+**Sub-capa Persistence: JPA Entities**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| AlertPersistenceEntity | Representa una fila de la tabla `alerts`, cuyo tipo determina si corresponde a una emergencia o a una inactividad. Contiene las colecciones de notificaciones y acciones de atención, que se persisten en cascada junto con la alerta. | Usada por `AlertJpaRepository` y por los mappers del contexto. |
+| AlertNotificationPersistenceEntity | Representa una fila de la tabla `alert_notifications`. | Contenida en `AlertPersistenceEntity`. |
+| AlertAttentionPersistenceEntity | Representa una fila de la tabla `alert_attentions`. | Contenida en `AlertPersistenceEntity`. |
+
+**Sub-capa Persistence: JPA Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| AlertJpaRepository | Interfaz de Spring Data JPA con las consultas por identificador y tipo, por adulto mayor y tipo ordenadas por fecha, resueltas sobre el índice `(older_adult_id, triggered_at)`, y la verificación por check-in, resuelta sobre el índice único de `check_in_id`. | Extiende `JpaRepository`; usada por `EmergencyAlertRepositoryImpl` e `InactivityAlertRepositoryImpl`. |
+
+**Sub-capa Persistence: Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| EmergencyAlertRepositoryImpl | Persiste y recupera el aggregate `EmergencyAlert` sobre las filas de tipo EMERGENCY. Si dos familiares reconocen la misma alerta de forma simultánea, traduce la violación del índice único `(alert_id, action)` en una excepción de dominio. | Implementa `EmergencyAlertRepository`; usa `AlertJpaRepository` y `EmergencyAlertPersistenceMapper`. |
+| InactivityAlertRepositoryImpl | Persiste y recupera el aggregate `InactivityAlert` sobre las filas de tipo INACTIVITY. Si un mismo check-in se evalúa dos veces, el índice único de `check_in_id` impide duplicar la alerta. | Implementa `InactivityAlertRepository`; usa `AlertJpaRepository` y `InactivityAlertPersistenceMapper`. |
+
+**Sub-capa Persistence: Mappers**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| EmergencyAlertPersistenceMapper | Traduce entre el aggregate `EmergencyAlert`, con sus notificaciones y acciones de atención, y sus entidades de persistencia. | Usado por `EmergencyAlertRepositoryImpl`. |
+| InactivityAlertPersistenceMapper | Traduce entre el aggregate `InactivityAlert`, con sus acciones de atención, y sus entidades de persistencia. | Usado por `InactivityAlertRepositoryImpl`. |
 #### 2.6.6.5. Bounded Context Software Architecture Component Level Diagrams
 
 En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Alerts and Safety, elaborado con la herramienta Structurizr (Imagen 53). El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: el `AlertController` como punto de entrada de las peticiones REST; los *Resources* (`AlertResource`, `TriggerEmergencyAlertResource`, `ConfirmAlertAttentionResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y la entidad de dominio `Alert`; los *Commands* y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `AlertCommandService` y `AlertQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IAlertCommandService` e `IAlertQueryService`; y finalmente `IAlertRepository` e `IInactivityWindowRepository`, implementados por sus respectivos repositorios concretos, que gestionan la persistencia de los dos aggregates. Se incluye además `UnansweredCheckInConsumer`, `DiscomfortPatternDetectedConsumer` y `FamilyLinkEstablishedConsumer`, componentes que escuchan los eventos `UnansweredCheckIn` (publicado por Daily Check-in), `DiscomfortPatternDetected` (publicado por Wellbeing Monitoring) y `FamilyLinkEstablished` (publicado por Care Circle), respectivamente, para desencadenar la apertura de la ventana de inactividad, la generación de un Alert de tipo WELLBEING y el mantenimiento local de la referencia de familiares vinculados, esta última sin requerir consulta síncrona a Care Circle al momento de notificar un Alert.
