@@ -4862,77 +4862,300 @@ Incluye índices sobre `care_circle_id` y `author_id` que optimizan la consulta 
 
 ### 2.6.3. Bounded Context: Daily Check-in
 
-El bounded context **Daily Check-in** es el mecanismo principal de recolección de datos. Su responsabilidad es capturar el estado diario del adulto mayor mediante preguntas ligeras, así como administrar las preferencias del usuario (horarios, pausas y modos de interfaz). Conforme al EventStorming, este contexto divide su dominio en dos agregados principales: `CheckIn` y `CheckInPreferences`.
+El bounded context Daily Check-in es el principal mecanismo de contacto diario entre Serenia y el adulto mayor. Gestiona el ciclo de vida del check-in de cada día: su apertura con una pregunta distinta a las recientes, el aviso dentro de la aplicación al llegar el horario configurado, el registro de la respuesta y el cierre del día como no respondido u omitido. También administra las preferencias que el adulto mayor controla sobre esta interacción: el horario del check-in, la pausa diaria de preguntas y el modo simplificado de la interfaz. Es un contexto core: concentra la propuesta de valor de Serenia, que reemplaza la llamada de control por una pregunta breve y respetuosa de la autonomía del usuario.
 
-<br>
+Su modelo se organiza en dos aggregates. `CheckInPreferences` reúne la configuración del adulto mayor y su pausa diaria, ya que ambas determinan cuándo y si debe presentarse la pregunta. `CheckIn` representa la interacción de un día concreto y controla sus transiciones de estado. Las preguntas forman un catálogo de solo lectura, `CheckInQuestion`, del cual se elige la pregunta de cada día.
+
+El contexto consume de Identity & Access la zona horaria del adulto mayor, necesaria para determinar su día en curso, y de Care Circle la verificación de vínculos, necesaria para que los familiares consulten el estado diario. Publica los eventos `CheckInAnswered` y `CheckInMissed`, a partir de los cuales Wellbeing Monitoring evalúa patrones de bienestar y Alerts and Safety genera alertas de inactividad.
 
 #### 2.6.3.1. Domain Layer
 
-**Sub-capa Model - Aggregates y Entities:**
+En esta capa se representan las reglas que gobiernan la interacción diaria con el adulto mayor, sin dependencia de frameworks de persistencia, red ni interfaz. Las fechas de check-in se expresan en la zona horaria del adulto mayor y los instantes, en UTC.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Aggregate | CheckIn | Registro histórico de la interacción diaria. | Controlar el ciclo de vida del check-in (PENDING, ANSWERED o MISSED) y capturar el nivel de ánimo. | Publica eventos para Wellbeing Monitoring y Alerts & Safety. |
-| Aggregate | CheckInPreferences | Preferencias y configuración de la experiencia por usuario. | Administrar horarios, activación de pausas diarias y el modo de interfaz simplificado. | Referencia a la cuenta del usuario. |
-| Entity | QuestionPause | Historial de días pausados voluntariamente. | Evitar alertas de inactividad durante la fecha pausada. | Pertenece al agregado CheckInPreferences. |
+**Sub-capa Model: Aggregates**
 
-**Sub-capa Model - Commands:**
+`CheckInPreferences` (Aggregate Root): representa la configuración del check-in diario de un adulto mayor. Controla el horario, el plazo de respuesta, el modo simplificado y la pausa de preguntas, que el adulto mayor puede activar y desactivar durante el día.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal |
-|---|---|---|---|
-| Command | PromptCheckInCommand | Comando interno del sistema. | Generar y enviar la pregunta del día al usuario. |
-| Command | AnswerCheckInCommand | Comando del adulto mayor. | Registrar la respuesta con el estado de ánimo (`MoodLevel`). |
-| Command | ExpireCheckInCommand | Comando interno de tiempo. | Cambiar el estado a MISSED al vencer el tiempo límite. |
-| Command | ScheduleCheckInCommand | Comando de configuración. | Establecer la hora preferida del recordatorio. |
-| Command | ActivateDailyPauseCommand | Comando de configuración. | Pausar las interacciones para el día actual. |
-| Command | EnableSimplifiedModeCommand | Comando de accesibilidad. | Activar o desactivar el modo simplificado de UI. |
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | CheckInPreferencesId | private | Identificador único de las preferencias. |
+| olderAdultId | OlderAdultId | private | Adulto mayor al que pertenecen las preferencias; cada adulto mayor tiene una única configuración. |
+| reminderTime | ReminderTime | private | Hora local en la que se presenta la pregunta del día; por defecto, las 10:00. |
+| timeLimit | TimeLimit | private | Plazo para responder a partir de la hora configurada; por defecto, 180 minutos. |
+| simplifiedMode | boolean | private | Indica si la interfaz se muestra en modo simplificado. |
+| latestPause | QuestionPause | private | Pausa más reciente del adulto mayor; es nula si nunca pausó las preguntas o si reactivó la última. |
+| updatedAt | Instant | private | Instante de la última modificación, en UTC. |
 
-**Sub-capa Model - Events y Queries:**
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| initialize(olderAdultId, updatedAt) | public (static) | Factory que crea las preferencias con la hora y el plazo predeterminados y registra el evento `CheckInPreferencesInitialized`. |
+| schedule(reminderTime, updatedAt) | public | Cambia la hora del check-in; el nuevo horario se aplica a partir del siguiente check-in. Registra el evento `CheckInScheduled`. |
+| activateDailyPause(today, createdAt) | public | Pausa las preguntas del día en curso; rechaza la operación si ya están pausadas. Registra el evento `DailyPauseActivated`. |
+| resumeToday(today, resumedAt) | public | Reactiva las preguntas del día en curso; rechaza la operación si no estaban pausadas. Registra el evento `DailyCheckInResumed`. |
+| resumeAfterPausedDay(today) | public | Si el día anterior terminó con las preguntas pausadas, registra el evento `DailyCheckInResumed`; en caso contrario no realiza cambios. |
+| enableSimplifiedMode(updatedAt) | public | Activa el modo simplificado y registra el evento `SimplifiedModeEnabled`, siempre que no estuviera activo. |
+| disableSimplifiedMode(updatedAt) | public | Desactiva el modo simplificado y registra el evento `SimplifiedModeDisabled`, siempre que estuviera activo. |
+| isPausedOn(date) | public | Indica si las preguntas están pausadas en la fecha indicada. |
+| windowFor(checkDate, timeZone) | public | Calcula los instantes de presentación y de vencimiento del check-in de una fecha, según la hora configurada, el plazo y la zona horaria del adulto mayor. |
 
-| Tipo | Nombre | Descripción |
-|---|---|---|
-| Event | CheckInAnswered | Informa a *Wellbeing Monitoring* para evaluación de patrones. |
-| Event | CheckInMissed | Informa a *Alerts & Safety* para abrir ventana de inactividad. |
-| Query | GetTodayCheckInQuery | Recuperar el check-in activo del día para la interfaz. |
+`CheckIn` (Aggregate Root): representa la interacción de un día concreto con el adulto mayor. Controla las transiciones entre pendiente, respondido, no respondido y omitido.
 
-**Sub-capa Repositories y Services (Interfaces):**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | CheckInId | private | Identificador único del check-in. |
+| olderAdultId | OlderAdultId | private | Adulto mayor al que corresponde el check-in. |
+| questionId | CheckInQuestionId | private | Pregunta presentada ese día. |
+| checkDate | LocalDate | private | Fecha del check-in en la zona horaria del adulto mayor; existe un único check-in por fecha. |
+| window | CheckInWindow | private | Instantes de presentación y de vencimiento del check-in. |
+| promptedAt | Instant | private | Instante en que se avisó al adulto mayor; es nulo mientras no se haya avisado. |
+| mood | MoodLevel | private | Estado de ánimo informado; es nulo mientras no haya respuesta. |
+| positiveActivity | PositiveActivity | private | Actividad positiva informada junto con la respuesta, opcional. |
+| status | CheckInStatus | private | Estado del check-in. |
+| answeredAt | Instant | private | Instante de la respuesta; es nulo mientras no haya respuesta. |
 
-| Tipo | Nombre | Descripción |
-|---|---|---|
-| Interface | ICheckInRepository | Contrato CRUD para el registro diario de interacciones. |
-| Interface | ICheckInPreferencesRepository | Contrato CRUD para horarios, pausas y modos visuales. |
-| Interface | IDailyCheckInCommandService | Contrato para orquestar los comandos de respuesta y preferencias. |
-| Interface | IDailyCheckInQueryService | Contrato para la lectura de estado y configuración. |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| open(olderAdultId, questionId, checkDate, window) | public (static) | Factory que abre el check-in pendiente de una fecha y registra el evento `CheckInOpened`. |
+| prompt(promptedAt) | public | Registra el aviso del check-in; solo procede si está pendiente y aún no fue avisado. Registra el evento `CheckInPrompted`. |
+| answer(mood, positiveActivity, answeredAt) | public | Registra la respuesta; solo procede si el check-in está pendiente y su plazo no venció. Puede responderse antes del horario configurado. Registra el evento `CheckInAnswered`. |
+| extendDeadline(newDeadlineAt) | public | Otorga un nuevo plazo a un check-in pendiente; el nuevo vencimiento debe ser posterior al actual. |
+| expire(referenceTime) | public | Marca como no respondido un check-in pendiente cuyo plazo venció y registra el evento `CheckInMissed`. |
+| skip(skippedAt) | public | Marca como omitido un check-in pendiente cuyo día terminó con las preguntas pausadas y registra el evento `CheckInSkipped`. |
+| isPending() | public | Indica si el check-in sigue pendiente. |
 
-<br>
+**Sub-capa Model: Entities**
+
+`QuestionPause`: representa la decisión del adulto mayor de no recibir preguntas en una fecha. Pertenece al aggregate `CheckInPreferences`, que solo carga la pausa más reciente; las de días anteriores se conservan en la base de datos como historial.
+
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | QuestionPauseId | private | Identificador único de la pausa. |
+| pausedDate | LocalDate | private | Fecha pausada, en la zona horaria del adulto mayor. |
+| createdAt | Instant | private | Instante en que se activó la pausa, en UTC. |
+
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| appliesTo(date) | public | Indica si la pausa corresponde a la fecha indicada. |
+
+`CheckInQuestion`: representa una pregunta del catálogo que puede presentarse en un check-in. Es una entidad de catálogo de solo lectura: se carga al iniciar la aplicación, no forma parte de ningún aggregate y se consulta mediante su propio repositorio.
+
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | CheckInQuestionId | private | Identificador único de la pregunta. |
+| text | QuestionText | private | Texto de la pregunta presentado al adulto mayor. |
+| tone | String | private | Tono de la pregunta, por ejemplo cálido o reflexivo, opcional. |
+| active | boolean | private | Indica si la pregunta forma parte de la rotación. |
+
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| isActive() | public | Indica si la pregunta puede seleccionarse para un check-in. |
+
+**Sub-capa Model: Value Objects**
+
+Se implementan como records inmutables que validan su contenido al construirse. Los límites de longitud coinciden con las columnas de la base de datos.
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| CheckInPreferencesId, CheckInId, CheckInQuestionId, QuestionPauseId | value: UUID | Identidades inmutables de los aggregates y entities del contexto. |
+| OlderAdultId | value: UUID | Referencia por identidad a una cuenta de adulto mayor de Identity & Access. |
+| ReminderTime | value: LocalTime | Hora del check-in, entre las 06:00 y las 20:00; con el plazo predeterminado, el último check-in posible vence a las 23:00 del mismo día. |
+| TimeLimit | minutes: int | Plazo de respuesta en minutos; debe ser mayor que cero. |
+| CheckInWindow | scheduledFor: Instant, deadlineAt: Instant | Ventana del check-in; el vencimiento debe ser posterior a la presentación. |
+| PositiveActivity | value: String | Actividad positiva informada por el adulto mayor, de máximo 200 caracteres. |
+| QuestionText | value: String | Texto de una pregunta, obligatorio y de máximo 200 caracteres. |
+
+**Sub-capa Model: Enumerations**
+
+| Nombre | Valores | Descripción |
+| --- | --- | --- |
+| CheckInStatus | PENDING, ANSWERED, MISSED, SKIPPED | Estado del check-in: pendiente, respondido, no respondido u omitido por pausa. |
+| MoodLevel | VERY_LOW, LOW, NEUTRAL, GOOD, VERY_GOOD | Escala de estado de ánimo que el adulto mayor selecciona con un solo toque. |
+
+**Sub-capa Model: Domain Services**
+
+| Nombre | Métodos principales | Descripción |
+| --- | --- | --- |
+| QuestionSelectionService | select(activeQuestions, recentQuestionIds): CheckInQuestionId | Elige la pregunta del día priorizando las que nunca se usaron y, entre las usadas, la que se presentó hace más tiempo. Así ninguna pregunta se repite antes de recorrer el conjunto activo y la pregunta siempre difiere de la del día anterior. |
+
+**Sub-capa Model: Commands**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| InitializeCheckInPreferencesCommand | olderAdultId | Intención de crear las preferencias de un adulto mayor recién registrado. |
+| ScheduleCheckInCommand | olderAdultId, reminderTime | Intención de cambiar la hora del check-in. |
+| ActivateDailyPauseCommand | olderAdultId | Intención de pausar las preguntas del día en curso. |
+| ResumeDailyCheckInCommand | olderAdultId | Intención de reactivar las preguntas del día en curso. |
+| EnableSimplifiedModeCommand | olderAdultId | Intención de activar el modo simplificado. |
+| DisableSimplifiedModeCommand | olderAdultId | Intención de desactivar el modo simplificado. |
+| OpenDailyCheckInsCommand | referenceTime | Intención de abrir el check-in de cada adulto mayor cuyo día local ya comenzó. |
+| PromptDueCheckInsCommand | referenceTime | Intención de avisar los check-ins pendientes cuyo horario ya llegó. |
+| AnswerCheckInCommand | checkInId, olderAdultId, mood, positiveActivity | Intención del adulto mayor de responder su check-in. |
+| ExpireDueCheckInsCommand | referenceTime | Intención de cerrar los check-ins pendientes cuyo plazo venció. |
+
+**Sub-capa Model: Queries**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| GetCheckInPreferencesByOlderAdultIdQuery | olderAdultId, requesterId | Consulta de las preferencias de un adulto mayor. |
+| GetTodayCheckInQuery | olderAdultId, requesterId | Consulta del check-in del día en curso y de si las preguntas están pausadas; la usan el adulto mayor para responder y el familiar para conocer su estado. |
+| GetCheckInHistoryQuery | olderAdultId, requesterId, fromDate, toDate | Consulta de los check-ins de un rango de fechas, ordenados por fecha. |
+| GetCheckInQuestionByIdQuery | questionId | Consulta del texto de una pregunta del catálogo. |
+
+**Sub-capa Model: Events**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| CheckInPreferencesInitialized | olderAdultId, occurredAt | Se crearon las preferencias de un adulto mayor. |
+| CheckInScheduled | olderAdultId, reminderTime, occurredAt | Se cambió la hora del check-in. |
+| DailyPauseActivated | olderAdultId, pausedDate, occurredAt | El adulto mayor pausó las preguntas del día. |
+| DailyCheckInResumed | olderAdultId, resumedDate, occurredAt | Las preguntas se reactivaron, por decisión del adulto mayor o por el inicio de un nuevo día. |
+| SimplifiedModeEnabled | olderAdultId, occurredAt | Se activó el modo simplificado. |
+| SimplifiedModeDisabled | olderAdultId, occurredAt | Se desactivó el modo simplificado. |
+| CheckInOpened | checkInId, olderAdultId, checkDate, occurredAt | Se abrió el check-in de un día. |
+| CheckInPrompted | checkInId, olderAdultId, occurredAt | Se avisó al adulto mayor que su check-in está disponible. |
+| CheckInAnswered | checkInId, olderAdultId, checkDate, mood, positiveActivity, occurredAt | El adulto mayor respondió su check-in. Lo consume Wellbeing Monitoring. |
+| CheckInMissed | checkInId, olderAdultId, checkDate, occurredAt | El plazo venció sin respuesta. Lo consume Alerts and Safety. |
+| CheckInSkipped | checkInId, olderAdultId, checkDate, occurredAt | El día terminó con las preguntas pausadas, por lo que no se genera una alerta de inactividad. |
+
+**Sub-capa Repositories**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | CheckInPreferencesRepository | save(preferences), findByOlderAdultId(olderAdultId), findAll() | Contrato de persistencia del aggregate `CheckInPreferences` junto con su pausa más reciente. Se implementa en Infrastructure. |
+| Interface | CheckInRepository | save(checkIn), findById(checkInId), findByOlderAdultIdAndCheckDate(olderAdultId, checkDate), existsByOlderAdultIdAndCheckDate(olderAdultId, checkDate), findAllByOlderAdultIdAndCheckDateBetween(olderAdultId, fromDate, toDate), findAllPendingDueForPrompt(referenceTime), findAllPendingPastDeadline(referenceTime), findRecentQuestionIds(olderAdultId, limit) | Contrato de persistencia del aggregate `CheckIn`. Se implementa en Infrastructure. |
+| Interface | CheckInQuestionRepository | findById(questionId), findAllActive(), saveAll(questions), count() | Contrato de consulta del catálogo de preguntas; `saveAll` solo se usa en la carga inicial. Se implementa en Infrastructure. |
+
+**Sub-capa Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | CheckInPreferencesCommandService | handle(InitializeCheckInPreferencesCommand), handle(ScheduleCheckInCommand), handle(ActivateDailyPauseCommand), handle(ResumeDailyCheckInCommand), handle(EnableSimplifiedModeCommand), handle(DisableSimplifiedModeCommand) | Contrato de las operaciones de escritura sobre las preferencias. |
+| Interface | CheckInPreferencesQueryService | handle(GetCheckInPreferencesByOlderAdultIdQuery) | Contrato de la lectura de preferencias. |
+| Interface | CheckInCommandService | handle(OpenDailyCheckInsCommand), handle(PromptDueCheckInsCommand), handle(AnswerCheckInCommand), handle(ExpireDueCheckInsCommand) | Contrato de las operaciones de escritura sobre los check-ins. |
+| Interface | CheckInQueryService | handle(GetTodayCheckInQuery), handle(GetCheckInHistoryQuery) | Contrato de la lectura de check-ins. |
+| Interface | CheckInQuestionQueryService | handle(GetCheckInQuestionByIdQuery) | Contrato de la lectura del catálogo de preguntas. |
 
 #### 2.6.3.2. Interface Layer
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal |
-|---|---|---|---|
-| Controller | CheckInsController | REST API para interacciones. | Endpoints GET/POST para responder el check-in diario. |
-| Controller | PreferencesController | REST API para configuración. | Endpoints PUT/POST para horarios, pausas y modo simplificado. |
-| Assembler | Assemblers | Transformadores de datos. | Mapear los JSON a Commands/Queries del dominio. |
+Clases que exponen el bounded context hacia el exterior y traducen las peticiones entrantes al lenguaje del dominio.
 
-<br>
+**Sub-capa REST: Controllers**
+
+| Nombre | Endpoints | Descripción |
+| --- | --- | --- |
+| CheckInsController | GET /api/v1/check-ins/today?olderAdultId={olderAdultId}, GET /api/v1/check-ins?olderAdultId={olderAdultId}&from={fromDate}&to={toDate}, POST /api/v1/check-ins/{checkInId}/answer | Punto de entrada de la consulta del check-in del día, del historial y del registro de la respuesta. La respuesta responde 409 Conflict si el check-in ya no está pendiente o su plazo venció. |
+| CheckInPreferencesController | GET /api/v1/check-in-preferences?olderAdultId={olderAdultId}, PUT /api/v1/check-in-preferences/{preferencesId}/reminder-time, POST /api/v1/check-in-preferences/{preferencesId}/daily-pause, DELETE /api/v1/check-in-preferences/{preferencesId}/daily-pause, PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode | Punto de entrada de la consulta y modificación de las preferencias. El cambio de hora responde 400 Bad Request con el rango válido si la hora está fuera de él. La pausa se activa con POST y se desactiva con DELETE; ambas responden 409 Conflict si las preguntas ya estaban en el estado solicitado. |
+
+Las consultas de check-ins solo proceden para el propio adulto mayor o para un familiar con vínculo activo; las preferencias y la respuesta, solo para el propio adulto mayor. En otro caso se responde 403 Forbidden.
+
+**Sub-capa REST: Resources**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| CheckInResource | id, olderAdultId, checkDate, questionText, scheduledFor, deadlineAt, status, paused, mood, positiveActivity, answeredAt | Representación de un check-in junto con el texto de su pregunta y la indicación de si las preguntas están pausadas, con la que el familiar sabe que el adulto mayor optó por no participar. |
+| AnswerCheckInResource | mood, positiveActivity | Datos de entrada de la respuesta del adulto mayor. |
+| CheckInPreferencesResource | id, olderAdultId, reminderTime, timeLimitMinutes, simplifiedMode, pausedToday | Representación de las preferencias del check-in. |
+| ScheduleCheckInResource | reminderTime | Datos de entrada para cambiar la hora del check-in. |
+| UpdateSimplifiedModeResource | enabled | Datos de entrada para activar o desactivar el modo simplificado. |
+
+**Sub-capa REST: Transform**
+
+| Nombre | Descripción |
+| --- | --- |
+| CheckInResourceFromEntityAssembler | Combina el aggregate `CheckIn` con el texto de su pregunta y el estado de la pausa en su representación REST. |
+| CheckInPreferencesResourceFromEntityAssembler | Convierte el aggregate `CheckInPreferences` en su representación REST. |
+| AnswerCheckInCommandFromResourceAssembler | Combina la respuesta con el check-in y el adulto mayor autenticado para construir el comando. |
+| ScheduleCheckInCommandFromResourceAssembler | Convierte la petición de cambio de hora en su comando. |
+| SimplifiedModeCommandFromResourceAssembler | Convierte la petición en el comando de activación o de desactivación, según el valor recibido. |
+
+**Sub-capa Scheduling: Jobs**
+
+| Nombre | Descripción |
+| --- | --- |
+| CheckInLifecycleScheduler | Tareas periódicas del ciclo del check-in. Cada hora envía `OpenDailyCheckInsCommand`, frecuencia suficiente porque el horario más temprano permitido es a las 06:00. Cada minuto envía `PromptDueCheckInsCommand` y `ExpireDueCheckInsCommand`. |
+
+**Sub-capa ACL**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | DailyCheckInContextFacade | fetchMoodsByDateRange(olderAdultId, fromDate, toDate): Map\<LocalDate, String\> | Contrato que el contexto ofrece a los demás. Wellbeing Monitoring lo usa para obtener los estados de ánimo de varios días consecutivos al evaluar patrones. Devuelve tipos estándar de Java para no exponer clases del dominio. |
 
 #### 2.6.3.3. Application Layer
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal |
-|---|---|---|---|
-| Service | DailyCheckInCommandService | Ejecutor de casos de uso de escritura. | Valida invariantes, modifica los agregados `CheckIn` o `CheckInPreferences` y publica los eventos de dominio. |
-| Service | DailyCheckInQueryService | Ejecutor de casos de uso de lectura. | Devuelve los recursos de lectura sin alterar estado. |
+Clases que orquestan los flujos del contexto, coordinando los aggregates, los repositorios, el servicio de selección de preguntas y los servicios de otros contextos.
 
-<br>
+**Sub-capa Internal: CommandServices (Command Handlers)**
 
-#### 2.6.3.4 Infrastructure Layer
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInPreferencesCommandServiceImpl | Crea las preferencias sin duplicarlas si el adulto mayor ya tiene una configuración, cambia la hora y gestiona el modo simplificado. Activa y desactiva la pausa del día en curso, calculado en la zona horaria del adulto mayor. Al reactivar las preguntas, si el plazo del check-in del día ya venció, le otorga un nuevo plazo de la misma duración desde la reactivación, sin superar el fin del día local. Es la única operación que modifica ambos aggregates en una misma transacción, porque la decisión del adulto mayor debe surtir efecto de inmediato. Tras persistir, publica los eventos acumulados. | Implementa `CheckInPreferencesCommandService`; usa `CheckInPreferencesRepository`, `CheckInRepository`, `ExternalIamService` y `DomainEventPublisher`. |
+| CheckInCommandServiceImpl | Abre el check-in del día de cada adulto mayor cuya fecha local aún no tiene uno: elige la pregunta con `QuestionSelectionService`, calcula la ventana con sus preferencias y, si el día anterior terminó pausado, registra la reanudación. Avisa los check-ins pendientes cuyo horario llegó y cuyas preguntas no están pausadas; si las preguntas se reactivan después del horario, el aviso se envía en la siguiente ejecución. Registra respuestas verificando que provengan del propio adulto mayor. Al vencer un plazo, marca el check-in como no respondido; si las preguntas están pausadas, lo deja pendiente y lo marca como omitido recién cuando termina el día local. | Implementa `CheckInCommandService`; usa `CheckInRepository`, `CheckInPreferencesRepository`, `CheckInQuestionRepository`, `QuestionSelectionService`, `ExternalIamService` y `DomainEventPublisher`. |
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal |
-|---|---|---|---|
-| Repository | CheckInRepository | Implementación persistencia. | Persistir las interacciones diarias en la BD. |
-| Repository | CheckInPreferencesRepository | Implementación persistencia. | Persistir horarios, pausas y flags de UI en la BD. |
+**Sub-capa Internal: QueryServices**
 
-<br>
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInPreferencesQueryServiceImpl | Resuelve la consulta de preferencias del propio adulto mayor. | Implementa `CheckInPreferencesQueryService`; usa `CheckInPreferencesRepository`. |
+| CheckInQueryServiceImpl | Resuelve el check-in del día, calculado en la zona horaria del adulto mayor, junto con el estado de la pausa, y el historial, previa verificación de que el solicitante sea el adulto mayor o un familiar con vínculo activo. | Implementa `CheckInQueryService`; usa `CheckInRepository`, `CheckInPreferencesRepository`, `ExternalIamService` y `ExternalCareCircleService`. |
+| CheckInQuestionQueryServiceImpl | Resuelve la consulta de una pregunta del catálogo. | Implementa `CheckInQuestionQueryService`; usa `CheckInQuestionRepository`. |
+
+**Sub-capa Internal: Event Handlers**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| OlderAdultRegisteredEventHandler | Crea las preferencias del check-in de un adulto mayor recién registrado. Se ejecuta de forma síncrona dentro de la transacción del registro. | Escucha `OlderAdultRegistered` de Identity & Access; envía `InitializeCheckInPreferencesCommand`. |
+| ApplicationReadyEventHandler | Carga el catálogo inicial de preguntas al iniciar la aplicación, solo si el catálogo está vacío. | Escucha el evento de arranque de Spring; usa `CheckInQuestionRepository`. |
+
+**Sub-capa Internal: Outbound Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Class | ExternalIamService | fetchTimeZone(olderAdultId) | Consume `IamContextFacade` y devuelve la zona horaria del adulto mayor como `ZoneId`. |
+| Class | ExternalCareCircleService | isActiveRelativeOf(relativeId, olderAdultId) | Consume `CareCircleContextFacade` para verificar que un familiar esté vinculado al adulto mayor. |
+
+**Sub-capa ACL**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| DailyCheckInContextFacadeImpl | Resuelve los estados de ánimo de un rango de fechas a partir de los check-ins respondidos. | Implementa `DailyCheckInContextFacade`; usa `CheckInRepository`. |
+
+#### 2.6.3.4. Infrastructure Layer
+
+Clases que resuelven el acceso a la base de datos MySQL, implementando las abstracciones definidas en la capa Domain.
+
+**Sub-capa Persistence: JPA Entities**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInPreferencesPersistenceEntity | Representa una fila de la tabla `check_in_preferences`. | Usada por `CheckInPreferencesJpaRepository` y `CheckInPreferencesPersistenceMapper`. |
+| QuestionPausePersistenceEntity | Representa una fila de la tabla `question_pauses`. | Usada por `QuestionPauseJpaRepository` y `CheckInPreferencesPersistenceMapper`. |
+| CheckInPersistenceEntity | Representa una fila de la tabla `check_ins`. | Usada por `CheckInJpaRepository` y `CheckInPersistenceMapper`. |
+| CheckInQuestionPersistenceEntity | Representa una fila de la tabla `check_in_questions`. | Usada por `CheckInQuestionJpaRepository` y `CheckInQuestionPersistenceMapper`. |
+
+**Sub-capa Persistence: JPA Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInPreferencesJpaRepository | Interfaz de Spring Data JPA con la consulta por adulto mayor, resuelta sobre el índice único de `older_adult_id`. | Extiende `JpaRepository`; usada por `CheckInPreferencesRepositoryImpl`. |
+| QuestionPauseJpaRepository | Interfaz de Spring Data JPA con la consulta de la pausa más reciente de un adulto mayor, resuelta sobre el índice único `(older_adult_id, paused_date)`. | Extiende `JpaRepository`; usada por `CheckInPreferencesRepositoryImpl`. |
+| CheckInJpaRepository | Interfaz de Spring Data JPA. Las consultas por adulto mayor y fecha o rango de fechas usan el índice único `(older_adult_id, check_date)`. Las de check-ins por avisar o vencidos usan el índice `(status, deadline_at)`; como cada adulto mayor tiene a lo sumo un check-in pendiente, el conjunto que recorren es pequeño. | Extiende `JpaRepository`; usada por `CheckInRepositoryImpl`. |
+| CheckInQuestionJpaRepository | Interfaz de Spring Data JPA con la consulta de preguntas activas. | Extiende `JpaRepository`; usada por `CheckInQuestionRepositoryImpl`. |
+
+**Sub-capa Persistence: Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInPreferencesRepositoryImpl | Persiste y recupera el aggregate `CheckInPreferences`, componiéndolo con su pausa más reciente. Inserta una fila en `question_pauses` al activarse la pausa y la elimina cuando el adulto mayor reactiva las preguntas el mismo día. | Implementa `CheckInPreferencesRepository`; usa `CheckInPreferencesJpaRepository`, `QuestionPauseJpaRepository` y `CheckInPreferencesPersistenceMapper`. |
+| CheckInRepositoryImpl | Persiste y recupera el aggregate `CheckIn`. Si dos ejecuciones intentan abrir el mismo día, traduce la violación del índice único en una excepción de dominio, de modo que la apertura sea idempotente. | Implementa `CheckInRepository`; usa `CheckInJpaRepository` y `CheckInPersistenceMapper`. |
+| CheckInQuestionRepositoryImpl | Recupera el catálogo de preguntas y lo persiste durante la carga inicial. | Implementa `CheckInQuestionRepository`; usa `CheckInQuestionJpaRepository` y `CheckInQuestionPersistenceMapper`. |
+
+**Sub-capa Persistence: Mappers**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInPreferencesPersistenceMapper | Traduce entre el aggregate `CheckInPreferences`, con su pausa más reciente, y sus entidades de persistencia. | Usado por `CheckInPreferencesRepositoryImpl`. |
+| CheckInPersistenceMapper | Traduce entre el aggregate `CheckIn` y `CheckInPersistenceEntity`. | Usado por `CheckInRepositoryImpl`. |
+| CheckInQuestionPersistenceMapper | Traduce entre la entidad `CheckInQuestion` y `CheckInQuestionPersistenceEntity`. | Usado por `CheckInQuestionRepositoryImpl`. |
 
 #### 2.6.3.5. Bounded Context Software Architecture Component Level Diagrams
 
