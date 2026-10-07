@@ -5207,145 +5207,139 @@ El diseño de base de datos transaccional para Daily Check-in (Imagen 46) incluy
 
 ### 2.6.4. Bounded Context: Wellbeing Monitoring
 
-El bounded context **Wellbeing Monitoring** es responsable de interpretar los check-ins registrados por el módulo **Daily Check-in** para producir el estado de bienestar del adulto mayor: registra cada estado de ánimo derivado de un check-in respondido (`WellbeingEntry`), genera el resumen diario que ve el cuidador a distancia (`StatusSummary`), detecta patrones sostenidos de malestar o de mejora en la tendencia (`WellbeingPattern`) y registra pequeños logros (`SmallWin`) cuando corresponde. A diferencia de otros contextos, no mantiene un agregado único: cada uno de estos cuatro conceptos es una raíz de agregado independiente, alineada 1 a 1 con las tablas `wellbeing_entries`, `status_summaries`, `small_wins` y `wellbeing_patterns` del diseño de base de datos oficial del equipo. El diseño táctico presentado a continuación está alineado directamente con los eventos de dominio levantados en la sesión de EventStorming del bounded context (ver imagen).
+El bounded context Wellbeing Monitoring interpreta las respuestas del check-in diario para que el familiar a distancia sepa cuándo conviene actuar y qué vale la pena celebrar. Evalúa cada check-in respondido junto con los días anteriores para detectar un malestar sostenido, emite una sugerencia de acción cuando lo detecta y registra pequeñas victorias cuando el adulto mayor tiene un buen día o comparte una actividad positiva. También permite a los familiares descartar las sugerencias que ya atendieron. Es un contexto de soporte: no recolecta datos propios, sino que transforma los datos de Daily Check-in en información útil para el familiar.
 
-<br>
+Su modelo se organiza en un único aggregate, `WellbeingInsight`, que reúne la interpretación del bienestar de un adulto mayor: los patrones de malestar, las sugerencias y las pequeñas victorias. Su identidad es la del adulto mayor y no requiere una tabla propia. Como el historial crece con cada día evaluado, el aggregate carga solo los elementos que intervienen en sus reglas: el patrón de malestar más reciente, para decidir si una racha continúa o comienza, y las sugerencias activas, para que un patrón no genere más de una sugerencia.
+
+El contexto reacciona al evento `CheckInAnswered` de Daily Check-in, del cual obtiene el estado de ánimo y la actividad del día, y consulta a ese mismo contexto los estados de ánimo de los días anteriores. Consulta a Care Circle la verificación de vínculos, para que solo los familiares vinculados vean y descarten sugerencias, y a Identity & Access la zona horaria del adulto mayor, para resolver los periodos consultados.
 
 #### 2.6.4.1. Domain Layer
 
-En esta capa se representan las reglas de negocio propias del bienestar del adulto mayor, sin dependencia de frameworks de persistencia, red ni interfaz.
+En esta capa se representan las reglas que convierten las respuestas diarias en señales de bienestar, sin dependencia de frameworks de persistencia, red ni interfaz.
 
 **Sub-capa Model: Aggregates**
 
-`WellbeingEntry` (Aggregate Root): representa el registro del estado de ánimo del adulto mayor derivado de un check-in respondido.
+`WellbeingInsight` (Aggregate Root): representa la interpretación del bienestar de un adulto mayor. Controla la detección de patrones de malestar, la emisión y el descarte de sugerencias y el registro de pequeñas victorias.
 
 | Atributo | Tipo | Visibilidad | Descripción |
 | --- | --- | --- | --- |
-| id | WellbeingEntryId | private | Identificador único del registro de bienestar. |
-| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el registro. |
-| checkInId | CheckInId | private | Identificador del check-in del cual se derivó este registro. |
-| mood | MoodLevel | private | Nivel de ánimo reportado en el check-in. |
-| moodScore | MoodScore | private | Puntaje numérico asociado al nivel de ánimo reportado. |
-| recordedAt | LocalDateTime | private | Fecha y hora en que se registró el estado de ánimo. |
+| olderAdultId | OlderAdultId | private | Adulto mayor al que corresponde la interpretación; es la identidad del aggregate. |
+| latestDiscomfortPattern | WellbeingPattern | private | Patrón de malestar más reciente; es nulo si nunca se detectó uno. |
+| activeSuggestions | List\<WellbeingSuggestion\> | private | Sugerencias vigentes, aún no descartadas. |
+| newSmallWins | List\<SmallWin\> | private | Pequeñas victorias registradas en la operación en curso; las anteriores no se cargan porque ninguna regla depende de ellas. |
 
 | Método | Visibilidad | Descripción |
 | --- | --- | --- |
-| recordFrom(checkInId, olderAdultId, mood, moodScore) | public (static) | Crea un nuevo registro de bienestar a partir de un check-in respondido. |
-| moodValue() | public | Devuelve el nivel de ánimo registrado. |
+| evaluate(checkInId, checkDate, mood, positiveActivity, recentMoods, evaluatedAt) | public | Evalúa el día respondido junto con los anteriores. Si se completan tres días consecutivos de malestar, detecta un patrón y registra el evento `DiscomfortPatternDetected`; si la racha ya tenía un patrón, lo extiende sin detectar uno nuevo. Si el día muestra bienestar positivo, registra el evento `WellbeingTrendImproved`. |
+| issueSuggestion(patternId, message, issuedAt) | public | Emite una sugerencia de acción para un patrón; rechaza una segunda sugerencia para el mismo patrón. Registra el evento `WellbeingSuggestionIssued`. |
+| recordSmallWin(checkInId, description, recordedAt) | public | Registra una pequeña victoria asociada a un check-in y el evento `SmallWinRecorded`. |
+| dismissSuggestion(suggestionId, relativeId, dismissedAt) | public | Descarta una sugerencia activa para todos los familiares y registra el evento `WellbeingSuggestionDismissed`. |
+| discomfortStreakEndingOn(date, recentMoods) | private | Cuenta los días consecutivos con ánimo bajo o muy bajo que terminan en la fecha indicada; un día sin respuesta interrumpe la racha. |
+| isPositiveDay(mood, positiveActivity) | private | Indica si el día muestra bienestar positivo: ánimo bueno o muy bueno, o una actividad positiva informada. |
 
-`WellbeingPattern` (Aggregate Root): representa un patrón detectado en el historial de check-ins de un adulto mayor, de malestar sostenido o de mejora en la tendencia de bienestar.
+**Sub-capa Model: Entities**
+
+`WellbeingPattern`: representa un periodo sostenido de malestar del adulto mayor. Pertenece al aggregate `WellbeingInsight`.
 
 | Atributo | Tipo | Visibilidad | Descripción |
 | --- | --- | --- | --- |
-| id | WellbeingPatternId | private | Identificador único del patrón detectado. |
-| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el patrón. |
-| type | PatternType | private | Tipo de patrón detectado: malestar sostenido o mejora. |
-| consecutiveDays | Integer | private | Cantidad de días consecutivos que sostienen el patrón. |
-| startDate | LocalDate | private | Fecha de inicio del periodo evaluado. |
-| endDate | LocalDate | private | Fecha de fin del periodo evaluado. |
-| detectedAt | LocalDateTime | private | Fecha y hora en que se detectó el patrón. |
+| id | WellbeingPatternId | private | Identificador único del patrón. |
+| type | PatternType | private | Tipo de patrón detectado. |
+| consecutiveDays | int | private | Cantidad de días consecutivos que sostienen el patrón. |
+| startDate | LocalDate | private | Primer día del patrón, en la zona horaria del adulto mayor. |
+| endDate | LocalDate | private | Último día del patrón, en la zona horaria del adulto mayor. |
+| detectedAt | Instant | private | Instante en que se detectó el patrón, en UTC. |
 
 | Método | Visibilidad | Descripción |
 | --- | --- | --- |
-| detect(olderAdultId, type, consecutiveDays, startDate, endDate) | public (static) | Crea un nuevo patrón a partir del análisis del historial de check-ins. |
-| isDiscomfort() | public | Indica si el patrón corresponde a malestar sostenido. |
-| isImprovement() | public | Indica si el patrón corresponde a una mejora de tendencia. |
+| extendTo(endDate) | public | Prolonga el patrón cuando la racha continúa al día siguiente y actualiza la cantidad de días. |
+| continuesOn(date) | public | Indica si la fecha indicada es el día siguiente al último día del patrón. |
 
-`SmallWin` (Aggregate Root): representa un pequeño logro del adulto mayor, generado a partir de una mejora detectada en su tendencia de bienestar y compartido con el cuidador a distancia.
+`WellbeingSuggestion`: representa una recomendación dirigida a los familiares, como llamar o visitar al adulto mayor, emitida a partir de un patrón de malestar. Pertenece al aggregate `WellbeingInsight`.
 
 | Atributo | Tipo | Visibilidad | Descripción |
 | --- | --- | --- | --- |
-| id | SmallWinId | private | Identificador único del pequeño logro. |
-| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el logro. |
-| checkInId | CheckInId | private | Identificador del check-in del cual se derivó el logro, cuando aplica. |
-| description | SmallWinDescription | private | Descripción del pequeño logro. |
-| recordedAt | LocalDateTime | private | Fecha y hora en que se registró el logro. |
+| id | WellbeingSuggestionId | private | Identificador único de la sugerencia. |
+| patternId | WellbeingPatternId | private | Patrón que originó la sugerencia. |
+| message | SuggestionMessage | private | Texto de la recomendación. |
+| status | SuggestionStatus | private | Estado de la sugerencia: activa o descartada. |
+| issuedAt | Instant | private | Instante de emisión, en UTC. |
+| dismissedBy | RelativeId | private | Familiar que descartó la sugerencia; es nulo mientras esté activa. |
+| dismissedAt | Instant | private | Instante del descarte; es nulo mientras esté activa. |
 
 | Método | Visibilidad | Descripción |
 | --- | --- | --- |
-| recordFrom(olderAdultId, checkInId, description) | public (static) | Crea un nuevo pequeño logro a partir de una mejora detectada. |
+| dismiss(relativeId, dismissedAt) | public | Marca la sugerencia como descartada. |
+| isActive() | public | Indica si la sugerencia sigue vigente. |
 
-`StatusSummary` (Aggregate Root): representa el resumen diario del estado del adulto mayor, mostrado al cuidador a distancia como una vista consolidada del día.
+`SmallWin`: representa un buen día o una actividad positiva del adulto mayor, que se muestra a los familiares para reforzar lo positivo. Pertenece al aggregate `WellbeingInsight`.
 
 | Atributo | Tipo | Visibilidad | Descripción |
 | --- | --- | --- | --- |
-| id | StatusSummaryId | private | Identificador único del resumen. |
-| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el resumen. |
-| summaryDate | LocalDate | private | Fecha a la que corresponde el resumen. |
-| mood | MoodLevel | private | Estado de ánimo predominante del día resumido. |
-| hasAnswered | Boolean | private | Indica si el adulto mayor respondió su check-in ese día. |
-| highlight | String | private | Dato destacado del día, mostrado al cuidador a distancia. |
-| generatedAt | LocalDateTime | private | Fecha y hora en que se generó el resumen. |
-
-| Método | Visibilidad | Descripción |
-| --- | --- | --- |
-| generateFor(olderAdultId, summaryDate, mood, hasAnswered, highlight) | public (static) | Genera o actualiza el resumen diario de un adulto mayor. |
+| id | SmallWinId | private | Identificador único de la pequeña victoria. |
+| checkInId | CheckInId | private | Check-in del cual proviene; cada check-in genera a lo sumo una pequeña victoria. |
+| description | SmallWinDescription | private | Actividad positiva informada o, si no la hubo, una descripción del buen día. |
+| recordedAt | Instant | private | Instante del registro, en UTC. |
 
 **Sub-capa Model: Value Objects**
 
+Se implementan como records inmutables que validan su contenido al construirse. Los límites de longitud coinciden con las columnas de la base de datos.
+
 | Nombre | Atributos | Descripción |
 | --- | --- | --- |
-| WellbeingEntryId | value: UUID | Identidad inmutable de un registro de bienestar. |
-| WellbeingPatternId | value: UUID | Identidad inmutable de un patrón detectado. |
-| SmallWinId | value: UUID | Identidad inmutable de un pequeño logro. |
-| StatusSummaryId | value: UUID | Identidad inmutable de un resumen diario. |
-| MoodScore | value: Integer | Puntaje numérico de bienestar, validado dentro de un rango permitido. |
-| SmallWinDescription | value: String | Descripción del pequeño logro, con validación de longitud máxima. |
+| WellbeingPatternId, WellbeingSuggestionId, SmallWinId | value: UUID | Identidades inmutables de las entities del contexto. |
+| OlderAdultId | value: UUID | Referencia por identidad a una cuenta de adulto mayor de Identity & Access. |
+| RelativeId | value: UUID | Referencia por identidad a una cuenta de familiar a distancia de Identity & Access. |
+| CheckInId | value: UUID | Referencia por identidad a un check-in de Daily Check-in. |
+| SuggestionMessage | value: String | Texto de la sugerencia, obligatorio y de máximo 300 caracteres. |
+| SmallWinDescription | value: String | Descripción de la pequeña victoria, obligatoria y de máximo 200 caracteres. |
 
 **Sub-capa Model: Enumerations**
 
 | Nombre | Valores | Descripción |
 | --- | --- | --- |
-| MoodLevel | VERY_LOW, LOW, NEUTRAL, GOOD, VERY_GOOD | Nivel de ánimo reportado en un check-in. |
-| PatternType | SUSTAINED_DISCOMFORT, IMPROVEMENT | Tipo de patrón detectado en el historial de check-ins de un adulto mayor. |
+| MoodLevel | VERY_LOW, LOW, NEUTRAL, GOOD, VERY_GOOD | Estado de ánimo informado en un check-in, traducido desde los valores que publica Daily Check-in. |
+| PatternType | SUSTAINED_DISCOMFORT | Tipo de patrón detectado en el historial del adulto mayor. |
+| SuggestionStatus | ACTIVE, DISMISSED | Estado de una sugerencia. |
 
 **Sub-capa Model: Commands**
 
-| Nombre | Descripción |
-| --- | --- |
-| RecordWellbeingEntryCommand | Intención de registrar el estado de ánimo derivado de un check-in respondido. |
-| DetectWellbeingPatternCommand | Intención de analizar el historial de check-ins de un adulto mayor y determinar si existe un patrón de malestar sostenido o de mejora. |
-| RecordSmallWinCommand | Intención de registrar un pequeño logro a partir de una mejora detectada. |
-| GenerateStatusSummaryCommand | Intención de generar o actualizar el resumen diario del estado de un adulto mayor. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| EvaluateWellbeingPatternCommand | olderAdultId, checkInId, checkDate, mood, positiveActivity | Intención de evaluar el bienestar a partir de un check-in respondido. |
+| IssueWellbeingSuggestionCommand | olderAdultId, patternId | Intención de emitir una sugerencia de acción a partir de un patrón de malestar. |
+| RecordSmallWinCommand | olderAdultId, checkInId, positiveActivity | Intención de registrar una pequeña victoria a partir de un día positivo. |
+| DismissWellbeingSuggestionCommand | olderAdultId, suggestionId, relativeId | Intención de un familiar de descartar una sugerencia. |
 
 **Sub-capa Model: Queries**
 
-| Nombre | Descripción |
-| --- | --- |
-| GetWellbeingEntriesByOlderAdultIdQuery | Consulta del historial de registros de bienestar de un adulto mayor. |
-| GetWellbeingPatternsByOlderAdultIdQuery | Consulta de los patrones detectados para un adulto mayor. |
-| GetSmallWinsByOlderAdultIdQuery | Consulta de los pequeños logros registrados para un adulto mayor. |
-| GetStatusSummaryByDateQuery | Consulta del resumen diario de un adulto mayor en una fecha específica. |
-| GetLatestStatusSummaryQuery | Consulta del resumen diario más reciente de un adulto mayor. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| GetActiveWellbeingSuggestionsQuery | olderAdultId, requesterId | Consulta de las sugerencias vigentes de un adulto mayor. |
+| GetSmallWinsByPeriodQuery | olderAdultId, requesterId, fromDate, toDate | Consulta de las pequeñas victorias de un periodo, ordenadas por fecha. |
 
 **Sub-capa Model: Events**
 
-| Nombre | Descripción |
-| --- | --- |
-| WellbeingEntryRecorded | Se registró el estado de ánimo derivado de un check-in respondido. |
-| SustainedDiscomfortPatternDetected | Se detectó un patrón de malestar sostenido en el historial de check-ins. |
-| WellbeingImprovementPatternDetected | Se detectó una mejora en la tendencia de bienestar. |
-| SmallWinRecorded | Se registró un pequeño logro del adulto mayor. |
-| StatusSummaryGenerated | Se generó o actualizó el resumen diario del estado de un adulto mayor. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| DiscomfortPatternDetected | olderAdultId, patternId, consecutiveDays, startDate, endDate, occurredAt | Se detectó un malestar sostenido durante varios días consecutivos. |
+| WellbeingTrendImproved | olderAdultId, checkInId, checkDate, positiveActivity, occurredAt | El día evaluado mostró bienestar positivo. |
+| WellbeingSuggestionIssued | olderAdultId, suggestionId, patternId, occurredAt | Se emitió una sugerencia de acción para los familiares. |
+| SmallWinRecorded | olderAdultId, smallWinId, checkInId, occurredAt | Se registró una pequeña victoria. |
+| WellbeingSuggestionDismissed | olderAdultId, suggestionId, relativeId, occurredAt | Un familiar descartó una sugerencia. |
 
 **Sub-capa Repositories**
 
 | Tipo | Nombre | Métodos principales | Descripción |
 | --- | --- | --- | --- |
-| Interface | IWellbeingEntryRepository | save(entry), findById(id), findByOlderAdultId(olderAdultId), findByCheckInId(checkInId) | Contrato de persistencia del aggregate `WellbeingEntry`. Se implementa en Infrastructure. |
-| Interface | IWellbeingPatternRepository | save(pattern), findById(id), findByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `WellbeingPattern`. |
-| Interface | ISmallWinRepository | save(smallWin), findById(id), findByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `SmallWin`. |
-| Interface | IStatusSummaryRepository | save(summary), findByOlderAdultIdAndDate(olderAdultId, date), findLatestByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `StatusSummary`. |
+| Interface | WellbeingInsightRepository | findByOlderAdultId(olderAdultId), save(insight), findActiveSuggestionsByOlderAdultId(olderAdultId), findSmallWinsByOlderAdultIdBetween(olderAdultId, from, to) | Contrato de persistencia del aggregate `WellbeingInsight` y de las consultas de sugerencias y pequeñas victorias. Se implementa en Infrastructure. |
 
 **Sub-capa Services**
 
 | Tipo | Nombre | Métodos principales | Descripción |
 | --- | --- | --- | --- |
-| Interface | IWellbeingCommandService | handle(RecordWellbeingEntryCommand), handle(DetectWellbeingPatternCommand), handle(RecordSmallWinCommand), handle(GenerateStatusSummaryCommand) | Contrato de las operaciones de escritura del contexto. |
-| Interface | IWellbeingQueryService | handle(GetWellbeingEntriesByOlderAdultIdQuery), handle(GetWellbeingPatternsByOlderAdultIdQuery), handle(GetSmallWinsByOlderAdultIdQuery), handle(GetStatusSummaryByDateQuery), handle(GetLatestStatusSummaryQuery) | Contrato de las operaciones de lectura del contexto. |
-| Interface | IDomainEventPublisher | publish(event) | Abstracción para publicar los eventos de dominio hacia los demás módulos, compartida con los demás bounded contexts. |
-
-<br>
+| Interface | WellbeingInsightCommandService | handle(EvaluateWellbeingPatternCommand), handle(IssueWellbeingSuggestionCommand), handle(RecordSmallWinCommand), handle(DismissWellbeingSuggestionCommand) | Contrato de las operaciones de escritura del contexto. |
+| Interface | WellbeingInsightQueryService | handle(GetActiveWellbeingSuggestionsQuery), handle(GetSmallWinsByPeriodQuery) | Contrato de las operaciones de lectura del contexto. |
 
 #### 2.6.4.2. Interface Layer
 
@@ -5355,83 +5349,88 @@ Clases que exponen el bounded context hacia el exterior y traducen las peticione
 
 | Nombre | Endpoints | Descripción |
 | --- | --- | --- |
-| WellbeingEntriesController | GET /wellbeing-entries?olderAdultId={id} | Punto de entrada de consulta del historial de registros de bienestar de un adulto mayor. |
-| WellbeingPatternsController | GET /wellbeing-patterns?olderAdultId={id} | Punto de entrada de consulta de los patrones detectados. |
-| SmallWinsController | GET /small-wins?olderAdultId={id}, POST /small-wins | Punto de entrada de consulta y registro manual de pequeños logros. |
-| StatusSummariesController | GET /status-summaries/latest?olderAdultId={id}, GET /status-summaries?olderAdultId={id}&date={date} | Punto de entrada de consulta del resumen diario del adulto mayor. |
+| WellbeingSuggestionsController | GET /api/v1/wellbeing-suggestions?olderAdultId={olderAdultId}, POST /api/v1/wellbeing-suggestions/{suggestionId}/dismiss | Punto de entrada de la consulta de sugerencias vigentes y de su descarte. El descarte responde 409 Conflict si la sugerencia ya no está activa. Ambas operaciones están reservadas a familiares con vínculo activo. |
+| SmallWinsController | GET /api/v1/small-wins?olderAdultId={olderAdultId}&from={fromDate}&to={toDate} | Punto de entrada de la consulta de pequeñas victorias de un periodo, disponible para el adulto mayor y para sus familiares vinculados. |
+
+Las operaciones responden 403 Forbidden cuando el usuario autenticado no tiene el acceso indicado.
 
 **Sub-capa REST: Resources**
 
-| Nombre | Descripción |
-| --- | --- |
-| WellbeingEntryResource | Representación pública de un registro de bienestar. |
-| WellbeingPatternResource | Representación pública de un patrón detectado. |
-| SmallWinResource | Representación pública de un pequeño logro. |
-| RecordSmallWinResource | Datos de entrada para registrar manualmente un pequeño logro. |
-| StatusSummaryResource | Representación pública del resumen diario de un adulto mayor. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| WellbeingSuggestionResource | id, olderAdultId, patternId, message, status, issuedAt | Representación de una sugerencia de acción. |
+| SmallWinResource | id, olderAdultId, checkInId, description, recordedAt | Representación de una pequeña victoria. |
 
 **Sub-capa REST: Transform**
 
 | Nombre | Descripción |
 | --- | --- |
-| WellbeingEntryResourceFromEntityAssembler | Convierte el aggregate `WellbeingEntry` en su representación REST. |
-| WellbeingPatternResourceFromEntityAssembler | Convierte el aggregate `WellbeingPattern` en su representación REST. |
-| SmallWinResourceFromEntityAssembler | Convierte el aggregate `SmallWin` en su representación REST. |
-| RecordSmallWinCommandFromResourceAssembler | Convierte la petición de registro manual en el comando `RecordSmallWinCommand`. |
-| StatusSummaryResourceFromEntityAssembler | Convierte el aggregate `StatusSummary` en su representación REST. |
-
-**Sub-capa ACL: Consumers**
-
-| Nombre | Descripción |
-| --- | --- |
-| CheckInAnsweredConsumer | Escucha, dentro del monolito modular, el evento `CheckInAnswered` publicado por Daily Check-in y desencadena `RecordWellbeingEntryCommand`, `DetectWellbeingPatternCommand` y `GenerateStatusSummaryCommand`. |
-
-<br>
+| WellbeingSuggestionResourceFromEntityAssembler | Convierte la entidad `WellbeingSuggestion` en su representación REST. |
+| SmallWinResourceFromEntityAssembler | Convierte la entidad `SmallWin` en su representación REST. |
 
 #### 2.6.4.3. Application Layer
 
-Clases que orquestan los flujos del contexto, coordinando los cuatro aggregates y sus repositorios.
+Clases que orquestan los flujos del contexto, coordinando el aggregate, su repositorio y los servicios de otros contextos.
 
-**Sub-capa Internal: CommandServices**
+**Sub-capa Internal: CommandServices (Command Handlers)**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| WellbeingCommandService | Ejecuta los cuatro comandos del contexto: registra el estado de ánimo derivado de un check-in, analiza el historial para detectar patrones, registra pequeños logros y genera el resumen diario, publicando los eventos de dominio correspondientes en cada caso. | Implementa `IWellbeingCommandService`; usa `IWellbeingEntryRepository`, `IWellbeingPatternRepository`, `ISmallWinRepository`, `IStatusSummaryRepository` e `IDomainEventPublisher`. |
+| WellbeingInsightCommandServiceImpl | Para evaluar un check-in, obtiene los estados de ánimo de los siete días previos e invoca al aggregate. Para emitir una sugerencia, redacta el mensaje con la cantidad de días del patrón. Para registrar una pequeña victoria, usa la actividad positiva informada o, si no la hubo, una descripción del buen día. Para descartar una sugerencia, verifica que el familiar tenga un vínculo activo con el adulto mayor. Tras persistir, publica los eventos acumulados. | Implementa `WellbeingInsightCommandService`; usa `WellbeingInsightRepository`, `ExternalDailyCheckInService`, `ExternalCareCircleService` y `DomainEventPublisher`. |
 
 **Sub-capa Internal: QueryServices**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| WellbeingQueryService | Resuelve las consultas de registros de bienestar, patrones, pequeños logros y resúmenes diarios, sin modificar el estado. | Implementa `IWellbeingQueryService`; usa los cuatro repositorios del contexto. |
+| WellbeingInsightQueryServiceImpl | Resuelve las sugerencias vigentes y las pequeñas victorias de un periodo, convirtiendo las fechas a instantes según la zona horaria del adulto mayor, previa verificación de acceso del solicitante. | Implementa `WellbeingInsightQueryService`; usa `WellbeingInsightRepository`, `ExternalIamService` y `ExternalCareCircleService`. |
 
-<br>
+**Sub-capa Internal: Event Handlers**
 
-#### 2.6.4.4 Infrastructure Layer
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInAnsweredEventHandler | Inicia la evaluación del bienestar cuando el adulto mayor responde su check-in. Se ejecuta en una transacción propia, después de confirmarse la respuesta, de modo que una falla en la evaluación no impida registrar el check-in. | Escucha `CheckInAnswered` de Daily Check-in; envía `EvaluateWellbeingPatternCommand`. |
+| DiscomfortPatternDetectedEventHandler | Emite la sugerencia de acción correspondiente al patrón detectado, en la misma transacción de la evaluación. | Escucha `DiscomfortPatternDetected`; envía `IssueWellbeingSuggestionCommand`. |
+| WellbeingTrendImprovedEventHandler | Registra la pequeña victoria del día positivo, en la misma transacción de la evaluación. | Escucha `WellbeingTrendImproved`; envía `RecordSmallWinCommand`. |
 
-Clases que resuelven el acceso a la base de datos y a los mecanismos de mensajería, implementando las abstracciones definidas en el dominio.
+**Sub-capa Internal: Outbound Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Class | ExternalDailyCheckInService | fetchMoods(olderAdultId, fromDate, toDate) | Consume `DailyCheckInContextFacade` y traduce los estados de ánimo a `MoodLevel`. |
+| Class | ExternalCareCircleService | isActiveRelativeOf(relativeId, olderAdultId) | Consume `CareCircleContextFacade` para verificar que un familiar esté vinculado al adulto mayor. |
+| Class | ExternalIamService | fetchTimeZone(olderAdultId) | Consume `IamContextFacade` y devuelve la zona horaria del adulto mayor como `ZoneId`. |
+
+#### 2.6.4.4. Infrastructure Layer
+
+Clases que resuelven el acceso a la base de datos MySQL, implementando las abstracciones definidas en la capa Domain.
+
+**Sub-capa Persistence: JPA Entities**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| WellbeingPatternPersistenceEntity | Representa una fila de la tabla `wellbeing_patterns`. | Usada por `WellbeingPatternJpaRepository` y `WellbeingInsightPersistenceMapper`. |
+| WellbeingSuggestionPersistenceEntity | Representa una fila de la tabla `wellbeing_suggestions`. | Usada por `WellbeingSuggestionJpaRepository` y `WellbeingInsightPersistenceMapper`. |
+| SmallWinPersistenceEntity | Representa una fila de la tabla `small_wins`. | Usada por `SmallWinJpaRepository` y `WellbeingInsightPersistenceMapper`. |
+
+**Sub-capa Persistence: JPA Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| WellbeingPatternJpaRepository | Interfaz de Spring Data JPA con la consulta del patrón más reciente de un adulto mayor, resuelta sobre el índice `(older_adult_id, detected_at)`. | Extiende `JpaRepository`; usada por `WellbeingInsightRepositoryImpl`. |
+| WellbeingSuggestionJpaRepository | Interfaz de Spring Data JPA con la consulta de sugerencias activas, resuelta sobre el índice `(older_adult_id, status)`. | Extiende `JpaRepository`; usada por `WellbeingInsightRepositoryImpl`. |
+| SmallWinJpaRepository | Interfaz de Spring Data JPA con la consulta de pequeñas victorias por periodo, resuelta sobre el índice `(older_adult_id, recorded_at)`. | Extiende `JpaRepository`; usada por `WellbeingInsightRepositoryImpl`. |
 
 **Sub-capa Persistence: Repositories**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| WellbeingEntryRepository | Persiste y recupera el aggregate `WellbeingEntry` sobre la tabla `wellbeing_entries`. | Implementa `IWellbeingEntryRepository`. |
-| WellbeingPatternRepository | Persiste y recupera el aggregate `WellbeingPattern` sobre la tabla `wellbeing_patterns`. | Implementa `IWellbeingPatternRepository`. |
-| SmallWinRepository | Persiste y recupera el aggregate `SmallWin` sobre la tabla `small_wins`. | Implementa `ISmallWinRepository`. |
-| StatusSummaryRepository | Persiste y recupera el aggregate `StatusSummary` sobre la tabla `status_summaries`. | Implementa `IStatusSummaryRepository`. |
+| WellbeingInsightRepositoryImpl | Compone el aggregate `WellbeingInsight` a partir de su patrón más reciente y sus sugerencias activas, y persiste sus cambios en las tres tablas. Si un mismo check-in se evalúa dos veces, el índice único de `small_wins.check_in_id` impide duplicar la pequeña victoria. | Implementa `WellbeingInsightRepository`; usa `WellbeingPatternJpaRepository`, `WellbeingSuggestionJpaRepository`, `SmallWinJpaRepository` y `WellbeingInsightPersistenceMapper`. |
 
 **Sub-capa Persistence: Mappers**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| WellbeingPersistenceMapper | Traduce entre los cuatro aggregates del contexto y su representación en base de datos, evitando que el modelo de persistencia se filtre al dominio. | Usado por los cuatro repositorios de Infrastructure. |
-
-**Sub-capa Messaging: Consumers**
-
-| Nombre | Responsabilidad principal | Relación con otros elementos |
-| --- | --- | --- |
-| CheckInAnsweredConsumerAdapter | Se suscribe al evento `CheckInAnswered` publicado por Daily Check-in dentro del monolito modular y lo traduce en la invocación de los comandos del contexto. | Implementa `CheckInAnsweredConsumer`; usado por la capa Interface. |
-
-<br>
+| WellbeingInsightPersistenceMapper | Traduce entre el aggregate `WellbeingInsight`, con sus patrones, sugerencias y pequeñas victorias, y sus entidades de persistencia. | Usado por `WellbeingInsightRepositoryImpl`. |
 
 #### 2.6.4.5. Bounded Context Software Architecture Component Level Diagrams
 
