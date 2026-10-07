@@ -5524,209 +5524,305 @@ Diagrama de base de datos: en la Imagen 49 se muestra el diseño de las tablas c
 
 ### 2.6.5. Bounded Context: Social Companionship
 
-Social Companionship es el bounded context que sostiene el vínculo emocional entre el adulto mayor y sus familiares, sin ningún fin de monitoreo. Cubre la grabación y envío de mensajes de audio del adulto mayor hacia el familiar, la reproducción de esos audios, y la gestión de recordatorios de contacto social como llamar a una amistad o asistir a una actividad, incluyendo posponerlos o marcarlos como completados.
-<br>
+El bounded context Social Companionship sostiene el vínculo emocional entre el adulto mayor y su familia, sin fines de monitoreo. Cubre el intercambio de mensajes multimedia asíncronos: el adulto mayor graba audios breves sobre su día para sus familiares, y los familiares le comparten fotografías de su vida cotidiana. También gestiona los recordatorios de contacto social con los que el adulto mayor mantiene activa su vida social, como llamar a una amistad o asistir a una actividad, que puede completar, posponer o cancelar. Es un contexto de soporte: complementa el check-in diario con una dimensión de compañía que va más allá de la seguridad física.
+
+Su modelo se organiza en tres aggregates. `AudioMessage` y `PhotoMessage` representan los mensajes de cada tipo; ambos se persisten en la misma tabla, diferenciados por su tipo, y se modelan por separado porque su origen y sus destinatarios difieren: el audio va del adulto mayor a todos sus familiares vinculados y la fotografía, de un familiar al adulto mayor. Ambos se crean primero como borrador, mientras el remitente revisa el contenido, y solo llegan a sus destinatarios al compartirse. `SocialReminder` representa un recordatorio programado por el adulto mayor y controla su presentación, postergación y cierre.
+
+El contexto consulta a Care Circle el círculo y los familiares vinculados del adulto mayor, para resolver los destinatarios de cada mensaje y verificar el acceso, y a Identity & Access la zona horaria del adulto mayor, para interpretar los horarios de los recordatorios. Los archivos de audio y fotografía se almacenan fuera de la base de datos y solo se entregan a través de la API, previa verificación de acceso.
 
 #### 2.6.5.1. Domain Layer
 
-Clases que representan el núcleo del negocio. No depende de ninguna otra capa; es el centro del que todo lo demás depende.
+En esta capa se representan las reglas de intercambio de mensajes y de gestión de recordatorios sociales, sin dependencia de frameworks de persistencia, red ni interfaz.
 
-**Sub-capa Domain Model: Aggregates**
+**Sub-capa Model: Aggregates**
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessage | Aggregate root del flujo de mensajes de audio. Gestiona su ciclo de vida: grabado, compartido y descartado. |
-| PhotoMessage | Aggregate root del flujo de mensajes de foto. Gestiona su compartición y visualización dentro del círculo. |
-| SocialReminder | Aggregate root de los recordatorios sociales. Gestiona su ciclo de vida: pendiente, completado y cancelado. |
+`AudioMessage` (Aggregate Root): representa un mensaje de voz que el adulto mayor graba para sus familiares. Controla su paso de borrador a compartido y registra su reproducción por cada familiar.
 
-**Sub-capa Domain Model: Value Objects**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | AudioMessageId | private | Identificador único del mensaje. |
+| careCircleId | CareCircleId | private | Círculo de cuidado en el que se comparte el mensaje. |
+| senderId | OlderAdultId | private | Adulto mayor que grabó el mensaje. |
+| mediaKey | MediaKey | private | Clave del archivo de audio en el almacenamiento. |
+| duration | AudioDuration | private | Duración del audio. |
+| status | MessageStatus | private | Estado del mensaje: borrador o compartido. |
+| createdAt | Instant | private | Instante de la grabación, en UTC. |
+| sentAt | Instant | private | Instante en que se compartió; es nulo mientras sea borrador. |
+| receipts | List\<MessageReceipt\> | private | Registro de reproducción por cada familiar destinatario. |
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageId | Identificador único de un mensaje de audio. Evita el uso de UUID primitivo en el dominio. |
-| PhotoMessageId | Identificador único de un mensaje de foto. |
-| SocialReminderId | Identificador único de un recordatorio social. |
-| CareCircleId | Referencia al círculo de cuidado al que pertenece el mensaje o recordatorio. Identifica el contexto sin acoplarse a su modelo. |
-| SenderId | Identificador del familiar que originó el mensaje o el recordatorio. |
-| AudioUrl | URL de reproducción del archivo de audio. Encapsula validación de formato. |
-| PhotoUrl | URL de visualización de la foto. Encapsula validación de formato. |
-| AudioMessageStatus | Estado del mensaje de audio: RECORDED, SHARED o DISCARDED. |
-| PhotoMessageStatus | Estado del mensaje de foto: SHARED. |
-| SocialReminderStatus | Estado del recordatorio: PENDING, COMPLETED o CANCELLED. |
-| ReminderTitle | Título del recordatorio. No puede ser cadena vacía. |
-| ReminderDescription | Descripción opcional del recordatorio. |
-| ScheduledDate | Fecha programada del recordatorio. Debe ser posterior al momento de creación. |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| record(careCircleId, senderId, mediaKey, duration, recordedAt) | public (static) | Factory que crea el mensaje como borrador a partir del audio grabado y registra el evento `AudioMessageRecorded`. |
+| share(recipientIds, sharedAt) | public | Comparte el borrador con los familiares vinculados, crea un registro de recepción por cada uno y registra el evento `AudioMessageShared`. Rechaza la operación si el mensaje ya fue compartido o si no hay destinatarios. |
+| discard(discardedAt) | public | Descarta el borrador antes de compartirlo y registra el evento `AudioMessageDiscarded`. Rechaza la operación si el mensaje ya fue compartido. |
+| play(relativeId, playedAt) | public | Registra la primera reproducción del audio por un familiar destinatario y el evento `AudioMessagePlayed`; las reproducciones siguientes no cambian el estado. |
+| isRecipient(userId) | public | Indica si el usuario es destinatario del mensaje. |
 
-**Sub-capa Domain Model: Commands**
+`PhotoMessage` (Aggregate Root): representa una fotografía que un familiar comparte con el adulto mayor. Controla su paso de borrador a compartida y registra su visualización.
 
-| Nombre | Descripción |
-|---|---|
-| RecordAudioMessageCommand | Intención de iniciar la grabación de un mensaje de audio. |
-| ShareAudioMessageCommand | Intención de compartir un audio ya grabado con el destinatario del círculo. |
-| DiscardAudioMessageCommand | Intención de descartar un mensaje de audio antes de compartirlo. |
-| PlayAudioMessageCommand | Intención de registrar la reproducción de un mensaje de audio. |
-| SharePhotoMessageCommand | Intención de compartir una foto con el círculo de cuidado. |
-| ScheduleSocialReminderCommand | Intención de programar un recordatorio social con título, descripción y fecha. |
-| CompleteSocialReminderCommand | Intención de marcar un recordatorio como completado. |
-| CancelSocialReminderCommand | Intención de cancelar un recordatorio pendiente. |
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | PhotoMessageId | private | Identificador único del mensaje. |
+| careCircleId | CareCircleId | private | Círculo de cuidado en el que se comparte la fotografía. |
+| senderId | RelativeId | private | Familiar que compartió la fotografía. |
+| mediaKey | MediaKey | private | Clave del archivo de imagen en el almacenamiento. |
+| status | MessageStatus | private | Estado del mensaje: borrador o compartido. |
+| createdAt | Instant | private | Instante de la selección, en UTC. |
+| sentAt | Instant | private | Instante en que se compartió; es nulo mientras sea borrador. |
+| receipt | MessageReceipt | private | Registro de visualización del adulto mayor. |
 
-**Sub-capa Domain Model: Queries**
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| select(careCircleId, senderId, mediaKey, selectedAt) | public (static) | Factory que crea el mensaje como borrador a partir de la fotografía seleccionada y registra el evento `PhotoMessageSelected`. |
+| share(olderAdultId, sharedAt) | public | Comparte el borrador con el adulto mayor del círculo, crea su registro de recepción y registra el evento `PhotoMessageShared`. Rechaza la operación si la fotografía ya fue compartida. |
+| discard(discardedAt) | public | Descarta el borrador antes de compartirlo y registra el evento `PhotoMessageDiscarded`. Rechaza la operación si la fotografía ya fue compartida. |
+| view(olderAdultId, viewedAt) | public | Registra la primera visualización de la fotografía por el adulto mayor y el evento `PhotoMessageViewed`; las visualizaciones siguientes no cambian el estado. |
+| isRecipient(userId) | public | Indica si el usuario es el destinatario de la fotografía. |
 
-| Nombre | Descripción |
-|---|---|
-| GetAudioMessageByIdQuery | Consulta para obtener un mensaje de audio por su identificador. |
-| GetPhotoMessageByIdQuery | Consulta para obtener un mensaje de foto por su identificador. |
-| GetSocialRemindersByCircleQuery | Consulta para obtener los recordatorios activos de un círculo de cuidado. |
+`SocialReminder` (Aggregate Root): representa un recordatorio de contacto social programado por el adulto mayor. Controla su presentación, postergación, completado, cancelación y cierre como no completado.
 
-**Sub-capa Domain Model: Events**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | SocialReminderId | private | Identificador único del recordatorio. |
+| olderAdultId | OlderAdultId | private | Adulto mayor que programó el recordatorio. |
+| title | ReminderTitle | private | Título del recordatorio. |
+| description | ReminderDescription | private | Descripción del recordatorio, opcional. |
+| remindAt | Instant | private | Instante en que debe presentarse el recordatorio, en UTC; se actualiza al posponerlo. |
+| status | ReminderStatus | private | Estado del recordatorio. |
+| completedAt | Instant | private | Instante en que se completó; es nulo mientras no se haya completado. |
+| createdAt | Instant | private | Instante de creación, en UTC. |
+| updatedAt | Instant | private | Instante de la última modificación, en UTC. |
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageRecordedEvent | Se emite cuando un mensaje de audio es grabado exitosamente. |
-| AudioMessageSharedEvent | Se emite cuando un mensaje de audio es compartido con el destinatario. |
-| AudioMessageDiscardedEvent | Se emite cuando un mensaje de audio es descartado antes de compartirse. |
-| AudioMessagePlayedEvent | Se emite cuando un mensaje de audio es reproducido. |
-| PhotoMessageSharedEvent | Se emite cuando una foto es compartida con el círculo de cuidado. |
-| SocialReminderScheduledEvent | Se emite cuando un recordatorio social es programado. |
-| SocialReminderCompletedEvent | Se emite cuando un recordatorio es marcado como completado. |
-| SocialReminderCancelledEvent | Se emite cuando un recordatorio pendiente es cancelado. |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| schedule(olderAdultId, title, description, remindAt, scheduledAt) | public (static) | Factory que programa el recordatorio; rechaza instantes ya transcurridos. Registra el evento `SocialReminderScheduled`. |
+| present(presentedAt) | public | Presenta el recordatorio al adulto mayor cuando llega su hora; solo procede si está programado o pospuesto. Registra el evento `SocialReminderPresented`. |
+| postpone(postponedAt, endOfDay) | public | Posterga el recordatorio presentado 60 minutos, dentro del mismo día local; rechaza la operación si ya no queda tiempo en el día. Registra el evento `SocialReminderPostponed`. |
+| complete(completedAt) | public | Marca el recordatorio como completado para que no vuelva a presentarse y registra el evento `SocialReminderCompleted`. |
+| cancel(canceledAt) | public | Cancela un recordatorio programado, presentado o pospuesto para que no vuelva a presentarse y registra el evento `SocialReminderCanceled`. |
+| markAsMissed(markedAt) | public | Cierra como no completado un recordatorio presentado o pospuesto cuyo día terminó sin que el adulto mayor lo completara ni lo cancelara. Registra el evento `SocialReminderMarkedAsMissed`. |
+| isAwaitingAction() | public | Indica si el recordatorio está presentado o pospuesto. |
 
-**Sub-capa Domain Model: Services**
+**Sub-capa Model: Entities**
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageCommandService | Interfaz que define los casos de uso de escritura sobre mensajes de audio. |
-| AudioMessageQueryService | Interfaz que define los casos de uso de lectura sobre mensajes de audio. |
-| PhotoMessageCommandService | Interfaz que define los casos de uso de escritura sobre mensajes de foto. |
-| PhotoMessageQueryService | Interfaz que define los casos de uso de lectura sobre mensajes de foto. |
-| SocialReminderCommandService | Interfaz que define los casos de uso de escritura sobre recordatorios sociales. |
-| SocialReminderQueryService | Interfaz que define los casos de uso de lectura sobre recordatorios sociales. |
+`MessageReceipt`: representa la recepción de un mensaje por un destinatario y el momento en que lo abrió. Pertenece a los aggregates `AudioMessage` y `PhotoMessage`.
 
-**Sub-capa Domain Model: Repositories**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| recipientId | UserId | private | Destinatario del mensaje; junto con el mensaje, identifica el registro. |
+| openedAt | Instant | private | Instante en que el destinatario reprodujo el audio o vio la fotografía; es nulo mientras no lo haya abierto. |
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageRepository | Puerto de salida que define las operaciones de persistencia para mensajes de audio. La implementación vive en la capa de infraestructura. |
-| PhotoMessageRepository | Puerto de salida que define las operaciones de persistencia para mensajes de foto. |
-| SocialReminderRepository | Puerto de salida que define las operaciones de persistencia para recordatorios sociales. |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| markAsOpened(openedAt) | public | Registra la primera apertura del mensaje por el destinatario. |
+| isOpened() | public | Indica si el destinatario ya abrió el mensaje. |
 
-<br>
+**Sub-capa Model: Value Objects**
+
+Se implementan como records inmutables que validan su contenido al construirse. Los límites de longitud coinciden con las columnas de la base de datos.
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| AudioMessageId, PhotoMessageId, SocialReminderId | value: UUID | Identidades inmutables de los aggregates del contexto. |
+| CareCircleId | value: UUID | Referencia por identidad a un círculo de Care Circle. |
+| OlderAdultId, RelativeId, UserId | value: UUID | Referencias por identidad a cuentas de Identity & Access, según el rol que cumplen en el mensaje. |
+| MediaKey | value: String | Clave del archivo en el almacenamiento, de máximo 500 caracteres; no es una URL pública. |
+| MediaFile | content: byte[], contentType: String | Archivo recibido para almacenar. Solo admite audio en formato AAC (`audio/mp4`) e imágenes JPEG o PNG, dentro del tamaño máximo configurado. |
+| AudioDuration | seconds: int | Duración del audio, entre 1 y 180 segundos. |
+| ReminderTitle | value: String | Título del recordatorio, obligatorio y de máximo 120 caracteres. |
+| ReminderDescription | value: String | Descripción del recordatorio, de máximo 300 caracteres. |
+
+**Sub-capa Model: Enumerations**
+
+| Nombre | Valores | Descripción |
+| --- | --- | --- |
+| MessageType | AUDIO, PHOTO | Tipo de mensaje; distingue ambos aggregates en la persistencia. |
+| MessageStatus | DRAFT, SHARED | Estado de un mensaje: borrador en revisión o compartido con sus destinatarios. |
+| ReminderStatus | SCHEDULED, PRESENTED, POSTPONED, COMPLETED, CANCELED, MISSED | Estado del ciclo de vida de un recordatorio social. |
+
+**Sub-capa Model: Commands**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| RecordAudioMessageCommand | senderId, audioFile, durationSeconds | Intención del adulto mayor de guardar un audio grabado como borrador. |
+| ShareAudioMessageCommand | audioMessageId, senderId | Intención de compartir el audio con los familiares vinculados. |
+| DiscardAudioMessageCommand | audioMessageId, senderId | Intención de descartar un audio antes de compartirlo. |
+| PlayAudioMessageCommand | audioMessageId, relativeId | Intención de un familiar de reproducir un audio recibido. |
+| SelectPhotoMessageCommand | careCircleId, senderId, photoFile | Intención de un familiar de cargar una fotografía como borrador. |
+| SharePhotoMessageCommand | photoMessageId, senderId | Intención de compartir la fotografía con el adulto mayor. |
+| DiscardPhotoMessageCommand | photoMessageId, senderId | Intención de descartar una fotografía antes de compartirla. |
+| ViewPhotoMessageCommand | photoMessageId, olderAdultId | Intención del adulto mayor de ver una fotografía recibida. |
+| ScheduleSocialReminderCommand | olderAdultId, title, description, remindAt | Intención de programar un recordatorio en una fecha y hora locales. |
+| PresentSocialReminderCommand | socialReminderId | Intención de presentar un recordatorio cuya hora llegó. |
+| PostponeSocialReminderCommand | socialReminderId, olderAdultId | Intención de posponer un recordatorio presentado. |
+| CompleteSocialReminderCommand | socialReminderId, olderAdultId | Intención de marcar un recordatorio como realizado. |
+| CancelSocialReminderCommand | socialReminderId, olderAdultId | Intención de cancelar un recordatorio que ya no se necesita. |
+| MarkSocialReminderMissedCommand | socialReminderId | Intención de cerrar como no completado un recordatorio cuyo día terminó sin acción del adulto mayor. |
+
+**Sub-capa Model: Queries**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| GetSharedAudioMessagesByCareCircleIdQuery | careCircleId, requesterId | Consulta de los audios compartidos de un círculo, del más reciente al más antiguo. |
+| GetAudioMessageMediaQuery | audioMessageId, requesterId | Consulta del archivo de un audio para su reproducción. |
+| GetSharedPhotoMessagesByCareCircleIdQuery | careCircleId, requesterId | Consulta de las fotografías compartidas de un círculo, de la más reciente a la más antigua. |
+| GetPhotoMessageMediaQuery | photoMessageId, requesterId | Consulta del archivo de una fotografía para su visualización. |
+| GetActiveSocialRemindersQuery | olderAdultId, requesterId | Consulta de los recordatorios programados, presentados o pospuestos de un adulto mayor. |
+| GetSocialRemindersDueForPresentationQuery | referenceTime | Consulta de los recordatorios programados o pospuestos cuya hora ya llegó. |
+| GetSocialRemindersAwaitingActionQuery | referenceTime | Consulta de los recordatorios presentados o pospuestos anteriores al instante indicado, candidatos a cerrarse como no completados. |
+
+**Sub-capa Model: Events**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| AudioMessageRecorded | audioMessageId, senderId, occurredAt | El adulto mayor grabó un audio, que quedó como borrador. |
+| AudioMessageShared | audioMessageId, careCircleId, recipientIds, occurredAt | El audio se compartió con los familiares vinculados. |
+| AudioMessageDiscarded | audioMessageId, senderId, occurredAt | El adulto mayor descartó un audio antes de compartirlo. |
+| AudioMessagePlayed | audioMessageId, relativeId, occurredAt | Un familiar reprodujo el audio por primera vez. |
+| PhotoMessageSelected | photoMessageId, senderId, occurredAt | Un familiar cargó una fotografía, que quedó como borrador. |
+| PhotoMessageShared | photoMessageId, careCircleId, olderAdultId, occurredAt | La fotografía se compartió con el adulto mayor. |
+| PhotoMessageDiscarded | photoMessageId, senderId, occurredAt | El familiar descartó una fotografía antes de compartirla. |
+| PhotoMessageViewed | photoMessageId, olderAdultId, occurredAt | El adulto mayor vio la fotografía por primera vez. |
+| SocialReminderScheduled | socialReminderId, olderAdultId, remindAt, occurredAt | Se programó un recordatorio social. |
+| SocialReminderPresented | socialReminderId, olderAdultId, occurredAt | Se presentó un recordatorio al adulto mayor. |
+| SocialReminderPostponed | socialReminderId, olderAdultId, remindAt, occurredAt | El adulto mayor pospuso un recordatorio para más tarde el mismo día. |
+| SocialReminderCompleted | socialReminderId, olderAdultId, occurredAt | El adulto mayor indicó que realizó la actividad del recordatorio. |
+| SocialReminderCanceled | socialReminderId, olderAdultId, occurredAt | El adulto mayor canceló un recordatorio. |
+| SocialReminderMarkedAsMissed | socialReminderId, olderAdultId, occurredAt | El día del recordatorio terminó sin que se completara. |
+
+**Sub-capa Repositories**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | AudioMessageRepository | save(audioMessage), findById(audioMessageId), delete(audioMessage), findAllSharedByCareCircleId(careCircleId) | Contrato de persistencia del aggregate `AudioMessage` junto con sus registros de recepción. Se implementa en Infrastructure. |
+| Interface | PhotoMessageRepository | save(photoMessage), findById(photoMessageId), delete(photoMessage), findAllSharedByCareCircleId(careCircleId) | Contrato de persistencia del aggregate `PhotoMessage` junto con su registro de recepción. Se implementa en Infrastructure. |
+| Interface | SocialReminderRepository | save(socialReminder), findById(socialReminderId), findActiveByOlderAdultId(olderAdultId), findAllDueForPresentation(referenceTime), findAllAwaitingActionBefore(referenceTime) | Contrato de persistencia del aggregate `SocialReminder`. Se implementa en Infrastructure. |
+
+**Sub-capa Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | AudioMessageCommandService | handle(RecordAudioMessageCommand), handle(ShareAudioMessageCommand), handle(DiscardAudioMessageCommand), handle(PlayAudioMessageCommand) | Contrato de las operaciones de escritura sobre los mensajes de audio. |
+| Interface | AudioMessageQueryService | handle(GetSharedAudioMessagesByCareCircleIdQuery), handle(GetAudioMessageMediaQuery) | Contrato de la lectura de mensajes de audio. |
+| Interface | PhotoMessageCommandService | handle(SelectPhotoMessageCommand), handle(SharePhotoMessageCommand), handle(DiscardPhotoMessageCommand), handle(ViewPhotoMessageCommand) | Contrato de las operaciones de escritura sobre los mensajes de fotografía. |
+| Interface | PhotoMessageQueryService | handle(GetSharedPhotoMessagesByCareCircleIdQuery), handle(GetPhotoMessageMediaQuery) | Contrato de la lectura de mensajes de fotografía. |
+| Interface | SocialReminderCommandService | handle(ScheduleSocialReminderCommand), handle(PresentSocialReminderCommand), handle(PostponeSocialReminderCommand), handle(CompleteSocialReminderCommand), handle(CancelSocialReminderCommand), handle(MarkSocialReminderMissedCommand) | Contrato de las operaciones de escritura sobre los recordatorios sociales. |
+| Interface | SocialReminderQueryService | handle(GetActiveSocialRemindersQuery), handle(GetSocialRemindersDueForPresentationQuery), handle(GetSocialRemindersAwaitingActionQuery) | Contrato de la lectura de recordatorios sociales. |
 
 #### 2.6.5.2. Interface Layer
 
-
 Clases que exponen el bounded context hacia el exterior y traducen las peticiones entrantes al lenguaje del dominio.
 
-***Sub-capa REST: Controllers***
+**Sub-capa REST: Controllers**
 
 | Nombre | Endpoints | Descripción |
-|---|---|---|
-| AudioMessagesController | POST /care-circles/{careCircleId}/audio-messages, POST /care-circles/{careCircleId}/audio-messages/{messageId}/share, DELETE /care-circles/{careCircleId}/audio-messages/{messageId}, PUT /care-circles/{careCircleId}/audio-messages/{messageId}/play | Punto de entrada de las operaciones de grabación, compartición, descarte y reproducción de mensajes de audio. Delega en los servicios de comandos y consultas. |
-| PhotoMessagesController | POST /care-circles/{careCircleId}/photo-messages, GET /care-circles/{careCircleId}/photo-messages/{messageId} | Punto de entrada de las operaciones de compartición y visualización de mensajes de foto. Delega en los servicios de comandos y consultas. |
-| SocialRemindersController | POST /care-circles/{careCircleId}/social-reminders, PUT /care-circles/{careCircleId}/social-reminders/{reminderId}/complete, DELETE /care-circles/{careCircleId}/social-reminders/{reminderId} | Punto de entrada de las operaciones de programación, completado y cancelación de recordatorios sociales. Delega en los servicios de comandos. |
+| --- | --- | --- |
+| AudioMessagesController | POST /api/v1/care-circles/{careCircleId}/audio-messages, POST /api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/share, DELETE /api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}, GET /api/v1/care-circles/{careCircleId}/audio-messages, GET /api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/media, POST /api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/play | Punto de entrada de la grabación, el envío y el descarte de audios por el adulto mayor, y de su consulta y reproducción por los familiares. La grabación recibe el archivo como `multipart/form-data` y responde 415 Unsupported Media Type si el formato no está admitido. El archivo se entrega con soporte de solicitudes por rango, de modo que el reproductor pueda desplazarse dentro del audio. |
+| PhotoMessagesController | POST /api/v1/care-circles/{careCircleId}/photo-messages, POST /api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/share, DELETE /api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}, GET /api/v1/care-circles/{careCircleId}/photo-messages, GET /api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/media, POST /api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/view | Punto de entrada de la carga, el envío y el descarte de fotografías por los familiares, y de la galería y visualización por el adulto mayor. La carga recibe el archivo como `multipart/form-data` y responde 415 Unsupported Media Type si el formato no está admitido. |
+| SocialRemindersController | POST /api/v1/social-reminders, GET /api/v1/social-reminders?olderAdultId={olderAdultId}, POST /api/v1/social-reminders/{socialReminderId}/postpone, POST /api/v1/social-reminders/{socialReminderId}/complete, POST /api/v1/social-reminders/{socialReminderId}/cancel | Punto de entrada de la programación y gestión de recordatorios por el propio adulto mayor. La programación responde 400 Bad Request si falta el título o la fecha y hora ya transcurrió; las demás operaciones responden 409 Conflict si el estado del recordatorio no admite la acción. |
 
-***Sub-capa REST: Resources***
+Los endpoints de mensajes responden 403 Forbidden cuando el usuario autenticado no pertenece al círculo, o cuando intenta reproducir o ver un mensaje del que no es destinatario. El envío y el descarte solo proceden para el remitente del borrador.
 
-| Nombre | Descripción |
-|---|---|
-| RecordAudioMessageResource | Datos de entrada para iniciar la grabación de un mensaje de audio. |
-| AudioMessageResource | Representación pública de un mensaje de audio, incluida su URL de reproducción. |
-| ShareAudioMessageResource | Datos de entrada para compartir un mensaje de audio grabado con el destinatario. |
-| SharePhotoMessageResource | Datos de entrada para compartir una foto con el círculo de cuidado. |
-| PhotoMessageResource | Representación pública de un mensaje de foto, incluida su URL de visualización. |
-| ScheduleSocialReminderResource | Datos de entrada para programar un recordatorio social, incluidos título, descripción y fecha. |
-| SocialReminderResource | Representación pública de un recordatorio social y su estado actual. |
+**Sub-capa REST: Resources**
 
-***Sub-capa REST: Transform***
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| RecordAudioMessageResource | file, durationSeconds | Datos de entrada de la grabación, recibidos como formulario multiparte. |
+| AudioMessageResource | id, careCircleId, senderId, status, durationSeconds, mediaUrl, createdAt, sentAt, played | Representación de un mensaje de audio. `mediaUrl` apunta al endpoint protegido del archivo y `played` indica si el solicitante ya lo reprodujo. |
+| SelectPhotoMessageResource | file | Datos de entrada de la carga de una fotografía, recibidos como formulario multiparte. |
+| PhotoMessageResource | id, careCircleId, senderId, status, mediaUrl, createdAt, sentAt, viewed | Representación de un mensaje de fotografía; `viewed` indica si el adulto mayor ya la vio. |
+| ScheduleSocialReminderResource | title, description, remindAt | Datos de entrada para programar un recordatorio en fecha y hora locales. |
+| SocialReminderResource | id, olderAdultId, title, description, remindAt, status, completedAt | Representación de un recordatorio social. |
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageResourceFromEntityAssembler | Convierte la entidad AudioMessage en su representación REST. |
-| PhotoMessageResourceFromEntityAssembler | Convierte la entidad PhotoMessage en su representación REST. |
-| SocialReminderResourceFromEntityAssembler | Convierte la entidad SocialReminder en su representación REST. |
-| RecordAudioMessageCommandFromResourceAssembler | Convierte la petición de grabación en el comando de dominio correspondiente. |
-| ShareAudioMessageCommandFromResourceAssembler | Convierte la petición de compartición de audio en su comando de dominio. |
-| SharePhotoMessageCommandFromResourceAssembler | Convierte la petición de compartición de foto en su comando de dominio. |
-| ScheduleSocialReminderCommandFromResourceAssembler | Convierte la petición de programación en el comando de recordatorio social. |
-
-***Sub-capa ACL***
+**Sub-capa REST: Transform**
 
 | Nombre | Descripción |
-|---|---|
-| CareCircleContextFacade | Puerto de salida que define el contrato de los datos que Social Companionship necesita del bounded context Care Circle. |
-| UserContextFacade | Puerto de salida que define el contrato de los datos que Social Companionship necesita del bounded context Identity & Access. |
-| CareCircleContextFacadeImpl | Implementación HTTP del CareCircleContextFacade. Llama a los endpoints del bounded context Care Circle y traduce la respuesta al modelo interno. |
-| UserContextFacadeImpl | Implementación HTTP del UserContextFacade. Llama a los endpoints del bounded context Identity & Access y traduce la respuesta al modelo interno. |
-| ExternalCareCircleMemberResource | Representación de la respuesta externa del bounded context Care Circle al consultar los miembros de un círculo. |
-| ExternalUserResource | Representación de la respuesta externa del bounded context Identity & Access al consultar datos de un usuario. |
-| CareCircleMemberFromExternalResourceAssembler | Traduce el ExternalCareCircleMemberResource al value object interno del dominio de Social Companionship. |
-| UserFromExternalResourceAssembler | Traduce el ExternalUserResource al value object interno del dominio de Social Companionship. |
+| --- | --- |
+| AudioMessageResourceFromEntityAssembler | Convierte el aggregate `AudioMessage` en su representación REST según el solicitante. |
+| PhotoMessageResourceFromEntityAssembler | Convierte el aggregate `PhotoMessage` en su representación REST. |
+| SocialReminderResourceFromEntityAssembler | Convierte el aggregate `SocialReminder` en su representación REST, expresando la hora en la zona horaria del adulto mayor. |
+| RecordAudioMessageCommandFromResourceAssembler | Combina el archivo recibido con el adulto mayor autenticado para construir el comando de grabación. |
+| SelectPhotoMessageCommandFromResourceAssembler | Combina el archivo recibido con el círculo y el familiar autenticado para construir el comando de selección. |
+| ScheduleSocialReminderCommandFromResourceAssembler | Combina la petición con el adulto mayor autenticado para construir el comando de programación. |
 
-<br>
+**Sub-capa Scheduling: Jobs**
+
+| Nombre | Descripción |
+| --- | --- |
+| SocialReminderScheduler | Tareas periódicas de los recordatorios. Cada minuto consulta los recordatorios cuya hora llegó y envía un `PresentSocialReminderCommand` por cada uno. Cada hora consulta los recordatorios presentados o pospuestos y envía un `MarkSocialReminderMissedCommand` por cada uno. |
 
 #### 2.6.5.3. Application Layer
 
-Clases que implementan los casos de uso del dominio. Orquesta los agregados, repositorios y eventos definidos en la capa de dominio sin contener lógica de negocio propia.
+Clases que orquestan los flujos del contexto, coordinando los aggregates, los repositorios, el almacenamiento de archivos y los servicios de otros contextos.
 
-**Sub-capa Application: Command Services**
+**Sub-capa Internal: CommandServices (Command Handlers)**
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageCommandServiceImpl | Implementa AudioMessageCommandService. Orquesta la grabación, compartición, descarte y reproducción de mensajes de audio. |
-| PhotoMessageCommandServiceImpl | Implementa PhotoMessageCommandService. Orquesta la compartición de mensajes de foto dentro del círculo. |
-| SocialReminderCommandServiceImpl | Implementa SocialReminderCommandService. Orquesta la programación, completado y cancelación de recordatorios sociales. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| AudioMessageCommandServiceImpl | Al grabar, obtiene el círculo del adulto mayor, almacena el archivo y crea el borrador. Al compartir, obtiene los familiares con vínculo activo como destinatarios. Al descartar, elimina el registro y luego el archivo, una vez confirmada la eliminación. Registra la reproducción verificando que el familiar sea destinatario. Tras persistir, publica los eventos acumulados. | Implementa `AudioMessageCommandService`; usa `AudioMessageRepository`, `MediaStorageService`, `ExternalCareCircleService` y `DomainEventPublisher`. |
+| PhotoMessageCommandServiceImpl | Al seleccionar, verifica que el familiar tenga un vínculo activo con el círculo, almacena el archivo y crea el borrador. Al compartir, obtiene el adulto mayor del círculo como destinatario. Al descartar, elimina el registro y luego el archivo. Registra la visualización verificando que el solicitante sea el adulto mayor destinatario. Tras persistir, publica los eventos acumulados. | Implementa `PhotoMessageCommandService`; usa `PhotoMessageRepository`, `MediaStorageService`, `ExternalCareCircleService` y `DomainEventPublisher`. |
+| SocialReminderCommandServiceImpl | Al programar, interpreta la fecha y hora en la zona horaria del adulto mayor. Presenta los recordatorios cuya hora llegó y posterga los presentados dentro del día local. Gestiona el completado y la cancelación verificando que provengan del propio adulto mayor. Al cerrar un recordatorio como no completado, solo actúa si su día local ya terminó; en otro caso no realiza cambios. Tras persistir, publica los eventos acumulados. | Implementa `SocialReminderCommandService`; usa `SocialReminderRepository`, `ExternalIamService` y `DomainEventPublisher`. |
 
-**Sub-capa Application: Query Services**
+**Sub-capa Internal: QueryServices**
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageQueryServiceImpl | Implementa AudioMessageQueryService. Resuelve las consultas de mensajes de audio por identificador. |
-| PhotoMessageQueryServiceImpl | Implementa PhotoMessageQueryService. Resuelve las consultas de mensajes de foto por identificador. |
-| SocialReminderQueryServiceImpl | Implementa SocialReminderQueryService. Resuelve las consultas de recordatorios activos de un círculo de cuidado. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| AudioMessageQueryServiceImpl | Resuelve los audios compartidos de un círculo, previa verificación de acceso, y entrega el archivo de un audio solo a su remitente o a sus destinatarios. | Implementa `AudioMessageQueryService`; usa `AudioMessageRepository`, `MediaStorageService` y `ExternalCareCircleService`. |
+| PhotoMessageQueryServiceImpl | Resuelve las fotografías compartidas de un círculo, previa verificación de acceso, y entrega el archivo de una fotografía solo a su remitente o a su destinatario. | Implementa `PhotoMessageQueryService`; usa `PhotoMessageRepository`, `MediaStorageService` y `ExternalCareCircleService`. |
+| SocialReminderQueryServiceImpl | Resuelve los recordatorios activos del propio adulto mayor y los recordatorios por presentar o por cerrar para las tareas periódicas. | Implementa `SocialReminderQueryService`; usa `SocialReminderRepository`. |
 
-<br>
+**Sub-capa Internal: Event Handlers**
 
-#### 2.6.5.4 Infrastructure Layer
+Las policies de este contexto dependen del paso del tiempo y las ejecuta `SocialReminderScheduler`; el contexto no consume eventos de otros contextos.
 
+**Sub-capa Internal: Outbound Services**
 
-Clases que implementan los detalles técnicos de persistencia y comunicación externa. Depende del dominio pero nunca al revés: toda referencia apunta hacia adentro.
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | MediaStorageService | store(mediaFile): MediaKey, load(mediaKey), delete(mediaKey) | Abstracción del almacenamiento de archivos de audio e imagen. |
+| Class | ExternalCareCircleService | fetchCareCircleId(olderAdultId), fetchOlderAdultId(careCircleId), fetchActiveRelativeIds(olderAdultId), hasAccessToCareCircle(userId, careCircleId) | Consume `CareCircleContextFacade` para resolver círculos, destinatarios y permisos de acceso. |
+| Class | ExternalIamService | fetchTimeZone(olderAdultId) | Consume `IamContextFacade` y devuelve la zona horaria del adulto mayor como `ZoneId`. |
 
-**Sub-capa Persistence: Room Entities**
+#### 2.6.5.4. Infrastructure Layer
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageEntity | Clase anotada con `@Entity` que representa la tabla `audio_messages` en SQLite. Contiene los campos de persistencia del agregado `AudioMessage`. |
-| PhotoMessageEntity | Clase anotada con `@Entity` que representa la tabla `photo_messages` en SQLite. Contiene los campos de persistencia del agregado `PhotoMessage`. |
-| SocialReminderEntity | Clase anotada con `@Entity` que representa la tabla `social_reminders` en SQLite. Contiene los campos de persistencia del agregado `SocialReminder`. |
+Clases que resuelven el acceso a la base de datos MySQL y al almacenamiento de archivos, implementando las abstracciones definidas en las capas Domain y Application.
 
-**Sub-capa Persistence: Room DAOs**
+**Sub-capa Persistence: JPA Entities**
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageDao | Interfaz anotada con `@Dao` que define las operaciones de acceso a datos de bajo nivel para mensajes de audio. |
-| PhotoMessageDao | Interfaz anotada con `@Dao` que define las operaciones de acceso a datos de bajo nivel para mensajes de foto. |
-| SocialReminderDao | Interfaz anotada con `@Dao` que define las operaciones de acceso a datos para recordatorios sociales, incluyendo consulta por círculo de cuidado y estado activo. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CompanionMessagePersistenceEntity | Representa una fila de la tabla `companion_messages`, cuyo tipo determina si corresponde a un audio o a una fotografía. Contiene la colección de registros de recepción, que se persisten en cascada junto con el mensaje. | Usada por `CompanionMessageJpaRepository` y por los mappers de mensajes. |
+| MessageReceiptPersistenceEntity | Representa una fila de la tabla `message_receipts`. | Contenida en `CompanionMessagePersistenceEntity`. |
+| SocialReminderPersistenceEntity | Representa una fila de la tabla `social_reminders`. | Usada por `SocialReminderJpaRepository` y `SocialReminderPersistenceMapper`. |
 
-**Sub-capa Persistence: Repository Implementations**
+**Sub-capa Persistence: JPA Repositories**
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageRepositoryImpl | Implementa AudioMessageRepository del dominio. Traduce entre el modelo de dominio y la entidad JPA usando los assemblers de persistencia. |
-| PhotoMessageRepositoryImpl | Implementa PhotoMessageRepository del dominio. |
-| SocialReminderRepositoryImpl | Implementa SocialReminderRepository del dominio. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CompanionMessageJpaRepository | Interfaz de Spring Data JPA con las consultas por identificador y tipo, y la de mensajes compartidos de un círculo por tipo ordenados por fecha de envío, resuelta sobre el índice `(care_circle_id, type, sent_at)`. | Extiende `JpaRepository`; usada por `AudioMessageRepositoryImpl` y `PhotoMessageRepositoryImpl`. |
+| SocialReminderJpaRepository | Interfaz de Spring Data JPA con la consulta de recordatorios activos de un adulto mayor, resuelta sobre el índice `(older_adult_id, remind_at)`, y las de recordatorios por presentar o por cerrar, resueltas sobre el índice `(status, remind_at)`. | Extiende `JpaRepository`; usada por `SocialReminderRepositoryImpl`. |
 
-**Sub-capa Persistence: Transform**
+**Sub-capa Persistence: Repositories**
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageEntityFromModelAssembler | Convierte el agregado AudioMessage del dominio en su entidad de persistencia AudioMessageEntity. |
-| AudioMessageModelFromEntityAssembler | Convierte la entidad de persistencia AudioMessageEntity en el agregado AudioMessage del dominio. |
-| PhotoMessageEntityFromModelAssembler | Convierte el agregado PhotoMessage en su entidad de persistencia. |
-| PhotoMessageModelFromEntityAssembler | Convierte la entidad de persistencia PhotoMessageEntity en el agregado PhotoMessage. |
-| SocialReminderEntityFromModelAssembler | Convierte el agregado SocialReminder en su entidad de persistencia. |
-| SocialReminderModelFromEntityAssembler | Convierte la entidad de persistencia SocialReminderEntity en el agregado SocialReminder. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| AudioMessageRepositoryImpl | Persiste, recupera y elimina el aggregate `AudioMessage` sobre las filas de tipo AUDIO. | Implementa `AudioMessageRepository`; usa `CompanionMessageJpaRepository` y `AudioMessagePersistenceMapper`. |
+| PhotoMessageRepositoryImpl | Persiste, recupera y elimina el aggregate `PhotoMessage` sobre las filas de tipo PHOTO. | Implementa `PhotoMessageRepository`; usa `CompanionMessageJpaRepository` y `PhotoMessagePersistenceMapper`. |
+| SocialReminderRepositoryImpl | Persiste y recupera el aggregate `SocialReminder`. | Implementa `SocialReminderRepository`; usa `SocialReminderJpaRepository` y `SocialReminderPersistenceMapper`. |
 
-<br>
+**Sub-capa Persistence: Mappers**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| AudioMessagePersistenceMapper | Traduce entre el aggregate `AudioMessage`, con sus registros de recepción, y sus entidades de persistencia. | Usado por `AudioMessageRepositoryImpl`. |
+| PhotoMessagePersistenceMapper | Traduce entre el aggregate `PhotoMessage`, con su registro de recepción, y sus entidades de persistencia. | Usado por `PhotoMessageRepositoryImpl`. |
+| SocialReminderPersistenceMapper | Traduce entre el aggregate `SocialReminder` y `SocialReminderPersistenceEntity`. | Usado por `SocialReminderRepositoryImpl`. |
+
+**Sub-capa Storage: Services**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| AzureBlobMediaStorageService | Almacena los archivos en un contenedor privado de Azure Blob Storage, identificados por una clave aleatoria. Los archivos no tienen acceso público y solo se obtienen a través de la API, después de verificar el acceso del solicitante. | Implementa `MediaStorageService`. |
 
 #### 2.6.5.5. Bounded Context Software Architecture Component Level Diagrams
 
