@@ -6458,6 +6458,103 @@ Las etiquetas que nombran cada grupo se definen en la sección 3.1.2.2 (Labellin
 <br>
 
 #### 3.1.2.2. Labelling Systems
+El sistema de etiquetado de Serenia fue diseñado para garantizar claridad, coherencia y simplicidad en la comunicación de todos los elementos dentro de la experiencia digital. Las etiquetas, títulos y botones fueron redactados en un lenguaje cotidiano y cercano, con el mínimo número de palabras posible, de modo que los usuarios comprendan fácilmente las acciones que pueden realizar, reduciendo la carga cognitiva y reforzando la identidad de la marca.
+
+**Labeling System Landing Page**
+
+En la interfaz web se utilizan etiquetas sencillas y universales que guían la exploración inicial del visitante: Cómo funciona, Para quién, Funciones y Planes, ubicadas en la barra de navegación del encabezado principal. Estas se acompañan con botones de contraste como "Probar gratis" y "Descarga la app", redactados con verbos directos que invitan a la acción. El encabezado incluye además el selector de idioma ES/EN mediante i18n, y el título principal "Bienestar hoy, siempre contigo" comunica de forma breve la propuesta de valor de Serenia.
+
+navigation bar:
+
+- **Español:**
+
+![Barra de navegación - Landing Page (ES)](assets/img/labeling-system/navegationvar-es.png)
+
+
+- **Inglés:**
+
+![Barra de navegación - Landing Page (EN)](assets/img/labeling-system/navegationvar-en.png)
+
+
+Los títulos de cada sección siguen el mismo criterio: frases cortas, en tono cálido, que anticipan el contenido del bloque, como "Tres pasos, cada día. Nada más.", "Una app, dos formas de estar cerca." y "Acompaña sin invadir.". En la sección de precios, los planes se etiquetan como Básico (Gratis) y Familia (14 días gratis), de modo que el costo sea evidente desde el primer vistazo.
+
+![Hero de la Landing Page](assets/img/labeling-system/landing-hero.png)
+
+
+![Sección de planes de la Landing Page](assets/img/labeling-system/landing-plans.png)
+
+
+Luego, se mantiene una paleta de colores basada en verdes profundos sobre fondos crema, con acentos en café, que genera armonía visual y transmite calma y cercanía.
+
+**Labeling System App - Registro e inicio**
+
+En la versión móvil, el recorrido inicial usa etiquetas de una o dos palabras con verbos de acción: "Empezar", "Ya tengo cuenta", "Iniciar sesión", "Crear cuenta", "Continuar" y "Entrar a Serenia". Las pantallas se titulan con frases cortas y conversacionales, como "Qué bueno verte de nuevo", "Solo necesitamos tres datos." y "Elige tu plan". Para personalizar la experiencia, la pregunta "¿Quién eres?" ofrece dos opciones redactadas desde la identidad del usuario: "Soy familiar" y "Soy adulto mayor", cada una acompañada de una frase breve que explica su propósito.
+
+![Pantalla de bienvenida](assets/img/labeling-system/welcome-app.png)
+
+
+![Selección de rol](assets/img/labeling-system/rol.png)
+
+
+**Labeling System App para Adultos Mayores**
+
+En la vista del adulto mayor, las etiquetas se redactan en primera persona y con el menor número de palabras posible, de modo que el usuario sienta la app como propia: "Mi cuenta", "Mi pregunta", "Mi ayuda" y "Mi teléfono". La pantalla principal saluda por el nombre ("Buenos días, Rosa") y plantea una sola pregunta, "¿Cómo amaneciste hoy?", con tres opciones directas: Muy bien, Más o menos y No tan bien. Además, se ofrecen salidas sin presión como "Cuéntame algo" y "Hoy no quiero responder", y la acción final se expresa con claridad: "Enviar a mi familia". El lenguaje es afectuoso, evita términos técnicos y se complementa con un modo simplificado que muestra solo lo esencial: cómo está el usuario y pedir ayuda.
+
+![Inicio del adulto mayor](assets/img/labeling-system/app-adulto.png)
+
+
+Cuando el usuario necesita apoyo, la etiqueta "Ayuda" abre una confirmación en lenguaje claro: "¿Quieres que avisemos a tu familia?", con las respuestas "Sí, avisar" y "No, ya estoy bien".
+
+![Pantalla de ayuda](assets/img/labeling-system/app-adulto-ayuda.png)
+
+**Labeling System App para Familiares a distancia**
+
+En la vista del familiar se mantiene la coherencia estructural con la versión del adulto mayor, pero las etiquetas se redactan en tercera persona y mencionan a la persona cuidada, lo que da contexto inmediato: "¿Cómo amaneció Mamá Rosa hoy?", "Círculo de Mamá Rosa" y "Para Mamá Rosa". Las secciones principales son Inicio, Historial, Alertas, Círculo y Mensajes, y las acciones se expresan con verbos simples: Llamar, Mensaje, Responderle, "Llamar ahora" y "Programar recordatorio". Las sugerencias usan un tono suave, como "Un gesto suave" y "Un gesto sugerido", en línea con la propuesta de acompañar sin alarmar.
+
+![Inicio del familiar](assets/img/labeling-system/app-familiar.png)
+
+
+![Alertas del familiar](assets/img/labeling-system/app-familiar-alerta.png)
+
+
+**Iconografía estándar**
+
+En este apartado se consideran los íconos completamente intuitivos para el usuario, que se adaptan a una acción o funcionalidad específica: casa para Inicio, campana para Avisos y Alertas, burbuja de chat para Familia y Mensajes, reloj con flecha para Historial, grupo de personas para Círculo, micrófono para Audio y usuario para Cuenta. Todos pertenecen a un mismo set de íconos (Phosphor) para mantener un estilo uniforme, y siempre se acompañan de una etiqueta de texto, para no depender únicamente del símbolo, algo especialmente importante en adultos mayores.
+
+![Íconos estándar](assets/img/labeling-system/nav-icon1.png)
+![Íconos estándar](assets/img/labeling-system/nav-icon2.png)
+![Íconos estándar](assets/img/labeling-system/nav-icon3.png)
+![Íconos estándar](assets/img/labeling-system/nav-icon4.png)
+![Íconos estándar](assets/img/labeling-system/nav-icon5.png)
+
+
+
+**Elementos de interacción activa**
+
+Son los elementos con los que el usuario interactúa más seguido, como la navigation bar del móvil. La versión del adulto mayor se limita a cuatro pestañas (Inicio, Avisos, Familia y Cuenta) para reducir la carga cognitiva, mientras que la del familiar cuenta con cinco (Inicio, Historial, Alertas, Círculo y Mensajes) para cubrir el seguimiento del círculo de cuidado. La pestaña activa se resalta con color para indicar la ubicación del usuario.
+
+navigation bar adulto mayor:
+
+![Navigation bar - Adulto mayor](assets/img/labeling-system/navegationbar-mobile.png)
+
+
+navigation bar familiar:
+
+![Navigation bar - Familiar](assets/img/labeling-system/navbar-mobile2.png)
+<!-- 📷 IMAGEN 13 -->
+
+**Elementos de validación**
+
+Íconos y mensajes que informan al usuario el resultado de una acción, siempre con un tono tranquilizador. Por ejemplo, tras pedir ayuda, la app confirma "Ya avisamos a Lucía y a Martín." y agrega "Tranquila, Rosa. Te van a llamar en un momento."; al vincular a la familia, muestra "Lucía y Rosa ya están conectadas"; y al unirse a la lista de espera, "¡Listo, ya estás en la lista!". Ante errores, el mensaje explica cómo corregirlo, como "Escribe un correo válido para avisarte.".
+
+icons:
+
+![Validación exitosa](assets/img/labeling-system/alertsent-mobile.png)
+
+
+![Validación de error](assets/img/labeling-system/error-landing.png)
+
+
 #### 3.1.2.3. SEO Tags and Meta Tags
 
 #### 3.1.2.4. Searching Systems
@@ -6579,6 +6676,7 @@ Esta aplicación concentra más contenido, por lo que emplea una barra de navega
 <div align="center">
 
 ![Barra de navegación - Aplicación móvil del familiar a distancia](assets/img/navigation-systems/mobile-navbar.png)
+
   <br/><i>Imagen 27: Barra de navegación inferior de la aplicación móvil del familiar a distancia.</i>
 
 </div>
