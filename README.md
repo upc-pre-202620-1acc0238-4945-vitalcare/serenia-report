@@ -7536,6 +7536,86 @@ Para probar la vinculación en el prototipo, el código válido es 4821 y el có
 ## 4.1. Software Configuration Management
 ### 4.1.1. Software Development Environment Configuration
 ### 4.1.2. Source Code Management
+El equipo utiliza GitHub como plataforma principal de control de versiones y colaboración. A continuación se indican los repositorios correspondientes a cada
+producto del proyecto:
+
+- **Informe:** https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-report
+- **Landing Page:** https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website
+- **Platform:** https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform
+
+**Implementacion de Gitflow:**
+El equipo implementa el modelo de ramificación GitFlow propuesto por Vincent Driessen como workflow de control de versiones. Este modelo establece una
+estructura clara de ramas que permite gestionar el desarrollo de features, releases y correcciones de forma ordenada y trazable.
+
+**Ramas principales**
+- main: rama de producción. Contiene únicamente versiones estables y desplegadas del producto. Todo merge a esta rama representa una nueva versión
+publicada.
+- develop: rama de integración continua. Concentra el trabajo completado de cada feature branch antes de ser promovido a producción. Es la rama base
+para el desarrollo del equipo.
+
+**Feature branches**
+Cada historia de usuario, tarea técnica o sección del informe requiere su propia rama de feature, creada a partir de develop y reintegrada a develop mediante
+Pull Request una vez completada y revisada.
+
+Convención de nomenclatura:
+
+feature/<descripción-en-kebab-case>
+
+Ejemplos aplicados durante el Sprint 1 en el repositorio del informe:
+- feature/labeling-system
+- feature/sprint-planning
+- feature/source-code-style-guide
+- feature/software-deployment-configuration
+- feature/bounded-wellbeing
+- feature/general-style-guidelines
+- feature/product-design
+- feature/new-event-storming
+- feature/organization-systems
+- feature/validation-interview
+- feature/teams-collaboration-insights
+
+
+Ejemplos aplicados durante el Sprint 1 en el repositorio del backend:
+
+- feature/alerts-and-safety-application-layer
+- feature/social-companionship
+- feature/wellbeing-monitoring
+- feature/daily-check-in
+- feature/care-circle
+- feature/identity-and-access
+
+**Release branches**
+Las ramas de release se crean a partir de develop cuando el conjunto de features planificado para una versión está completo y listo para ser estabilizado antes del despliegue a producción. Se aplica Semantic Versioning con el esquema MAJOR.MINOR.PATCH.
+
+**Convención de nomenclatura:**
+Ejemplos:
+- release/v1.0.0 — primera versión estable de la Landing Page (Sprint 1)
+- release/v1.1.0 — incorporacion del backend primera version (Sprint 1)
+- release/v2.0.0 —  incorporacion del backend primera version (Sprint 2)
+
+**Conventional Commits** 
+
+El equipo aplica la especificación Conventional Commits para estandarizar los mensajes de commit, facilitando la trazabilidad del historial y la generaciónautomática de changelogs. La estructura adoptada es la siguiente:
+
+Los tipos utilizados por el equipo son:
+
+| Tipo | Uso |
+|------|-----|
+| `feat` | Implementación de una nueva funcionalidad o sección |
+| `fix` | Corrección de un error en el código o documentación |
+| `docs` | Cambios exclusivos en documentación del informe |
+| `chore` | Tareas de configuración, setup o mantenimiento |
+| `refactor` | Reestructuración de código sin cambio de funcionalidad |
+| `style` | Cambios de estilos visuales o formato sin lógica |
+| `test` | Adición o modificación de pruebas |
+
+Ejemplos aplicados durante el Sprint 1:
+- docs: add landing page UI design section
+- feat(shared): add unsupported media type and payload too large errors
+- fix(product):re-order us
+- chore: ignore local tool settings
+
+
 ### 4.1.3. Source Code Style Guide & Conventions
 ### 4.1.4. Software Deployment Configuration
 ## 4.2. Landing Page & Mobile Application Implementation
