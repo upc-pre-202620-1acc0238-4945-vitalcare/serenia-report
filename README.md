@@ -3639,7 +3639,19 @@ La siguiente tabla ordena las 46 historias del Product Backlog y asigna cada una
 | 43 | US26 | Sección institucional de la startup | 1 | Sprint 3 |
 | 44 | US27 | Envío de fotografía al adulto mayor | 2 | Sprint 3 |
 | 45| SP01 | Integración de Firebase Cloud Messaging | 5 | Sprint 3 |
-| 46 | SP02 | Grabación, almacenamiento y reproducción de audio | 5 | Sprint 3 |
+| 46 | SP02 | Grabación, almacenamiento y reproducción de audio | 5 | Sprint 3 || 47 | US28 | Registro de cuenta del familiar a distancia | 2 | Sprint 3 |
+| 48 | US29 | Inicio de sesión | 2 | Sprint 3 |
+| 49 | US30 | Cierre de sesión | 1 | Sprint 3 |
+| 50 | US31 | Edición de datos de perfil y foto | 3 | Sprint 3 |
+| 51 | US32 | Cambio de contraseña | 2 | Sprint 3 |
+| 52 | US33 | Revocación de vínculo familiar | 2 | Sprint 3 |
+| 53 | US34 | Programación de recordatorio de contacto social | 3 | Sprint 3 |
+| 54 | US35 | Cancelación de recordatorio de contacto social | 1 | Sprint 3 |
+| 55 | US36 | Reasignación de turnos de atención | 3 | Sprint 3 |
+| 56 | US37 | Descarte de sugerencias de bienestar | 1 | Sprint 3 |
+| 57 | US38 | Reconocimiento de alertas | 2 | Sprint 3 |
+| 58 | US39 | Resolución de alertas | 2 | Sprint 3 |
+
 
 <br>
 
