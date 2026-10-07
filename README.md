@@ -4056,77 +4056,85 @@ Como se observa en el diagrama, cada uno de los containers de Serenia se desplie
 
 El bounded context Identity & Access concentra todo lo relacionado con la identidad de las personas que usan Serenia: el registro diferenciado de adultos mayores y familiares a distancia, el inicio y cierre de sesión, la actualización de los datos de perfil y el cambio de contraseña. Es un contexto genérico: sus reglas son estándar y no se derivan del negocio del cuidado, pero ningún otro contexto puede operar sin él, ya que toda acción del sistema se atribuye a un usuario autenticado y a un rol determinado.
 
-Su modelo gira en torno a un único aggregate, `User`, que es la raíz responsable de garantizar la consistencia de las credenciales, el estado de la cuenta y las sesiones abiertas de una misma persona. El rol se fija en el momento del registro y determina a qué aplicación accede el usuario. Al completarse el registro de un adulto mayor, el contexto publica el evento correspondiente, que habilita la creación posterior de su círculo de cuidado.
+Su modelo se organiza en dos aggregates. `User` garantiza la consistencia de la cuenta: credenciales, datos de perfil, rol y estado. `Session` representa cada acceso autenticado desde un dispositivo y se modela de forma independiente porque su número crece con cada inicio de sesión; mantenerla dentro de `User` obligaría a cargar todo el historial de accesos cada vez que se modifica la cuenta. Ambos aggregates se relacionan por identidad: una sesión conserva el `UserId` de su dueño, no una referencia al objeto.
+
+El contexto es upstream del resto del sistema. Al registrarse un adulto mayor publica el evento `OlderAdultRegistered`, a partir del cual Care Circle crea su círculo de cuidado y Daily Check-in inicializa sus preferencias. Además, expone la fachada `IamContextFacade`, mediante la cual los demás contextos consultan el rol, el nombre o la zona horaria de un usuario sin depender de su modelo interno.
 
 #### 2.6.1.1. Domain Layer
 
-En esta capa se representan las reglas de negocio propias de la identidad de un usuario, sin dependencia de frameworks de persistencia, red ni interfaz.
+En esta capa se representan las reglas de negocio propias de la identidad de un usuario, sin dependencia de frameworks de persistencia, red ni interfaz. Los aggregates extienden la clase base `AggregateRoot` del shared kernel, que acumula los eventos de dominio registrados durante una operación para que la capa Application los publique después de persistir.
 
 **Sub-capa Model: Aggregates**
 
-`User` (Aggregate Root): representa la cuenta de una persona en Serenia, sea adulto mayor o familiar a distancia. Controla la validez de sus credenciales, el estado de la cuenta y el ciclo de vida de sus sesiones.
+`User` (Aggregate Root): representa la cuenta de una persona en Serenia, sea adulto mayor o familiar a distancia. Controla la validez de sus credenciales, sus datos de perfil y el estado de la cuenta.
 
 | Atributo | Tipo | Visibilidad | Descripción |
 | --- | --- | --- | --- |
 | id | UserId | private | Identificador único de la cuenta. |
 | email | EmailAddress | private | Correo electrónico único con el que el usuario inicia sesión. |
 | passwordHash | PasswordHash | private | Representación cifrada de la contraseña; nunca almacena el valor en claro. |
-| role | UserRole | private | Rol asignado en el registro; determina la aplicación a la que accede. |
+| role | UserRole | private | Rol asignado en el registro; es inmutable y determina la aplicación a la que accede el usuario. |
 | fullName | PersonName | private | Nombre completo del usuario. |
 | phoneNumber | PhoneNumber | private | Número de contacto, opcional. |
-| birthDate | LocalDate | private | Fecha de nacimiento, opcional. |
+| birthDate | LocalDate | private | Fecha de nacimiento, opcional; no puede ser posterior a la fecha actual. |
 | photoUrl | String | private | Ubicación de la fotografía de perfil, opcional. |
 | locale | LocaleCode | private | Idioma y región de la interfaz. |
+| timeZone | ZoneId | private | Zona horaria del usuario; los demás contextos la usan para determinar el inicio y el fin de su día. |
 | status | AccountStatus | private | Estado de la cuenta: activa, suspendida o eliminada. |
-| sessions | List\<Session\> | private | Sesiones abiertas o históricas de la cuenta. |
-| createdAt | LocalDateTime | private | Fecha y hora de creación de la cuenta. |
-| updatedAt | LocalDateTime | private | Fecha y hora de la última modificación. |
+| createdAt | Instant | private | Instante de creación de la cuenta, en UTC. |
+| updatedAt | Instant | private | Instante de la última modificación, en UTC. |
 
 | Método | Visibilidad | Descripción |
 | --- | --- | --- |
-| registerOlderAdult(email, passwordHash, fullName, locale) | public (static) | Crea una cuenta con rol de adulto mayor a partir de datos ya validados. |
-| registerDistantRelative(email, passwordHash, fullName, locale) | public (static) | Crea una cuenta con rol de familiar a distancia. |
-| openSession(tokenHash, deviceInfo, expiresAt) | public | Abre una nueva sesión para la cuenta y la incorpora al aggregate. |
-| closeSession(sessionId) | public | Revoca la sesión indicada y la marca como cerrada. |
-| updatePhoto(photoUrl) | public | Reemplaza la fotografía de perfil del usuario. |
-| updateProfileData(fullName, phoneNumber, birthDate, locale) | public | Actualiza los datos personales de la cuenta. |
-| changePassword(newPasswordHash) | public | Sustituye la contraseña cifrada de la cuenta. |
-| activeSessions() | public | Devuelve las sesiones vigentes, sin revocar ni expiradas. |
+| registerOlderAdult(email, passwordHash, fullName, phoneNumber, birthDate, locale, timeZone) | public (static) | Factory que crea una cuenta activa con rol de adulto mayor y registra el evento `OlderAdultRegistered`. |
+| registerDistantRelative(email, passwordHash, fullName, phoneNumber, birthDate, locale, timeZone) | public (static) | Factory que crea una cuenta activa con rol de familiar a distancia y registra el evento `DistantRelativeRegistered`. |
+| updateProfileData(fullName, phoneNumber, birthDate, locale, timeZone) | public | Actualiza los datos personales de la cuenta y registra el evento `ProfileDataUpdated`. |
+| updatePhoto(photoUrl) | public | Reemplaza la fotografía de perfil y registra el evento `UserPhotoUpdated`. |
+| changePassword(newPasswordHash, preservedSessionId) | public | Sustituye la contraseña cifrada y registra el evento `PasswordChanged`, indicando la sesión desde la que se realizó el cambio. |
 | isActive() | public | Indica si la cuenta se encuentra en estado activo. |
-| ensureActive() | private | Impide ejecutar operaciones sobre una cuenta suspendida o eliminada. |
+| isOlderAdult() | public | Indica si la cuenta tiene rol de adulto mayor. |
+| ensureActive() | private | Impide modificar una cuenta suspendida o eliminada; lo invocan todos los métodos que alteran el estado. |
 
-**Sub-capa Model: Entities**
-
-`Session`: representa un periodo de acceso autenticado de un usuario desde un dispositivo. Pertenece al aggregate `User` y no se manipula fuera de él.
+`Session` (Aggregate Root): representa un periodo de acceso autenticado de un usuario desde un dispositivo. Su identificador se genera antes que el token, porque viaja dentro de él.
 
 | Atributo | Tipo | Visibilidad | Descripción |
 | --- | --- | --- | --- |
 | id | SessionId | private | Identificador único de la sesión. |
+| userId | UserId | private | Referencia por identidad a la cuenta dueña de la sesión. |
 | tokenHash | TokenHash | private | Representación cifrada del token entregado al cliente. |
-| deviceInfo | DeviceInfo | private | Descripción del dispositivo desde el que se inició la sesión. |
-| issuedAt | LocalDateTime | private | Fecha y hora de emisión del token. |
-| expiresAt | LocalDateTime | private | Fecha y hora en que el token deja de ser válido. |
-| revokedAt | LocalDateTime | private | Fecha y hora del cierre de sesión, si ocurrió. |
+| deviceInfo | DeviceInfo | private | Descripción del dispositivo desde el que se inició la sesión, opcional. |
+| issuedAt | Instant | private | Instante de emisión del token, en UTC. |
+| expiresAt | Instant | private | Instante en que el token deja de ser válido, en UTC. |
+| revokedAt | Instant | private | Instante del cierre de sesión; es nulo mientras la sesión no haya sido revocada. |
 
 | Método | Visibilidad | Descripción |
 | --- | --- | --- |
-| revoke(revokedAt) | public | Marca la sesión como cerrada en el instante indicado. |
-| isExpired(referenceTime) | public | Indica si el token ya superó su fecha de expiración. |
+| open(sessionId, userId, tokenHash, deviceInfo, issuedAt, expiresAt) | public (static) | Factory que abre una sesión, valida que la expiración sea posterior a la emisión y registra el evento `UserLoggedIn`. |
+| revoke(revokedAt) | public | Marca la sesión como cerrada y registra el evento `UserSessionClosed`; si ya estaba revocada, no realiza cambios. |
+| belongsTo(userId) | public | Indica si la sesión pertenece al usuario indicado; impide cerrar sesiones ajenas. |
+| matchesToken(tokenHash) | public | Compara el hash del token presentado con el almacenado. |
+| isExpired(referenceTime) | public | Indica si el token ya superó su instante de expiración. |
 | isActive(referenceTime) | public | Indica si la sesión sigue vigente: no revocada y no expirada. |
 
+**Sub-capa Model: Entities**
+
+Ninguno de los dos aggregates contiene entities internas; sus partes se modelan como value objects.
+
 **Sub-capa Model: Value Objects**
+
+Se implementan como records inmutables que validan su contenido al construirse. Los límites de longitud coinciden con las columnas de la base de datos.
 
 | Nombre | Atributos | Descripción |
 | --- | --- | --- |
 | UserId | value: UUID | Identidad inmutable de una cuenta. |
 | SessionId | value: UUID | Identidad inmutable de una sesión. |
-| EmailAddress | value: String | Correo electrónico validado en formato y longitud máxima. |
-| PasswordHash | value: String | Contraseña ya cifrada; impide que el dominio maneje texto plano. |
-| TokenHash | value: String | Token de sesión cifrado, nunca almacenado en claro. |
-| PersonName | value: String | Nombre completo con validación de obligatoriedad y longitud. |
-| PhoneNumber | value: String | Número telefónico validado en formato. |
-| LocaleCode | value: String | Código de idioma y región de la interfaz. |
-| DeviceInfo | value: String | Descripción del dispositivo asociado a una sesión. |
+| EmailAddress | value: String | Correo con formato válido y máximo 160 caracteres; se normaliza a minúsculas para que la unicidad no dependa de mayúsculas. |
+| PasswordHash | value: String | Contraseña cifrada con BCrypt; impide que el dominio maneje texto plano. |
+| TokenHash | value: String | Hash SHA-256 del token de sesión, de 64 caracteres hexadecimales. |
+| PersonName | value: String | Nombre completo obligatorio, de máximo 120 caracteres. |
+| PhoneNumber | value: String | Número telefónico en formato E.164 (por ejemplo, +51987654321), de máximo 20 caracteres. |
+| LocaleCode | value: String | Código de idioma y región de la interfaz, de máximo 10 caracteres. |
+| DeviceInfo | value: String | Descripción del dispositivo asociado a una sesión, de máximo 200 caracteres. |
 
 **Sub-capa Model: Enumerations**
 
@@ -4137,52 +4145,50 @@ En esta capa se representan las reglas de negocio propias de la identidad de un 
 
 **Sub-capa Model: Commands**
 
-| Nombre | Descripción |
-| --- | --- |
-| RegisterOlderAdultCommand | Intención de crear una cuenta con rol de adulto mayor. |
-| RegisterDistantRelativeCommand | Intención de crear una cuenta con rol de familiar a distancia. |
-| SignInCommand | Intención de autenticar a un usuario y abrir una sesión. |
-| SignOutCommand | Intención de cerrar una sesión vigente. |
-| UpdateUserPhotoCommand | Intención de actualizar la fotografía de perfil. |
-| UpdateProfileDataCommand | Intención de actualizar los datos personales del perfil. |
-| ChangePasswordCommand | Intención de reemplazar la contraseña de la cuenta. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| RegisterOlderAdultCommand | email, password, fullName, phoneNumber, birthDate, locale, timeZone | Intención de crear una cuenta con rol de adulto mayor. |
+| RegisterDistantRelativeCommand | email, password, fullName, phoneNumber, birthDate, locale, timeZone | Intención de crear una cuenta con rol de familiar a distancia. |
+| SignInCommand | email, password, deviceInfo | Intención de autenticar a un usuario y abrir una sesión. |
+| SignOutCommand | sessionId, userId | Intención de cerrar una sesión vigente del usuario solicitante. |
+| UpdateUserPhotoCommand | userId, photoUrl | Intención de actualizar la fotografía de perfil. |
+| UpdateProfileDataCommand | userId, fullName, phoneNumber, birthDate, locale, timeZone | Intención de actualizar los datos personales del perfil. |
+| ChangePasswordCommand | userId, sessionId, currentPassword, newPassword | Intención de reemplazar la contraseña, previa verificación de la contraseña actual. |
 
 **Sub-capa Model: Queries**
 
-| Nombre | Descripción |
-| --- | --- |
-| GetUserByIdQuery | Consulta de una cuenta por su identificador. |
-| GetUserByEmailQuery | Consulta de una cuenta por su correo electrónico. |
-| GetUserBySessionTokenQuery | Consulta de la cuenta asociada a un token de sesión vigente. |
-| GetActiveSessionsByUserIdQuery | Consulta de las sesiones vigentes de una cuenta. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| GetUserByIdQuery | userId | Consulta de una cuenta por su identificador. |
+| GetActiveSessionByIdQuery | sessionId | Consulta de una sesión que siga vigente; la utiliza el filtro de autorización en cada petición. |
 
 **Sub-capa Model: Events**
 
-| Nombre | Descripción |
-| --- | --- |
-| OlderAdultRegistered | Se creó una cuenta con rol de adulto mayor. |
-| DistantRelativeRegistered | Se creó una cuenta con rol de familiar a distancia. |
-| UserLoggedIn | Un usuario se autenticó correctamente y abrió una sesión. |
-| UserSessionClosed | Un usuario cerró su sesión de forma explícita. |
-| UserPhotoUpdated | Se actualizó la fotografía de perfil de un usuario. |
-| ProfileDataUpdated | Se actualizaron los datos personales de un usuario. |
-| PasswordChanged | Se modificó la contraseña de una cuenta. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| OlderAdultRegistered | userId, occurredAt | Se creó una cuenta con rol de adulto mayor. Lo consumen Care Circle y Daily Check-in. |
+| DistantRelativeRegistered | userId, occurredAt | Se creó una cuenta con rol de familiar a distancia. |
+| UserLoggedIn | userId, sessionId, occurredAt | Un usuario se autenticó correctamente y abrió una sesión. |
+| UserSessionClosed | userId, sessionId, occurredAt | Un usuario cerró su sesión de forma explícita. |
+| UserPhotoUpdated | userId, occurredAt | Se actualizó la fotografía de perfil de un usuario. |
+| ProfileDataUpdated | userId, occurredAt | Se actualizaron los datos personales de un usuario. |
+| PasswordChanged | userId, preservedSessionId, occurredAt | Se modificó la contraseña de una cuenta desde la sesión indicada. |
 
 **Sub-capa Repositories**
 
 | Tipo | Nombre | Métodos principales | Descripción |
 | --- | --- | --- | --- |
-| Interface | IUserRepository | save(user), findById(userId), findByEmail(email), existsByEmail(email), findBySessionTokenHash(tokenHash), findAll() | Contrato de persistencia del aggregate `User` junto con sus sesiones. Se implementa en Infrastructure. |
+| Interface | UserRepository | save(user), findById(userId), findByEmail(email), existsByEmail(email) | Contrato de persistencia del aggregate `User`. Se implementa en Infrastructure. |
+| Interface | SessionRepository | save(session), findById(sessionId), findActiveByUserId(userId, referenceTime) | Contrato de persistencia del aggregate `Session`. Se implementa en Infrastructure. |
 
 **Sub-capa Services**
 
 | Tipo | Nombre | Métodos principales | Descripción |
 | --- | --- | --- | --- |
-| Interface | IUserCommandService | handle(RegisterOlderAdultCommand), handle(RegisterDistantRelativeCommand), handle(SignInCommand), handle(SignOutCommand), handle(UpdateUserPhotoCommand), handle(UpdateProfileDataCommand), handle(ChangePasswordCommand) | Contrato de las operaciones de escritura del contexto. |
-| Interface | IUserQueryService | handle(GetUserByIdQuery), handle(GetUserByEmailQuery), handle(GetUserBySessionTokenQuery), handle(GetActiveSessionsByUserIdQuery) | Contrato de las operaciones de lectura del contexto. |
-| Interface | IPasswordHashingService | hash(rawPassword), matches(rawPassword, passwordHash) | Abstracción del cifrado y verificación de contraseñas; mantiene el dominio libre de bibliotecas de seguridad. |
-| Interface | ITokenService | generate(userId, role), hash(token), expirationOf(token) | Abstracción de la generación y el cifrado de tokens de sesión. |
-| Interface | IDomainEventPublisher | publish(event) | Abstracción para publicar los eventos de dominio hacia los demás módulos. |
+| Interface | UserCommandService | handle(RegisterOlderAdultCommand), handle(RegisterDistantRelativeCommand), handle(UpdateUserPhotoCommand), handle(UpdateProfileDataCommand), handle(ChangePasswordCommand) | Contrato de las operaciones de escritura sobre las cuentas. |
+| Interface | UserQueryService | handle(GetUserByIdQuery) | Contrato de las operaciones de lectura sobre las cuentas. |
+| Interface | SessionCommandService | handle(SignInCommand), handle(SignOutCommand) | Contrato de las operaciones de autenticación y cierre de sesión. |
+| Interface | SessionQueryService | handle(GetActiveSessionByIdQuery) | Contrato de la lectura de sesiones vigentes. |
 
 #### 2.6.1.2. Interface Layer
 
@@ -4192,80 +4198,131 @@ Clases que exponen el bounded context hacia el exterior y traducen las peticione
 
 | Nombre | Endpoints | Descripción |
 | --- | --- | --- |
-| UsersController | POST /users, GET /users/{id}, PUT /users/{id}/photo, PUT /users/{id}/profile, PUT /users/{id}/password | Punto de entrada de las operaciones de registro, consulta y gestión de perfil. Delega en los servicios de comandos y consultas. |
-| SessionsController | POST /sessions, DELETE /sessions/{id} | Punto de entrada de la autenticación y el cierre de sesión. |
+| UsersController | POST /api/v1/users, GET /api/v1/users/{userId}, PUT /api/v1/users/{userId}/profile, PUT /api/v1/users/{userId}/photo, PUT /api/v1/users/{userId}/password | Punto de entrada del registro, la consulta y la gestión del perfil. El registro es público y elige el comando según el rol recibido. Las operaciones de modificación solo proceden cuando `{userId}` coincide con el usuario autenticado; en caso contrario responde 403 Forbidden. |
+| SessionsController | POST /api/v1/sessions, DELETE /api/v1/sessions/{sessionId} | Punto de entrada de la autenticación, que responde con el token emitido, y del cierre de sesión. |
 
 **Sub-capa REST: Resources**
 
-| Nombre | Descripción |
-| --- | --- |
-| RegisterUserResource | Datos de entrada del registro, incluido el rol solicitado. |
-| UserResource | Representación pública de una cuenta, sin datos sensibles. |
-| SignInResource | Credenciales enviadas para solicitar una sesión. |
-| AuthenticatedUserResource | Token de sesión emitido junto con los datos del usuario autenticado. |
-| UpdateUserPhotoResource | Datos de entrada para actualizar la fotografía de perfil. |
-| UpdateProfileDataResource | Datos de entrada para actualizar los datos personales. |
-| ChangePasswordResource | Datos de entrada para el cambio de contraseña. |
-| SessionResource | Representación de una sesión vigente y su dispositivo asociado. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| RegisterUserResource | email, password, role, fullName, phoneNumber, birthDate, locale, timeZone | Datos de entrada del registro, incluido el rol solicitado. |
+| UserResource | id, email, role, fullName, phoneNumber, birthDate, photoUrl, locale, timeZone, status | Representación pública de una cuenta, sin datos sensibles. |
+| SignInResource | email, password, deviceInfo | Credenciales enviadas para solicitar una sesión. |
+| AuthenticatedUserResource | sessionId, token, expiresAt, user | Token de sesión emitido junto con los datos del usuario autenticado. |
+| UpdateProfileDataResource | fullName, phoneNumber, birthDate, locale, timeZone | Datos de entrada para actualizar los datos personales. |
+| UpdateUserPhotoResource | photoUrl | Datos de entrada para actualizar la fotografía de perfil. |
+| ChangePasswordResource | currentPassword, newPassword | Datos de entrada para el cambio de contraseña. |
 
 **Sub-capa REST: Transform**
 
 | Nombre | Descripción |
 | --- | --- |
 | UserResourceFromEntityAssembler | Convierte el aggregate `User` en su representación REST. |
-| AuthenticatedUserResourceFromEntityAssembler | Combina usuario y token emitido en un único recurso de respuesta. |
-| SessionResourceFromEntityAssembler | Convierte la entidad `Session` en su representación REST. |
+| AuthenticatedUserResourceFromEntityAssembler | Combina el usuario, la sesión abierta y el token emitido en un único recurso de respuesta. |
 | RegisterOlderAdultCommandFromResourceAssembler | Convierte la petición de registro en el comando de adulto mayor. |
 | RegisterDistantRelativeCommandFromResourceAssembler | Convierte la petición de registro en el comando de familiar a distancia. |
 | SignInCommandFromResourceAssembler | Convierte las credenciales recibidas en el comando de autenticación. |
-| UpdateUserPhotoCommandFromResourceAssembler | Convierte la petición de fotografía en su comando. |
 | UpdateProfileDataCommandFromResourceAssembler | Convierte la petición de datos personales en su comando. |
-| ChangePasswordCommandFromResourceAssembler | Convierte la petición de cambio de contraseña en su comando. |
+| UpdateUserPhotoCommandFromResourceAssembler | Convierte la petición de fotografía en su comando. |
+| ChangePasswordCommandFromResourceAssembler | Combina la petición con el usuario y la sesión autenticados para construir el comando de cambio de contraseña. |
+
+**Sub-capa ACL**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | IamContextFacade | existsActiveUserById(userId): boolean, fetchUserRoleById(userId): Optional\<String\>, fetchFullNameById(userId): Optional\<String\>, fetchTimeZoneById(userId): Optional\<String\> | Contrato que el contexto ofrece a los demás. Care Circle lo usa para validar que quien canjea un código es un familiar a distancia; Daily Check-in y Social Companionship, para obtener la zona horaria del adulto mayor; los contextos con vistas compartidas, para mostrar nombres. Recibe y devuelve tipos primitivos (`UUID`, `String`) para no exponer clases del dominio. |
 
 #### 2.6.1.3. Application Layer
 
-Clases que orquestan los flujos del contexto, coordinando el aggregate, los repositorios y los servicios de seguridad.
+Clases que orquestan los flujos del contexto, coordinando los aggregates, los repositorios y los servicios técnicos de seguridad.
 
-**Sub-capa Internal: CommandServices**
+**Sub-capa Internal: CommandServices (Command Handlers)**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| UserCommandService | Ejecuta los siete comandos del contexto: valida la unicidad del correo, delega el cifrado de contraseñas, invoca los métodos del aggregate `User`, persiste el resultado y publica los eventos de dominio correspondientes. | Implementa `IUserCommandService`; usa `IUserRepository`, `IPasswordHashingService`, `ITokenService` e `IDomainEventPublisher`. |
+| UserCommandServiceImpl | Registra cuentas: verifica que el correo no exista, cifra la contraseña e invoca la factory del rol correspondiente. Actualiza los datos personales y la fotografía. En el cambio de contraseña verifica primero la contraseña actual y rechaza el cambio si no coincide. Tras persistir, publica los eventos acumulados por el aggregate. | Implementa `UserCommandService`; usa `UserRepository`, `HashingService` y `DomainEventPublisher`. |
+| SessionCommandServiceImpl | En el inicio de sesión busca la cuenta por correo, verifica que esté activa y valida la contraseña; si el correo no existe o la contraseña es incorrecta, devuelve el mismo error para no revelar qué correos están registrados. Luego genera el `SessionId`, emite el token con ese identificador, almacena solo su hash y abre la `Session`. En el cierre de sesión verifica que la sesión pertenezca al solicitante y la revoca. | Implementa `SessionCommandService`; usa `UserRepository`, `SessionRepository`, `HashingService`, `TokenService` y `DomainEventPublisher`. |
 
 **Sub-capa Internal: QueryServices**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| UserQueryService | Resuelve las consultas de cuentas y sesiones, devolviendo el aggregate o sus sesiones vigentes sin modificar el estado. | Implementa `IUserQueryService`; usa `IUserRepository`. |
+| UserQueryServiceImpl | Resuelve la consulta de una cuenta por su identificador sin modificar el estado. | Implementa `UserQueryService`; usa `UserRepository`. |
+| SessionQueryServiceImpl | Devuelve una sesión solo si sigue vigente en el instante de la consulta. | Implementa `SessionQueryService`; usa `SessionRepository`. |
 
-#### 2.6.1.4 Infrastructure Layer
+**Sub-capa Internal: Event Handlers**
 
-Clases que resuelven el acceso a la base de datos y a los mecanismos técnicos de seguridad, implementando las abstracciones definidas en el dominio.
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| PasswordChangedEventHandler | Revoca todas las sesiones vigentes del usuario excepto la que realizó el cambio, de modo que un dispositivo con la contraseña anterior pierde el acceso. Se ejecuta de forma síncrona dentro de la misma transacción del cambio. | Escucha `PasswordChanged`; usa `SessionRepository`. |
+
+El evento `OlderAdultRegistered` no tiene handlers en este contexto: lo consumen Care Circle y Daily Check-in.
+
+**Sub-capa Internal: Outbound Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | HashingService | encode(rawPassword), matches(rawPassword, passwordHash) | Abstracción del cifrado y la verificación de contraseñas. |
+| Interface | TokenService | generateToken(userId, sessionId, role, expiresAt), validateToken(token), extractSessionId(token), hash(token) | Abstracción de la emisión, validación y cifrado de los tokens de sesión. |
+| Interface | DomainEventPublisher | publish(events) | Abstracción para publicar los eventos de dominio hacia los demás contextos. |
+
+**Sub-capa ACL**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| IamContextFacadeImpl | Resuelve las consultas de otros contextos a partir de la cuenta solicitada y las devuelve en tipos primitivos. | Implementa `IamContextFacade`; usa `UserQueryService`. |
+
+#### 2.6.1.4. Infrastructure Layer
+
+Clases que resuelven el acceso a la base de datos MySQL y a los mecanismos técnicos de seguridad, implementando las abstracciones definidas en las capas Domain y Application.
+
+**Sub-capa Persistence: JPA Entities**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| UserPersistenceEntity | Representa una fila de la tabla `users`: los identificadores UUID se almacenan como `BINARY(16)`, los enums como texto y los instantes como `DATETIME(6)` en UTC. | Usada por `UserJpaRepository` y `UserPersistenceMapper`. |
+| SessionPersistenceEntity | Representa una fila de la tabla `sessions`. | Usada por `SessionJpaRepository` y `SessionPersistenceMapper`. |
+
+**Sub-capa Persistence: JPA Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| UserJpaRepository | Interfaz de Spring Data JPA con las consultas `existsByEmail` y `findByEmail`, resueltas sobre el índice único de `email`. | Extiende `JpaRepository`; usada por `UserRepositoryImpl`. |
+| SessionJpaRepository | Interfaz de Spring Data JPA con la consulta de sesiones no revocadas y no expiradas de un usuario. | Extiende `JpaRepository`; usada por `SessionRepositoryImpl`. |
 
 **Sub-capa Persistence: Repositories**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| UserRepository | Persiste y recupera el aggregate `User` junto con sus sesiones sobre las tablas `users` y `sessions`, resolviendo además la búsqueda por correo y por token de sesión. | Implementa `IUserRepository`; usado por la capa Application. |
+| UserRepositoryImpl | Persiste y recupera el aggregate `User`. Si dos registros simultáneos usan el mismo correo, traduce la violación del índice único en una excepción de dominio. | Implementa `UserRepository`; usa `UserJpaRepository` y `UserPersistenceMapper`. |
+| SessionRepositoryImpl | Persiste y recupera el aggregate `Session`. | Implementa `SessionRepository`; usa `SessionJpaRepository` y `SessionPersistenceMapper`. |
 
 **Sub-capa Persistence: Mappers**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| UserPersistenceMapper | Traduce entre el aggregate `User` y su representación en base de datos, evitando que el modelo de persistencia se filtre al dominio. | Usado por `UserRepository`. |
+| UserPersistenceMapper | Traduce entre el aggregate `User` y `UserPersistenceEntity`, evitando que el modelo de persistencia se filtre al dominio. | Usado por `UserRepositoryImpl`. |
+| SessionPersistenceMapper | Traduce entre el aggregate `Session` y `SessionPersistenceEntity`. | Usado por `SessionRepositoryImpl`. |
 
 **Sub-capa Security: Services**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| BCryptPasswordHashingService | Cifra las contraseñas y verifica credenciales mediante el algoritmo BCrypt. | Implementa `IPasswordHashingService`. |
-| JwtTokenService | Genera los tokens de sesión, calcula su expiración y produce el hash que se almacena en la tabla `sessions`. | Implementa `ITokenService`. |
+| BCryptHashingServiceImpl | Cifra las contraseñas y verifica credenciales mediante BCrypt. | Implementa `HashingService`. |
+| JwtTokenServiceImpl | Emite tokens JWT firmados con la clave `JWT_SECRET`, con el identificador del usuario, el de la sesión, el rol y la expiración. Calcula el hash del token con SHA-256, ya que se verifica en cada petición y el token tiene suficiente entropía como para no requerir un algoritmo lento como BCrypt. | Implementa `TokenService`. |
+
+**Sub-capa Security: Authorization**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| BearerAuthorizationRequestFilter | En cada petición extrae el token del encabezado `Authorization`, valida su firma y expiración, obtiene el identificador de la sesión y comprueba que siga vigente y que el hash coincida. Si la sesión fue revocada, la petición se rechaza con 401 Unauthorized. Si es válida, registra el usuario y su rol en el contexto de seguridad sin cargar la cuenta completa. | Usa `TokenService` y `SessionQueryService`. |
+| WebSecurityConfiguration | Configura Spring Security sin estado de servidor, deja públicas las rutas de registro, inicio de sesión y documentación, exige autenticación en el resto y registra el filtro de autorización. | Registra `BearerAuthorizationRequestFilter`. |
 
 **Sub-capa Messaging: Publishers**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| DomainEventPublisherAdapter | Publica los eventos de dominio del contexto dentro del monolito modular para que otros módulos reaccionen a ellos. | Implementa `IDomainEventPublisher`. |
+| SpringDomainEventPublisher | Publica los eventos de dominio dentro del monolito modular mediante el `ApplicationEventPublisher` de Spring, sin un message broker externo. | Implementa `DomainEventPublisher`. |
 
 #### 2.6.1.5. Bounded Context Software Architecture Component Level Diagrams
 
