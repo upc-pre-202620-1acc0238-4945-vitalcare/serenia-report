@@ -4359,166 +4359,337 @@ Existe una relación de uno a muchos entre `users` y `sessions`: una cuenta pued
 
 ### 2.6.2. Bounded Context: Care Circle
 
-<br>
+El bounded context Care Circle gestiona la red de apoyo de cada adulto mayor: qué familiares lo acompañan, cómo se incorporan y cómo se coordinan entre ellos. Cubre la generación y el canje de códigos de invitación, el establecimiento y la revocación de vínculos familiares, la asignación de turnos de atención y las notas compartidas. Es un contexto de soporte del que depende el resto del sistema: a través de él se determina qué familiares pueden consultar la información de un adulto mayor y a quiénes deben dirigirse sus alertas.
+
+Su modelo se organiza en tres aggregates. `CareCircle` reúne los códigos de invitación y los vínculos familiares, porque las reglas que los relacionan deben verificarse de forma conjunta: un código se canjea una sola vez y un familiar no puede tener dos vínculos activos con el mismo círculo. La cantidad de códigos y vínculos por círculo es pequeña, acotada por el tamaño de la familia, por lo que cargarlos juntos no representa un costo relevante. `CareShift` y `SharedNote` son independientes: un turno o una nota se modifican sin afectar a los vínculos, y separarlos evita que dos familiares que editan al mismo tiempo compitan por el mismo aggregate. Ambos referencian al círculo por su identificador.
+
+Cada adulto mayor tiene exactamente un círculo, que se crea al completarse su registro en Identity & Access. El contexto consulta a Identity & Access el rol de quien canjea un código y la zona horaria del adulto mayor, y expone la fachada `CareCircleContextFacade` para que los demás contextos verifiquen vínculos y obtengan los familiares activos.
 
 #### 2.6.2.1. Domain Layer
 
-En esta capa se definen las reglas de negocio para la formación y gestión de la red de apoyo del adulto mayor. Conforme al EventStorming, el dominio se divide en tres *Aggregate Roots* independientes para evitar bloqueos transaccionales innecesarios.
+En esta capa se representan las reglas de formación y coordinación de la red de apoyo, sin dependencia de frameworks de persistencia, red ni interfaz. Toda operación sobre un círculo exige que quien la solicita sea el adulto mayor dueño o un familiar con vínculo activo.
 
-**Sub-capa Model - Aggregates y Entities:**
+**Sub-capa Model: Aggregates**
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Aggregate | CareCircle | Entidad raíz que administra la membresía del círculo de cuidado. | Mantener la integridad de los vínculos familiares y los códigos de invitación. | Relacionado con el módulo Identity & Access. |
-| Entity | InvitationCode | Código temporal generado para agregar familiares. | Garantizar que un código se redima una sola vez o expire. | Pertenece al aggregate CareCircle. |
-| Entity | FamilyLink | Relación activa o revocada entre el adulto mayor y un cuidador. | Representar la autorización de un familiar sobre un adulto mayor. | Pertenece al aggregate CareCircle. |
-| Aggregate | CareShift | Entidad raíz que gestiona los turnos de cuidado diarios. | Garantizar que no haya colisiones de responsabilidad en una misma fecha. | Referencia al CareCircle. |
-| Aggregate | SharedNote | Entidad raíz que gestiona la bitácora colaborativa. | Almacenar y exponer información de contexto compartida por los miembros. | Referencia al CareCircle. |
+`CareCircle` (Aggregate Root): representa la red de apoyo de un adulto mayor. Controla la emisión y el canje de códigos de invitación y el ciclo de vida de los vínculos familiares.
 
-**Sub-capa Model - Commands:**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | CareCircleId | private | Identificador único del círculo. |
+| olderAdultId | OlderAdultId | private | Adulto mayor dueño del círculo; cada adulto mayor tiene un único círculo. |
+| invitationCodes | List\<InvitationCode\> | private | Códigos de invitación generados para el círculo. |
+| familyLinks | List\<FamilyLink\> | private | Vínculos familiares del círculo, activos o revocados. |
+| createdAt | Instant | private | Instante de creación del círculo, en UTC. |
 
-| Tipo | Nombre | Descripción |
-|---|---|---|
-| Command | CreateCareCircleCommand | Intención de inicializar el círculo de cuidado tras el registro. |
-| Command | GenerateInvitationCodeCommand | Intención de crear un código temporal para invitar a un familiar. |
-| Command | RedeemInvitationCodeCommand | Intención de un familiar de unirse al círculo usando un código válido. |
-| Command | RevokeFamilyLinkCommand | Intención de eliminar el acceso de un familiar al círculo. |
-| Command | AssignCareShiftCommand | Intención de asignar un turno de cuidado en una fecha específica. |
-| Command | ReassignCareShiftCommand | Intención de cambiar al responsable de un turno de cuidado existente. |
-| Command | CreateSharedNoteCommand | Intención de añadir un apunte a la bitácora colaborativa. |
-| Command | EditSharedNoteCommand | Intención de modificar el contenido de una nota compartida existente. |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| create(olderAdultId, createdAt) | public (static) | Factory que crea el círculo de un adulto mayor y registra el evento `CareCircleCreated`. |
+| generateInvitationCode(requesterId, code, createdAt, expiresAt) | public | Genera un código pendiente; solo el adulto mayor dueño puede solicitarlo. Registra el evento `InvitationCodeGenerated`. |
+| redeemInvitationCode(code, relativeId, relationshipLabel, redeemedAt) | public | Marca el código como usado por el familiar. Rechaza el canje si el código ya fue usado, si su vigencia terminó aunque aún no haya sido marcado como expirado, o si el familiar ya tiene un vínculo activo con el círculo. Registra el evento `InvitationCodeRedeemed`. |
+| establishFamilyLink(relativeId, relationshipLabel, linkedAt) | public | Crea un vínculo activo con el familiar; si existe un vínculo revocado previo, lo reactiva en lugar de crear otro. Registra el evento `FamilyLinkEstablished`. |
+| revokeFamilyLink(familyLinkId, requesterId, revokedAt) | public | Revoca un vínculo activo. El adulto mayor puede revocar cualquier vínculo de su círculo; un familiar, solo el propio. Registra el evento `FamilyLinkRevoked`. |
+| expireDueInvitationCodes(referenceTime) | public | Marca como expirados los códigos pendientes cuya vigencia terminó y registra un evento `InvitationCodeExpired` por cada uno. |
+| hasAccess(userId) | public | Indica si el usuario es el adulto mayor dueño o un familiar con vínculo activo. |
+| isActiveRelative(relativeId) | public | Indica si el familiar tiene un vínculo activo con el círculo. |
+| activeFamilyLinks() | public | Devuelve los vínculos activos del círculo. |
 
-**Sub-capa Model - Events:**
+`CareShift` (Aggregate Root): representa la responsabilidad de un familiar sobre el seguimiento del adulto mayor en una fecha determinada.
 
-| Tipo | Nombre | Descripción |
-|---|---|---|
-| Event | CareCircleCreated | Se inicializó el círculo de cuidado. |
-| Event | InvitationCodeGenerated | Se generó un nuevo código de invitación temporal. |
-| Event | InvitationCodeRedeemed | Un código fue canjeado con éxito. |
-| Event | FamilyLinkEstablished | Se estableció el vínculo (Consumido por otros contextos para autorizar accesos). |
-| Event | FamilyLinkRevoked | Se eliminó el acceso de un familiar. |
-| Event | CareShiftAssigned | Se registró un nuevo turno de cuidado. |
-| Event | CareShiftReassigned | Se actualizó el responsable de un turno. |
-| Event | SharedNoteCreated | Se añadió una nota al círculo. |
-| Event | SharedNoteEdited | Se modificó una nota existente. |
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | CareShiftId | private | Identificador único del turno. |
+| careCircleId | CareCircleId | private | Referencia por identidad al círculo del turno. |
+| relativeId | RelativeId | private | Familiar responsable del turno. |
+| shiftDate | LocalDate | private | Fecha del turno, expresada en la zona horaria del adulto mayor. |
+| createdAt | Instant | private | Instante de creación del turno, en UTC. |
+| updatedAt | Instant | private | Instante de la última modificación, en UTC. |
 
-**Sub-capa Model - Queries:**
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| assign(careCircleId, relativeId, shiftDate, today, createdAt) | public (static) | Factory que asigna el turno a un familiar; rechaza fechas anteriores al día actual del adulto mayor. Registra el evento `CareShiftAssigned`. |
+| reassignTo(newRelativeId, today, updatedAt) | public | Cambia el responsable del turno; rechaza turnos de fechas pasadas y reasignaciones al mismo familiar. Registra el evento `CareShiftReassigned`. |
+| isAssignedTo(relativeId) | public | Indica si el turno está asignado al familiar indicado. |
 
-| Tipo | Nombre | Descripción |
-|---|---|---|
-| Query | GetCareCircleByIdQuery | Obtener la estructura y miembros de un círculo. |
-| Query | GetCareShiftsByDateQuery | Obtener el calendario de turnos. |
-| Query | GetSharedNotesQuery | Obtener la bitácora de notas compartidas. |
+`SharedNote` (Aggregate Root): representa una nota con información relevante sobre el adulto mayor, visible para todos los familiares del círculo.
 
-**Sub-capa Repositories y Services (Interfaces):**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | SharedNoteId | private | Identificador único de la nota. |
+| careCircleId | CareCircleId | private | Referencia por identidad al círculo de la nota. |
+| authorId | RelativeId | private | Familiar que creó la nota. |
+| content | NoteContent | private | Contenido de la nota. |
+| createdAt | Instant | private | Instante de creación de la nota, en UTC. |
+| updatedAt | Instant | private | Instante de la última edición, en UTC. |
 
-| Tipo | Nombre | Descripción |
-|---|---|---|
-| Interface | ICareCircleRepository | Contrato de persistencia para el agregado CareCircle. |
-| Interface | ICareShiftRepository | Contrato de persistencia para el agregado CareShift. |
-| Interface | ISharedNoteRepository | Contrato de persistencia para el agregado SharedNote. |
-| Interface | ICareCircleCommandService | Contrato de operaciones de escritura del dominio. |
-| Interface | ICareCircleQueryService | Contrato de operaciones de lectura del dominio. |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| create(careCircleId, authorId, content, createdAt) | public (static) | Factory que registra una nueva nota y el evento `SharedNoteCreated`. |
+| edit(editorId, content, updatedAt) | public | Reemplaza el contenido de la nota; solo el autor puede editarla. Registra el evento `SharedNoteEdited`. |
+| isAuthoredBy(relativeId) | public | Indica si la nota fue creada por el familiar indicado. |
 
-<br>
+**Sub-capa Model: Entities**
+
+`InvitationCode`: representa un código temporal que permite a un familiar incorporarse al círculo. Pertenece al aggregate `CareCircle` y no se manipula fuera de él.
+
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | InvitationCodeId | private | Identificador único del código. |
+| code | InvitationCodeValue | private | Valor que el adulto mayor comparte con su familiar. |
+| status | InvitationStatus | private | Estado del código: pendiente, usado o expirado. |
+| createdAt | Instant | private | Instante de generación, en UTC. |
+| expiresAt | Instant | private | Instante en que termina la vigencia del código, en UTC. |
+| usedAt | Instant | private | Instante del canje; es nulo mientras el código no se haya usado. |
+| usedBy | RelativeId | private | Familiar que canjeó el código; es nulo mientras no se haya usado. |
+
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| isRedeemableAt(referenceTime) | public | Indica si el código está pendiente y su vigencia no terminó en el instante indicado. |
+| markAsUsed(relativeId, usedAt) | public | Registra el canje del código por el familiar. |
+| isDueForExpiration(referenceTime) | public | Indica si el código sigue pendiente pero su vigencia ya terminó. |
+| expire() | public | Marca el código como expirado. |
+
+`FamilyLink`: representa la autorización de un familiar para acompañar al adulto mayor. Pertenece al aggregate `CareCircle` y no se manipula fuera de él.
+
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | FamilyLinkId | private | Identificador único del vínculo. |
+| relativeId | RelativeId | private | Familiar vinculado. |
+| relationshipLabel | RelationshipLabel | private | Parentesco declarado por el familiar, opcional. |
+| status | LinkStatus | private | Estado del vínculo: activo o revocado. |
+| linkedAt | Instant | private | Instante en que el vínculo se estableció o se reactivó por última vez, en UTC. |
+| revokedAt | Instant | private | Instante de la revocación; es nulo mientras el vínculo esté activo. |
+
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| revoke(revokedAt) | public | Marca el vínculo como revocado. |
+| reactivate(relationshipLabel, linkedAt) | public | Vuelve a activar un vínculo revocado. |
+| isActive() | public | Indica si el vínculo se encuentra activo. |
+
+**Sub-capa Model: Value Objects**
+
+Se implementan como records inmutables que validan su contenido al construirse. Los límites de longitud coinciden con las columnas de la base de datos.
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| CareCircleId, InvitationCodeId, FamilyLinkId, CareShiftId, SharedNoteId | value: UUID | Identidades inmutables de los aggregates y entities del contexto. |
+| OlderAdultId | value: UUID | Referencia por identidad a una cuenta de adulto mayor de Identity & Access. |
+| RelativeId | value: UUID | Referencia por identidad a una cuenta de familiar a distancia de Identity & Access. |
+| InvitationCodeValue | value: String | Código de 8 caracteres en mayúsculas, tomados de un alfabeto sin caracteres ambiguos (sin 0, O, 1, I ni L) para que pueda dictarse por teléfono sin errores. |
+| RelationshipLabel | value: String | Parentesco declarado por el familiar, por ejemplo "hija", de máximo 60 caracteres. |
+| NoteContent | value: String | Contenido de una nota; no puede estar vacío ni superar los 65 535 bytes de la columna TEXT. |
+
+**Sub-capa Model: Enumerations**
+
+| Nombre | Valores | Descripción |
+| --- | --- | --- |
+| InvitationStatus | PENDING, USED, EXPIRED | Estado del ciclo de vida de un código de invitación. |
+| LinkStatus | ACTIVE, REVOKED | Estado de un vínculo familiar. |
+
+**Sub-capa Model: Commands**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| CreateCareCircleCommand | olderAdultId | Intención de crear el círculo de un adulto mayor recién registrado. |
+| GenerateInvitationCodeCommand | careCircleId, requesterId | Intención del adulto mayor de generar un código para invitar a un familiar. |
+| RedeemInvitationCodeCommand | code, relativeId, relationshipLabel | Intención de un familiar de incorporarse a un círculo mediante un código. |
+| EstablishFamilyLinkCommand | careCircleId, relativeId, relationshipLabel | Intención de registrar el vínculo de un familiar tras el canje de su código. |
+| ExpireInvitationCodesCommand | referenceTime | Intención de marcar como expirados los códigos cuya vigencia terminó. |
+| RevokeFamilyLinkCommand | careCircleId, familyLinkId, requesterId | Intención de retirar el acceso de un familiar al círculo. |
+| AssignCareShiftCommand | careCircleId, relativeId, shiftDate | Intención de un familiar de asignarse el turno de una fecha. |
+| ReassignCareShiftCommand | careShiftId, newRelativeId, requesterId | Intención de cambiar el responsable de un turno existente. |
+| ReleaseCareShiftsCommand | careCircleId, relativeId | Intención de liberar los turnos pendientes de un familiar cuyo vínculo fue revocado. |
+| CreateSharedNoteCommand | careCircleId, authorId, content | Intención de registrar una nota compartida. |
+| EditSharedNoteCommand | sharedNoteId, editorId, content | Intención de modificar el contenido de una nota existente. |
+
+**Sub-capa Model: Queries**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| GetCareCircleByIdQuery | careCircleId, requesterId | Consulta de un círculo por su identificador. |
+| GetCareCircleByOlderAdultIdQuery | olderAdultId | Consulta del círculo de un adulto mayor. |
+| GetPendingInvitationCodesByCareCircleIdQuery | careCircleId, requesterId | Consulta de los códigos de invitación vigentes de un círculo. |
+| GetActiveFamilyLinksByCareCircleIdQuery | careCircleId, requesterId | Consulta de los familiares con vínculo activo en un círculo. |
+| GetActiveFamilyLinksByRelativeIdQuery | relativeId | Consulta de los círculos a los que un familiar está vinculado. |
+| GetCareShiftsByDateRangeQuery | careCircleId, requesterId, fromDate, toDate | Consulta de los turnos de un círculo en un rango de fechas; con un rango de un solo día devuelve el turno vigente. |
+| GetSharedNotesByCareCircleIdQuery | careCircleId, requesterId | Consulta de las notas compartidas de un círculo, de la más reciente a la más antigua. |
+
+**Sub-capa Model: Events**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| CareCircleCreated | careCircleId, olderAdultId, occurredAt | Se creó el círculo de cuidado de un adulto mayor. |
+| InvitationCodeGenerated | careCircleId, invitationCodeId, expiresAt, occurredAt | Se generó un código de invitación. |
+| InvitationCodeExpired | careCircleId, invitationCodeId, occurredAt | Un código terminó su vigencia sin ser canjeado. |
+| InvitationCodeRedeemed | careCircleId, invitationCodeId, relativeId, relationshipLabel, occurredAt | Un familiar canjeó un código válido. |
+| FamilyLinkEstablished | careCircleId, familyLinkId, relativeId, occurredAt | Un familiar quedó vinculado al círculo. |
+| FamilyLinkRevoked | careCircleId, familyLinkId, relativeId, occurredAt | Se retiró el acceso de un familiar al círculo. |
+| CareShiftAssigned | careShiftId, careCircleId, relativeId, shiftDate, occurredAt | Se asignó un turno de atención. |
+| CareShiftReassigned | careShiftId, previousRelativeId, newRelativeId, occurredAt | Se cambió el responsable de un turno. |
+| CareShiftsReleased | careCircleId, relativeId, occurredAt | Se liberaron los turnos pendientes de un familiar cuyo vínculo fue revocado. |
+| SharedNoteCreated | sharedNoteId, careCircleId, authorId, occurredAt | Se registró una nota compartida. |
+| SharedNoteEdited | sharedNoteId, occurredAt | Se modificó una nota compartida. |
+
+**Sub-capa Repositories**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | CareCircleRepository | save(careCircle), findById(careCircleId), findByOlderAdultId(olderAdultId), findByInvitationCode(code), findAllByActiveRelativeId(relativeId), findAllWithDueInvitationCodes(referenceTime) | Contrato de persistencia del aggregate `CareCircle` junto con sus códigos y vínculos. Se implementa en Infrastructure. |
+| Interface | CareShiftRepository | save(careShift), findById(careShiftId), existsByCareCircleIdAndShiftDate(careCircleId, shiftDate), findAllByCareCircleIdAndShiftDateBetween(careCircleId, fromDate, toDate), findAllByRelativeIdFromDate(careCircleId, relativeId, fromDate), deleteAll(careShifts) | Contrato de persistencia del aggregate `CareShift`. Se implementa en Infrastructure. |
+| Interface | SharedNoteRepository | save(sharedNote), findById(sharedNoteId), findAllByCareCircleId(careCircleId) | Contrato de persistencia del aggregate `SharedNote`. Se implementa en Infrastructure. |
+
+**Sub-capa Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | CareCircleCommandService | handle(CreateCareCircleCommand), handle(GenerateInvitationCodeCommand), handle(RedeemInvitationCodeCommand), handle(EstablishFamilyLinkCommand), handle(ExpireInvitationCodesCommand), handle(RevokeFamilyLinkCommand) | Contrato de las operaciones de escritura sobre los círculos, sus códigos y sus vínculos. |
+| Interface | CareCircleQueryService | handle(GetCareCircleByIdQuery), handle(GetCareCircleByOlderAdultIdQuery), handle(GetPendingInvitationCodesByCareCircleIdQuery), handle(GetActiveFamilyLinksByCareCircleIdQuery), handle(GetActiveFamilyLinksByRelativeIdQuery) | Contrato de las operaciones de lectura sobre los círculos. |
+| Interface | CareShiftCommandService | handle(AssignCareShiftCommand), handle(ReassignCareShiftCommand), handle(ReleaseCareShiftsCommand) | Contrato de las operaciones de escritura sobre los turnos. |
+| Interface | CareShiftQueryService | handle(GetCareShiftsByDateRangeQuery) | Contrato de la lectura del calendario de turnos. |
+| Interface | SharedNoteCommandService | handle(CreateSharedNoteCommand), handle(EditSharedNoteCommand) | Contrato de las operaciones de escritura sobre las notas. |
+| Interface | SharedNoteQueryService | handle(GetSharedNotesByCareCircleIdQuery) | Contrato de la lectura de notas compartidas. |
 
 #### 2.6.2.2. Interface Layer
+
 Clases que exponen el bounded context hacia el exterior y traducen las peticiones entrantes al lenguaje del dominio.
 
-**Sub-capa Rest - Controllers**
+**Sub-capa REST: Controllers**
 
-| **Nombre** | **Endpoints** | **Descripción** |
-|---|---|---|
-| **CareCirclesController** | POST /care-circles <br> GET /care-circles/{id} | Punto de entrada para la creación y consulta de un círculo de cuidado. Delega en los servicios de comandos y consultas correspondientes. |
-| **FamilyLinksController** | POST /care-circles/{id}/invitation-code <br> POST /family-links/redeem <br> DELETE /care-circles/{id}/family-links/{userId} | Punto de entrada para generar códigos de invitación, establecer vínculos familiares mediante el canje de invitaciones y revocar vínculos existentes. |
-| **CareShiftsController** | POST /care-circles/{id}/shifts <br> PUT /care-circles/{id}/shifts/{shiftId} | Punto de entrada para la asignación y reasignación de turnos de cuidado dentro de un Care Circle. |
-| **SharedNotesController** | POST /care-circles/{id}/shared-notes <br>PUT /care-circles/{id}/shared-notes/{noteId} | Punto de entrada para crear y editar notas compartidas entre los miembros del Care Circle. |
+| Nombre | Endpoints | Descripción |
+| --- | --- | --- |
+| CareCirclesController | GET /api/v1/care-circles/{careCircleId}, GET /api/v1/care-circles?olderAdultId={olderAdultId} | Punto de entrada de la consulta de círculos. No expone la creación, porque el círculo se crea automáticamente con el registro del adulto mayor. |
+| InvitationCodesController | POST /api/v1/care-circles/{careCircleId}/invitation-codes, GET /api/v1/care-circles/{careCircleId}/invitation-codes | Punto de entrada de la generación de códigos por parte del adulto mayor y de la consulta de los códigos vigentes. |
+| FamilyLinksController | POST /api/v1/family-links, GET /api/v1/family-links?relativeId={relativeId}, GET /api/v1/care-circles/{careCircleId}/family-links, DELETE /api/v1/care-circles/{careCircleId}/family-links/{familyLinkId} | Punto de entrada del canje de códigos, que responde 404 Not Found si el código no existe y 409 Conflict si ya fue usado o expiró; de la consulta de los círculos de un familiar; de la lista de familiares de un círculo; y de la revocación de vínculos. |
+| CareShiftsController | POST /api/v1/care-circles/{careCircleId}/care-shifts, GET /api/v1/care-circles/{careCircleId}/care-shifts?from={fromDate}&to={toDate}, PUT /api/v1/care-circles/{careCircleId}/care-shifts/{careShiftId} | Punto de entrada de la asignación de turnos, que responde 409 Conflict si la fecha ya está cubierta; de la consulta del calendario; y de la reasignación. |
+| SharedNotesController | POST /api/v1/care-circles/{careCircleId}/shared-notes, GET /api/v1/care-circles/{careCircleId}/shared-notes, PUT /api/v1/care-circles/{careCircleId}/shared-notes/{sharedNoteId} | Punto de entrada de la creación, consulta y edición de notas; la edición responde 403 Forbidden si el solicitante no es el autor. |
 
-**Sub-capa Rest - Resources**
+Los endpoints bajo `/care-circles/{careCircleId}` responden 403 Forbidden cuando el usuario autenticado no es el adulto mayor dueño ni un familiar con vínculo activo.
 
-Los Resources representan los datos que entran o salen de la API, sin exponer directamente las entidades o agregados del dominio.
+**Sub-capa REST: Resources**
 
-| **Nombre** | **Descripción** |
-|---|---|
-| **CreateCareCircleResource** | Datos de entrada necesarios para crear un nuevo Care Circle. |
-| **CareCircleResource** | Representación pública de un Care Circle y su información relevante para los usuarios. |
-| **GenerateInvitationCodeResource** | Datos necesarios para solicitar la generación de un código de invitación para incorporar un familiar al Care Circle. |
-| **InvitationCodeResource** | Representación del código de invitación generado y la información asociada a su vigencia. |
-| **RedeemInvitationCodeResource** | Código de invitación enviado por un usuario para solicitar su incorporación al Care Circle. |
-| **FamilyLinkResource** | Representación de un vínculo familiar establecido entre un miembro y el Care Circle. |
-| **AssignCareShiftResource** | Datos de entrada necesarios para asignar un turno de cuidado a un miembro del Care Circle. |
-| **CareShiftResource** | Representación de un turno de cuidado asignado dentro del Care Circle. |
-| **ReassignCareShiftResource** | Datos necesarios para modificar el miembro responsable de un turno de cuidado existente. |
-| **CreateSharedNoteResource** | Datos de entrada para crear una nota compartida dentro del Care Circle. |
-| **SharedNoteResource** | Representación de una nota compartida y sus datos relevantes. |
-| **EditSharedNoteResource** | Datos de entrada para modificar el contenido de una nota compartida existente. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| CareCircleResource | id, olderAdultId, createdAt | Representación de un círculo de cuidado. |
+| InvitationCodeResource | id, code, status, expiresAt | Representación de un código de invitación y su vigencia. |
+| RedeemInvitationCodeResource | code, relationshipLabel | Datos de entrada para canjear un código. |
+| FamilyLinkResource | id, careCircleId, relativeId, relationshipLabel, status, linkedAt | Representación de un vínculo familiar. |
+| AssignCareShiftResource | shiftDate | Datos de entrada para asignarse un turno. |
+| ReassignCareShiftResource | relativeId | Datos de entrada para cambiar el responsable de un turno. |
+| CareShiftResource | id, careCircleId, relativeId, shiftDate | Representación de un turno de atención. |
+| CreateSharedNoteResource | content | Datos de entrada para registrar una nota. |
+| EditSharedNoteResource | content | Datos de entrada para editar una nota. |
+| SharedNoteResource | id, careCircleId, authorId, content, createdAt, updatedAt | Representación de una nota compartida. |
 
-**Sub-Capa Rest - Transform**
+**Sub-capa REST: Transform**
 
-| **Nombre** | **Descripción** |
-|---|---|
-| **CareCircleResourceFromEntityAssembler** | Convierte el aggregate CareCircle en su representación REST. |
-| **FamilyLinkResourceFromEntityAssembler** | Convierte la entidad FamilyLink en su representación REST. |
-| **CareShiftResourceFromEntityAssembler** | Convierte la entidad CareShift en su representación REST. |
-| **SharedNoteResourceFromEntityAssembler** | Convierte la entidad SharedNote en su representación REST. |
-| **CreateCareCircleCommandFromResourceAssembler** | Convierte la petición de creación del Care Circle en el comando correspondiente. |
-| **GenerateInvitationCodeCommandFromResourceAssembler** | Convierte la petición de generación de código de invitación en el comando correspondiente. |
-| **RedeemInvitationCodeCommandFromResourceAssembler** | Convierte el código recibido en el comando para canjear la invitación. |
-| **RevokeFamilyLinkCommandFromResourceAssembler** | Convierte la petición de revocación de un vínculo familiar en su comando correspondiente. |
-| **AssignCareShiftCommandFromResourceAssembler** | Convierte la petición de asignación de un turno en el comando correspondiente. |
-| **ReassignCareShiftCommandFromResourceAssembler** | Convierte la petición de reasignación de un turno en el comando correspondiente. |
-| **CreateSharedNoteCommandFromResourceAssembler** | Convierte la petición de creación de una nota compartida en el comando correspondiente. |
-| **EditSharedNoteCommandFromResourceAssembler** | Convierte la petición de edición de una nota compartida en el comando correspondiente. |
+| Nombre | Descripción |
+| --- | --- |
+| CareCircleResourceFromEntityAssembler | Convierte el aggregate `CareCircle` en su representación REST. |
+| InvitationCodeResourceFromEntityAssembler | Convierte la entidad `InvitationCode` en su representación REST. |
+| FamilyLinkResourceFromEntityAssembler | Convierte la entidad `FamilyLink` en su representación REST. |
+| CareShiftResourceFromEntityAssembler | Convierte el aggregate `CareShift` en su representación REST. |
+| SharedNoteResourceFromEntityAssembler | Convierte el aggregate `SharedNote` en su representación REST. |
+| RedeemInvitationCodeCommandFromResourceAssembler | Combina la petición con el familiar autenticado para construir el comando de canje. |
+| AssignCareShiftCommandFromResourceAssembler | Combina la petición con el círculo y el familiar autenticado para construir el comando de asignación. |
+| ReassignCareShiftCommandFromResourceAssembler | Combina la petición con el turno y el solicitante para construir el comando de reasignación. |
+| CreateSharedNoteCommandFromResourceAssembler | Combina la petición con el círculo y el autor para construir el comando de creación de nota. |
+| EditSharedNoteCommandFromResourceAssembler | Combina la petición con la nota y el editor para construir el comando de edición. |
 
-<br>
+**Sub-capa Scheduling: Jobs**
+
+| Nombre | Descripción |
+| --- | --- |
+| InvitationCodeExpirationScheduler | Tarea periódica que envía el comando `ExpireInvitationCodesCommand` con el instante actual. |
+
+**Sub-capa ACL**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | CareCircleContextFacade | fetchCareCircleIdByOlderAdultId(olderAdultId): Optional\<UUID\>, fetchOlderAdultIdByCareCircleId(careCircleId): Optional\<UUID\>, fetchActiveRelativeIdsByOlderAdultId(olderAdultId): List\<UUID\>, isActiveRelativeOf(relativeId, olderAdultId): boolean, hasAccessToCareCircle(userId, careCircleId): boolean | Contrato que el contexto ofrece a los demás. Alerts and Safety lo usa para determinar a qué familiares notificar; Daily Check-in, Wellbeing Monitoring y Alerts and Safety, para verificar que un familiar esté vinculado antes de mostrar información; Social Companionship, para resolver los destinatarios de los mensajes. Recibe y devuelve tipos primitivos para no exponer clases del dominio. |
 
 #### 2.6.2.3. Application Layer
 
-Clases que orquestan los flujos del contexto, coordinando los aggregates, los repositorios y la publicación de eventos de dominio.
+Clases que orquestan los flujos del contexto, coordinando los aggregates, los repositorios, los servicios de otros contextos y la publicación de eventos de dominio.
 
-**Sub-capa Internal - CommandServices**
+**Sub-capa Internal: CommandServices (Command Handlers)**
 
-| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
-|---|---|---|
-| **CareCircleCommandService** | Ejecuta los comandos del contexto relacionados con la creación y gestión del Care Circle, generación y canje de códigos de invitación, establecimiento y revocación de vínculos familiares, asignación y reasignación de turnos de cuidado, y creación y edición de notas compartidas. Valida las reglas de negocio, invoca los métodos de los aggregates, persiste los cambios y publica los eventos de dominio correspondientes. | Implementa ICareCircleCommandService; usa ICareCircleRepository, IFamilyLinkRepository, ICareShiftRepository, ISharedNoteRepository e IDomainEventPublisher. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CareCircleCommandServiceImpl | Crea el círculo sin duplicarlo si el adulto mayor ya tiene uno. Genera códigos solicitando un valor nuevo hasta obtener uno que no exista y fija su expiración según la vigencia configurada. En el canje busca el círculo por código, verifica que el solicitante sea un familiar a distancia con cuenta activa e invoca al aggregate. Además, establece y revoca vínculos y expira los códigos vencidos. Tras persistir, publica los eventos acumulados. | Implementa `CareCircleCommandService`; usa `CareCircleRepository`, `InvitationCodeGenerator`, `ExternalIamService` y `DomainEventPublisher`. |
+| CareShiftCommandServiceImpl | Verifica que el solicitante tenga acceso al círculo y que el responsable tenga un vínculo activo; calcula el día actual en la zona horaria del adulto mayor; comprueba que la fecha no esté cubierta e invoca al aggregate. Al liberar turnos, elimina los turnos del familiar desde el día actual en adelante. | Implementa `CareShiftCommandService`; usa `CareShiftRepository`, `CareCircleRepository`, `ExternalIamService` y `DomainEventPublisher`. |
+| SharedNoteCommandServiceImpl | Verifica que el autor sea un familiar con vínculo activo antes de registrar una nota y delega en el aggregate la verificación de autoría al editarla. | Implementa `SharedNoteCommandService`; usa `SharedNoteRepository`, `CareCircleRepository` y `DomainEventPublisher`. |
 
-**Sub-capa Internal - QueryServices**
+**Sub-capa Internal: QueryServices**
 
-| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
-|---|---|---|
-| **CareCircleQueryService** | Resuelve las consultas de los Care Circle, sus miembros, vínculos familiares, turnos de cuidado y notas compartidas, devolviendo la información necesaria para las vistas sin modificar el estado del dominio. | Implementa ICareCircleQueryService; usa ICareCircleRepository, IFamilyLinkRepository, ICareShiftRepository e ISharedNoteRepository. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CareCircleQueryServiceImpl | Resuelve las consultas de círculos, códigos vigentes y vínculos activos, previa verificación de acceso del solicitante. | Implementa `CareCircleQueryService`; usa `CareCircleRepository`. |
+| CareShiftQueryServiceImpl | Resuelve la consulta del calendario de turnos de un círculo, previa verificación de acceso. | Implementa `CareShiftQueryService`; usa `CareShiftRepository` y `CareCircleRepository`. |
+| SharedNoteQueryServiceImpl | Resuelve la consulta de notas compartidas de un círculo, previa verificación de acceso. | Implementa `SharedNoteQueryService`; usa `SharedNoteRepository` y `CareCircleRepository`. |
 
-<br>
+**Sub-capa Internal: Event Handlers**
 
-#### 2.6.2.4 Infrastructure Layer
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| OlderAdultRegisteredEventHandler | Crea el círculo de cuidado de un adulto mayor recién registrado. Se ejecuta de forma síncrona dentro de la transacción del registro, de modo que no exista un adulto mayor sin círculo. | Escucha `OlderAdultRegistered` de Identity & Access; envía `CreateCareCircleCommand`. |
+| InvitationCodeRedeemedEventHandler | Establece el vínculo familiar tras el canje de un código. Se ejecuta en la misma transacción del canje, de modo que el consumo del código y la creación del vínculo ocurran juntos. | Escucha `InvitationCodeRedeemed`; envía `EstablishFamilyLinkCommand`. |
+| FamilyLinkRevokedEventHandler | Libera los turnos pendientes del familiar revocado, de modo que esas fechas queden sin asignar y otro familiar pueda cubrirlas. | Escucha `FamilyLinkRevoked`; envía `ReleaseCareShiftsCommand`. |
 
-Clases que resuelven el acceso a la base de datos y a los mecanismos técnicos de persistencia y mensajería, implementando las abstracciones definidas en el dominio.
+**Sub-capa Internal: Outbound Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | InvitationCodeGenerator | generate(): InvitationCodeValue | Abstracción de la generación aleatoria de códigos de invitación. |
+| Class | ExternalIamService | fetchUserRole(userId), isActiveUser(userId), fetchTimeZone(userId) | Consume `IamContextFacade` y traduce sus respuestas a tipos del contexto, como `ZoneId`. |
+
+**Sub-capa ACL**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CareCircleContextFacadeImpl | Resuelve las consultas de otros contextos sobre círculos y vínculos y las devuelve en tipos primitivos. | Implementa `CareCircleContextFacade`; usa `CareCircleRepository`. |
+
+#### 2.6.2.4. Infrastructure Layer
+
+Clases que resuelven el acceso a la base de datos MySQL y la generación de códigos, implementando las abstracciones definidas en las capas Domain y Application.
+
+**Sub-capa Persistence: JPA Entities**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CareCirclePersistenceEntity | Representa una fila de la tabla `care_circles` y contiene las colecciones de códigos y vínculos, que se persisten en cascada junto con el círculo. | Usada por `CareCircleJpaRepository` y `CareCirclePersistenceMapper`. |
+| InvitationCodePersistenceEntity | Representa una fila de la tabla `invitation_codes`. | Contenida en `CareCirclePersistenceEntity`. |
+| FamilyLinkPersistenceEntity | Representa una fila de la tabla `family_links`. | Contenida en `CareCirclePersistenceEntity`. |
+| CareShiftPersistenceEntity | Representa una fila de la tabla `care_shifts`. | Usada por `CareShiftJpaRepository` y `CareShiftPersistenceMapper`. |
+| SharedNotePersistenceEntity | Representa una fila de la tabla `shared_notes`. | Usada por `SharedNoteJpaRepository` y `SharedNotePersistenceMapper`. |
+
+**Sub-capa Persistence: JPA Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CareCircleJpaRepository | Interfaz de Spring Data JPA con las consultas por adulto mayor y por código, resueltas sobre los índices únicos de `older_adult_id` y `code`, además de las consultas por familiar activo y por códigos vencidos. | Extiende `JpaRepository`; usada por `CareCircleRepositoryImpl`. |
+| CareShiftJpaRepository | Interfaz de Spring Data JPA con las consultas por círculo y rango de fechas, resueltas sobre el índice único `(care_circle_id, shift_date)`. | Extiende `JpaRepository`; usada por `CareShiftRepositoryImpl`. |
+| SharedNoteJpaRepository | Interfaz de Spring Data JPA con la consulta de notas por círculo ordenadas por fecha, resuelta sobre el índice `(care_circle_id, created_at)`. | Extiende `JpaRepository`; usada por `SharedNoteRepositoryImpl`. |
 
 **Sub-capa Persistence: Repositories**
 
-| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
-|---|---|---|
-| **CareCircleRepository** | Persiste y recupera los aggregates CareCircle, incluyendo la información necesaria para consultar sus miembros y configuración del círculo. Resuelve las operaciones de creación y consulta de los Care Circle. | Implementa ICareCircleRepository; usado por la capa Application. |
-| **FamilyLinkRepository** | Persiste y recupera los vínculos familiares establecidos entre los usuarios y un CareCircle, incluyendo la información necesaria para establecer y revocar dichos vínculos. | Implementa IFamilyLinkRepository; usado por la capa Application. |
-| **CareShiftRepository** | Persiste y recupera los turnos de cuidado asociados a un CareCircle, permitiendo consultar y modificar las asignaciones de los miembros. | Implementa ICareShiftRepository; usado por la capa Application. |
-| **SharedNoteRepository** | Persiste y recupera las notas compartidas pertenecientes a un CareCircle, permitiendo consultar y actualizar su contenido. | Implementa ISharedNoteRepository; usado por la capa Application. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CareCircleRepositoryImpl | Persiste y recupera el aggregate `CareCircle` junto con sus códigos y vínculos. | Implementa `CareCircleRepository`; usa `CareCircleJpaRepository` y `CareCirclePersistenceMapper`. |
+| CareShiftRepositoryImpl | Persiste y recupera el aggregate `CareShift`. Si dos familiares se asignan la misma fecha de forma simultánea, traduce la violación del índice único en una excepción de dominio. | Implementa `CareShiftRepository`; usa `CareShiftJpaRepository` y `CareShiftPersistenceMapper`. |
+| SharedNoteRepositoryImpl | Persiste y recupera el aggregate `SharedNote`. | Implementa `SharedNoteRepository`; usa `SharedNoteJpaRepository` y `SharedNotePersistenceMapper`. |
 
 **Sub-capa Persistence: Mappers**
 
-| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
-|---|---|---|
-| **CareCirclePersistenceMapper** | Traduce entre el aggregate CareCircle y su representación en base de datos, evitando que el modelo de persistencia se filtre al dominio. | Usado por CareCircleRepository. |
-| **FamilyLinkPersistenceMapper** | Traduce entre la entidad FamilyLink y su representación en base de datos, manteniendo separado el modelo de persistencia del modelo de dominio. | Usado por FamilyLinkRepository. |
-| **CareShiftPersistenceMapper** | Traduce entre la entidad CareShift y su representación en base de datos. | Usado por CareShiftRepository. |
-| **SharedNotePersistenceMapper** | Traduce entre la entidad SharedNote y su representación en base de datos. | Usado por SharedNoteRepository. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CareCirclePersistenceMapper | Traduce entre el aggregate `CareCircle`, con sus códigos y vínculos, y sus entidades de persistencia. | Usado por `CareCircleRepositoryImpl`. |
+| CareShiftPersistenceMapper | Traduce entre el aggregate `CareShift` y `CareShiftPersistenceEntity`. | Usado por `CareShiftRepositoryImpl`. |
+| SharedNotePersistenceMapper | Traduce entre el aggregate `SharedNote` y `SharedNotePersistenceEntity`. | Usado por `SharedNoteRepositoryImpl`. |
 
-**Sub-capa Messaging: Publishers**
+**Sub-capa Services**
 
-| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
-|---|---|---|
-| **DomainEventPublisherAdapter** | Publica los eventos de dominio generados por las operaciones de Care Circle dentro del monolito modular, permitiendo que otros módulos reaccionen a eventos como la creación del Care Circle, establecimiento del vínculo familiar, asignación de turnos o creación de notas compartidas. | Implementa IDomainEventPublisher. |
-<br>
-
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| SecureRandomInvitationCodeGenerator | Genera códigos con `SecureRandom`, un generador criptográficamente seguro, para que no puedan predecirse. | Implementa `InvitationCodeGenerator`. |
 #### 2.6.2.5. Bounded Context Software Architecture Component Level Diagrams
 
 En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Care Circle, elaborado en Structurizr (Imagen 41). El diagrama detalla la arquitectura interna: los *Controllers* como puntos de entrada REST; los *Resources* y *Assemblers* para transformación de datos; los servicios de aplicación (`CareCircleCommandService`, `CareCircleQueryService`); y el acceso a datos mediante los 3 repositorios definidos en el dominio (`CareCircleRepository`, `CareShiftRepository`, `SharedNoteRepository`).
