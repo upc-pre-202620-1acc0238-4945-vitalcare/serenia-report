@@ -6872,8 +6872,6 @@ La landing page publicada puede consultarse en [sereniaa.netlify.app](https://se
 ### 3.1.4. Mobile Applications UX/UI Design
 #### 3.1.4.1. Mobile Applications Wireframes
 
-#### 3.1.4.1. Mobile Applications Wireframes
-
 Los wireframes de Serenia son la versión de baja fidelidad de las pantallas de las dos aplicaciones móviles del producto: la del adulto mayor y la del familiar. Se elaboraron en escala de grises, sin color, tipografías de marca ni imágenes, para concentrar la atención en la estructura de cada pantalla, la jerarquía de la información, la ubicación de los botones y la secuencia de navegación. De este modo el equipo pudo validar la distribución y el flujo antes de definir el diseño visual que se presenta en los mock-ups.
 
 <br>
