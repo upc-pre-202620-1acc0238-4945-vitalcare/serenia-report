@@ -5106,7 +5106,7 @@ El recorrido del adulto mayor comienza con la bienvenida, el ingreso a la cuenta
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/1.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/bienvenida.png)
 
 </div>
 
@@ -5248,7 +5248,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/1.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/bienvenida.png)
 
 </div>
 
