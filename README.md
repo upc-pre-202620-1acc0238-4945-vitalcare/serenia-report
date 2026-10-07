@@ -5075,14 +5075,331 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 ### 3.1.3. Landing Page UI Design
 #### 3.1.3.1. Landing Page Wireframe
 #### 3.1.3.2. Landing Page Mock-up
+
 ### 3.1.4. Mobile Applications UX/UI Design
 #### 3.1.4.1. Mobile Applications Wireframes
 #### 3.1.4.2. Mobile Applications Wireflow Diagrams
 #### 3.1.4.3. Mobile Applications Mock-ups
+
+#### 3.1.4.3. Mobile Applications Mock-ups
+
+Los mock-ups de Serenia traducen los requisitos funcionales del proyecto en pantallas de alta fidelidad. Su objetivo es validar con el equipo la jerarquía visual, la navegación y los estados de cada pantalla antes del desarrollo.
+
+<br>
+
+### Lineamientos de diseño
+
+Se usó la identidad visual de Serenia, con una paleta cálida basada en verde azulado, fondos crema y acentos suaves. Los títulos van en Young Serif, el texto en Nunito y los datos puntuales en DM Mono, con íconos Phosphor. Ambas aplicaciones comparten el mismo menú inferior flotante en verde oscuro, donde la pestaña activa se resalta en blanco. La interfaz del adulto mayor prioriza textos grandes, botones amplios y una acción principal por pantalla. La del familiar prioriza un resumen rápido del estado de su ser querido, con el detalle a un toque.
+
+
+### Decisiones de producto reflejadas
+
+El acceso es solo con correo y contraseña. La vinculación se hace con un código que genera el adulto mayor y que el familiar ingresa en su aplicación. No hay planes ni precios, ni llamadas desde la aplicación, y la aplicación del adulto mayor no incluye audios que lean textos en voz alta. El único audio es el mensaje que el adulto mayor graba para su familia.
+
+<br>
+
+## Flujo del adulto mayor
+
+El recorrido del adulto mayor comienza con la bienvenida, el ingreso a la cuenta y la creación de la cuenta. Luego accede a su aplicación, organizada en cuatro secciones: Inicio, Recordar, Familia y Cuenta. Desde el inicio responde su check-in diario con un toque, puede omitirlo si prefiere no responder, y dispone del botón "Ayuda" para avisar a su familia en una emergencia. En las demás secciones gestiona sus recordatorios, comparte fotos y audios con su familia, consulta su círculo y su código de invitación, y administra su cuenta.
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/1.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/2.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/3.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/4.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/5.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/6.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/7.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/8.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/9.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/10.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/11.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/12.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/13.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/14.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/15.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/16.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/17.png)
+
+</div>
+
+<br>
+
+## Flujo del familiar
+
+El recorrido del familiar comienza con la misma bienvenida, ingreso y creación de cuenta. Luego accede a su aplicación, organizada en cinco secciones: Inicio, Historial, Alertas, Círculo y Mensajes. En el inicio ve cómo amaneció su adulto mayor y accede al detalle de su check-in. En Historial revisa los registros anteriores y en Alertas atiende las emergencias y las inactividades. En Círculo gestiona a los familiares vinculados, los turnos de atención y las notas compartidas, y en Mensajes reproduce los audios y envía fotos.
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/1.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/2.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/3.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/18.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/19.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/20.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/21.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/22.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/23.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/24.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/25.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/26.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/27.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/28.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/29.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/30.png)
+
+</div>
+
+<br>
+
 #### 3.1.4.4. Mobile Applications User Flow Diagrams
+
 #### 3.1.4.5. Mobile Applications Prototyping
 
-<div style="page-break-after: always;"></div>
+El prototipo interactivo de Serenia se construyó como una página navegable en Claude Artifacts. Muestra un solo teléfono en pantalla, con chips debajo para saltar entre los pasos del flujo (registro, vinculación, aplicación del adulto mayor y aplicación del familiar). Además de recorrerlo pantalla por pantalla, se puede probar la interacción entre ambas aplicaciones. Por ejemplo, la respuesta al check-in del adulto mayor se refleja en el inicio del familiar, una alerta de ayuda aparece en la lista de alertas del familiar, y un audio grabado por el adulto mayor queda disponible para su reproducción.
+
+Enlace al prototipo: https://claude.ai/artifact/PQLMrSNqDntp1Fu4cfuvJu
+
+Para probar la vinculación en el prototipo, el código válido es 4821 y el código expirado es 0000. Cualquier otro valor muestra el estado de código inválido.
+
+<br>
+
+<div align="center">
+
+
+**Mobile Prototyping**
+
+![Mobile Video Prototype](.png)
+
+[Ver video de prototipo Mobile en Microsoft Stream]()
+
+</div>
+
+<br>
+
+
 
 # Capítulo IV: Product Implementation & Validation
 ## 4. Product Implementation & Validation
