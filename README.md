@@ -6431,22 +6431,23 @@ Un sistema de organización define cómo se agrupa y se ordena la información d
 | --- | --- | --- |
 | Jerárquica | El usuario parte de una vista general y baja al detalle de un elemento | Resumen de estado del adulto mayor que abre el detalle de su check-in |
 | Secuencial | La tarea tiene pasos ordenados que se completan de a uno | Check-in diario, con un paso por pantalla |
-| Matricial | El mismo conjunto de elementos se consulta desde más de una dimensión a la vez | Alertas filtradas por tipo, severidad y estado |
+| Matricial | El mismo conjunto de elementos se consulta desde más de una dimensión a la vez | Alertas filtradas por tipo y estado |
 
 <br>
 
 **Aplicación móvil del adulto mayor**
 
-La estructura se mantiene en un máximo de dos niveles desde la pantalla de inicio, en coherencia con los principios de la sección 3.1.2.5 (Navigation Systems). El botón de ayuda no pertenece a ninguna estructura: está disponible en todas las pantallas para que el adulto mayor pueda pedir auxilio sin importar dónde se encuentre.
+La estructura se mantiene en un máximo de dos niveles desde la pantalla de inicio, en coherencia con los principios de la sección 3.1.2.5 (Navigation Systems). La aplicación tiene cuatro destinos en una barra inferior (Inicio, Recordar, Familia y Cuenta), que forman el primer nivel. El botón de ayuda no pertenece a ninguna de estas estructuras: está siempre a la vista en la pantalla de inicio, para que el adulto mayor pueda pedir auxilio sin tener que buscarlo.
 
 <br>
 
 | Grupo de información | Estructura | Cómo se organiza | Justificación |
 | --- | --- | --- | --- |
-| Pantalla de inicio | Jerárquica de un solo nivel | Tres acciones al mismo nivel: responder el check-in del día, abrir los mensajes de la familia y activar el botón de ayuda | Sin menús ni pestañas, el usuario solo decide entre tres opciones |
-| Check-in diario | Secuencial | Un paso por pantalla: pregunta del día, estado de ánimo, nota opcional y confirmación | Cada pantalla pide una sola decisión; el modo simplificado reduce aún más los pasos |
-| Mensajes recibidos | Jerárquica de dos niveles | Lista de mensajes y fotos de la familia y, al elegir uno, su reproducción o vista | Mantiene la profundidad máxima de dos niveles |
-| Preferencias y cuenta (horario del check-in, pausa del día, modo simplificado, perfil, contraseña y cierre de sesión) | Jerárquica de dos niveles | Lista corta de ajustes; cada uno abre su propio detalle | Se consultan pocas veces, por lo que no compiten con las acciones del inicio |
+| Pantalla de inicio | Jerárquica de un solo nivel | Tres acciones al mismo nivel: responder el check-in del día con un toque, elegir "Hoy no quiero responder" y activar el botón de ayuda; debajo, la barra con los cuatro destinos | Las acciones del día están a la vista y el resto de la aplicación queda a un toque de distancia |
+| Check-in diario | Secuencial | Un paso por pantalla: la pregunta del día con tres opciones de respuesta y la confirmación de que la familia sabrá cómo está; si el usuario elige no responder, una pantalla le confirma la pausa del día | Cada pantalla pide una sola decisión; el modo simplificado reduce aún más los pasos |
+| Recordatorios (destino Recordar) | Jerárquica de un solo nivel | Lista de recordatorios ordenados por fecha y hora, cada uno con las acciones "Listo", "Más tarde" y descartar a un toque | Las acciones se resuelven en la misma lista, sin añadir un segundo nivel |
+| Familia (fotos, audios y círculo) | Jerárquica de dos niveles | La pantalla Familia muestra las fotos que envió la familia y ofrece dos accesos: grabar un audio para la familia y Mi círculo, donde están el código de invitación (que se puede copiar o renovar) y la lista de quienes acompañan al usuario | Reúne en un solo destino todo lo que tiene que ver con la familia y mantiene la profundidad máxima de dos niveles |
+| Cuenta (horario del check-in, modo simplificado, perfil, contraseña y cierre de sesión) | Jerárquica de dos niveles | Lista corta de ajustes; el perfil abre su propia pantalla para editar los datos y el cierre de sesión pide confirmación | Se consultan pocas veces, por lo que no compiten con las acciones del inicio |
 
 <br>
 
@@ -6460,7 +6461,7 @@ Esta aplicación concentra más contenido, por lo que combina las tres estructur
 | --- | --- | --- | --- |
 | Inicio | Jerárquica | Tarjeta de resumen del día que abre el detalle del check-in | Responde de un vistazo si el adulto mayor está bien y permite profundizar solo si hace falta |
 | Historial de check-ins y pequeños logros | Matricial | Registro ordenado en el tiempo, combinable con filtros por rango de fechas, estado de ánimo y estado de respuesta | El mismo historial se consulta por fecha, por ánimo o por respuestas perdidas |
-| Alertas | Matricial | Alertas combinables por tipo (inactividad, bienestar o emergencia), severidad y estado de atención, con una insignia que indica las pendientes | Lo urgente debe poder aislarse rápidamente entre muchas alertas |
+| Alertas | Matricial | Alertas combinables por tipo (emergencia o inactividad) y estado de atención (pendiente, reconocida o resuelta), con una insignia que indica las pendientes | Lo urgente debe poder aislarse rápidamente entre muchas alertas |
 | Círculo | Jerárquica | Tres pestañas internas: integrantes (desde donde se puede revocar un vínculo), turnos de atención y notas compartidas | Agrupa en un solo destino todo lo que sirve para coordinarse con los demás familiares |
 | Turnos de atención | Matricial | Calendario con los días en un eje y el familiar asignado en el otro; los turnos se asignan y se reasignan, y cada fecha admite un único turno | Evita que dos familiares se asignen el mismo día, permite cubrir imprevistos y muestra quién cubre cada fecha |
 | Mensajes | Jerárquica | Lista de mensajes de audio, fotos y texto, y recordatorios sociales; al elegir uno se abre su detalle, con filtro por tipo | Reúne el contenido afectivo en un solo destino, separado de lo operativo |
@@ -6485,8 +6486,8 @@ La estructura define la forma en que se presenta cada grupo; el esquema de categ
 
 | Esquema | Dónde se aplica | Justificación | Dónde no se aplica |
 | --- | --- | --- | --- |
-| Cronológico | Historial de check-ins, alertas, mensajes, notas compartidas y pequeños logros, del más reciente al más antiguo; turnos de atención por fecha | El valor de estos datos está en su evolución en el tiempo, y coincide con el orden por defecto definido en la sección 3.1.2.4 (Searching Systems) | Pantalla de inicio y landing page, que presentan una vista actual y no un registro |
-| Por tópicos | Los cinco destinos de la barra del familiar, las pestañas del Círculo y las secciones de la landing page | Cada tópico corresponde a una meta del usuario: saber, revisar, responder, coordinarse y acompañar | Aplicación del adulto mayor, donde agrupar por tópicos añadiría menús |
+| Cronológico | Historial de check-ins, alertas, mensajes, notas compartidas y pequeños logros, del más reciente al más antiguo; recordatorios del adulto mayor y turnos de atención por fecha | El valor de estos datos está en su evolución en el tiempo, y coincide con el orden por defecto definido en la sección 3.1.2.4 (Searching Systems) | Pantalla de inicio y landing page, que presentan una vista actual y no un registro |
+| Por tópicos | Los cinco destinos de la barra del familiar, los cuatro destinos de la barra del adulto mayor, las pestañas del Círculo y las secciones de la landing page | Cada tópico corresponde a una meta del usuario: saber, revisar, responder, coordinarse y acompañar | Dentro de cada destino de la aplicación del adulto mayor, donde agrupar por tópicos añadiría niveles |
 | Según audiencia | La separación en dos aplicaciones, una por tipo de usuario, y la sección Para quién de la landing page, con una tarjeta por perfil | El rol se define en el registro y determina la aplicación a la que accede la persona, de modo que cada una solo ve lo que necesita | Dentro de cada aplicación, que ya atiende a un único perfil |
 | Alfabético | Lista de integrantes del círculo familiar, ordenada por nombre | Es el único grupo en el que el usuario busca a una persona concreta por su nombre | Historial, alertas y mensajes, donde ordenar por letra rompería la secuencia en el tiempo |
 
@@ -7572,7 +7573,7 @@ Un user flow muestra la ruta que sigue el usuario para lograr su objetivo, con l
   <br/><i>Imagen X. User Flow 2. Pedir ayuda con el botón de auxilio (adulto mayor y familiar).</i>
 </div>
 
-**Condiciones del flujo:** el botón "Ayuda" siempre está visible para el adulto mayor, de modo que puede activarlo sin importar en qué pantalla se encuentre. Al activarlo, el sistema registra la emergencia y confirma al usuario que avisó a su familia. Si el círculo tiene familiares vinculados, todos reciben la alerta al mismo tiempo y la ven en la sección Alertas de su aplicación con las etiquetas "Emergencia" y "Pendiente". Si no hay familiares vinculados, la emergencia queda registrada con un despacho fallido y nadie es notificado.
+**Condiciones del flujo:** el botón "Ayuda" está siempre a la vista en la pantalla de inicio del adulto mayor, de modo que puede activarlo sin tener que buscarlo. Al activarlo, el sistema registra la emergencia y confirma al usuario que avisó a su familia. Si el círculo tiene familiares vinculados, todos reciben la alerta al mismo tiempo y la ven en la sección Alertas de su aplicación con las etiquetas "Emergencia" y "Pendiente". Si no hay familiares vinculados, la emergencia queda registrada con un despacho fallido y nadie es notificado.
 
 **User Flow 3. Vincularse al círculo con el código (familiar)**
 
