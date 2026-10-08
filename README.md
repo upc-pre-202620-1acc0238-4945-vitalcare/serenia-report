@@ -7295,6 +7295,36 @@ El familiar abre Serenia, toca "Empezar", elige "Soy familiar" y crea su cuenta 
 - **Camino feliz:** el código es válido, la aplicación confirma que ambos quedaron conectados y, al continuar, el familiar llega a su inicio, donde ve cómo amaneció el adulto mayor.
 - **Camino alternativo:** el código es inválido o ya venció. Se rechaza el código, no se crea el vínculo y el familiar vuelve a la pantalla del código para intentarlo con otro, como establece el escenario 2 de la historia US02.
 
+**Wireflow 5. Seguimiento del bienestar (Segmento 2)**
+
+**User goal:** como familiar a distancia (user persona del segundo segmento, sección 2.3.1), quiero saber cómo está mi adulto mayor día a día, sin tener que llamarlo (historias US15, US17, US18 y US19). El flujo se muestra en la Imagen X.
+
+<div align="center">
+
+![Wireflow 5 - Seguimiento del bienestar](assets/img/ux-design/mobile-app/flows/wireflow-5-seguimiento-bienestar.png)
+  <br/><i>Imagen X. Wireflow 5. Seguimiento del bienestar (Segmento 2).</i>
+</div>
+
+El flujo comienza en la pantalla de inicio de la aplicación del familiar, donde ve el estado del check-in de hoy. Al desplazarse por el inicio encuentra las "Pequeñas victorias" de la semana y, cuando el adulto mayor lleva varios días seguidos con poco ánimo, la sugerencia de bienestar. Luego entra a Historial, donde revisa los registros anteriores. La decisión del flujo es si abre el detalle de un día.
+
+- **Camino feliz:** el familiar abre el detalle de un día y la aplicación muestra el check-in de esa fecha, con la respuesta del adulto mayor y la pregunta del día. Esa pantalla se presenta en el user flow correspondiente, con su mock-up.
+- **Camino alternativo:** el familiar no abre ningún detalle y sigue revisando el historial con los filtros por estado ("Todos", "Muy bien", "Más o menos" y "No tan bien").
+
+**Wireflow 6. Atender una alerta (Segmento 2)**
+
+**User goal:** como familiar a distancia, quiero atender las alertas de mi adulto mayor y saber cuáles siguen pendientes (historias US14, US38 y US39). El flujo se muestra en la Imagen X.
+
+<div align="center">
+
+![Wireflow 6 - Atender una alerta](assets/img/ux-design/mobile-app/flows/wireflow-6-atender-alerta.png)
+  <br/><i>Imagen X. Wireflow 6. Atender una alerta (Segmento 2).</i>
+</div>
+
+El flujo comienza en el inicio del familiar, donde el ícono de Alertas muestra una insignia con las alertas pendientes. Al tocarlo, el familiar entra a Alertas y ve la lista con los dos tipos de alerta ("Emergencia" e "Inactividad"), cada una con su estado de atención ("Pendiente" o "Resuelta"). La decisión del flujo es si atiende una alerta pendiente.
+
+- **Camino feliz:** el familiar atiende la alerta. El sistema la reconoce y, cuando se resuelve, pasa a "Resuelta" en la lista, con el nombre de quien la resolvió.
+- **Camino alternativo:** el familiar no atiende la alerta, que sigue "Pendiente", y la insignia de Alertas se mantiene hasta que alguien la atienda.
+
 #### 3.1.4.3. Mobile Applications Mock-ups
 
 Los mock-ups de Serenia traducen los requisitos funcionales del proyecto en pantallas de alta fidelidad. Su objetivo es validar con el equipo la jerarquía visual, la navegación y los estados de cada pantalla antes del desarrollo.
@@ -7645,6 +7675,30 @@ Un user flow muestra la ruta que sigue el usuario para lograr su objetivo, con l
 </div>
 
 **Condiciones del flujo:** el adulto mayor genera previamente su código de invitación desde su aplicación; el código es de cuatro números y se usa una sola vez, por lo que él decide quién se vincula. El familiar crea su cuenta y escribe el código. Si es válido y vigente, el sistema registra el vínculo y habilita el acceso al panel de estado del adulto mayor. Si es inválido o ya venció, no se crea el vínculo y el familiar puede ingresar otro código.
+
+**User Flow 5. Seguimiento del bienestar (Segmento 2)**
+
+**User goal:** saber cómo está su adulto mayor día a día, sin tener que llamarlo. Esta ruta cumple las historias US15 (consulta del panel de estado diario), US17 (historial de check-ins), US18 (sugerencia de acción por patrón de malestar) y US19 (registro de pequeñas victorias) y se muestra en la Imagen X.
+
+<div align="center">
+
+![User Flow 5 - Seguimiento del bienestar](assets/img/ux-design/mobile-app/flows/user-flow-5-seguimiento-bienestar.png)
+  <br/><i>Imagen X. User Flow 5. Seguimiento del bienestar (Segmento 2).</i>
+</div>
+
+**Condiciones del flujo:** el inicio del familiar muestra el check-in de hoy: si el adulto mayor respondió, aparece su estado de ánimo; si todavía no responde, aparece "Aún no responde" hasta que venza el plazo. Al desplazarse, el familiar ve las "Pequeñas victorias" de la semana y, si el adulto mayor completó tres días consecutivos de malestar, la sugerencia de bienestar, que puede descartar (historia US37). En Historial ve los registros ordenados del más reciente al más antiguo y puede filtrarlos por estado; al elegir un día se abre el detalle del check-in, con la respuesta y la pregunta de esa fecha.
+
+**User Flow 6. Atender una alerta (Segmento 2)**
+
+**User goal:** atender las alertas de su adulto mayor y saber cuáles siguen pendientes. Esta ruta cumple las historias US14 (alerta inmediata al familiar), US38 (reconocimiento de alertas) y US39 (resolución de alertas) y se muestra en la Imagen X.
+
+<div align="center">
+
+![User Flow 6 - Atender una alerta](assets/img/ux-design/mobile-app/flows/user-flow-6-atender-alerta.png)
+  <br/><i>Imagen X. User Flow 6. Atender una alerta (Segmento 2).</i>
+</div>
+
+**Condiciones del flujo:** la insignia del ícono de Alertas indica cuántas alertas siguen pendientes. En la lista, cada alerta muestra su tipo ("Emergencia" o "Inactividad") y su estado ("Pendiente" o "Resuelta"). Cada alerta admite un único reconocimiento y una única resolución: si dos familiares actúan al mismo tiempo, solo se aplica la primera acción, y así todos saben que alguien ya está atendiendo. Al resolverse, la alerta pasa a "Resuelta" y, si quien la resolvió lo desea, deja una nota que describe cómo se resolvió.
 
 #### 3.1.4.5. Mobile Applications Prototyping
 
