@@ -3972,7 +3972,7 @@ La elaboración de los seis canvases permitió pasar de una descripción de los 
 
 ### 2.5.2. Context Mapping
 
-A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety, Social Companionship), el equipo elaboró un Context Map para visualizar y explicar las relaciones estructurales entre ellos, revisando la información recolectada en las etapas previas de investigación para producir el diseño candidato. La Imagen 33 muestra el Context Map resultante.
+A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety, Social Companionship), el equipo elaboró un Context Map para visualizar y explicar las relaciones estructurales entre ellos. La primera versión, presentada en la entrega anterior, se actualizó después de detallar las capas de cada bounded context (sección 2.6), porque allí se precisó cómo se comunican realmente los contextos. La Imagen 33 muestra el Context Map resultante.
 
 <div align="center">
 
@@ -3980,22 +3980,46 @@ A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-
   <br/><i>Imagen 33. Context Mapping Diagram.</i>
 </div>
 
-**URL del tablero en Miro:** https://miro.com/app/board/uXjVHm8lGW8=/
+**URL del tablero en Miro:** https://miro.com/app/board/uXjVHm8lGW8=/?share_link_id=454089766644
 
 <br>
 
+**Cómo se comunican los contextos:**
+
+Cada relación del mapa corresponde a un mecanismo concreto, definido en las capas Application e Interface de la sección 2.6. El contexto upstream publica un contrato, que puede ser una fachada (`ContextFacade`) que responde con tipos primitivos o un evento de dominio, y el contexto downstream lo consume a través de una clase `External...Service` de su capa Application, que traduce la respuesta a sus propios tipos.
+
+| Upstream | Downstream | Mecanismo |
+| --- | --- | --- |
+| IAM | Care Circle | Evento `OlderAdultRegistered`, que crea el círculo del adulto mayor, y fachada `IamContextFacade`, que entrega el rol y la zona horaria |
+| IAM | Daily Check-in | Evento `OlderAdultRegistered`, que inicializa las preferencias del check-in, y fachada `IamContextFacade`, que entrega la zona horaria |
+| IAM | Wellbeing Monitoring | Fachada `IamContextFacade`, que entrega la zona horaria del adulto mayor |
+| IAM | Social Companionship | Fachada `IamContextFacade`, que entrega la zona horaria del adulto mayor |
+| Care Circle | Daily Check-in | Fachada `CareCircleContextFacade`, que verifica que un familiar esté vinculado al adulto mayor |
+| Care Circle | Wellbeing Monitoring | Fachada `CareCircleContextFacade`, que verifica el vínculo del familiar |
+| Care Circle | Social Companionship | Fachada `CareCircleContextFacade`, que resuelve el círculo, los destinatarios y el acceso de cada usuario |
+| Care Circle | Alerts and Safety | Fachada `CareCircleContextFacade`, que entrega los familiares vinculados a quienes se dirige la alerta |
+| Daily Check-in | Wellbeing Monitoring | Evento `CheckInAnswered` y fachada `DailyCheckInContextFacade`, que entrega los estados de ánimo de los días anteriores |
+| Daily Check-in | Alerts and Safety | Evento `CheckInMissed`, que inicia la evaluación de inactividad |
+
+IAM no se relaciona con Alerts and Safety, porque esta solo necesita conocer a los familiares vinculados, que obtiene de Care Circle. Wellbeing Monitoring y Alerts and Safety tampoco se relacionan: el patrón de malestar detectado se resuelve dentro de Wellbeing Monitoring, que emite la sugerencia dirigida al familiar, por lo que no necesita pasar por Alerts and Safety.
+
+**Sistemas externos:**
+
+- **Firebase Cloud Messaging (Push Notification Provider):** Daily Check-in y Alerts and Safety dependen de un servicio de notificaciones push de terceros para llevar los recordatorios del check-in y las alertas de emergencia al dispositivo del usuario. El proveedor previsto es Firebase Cloud Messaging (FCM), cuya integración con la aplicación móvil y el backend se investiga y se prototipa en el spike SP01 del Product Backlog (Sprint 3).
+- **Azure Blob Storage (Cloud Storage Provider):** Social Companionship guarda en un almacenamiento en la nube los archivos de audio y de foto que intercambian el adulto mayor y su familia. El backend lo implementa con un contenedor privado de Azure Blob Storage, al que accede mediante una abstracción de almacenamiento definida en su capa Application.
+
 **Discusión de alternativas consideradas:**
 
-- *¿Qué pasaría si duplicamos el Account ID y el Role en cada bounded context, en vez de compartirlo?* Se descartó porque generaría inconsistencias si un rol cambia (por ejemplo, si se revoca una cuenta) y cada context tendría que sincronizarse por separado. Por eso se optó por un **Shared Kernel** mínimo (solo Account ID + Role) entre IAM y los otros 5 contexts.
-- *¿Qué pasaría si Wellbeing Monitoring y Alerts & Safety compartieran directamente su lógica de detección de anomalías?* Se evaluó, pero se decidió mantenerlos separados: Wellbeing Monitoring interpreta tendencias de bienestar (no urgentes), mientras que Alerts & Safety reacciona a umbrales que requieren atención inmediata. Fusionarlos mezclaría dos responsabilidades con niveles de criticidad distintos.
-- *¿Qué pasaría si creáramos un shared service para reducir la duplicación entre Care Circle y los contexts que consultan el vínculo familiar (Wellbeing Monitoring, Alerts and Safety, Social Companionship)?* Se descartó por ahora: como los tres consumen el mismo dato (autorización de vínculo) de la misma forma, no hay duplicación de lógica que justifique un servicio nuevo, ya que cada uno simplemente consulta a Care Circle como su proveedor (**Customer/Supplier**).
-- *¿Qué pasaría si Daily Check-in y Alerts and Safety adoptaran directamente el modelo del Push Notification Provider externo (Conformist), en vez de traducirlo?* Se descartó: el modelo de un proveedor externo (device tokens, formato de payload propio de cada plataforma) es un detalle de infraestructura que no debería filtrarse al dominio, y adoptarlo tal cual dejaría a ambos contexts acoplados a las decisiones de ese proveedor. Por eso se optó por una **Anti-Corruption Layer (ACL)** que traduce el modelo externo antes de que entre al dominio.
+- *¿Qué pasaría si IAM compartiera su modelo de cuenta (Account ID y Role) con los demás contextos mediante un Shared Kernel?* Era la solución de la primera versión del mapa, y se descartó al detallar las capas: cada contexto necesita solo datos puntuales de IAM, como el rol, la zona horaria o si la cuenta está activa, y IAM los expone mediante una fachada que responde con tipos primitivos. Compartir el modelo haría que cualquier cambio en IAM afectara a los otros cinco contextos al mismo tiempo, mientras que con la fachada cada consumidor traduce la respuesta a sus propios tipos y solo depende del contrato.
+- *¿Qué pasaría si Wellbeing Monitoring y Alerts and Safety compartieran directamente su lógica de detección de anomalías?* Se evaluó, pero se decidió mantenerlos separados: Wellbeing Monitoring interpreta tendencias de bienestar (no urgentes), mientras que Alerts and Safety reacciona a emergencias y a la ausencia de respuesta, que requieren atención inmediata. Fusionarlos mezclaría dos responsabilidades con niveles de criticidad distintos.
+- *¿Qué pasaría si creáramos un shared service para reducir la duplicación entre Care Circle y los contextos que consultan el vínculo familiar (Daily Check-in, Wellbeing Monitoring, Alerts and Safety y Social Companionship)?* Se descartó por ahora: como los cuatro consumen el mismo dato (autorización de vínculo) de la misma forma, no hay duplicación de lógica que justifique un servicio nuevo, ya que cada uno simplemente consulta a Care Circle como su proveedor (**Customer/Supplier**).
+- *¿Qué pasaría si Daily Check-in, Alerts and Safety y Social Companionship adoptaran directamente el modelo de los proveedores externos (Conformist), en vez de traducirlo?* Se descartó: el modelo de un proveedor externo (tokens de dispositivo y formato de payload propio de cada plataforma en el caso del push, claves y contenedores en el caso del almacenamiento) es un detalle de infraestructura que no debería filtrarse al dominio, y adoptarlo tal cual dejaría a los contextos acoplados a las decisiones de ese proveedor. Por eso se optó por una **Anti-Corruption Layer (ACL)** que traduce el modelo externo antes de que entre al dominio.
 
 **Patrones aplicados:**
-- **Shared Kernel**: IAM comparte Account ID + Role con los 5 contexts restantes, dado el alto acoplamiento aceptable para un dato tan básico y transversal.
-- **Customer/Supplier**: predomina en el resto de relaciones (Care Circle y Daily Check-in como proveedores), ya que todo el sistema lo construye el mismo equipo y puede coordinar cambios libremente entre contexts.
-- **Anti-Corruption Layer (ACL)**: Daily Check-in y Alerts and Safety dependen de un Push Notification Provider externo (servicio de terceros) para enviar notificaciones push al dispositivo del usuario. Se optó por una ACL en lugar de un Conformist porque el modelo del proveedor externo (tokens de dispositivo, formato de payload específico por plataforma) no debe filtrarse al dominio; cada context traduce hacia/desde ese modelo externo antes de operar con sus propios conceptos.
-- **Conformist** no se aplicó: se decidió no adoptar el modelo del proveedor externo tal cual, precisamente para poder aislar el dominio y facilitar un eventual cambio de proveedor sin impactar la lógica de negocio.
+- **Customer/Supplier:** es el patrón de todas las relaciones entre contextos internos. IAM, Care Circle y Daily Check-in actúan como proveedores y publican el contrato que los demás consumen, ya que todo el sistema lo construye el mismo equipo y puede coordinar los cambios entre contextos.
+- **Anti-Corruption Layer (ACL):** Daily Check-in y Alerts and Safety con Firebase Cloud Messaging, y Social Companionship con Azure Blob Storage. Cada contexto traduce hacia y desde el modelo externo antes de operar con sus propios conceptos, lo que además facilita cambiar de proveedor sin afectar la lógica de negocio.
+- **Shared Kernel:** no se aplicó, por las razones expuestas en la primera alternativa.
+- **Conformist:** no se aplicó: se decidió no adoptar el modelo de los proveedores externos tal cual, precisamente para poder aislar el dominio.
 
 <br>
 
