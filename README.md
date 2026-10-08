@@ -7218,7 +7218,7 @@ Un wireflow combina los wireframes de las pantallas con las flechas que muestran
 
 Antes de dibujarlos se definieron los pasos típicos de cada objetivo como una secuencia de acciones (task flow), tomando como base las historias de usuario del capítulo II y la organización de la información de las secciones 3.1.2.1 y 3.1.2.5. En los diagramas, la flecha verde marca el camino feliz, la flecha naranja un camino alternativo, el recuadro amarillo una decisión y la caja blanca el resultado final de cada camino. Los nombres que aparecen en las pantallas (Rosa, Lucía y Martín) son datos de ejemplo del prototipo.
 
-**URL del tablero en Miro:** https://miro.com/app/board/uXjVEch8qjo=/ (contiene los wireflows y los user flows en mayor tamaño).
+**URL del tablero en Miro:** https://miro.com/app/board/uXjVEch8qjo=/?share_link_id=85197687422 (contiene los wireflows y los user flows en mayor tamaño).
 
 **Wireflow 1. Responder el check-in diario (adulto mayor)**
 
@@ -7562,7 +7562,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 Un user flow muestra la ruta que sigue el usuario para lograr su objetivo, con las pantallas finales de la aplicación, el camino esperado (happy path) y las rutas alternativas (unhappy paths). Los tres user flows de esta sección se derivan de los wireflows de la sección 3.1.4.2: mantienen los mismos pasos, decisiones y resultados, y reemplazan los wireframes por los mock-ups de la sección 3.1.4.3, que incluyen el diseño visual definitivo. La lectura de los diagramas es la misma: flecha verde para el camino feliz, flecha naranja para el camino alternativo, recuadro amarillo para las decisiones y caja blanca para el resultado final.
 
-**URL del tablero en Miro:** https://miro.com/app/board/uXjVEch8qjo=/ (contiene los wireflows y los user flows en mayor tamaño).
+**URL del tablero en Miro:** https://miro.com/app/board/uXjVEch8qjo=/?share_link_id=85197687422 (contiene los wireflows y los user flows en mayor tamaño).
 
 **User Flow 1. Responder el check-in diario (adulto mayor)**
 
