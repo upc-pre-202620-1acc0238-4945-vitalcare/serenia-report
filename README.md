@@ -6431,7 +6431,7 @@ Un sistema de organización define cómo se agrupa y se ordena la información d
 | --- | --- | --- |
 | Jerárquica | El usuario parte de una vista general y baja al detalle de un elemento | Resumen de estado del adulto mayor que abre el detalle de su check-in |
 | Secuencial | La tarea tiene pasos ordenados que se completan de a uno | Check-in diario, con un paso por pantalla |
-| Matricial | El mismo conjunto de elementos se consulta desde más de una dimensión a la vez | Alertas filtradas por tipo, severidad y estado |
+| Matricial | El mismo conjunto de elementos se consulta desde más de una dimensión a la vez | Alertas filtradas por tipo y estado |
 
 <br>
 
@@ -6461,7 +6461,7 @@ Esta aplicación concentra más contenido, por lo que combina las tres estructur
 | --- | --- | --- | --- |
 | Inicio | Jerárquica | Tarjeta de resumen del día que abre el detalle del check-in | Responde de un vistazo si el adulto mayor está bien y permite profundizar solo si hace falta |
 | Historial de check-ins y pequeños logros | Matricial | Registro ordenado en el tiempo, combinable con filtros por rango de fechas, estado de ánimo y estado de respuesta | El mismo historial se consulta por fecha, por ánimo o por respuestas perdidas |
-| Alertas | Matricial | Alertas combinables por tipo (inactividad, bienestar o emergencia), severidad y estado de atención, con una insignia que indica las pendientes | Lo urgente debe poder aislarse rápidamente entre muchas alertas |
+| Alertas | Matricial | Alertas combinables por tipo (emergencia o inactividad) y estado de atención (pendiente, reconocida o resuelta), con una insignia que indica las pendientes | Lo urgente debe poder aislarse rápidamente entre muchas alertas |
 | Círculo | Jerárquica | Tres pestañas internas: integrantes (desde donde se puede revocar un vínculo), turnos de atención y notas compartidas | Agrupa en un solo destino todo lo que sirve para coordinarse con los demás familiares |
 | Turnos de atención | Matricial | Calendario con los días en un eje y el familiar asignado en el otro; los turnos se asignan y se reasignan, y cada fecha admite un único turno | Evita que dos familiares se asignen el mismo día, permite cubrir imprevistos y muestra quién cubre cada fecha |
 | Mensajes | Jerárquica | Lista de mensajes de audio, fotos y texto, y recordatorios sociales; al elegir uno se abre su detalle, con filtro por tipo | Reúne el contenido afectivo en un solo destino, separado de lo operativo |
