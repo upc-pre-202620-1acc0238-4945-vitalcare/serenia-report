@@ -7749,6 +7749,61 @@ Ejemplos aplicados durante el Sprint 1:
 En esta sección se registra y explica el proceso de validación de Serenia con usuarios reales de los segmentos objetivo: adultos mayores que viven solos y familiares que los acompañan a distancia. Cada participante interactúa con el landing page y con las aplicaciones móviles, completando tareas sobre los *user flows* principales del producto mientras expresan sus observaciones. La sección se organiza en tres partes: el diseño de las entrevistas, que define los elementos y flujos a evaluar en cada segmento; el registro de las entrevistas, que documenta a cada participante, la evidencia en video y el resumen de sus apreciaciones; y las evaluaciones según heurísticas de usabilidad, arquitectura de información y diseño inclusivo.
 
 ### 4.3.1. Diseño de Entrevistas
+
+#### Segmento 1: Adultos mayores que viven solos
+
+Personas de 60 años a más, residentes en zonas urbanas del Perú, que viven solas y cuentan con un teléfono celular. Para las entrevistas de validación se evaluará la usabilidad, la claridad y la accesibilidad de Serenia desde la perspectiva del adulto mayor. Ello se conseguirá considerando los avances del proyecto hasta el Sprint 1, que comprenden el landing page y el prototipo interactivo de la aplicación del adulto mayor, y podrá ajustarse según el avance del equipo de desarrollo y el acuerdo con los entrevistados. Se validará el feedback de cada participante en el uso del prototipo junto con el landing page, poniendo especial atención en si puede completar cada tarea sin ayuda y con la menor cantidad de toques posible.
+
+##### Objetivos de la Entrevista:
+
+1) Validar la experiencia de usuario (UX) y la interfaz de usuario (UI) de la aplicación del adulto mayor, evaluando si comprende los textos, reconoce los botones y completa las tareas principales de forma autónoma, sin necesidad de que alguien le explique cómo hacerlo.
+
+2) Evaluar si Serenia resulta para el adulto mayor una alternativa útil y aceptable frente a la llamada diaria de verificación, y si las funcionalidades base (registro y creación del círculo familiar, check-in diario y botón de ayuda) le transmiten seguridad sin sentirse vigilado.
+
+##### Criterios de Evaluación:
+
+- Evaluar si el adulto mayor completa el registro y la creación del círculo familiar sin asistencia, comprendiendo para qué sirve el código de 4 dígitos y a quién debe compartirlo.
+- Medir el tiempo y el número de toques que necesita para responder el check-in diario desde que abre la notificación hasta que ve la confirmación "Tu familia sabrá que estás bien".
+- Evaluar si comprende la opción "Hoy no quiero responder" y sabe cómo retomar sus preguntas desde la pantalla de pausa.
+- Evaluar si identifica el botón "Ayuda" en la pantalla de inicio sin indicaciones y si entiende, a partir de la confirmación "Ya avisamos a tu familia", que su familia fue notificada.
+- Evaluar la legibilidad de los textos, el tamaño de los botones y el contraste de la interfaz, registrando si el participante necesita acercarse a la pantalla o se equivoca de botón.
+- Evaluar la comprensión de la propuesta de valor del landing page, verificando si el adulto mayor entiende qué hace Serenia y qué información recibe su familia.
+
+*Se considerarán los siguientes User Flows*:
+
+- **User Flow 1**: Registro y vinculación con la familia.
+- **User Flow 2**: Check-in diario.
+- **User Flow 3**: Pedir ayuda.
+
+Los User Flows propuestos son los principales de la aplicación del adulto mayor: el primero habilita el círculo familiar al que se dirigen todas las demás funciones, el segundo entrega el valor central de Serenia al reemplazar la llamada de verificación diaria, y el tercero es el flujo crítico por seguridad, que debe resolverse en un solo toque.
+
+#### Segmento 2: Familiares a distancia
+
+Hijos, hijas o parientes cercanos de 25 a 59 años que no conviven con el adulto mayor y buscan saber de él sin recurrir a llamadas constantes. Para las entrevistas de validación se evaluará la usabilidad, la utilidad y la eficiencia de Serenia desde la perspectiva del familiar. Ello se conseguirá considerando los avances del proyecto hasta el Sprint 1, que comprenden el landing page y el prototipo interactivo de la aplicación del familiar, y podrá ajustarse según el avance del equipo de desarrollo y el acuerdo con los entrevistados. Se validará el feedback de cada participante en el uso del prototipo junto con el landing page, enfocándose en si la información que recibe le da tranquilidad y le permite actuar a tiempo cuando el adulto mayor lo necesita.
+
+##### Objetivos de la Entrevista:
+
+1) Validar la experiencia de usuario (UX) y la interfaz de usuario (UI) de la aplicación del familiar, evaluando si comprende la arquitectura de navegación (Inicio, Historial y Alertas) y accede a la información del adulto mayor de manera rápida e intuitiva.
+
+2) Evaluar si Serenia ofrece al familiar una propuesta de valor diferencial frente a las llamadas y los mensajes de verificación, y si las funcionalidades base (vinculación por código, seguimiento del bienestar y atención de alertas) cubren su necesidad de estar presente a distancia.
+
+##### Criterios de Evaluación:
+
+- Evaluar si el familiar completa el registro y la vinculación con el código de 4 dígitos sin ambigüedades, y si entiende qué ocurre cuando el código es inválido o ya venció.
+- Medir el tiempo que necesita para identificar, desde Inicio, si el adulto mayor respondió el check-in del día y cuál fue su estado de ánimo.
+- Evaluar si navega con facilidad por el Historial, aplica los filtros por estado y abre el detalle de un día, comprendiendo la información que se le muestra.
+- Evaluar si interpreta correctamente las "Pequeñas victorias" y la sugerencia de bienestar que aparece cuando hay varios días seguidos con poco ánimo.
+- Evaluar si distingue en la sección Alertas una alerta de Emergencia de una de Inactividad, reconoce cuáles están pendientes y sabe qué acción tomar para atenderlas.
+- Evaluar la comprensión de la propuesta de valor del landing page orientada al familiar, verificando si percibe con claridad los beneficios de usar Serenia frente a llamar a diario.
+
+*Se considerarán los siguientes User Flows*:
+
+- **User Flow 4**: Registro y vinculación con el adulto mayor.
+- **User Flow 5**: Seguimiento del bienestar.
+- **User Flow 6**: Atender una alerta.
+
+Los User Flows propuestos corresponden a las funcionalidades core de la aplicación del familiar y cubren su ciclo completo: conectarse con el adulto mayor, mantenerse al tanto de cómo está día a día y actuar cuando el sistema le avisa que necesita ayuda. También se mostrará nuestra landing page para conocer su opinión.
+
 ### 4.3.2. Registro de Entrevistas
 ### 4.3.3. Evaluaciones según heurísticas
 
