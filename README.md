@@ -7225,20 +7225,37 @@ El recorrido del familiar comienza con la misma bienvenida, creación de cuenta 
 
 #### 3.1.4.2. Mobile Applications Wireflow Diagrams
 
-Un wireflow combina los wireframes de las pantallas con las flechas que muestran cómo avanza el usuario de una a otra, de modo que cada paso del flujo se representa con la pantalla en el estado que el usuario ve en ese momento. En esta sección se presentan tres wireflows, uno por cada user goal que el equipo consideró prioritario para esta entrega, porque en conjunto cubren la propuesta de valor de Serenia: que el adulto mayor cuente cómo amaneció, que pueda pedir ayuda y que su familia pueda acompañarlo a distancia. Los tres parten de los wireframes de la sección 3.1.4.1 y se elaboraron en Miro.
+Un wireflow combina los wireframes de las pantallas con las flechas que muestran cómo avanza el usuario de una a otra, de modo que cada paso del flujo se representa con la pantalla en el estado que el usuario ve en ese momento. En esta sección se presentan los wireflows de los user goals que el equipo consideró prioritarios para esta entrega, agrupados por segmento de usuario: el **Segmento 1** (adultos mayores que viven solos) y el **Segmento 2** (familiares a distancia), que corresponden a los user personas de la sección 2.3.1. En conjunto cubren la propuesta de valor de Serenia: que el adulto mayor cree su círculo, cuente cómo amaneció y pueda pedir ayuda, y que su familia pueda vincularse y acompañarlo a distancia. Los wireflows parten de los wireframes de la sección 3.1.4.1 y se elaboraron en Miro.
 
 Antes de dibujarlos se definieron los pasos típicos de cada objetivo como una secuencia de acciones (task flow), tomando como base las historias de usuario del capítulo II y la organización de la información de las secciones 3.1.2.1 y 3.1.2.5. En los diagramas, la flecha verde marca el camino feliz, la flecha naranja un camino alternativo, el recuadro amarillo una decisión y la caja blanca el resultado final de cada camino. Los nombres que aparecen en las pantallas (Rosa, Lucía y Martín) son datos de ejemplo del prototipo.
 
 **URL del tablero en Miro:** https://miro.com/app/board/uXjVEch8qjo=/?share_link_id=85197687422 (contiene los wireflows y los user flows en mayor tamaño).
 
-**Wireflow 1. Responder el check-in diario (adulto mayor)**
+**Segmento 1: adultos mayores que viven solos**
 
-**User goal:** como adulto mayor que vive solo (user persona del primer segmento, sección 2.3.1), quiero contar en un toque cómo amaneció, o dejar pasar el día sin responder si no lo deseo (historias US03 y US07). El flujo se muestra en la Imagen X.
+**Wireflow 1. Registro y vinculación con la familia (Segmento 1)**
+
+**User goal:** como adulto mayor que vive solo (user persona del primer segmento, sección 2.3.1), quiero registrarme y crear mi círculo familiar para obtener el código de invitación que compartiré con mis familiares (historias US01, US05 y US40). El flujo se muestra en la Imagen X.
 
 <div align="center">
 
-![Wireflow 1 - Responder el check-in diario](assets/img/ux-design/mobile-app/flows/wireflow-1-checkin.png)
-  <br/><i>Imagen X. Wireflow 1. Responder el check-in diario (adulto mayor).</i>
+![Wireflow 1 - Registro y vinculación con la familia](assets/img/ux-design/mobile-app/flows/wireflow-1-registro-adulto.png)
+  <br/><i>Imagen X. Wireflow 1. Registro y vinculación con la familia (Segmento 1).</i>
+</div>
+
+El flujo comienza en la pantalla de bienvenida: el adulto mayor toca "Empezar" y, en "¿Quién eres?", elige "Soy adulto mayor". Luego crea su cuenta con su nombre, su correo o celular y una contraseña. La decisión del flujo es si los datos de la cuenta son válidos. Después elige la hora a la que quiere recibir la pregunta del día, crea su círculo familiar y obtiene su código de invitación, que podrá copiar y compartir.
+
+- **Camino feliz:** los datos son válidos, por lo que la aplicación continúa con la elección de la hora, la creación del círculo, la pantalla con el código de cuatro números y, al tocar "Entrar a Serenia", el inicio de la aplicación.
+- **Camino alternativo:** los datos no son válidos. Se muestran los errores en la misma pantalla y la persona corrige sus datos para volver a intentarlo.
+
+**Wireflow 2. Check-in diario (Segmento 1)**
+
+**User goal:** como adulto mayor que vive solo, quiero contar en un toque cómo amaneció, o dejar pasar el día sin responder si no lo deseo (historias US03 y US07). El flujo se muestra en la Imagen X.
+
+<div align="center">
+
+![Wireflow 2 - Check-in diario](assets/img/ux-design/mobile-app/flows/wireflow-2-checkin.png)
+  <br/><i>Imagen X. Wireflow 2. Check-in diario (Segmento 1).</i>
 </div>
 
 El flujo comienza en la pantalla de inicio de la aplicación del adulto mayor, donde una notificación del horario configurado le pregunta "¿Cómo amaneciste hoy?" y le ofrece tres opciones: "Muy bien", "Más o menos" y "No tan bien". El único punto de decisión es si el usuario responde ese día.
@@ -7246,14 +7263,14 @@ El flujo comienza en la pantalla de inicio de la aplicación del adulto mayor, d
 - **Camino feliz:** el adulto mayor toca una de las tres opciones y la aplicación muestra la pantalla de agradecimiento, que le confirma que su familia sabrá cómo está. Desde allí vuelve al inicio con un solo botón.
 - **Camino alternativo:** el adulto mayor toca "Hoy no quiero responder". La aplicación muestra una pantalla que le confirma que hoy no se le preguntará nada y que su familia sabe que eligió una pausa; desde allí puede retomar sus preguntas o volver al inicio. Esta pausa es una decisión del usuario y no genera alerta.
 
-**Wireflow 2. Pedir ayuda con el botón de auxilio (adulto mayor y familiar)**
+**Wireflow 3. Pedir ayuda (Segmento 1)**
 
 **User goal:** como adulto mayor que vive solo, quiero pedir ayuda de inmediato y que mi familia lo sepa, sin tener que buscar a quién llamar (historias US13 y US14). El flujo cruza las dos aplicaciones: empieza en la del adulto mayor y termina en la del familiar a distancia (Imagen X).
 
 <div align="center">
 
-![Wireflow 2 - Pedir ayuda con el botón de auxilio](assets/img/ux-design/mobile-app/flows/wireflow-2-ayuda.png)
-  <br/><i>Imagen X. Wireflow 2. Pedir ayuda con el botón de auxilio (adulto mayor y familiar).</i>
+![Wireflow 3 - Pedir ayuda](assets/img/ux-design/mobile-app/flows/wireflow-3-ayuda.png)
+  <br/><i>Imagen X. Wireflow 3. Pedir ayuda (Segmento 1).</i>
 </div>
 
 El botón "Ayuda" está disponible en la pantalla de inicio del adulto mayor. Al tocarlo, la aplicación muestra una pantalla de confirmación ("Ya avisamos a tu familia") y el sistema despacha la alerta. La decisión del flujo es si el círculo del adulto mayor tiene familiares vinculados.
@@ -7261,14 +7278,16 @@ El botón "Ayuda" está disponible en la pantalla de inicio del adulto mayor. Al
 - **Camino feliz:** hay familiares vinculados, por lo que la alerta les llega a todos al mismo tiempo. El familiar abre su aplicación, donde el ícono de Alertas muestra una insignia de pendientes, y entra a Alertas, donde la emergencia aparece como pendiente.
 - **Camino alternativo:** el círculo no tiene familiares vinculados. Según las reglas del bounded context Alerts and Safety (sección 2.6.6), el despacho se marca como fallido y la emergencia queda registrada sin notificar a nadie. Este camino no tiene una pantalla propia y se representa como el resultado final del flujo.
 
-**Wireflow 3. Vincularse al círculo con el código (familiar)**
+**Segmento 2: familiares a distancia**
+
+**Wireflow 4. Registro y vinculación con el adulto mayor (Segmento 2)**
 
 **User goal:** como familiar a distancia (user persona del segundo segmento, sección 2.3.1), quiero vincular mi cuenta con la de mi adulto mayor mediante un código de invitación, para ver cómo amaneció (historias US02 y US40). El flujo se muestra en la Imagen X.
 
 <div align="center">
 
-![Wireflow 3 - Vincularse al círculo con el código](assets/img/ux-design/mobile-app/flows/wireflow-3-vinculo.png)
-  <br/><i>Imagen X. Wireflow 3. Vincularse al círculo con el código (familiar).</i>
+![Wireflow 4 - Registro y vinculación con el adulto mayor](assets/img/ux-design/mobile-app/flows/wireflow-4-registro-familiar.png)
+  <br/><i>Imagen X. Wireflow 4. Registro y vinculación con el adulto mayor (Segmento 2).</i>
 </div>
 
 El familiar abre Serenia, toca "Empezar", elige "Soy familiar" y crea su cuenta con su nombre, su correo o celular y una contraseña. Luego escribe en el teclado numérico el código de cuatro números que el adulto mayor generó en su propia aplicación y toca "Vincularme". La decisión del flujo es si el código es válido y vigente.
@@ -7571,42 +7590,58 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 #### 3.1.4.4. Mobile Applications User Flow Diagrams
 
-Un user flow muestra la ruta que sigue el usuario para lograr su objetivo, con las pantallas finales de la aplicación, el camino esperado (happy path) y las rutas alternativas (unhappy paths). Los tres user flows de esta sección se derivan de los wireflows de la sección 3.1.4.2: mantienen los mismos pasos, decisiones y resultados, y reemplazan los wireframes por los mock-ups de la sección 3.1.4.3, que incluyen el diseño visual definitivo. La lectura de los diagramas es la misma: flecha verde para el camino feliz, flecha naranja para el camino alternativo, recuadro amarillo para las decisiones y caja blanca para el resultado final.
+Un user flow muestra la ruta que sigue el usuario para lograr su objetivo, con las pantallas finales de la aplicación, el camino esperado (happy path) y las rutas alternativas (unhappy paths). Los user flows de esta sección se derivan de los wireflows de la sección 3.1.4.2, con la misma numeración y la misma organización por segmento: mantienen los mismos pasos, decisiones y resultados, y reemplazan los wireframes por los mock-ups de la sección 3.1.4.3, que incluyen el diseño visual definitivo. La lectura de los diagramas es la misma: flecha verde para el camino feliz, flecha naranja para el camino alternativo, recuadro amarillo para las decisiones y caja blanca para el resultado final.
 
 **URL del tablero en Miro:** https://miro.com/app/board/uXjVEch8qjo=/?share_link_id=85197687422 (contiene los wireflows y los user flows en mayor tamaño).
 
-**User Flow 1. Responder el check-in diario (adulto mayor)**
+**Segmento 1: adultos mayores que viven solos**
+
+**User Flow 1. Registro y vinculación con la familia (Segmento 1)**
+
+**User goal:** registrarse y crear su círculo familiar para obtener el código de invitación que compartirá con sus familiares. Esta ruta cumple las historias US01 (registro de cuenta de usuario), US05 (configuración del horario del check-in) y US40 (generación de código de invitación) y se muestra en la Imagen X.
+
+<div align="center">
+
+![User Flow 1 - Registro y vinculación con la familia](assets/img/ux-design/mobile-app/flows/user-flow-1-registro-adulto.png)
+  <br/><i>Imagen X. User Flow 1. Registro y vinculación con la familia (Segmento 1).</i>
+</div>
+
+**Condiciones del flujo:** el adulto mayor crea su cuenta con los datos básicos que la aplicación pide; si algún dato no es válido, la pantalla indica el error y no avanza hasta que se corrige. Con la cuenta creada, elige la hora del día en que quiere recibir su pregunta (puede cambiarla después desde Cuenta), y la aplicación crea su círculo familiar, que desde ese momento tiene un único adulto mayor. El código de cuatro números que recibe se usa una sola vez, y es el adulto mayor quien decide con quién lo comparte; sin círculo y sin código, ninguna otra función de la aplicación tiene destinatario.
+
+**User Flow 2. Check-in diario (Segmento 1)**
 
 **User goal:** contar en un toque cómo amaneció, o dejar pasar el día sin responder si no lo desea. Esta ruta cumple las historias US03 (registro de respuesta del check-in) y US07 (pausa diaria de preguntas) y se muestra en la Imagen X.
 
 <div align="center">
 
-![User Flow 1 - Responder el check-in diario](assets/img/ux-design/mobile-app/flows/user-flow-1-checkin.png)
-  <br/><i>Imagen X. User Flow 1. Responder el check-in diario (adulto mayor).</i>
+![User Flow 2 - Check-in diario](assets/img/ux-design/mobile-app/flows/user-flow-2-checkin.png)
+  <br/><i>Imagen X. User Flow 2. Check-in diario (Segmento 1).</i>
 </div>
 
 **Condiciones del flujo:** el check-in llega a la hora que el adulto mayor configuró, y el usuario decide si responde ese día. Si responde, la aplicación registra su estado de ánimo y lo agradece; si prefiere no hacerlo, activa la pausa del día, con lo que el sistema omite el check-in e informa a los familiares vinculados que hoy optó por no participar. En ninguno de los dos casos se genera una alerta. Si el adulto mayor no hace ninguna de las dos cosas y el plazo vence, se activa la evaluación de inactividad del bounded context Alerts and Safety (sección 2.6.6), que corresponde a otro flujo.
 
-**User Flow 2. Pedir ayuda con el botón de auxilio (adulto mayor y familiar)**
+**User Flow 3. Pedir ayuda (Segmento 1)**
 
 **User goal:** pedir ayuda de inmediato y que la familia lo sepa sin buscar a quién llamar. Esta ruta cumple las historias US13 (activación del botón de auxilio) y US14 (alerta inmediata al familiar) y se muestra en la Imagen X.
 
 <div align="center">
 
-![User Flow 2 - Pedir ayuda con el botón de auxilio](assets/img/ux-design/mobile-app/flows/user-flow-2-ayuda.png)
-  <br/><i>Imagen X. User Flow 2. Pedir ayuda con el botón de auxilio (adulto mayor y familiar).</i>
+![User Flow 3 - Pedir ayuda](assets/img/ux-design/mobile-app/flows/user-flow-3-ayuda.png)
+  <br/><i>Imagen X. User Flow 3. Pedir ayuda (Segmento 1).</i>
 </div>
 
 **Condiciones del flujo:** el botón "Ayuda" está siempre a la vista en la pantalla de inicio del adulto mayor, de modo que puede activarlo sin tener que buscarlo. Al activarlo, el sistema registra la emergencia y confirma al usuario que avisó a su familia. Si el círculo tiene familiares vinculados, todos reciben la alerta al mismo tiempo y la ven en la sección Alertas de su aplicación con las etiquetas "Emergencia" y "Pendiente". Si no hay familiares vinculados, la emergencia queda registrada con un despacho fallido y nadie es notificado.
 
-**User Flow 3. Vincularse al círculo con el código (familiar)**
+**Segmento 2: familiares a distancia**
+
+**User Flow 4. Registro y vinculación con el adulto mayor (Segmento 2)**
 
 **User goal:** vincular su cuenta con la de su adulto mayor mediante un código de invitación, para ver cómo amaneció. Esta ruta cumple las historias US02 (vinculación familiar por código de invitación) y US40 (generación de código de invitación) y se muestra en la Imagen X.
 
 <div align="center">
 
-![User Flow 3 - Vincularse al círculo con el código](assets/img/ux-design/mobile-app/flows/user-flow-3-vinculo.png)
-  <br/><i>Imagen X. User Flow 3. Vincularse al círculo con el código (familiar).</i>
+![User Flow 4 - Registro y vinculación con el adulto mayor](assets/img/ux-design/mobile-app/flows/user-flow-4-registro-familiar.png)
+  <br/><i>Imagen X. User Flow 4. Registro y vinculación con el adulto mayor (Segmento 2).</i>
 </div>
 
 **Condiciones del flujo:** el adulto mayor genera previamente su código de invitación desde su aplicación; el código es de cuatro números y se usa una sola vez, por lo que él decide quién se vincula. El familiar crea su cuenta y escribe el código. Si es válido y vigente, el sistema registra el vínculo y habilita el acceso al panel de estado del adulto mayor. Si es inválido o ya venció, no se crea el vínculo y el familiar puede ingresar otro código.
