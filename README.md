@@ -4766,11 +4766,13 @@ Clases que resuelven el acceso a la base de datos MySQL y la generación de cód
 
 #### 2.6.2.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Care Circle, elaborado en Structurizr (Imagen 41). El diagrama detalla la arquitectura interna: los *Controllers* como puntos de entrada REST; los *Resources* y *Assemblers* para transformación de datos; los servicios de aplicación (`CareCircleCommandService`, `CareCircleQueryService`); y el acceso a datos mediante los 3 repositorios definidos en el dominio (`CareCircleRepository`, `CareShiftRepository`, `SharedNoteRepository`).
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Care Circle, elaborado en Structurizr (Imagen 41). El diagrama detalla la arquitectura interna del módulo dentro del container API REST, organizada en las cuatro capas del diseño táctico: los *Controllers* (`CareCirclesController`, `InvitationCodesController`, `FamilyLinksController`, `CareShiftsController` y `SharedNotesController`) como puntos de entrada REST, junto con el scheduler `InvitationCodeExpirationScheduler`; los *Resources* y *Assemblers* para la transformación de datos; los servicios de aplicación de comando y de consulta (`CareCircleCommandService`, `CareCircleQueryService`, `CareShiftCommandService`, `CareShiftQueryService`, `SharedNoteCommandService` y `SharedNoteQueryService`); y el acceso a datos mediante los tres repositorios definidos en el dominio (`CareCircleRepository`, `CareShiftRepository` y `SharedNoteRepository`), implementados en Infrastructure sobre MySQL.
+
+En el centro del diagrama se ubican los aggregates `CareCircle`, `CareShift` y `SharedNote`, junto con los Commands, Queries y Domain Events del contexto. La capa Application incluye además los event handlers `OlderAdultRegisteredEventHandler`, que crea el círculo cuando Identity & Access registra a un adulto mayor, e `InvitationCodeRedeemedEventHandler`, que establece el vínculo familiar tras el canje de un código. El contexto consulta a Identity & Access mediante `ExternalIamService` y expone la fachada `CareCircleContextFacade`, que los demás módulos del monolito usan para verificar vínculos y obtener los familiares activos. Las flechas evidencian que las dependencias apuntan siempre hacia el dominio y que ningún componente de Interface accede directamente a la base de datos.
 
 <div align="center">
 
-![Component Diagram - Care Circle](assets/img/bounded-context/care-circle/care-circle-component-diagram.png)
+![Component Diagram - Care Circle](assets/img/bounded-context/care-circle/carecircle_components.png)
   <br/><i>Imagen 41. Component Diagram del Bounded Context Care Circle.</i>
 
 </div>
