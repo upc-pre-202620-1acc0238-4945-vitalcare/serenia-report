@@ -6213,7 +6213,7 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 
 ##### 2.6.6.6.1. Bounded Context Domain Layer Class Diagrams
 
-Diagrama de clases de la capa Domain: en la Imagen 54 se muestran las clases del dominio Alerts and Safety, que incluyen `Alert` (con sus entidades internas `AlertNotification` y `AlertAttention`) e `InactivityWindow` como aggregate roots, los Commands para las operaciones de activación, apertura, recordatorio, escalamiento, notificación, confirmación y cierre, las Queries para las consultas de historial por adulto mayor, e interfaces para los servicios de dominio con sus respectivas implementaciones.
+Diagrama de clases de la capa Domain: en la Imagen 54 se muestran las clases del dominio Alerts and Safety. Los aggregate roots son `EmergencyAlert` e `InactivityAlert`, que comparten la clase base `Alert`. Ambos registran la atención de los familiares mediante la entity `AlertAttention`, y `EmergencyAlert` contiene además la entity `AlertNotification`, que representa el aviso dirigido a cada familiar vinculado. Las enumeraciones `AlertType`, `AlertStatus`, `DeliveryStatus` y `AttentionAction` expresan el tipo y el estado de cada alerta. También se muestran las interfaces de dominio: `EmergencyAlertRepository` e `InactivityAlertRepository` para la persistencia, `EmergencyAlertCommandService` e `InactivityAlertCommandService` para las operaciones de escritura, con los Commands que reciben, y `AlertQueryService` para la lectura del historial y del detalle de las alertas de ambos tipos.
 
 <br>
 <div align="center">
