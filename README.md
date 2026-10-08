@@ -4766,11 +4766,13 @@ Clases que resuelven el acceso a la base de datos MySQL y la generación de cód
 
 #### 2.6.2.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Care Circle, elaborado en Structurizr (Imagen 41). El diagrama detalla la arquitectura interna: los *Controllers* como puntos de entrada REST; los *Resources* y *Assemblers* para transformación de datos; los servicios de aplicación (`CareCircleCommandService`, `CareCircleQueryService`); y el acceso a datos mediante los 3 repositorios definidos en el dominio (`CareCircleRepository`, `CareShiftRepository`, `SharedNoteRepository`).
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Care Circle, elaborado en Structurizr (Imagen 41). El diagrama detalla la arquitectura interna del módulo dentro del container API REST, organizada en las cuatro capas del diseño táctico: los *Controllers* (`CareCirclesController`, `InvitationCodesController`, `FamilyLinksController`, `CareShiftsController` y `SharedNotesController`) como puntos de entrada REST, junto con el scheduler `InvitationCodeExpirationScheduler`; los *Resources* y *Assemblers* para la transformación de datos; los servicios de aplicación de comando y de consulta (`CareCircleCommandService`, `CareCircleQueryService`, `CareShiftCommandService`, `CareShiftQueryService`, `SharedNoteCommandService` y `SharedNoteQueryService`); y el acceso a datos mediante los tres repositorios definidos en el dominio (`CareCircleRepository`, `CareShiftRepository` y `SharedNoteRepository`), implementados en Infrastructure sobre MySQL.
+
+En el centro del diagrama se ubican los aggregates `CareCircle`, `CareShift` y `SharedNote`, junto con los Commands, Queries y Domain Events del contexto. La capa Application incluye además los event handlers `OlderAdultRegisteredEventHandler`, que crea el círculo cuando Identity & Access registra a un adulto mayor, e `InvitationCodeRedeemedEventHandler`, que establece el vínculo familiar tras el canje de un código. El contexto consulta a Identity & Access mediante `ExternalIamService` y expone la fachada `CareCircleContextFacade`, que los demás módulos del monolito usan para verificar vínculos y obtener los familiares activos. Las flechas evidencian que las dependencias apuntan siempre hacia el dominio y que ningún componente de Interface accede directamente a la base de datos.
 
 <div align="center">
 
-![Component Diagram - Care Circle](assets/img/bounded-context/care-circle/care-circle-component-diagram.png)
+![Component Diagram - Care Circle](assets/img/bounded-context/care-circle/carecircle_components.png)
   <br/><i>Imagen 41. Component Diagram del Bounded Context Care Circle.</i>
 
 </div>
@@ -4781,11 +4783,13 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 
 ##### 2.6.2.6.1. Bounded Context Domain Layer Class Diagrams
 
-El siguiente diagrama de clases UML (Imagen 42) representa la capa de dominio. Acatando el EventStorming, se visualizan los tres Aggregate Roots principales: `CareCircle`, `CareShift` y `SharedNote`. Se detallan las interfaces de los servicios de aplicación y repositorios que orquestan la lógica.
+El siguiente diagrama de clases UML (Imagen 42) representa el bounded context Care Circle organizado en sus cuatro capas: Interface, Application, Domain e Infrastructure. Acatando el EventStorming, en la capa de dominio se visualizan los tres Aggregate Roots principales: `CareCircle`, `CareShift` y `SharedNote`. El aggregate `CareCircle` contiene las entidades `InvitationCode` y `FamilyLink`, mientras que `CareShift` y `SharedNote` son independientes y referencian al círculo por su identificador. Junto a ellos se agrupan los value objects, las enumeraciones, los commands, las queries y los eventos de dominio.
+
+El dominio declara además las interfaces de los servicios de aplicación (`CareCircleCommandService`, `CareShiftCommandService`, `SharedNoteCommandService` y sus servicios de consulta) y de los repositorios (`CareCircleRepository`, `CareShiftRepository` y `SharedNoteRepository`). Estas interfaces orquestan la lógica y son implementadas por las capas externas: la capa Application aporta los servicios `Impl`, los event handlers y la implementación de la fachada `CareCircleContextFacade`, y la capa Infrastructure aporta los repositorios, los mappers, las entidades JPA y el generador de códigos de invitación. Por su parte, la capa Interface expone los controladores REST y el scheduler de expiración de códigos. Las dependencias apuntan siempre hacia el dominio, sin que ninguna capa superior acceda directamente a la persistencia.
 
 <div align="center">
 
-![Class Diagram - Care Circle](assets/img/bounded-context/care-circle/care-circle-class-diagram.png)
+![Class Diagram - Care Circle](assets/img/bounded-context/care-circle/diagram-class-care-circle.svg)
   <br/><i>Imagen 42. Domain Layer Class Diagram del Bounded Context Care Circle.</i>
 
 </div>
@@ -4794,86 +4798,82 @@ El siguiente diagrama de clases UML (Imagen 42) representa la capa de dominio. A
 
 ##### 2.6.2.6.2. Bounded Context Database Design Diagram
 
-El diagrama de base de datos (Imagen 43) presenta los objetos que permiten la persistencia del bounded context **Care Circle** sobre el motor MySQL. El contexto se materializa en cinco tablas que corresponden al aggregate root care_circles y a las entidades que este contiene: invitation_codes, family_links, care_shifts y shared_notes.
+El diagrama de base de datos presenta los objetos que permiten la persistencia del bounded context **Care Circle** sobre el motor MySQL. El contexto se materializa en cinco tablas: `care_circles`, `invitation_codes`, `family_links`, `care_shifts` y `shared_notes`. Las tres primeras sostienen el aggregate `CareCircle` junto con sus códigos de invitación y vínculos familiares, y las dos últimas corresponden a los aggregates independientes `CareShift` y `SharedNote`. Los identificadores se almacenan como `BINARY(16)` y las fechas en UTC con `DATETIME(6)`.
 
 **Tabla care_circles**
 
 | Columna | Tipo | Constraints | Descripción |
 |---|---|---|---|
-| id | uuid | PK | Identificador único del círculo de cuidado. |
-| older_adult_id | uuid | NOT NULL, UNIQUE, FK → users.id | Adulto mayor dueño del círculo. Relación 1-1 con la cuenta. |
-| created_at | timestamp | NOT NULL | Fecha y hora de creación del círculo. |
+| id | binary(16) | PK | Identificador único del círculo de cuidado. |
+| older_adult_id | binary(16) | NOT NULL, UNIQUE, FK → users.id | Adulto mayor dueño del círculo. |
+| created_at | datetime(6) | NOT NULL | Fecha y hora de creación del círculo, en UTC. |
 
-Esta tabla es el aggregate root del bounded context. Se crea automáticamente al registrar un adulto mayor y actúa como punto de entrada para todas las demás entidades del contexto. Incluye un índice único sobre `older_adult_id` que garantiza a nivel de base de datos que cada adulto mayor posee exactamente un círculo.
+Esta tabla es el punto de entrada del contexto: representa la red de apoyo de un adulto mayor. La restricción `UNIQUE` sobre `older_adult_id` garantiza que cada adulto mayor tenga exactamente un círculo, que se crea al completarse su registro en Identity & Access.
 
-***Tabla invitation_codes***
+**Tabla invitation_codes**
 
 | Columna | Tipo | Constraints | Descripción |
 |---|---|---|---|
-| id | uuid | PK | Identificador único del código de invitación. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que da acceso este código. |
-| code | varchar(12) | NOT NULL, UNIQUE | Código alfanumérico en mayúscula (6-12 chars) compartido con el familiar. |
+| id | binary(16) | PK | Identificador único del código de invitación. |
+| care_circle_id | binary(16) | NOT NULL, FK → care_circles.id | Círculo al que da acceso el código. |
+| code | varchar(12) | NOT NULL, UNIQUE | Valor que el adulto mayor comparte con su familiar. |
 | status | invitation_status | NOT NULL, DEFAULT 'PENDING' | Estado del código: pendiente, usado o expirado. |
-| created_at | timestamp | NOT NULL | Fecha y hora de generación del código. |
-| expires_at | timestamp | NOT NULL | Fecha y hora de vencimiento. Siempre posterior a created_at. |
-| used_at | timestamp | - | Momento en que fue canjeado. Nulo si status ≠ USED. |
-| used_by_user_id | uuid | FK → users.id | Familiar que redimió el código. Nulo si status ≠ USED. |
+| created_at | datetime(6) | NOT NULL | Fecha y hora de generación del código, en UTC. |
+| expires_at | datetime(6) | NOT NULL | Fecha y hora en que termina la vigencia del código, en UTC. |
+| used_at | datetime(6) | - | Momento en que fue canjeado. Nulo mientras no se haya usado. |
+| used_by_user_id | binary(16) | FK → users.id | Familiar que canjeó el código. Nulo mientras no se haya usado. |
 
-La tabla incluye un índice único sobre `code` y un índice sobre `status` que optimiza la consulta de códigos vigentes.
+Esta tabla registra los códigos temporales con los que un familiar se incorpora al círculo. La restricción `UNIQUE` sobre `code` impide que dos códigos compartan el mismo valor. Incluye dos índices: `(care_circle_id, status)`, para consultar los códigos vigentes de un círculo, y `(status, expires_at)`, para que la tarea periódica encuentre los códigos pendientes cuya vigencia ya terminó.
 
-
-***Tabla family_links***
+**Tabla family_links**
 
 | Columna | Tipo | Constraints | Descripción |
 |---|---|---|---|
-| id | uuid | PK | Identificador único del vínculo familiar. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que pertenece el vínculo. |
-| relative_id | uuid | NOT NULL, FK → users.id | Familiar vinculado al círculo. |
-| invitation_code_id | uuid | NOT NULL, FK → invitation_codes.id | Código que originó el vínculo. Permite trazabilidad de auditoría. |
-| relationship_label | relationship_label | NOT NULL | Tipo de parentesco: hijo, hija, nieto, sobrino, etc. |
+| id | binary(16) | PK | Identificador único del vínculo familiar. |
+| care_circle_id | binary(16) | NOT NULL, FK → care_circles.id | Círculo al que pertenece el vínculo. |
+| relative_id | binary(16) | NOT NULL, FK → users.id | Familiar vinculado. |
+| relationship_label | varchar(60) | - | Parentesco declarado por el familiar, por ejemplo "hija". Opcional. |
 | status | link_status | NOT NULL, DEFAULT 'ACTIVE' | Estado del vínculo: activo o revocado. |
-| linked_at | timestamp | NOT NULL | Momento en que se canjeó el código de invitación. |
-| revoked_at | timestamp | - | Momento de la revocación. Nulo si status = ACTIVE. |
-| revoked_by | uuid | FK → users.id | Actor que ejecutó la revocación. Nulo si status = ACTIVE. |
+| linked_at | datetime(6) | NOT NULL | Momento en que el vínculo se estableció o se reactivó por última vez, en UTC. |
+| revoked_at | datetime(6) | - | Momento de la revocación. Nulo mientras el vínculo esté activo. |
 
-Incluye un índice único compuesto sobre `(care_circle_id, relative_id)` que impide que un familiar se vincule más de una vez al mismo círculo, e índices sobre `relative_id` y `status` para optimizar las consultas frecuentes.
+Esta tabla registra la autorización de cada familiar para acompañar al adulto mayor. El índice único sobre `(care_circle_id, relative_id)` garantiza que un familiar tenga un solo vínculo con cada círculo; si el vínculo se revoca y luego se restablece, se reactiva la misma fila en lugar de crear otra.
 
-***Tabla care_shifts***
-
-| Columna | Tipo | Constraints | Descripción |
-|---|---|---|---|
-| id | uuid | PK | Identificador único del turno. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que pertenece el turno. |
-| relative_id | uuid | NOT NULL, FK → users.id | Familiar responsable del día. Se actualiza al reasignar. |
-| shift_date | date | NOT NULL | Día calendario en que el familiar está de turno. |
-| assigned_by | uuid | NOT NULL, FK → users.id | Familiar que realizó la última asignación o reasignación. |
-| created_at | timestamp | NOT NULL | Fecha y hora de la asignación inicial. |
-| updated_at | timestamp | NOT NULL | Fecha y hora de la última reasignación. Siempre ≥ created_at. |
-
-Incluye un índice único compuesto sobre `(care_circle_id, shift_date)` que garantiza que solo un familiar puede estar asignado por día dentro de un mismo círculo.
-
-***Tabla shared_notes***
+**Tabla care_shifts**
 
 | Columna | Tipo | Constraints | Descripción |
 |---|---|---|---|
-| id | uuid | PK | Identificador único de la nota. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que pertenece la nota. |
-| author_id | uuid | NOT NULL, FK → users.id | Familiar que redactó la nota. |
-| content | text | NOT NULL | Contenido de la nota. No puede ser texto vacío. |
-| created_at | timestamp | NOT NULL | Fecha y hora de creación de la nota. |
-| updated_at | timestamp | - | Fecha y hora de la última edición. Nulo si nunca fue editada. |
+| id | binary(16) | PK | Identificador único del turno. |
+| care_circle_id | binary(16) | NOT NULL, FK → care_circles.id | Círculo al que pertenece el turno. |
+| relative_id | binary(16) | NOT NULL, FK → users.id | Familiar responsable del turno. |
+| shift_date | date | NOT NULL | Fecha del turno, expresada en la zona horaria del adulto mayor. |
+| created_at | datetime(6) | NOT NULL | Fecha y hora de creación del turno, en UTC. |
+| updated_at | datetime(6) | NOT NULL | Fecha y hora de la última modificación, en UTC. |
 
-Incluye índices sobre `care_circle_id` y `author_id` que optimizan la consulta de notas por círculo y por autor respectivamente.
+Esta tabla registra qué familiar es responsable del seguimiento del adulto mayor en cada fecha. El índice único sobre `(care_circle_id, shift_date)` permite un solo turno por círculo y fecha, por lo que si dos familiares intentan asignarse el mismo día de forma simultánea, la base de datos rechaza al segundo.
 
-***Relaciones entre tablas***
+**Tabla shared_notes**
 
-`care_circles` se relaciona de uno a muchos con `invitation_codes`, `family_links`, `care_shifts` y `shared_notes`: un círculo puede contener varios registros de cada tipo, mientras que cada registro pertenece obligatoriamente a un único círculo. A su vez, `family_links` referencia a `invitation_codes` mediante `invitation_code_id`, registrando el código exacto que originó cada vínculo. Las columnas `relative_id`, `used_by_user_id`, `revoked_by`, `assigned_by` y `author_id` referencian a `users`, que es la tabla del bounded context Identity & Access y actúa como referencia externa en este contexto.
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | binary(16) | PK | Identificador único de la nota. |
+| care_circle_id | binary(16) | NOT NULL, FK → care_circles.id | Círculo al que pertenece la nota. |
+| author_id | binary(16) | NOT NULL, FK → users.id | Familiar que creó la nota. |
+| content | text | NOT NULL | Contenido de la nota. |
+| created_at | datetime(6) | NOT NULL | Fecha y hora de creación de la nota, en UTC. |
+| updated_at | datetime(6) | NOT NULL | Fecha y hora de la última edición, en UTC. |
+
+Esta tabla almacena las notas con información relevante sobre el adulto mayor, visibles para todos los familiares del círculo. Incluye un índice sobre `(care_circle_id, created_at)` para optimizar la consulta de las notas de un círculo, de la más reciente a la más antigua.
+
+**Relaciones entre tablas**
+
+La tabla `care_circles` es el eje del contexto: `invitation_codes`, `family_links`, `care_shifts` y `shared_notes` la referencian mediante `care_circle_id`, de modo que todo código, vínculo, turno o nota existe dentro de un círculo concreto. Entre `care_circles` y las otras cuatro tablas la relación es de uno a muchos. Las columnas `older_adult_id`, `used_by_user_id`, `relative_id` y `author_id` referencian a `users`, que pertenece al bounded context Identity & Access y actúa como referencia externa en este contexto. La relación entre `care_circles` y `users` a través de `older_adult_id` es de uno a uno, porque cada adulto mayor tiene un único círculo. Las tablas `invitation_codes` y `family_links` forman parte del mismo aggregate `CareCircle`, mientras que `care_shifts` y `shared_notes` son independientes entre sí y solo comparten la referencia al círculo.
 
 <br>
 
 <div align="center">
 
-![Database Design Diagram -Care Circle](assets/img/bounded-context/care-circle/care-circle-database.png)
+![Database Design Diagram -Care Circle](assets/img/bounded-context/care-circle/database-care-circle.png)
   <br/><i>Imagen 43. Database Design Diagram del Bounded Context Care Circle.</i>
 </div>
 
@@ -5841,13 +5841,9 @@ Clases que resuelven el acceso a la base de datos MySQL y al almacenamiento de a
 
 #### 2.6.5.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Social Companionship, elaborado con la herramienta Structurizr (Imagen 50). El diagrama descompone el módulo de acompañamiento social dentro del container API REST y muestra cómo sus componentes se distribuyen entre las cuatro capas del diseño táctico, respetando la regla de dependencia unidireccional hacia el dominio.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Social Companionship, elaborado en Structurizr (Imagen 50). El diagrama detalla la arquitectura interna del módulo dentro del container API REST, organizada en las cuatro capas del diseño táctico: los *Controllers* (`AudioMessagesController`, `PhotoMessagesController` y `SocialRemindersController`) como puntos de entrada REST; los *Resources* y *Assemblers* para la transformación de datos; los servicios de aplicación de comando y de consulta, uno por cada aggregate; y el acceso a datos mediante los tres repositorios definidos en el dominio (`AudioMessageRepository`, `PhotoMessageRepository` y `SocialReminderRepository`), implementados en Infrastructure.
 
-El flujo de entrada llega desde la Aplicación Móvil hacia los tres componentes de la capa Interface: AudioMessagesController, que atiende la grabación, compartición, descarte y reproducción de mensajes de audio; PhotoMessagesController, que atiende la compartición y visualización de mensajes de foto; y SocialRemindersController, que atiende la programación, completado y cancelación de recordatorios sociales. Los tres delegan en la capa Application, donde los servicios de comando resuelven las operaciones de escritura y los servicios de consulta las de lectura, uno por cada aggregate del contexto.
-
-En el centro del diagrama se ubican los tres aggregates: AudioMessage, PhotoMessage y SocialReminder, junto con los Commands y Queries que expresan las intenciones del contexto y los Domain Events que se publican al completarse cada operación. Alrededor de los aggregates se muestran las abstracciones que el dominio declara y que ninguna capa superior implementa: IAudioMessageRepository, IPhotoMessageRepository, ISocialReminderRepository e IDomainEventPublisher.
-
-La capa Infrastructure aparece en el extremo opuesto, con las implementaciones concretas de esas abstracciones: AudioMessageRepository, PhotoMessageRepository y SocialReminderRepository, que persisten cada aggregate sobre SQLite apoyándose en sus respectivos mappers de persistencia; y DomainEventPublisherAdapter, que publica los eventos de dominio dentro del monolito modular para que otros módulos reaccionen a ellos. Las flechas evidencian que las dependencias apuntan siempre hacia el dominio y que ningún componente de Interface accede directamente a la base de datos.
+En el centro del diagrama se ubican los aggregates `AudioMessage`, `PhotoMessage` y `SocialReminder`, junto con los Commands, Queries y Domain Events del contexto. Los servicios de aplicación se apoyan en abstracciones salientes: `MediaStorageService`, implementado sobre Azure Blob Storage para guardar los archivos de audio e imagen; `ExternalCareCircleService`, que consulta a Care Circle los destinatarios y los permisos de acceso; y `ExternalIamService`, que consulta a Identity & Access la zona horaria del adulto mayor. El scheduler `SocialReminderScheduler` presenta los recordatorios cuya hora llegó y cierra como no completados los vencidos, y `DomainEventPublisherAdapter` publica los eventos de dominio dentro del monolito modular. Las flechas evidencian que las dependencias apuntan siempre hacia el dominio y que ningún componente de Interface accede directamente a la base de datos.
 
 <div align="center">
 
@@ -5862,15 +5858,12 @@ La capa Infrastructure aparece en el extremo opuesto, con las implementaciones c
 En esta sección se presentan los diagramas de mayor nivel de detalle sobre la implementación del bounded context Social Companionship. Se incluye el diagrama de clases de la capa Domain y el diagrama de diseño de base de datos correspondiente a las tablas que dan persistencia al aggregate.
 <br>
 
+
 ##### 2.6.5.6.1. Bounded Context Domain Layer Class Diagrams
 
-El diagrama de clases representa la capa Domain del bounded context Social Companionship, elaborado con la herramienta PlantUML (Imagen 51). En él se muestran las clases, interfaces y enumeraciones del dominio junto con sus atributos, métodos y el scope de cada miembro.
+El siguiente diagrama de clases UML (Imagen 51) representa el bounded context Social Companionship organizado en sus cuatro capas: Interface, Application, Domain e Infrastructure. Acatando el EventStorming, en la capa de dominio se visualizan los tres Aggregate Roots principales: `AudioMessage`, `PhotoMessage` y `SocialReminder`. Los dos primeros contienen la entidad `MessageReceipt`, que registra la recepción de cada mensaje por su destinatario, mientras que `SocialReminder` controla el ciclo de vida del recordatorio. Junto a ellos se agrupan los value objects, las enumeraciones, los commands, las queries y los eventos de dominio.
 
-Los elementos centrales son los tres aggregate roots del contexto: AudioMessage, PhotoMessage y SocialReminder. Sus atributos son privados y solo se modifican a través de sus métodos públicos, lo que garantiza que ninguna regla del ciclo de vida de un mensaje o recordatorio pueda vulnerarse desde fuera del aggregate. AudioMessage gestiona los estados RECORDED, SHARED y DISCARDED mediante los métodos record, share, discard y play. PhotoMessage encapsula el acto de compartir una foto dentro del círculo. SocialReminder gestiona los estados PENDING, COMPLETED y CANCELLED mediante los métodos schedule, complete y cancel.
-
-Los value objects aparecen relacionados con cada aggregate por composición con multiplicidad 1, salvo ReminderDescription, que es opcional y se relaciona con multiplicidad 0..1. Estos tipos encapsulan las validaciones de formato y evitan la obsesión por primitivos: el dominio nunca maneja una URL de audio, un título de recordatorio o una fecha programada como cadenas o primitivos simples. Las enumeraciones AudioMessageStatus, PhotoMessageStatus y SocialReminderStatus se asocian también a sus respectivos aggregates con multiplicidad 1 y expresan el estado del ciclo de vida de cada uno.
-
-El diagrama incluye además los Commands y Queries que expresan las intenciones de escritura y lectura del contexto, y los Domain Events que cada aggregate registra al completarse cada operación. Finalmente se muestran las abstracciones declaradas por el dominio: IAudioMessageRepository, IPhotoMessageRepository e ISocialReminderRepository, que definen los contratos de persistencia de cada aggregate; IAudioMessageCommandService, IPhotoMessageCommandService e ISocialReminderCommandService, que definen las operaciones de escritura; IAudioMessageQueryService, IPhotoMessageQueryService e ISocialReminderQueryService, que definen las operaciones de lectura; e IDomainEventPublisher, que aísla al dominio del mecanismo técnico de publicación de eventos. Ninguna de estas interfaces depende de las capas superiores, de modo que las dependencias apuntan siempre hacia el dominio.
+El dominio declara además las interfaces de los servicios de aplicación (`AudioMessageCommandService`, `PhotoMessageCommandService`, `SocialReminderCommandService` y sus servicios de consulta) y de los repositorios (`AudioMessageRepository`, `PhotoMessageRepository` y `SocialReminderRepository`). Estas interfaces orquestan la lógica y son implementadas por las capas externas: la capa Application aporta los servicios `Impl` y los servicios salientes `MediaStorageService`, `ExternalCareCircleService` y `ExternalIamService`, y la capa Infrastructure aporta los repositorios, los mappers, las entidades JPA y `AzureBlobMediaStorageService` para el almacenamiento de archivos. Por su parte, la capa Interface expone los controladores REST y el scheduler `SocialReminderScheduler`.
 
 <div align="center">
 
