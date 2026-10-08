@@ -4005,8 +4005,8 @@ IAM no se relaciona con Alerts and Safety, porque esta solo necesita conocer a l
 
 **Sistemas externos:**
 
-- **Push Notification Provider:** Daily Check-in y Alerts and Safety dependen de un servicio de notificaciones push de terceros para llevar los recordatorios del check-in y las alertas de emergencia al dispositivo del usuario. El proveedor concreto todavía no está definido: el spike SP01 del Product Backlog investiga la integración de Firebase Cloud Messaging.
-- **Cloud Storage Provider:** Social Companionship guarda en un almacenamiento en la nube los archivos de audio y de foto que intercambian el adulto mayor y su familia. El backend lo implementa con un contenedor privado de Azure Blob Storage, al que accede mediante una abstracción de almacenamiento definida en su capa Application.
+- **Firebase Cloud Messaging (Push Notification Provider):** Daily Check-in y Alerts and Safety dependen de un servicio de notificaciones push de terceros para llevar los recordatorios del check-in y las alertas de emergencia al dispositivo del usuario. El proveedor previsto es Firebase Cloud Messaging (FCM), cuya integración con la aplicación móvil y el backend se investiga y se prototipa en el spike SP01 del Product Backlog (Sprint 3).
+- **Azure Blob Storage (Cloud Storage Provider):** Social Companionship guarda en un almacenamiento en la nube los archivos de audio y de foto que intercambian el adulto mayor y su familia. El backend lo implementa con un contenedor privado de Azure Blob Storage, al que accede mediante una abstracción de almacenamiento definida en su capa Application.
 
 **Discusión de alternativas consideradas:**
 
@@ -4017,7 +4017,7 @@ IAM no se relaciona con Alerts and Safety, porque esta solo necesita conocer a l
 
 **Patrones aplicados:**
 - **Customer/Supplier:** es el patrón de todas las relaciones entre contextos internos. IAM, Care Circle y Daily Check-in actúan como proveedores y publican el contrato que los demás consumen, ya que todo el sistema lo construye el mismo equipo y puede coordinar los cambios entre contextos.
-- **Anti-Corruption Layer (ACL):** Daily Check-in y Alerts and Safety con el Push Notification Provider, y Social Companionship con el Cloud Storage Provider. Cada contexto traduce hacia y desde el modelo externo antes de operar con sus propios conceptos, lo que además facilita cambiar de proveedor sin afectar la lógica de negocio.
+- **Anti-Corruption Layer (ACL):** Daily Check-in y Alerts and Safety con Firebase Cloud Messaging, y Social Companionship con Azure Blob Storage. Cada contexto traduce hacia y desde el modelo externo antes de operar con sus propios conceptos, lo que además facilita cambiar de proveedor sin afectar la lógica de negocio.
 - **Shared Kernel:** no se aplicó, por las razones expuestas en la primera alternativa.
 - **Conformist:** no se aplicó: se decidió no adoptar el modelo de los proveedores externos tal cual, precisamente para poder aislar el dominio.
 
