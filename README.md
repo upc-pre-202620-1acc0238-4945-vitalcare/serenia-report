@@ -5454,7 +5454,7 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 <br>
 <div align="center">
 
-![Component Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-diagram.png)
+![Component Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/components-diagram.png)
   <br/><i>Imagen 47. Component Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
@@ -5470,7 +5470,7 @@ Diagrama de clases de la capa Domain: en la Imagen 48 se muestran las clases del
 <br>
 <div align="center">
 
-![Class Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-class-diagram.png)
+![Class Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/class-diagram.png)
   <br/><i>Imagen 48. Class Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
@@ -5529,7 +5529,7 @@ Diagrama de base de datos: en la Imagen 49 se muestra el diseño de las tablas c
 <br>
 <div align="center">
 
-![Database Design Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-database-diagram.png)
+![Database Design Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/db-diagram.png)
   <br/><i>Imagen 49. Database Design Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
