@@ -5851,7 +5851,7 @@ La capa Infrastructure aparece en el extremo opuesto, con las implementaciones c
 
 <div align="center">
 
-![DComponent Level- Social Companionship](assets/img/bounded-context/social-companionship/social-companionship-components.png)
+![DComponent Level- Social Companionship](assets/img/bounded-context/social-companionship/socialcompanionship_components.png)
   <br/><i>Imagen 50. Component Level Diagram del Bounded Context Social Companionship.</i>
 
 </div>
@@ -5874,71 +5874,64 @@ El diagrama incluye además los Commands y Queries que expresan las intenciones 
 
 <div align="center">
 
-![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/social-companionship.svg)
-![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/social-companionship_class3.svg)
-![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/social-companionship_class2.svg)
-  <br/><i>Imagen 51. Class Diagram del Bounded Context Social Companionship.</i>
+![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/class-diagram-social.svg)
+<br/><i>Imagen 51. Bounded Context Domain Layer Class Diagram</i>
 
 </div>
 <br>
 
 ##### 2.6.5.6.2. Bounded Context Database Design Diagram
 
-El diagrama de base de datos (Imagen 52) presenta los objetos que permiten la persistencia del bounded context **Social Companionship** sobre el motor SQLite. El contexto se materializa en tres tablas que corresponden a los tres aggregates roots del dominio: `audio_messages`, `photo_messages` y `social_reminders`.
+El diagrama de base de datos presenta los objetos que permiten la persistencia del bounded context **Social Companionship** sobre el motor MySQL. El contexto se materializa en tres tablas: `companion_messages`, `message_receipts` y `social_reminders`. Las dos primeras sostienen el intercambio de mensajes multimedia, y la tercera, los recordatorios de contacto social. Los identificadores se almacenan como `BINARY(16)` y las fechas en UTC con `DATETIME(6)`.
 
-**Tabla audio_messages**
-
-| Columna | Tipo | Constraints | Descripción |
-|---|---|---|---|
-| id | uuid | PK | Identificador único del mensaje de audio. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo de cuidado al que pertenece el mensaje. |
-| sender_id | uuid | NOT NULL, FK → users.id | Usuario que grabó el mensaje. |
-| audio_url | varchar(500) | NOT NULL | URL de acceso al archivo de audio grabado. |
-| status | audio_message_status | NOT NULL, DEFAULT 'RECORDED' | Estado del mensaje: grabado, compartido o descartado. |
-| recorded_at | timestamp | NOT NULL | Fecha y hora en que se inició la grabación. |
-| shared_at | timestamp | - | Momento en que fue compartido. Nulo si status ≠ SHARED. |
-| discarded_at | timestamp | - | Momento en que fue descartado. Nulo si status ≠ DISCARDED. |
-
-Esta tabla es el aggregate root del flujo de mensajes de audio. Registra el ciclo de vida completo del mensaje desde su grabación hasta su compartición o descarte. Las columnas `shared_at` y `discarded_at` son mutuamente excluyentes: solo una puede estar poblada según el valor de `status`. Incluye un índice sobre `care_circle_id` para optimizar la consulta de mensajes por círculo.
-
-**Tabla photo_messages**
+**Tabla companion_messages**
 
 | Columna | Tipo | Constraints | Descripción |
 |---|---|---|---|
-| id | uuid | PK | Identificador único del mensaje de foto. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo de cuidado al que pertenece el mensaje. |
-| sender_id | uuid | NOT NULL, FK → users.id | Usuario que compartió la foto. |
-| photo_url | varchar(500) | NOT NULL | URL de acceso a la imagen compartida. |
-| status | photo_message_status | NOT NULL, DEFAULT 'SHARED' | Estado del mensaje: compartido. |
-| shared_at | timestamp | NOT NULL | Fecha y hora en que la foto fue compartida con el círculo. |
+| id | binary(16) | PK | Identificador único del mensaje. |
+| care_circle_id | binary(16) | NOT NULL, FK → care_circles.id | Círculo de cuidado en el que se comparte el mensaje. |
+| sender_id | binary(16) | NOT NULL, FK → users.id | Usuario que envía el mensaje. |
+| type | message_type | NOT NULL | Tipo de mensaje: AUDIO o PHOTO. |
+| media_url | varchar(500) | NOT NULL | Referencia al archivo de audio o imagen. |
+| duration_seconds | int | - | Duración del audio en segundos. Solo aplica cuando type = AUDIO. |
+| sent_at | datetime(6) | NOT NULL | Fecha y hora en que se envió el mensaje, en UTC. |
 
-Esta tabla es el aggregate root del flujo de mensajes de foto. A diferencia de los mensajes de audio, una foto se comparte directamente sin pasar por un estado intermedio de grabación, por lo que su ciclo de vida es más simple. Incluye un índice sobre `care_circle_id` para optimizar la consulta de fotos por círculo.
+Esta tabla almacena en una sola estructura los mensajes de audio y de fotografía, diferenciados por la columna `type`. Un audio va del adulto mayor a todos los familiares activos del círculo, y una fotografía va de un familiar al adulto mayor. La columna `duration_seconds` solo se llena para los audios. Incluye un índice compuesto sobre `(care_circle_id, type, sent_at)` para optimizar la consulta de los mensajes de un círculo por tipo y por fecha de envío.
+
+**Tabla message_receipts**
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| message_id | binary(16) | PK (compuesta), NOT NULL, FK → companion_messages.id | Mensaje recibido. |
+| recipient_id | binary(16) | PK (compuesta), NOT NULL, FK → users.id | Destinatario del mensaje. |
+| opened_at | datetime(6) | - | Momento en que el destinatario reprodujo el audio o vio la fotografía. Nulo mientras no lo haya abierto. |
+
+Esta tabla registra la recepción de cada mensaje por cada destinatario. Se crea una fila por destinatario en el momento de enviar el mensaje, y `opened_at` se completa la primera vez que el destinatario lo abre. Su llave primaria es compuesta por `(message_id, recipient_id)`, lo que impide registrar dos veces al mismo destinatario para un mismo mensaje.
 
 **Tabla social_reminders**
 
 | Columna | Tipo | Constraints | Descripción |
 |---|---|---|---|
-| id | uuid | PK | Identificador único del recordatorio. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo de cuidado al que pertenece el recordatorio. |
-| creator_id | uuid | NOT NULL, FK → users.id | Usuario que programó el recordatorio. |
-| title | varchar(200) | NOT NULL | Título del recordatorio. No puede ser cadena vacía. |
-| description | text | - | Descripción opcional del recordatorio. |
-| scheduled_date | date | NOT NULL | Fecha en que debe ejecutarse el recordatorio. Posterior a la fecha de creación. |
-| status | social_reminder_status | NOT NULL, DEFAULT 'PENDING' | Estado del recordatorio: pendiente, completado o cancelado. |
-| created_at | timestamp | NOT NULL | Fecha y hora de creación del recordatorio. |
-| completed_at | timestamp | - | Momento en que fue completado. Nulo si status ≠ COMPLETED. |
-| cancelled_at | timestamp | - | Momento en que fue cancelado. Nulo si status ≠ CANCELLED. |
+| id | binary(16) | PK | Identificador único del recordatorio. |
+| older_adult_id | binary(16) | NOT NULL, FK → users.id | Adulto mayor que programó el recordatorio. |
+| title | varchar(120) | NOT NULL | Título del recordatorio. |
+| description | varchar(300) | - | Descripción opcional del recordatorio. |
+| remind_at | datetime(6) | NOT NULL | Instante en que debe presentarse el recordatorio, en UTC. |
+| status | reminder_status | NOT NULL, DEFAULT 'SCHEDULED' | Estado del recordatorio: programado, presentado, pospuesto, completado, cancelado o no completado. |
+| completed_at | datetime(6) | - | Momento en que se completó. Nulo mientras no se haya completado. |
+| created_at | datetime(6) | NOT NULL | Fecha y hora de creación, en UTC. |
+| updated_at | datetime(6) | NOT NULL | Fecha y hora de la última modificación, en UTC. |
 
-Esta tabla es el aggregate root del flujo de recordatorios sociales. Gestiona el ciclo de vida del recordatorio desde su programación hasta su completado o cancelación. Las columnas `completed_at` y `cancelled_at` son mutuamente excluyentes según el valor de `status`. Incluye índices sobre `care_circle_id` y `status` para optimizar las consultas de recordatorios activos por círculo.
-
+Esta tabla gestiona el ciclo de vida del recordatorio desde su programación hasta su cierre. Los valores posibles de `status` son SCHEDULED, PRESENTED, POSTPONED, COMPLETED, CANCELED y MISSED. Incluye dos índices: `(older_adult_id, remind_at)`, para consultar los recordatorios de un adulto mayor, y `(status, remind_at)`, para que las tareas periódicas encuentren los recordatorios por presentar o por cerrar.
 
 **Relaciones entre tablas**
 
-Las tres tablas referencian a `care_circles`, que es el aggregate root del bounded context Care Circle y actúa como punto de entrada contextual: todo mensaje de audio, mensaje de foto o recordatorio social existe dentro de un círculo de cuidado concreto. Las columnas `sender_id` y `creator_id` referencian a `users`, que es la tabla del bounded context Identity & Access y actúa como referencia externa en este contexto. Ninguna de las tres tablas se relaciona entre sí, ya que representan flujos de dominio independientes dentro del mismo bounded context.
+La tabla `companion_messages` referencia a `care_circles`, que pertenece al bounded context Care Circle y actúa como punto de entrada contextual: todo mensaje existe dentro de un círculo de cuidado concreto. Las columnas `sender_id`, `recipient_id` y `older_adult_id` referencian a `users`, que pertenece al bounded context Identity & Access y actúa como referencia externa en este contexto. La tabla `message_receipts` depende de `companion_messages`, de modo que cada mensaje tiene una fila por destinatario. La tabla `social_reminders` es independiente de las otras dos, ya que representa un flujo de dominio distinto dentro del mismo bounded context.
+
 
 <div align="center">
 
-![Database Diagram - Social companionship](assets/img/bounded-context/social-companionship/database-diagram.png)
+![Database Diagram - Social companionship](assets/img/bounded-context/social-companionship/database.png)
   <br/><i>Imagen 52. Database Design Diagram del Bounded Context Social Companionship.</i>
 
 </div>
