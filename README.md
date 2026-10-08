@@ -4798,86 +4798,82 @@ El dominio declara además las interfaces de los servicios de aplicación (`Care
 
 ##### 2.6.2.6.2. Bounded Context Database Design Diagram
 
-El diagrama de base de datos (Imagen 43) presenta los objetos que permiten la persistencia del bounded context **Care Circle** sobre el motor MySQL. El contexto se materializa en cinco tablas que corresponden al aggregate root care_circles y a las entidades que este contiene: invitation_codes, family_links, care_shifts y shared_notes.
+El diagrama de base de datos presenta los objetos que permiten la persistencia del bounded context **Care Circle** sobre el motor MySQL. El contexto se materializa en cinco tablas: `care_circles`, `invitation_codes`, `family_links`, `care_shifts` y `shared_notes`. Las tres primeras sostienen el aggregate `CareCircle` junto con sus códigos de invitación y vínculos familiares, y las dos últimas corresponden a los aggregates independientes `CareShift` y `SharedNote`. Los identificadores se almacenan como `BINARY(16)` y las fechas en UTC con `DATETIME(6)`.
 
 **Tabla care_circles**
 
 | Columna | Tipo | Constraints | Descripción |
 |---|---|---|---|
-| id | uuid | PK | Identificador único del círculo de cuidado. |
-| older_adult_id | uuid | NOT NULL, UNIQUE, FK → users.id | Adulto mayor dueño del círculo. Relación 1-1 con la cuenta. |
-| created_at | timestamp | NOT NULL | Fecha y hora de creación del círculo. |
+| id | binary(16) | PK | Identificador único del círculo de cuidado. |
+| older_adult_id | binary(16) | NOT NULL, UNIQUE, FK → users.id | Adulto mayor dueño del círculo. |
+| created_at | datetime(6) | NOT NULL | Fecha y hora de creación del círculo, en UTC. |
 
-Esta tabla es el aggregate root del bounded context. Se crea automáticamente al registrar un adulto mayor y actúa como punto de entrada para todas las demás entidades del contexto. Incluye un índice único sobre `older_adult_id` que garantiza a nivel de base de datos que cada adulto mayor posee exactamente un círculo.
+Esta tabla es el punto de entrada del contexto: representa la red de apoyo de un adulto mayor. La restricción `UNIQUE` sobre `older_adult_id` garantiza que cada adulto mayor tenga exactamente un círculo, que se crea al completarse su registro en Identity & Access.
 
-***Tabla invitation_codes***
+**Tabla invitation_codes**
 
 | Columna | Tipo | Constraints | Descripción |
 |---|---|---|---|
-| id | uuid | PK | Identificador único del código de invitación. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que da acceso este código. |
-| code | varchar(12) | NOT NULL, UNIQUE | Código alfanumérico en mayúscula (6-12 chars) compartido con el familiar. |
+| id | binary(16) | PK | Identificador único del código de invitación. |
+| care_circle_id | binary(16) | NOT NULL, FK → care_circles.id | Círculo al que da acceso el código. |
+| code | varchar(12) | NOT NULL, UNIQUE | Valor que el adulto mayor comparte con su familiar. |
 | status | invitation_status | NOT NULL, DEFAULT 'PENDING' | Estado del código: pendiente, usado o expirado. |
-| created_at | timestamp | NOT NULL | Fecha y hora de generación del código. |
-| expires_at | timestamp | NOT NULL | Fecha y hora de vencimiento. Siempre posterior a created_at. |
-| used_at | timestamp | - | Momento en que fue canjeado. Nulo si status ≠ USED. |
-| used_by_user_id | uuid | FK → users.id | Familiar que redimió el código. Nulo si status ≠ USED. |
+| created_at | datetime(6) | NOT NULL | Fecha y hora de generación del código, en UTC. |
+| expires_at | datetime(6) | NOT NULL | Fecha y hora en que termina la vigencia del código, en UTC. |
+| used_at | datetime(6) | - | Momento en que fue canjeado. Nulo mientras no se haya usado. |
+| used_by_user_id | binary(16) | FK → users.id | Familiar que canjeó el código. Nulo mientras no se haya usado. |
 
-La tabla incluye un índice único sobre `code` y un índice sobre `status` que optimiza la consulta de códigos vigentes.
+Esta tabla registra los códigos temporales con los que un familiar se incorpora al círculo. La restricción `UNIQUE` sobre `code` impide que dos códigos compartan el mismo valor. Incluye dos índices: `(care_circle_id, status)`, para consultar los códigos vigentes de un círculo, y `(status, expires_at)`, para que la tarea periódica encuentre los códigos pendientes cuya vigencia ya terminó.
 
-
-***Tabla family_links***
+**Tabla family_links**
 
 | Columna | Tipo | Constraints | Descripción |
 |---|---|---|---|
-| id | uuid | PK | Identificador único del vínculo familiar. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que pertenece el vínculo. |
-| relative_id | uuid | NOT NULL, FK → users.id | Familiar vinculado al círculo. |
-| invitation_code_id | uuid | NOT NULL, FK → invitation_codes.id | Código que originó el vínculo. Permite trazabilidad de auditoría. |
-| relationship_label | relationship_label | NOT NULL | Tipo de parentesco: hijo, hija, nieto, sobrino, etc. |
+| id | binary(16) | PK | Identificador único del vínculo familiar. |
+| care_circle_id | binary(16) | NOT NULL, FK → care_circles.id | Círculo al que pertenece el vínculo. |
+| relative_id | binary(16) | NOT NULL, FK → users.id | Familiar vinculado. |
+| relationship_label | varchar(60) | - | Parentesco declarado por el familiar, por ejemplo "hija". Opcional. |
 | status | link_status | NOT NULL, DEFAULT 'ACTIVE' | Estado del vínculo: activo o revocado. |
-| linked_at | timestamp | NOT NULL | Momento en que se canjeó el código de invitación. |
-| revoked_at | timestamp | - | Momento de la revocación. Nulo si status = ACTIVE. |
-| revoked_by | uuid | FK → users.id | Actor que ejecutó la revocación. Nulo si status = ACTIVE. |
+| linked_at | datetime(6) | NOT NULL | Momento en que el vínculo se estableció o se reactivó por última vez, en UTC. |
+| revoked_at | datetime(6) | - | Momento de la revocación. Nulo mientras el vínculo esté activo. |
 
-Incluye un índice único compuesto sobre `(care_circle_id, relative_id)` que impide que un familiar se vincule más de una vez al mismo círculo, e índices sobre `relative_id` y `status` para optimizar las consultas frecuentes.
+Esta tabla registra la autorización de cada familiar para acompañar al adulto mayor. El índice único sobre `(care_circle_id, relative_id)` garantiza que un familiar tenga un solo vínculo con cada círculo; si el vínculo se revoca y luego se restablece, se reactiva la misma fila en lugar de crear otra.
 
-***Tabla care_shifts***
-
-| Columna | Tipo | Constraints | Descripción |
-|---|---|---|---|
-| id | uuid | PK | Identificador único del turno. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que pertenece el turno. |
-| relative_id | uuid | NOT NULL, FK → users.id | Familiar responsable del día. Se actualiza al reasignar. |
-| shift_date | date | NOT NULL | Día calendario en que el familiar está de turno. |
-| assigned_by | uuid | NOT NULL, FK → users.id | Familiar que realizó la última asignación o reasignación. |
-| created_at | timestamp | NOT NULL | Fecha y hora de la asignación inicial. |
-| updated_at | timestamp | NOT NULL | Fecha y hora de la última reasignación. Siempre ≥ created_at. |
-
-Incluye un índice único compuesto sobre `(care_circle_id, shift_date)` que garantiza que solo un familiar puede estar asignado por día dentro de un mismo círculo.
-
-***Tabla shared_notes***
+**Tabla care_shifts**
 
 | Columna | Tipo | Constraints | Descripción |
 |---|---|---|---|
-| id | uuid | PK | Identificador único de la nota. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que pertenece la nota. |
-| author_id | uuid | NOT NULL, FK → users.id | Familiar que redactó la nota. |
-| content | text | NOT NULL | Contenido de la nota. No puede ser texto vacío. |
-| created_at | timestamp | NOT NULL | Fecha y hora de creación de la nota. |
-| updated_at | timestamp | - | Fecha y hora de la última edición. Nulo si nunca fue editada. |
+| id | binary(16) | PK | Identificador único del turno. |
+| care_circle_id | binary(16) | NOT NULL, FK → care_circles.id | Círculo al que pertenece el turno. |
+| relative_id | binary(16) | NOT NULL, FK → users.id | Familiar responsable del turno. |
+| shift_date | date | NOT NULL | Fecha del turno, expresada en la zona horaria del adulto mayor. |
+| created_at | datetime(6) | NOT NULL | Fecha y hora de creación del turno, en UTC. |
+| updated_at | datetime(6) | NOT NULL | Fecha y hora de la última modificación, en UTC. |
 
-Incluye índices sobre `care_circle_id` y `author_id` que optimizan la consulta de notas por círculo y por autor respectivamente.
+Esta tabla registra qué familiar es responsable del seguimiento del adulto mayor en cada fecha. El índice único sobre `(care_circle_id, shift_date)` permite un solo turno por círculo y fecha, por lo que si dos familiares intentan asignarse el mismo día de forma simultánea, la base de datos rechaza al segundo.
 
-***Relaciones entre tablas***
+**Tabla shared_notes**
 
-`care_circles` se relaciona de uno a muchos con `invitation_codes`, `family_links`, `care_shifts` y `shared_notes`: un círculo puede contener varios registros de cada tipo, mientras que cada registro pertenece obligatoriamente a un único círculo. A su vez, `family_links` referencia a `invitation_codes` mediante `invitation_code_id`, registrando el código exacto que originó cada vínculo. Las columnas `relative_id`, `used_by_user_id`, `revoked_by`, `assigned_by` y `author_id` referencian a `users`, que es la tabla del bounded context Identity & Access y actúa como referencia externa en este contexto.
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | binary(16) | PK | Identificador único de la nota. |
+| care_circle_id | binary(16) | NOT NULL, FK → care_circles.id | Círculo al que pertenece la nota. |
+| author_id | binary(16) | NOT NULL, FK → users.id | Familiar que creó la nota. |
+| content | text | NOT NULL | Contenido de la nota. |
+| created_at | datetime(6) | NOT NULL | Fecha y hora de creación de la nota, en UTC. |
+| updated_at | datetime(6) | NOT NULL | Fecha y hora de la última edición, en UTC. |
+
+Esta tabla almacena las notas con información relevante sobre el adulto mayor, visibles para todos los familiares del círculo. Incluye un índice sobre `(care_circle_id, created_at)` para optimizar la consulta de las notas de un círculo, de la más reciente a la más antigua.
+
+**Relaciones entre tablas**
+
+La tabla `care_circles` es el eje del contexto: `invitation_codes`, `family_links`, `care_shifts` y `shared_notes` la referencian mediante `care_circle_id`, de modo que todo código, vínculo, turno o nota existe dentro de un círculo concreto. Entre `care_circles` y las otras cuatro tablas la relación es de uno a muchos. Las columnas `older_adult_id`, `used_by_user_id`, `relative_id` y `author_id` referencian a `users`, que pertenece al bounded context Identity & Access y actúa como referencia externa en este contexto. La relación entre `care_circles` y `users` a través de `older_adult_id` es de uno a uno, porque cada adulto mayor tiene un único círculo. Las tablas `invitation_codes` y `family_links` forman parte del mismo aggregate `CareCircle`, mientras que `care_shifts` y `shared_notes` son independientes entre sí y solo comparten la referencia al círculo.
 
 <br>
 
 <div align="center">
 
-![Database Design Diagram -Care Circle](assets/img/bounded-context/care-circle/care-circle-database.png)
+![Database Design Diagram -Care Circle](assets/img/bounded-context/care-circle/database-care-circle.png)
   <br/><i>Imagen 43. Database Design Diagram del Bounded Context Care Circle.</i>
 </div>
 
