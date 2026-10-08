@@ -4781,11 +4781,13 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 
 ##### 2.6.2.6.1. Bounded Context Domain Layer Class Diagrams
 
-El siguiente diagrama de clases UML (Imagen 42) representa la capa de dominio. Acatando el EventStorming, se visualizan los tres Aggregate Roots principales: `CareCircle`, `CareShift` y `SharedNote`. Se detallan las interfaces de los servicios de aplicación y repositorios que orquestan la lógica.
+El siguiente diagrama de clases UML (Imagen 42) representa el bounded context Care Circle organizado en sus cuatro capas: Interface, Application, Domain e Infrastructure. Acatando el EventStorming, en la capa de dominio se visualizan los tres Aggregate Roots principales: `CareCircle`, `CareShift` y `SharedNote`. El aggregate `CareCircle` contiene las entidades `InvitationCode` y `FamilyLink`, mientras que `CareShift` y `SharedNote` son independientes y referencian al círculo por su identificador. Junto a ellos se agrupan los value objects, las enumeraciones, los commands, las queries y los eventos de dominio.
+
+El dominio declara además las interfaces de los servicios de aplicación (`CareCircleCommandService`, `CareShiftCommandService`, `SharedNoteCommandService` y sus servicios de consulta) y de los repositorios (`CareCircleRepository`, `CareShiftRepository` y `SharedNoteRepository`). Estas interfaces orquestan la lógica y son implementadas por las capas externas: la capa Application aporta los servicios `Impl`, los event handlers y la implementación de la fachada `CareCircleContextFacade`, y la capa Infrastructure aporta los repositorios, los mappers, las entidades JPA y el generador de códigos de invitación. Por su parte, la capa Interface expone los controladores REST y el scheduler de expiración de códigos. Las dependencias apuntan siempre hacia el dominio, sin que ninguna capa superior acceda directamente a la persistencia.
 
 <div align="center">
 
-![Class Diagram - Care Circle](assets/img/bounded-context/care-circle/care-circle-class-diagram.png)
+![Class Diagram - Care Circle](assets/img/bounded-context/care-circle/diagram-class-care-circle.svg)
   <br/><i>Imagen 42. Domain Layer Class Diagram del Bounded Context Care Circle.</i>
 
 </div>
