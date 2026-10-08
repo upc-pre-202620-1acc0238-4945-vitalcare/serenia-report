@@ -5851,7 +5851,7 @@ La capa Infrastructure aparece en el extremo opuesto, con las implementaciones c
 
 <div align="center">
 
-![DComponent Level- Social Companionship](assets/img/bounded-context/social-companionship/social-companionship-components.png)
+![DComponent Level- Social Companionship](assets/img/bounded-context/social-companionship/socialcompanionship_components.png)
   <br/><i>Imagen 50. Component Level Diagram del Bounded Context Social Companionship.</i>
 
 </div>
@@ -5875,6 +5875,7 @@ El diagrama incluye además los Commands y Queries que expresan las intenciones 
 <div align="center">
 
 ![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/class-diagram-social.svg)
+<br/><i>Imagen 51. Bounded Context Domain Layer Class Diagram</i>
 
 </div>
 <br>
