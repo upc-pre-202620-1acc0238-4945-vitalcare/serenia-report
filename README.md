@@ -3980,7 +3980,7 @@ A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-
   <br/><i>Imagen 33. Context Mapping Diagram.</i>
 </div>
 
-**URL del tablero en Miro:** https://miro.com/app/board/uXjVHm8lGW8=/
+**URL del tablero en Miro:** https://miro.com/app/board/uXjVHm8lGW8=/?share_link_id=454089766644
 
 <br>
 
