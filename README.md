@@ -6227,7 +6227,7 @@ El diagrama de base de datos (Imagen 55) presenta las tablas que permiten la per
 | triggered_at | datetime(6) | NOT NULL | Instante en que se generó la alerta, en UTC. |
 | resolved_at | datetime(6) | - | Instante de la resolución. Nulo mientras la alerta no se haya resuelto. |
 
-Esta tabla almacena las alertas de emergencia y de inactividad en una misma estructura, ya que ambas comparten el ciclo de reconocimiento y resolución por parte de los familiares. El índice único sobre `check_in_id` garantiza que un check-in genere a lo sumo una alerta. Incluye un índice sobre `(older_adult_id, triggered_at)` para consultar el historial de alertas de un adulto mayor ordenado por fecha, y otro sobre `(type, status)` para filtrar las alertas por tipo y estado.
+Esta tabla almacena las alertas de emergencia y de inactividad en una misma estructura, ya que ambas comparten el ciclo de reconocimiento y resolución por parte de los familiares. El índice único sobre `check_in_id` garantiza que un check-in genere a lo sumo una alerta. Incluye un índice sobre `(older_adult_id, triggered_at)` para consultar el historial de alertas de un adulto mayor ordenado por fecha.
 
 **Tabla alert_notifications**
 
@@ -6236,8 +6236,8 @@ Esta tabla almacena las alertas de emergencia y de inactividad en una misma estr
 | id | binary(16) | PK | Identificador único de la notificación. |
 | alert_id | binary(16) | NOT NULL, FK → alerts.id | Alerta de emergencia a la que pertenece la notificación. |
 | relative_id | binary(16) | NOT NULL, FK → users.id | Familiar al que se dirige la notificación. |
-| status | delivery_status | NOT NULL, DEFAULT 'PENDING' | Estado de la notificación: PENDING, SENT, DELIVERED o FAILED. |
-| sent_at | datetime(6) | - | Instante del registro de la notificación, en UTC. |
+| status | delivery_status | NOT NULL | Estado de la notificación: SENT o DELIVERED. |
+| sent_at | datetime(6) | NOT NULL | Instante del envío de la notificación, en UTC. |
 | delivered_at | datetime(6) | - | Instante en que la notificación quedó disponible para el familiar. Nulo mientras no se confirme. |
 
 Esta tabla registra el despacho de una emergencia a cada familiar con vínculo activo. Un índice único sobre `(alert_id, relative_id)` asegura que exista una sola notificación por familiar y alerta.
@@ -6261,7 +6261,7 @@ Esta tabla deja constancia de qué familiar reconoció una alerta y cuál la res
 |---|---|---|
 | alert_type | EMERGENCY, INACTIVITY | Tipo de alerta; distingue ambos aggregates en la tabla `alerts`. |
 | alert_status | RAISED, DISPATCHED, DISPATCH_FAILED, ACKNOWLEDGED, RESOLVED | Estado de la alerta a lo largo de su ciclo de vida. |
-| delivery_status | PENDING, SENT, DELIVERED, FAILED | Estado de entrega de una notificación de emergencia. |
+| delivery_status | SENT, DELIVERED | Estado de entrega de una notificación de emergencia. |
 | attention_action | ACKNOWLEDGED, RESOLVED | Acción de un familiar sobre una alerta. |
 
 <br>
