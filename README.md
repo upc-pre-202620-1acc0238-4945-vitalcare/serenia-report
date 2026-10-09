@@ -6201,6 +6201,7 @@ Clases que resuelven el acceso a la base de datos MySQL, implementando las abstr
 | --- | --- | --- |
 | EmergencyAlertPersistenceMapper | Traduce entre el aggregate `EmergencyAlert`, con sus notificaciones y acciones de atención, y sus entidades de persistencia. | Usado por `EmergencyAlertRepositoryImpl`. |
 | InactivityAlertPersistenceMapper | Traduce entre el aggregate `InactivityAlert`, con sus acciones de atención, y sus entidades de persistencia. | Usado por `InactivityAlertRepositoryImpl`. |
+| AlertAttentionPersistenceMapper | Traduce las acciones de atención entre el aggregate y `AlertAttentionPersistenceEntity`, común a ambos tipos de alerta. Solo agrega las acciones que la fila aún no tiene y nunca modifica ni elimina las existentes, de modo que la acción simultánea de otro familiar choca con el índice único en lugar de perderse. | Usado por `EmergencyAlertPersistenceMapper` e `InactivityAlertPersistenceMapper`. |
 
 #### 2.6.6.5. Bounded Context Software Architecture Component Level Diagrams
 
