@@ -6628,6 +6628,19 @@ icons:
 
 #### 3.1.2.3. SEO Tags and Meta Tags
 
+#### 3.1.2.3. SEO Tags and Meta Tags
+
+En esta sección se definen los SEO Tags y Meta Tags implementados en la Landing Page de Serenia. Más allá de los metadatos tradicionales para motores de búsqueda, el equipo ha integrado etiquetas Open Graph y Twitter Cards. Esto es estratégico para nuestro modelo de adquisición: el descubrimiento y la recomendación entre familiares (Segmento 2) se da frecuentemente a través de enlaces compartidos en aplicaciones de mensajería como WhatsApp, donde estas etiquetas garantizan una previsualización visualmente atractiva y confiable.
+
+**Landing Page:**
+
+| Elemento | Valor |
+| :--- | :--- |
+| **Title** | Serenia - Bienestar hoy, siempre contigo |
+| **Meta Description** | Serenia es la app para familias a distancia: tu mamá o tu papá te cuenta cómo se siente con un toque al día y tú sabes cuándo es momento de estar más cerca. Plan básico gratis. |
+| **Meta Keywords** | Serenia, bienestar adultos mayores, cuidado de padres a distancia, check-in diario, círculo de cuidado, app para familias, acompañamiento |
+| **Author** | Serenia |
+
 #### 3.1.2.4. Searching Systems
 
 Un sistema de búsqueda permite al usuario encontrar información escribiendo una consulta o acotando un conjunto de resultados mediante filtros, en lugar de recorrer la estructura de navegación. En arquitectura de información, su inclusión se justifica cuando el volumen de contenido es suficientemente grande o cuando el usuario sabe de antemano qué busca; en caso contrario, agrega complejidad sin aportar valor. Por ello, el equipo no incorporó un buscador global en Serenia, sino que decidió, producto por producto, dónde la búsqueda es necesaria y dónde resulta contraproducente.
