@@ -3639,7 +3639,22 @@ La siguiente tabla ordena las 46 historias del Product Backlog y asigna cada una
 | 43 | US26 | Sección institucional de la startup | 1 | Sprint 3 |
 | 44 | US27 | Envío de fotografía al adulto mayor | 2 | Sprint 3 |
 | 45| SP01 | Integración de Firebase Cloud Messaging | 5 | Sprint 3 |
-| 46 | SP02 | Grabación, almacenamiento y reproducción de audio | 5 | Sprint 3 |
+| 46 | SP02 | Grabación, almacenamiento y reproducción de audio | 5 | Sprint 3 || 47 | US28 | Registro de cuenta del familiar a distancia | 2 | Sprint 3 |
+| 48 | US29 | Inicio de sesión | 2 | Sprint 3 |
+| 49 | US30 | Cierre de sesión | 1 | Sprint 3 |
+| 50 | US31 | Edición de datos de perfil y foto | 3 | Sprint 3 |
+| 51 | US32 | Cambio de contraseña | 2 | Sprint 3 |
+| 52 | US33 | Revocación de vínculo familiar | 2 | Sprint 3 |
+| 53 | US34 | Programación de recordatorio de contacto social | 3 | Sprint 3 |
+| 54 | US35 | Cancelación de recordatorio de contacto social | 1 | Sprint 3 |
+| 55 | US36 | Reasignación de turnos de atención | 3 | Sprint 3 |
+| 56 | US37 | Descarte de sugerencias de bienestar | 1 | Sprint 3 |
+| 57 | US38 | Reconocimiento de alertas | 2 | Sprint 3 |
+| 58 | US39 | Resolución de alertas | 2 | Sprint 3 |
+| 59 | US40 | Generación de código de invitación | 3 | Sprint 3 |
+| 60 | US41 | Visualización de fotografías recibidas | 2 | Sprint 3 |
+| 61 | US42 | Consulta del historial de alertas | 2 | Sprint 3 |
+
 
 <br>
 
@@ -3957,7 +3972,7 @@ La elaboración de los seis canvases permitió pasar de una descripción de los 
 
 ### 2.5.2. Context Mapping
 
-A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety, Social Companionship), el equipo elaboró un Context Map para visualizar y explicar las relaciones estructurales entre ellos, revisando la información recolectada en las etapas previas de investigación para producir el diseño candidato. La Imagen 33 muestra el Context Map resultante.
+A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety, Social Companionship), el equipo elaboró un Context Map para visualizar y explicar las relaciones estructurales entre ellos. La primera versión, presentada en la entrega anterior, se actualizó después de detallar las capas de cada bounded context (sección 2.6), porque allí se precisó cómo se comunican realmente los contextos. La Imagen 33 muestra el Context Map resultante.
 
 <div align="center">
 
@@ -3965,22 +3980,46 @@ A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-
   <br/><i>Imagen 33. Context Mapping Diagram.</i>
 </div>
 
-**URL del tablero en Miro:** https://miro.com/app/board/uXjVHm8lGW8=/
+**URL del tablero en Miro:** https://miro.com/app/board/uXjVHm8lGW8=/?share_link_id=454089766644
 
 <br>
 
+**Cómo se comunican los contextos:**
+
+Cada relación del mapa corresponde a un mecanismo concreto, definido en las capas Application e Interface de la sección 2.6. El contexto upstream publica un contrato, que puede ser una fachada (`ContextFacade`) que responde con tipos primitivos o un evento de dominio, y el contexto downstream lo consume a través de una clase `External...Service` de su capa Application, que traduce la respuesta a sus propios tipos.
+
+| Upstream | Downstream | Mecanismo |
+| --- | --- | --- |
+| IAM | Care Circle | Evento `OlderAdultRegistered`, que crea el círculo del adulto mayor, y fachada `IamContextFacade`, que entrega el rol y la zona horaria |
+| IAM | Daily Check-in | Evento `OlderAdultRegistered`, que inicializa las preferencias del check-in, y fachada `IamContextFacade`, que entrega la zona horaria |
+| IAM | Wellbeing Monitoring | Fachada `IamContextFacade`, que entrega la zona horaria del adulto mayor |
+| IAM | Social Companionship | Fachada `IamContextFacade`, que entrega la zona horaria del adulto mayor |
+| Care Circle | Daily Check-in | Fachada `CareCircleContextFacade`, que verifica que un familiar esté vinculado al adulto mayor |
+| Care Circle | Wellbeing Monitoring | Fachada `CareCircleContextFacade`, que verifica el vínculo del familiar |
+| Care Circle | Social Companionship | Fachada `CareCircleContextFacade`, que resuelve el círculo, los destinatarios y el acceso de cada usuario |
+| Care Circle | Alerts and Safety | Fachada `CareCircleContextFacade`, que entrega los familiares vinculados a quienes se dirige la alerta |
+| Daily Check-in | Wellbeing Monitoring | Evento `CheckInAnswered` y fachada `DailyCheckInContextFacade`, que entrega los estados de ánimo de los días anteriores |
+| Daily Check-in | Alerts and Safety | Evento `CheckInMissed`, que inicia la evaluación de inactividad |
+
+IAM no se relaciona con Alerts and Safety, porque esta solo necesita conocer a los familiares vinculados, que obtiene de Care Circle. Wellbeing Monitoring y Alerts and Safety tampoco se relacionan: el patrón de malestar detectado se resuelve dentro de Wellbeing Monitoring, que emite la sugerencia dirigida al familiar, por lo que no necesita pasar por Alerts and Safety.
+
+**Sistemas externos:**
+
+- **Firebase Cloud Messaging (Push Notification Provider):** Daily Check-in y Alerts and Safety dependen de un servicio de notificaciones push de terceros para llevar los recordatorios del check-in y las alertas de emergencia al dispositivo del usuario. El proveedor previsto es Firebase Cloud Messaging (FCM), cuya integración con la aplicación móvil y el backend se investiga y se prototipa en el spike SP01 del Product Backlog (Sprint 3).
+- **Azure Blob Storage (Cloud Storage Provider):** Social Companionship guarda en un almacenamiento en la nube los archivos de audio y de foto que intercambian el adulto mayor y su familia. El backend lo implementa con un contenedor privado de Azure Blob Storage, al que accede mediante una abstracción de almacenamiento definida en su capa Application.
+
 **Discusión de alternativas consideradas:**
 
-- *¿Qué pasaría si duplicamos el Account ID y el Role en cada bounded context, en vez de compartirlo?* Se descartó porque generaría inconsistencias si un rol cambia (por ejemplo, si se revoca una cuenta) y cada context tendría que sincronizarse por separado. Por eso se optó por un **Shared Kernel** mínimo (solo Account ID + Role) entre IAM y los otros 5 contexts.
-- *¿Qué pasaría si Wellbeing Monitoring y Alerts & Safety compartieran directamente su lógica de detección de anomalías?* Se evaluó, pero se decidió mantenerlos separados: Wellbeing Monitoring interpreta tendencias de bienestar (no urgentes), mientras que Alerts & Safety reacciona a umbrales que requieren atención inmediata. Fusionarlos mezclaría dos responsabilidades con niveles de criticidad distintos.
-- *¿Qué pasaría si creáramos un shared service para reducir la duplicación entre Care Circle y los contexts que consultan el vínculo familiar (Wellbeing Monitoring, Alerts and Safety, Social Companionship)?* Se descartó por ahora: como los tres consumen el mismo dato (autorización de vínculo) de la misma forma, no hay duplicación de lógica que justifique un servicio nuevo, ya que cada uno simplemente consulta a Care Circle como su proveedor (**Customer/Supplier**).
-- *¿Qué pasaría si Daily Check-in y Alerts and Safety adoptaran directamente el modelo del Push Notification Provider externo (Conformist), en vez de traducirlo?* Se descartó: el modelo de un proveedor externo (device tokens, formato de payload propio de cada plataforma) es un detalle de infraestructura que no debería filtrarse al dominio, y adoptarlo tal cual dejaría a ambos contexts acoplados a las decisiones de ese proveedor. Por eso se optó por una **Anti-Corruption Layer (ACL)** que traduce el modelo externo antes de que entre al dominio.
+- *¿Qué pasaría si IAM compartiera su modelo de cuenta (Account ID y Role) con los demás contextos mediante un Shared Kernel?* Era la solución de la primera versión del mapa, y se descartó al detallar las capas: cada contexto necesita solo datos puntuales de IAM, como el rol, la zona horaria o si la cuenta está activa, y IAM los expone mediante una fachada que responde con tipos primitivos. Compartir el modelo haría que cualquier cambio en IAM afectara a los otros cinco contextos al mismo tiempo, mientras que con la fachada cada consumidor traduce la respuesta a sus propios tipos y solo depende del contrato.
+- *¿Qué pasaría si Wellbeing Monitoring y Alerts and Safety compartieran directamente su lógica de detección de anomalías?* Se evaluó, pero se decidió mantenerlos separados: Wellbeing Monitoring interpreta tendencias de bienestar (no urgentes), mientras que Alerts and Safety reacciona a emergencias y a la ausencia de respuesta, que requieren atención inmediata. Fusionarlos mezclaría dos responsabilidades con niveles de criticidad distintos.
+- *¿Qué pasaría si creáramos un shared service para reducir la duplicación entre Care Circle y los contextos que consultan el vínculo familiar (Daily Check-in, Wellbeing Monitoring, Alerts and Safety y Social Companionship)?* Se descartó por ahora: como los cuatro consumen el mismo dato (autorización de vínculo) de la misma forma, no hay duplicación de lógica que justifique un servicio nuevo, ya que cada uno simplemente consulta a Care Circle como su proveedor (**Customer/Supplier**).
+- *¿Qué pasaría si Daily Check-in, Alerts and Safety y Social Companionship adoptaran directamente el modelo de los proveedores externos (Conformist), en vez de traducirlo?* Se descartó: el modelo de un proveedor externo (tokens de dispositivo y formato de payload propio de cada plataforma en el caso del push, claves y contenedores en el caso del almacenamiento) es un detalle de infraestructura que no debería filtrarse al dominio, y adoptarlo tal cual dejaría a los contextos acoplados a las decisiones de ese proveedor. Por eso se optó por una **Anti-Corruption Layer (ACL)** que traduce el modelo externo antes de que entre al dominio.
 
 **Patrones aplicados:**
-- **Shared Kernel**: IAM comparte Account ID + Role con los 5 contexts restantes, dado el alto acoplamiento aceptable para un dato tan básico y transversal.
-- **Customer/Supplier**: predomina en el resto de relaciones (Care Circle y Daily Check-in como proveedores), ya que todo el sistema lo construye el mismo equipo y puede coordinar cambios libremente entre contexts.
-- **Anti-Corruption Layer (ACL)**: Daily Check-in y Alerts and Safety dependen de un Push Notification Provider externo (servicio de terceros) para enviar notificaciones push al dispositivo del usuario. Se optó por una ACL en lugar de un Conformist porque el modelo del proveedor externo (tokens de dispositivo, formato de payload específico por plataforma) no debe filtrarse al dominio; cada context traduce hacia/desde ese modelo externo antes de operar con sus propios conceptos.
-- **Conformist** no se aplicó: se decidió no adoptar el modelo del proveedor externo tal cual, precisamente para poder aislar el dominio y facilitar un eventual cambio de proveedor sin impactar la lógica de negocio.
+- **Customer/Supplier:** es el patrón de todas las relaciones entre contextos internos. IAM, Care Circle y Daily Check-in actúan como proveedores y publican el contrato que los demás consumen, ya que todo el sistema lo construye el mismo equipo y puede coordinar los cambios entre contextos.
+- **Anti-Corruption Layer (ACL):** Daily Check-in y Alerts and Safety con Firebase Cloud Messaging, y Social Companionship con Azure Blob Storage. Cada contexto traduce hacia y desde el modelo externo antes de operar con sus propios conceptos, lo que además facilita cambiar de proveedor sin afectar la lógica de negocio.
+- **Shared Kernel:** no se aplicó, por las razones expuestas en la primera alternativa.
+- **Conformist:** no se aplicó: se decidió no adoptar el modelo de los proveedores externos tal cual, precisamente para poder aislar el dominio.
 
 <br>
 
@@ -4056,77 +4095,86 @@ Como se observa en el diagrama, cada uno de los containers de Serenia se desplie
 
 El bounded context Identity & Access concentra todo lo relacionado con la identidad de las personas que usan Serenia: el registro diferenciado de adultos mayores y familiares a distancia, el inicio y cierre de sesión, la actualización de los datos de perfil y el cambio de contraseña. Es un contexto genérico: sus reglas son estándar y no se derivan del negocio del cuidado, pero ningún otro contexto puede operar sin él, ya que toda acción del sistema se atribuye a un usuario autenticado y a un rol determinado.
 
-Su modelo gira en torno a un único aggregate, `User`, que es la raíz responsable de garantizar la consistencia de las credenciales, el estado de la cuenta y las sesiones abiertas de una misma persona. El rol se fija en el momento del registro y determina a qué aplicación accede el usuario. Al completarse el registro de un adulto mayor, el contexto publica el evento correspondiente, que habilita la creación posterior de su círculo de cuidado.
+Su modelo se organiza en dos aggregates. `User` garantiza la consistencia de la cuenta: credenciales, datos de perfil, rol y estado. `Session` representa cada acceso autenticado desde un dispositivo y se modela de forma independiente porque su número crece con cada inicio de sesión; mantenerla dentro de `User` obligaría a cargar todo el historial de accesos cada vez que se modifica la cuenta. Ambos aggregates se relacionan por identidad: una sesión conserva el `UserId` de su dueño, no una referencia al objeto.
+
+El contexto es upstream del resto del sistema. Al registrarse un adulto mayor publica el evento `OlderAdultRegistered`, a partir del cual Care Circle crea su círculo de cuidado y Daily Check-in inicializa sus preferencias. Además, expone la fachada `IamContextFacade`, mediante la cual los demás contextos consultan el rol, el nombre o la zona horaria de un usuario sin depender de su modelo interno.
 
 #### 2.6.1.1. Domain Layer
 
-En esta capa se representan las reglas de negocio propias de la identidad de un usuario, sin dependencia de frameworks de persistencia, red ni interfaz.
+En esta capa se representan las reglas de negocio propias de la identidad de un usuario, sin dependencia de frameworks de persistencia, red ni interfaz. Los aggregates extienden la clase base `AggregateRoot` del shared kernel, que acumula los eventos de dominio registrados durante una operación para que la capa Application los publique después de persistir.
 
 **Sub-capa Model: Aggregates**
 
-`User` (Aggregate Root): representa la cuenta de una persona en Serenia, sea adulto mayor o familiar a distancia. Controla la validez de sus credenciales, el estado de la cuenta y el ciclo de vida de sus sesiones.
+`User` (Aggregate Root): representa la cuenta de una persona en Serenia, sea adulto mayor o familiar a distancia. Controla la validez de sus credenciales, sus datos de perfil y el estado de la cuenta.
 
 | Atributo | Tipo | Visibilidad | Descripción |
 | --- | --- | --- | --- |
 | id | UserId | private | Identificador único de la cuenta. |
 | email | EmailAddress | private | Correo electrónico único con el que el usuario inicia sesión. |
 | passwordHash | PasswordHash | private | Representación cifrada de la contraseña; nunca almacena el valor en claro. |
-| role | UserRole | private | Rol asignado en el registro; determina la aplicación a la que accede. |
+| role | UserRole | private | Rol asignado en el registro; es inmutable y determina la aplicación a la que accede el usuario. |
 | fullName | PersonName | private | Nombre completo del usuario. |
 | phoneNumber | PhoneNumber | private | Número de contacto, opcional. |
-| birthDate | LocalDate | private | Fecha de nacimiento, opcional. |
+| birthDate | LocalDate | private | Fecha de nacimiento, opcional; no puede ser posterior a la fecha actual. |
 | photoUrl | String | private | Ubicación de la fotografía de perfil, opcional. |
 | locale | LocaleCode | private | Idioma y región de la interfaz. |
+| timeZone | ZoneId | private | Zona horaria del usuario; los demás contextos la usan para determinar el inicio y el fin de su día. |
 | status | AccountStatus | private | Estado de la cuenta: activa, suspendida o eliminada. |
-| sessions | List\<Session\> | private | Sesiones abiertas o históricas de la cuenta. |
-| createdAt | LocalDateTime | private | Fecha y hora de creación de la cuenta. |
-| updatedAt | LocalDateTime | private | Fecha y hora de la última modificación. |
+| createdAt | Instant | private | Instante de creación de la cuenta, en UTC. |
+| updatedAt | Instant | private | Instante de la última modificación, en UTC. |
 
 | Método | Visibilidad | Descripción |
 | --- | --- | --- |
-| registerOlderAdult(email, passwordHash, fullName, locale) | public (static) | Crea una cuenta con rol de adulto mayor a partir de datos ya validados. |
-| registerDistantRelative(email, passwordHash, fullName, locale) | public (static) | Crea una cuenta con rol de familiar a distancia. |
-| openSession(tokenHash, deviceInfo, expiresAt) | public | Abre una nueva sesión para la cuenta y la incorpora al aggregate. |
-| closeSession(sessionId) | public | Revoca la sesión indicada y la marca como cerrada. |
-| updatePhoto(photoUrl) | public | Reemplaza la fotografía de perfil del usuario. |
-| updateProfileData(fullName, phoneNumber, birthDate, locale) | public | Actualiza los datos personales de la cuenta. |
-| changePassword(newPasswordHash) | public | Sustituye la contraseña cifrada de la cuenta. |
-| activeSessions() | public | Devuelve las sesiones vigentes, sin revocar ni expiradas. |
+| registerOlderAdult(email, passwordHash, fullName, phoneNumber, birthDate, locale, timeZone) | public (static) | Factory que crea una cuenta activa con rol de adulto mayor y registra el evento `OlderAdultRegistered`. |
+| registerDistantRelative(email, passwordHash, fullName, phoneNumber, birthDate, locale, timeZone) | public (static) | Factory que crea una cuenta activa con rol de familiar a distancia y registra el evento `DistantRelativeRegistered`. |
+| updateProfileData(fullName, phoneNumber, birthDate, locale, timeZone) | public | Actualiza los datos personales de la cuenta y registra el evento `ProfileDataUpdated`. |
+| updatePhoto(photoUrl) | public | Reemplaza la fotografía de perfil y registra el evento `UserPhotoUpdated`. |
+| changePassword(newPasswordHash, preservedSessionId) | public | Sustituye la contraseña cifrada y registra el evento `PasswordChanged`, indicando la sesión desde la que se realizó el cambio. |
 | isActive() | public | Indica si la cuenta se encuentra en estado activo. |
-| ensureActive() | private | Impide ejecutar operaciones sobre una cuenta suspendida o eliminada. |
+| isOlderAdult() | public | Indica si la cuenta tiene rol de adulto mayor. |
+| ensureActive() | private | Impide modificar una cuenta suspendida o eliminada; lo invocan todos los métodos que alteran el estado. |
 
-**Sub-capa Model: Entities**
-
-`Session`: representa un periodo de acceso autenticado de un usuario desde un dispositivo. Pertenece al aggregate `User` y no se manipula fuera de él.
+`Session` (Aggregate Root): representa un periodo de acceso autenticado de un usuario desde un dispositivo. Su identificador se genera antes que el token, porque viaja dentro de él.
 
 | Atributo | Tipo | Visibilidad | Descripción |
 | --- | --- | --- | --- |
 | id | SessionId | private | Identificador único de la sesión. |
+| userId | UserId | private | Referencia por identidad a la cuenta dueña de la sesión. |
 | tokenHash | TokenHash | private | Representación cifrada del token entregado al cliente. |
-| deviceInfo | DeviceInfo | private | Descripción del dispositivo desde el que se inició la sesión. |
-| issuedAt | LocalDateTime | private | Fecha y hora de emisión del token. |
-| expiresAt | LocalDateTime | private | Fecha y hora en que el token deja de ser válido. |
-| revokedAt | LocalDateTime | private | Fecha y hora del cierre de sesión, si ocurrió. |
+| deviceInfo | DeviceInfo | private | Descripción del dispositivo desde el que se inició la sesión, opcional. |
+| issuedAt | Instant | private | Instante de emisión del token, en UTC. |
+| expiresAt | Instant | private | Instante en que el token deja de ser válido, en UTC. |
+| revokedAt | Instant | private | Instante del cierre o revocación de la sesión; es nulo mientras siga abierta. |
 
 | Método | Visibilidad | Descripción |
 | --- | --- | --- |
-| revoke(revokedAt) | public | Marca la sesión como cerrada en el instante indicado. |
-| isExpired(referenceTime) | public | Indica si el token ya superó su fecha de expiración. |
-| isActive(referenceTime) | public | Indica si la sesión sigue vigente: no revocada y no expirada. |
+| open(sessionId, userId, tokenHash, deviceInfo, issuedAt, expiresAt) | public (static) | Factory que abre una sesión, valida que la expiración sea posterior a la emisión y registra el evento `UserLoggedIn`. |
+| close(closedAt) | public | Cierra la sesión por decisión del usuario y registra el evento `UserSessionClosed`; si ya estaba cerrada, no realiza cambios. |
+| revoke(revokedAt) | public | Marca la sesión como revocada por una acción de seguridad; si ya estaba cerrada, no realiza cambios. |
+| belongsTo(userId) | public | Indica si la sesión pertenece al usuario indicado; impide cerrar sesiones ajenas. |
+| matchesToken(tokenHash) | public | Compara el hash del token presentado con el almacenado. |
+| isExpired(referenceTime) | public | Indica si el token ya superó su instante de expiración. |
+| isActive(referenceTime) | public | Indica si la sesión sigue vigente: no cerrada ni revocada, y no expirada. |
+
+**Sub-capa Model: Entities**
+
+Ninguno de los dos aggregates contiene entities internas; sus partes se modelan como value objects.
 
 **Sub-capa Model: Value Objects**
+
+Se implementan como records inmutables que validan su contenido al construirse. Los límites de longitud coinciden con las columnas de la base de datos.
 
 | Nombre | Atributos | Descripción |
 | --- | --- | --- |
 | UserId | value: UUID | Identidad inmutable de una cuenta. |
 | SessionId | value: UUID | Identidad inmutable de una sesión. |
-| EmailAddress | value: String | Correo electrónico validado en formato y longitud máxima. |
-| PasswordHash | value: String | Contraseña ya cifrada; impide que el dominio maneje texto plano. |
-| TokenHash | value: String | Token de sesión cifrado, nunca almacenado en claro. |
-| PersonName | value: String | Nombre completo con validación de obligatoriedad y longitud. |
-| PhoneNumber | value: String | Número telefónico validado en formato. |
-| LocaleCode | value: String | Código de idioma y región de la interfaz. |
-| DeviceInfo | value: String | Descripción del dispositivo asociado a una sesión. |
+| EmailAddress | value: String | Correo con formato válido y máximo 160 caracteres; se normaliza a minúsculas para que la unicidad no dependa de mayúsculas. |
+| PasswordHash | value: String | Contraseña cifrada con BCrypt; impide que el dominio maneje texto plano. |
+| TokenHash | value: String | Hash SHA-256 del token de sesión, de 64 caracteres hexadecimales. |
+| PersonName | value: String | Nombre completo obligatorio, de máximo 120 caracteres. |
+| PhoneNumber | value: String | Número telefónico en formato E.164 (por ejemplo, +51987654321), de máximo 20 caracteres. |
+| LocaleCode | value: String | Código de idioma y región de la interfaz, de máximo 10 caracteres. |
+| DeviceInfo | value: String | Descripción del dispositivo asociado a una sesión, de máximo 200 caracteres. |
 
 **Sub-capa Model: Enumerations**
 
@@ -4137,52 +4185,52 @@ En esta capa se representan las reglas de negocio propias de la identidad de un 
 
 **Sub-capa Model: Commands**
 
-| Nombre | Descripción |
-| --- | --- |
-| RegisterOlderAdultCommand | Intención de crear una cuenta con rol de adulto mayor. |
-| RegisterDistantRelativeCommand | Intención de crear una cuenta con rol de familiar a distancia. |
-| SignInCommand | Intención de autenticar a un usuario y abrir una sesión. |
-| SignOutCommand | Intención de cerrar una sesión vigente. |
-| UpdateUserPhotoCommand | Intención de actualizar la fotografía de perfil. |
-| UpdateProfileDataCommand | Intención de actualizar los datos personales del perfil. |
-| ChangePasswordCommand | Intención de reemplazar la contraseña de la cuenta. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| RegisterOlderAdultCommand | email, password, fullName, phoneNumber, birthDate, locale, timeZone | Intención de crear una cuenta con rol de adulto mayor. |
+| RegisterDistantRelativeCommand | email, password, fullName, phoneNumber, birthDate, locale, timeZone | Intención de crear una cuenta con rol de familiar a distancia. |
+| SignInCommand | email, password, deviceInfo | Intención de autenticar a un usuario y abrir una sesión. |
+| SignOutCommand | sessionId, userId | Intención de cerrar una sesión vigente del usuario solicitante. |
+| UpdateUserPhotoCommand | userId, photoUrl | Intención de actualizar la fotografía de perfil. |
+| UpdateProfileDataCommand | userId, fullName, phoneNumber, birthDate, locale, timeZone | Intención de actualizar los datos personales del perfil. |
+| ChangePasswordCommand | userId, sessionId, currentPassword, newPassword | Intención de reemplazar la contraseña, previa verificación de la contraseña actual. |
+| RevokeSessionsCommand | userId, preservedSessionId | Intención de revocar las sesiones vigentes del usuario distintas a la que realizó el cambio de contraseña. |
 
 **Sub-capa Model: Queries**
 
-| Nombre | Descripción |
-| --- | --- |
-| GetUserByIdQuery | Consulta de una cuenta por su identificador. |
-| GetUserByEmailQuery | Consulta de una cuenta por su correo electrónico. |
-| GetUserBySessionTokenQuery | Consulta de la cuenta asociada a un token de sesión vigente. |
-| GetActiveSessionsByUserIdQuery | Consulta de las sesiones vigentes de una cuenta. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| GetUserByIdQuery | userId | Consulta de una cuenta por su identificador. |
+| GetActiveSessionByIdQuery | sessionId | Consulta de una sesión que siga vigente; la utiliza el filtro de autorización en cada petición. |
 
 **Sub-capa Model: Events**
 
-| Nombre | Descripción |
-| --- | --- |
-| OlderAdultRegistered | Se creó una cuenta con rol de adulto mayor. |
-| DistantRelativeRegistered | Se creó una cuenta con rol de familiar a distancia. |
-| UserLoggedIn | Un usuario se autenticó correctamente y abrió una sesión. |
-| UserSessionClosed | Un usuario cerró su sesión de forma explícita. |
-| UserPhotoUpdated | Se actualizó la fotografía de perfil de un usuario. |
-| ProfileDataUpdated | Se actualizaron los datos personales de un usuario. |
-| PasswordChanged | Se modificó la contraseña de una cuenta. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| OlderAdultRegistered | userId, occurredAt | Se creó una cuenta con rol de adulto mayor. Lo consumen Care Circle y Daily Check-in. |
+| DistantRelativeRegistered | userId, occurredAt | Se creó una cuenta con rol de familiar a distancia. |
+| UserLoggedIn | userId, sessionId, occurredAt | Un usuario se autenticó correctamente y abrió una sesión. |
+| UserSessionClosed | userId, sessionId, occurredAt | Un usuario cerró su sesión de forma explícita. |
+| UserPhotoUpdated | userId, occurredAt | Se actualizó la fotografía de perfil de un usuario. |
+| ProfileDataUpdated | userId, occurredAt | Se actualizaron los datos personales de un usuario. |
+| PasswordChanged | userId, preservedSessionId, occurredAt | Se modificó la contraseña de una cuenta desde la sesión indicada. |
+| SessionsRevoked | userId, revokedSessionIds, occurredAt | Se revocaron las demás sesiones vigentes de un usuario tras el cambio de su contraseña. |
 
 **Sub-capa Repositories**
 
 | Tipo | Nombre | Métodos principales | Descripción |
 | --- | --- | --- | --- |
-| Interface | IUserRepository | save(user), findById(userId), findByEmail(email), existsByEmail(email), findBySessionTokenHash(tokenHash), findAll() | Contrato de persistencia del aggregate `User` junto con sus sesiones. Se implementa en Infrastructure. |
+| Interface | UserRepository | save(user), findById(userId), findByEmail(email), existsByEmail(email) | Contrato de persistencia del aggregate `User`. Se implementa en Infrastructure. |
+| Interface | SessionRepository | save(session), saveAll(sessions), findById(sessionId), findActiveByUserId(userId, referenceTime) | Contrato de persistencia del aggregate `Session`. Se implementa en Infrastructure. |
 
 **Sub-capa Services**
 
 | Tipo | Nombre | Métodos principales | Descripción |
 | --- | --- | --- | --- |
-| Interface | IUserCommandService | handle(RegisterOlderAdultCommand), handle(RegisterDistantRelativeCommand), handle(SignInCommand), handle(SignOutCommand), handle(UpdateUserPhotoCommand), handle(UpdateProfileDataCommand), handle(ChangePasswordCommand) | Contrato de las operaciones de escritura del contexto. |
-| Interface | IUserQueryService | handle(GetUserByIdQuery), handle(GetUserByEmailQuery), handle(GetUserBySessionTokenQuery), handle(GetActiveSessionsByUserIdQuery) | Contrato de las operaciones de lectura del contexto. |
-| Interface | IPasswordHashingService | hash(rawPassword), matches(rawPassword, passwordHash) | Abstracción del cifrado y verificación de contraseñas; mantiene el dominio libre de bibliotecas de seguridad. |
-| Interface | ITokenService | generate(userId, role), hash(token), expirationOf(token) | Abstracción de la generación y el cifrado de tokens de sesión. |
-| Interface | IDomainEventPublisher | publish(event) | Abstracción para publicar los eventos de dominio hacia los demás módulos. |
+| Interface | UserCommandService | handle(RegisterOlderAdultCommand), handle(RegisterDistantRelativeCommand), handle(UpdateUserPhotoCommand), handle(UpdateProfileDataCommand), handle(ChangePasswordCommand) | Contrato de las operaciones de escritura sobre las cuentas. |
+| Interface | UserQueryService | handle(GetUserByIdQuery) | Contrato de las operaciones de lectura sobre las cuentas. |
+| Interface | SessionCommandService | handle(SignInCommand), handle(SignOutCommand), handle(RevokeSessionsCommand) | Contrato de las operaciones de autenticación, cierre y revocación de sesiones. |
+| Interface | SessionQueryService | handle(GetActiveSessionByIdQuery) | Contrato de la lectura de sesiones vigentes. |
 
 #### 2.6.1.2. Interface Layer
 
@@ -4192,80 +4240,131 @@ Clases que exponen el bounded context hacia el exterior y traducen las peticione
 
 | Nombre | Endpoints | Descripción |
 | --- | --- | --- |
-| UsersController | POST /users, GET /users/{id}, PUT /users/{id}/photo, PUT /users/{id}/profile, PUT /users/{id}/password | Punto de entrada de las operaciones de registro, consulta y gestión de perfil. Delega en los servicios de comandos y consultas. |
-| SessionsController | POST /sessions, DELETE /sessions/{id} | Punto de entrada de la autenticación y el cierre de sesión. |
+| UsersController | POST /api/v1/users, GET /api/v1/users/{userId}, PUT /api/v1/users/{userId}/profile, PUT /api/v1/users/{userId}/photo, PUT /api/v1/users/{userId}/password | Punto de entrada del registro, la consulta y la gestión del perfil. El registro es público y elige el comando según el rol recibido. Las operaciones de modificación solo proceden cuando `{userId}` coincide con el usuario autenticado; en caso contrario responde 403 Forbidden. |
+| SessionsController | POST /api/v1/sessions, DELETE /api/v1/sessions/{sessionId} | Punto de entrada de la autenticación, que responde con el token emitido, y del cierre de sesión. |
 
 **Sub-capa REST: Resources**
 
-| Nombre | Descripción |
-| --- | --- |
-| RegisterUserResource | Datos de entrada del registro, incluido el rol solicitado. |
-| UserResource | Representación pública de una cuenta, sin datos sensibles. |
-| SignInResource | Credenciales enviadas para solicitar una sesión. |
-| AuthenticatedUserResource | Token de sesión emitido junto con los datos del usuario autenticado. |
-| UpdateUserPhotoResource | Datos de entrada para actualizar la fotografía de perfil. |
-| UpdateProfileDataResource | Datos de entrada para actualizar los datos personales. |
-| ChangePasswordResource | Datos de entrada para el cambio de contraseña. |
-| SessionResource | Representación de una sesión vigente y su dispositivo asociado. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| RegisterUserResource | email, password, role, fullName, phoneNumber, birthDate, locale, timeZone | Datos de entrada del registro, incluido el rol solicitado. |
+| UserResource | id, email, role, fullName, phoneNumber, birthDate, photoUrl, locale, timeZone, status | Representación pública de una cuenta, sin datos sensibles. |
+| SignInResource | email, password, deviceInfo | Credenciales enviadas para solicitar una sesión. |
+| AuthenticatedUserResource | sessionId, token, expiresAt, user | Token de sesión emitido junto con los datos del usuario autenticado. |
+| UpdateProfileDataResource | fullName, phoneNumber, birthDate, locale, timeZone | Datos de entrada para actualizar los datos personales. |
+| UpdateUserPhotoResource | photoUrl | Datos de entrada para actualizar la fotografía de perfil. |
+| ChangePasswordResource | currentPassword, newPassword | Datos de entrada para el cambio de contraseña. |
 
 **Sub-capa REST: Transform**
 
 | Nombre | Descripción |
 | --- | --- |
 | UserResourceFromEntityAssembler | Convierte el aggregate `User` en su representación REST. |
-| AuthenticatedUserResourceFromEntityAssembler | Combina usuario y token emitido en un único recurso de respuesta. |
-| SessionResourceFromEntityAssembler | Convierte la entidad `Session` en su representación REST. |
+| AuthenticatedUserResourceFromEntityAssembler | Combina el usuario, la sesión abierta y el token emitido en un único recurso de respuesta. |
 | RegisterOlderAdultCommandFromResourceAssembler | Convierte la petición de registro en el comando de adulto mayor. |
 | RegisterDistantRelativeCommandFromResourceAssembler | Convierte la petición de registro en el comando de familiar a distancia. |
 | SignInCommandFromResourceAssembler | Convierte las credenciales recibidas en el comando de autenticación. |
-| UpdateUserPhotoCommandFromResourceAssembler | Convierte la petición de fotografía en su comando. |
 | UpdateProfileDataCommandFromResourceAssembler | Convierte la petición de datos personales en su comando. |
-| ChangePasswordCommandFromResourceAssembler | Convierte la petición de cambio de contraseña en su comando. |
+| UpdateUserPhotoCommandFromResourceAssembler | Convierte la petición de fotografía en su comando. |
+| ChangePasswordCommandFromResourceAssembler | Combina la petición con el usuario y la sesión autenticados para construir el comando de cambio de contraseña. |
+
+**Sub-capa ACL**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | IamContextFacade | existsActiveUserById(userId): boolean, fetchUserRoleById(userId): Optional\<String\>, fetchFullNameById(userId): Optional\<String\>, fetchTimeZoneById(userId): Optional\<String\> | Contrato que el contexto ofrece a los demás. Care Circle lo usa para validar que quien canjea un código es un familiar a distancia; Daily Check-in, Wellbeing Monitoring y Social Companionship, para obtener la zona horaria del adulto mayor; los contextos con vistas compartidas, para mostrar nombres. Recibe y devuelve tipos primitivos (`UUID`, `String`) para no exponer clases del dominio. |
 
 #### 2.6.1.3. Application Layer
 
-Clases que orquestan los flujos del contexto, coordinando el aggregate, los repositorios y los servicios de seguridad.
+Clases que orquestan los flujos del contexto, coordinando los aggregates, los repositorios y los servicios técnicos de seguridad.
 
-**Sub-capa Internal: CommandServices**
+**Sub-capa Internal: CommandServices (Command Handlers)**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| UserCommandService | Ejecuta los siete comandos del contexto: valida la unicidad del correo, delega el cifrado de contraseñas, invoca los métodos del aggregate `User`, persiste el resultado y publica los eventos de dominio correspondientes. | Implementa `IUserCommandService`; usa `IUserRepository`, `IPasswordHashingService`, `ITokenService` e `IDomainEventPublisher`. |
+| UserCommandServiceImpl | Registra cuentas: verifica que el correo no exista, cifra la contraseña e invoca la factory del rol correspondiente. Actualiza los datos personales y la fotografía. En el cambio de contraseña verifica primero la contraseña actual y rechaza el cambio si no coincide. Tras persistir, publica los eventos acumulados por el aggregate. | Implementa `UserCommandService`; usa `UserRepository`, `HashingService` y `DomainEventPublisher`. |
+| SessionCommandServiceImpl | En el inicio de sesión busca la cuenta por correo, verifica que esté activa y valida la contraseña; si el correo no existe o la contraseña es incorrecta, devuelve el mismo error para no revelar qué correos están registrados. Luego genera el `SessionId`, emite el token con ese identificador, almacena solo su hash y abre la `Session`. En el cierre de sesión verifica que la sesión pertenezca al solicitante y la cierra. En la revocación cierra las sesiones vigentes del usuario excepto la indicada y publica un único evento `SessionsRevoked` con las sesiones afectadas. | Implementa `SessionCommandService`; usa `UserRepository`, `SessionRepository`, `HashingService`, `TokenService` y `DomainEventPublisher`. |
 
 **Sub-capa Internal: QueryServices**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| UserQueryService | Resuelve las consultas de cuentas y sesiones, devolviendo el aggregate o sus sesiones vigentes sin modificar el estado. | Implementa `IUserQueryService`; usa `IUserRepository`. |
+| UserQueryServiceImpl | Resuelve la consulta de una cuenta por su identificador sin modificar el estado. | Implementa `UserQueryService`; usa `UserRepository`. |
+| SessionQueryServiceImpl | Devuelve una sesión solo si sigue vigente en el instante de la consulta. | Implementa `SessionQueryService`; usa `SessionRepository`. |
 
-#### 2.6.1.4 Infrastructure Layer
+**Sub-capa Internal: Event Handlers**
 
-Clases que resuelven el acceso a la base de datos y a los mecanismos técnicos de seguridad, implementando las abstracciones definidas en el dominio.
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| PasswordChangedEventHandler | Solicita la revocación de las demás sesiones del usuario tras el cambio de contraseña, de modo que un dispositivo con la contraseña anterior pierde el acceso. Se ejecuta de forma síncrona dentro de la misma transacción del cambio. | Escucha `PasswordChanged`; envía `RevokeSessionsCommand`. |
+
+El evento `OlderAdultRegistered` no tiene handlers en este contexto: lo consumen Care Circle y Daily Check-in.
+
+**Sub-capa Internal: Outbound Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | HashingService | encode(rawPassword), matches(rawPassword, passwordHash) | Abstracción del cifrado y la verificación de contraseñas. |
+| Interface | TokenService | generateToken(userId, sessionId, role, expiresAt), validateToken(token), extractSessionId(token), hash(token) | Abstracción de la emisión, validación y cifrado de los tokens de sesión. |
+| Interface | DomainEventPublisher | publish(events) | Abstracción para publicar los eventos de dominio hacia los demás contextos. |
+
+**Sub-capa ACL**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| IamContextFacadeImpl | Resuelve las consultas de otros contextos a partir de la cuenta solicitada y las devuelve en tipos primitivos. | Implementa `IamContextFacade`; usa `UserQueryService`. |
+
+#### 2.6.1.4. Infrastructure Layer
+
+Clases que resuelven el acceso a la base de datos MySQL y a los mecanismos técnicos de seguridad, implementando las abstracciones definidas en las capas Domain y Application.
+
+**Sub-capa Persistence: JPA Entities**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| UserPersistenceEntity | Representa una fila de la tabla `users`: los identificadores UUID se almacenan como `BINARY(16)`, los enums como texto y los instantes como `DATETIME(6)` en UTC. | Usada por `UserJpaRepository` y `UserPersistenceMapper`. |
+| SessionPersistenceEntity | Representa una fila de la tabla `sessions`. | Usada por `SessionJpaRepository` y `SessionPersistenceMapper`. |
+
+**Sub-capa Persistence: JPA Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| UserJpaRepository | Interfaz de Spring Data JPA con las consultas `existsByEmail` y `findByEmail`, resueltas sobre el índice único de `email`. | Extiende `JpaRepository`; usada por `UserRepositoryImpl`. |
+| SessionJpaRepository | Interfaz de Spring Data JPA con la consulta de sesiones no revocadas y no expiradas de un usuario. | Extiende `JpaRepository`; usada por `SessionRepositoryImpl`. |
 
 **Sub-capa Persistence: Repositories**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| UserRepository | Persiste y recupera el aggregate `User` junto con sus sesiones sobre las tablas `users` y `sessions`, resolviendo además la búsqueda por correo y por token de sesión. | Implementa `IUserRepository`; usado por la capa Application. |
+| UserRepositoryImpl | Persiste y recupera el aggregate `User`. Si dos registros simultáneos usan el mismo correo, traduce la violación del índice único en una excepción de dominio. | Implementa `UserRepository`; usa `UserJpaRepository` y `UserPersistenceMapper`. |
+| SessionRepositoryImpl | Persiste y recupera el aggregate `Session`. | Implementa `SessionRepository`; usa `SessionJpaRepository` y `SessionPersistenceMapper`. |
 
 **Sub-capa Persistence: Mappers**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| UserPersistenceMapper | Traduce entre el aggregate `User` y su representación en base de datos, evitando que el modelo de persistencia se filtre al dominio. | Usado por `UserRepository`. |
+| UserPersistenceMapper | Traduce entre el aggregate `User` y `UserPersistenceEntity`, evitando que el modelo de persistencia se filtre al dominio. | Usado por `UserRepositoryImpl`. |
+| SessionPersistenceMapper | Traduce entre el aggregate `Session` y `SessionPersistenceEntity`. | Usado por `SessionRepositoryImpl`. |
 
 **Sub-capa Security: Services**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| BCryptPasswordHashingService | Cifra las contraseñas y verifica credenciales mediante el algoritmo BCrypt. | Implementa `IPasswordHashingService`. |
-| JwtTokenService | Genera los tokens de sesión, calcula su expiración y produce el hash que se almacena en la tabla `sessions`. | Implementa `ITokenService`. |
+| BCryptHashingServiceImpl | Cifra las contraseñas y verifica credenciales mediante BCrypt. | Implementa `HashingService`. |
+| JwtTokenServiceImpl | Emite tokens JWT firmados con la clave `JWT_SECRET`, con el identificador del usuario, el de la sesión, el rol y la expiración. Calcula el hash del token con SHA-256, ya que se verifica en cada petición y el token tiene suficiente entropía como para no requerir un algoritmo lento como BCrypt. | Implementa `TokenService`. |
+
+**Sub-capa Security: Authorization**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| BearerAuthorizationRequestFilter | En cada petición extrae el token del encabezado `Authorization`, valida su firma y expiración, obtiene el identificador de la sesión y comprueba que siga vigente y que el hash coincida. Si la sesión fue cerrada o revocada, la petición se rechaza con 401 Unauthorized. Si es válida, registra el usuario y su rol en el contexto de seguridad sin cargar la cuenta completa. | Usa `TokenService` y `SessionQueryService`. |
+| WebSecurityConfiguration | Configura Spring Security sin estado de servidor, deja públicas las rutas de registro, inicio de sesión y documentación, exige autenticación en el resto y registra el filtro de autorización. | Registra `BearerAuthorizationRequestFilter`. |
 
 **Sub-capa Messaging: Publishers**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| DomainEventPublisherAdapter | Publica los eventos de dominio del contexto dentro del monolito modular para que otros módulos reaccionen a ellos. | Implementa `IDomainEventPublisher`. |
+| SpringDomainEventPublisher | Publica los eventos de dominio dentro del monolito modular mediante el `ApplicationEventPublisher` de Spring, sin un message broker externo. | Implementa `DomainEventPublisher`. |
 
 #### 2.6.1.5. Bounded Context Software Architecture Component Level Diagrams
 
@@ -4359,173 +4458,345 @@ Existe una relación de uno a muchos entre `users` y `sessions`: una cuenta pued
 
 ### 2.6.2. Bounded Context: Care Circle
 
-<br>
+El bounded context Care Circle gestiona la red de apoyo de cada adulto mayor: qué familiares lo acompañan, cómo se incorporan y cómo se coordinan entre ellos. Cubre la generación y el canje de códigos de invitación, el establecimiento y la revocación de vínculos familiares, la asignación de turnos de atención y las notas compartidas. Es un contexto de soporte del que depende el resto del sistema: a través de él se determina qué familiares pueden consultar la información de un adulto mayor y a quiénes deben dirigirse sus alertas.
+
+Su modelo se organiza en tres aggregates. `CareCircle` reúne los códigos de invitación y los vínculos familiares, porque las reglas que los relacionan deben verificarse de forma conjunta: un código se canjea una sola vez y un familiar no puede tener dos vínculos activos con el mismo círculo. La cantidad de códigos y vínculos por círculo es pequeña, acotada por el tamaño de la familia, por lo que cargarlos juntos no representa un costo relevante. `CareShift` y `SharedNote` son independientes: un turno o una nota se modifican sin afectar a los vínculos, y separarlos evita que dos familiares que editan al mismo tiempo compitan por el mismo aggregate. Ambos referencian al círculo por su identificador.
+
+Cada adulto mayor tiene exactamente un círculo, que se crea al completarse su registro en Identity & Access. El contexto consulta a Identity & Access el rol de quien canjea un código y la zona horaria del adulto mayor, y expone la fachada `CareCircleContextFacade` para que los demás contextos verifiquen vínculos y obtengan los familiares activos.
 
 #### 2.6.2.1. Domain Layer
 
-En esta capa se definen las reglas de negocio para la formación y gestión de la red de apoyo del adulto mayor. Conforme al EventStorming, el dominio se divide en tres *Aggregate Roots* independientes para evitar bloqueos transaccionales innecesarios.
+En esta capa se representan las reglas de formación y coordinación de la red de apoyo, sin dependencia de frameworks de persistencia, red ni interfaz. Toda operación sobre un círculo exige que quien la solicita sea el adulto mayor dueño o un familiar con vínculo activo.
 
-**Sub-capa Model - Aggregates y Entities:**
+**Sub-capa Model: Aggregates**
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Aggregate | CareCircle | Entidad raíz que administra la membresía del círculo de cuidado. | Mantener la integridad de los vínculos familiares y los códigos de invitación. | Relacionado con el módulo Identity & Access. |
-| Entity | InvitationCode | Código temporal generado para agregar familiares. | Garantizar que un código se redima una sola vez o expire. | Pertenece al aggregate CareCircle. |
-| Entity | FamilyLink | Relación activa o revocada entre el adulto mayor y un cuidador. | Representar la autorización de un familiar sobre un adulto mayor. | Pertenece al aggregate CareCircle. |
-| Aggregate | CareShift | Entidad raíz que gestiona los turnos de cuidado diarios. | Garantizar que no haya colisiones de responsabilidad en una misma fecha. | Referencia al CareCircle. |
-| Aggregate | SharedNote | Entidad raíz que gestiona la bitácora colaborativa. | Almacenar y exponer información de contexto compartida por los miembros. | Referencia al CareCircle. |
+`CareCircle` (Aggregate Root): representa la red de apoyo de un adulto mayor. Controla la emisión y el canje de códigos de invitación y el ciclo de vida de los vínculos familiares.
 
-**Sub-capa Model - Commands:**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | CareCircleId | private | Identificador único del círculo. |
+| olderAdultId | OlderAdultId | private | Adulto mayor dueño del círculo; cada adulto mayor tiene un único círculo. |
+| invitationCodes | List\<InvitationCode\> | private | Códigos de invitación generados para el círculo. |
+| familyLinks | List\<FamilyLink\> | private | Vínculos familiares del círculo, activos o revocados. |
+| createdAt | Instant | private | Instante de creación del círculo, en UTC. |
 
-| Tipo | Nombre | Descripción |
-|---|---|---|
-| Command | CreateCareCircleCommand | Intención de inicializar el círculo de cuidado tras el registro. |
-| Command | GenerateInvitationCodeCommand | Intención de crear un código temporal para invitar a un familiar. |
-| Command | RedeemInvitationCodeCommand | Intención de un familiar de unirse al círculo usando un código válido. |
-| Command | RevokeFamilyLinkCommand | Intención de eliminar el acceso de un familiar al círculo. |
-| Command | AssignCareShiftCommand | Intención de asignar un turno de cuidado en una fecha específica. |
-| Command | ReassignCareShiftCommand | Intención de cambiar al responsable de un turno de cuidado existente. |
-| Command | CreateSharedNoteCommand | Intención de añadir un apunte a la bitácora colaborativa. |
-| Command | EditSharedNoteCommand | Intención de modificar el contenido de una nota compartida existente. |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| create(olderAdultId, createdAt) | public (static) | Factory que crea el círculo de un adulto mayor y registra el evento `CareCircleCreated`. |
+| generateInvitationCode(requesterId, code, createdAt, expiresAt) | public | Genera un código pendiente; solo el adulto mayor dueño puede solicitarlo. Registra el evento `InvitationCodeGenerated`. |
+| expireInvitationCode(invitationCodeId, referenceTime) | public | Marca como expirado un código pendiente cuya vigencia terminó y registra el evento `InvitationCodeExpired`. |
+| redeemInvitationCode(code, relativeId, relationshipLabel, redeemedAt) | public | Marca el código como usado por el familiar. Rechaza el canje si el código ya fue usado, si su vigencia terminó aunque aún no haya sido marcado como expirado, o si el familiar ya tiene un vínculo activo con el círculo. Registra el evento `InvitationCodeRedeemed`. |
+| establishFamilyLink(relativeId, relationshipLabel, linkedAt) | public | Crea un vínculo activo con el familiar; si existe un vínculo revocado previo, lo reactiva en lugar de crear otro. Registra el evento `FamilyLinkEstablished`. |
+| revokeFamilyLink(familyLinkId, requesterId, revokedAt) | public | Revoca un vínculo activo. El adulto mayor puede revocar cualquier vínculo de su círculo; un familiar, solo el propio. Registra el evento `FamilyLinkRevoked`. |
+| hasAccess(userId) | public | Indica si el usuario es el adulto mayor dueño o un familiar con vínculo activo. |
+| isActiveRelative(relativeId) | public | Indica si el familiar tiene un vínculo activo con el círculo. |
+| activeFamilyLinks() | public | Devuelve los vínculos activos del círculo. |
 
-**Sub-capa Model - Events:**
+`CareShift` (Aggregate Root): representa la responsabilidad de un familiar sobre el seguimiento del adulto mayor en una fecha determinada.
 
-| Tipo | Nombre | Descripción |
-|---|---|---|
-| Event | CareCircleCreated | Se inicializó el círculo de cuidado. |
-| Event | InvitationCodeGenerated | Se generó un nuevo código de invitación temporal. |
-| Event | InvitationCodeRedeemed | Un código fue canjeado con éxito. |
-| Event | FamilyLinkEstablished | Se estableció el vínculo (Consumido por otros contextos para autorizar accesos). |
-| Event | FamilyLinkRevoked | Se eliminó el acceso de un familiar. |
-| Event | CareShiftAssigned | Se registró un nuevo turno de cuidado. |
-| Event | CareShiftReassigned | Se actualizó el responsable de un turno. |
-| Event | SharedNoteCreated | Se añadió una nota al círculo. |
-| Event | SharedNoteEdited | Se modificó una nota existente. |
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | CareShiftId | private | Identificador único del turno. |
+| careCircleId | CareCircleId | private | Referencia por identidad al círculo del turno. |
+| relativeId | RelativeId | private | Familiar responsable del turno. |
+| shiftDate | LocalDate | private | Fecha del turno, expresada en la zona horaria del adulto mayor. |
+| createdAt | Instant | private | Instante de creación del turno, en UTC. |
+| updatedAt | Instant | private | Instante de la última modificación, en UTC. |
 
-**Sub-capa Model - Queries:**
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| assign(careCircleId, relativeId, shiftDate, today, createdAt) | public (static) | Factory que asigna el turno a un familiar; rechaza fechas anteriores al día actual del adulto mayor. Registra el evento `CareShiftAssigned`. |
+| reassignTo(newRelativeId, today, updatedAt) | public | Cambia el responsable del turno; rechaza turnos de fechas pasadas y reasignaciones al mismo familiar. Permite cubrir los turnos de un familiar cuyo vínculo fue revocado. Registra el evento `CareShiftReassigned`. |
+| isAssignedTo(relativeId) | public | Indica si el turno está asignado al familiar indicado. |
 
-| Tipo | Nombre | Descripción |
-|---|---|---|
-| Query | GetCareCircleByIdQuery | Obtener la estructura y miembros de un círculo. |
-| Query | GetCareShiftsByDateQuery | Obtener el calendario de turnos. |
-| Query | GetSharedNotesQuery | Obtener la bitácora de notas compartidas. |
+`SharedNote` (Aggregate Root): representa una nota con información relevante sobre el adulto mayor, visible para todos los familiares del círculo.
 
-**Sub-capa Repositories y Services (Interfaces):**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | SharedNoteId | private | Identificador único de la nota. |
+| careCircleId | CareCircleId | private | Referencia por identidad al círculo de la nota. |
+| authorId | RelativeId | private | Familiar que creó la nota. |
+| content | NoteContent | private | Contenido de la nota. |
+| createdAt | Instant | private | Instante de creación de la nota, en UTC. |
+| updatedAt | Instant | private | Instante de la última edición, en UTC. |
 
-| Tipo | Nombre | Descripción |
-|---|---|---|
-| Interface | ICareCircleRepository | Contrato de persistencia para el agregado CareCircle. |
-| Interface | ICareShiftRepository | Contrato de persistencia para el agregado CareShift. |
-| Interface | ISharedNoteRepository | Contrato de persistencia para el agregado SharedNote. |
-| Interface | ICareCircleCommandService | Contrato de operaciones de escritura del dominio. |
-| Interface | ICareCircleQueryService | Contrato de operaciones de lectura del dominio. |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| create(careCircleId, authorId, content, createdAt) | public (static) | Factory que registra una nueva nota y el evento `SharedNoteCreated`. |
+| edit(editorId, content, updatedAt) | public | Reemplaza el contenido de la nota; solo el autor puede editarla. Registra el evento `SharedNoteEdited`. |
+| isAuthoredBy(relativeId) | public | Indica si la nota fue creada por el familiar indicado. |
 
-<br>
+**Sub-capa Model: Entities**
+
+`InvitationCode`: representa un código temporal que permite a un familiar incorporarse al círculo. Pertenece al aggregate `CareCircle` y no se manipula fuera de él.
+
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | InvitationCodeId | private | Identificador único del código. |
+| code | InvitationCodeValue | private | Valor que el adulto mayor comparte con su familiar. |
+| status | InvitationStatus | private | Estado del código: pendiente, usado o expirado. |
+| createdAt | Instant | private | Instante de generación, en UTC. |
+| expiresAt | Instant | private | Instante en que termina la vigencia del código, en UTC. |
+| usedAt | Instant | private | Instante del canje; es nulo mientras el código no se haya usado. |
+| usedBy | RelativeId | private | Familiar que canjeó el código; es nulo mientras no se haya usado. |
+
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| isRedeemableAt(referenceTime) | public | Indica si el código está pendiente y su vigencia no terminó en el instante indicado. |
+| markAsUsed(relativeId, usedAt) | public | Registra el canje del código por el familiar. |
+| isDueForExpiration(referenceTime) | public | Indica si el código sigue pendiente pero su vigencia ya terminó. |
+| expire() | public | Marca el código como expirado. |
+
+`FamilyLink`: representa la autorización de un familiar para acompañar al adulto mayor. Pertenece al aggregate `CareCircle` y no se manipula fuera de él.
+
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | FamilyLinkId | private | Identificador único del vínculo. |
+| relativeId | RelativeId | private | Familiar vinculado. |
+| relationshipLabel | RelationshipLabel | private | Parentesco declarado por el familiar, opcional. |
+| status | LinkStatus | private | Estado del vínculo: activo o revocado. |
+| linkedAt | Instant | private | Instante en que el vínculo se estableció o se reactivó por última vez, en UTC. |
+| revokedAt | Instant | private | Instante de la revocación; es nulo mientras el vínculo esté activo. |
+
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| revoke(revokedAt) | public | Marca el vínculo como revocado. |
+| reactivate(relationshipLabel, linkedAt) | public | Vuelve a activar un vínculo revocado. |
+| isActive() | public | Indica si el vínculo se encuentra activo. |
+
+**Sub-capa Model: Value Objects**
+
+Se implementan como records inmutables que validan su contenido al construirse. Los límites de longitud coinciden con las columnas de la base de datos.
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| CareCircleId, InvitationCodeId, FamilyLinkId, CareShiftId, SharedNoteId | value: UUID | Identidades inmutables de los aggregates y entities del contexto. |
+| OlderAdultId | value: UUID | Referencia por identidad a una cuenta de adulto mayor de Identity & Access. |
+| RelativeId | value: UUID | Referencia por identidad a una cuenta de familiar a distancia de Identity & Access. |
+| InvitationCodeValue | value: String | Código de 8 caracteres en mayúsculas, tomados de un alfabeto sin caracteres ambiguos (sin 0, O, 1, I ni L) para que pueda dictarse por teléfono sin errores. |
+| RelationshipLabel | value: String | Parentesco declarado por el familiar, por ejemplo "hija", de máximo 60 caracteres. |
+| NoteContent | value: String | Contenido de una nota; no puede estar vacío ni superar los 65 535 bytes de la columna TEXT. |
+
+**Sub-capa Model: Enumerations**
+
+| Nombre | Valores | Descripción |
+| --- | --- | --- |
+| InvitationStatus | PENDING, USED, EXPIRED | Estado del ciclo de vida de un código de invitación. |
+| LinkStatus | ACTIVE, REVOKED | Estado de un vínculo familiar. |
+
+**Sub-capa Model: Commands**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| CreateCareCircleCommand | olderAdultId | Intención de crear el círculo de un adulto mayor recién registrado. |
+| GenerateInvitationCodeCommand | careCircleId, requesterId | Intención del adulto mayor de generar un código para invitar a un familiar. |
+| ExpireInvitationCodeCommand | careCircleId, invitationCodeId | Intención de marcar como expirado un código cuya vigencia terminó. |
+| RedeemInvitationCodeCommand | code, relativeId, relationshipLabel | Intención de un familiar de incorporarse a un círculo mediante un código. |
+| EstablishFamilyLinkCommand | careCircleId, relativeId, relationshipLabel | Intención de registrar el vínculo de un familiar tras el canje de su código. |
+| RevokeFamilyLinkCommand | careCircleId, familyLinkId, requesterId | Intención de retirar el acceso de un familiar al círculo. |
+| AssignCareShiftCommand | careCircleId, relativeId, shiftDate | Intención de un familiar de asignarse el turno de una fecha. |
+| ReassignCareShiftCommand | careShiftId, newRelativeId, requesterId | Intención de cambiar el responsable de un turno existente. |
+| CreateSharedNoteCommand | careCircleId, authorId, content | Intención de registrar una nota compartida. |
+| EditSharedNoteCommand | sharedNoteId, editorId, content | Intención de modificar el contenido de una nota existente. |
+
+**Sub-capa Model: Queries**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| GetCareCircleByIdQuery | careCircleId, requesterId | Consulta de un círculo por su identificador. |
+| GetCareCircleByOlderAdultIdQuery | olderAdultId | Consulta del círculo de un adulto mayor. |
+| GetPendingInvitationCodesByCareCircleIdQuery | careCircleId, requesterId | Consulta de los códigos de invitación vigentes de un círculo. |
+| GetDueInvitationCodesQuery | referenceTime | Consulta de los códigos pendientes cuya vigencia ya terminó. |
+| GetActiveFamilyLinksByCareCircleIdQuery | careCircleId, requesterId | Consulta de los familiares con vínculo activo en un círculo. |
+| GetActiveFamilyLinksByRelativeIdQuery | relativeId | Consulta de los círculos a los que un familiar está vinculado. |
+| GetCareShiftsByDateRangeQuery | careCircleId, requesterId, fromDate, toDate | Consulta de los turnos de un círculo en un rango de fechas; con un rango de un solo día devuelve el turno vigente. |
+| GetSharedNotesByCareCircleIdQuery | careCircleId, requesterId | Consulta de las notas compartidas de un círculo, de la más reciente a la más antigua. |
+
+**Sub-capa Model: Events**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| CareCircleCreated | careCircleId, olderAdultId, occurredAt | Se creó el círculo de cuidado de un adulto mayor. |
+| InvitationCodeGenerated | careCircleId, invitationCodeId, expiresAt, occurredAt | Se generó un código de invitación. |
+| InvitationCodeExpired | careCircleId, invitationCodeId, occurredAt | Un código terminó su vigencia sin ser canjeado. |
+| InvitationCodeRedeemed | careCircleId, invitationCodeId, relativeId, relationshipLabel, occurredAt | Un familiar canjeó un código válido. |
+| FamilyLinkEstablished | careCircleId, familyLinkId, relativeId, occurredAt | Un familiar quedó vinculado al círculo. |
+| FamilyLinkRevoked | careCircleId, familyLinkId, relativeId, occurredAt | Se retiró el acceso de un familiar al círculo. |
+| CareShiftAssigned | careShiftId, careCircleId, relativeId, shiftDate, occurredAt | Se asignó un turno de atención. |
+| CareShiftReassigned | careShiftId, previousRelativeId, newRelativeId, occurredAt | Se cambió el responsable de un turno. |
+| SharedNoteCreated | sharedNoteId, careCircleId, authorId, occurredAt | Se registró una nota compartida. |
+| SharedNoteEdited | sharedNoteId, occurredAt | Se modificó una nota compartida. |
+
+**Sub-capa Repositories**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | CareCircleRepository | save(careCircle), findById(careCircleId), findByOlderAdultId(olderAdultId), findByInvitationCode(code), findAllByActiveRelativeId(relativeId), findDueInvitationCodes(referenceTime) | Contrato de persistencia del aggregate `CareCircle` junto con sus códigos y vínculos. Se implementa en Infrastructure. |
+| Interface | CareShiftRepository | save(careShift), findById(careShiftId), existsByCareCircleIdAndShiftDate(careCircleId, shiftDate), findAllByCareCircleIdAndShiftDateBetween(careCircleId, fromDate, toDate) | Contrato de persistencia del aggregate `CareShift`. Se implementa en Infrastructure. |
+| Interface | SharedNoteRepository | save(sharedNote), findById(sharedNoteId), findAllByCareCircleId(careCircleId) | Contrato de persistencia del aggregate `SharedNote`. Se implementa en Infrastructure. |
+
+**Sub-capa Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | CareCircleCommandService | handle(CreateCareCircleCommand), handle(GenerateInvitationCodeCommand), handle(ExpireInvitationCodeCommand), handle(RedeemInvitationCodeCommand), handle(EstablishFamilyLinkCommand), handle(RevokeFamilyLinkCommand) | Contrato de las operaciones de escritura sobre los círculos, sus códigos y sus vínculos. |
+| Interface | CareCircleQueryService | handle(GetCareCircleByIdQuery), handle(GetCareCircleByOlderAdultIdQuery), handle(GetPendingInvitationCodesByCareCircleIdQuery), handle(GetDueInvitationCodesQuery), handle(GetActiveFamilyLinksByCareCircleIdQuery), handle(GetActiveFamilyLinksByRelativeIdQuery) | Contrato de las operaciones de lectura sobre los círculos. |
+| Interface | CareShiftCommandService | handle(AssignCareShiftCommand), handle(ReassignCareShiftCommand) | Contrato de las operaciones de escritura sobre los turnos. |
+| Interface | CareShiftQueryService | handle(GetCareShiftsByDateRangeQuery) | Contrato de la lectura del calendario de turnos. |
+| Interface | SharedNoteCommandService | handle(CreateSharedNoteCommand), handle(EditSharedNoteCommand) | Contrato de las operaciones de escritura sobre las notas. |
+| Interface | SharedNoteQueryService | handle(GetSharedNotesByCareCircleIdQuery) | Contrato de la lectura de notas compartidas. |
 
 #### 2.6.2.2. Interface Layer
+
 Clases que exponen el bounded context hacia el exterior y traducen las peticiones entrantes al lenguaje del dominio.
 
-**Sub-capa Rest - Controllers**
+**Sub-capa REST: Controllers**
 
-| **Nombre** | **Endpoints** | **Descripción** |
-|---|---|---|
-| **CareCirclesController** | POST /care-circles <br> GET /care-circles/{id} | Punto de entrada para la creación y consulta de un círculo de cuidado. Delega en los servicios de comandos y consultas correspondientes. |
-| **FamilyLinksController** | POST /care-circles/{id}/invitation-code <br> POST /family-links/redeem <br> DELETE /care-circles/{id}/family-links/{userId} | Punto de entrada para generar códigos de invitación, establecer vínculos familiares mediante el canje de invitaciones y revocar vínculos existentes. |
-| **CareShiftsController** | POST /care-circles/{id}/shifts <br> PUT /care-circles/{id}/shifts/{shiftId} | Punto de entrada para la asignación y reasignación de turnos de cuidado dentro de un Care Circle. |
-| **SharedNotesController** | POST /care-circles/{id}/shared-notes <br>PUT /care-circles/{id}/shared-notes/{noteId} | Punto de entrada para crear y editar notas compartidas entre los miembros del Care Circle. |
+| Nombre | Endpoints | Descripción |
+| --- | --- | --- |
+| CareCirclesController | GET /api/v1/care-circles/{careCircleId}, GET /api/v1/care-circles?olderAdultId={olderAdultId} | Punto de entrada de la consulta de círculos. No expone la creación, porque el círculo se crea automáticamente con el registro del adulto mayor. |
+| InvitationCodesController | POST /api/v1/care-circles/{careCircleId}/invitation-codes, GET /api/v1/care-circles/{careCircleId}/invitation-codes | Punto de entrada de la generación de códigos por parte del adulto mayor y de la consulta de los códigos vigentes. |
+| FamilyLinksController | POST /api/v1/family-links, GET /api/v1/family-links?relativeId={relativeId}, GET /api/v1/care-circles/{careCircleId}/family-links, DELETE /api/v1/care-circles/{careCircleId}/family-links/{familyLinkId} | Punto de entrada del canje de códigos, que responde 404 Not Found si el código no existe y 409 Conflict si ya fue usado o expiró; de la consulta de los círculos de un familiar; de la lista de familiares de un círculo; y de la revocación de vínculos. |
+| CareShiftsController | POST /api/v1/care-circles/{careCircleId}/care-shifts, GET /api/v1/care-circles/{careCircleId}/care-shifts?from={fromDate}&to={toDate}, PUT /api/v1/care-circles/{careCircleId}/care-shifts/{careShiftId} | Punto de entrada de la asignación de turnos, que responde 409 Conflict si la fecha ya está cubierta; de la consulta del calendario; y de la reasignación. |
+| SharedNotesController | POST /api/v1/care-circles/{careCircleId}/shared-notes, GET /api/v1/care-circles/{careCircleId}/shared-notes, PUT /api/v1/care-circles/{careCircleId}/shared-notes/{sharedNoteId} | Punto de entrada de la creación, consulta y edición de notas; la edición responde 403 Forbidden si el solicitante no es el autor. |
 
-**Sub-capa Rest - Resources**
+Los endpoints bajo `/care-circles/{careCircleId}` responden 403 Forbidden cuando el usuario autenticado no es el adulto mayor dueño ni un familiar con vínculo activo.
 
-Los Resources representan los datos que entran o salen de la API, sin exponer directamente las entidades o agregados del dominio.
+**Sub-capa REST: Resources**
 
-| **Nombre** | **Descripción** |
-|---|---|
-| **CreateCareCircleResource** | Datos de entrada necesarios para crear un nuevo Care Circle. |
-| **CareCircleResource** | Representación pública de un Care Circle y su información relevante para los usuarios. |
-| **GenerateInvitationCodeResource** | Datos necesarios para solicitar la generación de un código de invitación para incorporar un familiar al Care Circle. |
-| **InvitationCodeResource** | Representación del código de invitación generado y la información asociada a su vigencia. |
-| **RedeemInvitationCodeResource** | Código de invitación enviado por un usuario para solicitar su incorporación al Care Circle. |
-| **FamilyLinkResource** | Representación de un vínculo familiar establecido entre un miembro y el Care Circle. |
-| **AssignCareShiftResource** | Datos de entrada necesarios para asignar un turno de cuidado a un miembro del Care Circle. |
-| **CareShiftResource** | Representación de un turno de cuidado asignado dentro del Care Circle. |
-| **ReassignCareShiftResource** | Datos necesarios para modificar el miembro responsable de un turno de cuidado existente. |
-| **CreateSharedNoteResource** | Datos de entrada para crear una nota compartida dentro del Care Circle. |
-| **SharedNoteResource** | Representación de una nota compartida y sus datos relevantes. |
-| **EditSharedNoteResource** | Datos de entrada para modificar el contenido de una nota compartida existente. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| CareCircleResource | id, olderAdultId, createdAt | Representación de un círculo de cuidado. |
+| InvitationCodeResource | id, code, status, expiresAt | Representación de un código de invitación y su vigencia. |
+| RedeemInvitationCodeResource | code, relationshipLabel | Datos de entrada para canjear un código. |
+| FamilyLinkResource | id, careCircleId, relativeId, relationshipLabel, status, linkedAt | Representación de un vínculo familiar. |
+| AssignCareShiftResource | shiftDate | Datos de entrada para asignarse un turno. |
+| ReassignCareShiftResource | relativeId | Datos de entrada para cambiar el responsable de un turno. |
+| CareShiftResource | id, careCircleId, relativeId, shiftDate | Representación de un turno de atención. |
+| CreateSharedNoteResource | content | Datos de entrada para registrar una nota. |
+| EditSharedNoteResource | content | Datos de entrada para editar una nota. |
+| SharedNoteResource | id, careCircleId, authorId, content, createdAt, updatedAt | Representación de una nota compartida. |
 
-**Sub-Capa Rest - Transform**
+**Sub-capa REST: Transform**
 
-| **Nombre** | **Descripción** |
-|---|---|
-| **CareCircleResourceFromEntityAssembler** | Convierte el aggregate CareCircle en su representación REST. |
-| **FamilyLinkResourceFromEntityAssembler** | Convierte la entidad FamilyLink en su representación REST. |
-| **CareShiftResourceFromEntityAssembler** | Convierte la entidad CareShift en su representación REST. |
-| **SharedNoteResourceFromEntityAssembler** | Convierte la entidad SharedNote en su representación REST. |
-| **CreateCareCircleCommandFromResourceAssembler** | Convierte la petición de creación del Care Circle en el comando correspondiente. |
-| **GenerateInvitationCodeCommandFromResourceAssembler** | Convierte la petición de generación de código de invitación en el comando correspondiente. |
-| **RedeemInvitationCodeCommandFromResourceAssembler** | Convierte el código recibido en el comando para canjear la invitación. |
-| **RevokeFamilyLinkCommandFromResourceAssembler** | Convierte la petición de revocación de un vínculo familiar en su comando correspondiente. |
-| **AssignCareShiftCommandFromResourceAssembler** | Convierte la petición de asignación de un turno en el comando correspondiente. |
-| **ReassignCareShiftCommandFromResourceAssembler** | Convierte la petición de reasignación de un turno en el comando correspondiente. |
-| **CreateSharedNoteCommandFromResourceAssembler** | Convierte la petición de creación de una nota compartida en el comando correspondiente. |
-| **EditSharedNoteCommandFromResourceAssembler** | Convierte la petición de edición de una nota compartida en el comando correspondiente. |
+| Nombre | Descripción |
+| --- | --- |
+| CareCircleResourceFromEntityAssembler | Convierte el aggregate `CareCircle` en su representación REST. |
+| InvitationCodeResourceFromEntityAssembler | Convierte la entidad `InvitationCode` en su representación REST. |
+| FamilyLinkResourceFromEntityAssembler | Convierte la entidad `FamilyLink` en su representación REST. |
+| CareShiftResourceFromEntityAssembler | Convierte el aggregate `CareShift` en su representación REST. |
+| SharedNoteResourceFromEntityAssembler | Convierte el aggregate `SharedNote` en su representación REST. |
+| RedeemInvitationCodeCommandFromResourceAssembler | Combina la petición con el familiar autenticado para construir el comando de canje. |
+| AssignCareShiftCommandFromResourceAssembler | Combina la petición con el círculo y el familiar autenticado para construir el comando de asignación. |
+| ReassignCareShiftCommandFromResourceAssembler | Combina la petición con el turno y el solicitante para construir el comando de reasignación. |
+| CreateSharedNoteCommandFromResourceAssembler | Combina la petición con el círculo y el autor para construir el comando de creación de nota. |
+| EditSharedNoteCommandFromResourceAssembler | Combina la petición con la nota y el editor para construir el comando de edición. |
 
-<br>
+**Sub-capa Scheduling: Jobs**
+
+| Nombre | Descripción |
+| --- | --- |
+| InvitationCodeExpirationScheduler | Tarea periódica que consulta los códigos vencidos con `GetDueInvitationCodesQuery` y envía un `ExpireInvitationCodeCommand` por cada uno. |
+
+**Sub-capa ACL**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | CareCircleContextFacade | fetchCareCircleIdByOlderAdultId(olderAdultId): Optional\<UUID\>, fetchOlderAdultIdByCareCircleId(careCircleId): Optional\<UUID\>, fetchActiveRelativeIdsByOlderAdultId(olderAdultId): List\<UUID\>, isActiveRelativeOf(relativeId, olderAdultId): boolean, hasAccessToCareCircle(userId, careCircleId): boolean | Contrato que el contexto ofrece a los demás. Alerts and Safety lo usa para determinar a qué familiares notificar; Daily Check-in, Wellbeing Monitoring y Alerts and Safety, para verificar que un familiar esté vinculado antes de mostrar información; Social Companionship, para resolver los destinatarios de los mensajes. Recibe y devuelve tipos primitivos para no exponer clases del dominio. |
 
 #### 2.6.2.3. Application Layer
 
-Clases que orquestan los flujos del contexto, coordinando los aggregates, los repositorios y la publicación de eventos de dominio.
+Clases que orquestan los flujos del contexto, coordinando los aggregates, los repositorios, los servicios de otros contextos y la publicación de eventos de dominio.
 
-**Sub-capa Internal - CommandServices**
+**Sub-capa Internal: CommandServices (Command Handlers)**
 
-| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
-|---|---|---|
-| **CareCircleCommandService** | Ejecuta los comandos del contexto relacionados con la creación y gestión del Care Circle, generación y canje de códigos de invitación, establecimiento y revocación de vínculos familiares, asignación y reasignación de turnos de cuidado, y creación y edición de notas compartidas. Valida las reglas de negocio, invoca los métodos de los aggregates, persiste los cambios y publica los eventos de dominio correspondientes. | Implementa ICareCircleCommandService; usa ICareCircleRepository, IFamilyLinkRepository, ICareShiftRepository, ISharedNoteRepository e IDomainEventPublisher. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CareCircleCommandServiceImpl | Crea el círculo sin duplicarlo si el adulto mayor ya tiene uno. Genera códigos solicitando un valor nuevo hasta obtener uno que no exista y fija su expiración según la vigencia configurada. En el canje busca el círculo por código, verifica que el solicitante sea un familiar a distancia con cuenta activa e invoca al aggregate. Además, expira códigos vencidos y establece y revoca vínculos. Tras persistir, publica los eventos acumulados. | Implementa `CareCircleCommandService`; usa `CareCircleRepository`, `InvitationCodeGenerator`, `ExternalIamService` y `DomainEventPublisher`. |
+| CareShiftCommandServiceImpl | Verifica que el solicitante tenga acceso al círculo y que el responsable tenga un vínculo activo; calcula el día actual en la zona horaria del adulto mayor; comprueba que la fecha no esté cubierta e invoca al aggregate. | Implementa `CareShiftCommandService`; usa `CareShiftRepository`, `CareCircleRepository`, `ExternalIamService` y `DomainEventPublisher`. |
+| SharedNoteCommandServiceImpl | Verifica que el autor sea un familiar con vínculo activo antes de registrar una nota y delega en el aggregate la verificación de autoría al editarla. | Implementa `SharedNoteCommandService`; usa `SharedNoteRepository`, `CareCircleRepository` y `DomainEventPublisher`. |
 
-**Sub-capa Internal - QueryServices**
+**Sub-capa Internal: QueryServices**
 
-| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
-|---|---|---|
-| **CareCircleQueryService** | Resuelve las consultas de los Care Circle, sus miembros, vínculos familiares, turnos de cuidado y notas compartidas, devolviendo la información necesaria para las vistas sin modificar el estado del dominio. | Implementa ICareCircleQueryService; usa ICareCircleRepository, IFamilyLinkRepository, ICareShiftRepository e ISharedNoteRepository. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CareCircleQueryServiceImpl | Resuelve las consultas de círculos, códigos vigentes, códigos vencidos y vínculos activos, previa verificación de acceso del solicitante cuando la consulta proviene de un usuario. | Implementa `CareCircleQueryService`; usa `CareCircleRepository`. |
+| CareShiftQueryServiceImpl | Resuelve la consulta del calendario de turnos de un círculo, previa verificación de acceso. | Implementa `CareShiftQueryService`; usa `CareShiftRepository` y `CareCircleRepository`. |
+| SharedNoteQueryServiceImpl | Resuelve la consulta de notas compartidas de un círculo, previa verificación de acceso. | Implementa `SharedNoteQueryService`; usa `SharedNoteRepository` y `CareCircleRepository`. |
 
-<br>
+**Sub-capa Internal: Event Handlers**
 
-#### 2.6.2.4 Infrastructure Layer
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| OlderAdultRegisteredEventHandler | Crea el círculo de cuidado de un adulto mayor recién registrado. Se ejecuta de forma síncrona dentro de la transacción del registro, de modo que no exista un adulto mayor sin círculo. | Escucha `OlderAdultRegistered` de Identity & Access; envía `CreateCareCircleCommand`. |
+| InvitationCodeRedeemedEventHandler | Establece el vínculo familiar tras el canje de un código. Se ejecuta en la misma transacción del canje, de modo que el consumo del código y la creación del vínculo ocurran juntos. | Escucha `InvitationCodeRedeemed`; envía `EstablishFamilyLinkCommand`. |
 
-Clases que resuelven el acceso a la base de datos y a los mecanismos técnicos de persistencia y mensajería, implementando las abstracciones definidas en el dominio.
+**Sub-capa Internal: Outbound Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | InvitationCodeGenerator | generate(): InvitationCodeValue | Abstracción de la generación aleatoria de códigos de invitación. |
+| Class | ExternalIamService | fetchUserRole(userId), isActiveUser(userId), fetchTimeZone(userId) | Consume `IamContextFacade` y traduce sus respuestas a tipos del contexto, como `ZoneId`. |
+
+**Sub-capa ACL**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CareCircleContextFacadeImpl | Resuelve las consultas de otros contextos sobre círculos y vínculos y las devuelve en tipos primitivos. | Implementa `CareCircleContextFacade`; usa `CareCircleRepository`. |
+
+#### 2.6.2.4. Infrastructure Layer
+
+Clases que resuelven el acceso a la base de datos MySQL y la generación de códigos, implementando las abstracciones definidas en las capas Domain y Application.
+
+**Sub-capa Persistence: JPA Entities**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CareCirclePersistenceEntity | Representa una fila de la tabla `care_circles` y contiene las colecciones de códigos y vínculos, que se persisten en cascada junto con el círculo. | Usada por `CareCircleJpaRepository` y `CareCirclePersistenceMapper`. |
+| InvitationCodePersistenceEntity | Representa una fila de la tabla `invitation_codes`. | Contenida en `CareCirclePersistenceEntity`. |
+| FamilyLinkPersistenceEntity | Representa una fila de la tabla `family_links`. | Contenida en `CareCirclePersistenceEntity`. |
+| CareShiftPersistenceEntity | Representa una fila de la tabla `care_shifts`. | Usada por `CareShiftJpaRepository` y `CareShiftPersistenceMapper`. |
+| SharedNotePersistenceEntity | Representa una fila de la tabla `shared_notes`. | Usada por `SharedNoteJpaRepository` y `SharedNotePersistenceMapper`. |
+
+**Sub-capa Persistence: JPA Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CareCircleJpaRepository | Interfaz de Spring Data JPA con las consultas por adulto mayor y por código, resueltas sobre los índices únicos de `older_adult_id` y `code`, además de las consultas por familiar activo y de códigos vencidos, esta última resuelta sobre el índice `(status, expires_at)`. | Extiende `JpaRepository`; usada por `CareCircleRepositoryImpl`. |
+| CareShiftJpaRepository | Interfaz de Spring Data JPA con las consultas por círculo y rango de fechas, resueltas sobre el índice único `(care_circle_id, shift_date)`. | Extiende `JpaRepository`; usada por `CareShiftRepositoryImpl`. |
+| SharedNoteJpaRepository | Interfaz de Spring Data JPA con la consulta de notas por círculo ordenadas por fecha, resuelta sobre el índice `(care_circle_id, created_at)`. | Extiende `JpaRepository`; usada por `SharedNoteRepositoryImpl`. |
 
 **Sub-capa Persistence: Repositories**
 
-| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
-|---|---|---|
-| **CareCircleRepository** | Persiste y recupera los aggregates CareCircle, incluyendo la información necesaria para consultar sus miembros y configuración del círculo. Resuelve las operaciones de creación y consulta de los Care Circle. | Implementa ICareCircleRepository; usado por la capa Application. |
-| **FamilyLinkRepository** | Persiste y recupera los vínculos familiares establecidos entre los usuarios y un CareCircle, incluyendo la información necesaria para establecer y revocar dichos vínculos. | Implementa IFamilyLinkRepository; usado por la capa Application. |
-| **CareShiftRepository** | Persiste y recupera los turnos de cuidado asociados a un CareCircle, permitiendo consultar y modificar las asignaciones de los miembros. | Implementa ICareShiftRepository; usado por la capa Application. |
-| **SharedNoteRepository** | Persiste y recupera las notas compartidas pertenecientes a un CareCircle, permitiendo consultar y actualizar su contenido. | Implementa ISharedNoteRepository; usado por la capa Application. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CareCircleRepositoryImpl | Persiste y recupera el aggregate `CareCircle` junto con sus códigos y vínculos. | Implementa `CareCircleRepository`; usa `CareCircleJpaRepository` y `CareCirclePersistenceMapper`. |
+| CareShiftRepositoryImpl | Persiste y recupera el aggregate `CareShift`. Si dos familiares se asignan la misma fecha de forma simultánea, traduce la violación del índice único en una excepción de dominio. | Implementa `CareShiftRepository`; usa `CareShiftJpaRepository` y `CareShiftPersistenceMapper`. |
+| SharedNoteRepositoryImpl | Persiste y recupera el aggregate `SharedNote`. | Implementa `SharedNoteRepository`; usa `SharedNoteJpaRepository` y `SharedNotePersistenceMapper`. |
 
 **Sub-capa Persistence: Mappers**
 
-| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
-|---|---|---|
-| **CareCirclePersistenceMapper** | Traduce entre el aggregate CareCircle y su representación en base de datos, evitando que el modelo de persistencia se filtre al dominio. | Usado por CareCircleRepository. |
-| **FamilyLinkPersistenceMapper** | Traduce entre la entidad FamilyLink y su representación en base de datos, manteniendo separado el modelo de persistencia del modelo de dominio. | Usado por FamilyLinkRepository. |
-| **CareShiftPersistenceMapper** | Traduce entre la entidad CareShift y su representación en base de datos. | Usado por CareShiftRepository. |
-| **SharedNotePersistenceMapper** | Traduce entre la entidad SharedNote y su representación en base de datos. | Usado por SharedNoteRepository. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CareCirclePersistenceMapper | Traduce entre el aggregate `CareCircle`, con sus códigos y vínculos, y sus entidades de persistencia. | Usado por `CareCircleRepositoryImpl`. |
+| CareShiftPersistenceMapper | Traduce entre el aggregate `CareShift` y `CareShiftPersistenceEntity`. | Usado por `CareShiftRepositoryImpl`. |
+| SharedNotePersistenceMapper | Traduce entre el aggregate `SharedNote` y `SharedNotePersistenceEntity`. | Usado por `SharedNoteRepositoryImpl`. |
 
-**Sub-capa Messaging: Publishers**
+**Sub-capa Services**
 
-| **Nombre** | **Responsabilidad principal** | **Relación con otros elementos** |
-|---|---|---|
-| **DomainEventPublisherAdapter** | Publica los eventos de dominio generados por las operaciones de Care Circle dentro del monolito modular, permitiendo que otros módulos reaccionen a eventos como la creación del Care Circle, establecimiento del vínculo familiar, asignación de turnos o creación de notas compartidas. | Implementa IDomainEventPublisher. |
-<br>
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| SecureRandomInvitationCodeGenerator | Genera códigos con `SecureRandom`, un generador criptográficamente seguro, para que no puedan predecirse. | Implementa `InvitationCodeGenerator`. |
 
 #### 2.6.2.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Care Circle, elaborado en Structurizr (Imagen 41). El diagrama detalla la arquitectura interna: los *Controllers* como puntos de entrada REST; los *Resources* y *Assemblers* para transformación de datos; los servicios de aplicación (`CareCircleCommandService`, `CareCircleQueryService`); y el acceso a datos mediante los 3 repositorios definidos en el dominio (`CareCircleRepository`, `CareShiftRepository`, `SharedNoteRepository`).
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Care Circle, elaborado en Structurizr (Imagen 41). El diagrama detalla la arquitectura interna del módulo dentro del container API REST, organizada en las cuatro capas del diseño táctico: los *Controllers* (`CareCirclesController`, `InvitationCodesController`, `FamilyLinksController`, `CareShiftsController` y `SharedNotesController`) como puntos de entrada REST, junto con el scheduler `InvitationCodeExpirationScheduler`; los *Resources* y *Assemblers* para la transformación de datos; los servicios de aplicación de comando y de consulta (`CareCircleCommandService`, `CareCircleQueryService`, `CareShiftCommandService`, `CareShiftQueryService`, `SharedNoteCommandService` y `SharedNoteQueryService`); y el acceso a datos mediante los tres repositorios definidos en el dominio (`CareCircleRepository`, `CareShiftRepository` y `SharedNoteRepository`), implementados en Infrastructure sobre MySQL.
+
+En el centro del diagrama se ubican los aggregates `CareCircle`, `CareShift` y `SharedNote`, junto con los Commands, Queries y Domain Events del contexto. La capa Application incluye además los event handlers `OlderAdultRegisteredEventHandler`, que crea el círculo cuando Identity & Access registra a un adulto mayor, e `InvitationCodeRedeemedEventHandler`, que establece el vínculo familiar tras el canje de un código. El contexto consulta a Identity & Access mediante `ExternalIamService` y expone la fachada `CareCircleContextFacade`, que los demás módulos del monolito usan para verificar vínculos y obtener los familiares activos. Las flechas evidencian que las dependencias apuntan siempre hacia el dominio y que ningún componente de Interface accede directamente a la base de datos.
 
 <div align="center">
 
-![Component Diagram - Care Circle](assets/img/bounded-context/care-circle/care-circle-component-diagram.png)
+![Component Diagram - Care Circle](assets/img/bounded-context/care-circle/carecircle_components.png)
   <br/><i>Imagen 41. Component Diagram del Bounded Context Care Circle.</i>
 
 </div>
@@ -4536,11 +4807,13 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 
 ##### 2.6.2.6.1. Bounded Context Domain Layer Class Diagrams
 
-El siguiente diagrama de clases UML (Imagen 42) representa la capa de dominio. Acatando el EventStorming, se visualizan los tres Aggregate Roots principales: `CareCircle`, `CareShift` y `SharedNote`. Se detallan las interfaces de los servicios de aplicación y repositorios que orquestan la lógica.
+El siguiente diagrama de clases UML (Imagen 42) representa el bounded context Care Circle organizado en sus cuatro capas: Interface, Application, Domain e Infrastructure. Acatando el EventStorming, en la capa de dominio se visualizan los tres Aggregate Roots principales: `CareCircle`, `CareShift` y `SharedNote`. El aggregate `CareCircle` contiene las entidades `InvitationCode` y `FamilyLink`, mientras que `CareShift` y `SharedNote` son independientes y referencian al círculo por su identificador. Junto a ellos se agrupan los value objects, las enumeraciones, los commands, las queries y los eventos de dominio.
+
+El dominio declara además las interfaces de los servicios de aplicación (`CareCircleCommandService`, `CareShiftCommandService`, `SharedNoteCommandService` y sus servicios de consulta) y de los repositorios (`CareCircleRepository`, `CareShiftRepository` y `SharedNoteRepository`). Estas interfaces orquestan la lógica y son implementadas por las capas externas: la capa Application aporta los servicios `Impl`, los event handlers y la implementación de la fachada `CareCircleContextFacade`, y la capa Infrastructure aporta los repositorios, los mappers, las entidades JPA y el generador de códigos de invitación. Por su parte, la capa Interface expone los controladores REST y el scheduler de expiración de códigos. Las dependencias apuntan siempre hacia el dominio, sin que ninguna capa superior acceda directamente a la persistencia.
 
 <div align="center">
 
-![Class Diagram - Care Circle](assets/img/bounded-context/care-circle/care-circle-class-diagram.png)
+![Class Diagram - Care Circle](assets/img/bounded-context/care-circle/diagram-class-care-circle.svg)
   <br/><i>Imagen 42. Domain Layer Class Diagram del Bounded Context Care Circle.</i>
 
 </div>
@@ -4549,162 +4822,384 @@ El siguiente diagrama de clases UML (Imagen 42) representa la capa de dominio. A
 
 ##### 2.6.2.6.2. Bounded Context Database Design Diagram
 
-El diagrama de base de datos (Imagen 43) presenta los objetos que permiten la persistencia del bounded context **Care Circle** sobre el motor MySQL. El contexto se materializa en cinco tablas que corresponden al aggregate root care_circles y a las entidades que este contiene: invitation_codes, family_links, care_shifts y shared_notes.
+El diagrama de base de datos presenta los objetos que permiten la persistencia del bounded context **Care Circle** sobre el motor MySQL. El contexto se materializa en cinco tablas: `care_circles`, `invitation_codes`, `family_links`, `care_shifts` y `shared_notes`. Las tres primeras sostienen el aggregate `CareCircle` junto con sus códigos de invitación y vínculos familiares, y las dos últimas corresponden a los aggregates independientes `CareShift` y `SharedNote`. Los identificadores se almacenan como `BINARY(16)` y las fechas en UTC con `DATETIME(6)`.
 
 **Tabla care_circles**
 
 | Columna | Tipo | Constraints | Descripción |
 |---|---|---|---|
-| id | uuid | PK | Identificador único del círculo de cuidado. |
-| older_adult_id | uuid | NOT NULL, UNIQUE, FK → users.id | Adulto mayor dueño del círculo. Relación 1-1 con la cuenta. |
-| created_at | timestamp | NOT NULL | Fecha y hora de creación del círculo. |
+| id | binary(16) | PK | Identificador único del círculo de cuidado. |
+| older_adult_id | binary(16) | NOT NULL, UNIQUE, FK → users.id | Adulto mayor dueño del círculo. |
+| created_at | datetime(6) | NOT NULL | Fecha y hora de creación del círculo, en UTC. |
 
-Esta tabla es el aggregate root del bounded context. Se crea automáticamente al registrar un adulto mayor y actúa como punto de entrada para todas las demás entidades del contexto. Incluye un índice único sobre `older_adult_id` que garantiza a nivel de base de datos que cada adulto mayor posee exactamente un círculo.
+Esta tabla es el punto de entrada del contexto: representa la red de apoyo de un adulto mayor. La restricción `UNIQUE` sobre `older_adult_id` garantiza que cada adulto mayor tenga exactamente un círculo, que se crea al completarse su registro en Identity & Access.
 
-***Tabla invitation_codes***
+**Tabla invitation_codes**
 
 | Columna | Tipo | Constraints | Descripción |
 |---|---|---|---|
-| id | uuid | PK | Identificador único del código de invitación. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que da acceso este código. |
-| code | varchar(12) | NOT NULL, UNIQUE | Código alfanumérico en mayúscula (6-12 chars) compartido con el familiar. |
+| id | binary(16) | PK | Identificador único del código de invitación. |
+| care_circle_id | binary(16) | NOT NULL, FK → care_circles.id | Círculo al que da acceso el código. |
+| code | varchar(12) | NOT NULL, UNIQUE | Valor que el adulto mayor comparte con su familiar. |
 | status | invitation_status | NOT NULL, DEFAULT 'PENDING' | Estado del código: pendiente, usado o expirado. |
-| created_at | timestamp | NOT NULL | Fecha y hora de generación del código. |
-| expires_at | timestamp | NOT NULL | Fecha y hora de vencimiento. Siempre posterior a created_at. |
-| used_at | timestamp | - | Momento en que fue canjeado. Nulo si status ≠ USED. |
-| used_by_user_id | uuid | FK → users.id | Familiar que redimió el código. Nulo si status ≠ USED. |
+| created_at | datetime(6) | NOT NULL | Fecha y hora de generación del código, en UTC. |
+| expires_at | datetime(6) | NOT NULL | Fecha y hora en que termina la vigencia del código, en UTC. |
+| used_at | datetime(6) | - | Momento en que fue canjeado. Nulo mientras no se haya usado. |
+| used_by_user_id | binary(16) | FK → users.id | Familiar que canjeó el código. Nulo mientras no se haya usado. |
 
-La tabla incluye un índice único sobre `code` y un índice sobre `status` que optimiza la consulta de códigos vigentes.
+Esta tabla registra los códigos temporales con los que un familiar se incorpora al círculo. La restricción `UNIQUE` sobre `code` impide que dos códigos compartan el mismo valor. Incluye dos índices: `(care_circle_id, status)`, para consultar los códigos vigentes de un círculo, y `(status, expires_at)`, para que la tarea periódica encuentre los códigos pendientes cuya vigencia ya terminó.
 
-
-***Tabla family_links***
+**Tabla family_links**
 
 | Columna | Tipo | Constraints | Descripción |
 |---|---|---|---|
-| id | uuid | PK | Identificador único del vínculo familiar. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que pertenece el vínculo. |
-| relative_id | uuid | NOT NULL, FK → users.id | Familiar vinculado al círculo. |
-| invitation_code_id | uuid | NOT NULL, FK → invitation_codes.id | Código que originó el vínculo. Permite trazabilidad de auditoría. |
-| relationship_label | relationship_label | NOT NULL | Tipo de parentesco: hijo, hija, nieto, sobrino, etc. |
+| id | binary(16) | PK | Identificador único del vínculo familiar. |
+| care_circle_id | binary(16) | NOT NULL, FK → care_circles.id | Círculo al que pertenece el vínculo. |
+| relative_id | binary(16) | NOT NULL, FK → users.id | Familiar vinculado. |
+| relationship_label | varchar(60) | - | Parentesco declarado por el familiar, por ejemplo "hija". Opcional. |
 | status | link_status | NOT NULL, DEFAULT 'ACTIVE' | Estado del vínculo: activo o revocado. |
-| linked_at | timestamp | NOT NULL | Momento en que se canjeó el código de invitación. |
-| revoked_at | timestamp | - | Momento de la revocación. Nulo si status = ACTIVE. |
-| revoked_by | uuid | FK → users.id | Actor que ejecutó la revocación. Nulo si status = ACTIVE. |
+| linked_at | datetime(6) | NOT NULL | Momento en que el vínculo se estableció o se reactivó por última vez, en UTC. |
+| revoked_at | datetime(6) | - | Momento de la revocación. Nulo mientras el vínculo esté activo. |
 
-Incluye un índice único compuesto sobre `(care_circle_id, relative_id)` que impide que un familiar se vincule más de una vez al mismo círculo, e índices sobre `relative_id` y `status` para optimizar las consultas frecuentes.
+Esta tabla registra la autorización de cada familiar para acompañar al adulto mayor. El índice único sobre `(care_circle_id, relative_id)` garantiza que un familiar tenga un solo vínculo con cada círculo; si el vínculo se revoca y luego se restablece, se reactiva la misma fila en lugar de crear otra.
 
-***Tabla care_shifts***
-
-| Columna | Tipo | Constraints | Descripción |
-|---|---|---|---|
-| id | uuid | PK | Identificador único del turno. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que pertenece el turno. |
-| relative_id | uuid | NOT NULL, FK → users.id | Familiar responsable del día. Se actualiza al reasignar. |
-| shift_date | date | NOT NULL | Día calendario en que el familiar está de turno. |
-| assigned_by | uuid | NOT NULL, FK → users.id | Familiar que realizó la última asignación o reasignación. |
-| created_at | timestamp | NOT NULL | Fecha y hora de la asignación inicial. |
-| updated_at | timestamp | NOT NULL | Fecha y hora de la última reasignación. Siempre ≥ created_at. |
-
-Incluye un índice único compuesto sobre `(care_circle_id, shift_date)` que garantiza que solo un familiar puede estar asignado por día dentro de un mismo círculo.
-
-***Tabla shared_notes***
+**Tabla care_shifts**
 
 | Columna | Tipo | Constraints | Descripción |
 |---|---|---|---|
-| id | uuid | PK | Identificador único de la nota. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo al que pertenece la nota. |
-| author_id | uuid | NOT NULL, FK → users.id | Familiar que redactó la nota. |
-| content | text | NOT NULL | Contenido de la nota. No puede ser texto vacío. |
-| created_at | timestamp | NOT NULL | Fecha y hora de creación de la nota. |
-| updated_at | timestamp | - | Fecha y hora de la última edición. Nulo si nunca fue editada. |
+| id | binary(16) | PK | Identificador único del turno. |
+| care_circle_id | binary(16) | NOT NULL, FK → care_circles.id | Círculo al que pertenece el turno. |
+| relative_id | binary(16) | NOT NULL, FK → users.id | Familiar responsable del turno. |
+| shift_date | date | NOT NULL | Fecha del turno, expresada en la zona horaria del adulto mayor. |
+| created_at | datetime(6) | NOT NULL | Fecha y hora de creación del turno, en UTC. |
+| updated_at | datetime(6) | NOT NULL | Fecha y hora de la última modificación, en UTC. |
 
-Incluye índices sobre `care_circle_id` y `author_id` que optimizan la consulta de notas por círculo y por autor respectivamente.
+Esta tabla registra qué familiar es responsable del seguimiento del adulto mayor en cada fecha. El índice único sobre `(care_circle_id, shift_date)` permite un solo turno por círculo y fecha, por lo que si dos familiares intentan asignarse el mismo día de forma simultánea, la base de datos rechaza al segundo.
 
-***Relaciones entre tablas***
+**Tabla shared_notes**
 
-`care_circles` se relaciona de uno a muchos con `invitation_codes`, `family_links`, `care_shifts` y `shared_notes`: un círculo puede contener varios registros de cada tipo, mientras que cada registro pertenece obligatoriamente a un único círculo. A su vez, `family_links` referencia a `invitation_codes` mediante `invitation_code_id`, registrando el código exacto que originó cada vínculo. Las columnas `relative_id`, `used_by_user_id`, `revoked_by`, `assigned_by` y `author_id` referencian a `users`, que es la tabla del bounded context Identity & Access y actúa como referencia externa en este contexto.
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | binary(16) | PK | Identificador único de la nota. |
+| care_circle_id | binary(16) | NOT NULL, FK → care_circles.id | Círculo al que pertenece la nota. |
+| author_id | binary(16) | NOT NULL, FK → users.id | Familiar que creó la nota. |
+| content | text | NOT NULL | Contenido de la nota. |
+| created_at | datetime(6) | NOT NULL | Fecha y hora de creación de la nota, en UTC. |
+| updated_at | datetime(6) | NOT NULL | Fecha y hora de la última edición, en UTC. |
+
+Esta tabla almacena las notas con información relevante sobre el adulto mayor, visibles para todos los familiares del círculo. Incluye un índice sobre `(care_circle_id, created_at)` para optimizar la consulta de las notas de un círculo, de la más reciente a la más antigua.
+
+**Relaciones entre tablas**
+
+La tabla `care_circles` es el eje del contexto: `invitation_codes`, `family_links`, `care_shifts` y `shared_notes` la referencian mediante `care_circle_id`, de modo que todo código, vínculo, turno o nota existe dentro de un círculo concreto. Entre `care_circles` y las otras cuatro tablas la relación es de uno a muchos. Las columnas `older_adult_id`, `used_by_user_id`, `relative_id` y `author_id` referencian a `users`, que pertenece al bounded context Identity & Access y actúa como referencia externa en este contexto. La relación entre `care_circles` y `users` a través de `older_adult_id` es de uno a uno, porque cada adulto mayor tiene un único círculo. Las tablas `invitation_codes` y `family_links` forman parte del mismo aggregate `CareCircle`, mientras que `care_shifts` y `shared_notes` son independientes entre sí y solo comparten la referencia al círculo.
 
 <br>
 
 <div align="center">
 
-![Database Design Diagram -Care Circle](assets/img/bounded-context/care-circle/care-circle-database.png)
+![Database Design Diagram -Care Circle](assets/img/bounded-context/care-circle/database-care-circle.png)
   <br/><i>Imagen 43. Database Design Diagram del Bounded Context Care Circle.</i>
 </div>
 
 ### 2.6.3. Bounded Context: Daily Check-in
 
-El bounded context **Daily Check-in** es el mecanismo principal de recolección de datos. Su responsabilidad es capturar el estado diario del adulto mayor mediante preguntas ligeras, así como administrar las preferencias del usuario (horarios, pausas y modos de interfaz). Conforme al EventStorming, este contexto divide su dominio en dos agregados principales: `CheckIn` y `CheckInPreferences`.
+El bounded context Daily Check-in es el principal mecanismo de contacto diario entre Serenia y el adulto mayor. Gestiona el ciclo de vida del check-in de cada día: su apertura con una pregunta distinta a las recientes, el aviso dentro de la aplicación al llegar el horario configurado, el registro de la respuesta y el cierre del día como no respondido u omitido. También administra las preferencias que el adulto mayor controla sobre esta interacción: el horario del check-in, la pausa diaria de preguntas y el modo simplificado de la interfaz. Es un contexto core: concentra la propuesta de valor de Serenia, que reemplaza la llamada de control por una pregunta breve y respetuosa de la autonomía del usuario.
 
-<br>
+Su modelo se organiza en dos aggregates. `CheckInPreferences` reúne la configuración del adulto mayor y su pausa diaria, ya que ambas determinan cuándo y si debe presentarse la pregunta. `CheckIn` representa la interacción de un día concreto y controla sus transiciones de estado. Las preguntas forman un catálogo de solo lectura, `CheckInQuestion`, del cual se elige la pregunta de cada día.
+
+El contexto consume de Identity & Access la zona horaria del adulto mayor, necesaria para determinar su día en curso, y de Care Circle la verificación de vínculos, necesaria para que los familiares consulten el estado diario. Publica los eventos `CheckInAnswered` y `CheckInMissed`, a partir de los cuales Wellbeing Monitoring evalúa patrones de bienestar y Alerts and Safety genera alertas de inactividad.
 
 #### 2.6.3.1. Domain Layer
 
-**Sub-capa Model - Aggregates y Entities:**
+En esta capa se representan las reglas que gobiernan la interacción diaria con el adulto mayor, sin dependencia de frameworks de persistencia, red ni interfaz. Las fechas de check-in se expresan en la zona horaria del adulto mayor y los instantes, en UTC.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Aggregate | CheckIn | Registro histórico de la interacción diaria. | Controlar el ciclo de vida del check-in (PENDING, ANSWERED o MISSED) y capturar el nivel de ánimo. | Publica eventos para Wellbeing Monitoring y Alerts & Safety. |
-| Aggregate | CheckInPreferences | Preferencias y configuración de la experiencia por usuario. | Administrar horarios, activación de pausas diarias y el modo de interfaz simplificado. | Referencia a la cuenta del usuario. |
-| Entity | QuestionPause | Historial de días pausados voluntariamente. | Evitar alertas de inactividad durante la fecha pausada. | Pertenece al agregado CheckInPreferences. |
+**Sub-capa Model: Aggregates**
 
-**Sub-capa Model - Commands:**
+`CheckInPreferences` (Aggregate Root): representa la configuración del check-in diario de un adulto mayor. Controla el horario, el plazo de respuesta, el modo simplificado y la pausa de preguntas, que el adulto mayor puede activar y desactivar durante el día.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal |
-|---|---|---|---|
-| Command | PromptCheckInCommand | Comando interno del sistema. | Generar y enviar la pregunta del día al usuario. |
-| Command | AnswerCheckInCommand | Comando del adulto mayor. | Registrar la respuesta con el estado de ánimo (`MoodLevel`). |
-| Command | ExpireCheckInCommand | Comando interno de tiempo. | Cambiar el estado a MISSED al vencer el tiempo límite. |
-| Command | ScheduleCheckInCommand | Comando de configuración. | Establecer la hora preferida del recordatorio. |
-| Command | ActivateDailyPauseCommand | Comando de configuración. | Pausar las interacciones para el día actual. |
-| Command | EnableSimplifiedModeCommand | Comando de accesibilidad. | Activar o desactivar el modo simplificado de UI. |
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | CheckInPreferencesId | private | Identificador único de las preferencias. |
+| olderAdultId | OlderAdultId | private | Adulto mayor al que pertenecen las preferencias; cada adulto mayor tiene una única configuración. |
+| reminderTime | ReminderTime | private | Hora local en la que se presenta la pregunta del día; por defecto, las 10:00. |
+| timeLimit | TimeLimit | private | Plazo para responder a partir de la hora configurada; por defecto, 180 minutos. |
+| simplifiedMode | boolean | private | Indica si la interfaz se muestra en modo simplificado. |
+| latestPause | QuestionPause | private | Pausa más reciente del adulto mayor; es nula si nunca pausó las preguntas o si reactivó la última. |
+| updatedAt | Instant | private | Instante de la última modificación, en UTC. |
 
-**Sub-capa Model - Events y Queries:**
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| initialize(olderAdultId, updatedAt) | public (static) | Factory que crea las preferencias con la hora y el plazo predeterminados y registra el evento `CheckInPreferencesInitialized`. |
+| schedule(reminderTime, updatedAt) | public | Cambia la hora del check-in; el nuevo horario se aplica a partir del siguiente check-in. Registra el evento `CheckInScheduled`. |
+| activateDailyPause(today, createdAt) | public | Pausa las preguntas del día en curso; rechaza la operación si ya están pausadas. Registra el evento `DailyPauseActivated`. |
+| resumeToday(today, resumedAt) | public | Reactiva las preguntas del día en curso y registra el evento `DailyCheckInResumed`. |
+| resumeAfterPausedDay(today) | public | Si el día anterior terminó con las preguntas pausadas, registra el evento `DailyCheckInResumed`; en caso contrario no realiza cambios. |
+| enableSimplifiedMode(updatedAt) | public | Activa el modo simplificado y registra el evento `SimplifiedModeEnabled`, siempre que no estuviera activo. |
+| disableSimplifiedMode(updatedAt) | public | Desactiva el modo simplificado y registra el evento `SimplifiedModeDisabled`, siempre que estuviera activo. |
+| isPausedOn(date) | public | Indica si las preguntas están pausadas en la fecha indicada. |
+| windowFor(checkDate, timeZone) | public | Calcula los instantes de presentación y de vencimiento del check-in de una fecha, según la hora configurada, el plazo y la zona horaria del adulto mayor. |
 
-| Tipo | Nombre | Descripción |
-|---|---|---|
-| Event | CheckInAnswered | Informa a *Wellbeing Monitoring* para evaluación de patrones. |
-| Event | CheckInMissed | Informa a *Alerts & Safety* para abrir ventana de inactividad. |
-| Query | GetTodayCheckInQuery | Recuperar el check-in activo del día para la interfaz. |
+`CheckIn` (Aggregate Root): representa la interacción de un día concreto con el adulto mayor. Controla las transiciones entre pendiente, respondido, no respondido y omitido.
 
-**Sub-capa Repositories y Services (Interfaces):**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | CheckInId | private | Identificador único del check-in. |
+| olderAdultId | OlderAdultId | private | Adulto mayor al que corresponde el check-in. |
+| questionId | CheckInQuestionId | private | Pregunta presentada ese día. |
+| checkDate | LocalDate | private | Fecha del check-in en la zona horaria del adulto mayor; existe un único check-in por fecha. |
+| window | CheckInWindow | private | Instantes de presentación y de vencimiento del check-in. |
+| promptedAt | Instant | private | Instante en que se avisó al adulto mayor; es nulo mientras no se haya avisado. |
+| mood | MoodLevel | private | Estado de ánimo informado; es nulo mientras no haya respuesta. |
+| positiveActivity | PositiveActivity | private | Actividad positiva informada junto con la respuesta, opcional. |
+| status | CheckInStatus | private | Estado del check-in. |
+| answeredAt | Instant | private | Instante de la respuesta; es nulo mientras no haya respuesta. |
 
-| Tipo | Nombre | Descripción |
-|---|---|---|
-| Interface | ICheckInRepository | Contrato CRUD para el registro diario de interacciones. |
-| Interface | ICheckInPreferencesRepository | Contrato CRUD para horarios, pausas y modos visuales. |
-| Interface | IDailyCheckInCommandService | Contrato para orquestar los comandos de respuesta y preferencias. |
-| Interface | IDailyCheckInQueryService | Contrato para la lectura de estado y configuración. |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| open(olderAdultId, questionId, checkDate, window) | public (static) | Factory que abre el check-in pendiente de una fecha y registra el evento `CheckInOpened`. |
+| prompt(promptedAt) | public | Registra el aviso del check-in; solo procede si está pendiente y aún no fue avisado. Registra el evento `CheckInPrompted`. |
+| answer(mood, positiveActivity, answeredAt) | public | Registra la respuesta; solo procede si el check-in está pendiente y su plazo no venció. Puede responderse antes del horario configurado. Registra el evento `CheckInAnswered`. |
+| extendDeadline(newDeadlineAt) | public | Otorga un nuevo plazo a un check-in pendiente; el nuevo vencimiento debe ser posterior al actual. |
+| expire(referenceTime) | public | Marca como no respondido un check-in pendiente cuyo plazo venció y registra el evento `CheckInMissed`. |
+| skip(skippedAt) | public | Marca como omitido un check-in pendiente cuyo día terminó con las preguntas pausadas y registra el evento `CheckInSkipped`. |
+| isPending() | public | Indica si el check-in sigue pendiente. |
 
-<br>
+**Sub-capa Model: Entities**
+
+`QuestionPause`: representa la decisión del adulto mayor de no recibir preguntas en una fecha. Pertenece al aggregate `CheckInPreferences`, que solo carga la pausa más reciente; las de días anteriores se conservan en la base de datos como historial.
+
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | QuestionPauseId | private | Identificador único de la pausa. |
+| pausedDate | LocalDate | private | Fecha pausada, en la zona horaria del adulto mayor. |
+| createdAt | Instant | private | Instante en que se activó la pausa, en UTC. |
+
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| appliesTo(date) | public | Indica si la pausa corresponde a la fecha indicada. |
+
+`CheckInQuestion`: representa una pregunta del catálogo que puede presentarse en un check-in. Es una entidad de catálogo de solo lectura: se carga al iniciar la aplicación, no forma parte de ningún aggregate y se consulta mediante su propio repositorio.
+
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | CheckInQuestionId | private | Identificador único de la pregunta. |
+| text | QuestionText | private | Texto de la pregunta presentado al adulto mayor. |
+| tone | String | private | Tono de la pregunta, por ejemplo cálido o reflexivo, opcional. |
+| active | boolean | private | Indica si la pregunta forma parte de la rotación. |
+
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| isActive() | public | Indica si la pregunta puede seleccionarse para un check-in. |
+
+**Sub-capa Model: Value Objects**
+
+Se implementan como records inmutables que validan su contenido al construirse. Los límites de longitud coinciden con las columnas de la base de datos.
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| CheckInPreferencesId, CheckInId, CheckInQuestionId, QuestionPauseId | value: UUID | Identidades inmutables de los aggregates y entities del contexto. |
+| OlderAdultId | value: UUID | Referencia por identidad a una cuenta de adulto mayor de Identity & Access. |
+| ReminderTime | value: LocalTime | Hora del check-in, entre las 06:00 y las 20:00; con el plazo predeterminado, el último check-in posible vence a las 23:00 del mismo día. |
+| TimeLimit | minutes: int | Plazo de respuesta en minutos; debe ser mayor que cero. |
+| CheckInWindow | scheduledFor: Instant, deadlineAt: Instant | Ventana del check-in; el vencimiento debe ser posterior a la presentación. |
+| PositiveActivity | value: String | Actividad positiva informada por el adulto mayor, de máximo 200 caracteres. |
+| QuestionText | value: String | Texto de una pregunta, obligatorio y de máximo 200 caracteres. |
+
+**Sub-capa Model: Enumerations**
+
+| Nombre | Valores | Descripción |
+| --- | --- | --- |
+| CheckInStatus | PENDING, ANSWERED, MISSED, SKIPPED | Estado del check-in: pendiente, respondido, no respondido u omitido por pausa. |
+| MoodLevel | VERY_LOW, LOW, NEUTRAL, GOOD, VERY_GOOD | Escala de estado de ánimo que el adulto mayor selecciona con un solo toque. |
+
+**Sub-capa Model: Domain Services**
+
+| Nombre | Métodos principales | Descripción |
+| --- | --- | --- |
+| QuestionSelectionService | select(activeQuestions, recentQuestionIds): CheckInQuestionId | Elige la pregunta del día priorizando las que nunca se usaron y, entre las usadas, la que se presentó hace más tiempo. Así ninguna pregunta se repite antes de recorrer el conjunto activo y la pregunta siempre difiere de la del día anterior. |
+
+**Sub-capa Model: Commands**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| InitializeCheckInPreferencesCommand | olderAdultId | Intención de crear las preferencias de un adulto mayor recién registrado. |
+| ScheduleCheckInCommand | olderAdultId, reminderTime | Intención de cambiar la hora del check-in. |
+| ActivateDailyPauseCommand | olderAdultId | Intención de pausar las preguntas del día en curso. |
+| ResumeDailyCheckInCommand | olderAdultId | Intención de reactivar las preguntas, por decisión del adulto mayor o por el inicio de un nuevo día tras un día pausado. |
+| EnableSimplifiedModeCommand | olderAdultId | Intención de activar el modo simplificado. |
+| DisableSimplifiedModeCommand | olderAdultId | Intención de desactivar el modo simplificado. |
+| OpenCheckInCommand | olderAdultId | Intención de abrir el check-in del día en curso de un adulto mayor; si ya existe, no realiza cambios. |
+| PromptCheckInCommand | checkInId | Intención de avisar al adulto mayor que su check-in sigue pendiente. |
+| AnswerCheckInCommand | checkInId, olderAdultId, mood, positiveActivity | Intención del adulto mayor de responder su check-in. |
+| ExpireCheckInCommand | checkInId | Intención de cerrar un check-in pendiente cuyo plazo venció. |
+
+**Sub-capa Model: Queries**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| GetCheckInPreferencesByOlderAdultIdQuery | olderAdultId, requesterId | Consulta de las preferencias de un adulto mayor. |
+| GetAllCheckInPreferencesQuery | — | Consulta de las preferencias de todos los adultos mayores; la usa la apertura diaria. |
+| GetTodayCheckInQuery | olderAdultId, requesterId | Consulta del check-in del día en curso y de si las preguntas están pausadas; la usan el adulto mayor para responder y el familiar para conocer su estado. |
+| GetCheckInHistoryQuery | olderAdultId, requesterId, fromDate, toDate | Consulta de los check-ins de un rango de fechas, ordenados por fecha. |
+| GetCheckInsDueForPromptQuery | referenceTime | Consulta de los check-ins pendientes, aún no avisados, cuyo horario ya llegó. |
+| GetCheckInsPastDeadlineQuery | referenceTime | Consulta de los check-ins pendientes cuyo plazo venció. |
+| GetCheckInQuestionByIdQuery | questionId | Consulta del texto de una pregunta del catálogo. |
+
+**Sub-capa Model: Events**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| CheckInPreferencesInitialized | olderAdultId, occurredAt | Se crearon las preferencias de un adulto mayor. |
+| CheckInScheduled | olderAdultId, reminderTime, occurredAt | Se cambió la hora del check-in. |
+| DailyPauseActivated | olderAdultId, pausedDate, occurredAt | El adulto mayor pausó las preguntas del día. |
+| DailyCheckInResumed | olderAdultId, resumedDate, occurredAt | Las preguntas se reactivaron, por decisión del adulto mayor o por el inicio de un nuevo día. |
+| SimplifiedModeEnabled | olderAdultId, occurredAt | Se activó el modo simplificado. |
+| SimplifiedModeDisabled | olderAdultId, occurredAt | Se desactivó el modo simplificado. |
+| CheckInOpened | checkInId, olderAdultId, checkDate, occurredAt | Se abrió el check-in de un día. |
+| CheckInPrompted | checkInId, olderAdultId, occurredAt | Se avisó al adulto mayor que su check-in está disponible. |
+| CheckInAnswered | checkInId, olderAdultId, checkDate, mood, positiveActivity, occurredAt | El adulto mayor respondió su check-in. Lo consume Wellbeing Monitoring. |
+| CheckInMissed | checkInId, olderAdultId, checkDate, occurredAt | El plazo venció sin respuesta. Lo consume Alerts and Safety. |
+| CheckInSkipped | checkInId, olderAdultId, checkDate, occurredAt | El día terminó con las preguntas pausadas, por lo que no se genera una alerta de inactividad. |
+
+**Sub-capa Repositories**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | CheckInPreferencesRepository | save(preferences), findByOlderAdultId(olderAdultId), findAll() | Contrato de persistencia del aggregate `CheckInPreferences` junto con su pausa más reciente. Se implementa en Infrastructure. |
+| Interface | CheckInRepository | save(checkIn), findById(checkInId), findByOlderAdultIdAndCheckDate(olderAdultId, checkDate), existsByOlderAdultIdAndCheckDate(olderAdultId, checkDate), findAllByOlderAdultIdAndCheckDateBetween(olderAdultId, fromDate, toDate), findAllPendingDueForPrompt(referenceTime), findAllPendingPastDeadline(referenceTime), findRecentQuestionIds(olderAdultId, limit) | Contrato de persistencia del aggregate `CheckIn`. Se implementa en Infrastructure. |
+| Interface | CheckInQuestionRepository | findById(questionId), findAllActive(), saveAll(questions), count() | Contrato de consulta del catálogo de preguntas; `saveAll` solo se usa en la carga inicial. Se implementa en Infrastructure. |
+
+**Sub-capa Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | CheckInPreferencesCommandService | handle(InitializeCheckInPreferencesCommand), handle(ScheduleCheckInCommand), handle(ActivateDailyPauseCommand), handle(ResumeDailyCheckInCommand), handle(EnableSimplifiedModeCommand), handle(DisableSimplifiedModeCommand) | Contrato de las operaciones de escritura sobre las preferencias. |
+| Interface | CheckInPreferencesQueryService | handle(GetCheckInPreferencesByOlderAdultIdQuery), handle(GetAllCheckInPreferencesQuery) | Contrato de la lectura de preferencias. |
+| Interface | CheckInCommandService | handle(OpenCheckInCommand), handle(PromptCheckInCommand), handle(AnswerCheckInCommand), handle(ExpireCheckInCommand) | Contrato de las operaciones de escritura sobre los check-ins. |
+| Interface | CheckInQueryService | handle(GetTodayCheckInQuery), handle(GetCheckInHistoryQuery), handle(GetCheckInsDueForPromptQuery), handle(GetCheckInsPastDeadlineQuery) | Contrato de la lectura de check-ins. |
+| Interface | CheckInQuestionQueryService | handle(GetCheckInQuestionByIdQuery) | Contrato de la lectura del catálogo de preguntas. |
 
 #### 2.6.3.2. Interface Layer
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal |
-|---|---|---|---|
-| Controller | CheckInsController | REST API para interacciones. | Endpoints GET/POST para responder el check-in diario. |
-| Controller | PreferencesController | REST API para configuración. | Endpoints PUT/POST para horarios, pausas y modo simplificado. |
-| Assembler | Assemblers | Transformadores de datos. | Mapear los JSON a Commands/Queries del dominio. |
+Clases que exponen el bounded context hacia el exterior y traducen las peticiones entrantes al lenguaje del dominio.
 
-<br>
+**Sub-capa REST: Controllers**
+
+| Nombre | Endpoints | Descripción |
+| --- | --- | --- |
+| CheckInsController | GET /api/v1/check-ins/today?olderAdultId={olderAdultId}, GET /api/v1/check-ins?olderAdultId={olderAdultId}&from={fromDate}&to={toDate}, POST /api/v1/check-ins/{checkInId}/answer | Punto de entrada de la consulta del check-in del día, del historial y del registro de la respuesta. La respuesta responde 409 Conflict si el check-in ya no está pendiente o su plazo venció. |
+| CheckInPreferencesController | GET /api/v1/check-in-preferences?olderAdultId={olderAdultId}, PUT /api/v1/check-in-preferences/{preferencesId}/reminder-time, POST /api/v1/check-in-preferences/{preferencesId}/daily-pause, DELETE /api/v1/check-in-preferences/{preferencesId}/daily-pause, PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode | Punto de entrada de la consulta y modificación de las preferencias. El cambio de hora responde 400 Bad Request con el rango válido si la hora está fuera de él. La pausa se activa con POST y se desactiva con DELETE; ambas responden 409 Conflict si las preguntas ya estaban en el estado solicitado. |
+
+Las consultas de check-ins solo proceden para el propio adulto mayor o para un familiar con vínculo activo; las preferencias y la respuesta, solo para el propio adulto mayor. En otro caso se responde 403 Forbidden.
+
+**Sub-capa REST: Resources**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| CheckInResource | id, olderAdultId, checkDate, questionText, scheduledFor, deadlineAt, status, paused, mood, positiveActivity, answeredAt | Representación de un check-in junto con el texto de su pregunta y la indicación de si las preguntas están pausadas, con la que el familiar sabe que el adulto mayor optó por no participar. |
+| AnswerCheckInResource | mood, positiveActivity | Datos de entrada de la respuesta del adulto mayor. |
+| CheckInPreferencesResource | id, olderAdultId, reminderTime, timeLimitMinutes, simplifiedMode, pausedToday | Representación de las preferencias del check-in. |
+| ScheduleCheckInResource | reminderTime | Datos de entrada para cambiar la hora del check-in. |
+| UpdateSimplifiedModeResource | enabled | Datos de entrada para activar o desactivar el modo simplificado. |
+
+**Sub-capa REST: Transform**
+
+| Nombre | Descripción |
+| --- | --- |
+| CheckInResourceFromEntityAssembler | Combina el aggregate `CheckIn` con el texto de su pregunta y el estado de la pausa en su representación REST. |
+| CheckInPreferencesResourceFromEntityAssembler | Convierte el aggregate `CheckInPreferences` en su representación REST. |
+| AnswerCheckInCommandFromResourceAssembler | Combina la respuesta con el check-in y el adulto mayor autenticado para construir el comando. |
+| ScheduleCheckInCommandFromResourceAssembler | Convierte la petición de cambio de hora en su comando. |
+| SimplifiedModeCommandFromResourceAssembler | Convierte la petición en el comando de activación o de desactivación, según el valor recibido. |
+
+**Sub-capa Scheduling: Jobs**
+
+| Nombre | Descripción |
+| --- | --- |
+| CheckInLifecycleScheduler | Tareas periódicas del ciclo del check-in. Cada hora consulta las preferencias con `GetAllCheckInPreferencesQuery` y envía un `OpenCheckInCommand` por adulto mayor, frecuencia suficiente porque el horario más temprano permitido es a las 06:00. Cada minuto consulta los check-ins por avisar y los vencidos, y envía un `PromptCheckInCommand` o un `ExpireCheckInCommand` por cada uno. |
+
+**Sub-capa ACL**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | DailyCheckInContextFacade | fetchMoodsByDateRange(olderAdultId, fromDate, toDate): Map\<LocalDate, String\> | Contrato que el contexto ofrece a los demás. Wellbeing Monitoring lo usa para obtener los estados de ánimo de varios días consecutivos al evaluar patrones. Devuelve tipos estándar de Java para no exponer clases del dominio. |
 
 #### 2.6.3.3. Application Layer
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal |
-|---|---|---|---|
-| Service | DailyCheckInCommandService | Ejecutor de casos de uso de escritura. | Valida invariantes, modifica los agregados `CheckIn` o `CheckInPreferences` y publica los eventos de dominio. |
-| Service | DailyCheckInQueryService | Ejecutor de casos de uso de lectura. | Devuelve los recursos de lectura sin alterar estado. |
+Clases que orquestan los flujos del contexto, coordinando los aggregates, los repositorios, el servicio de selección de preguntas y los servicios de otros contextos.
 
-<br>
+**Sub-capa Internal: CommandServices (Command Handlers)**
 
-#### 2.6.3.4 Infrastructure Layer
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInPreferencesCommandServiceImpl | Crea las preferencias sin duplicarlas si el adulto mayor ya tiene una configuración, cambia la hora y gestiona el modo simplificado. Activa la pausa del día en curso, calculado en la zona horaria del adulto mayor. Al reactivar las preguntas: si el día en curso está pausado, levanta la pausa y, si el plazo del check-in ya venció, le otorga un nuevo plazo de la misma duración desde la reactivación, sin superar el fin del día local; si no está pausado pero el día anterior terminó pausado, registra la reanudación por el inicio del nuevo día; en otro caso rechaza la operación. Es la única operación que modifica ambos aggregates en una misma transacción, porque la decisión del adulto mayor debe surtir efecto de inmediato. Tras persistir, publica los eventos acumulados. | Implementa `CheckInPreferencesCommandService`; usa `CheckInPreferencesRepository`, `CheckInRepository`, `ExternalIamService` y `DomainEventPublisher`. |
+| CheckInCommandServiceImpl | Abre el check-in del día en curso del adulto mayor si aún no existe: elige la pregunta con `QuestionSelectionService`, calcula la ventana con sus preferencias y, si el día anterior terminó pausado, envía `ResumeDailyCheckInCommand`. Avisa un check-in pendiente solo si sus preguntas no están pausadas; si se reactivan después del horario, el aviso se envía en la siguiente ejecución. Registra respuestas verificando que provengan del propio adulto mayor. Al vencer el plazo, marca el check-in como no respondido; si las preguntas están pausadas, lo deja pendiente y lo marca como omitido recién cuando termina el día local. | Implementa `CheckInCommandService`; usa `CheckInRepository`, `CheckInPreferencesRepository`, `CheckInQuestionRepository`, `QuestionSelectionService`, `ExternalIamService` y `DomainEventPublisher`. |
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal |
-|---|---|---|---|
-| Repository | CheckInRepository | Implementación persistencia. | Persistir las interacciones diarias en la BD. |
-| Repository | CheckInPreferencesRepository | Implementación persistencia. | Persistir horarios, pausas y flags de UI en la BD. |
+**Sub-capa Internal: QueryServices**
 
-<br>
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInPreferencesQueryServiceImpl | Resuelve la consulta de preferencias del propio adulto mayor y la de todas las preferencias para la apertura diaria. | Implementa `CheckInPreferencesQueryService`; usa `CheckInPreferencesRepository`. |
+| CheckInQueryServiceImpl | Resuelve el check-in del día, calculado en la zona horaria del adulto mayor, junto con el estado de la pausa, y el historial, previa verificación de que el solicitante sea el adulto mayor o un familiar con vínculo activo. También resuelve los check-ins por avisar y los vencidos para las tareas periódicas. | Implementa `CheckInQueryService`; usa `CheckInRepository`, `CheckInPreferencesRepository`, `ExternalIamService` y `ExternalCareCircleService`. |
+| CheckInQuestionQueryServiceImpl | Resuelve la consulta de una pregunta del catálogo. | Implementa `CheckInQuestionQueryService`; usa `CheckInQuestionRepository`. |
+
+**Sub-capa Internal: Event Handlers**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| OlderAdultRegisteredEventHandler | Crea las preferencias del check-in de un adulto mayor recién registrado. Se ejecuta de forma síncrona dentro de la transacción del registro. | Escucha `OlderAdultRegistered` de Identity & Access; envía `InitializeCheckInPreferencesCommand`. |
+| ApplicationReadyEventHandler | Carga el catálogo inicial de preguntas al iniciar la aplicación, solo si el catálogo está vacío. | Escucha el evento de arranque de Spring; usa `CheckInQuestionRepository`. |
+
+**Sub-capa Internal: Outbound Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Class | ExternalIamService | fetchTimeZone(olderAdultId) | Consume `IamContextFacade` y devuelve la zona horaria del adulto mayor como `ZoneId`. |
+| Class | ExternalCareCircleService | isActiveRelativeOf(relativeId, olderAdultId) | Consume `CareCircleContextFacade` para verificar que un familiar esté vinculado al adulto mayor. |
+
+**Sub-capa ACL**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| DailyCheckInContextFacadeImpl | Resuelve los estados de ánimo de un rango de fechas a partir de los check-ins respondidos. | Implementa `DailyCheckInContextFacade`; usa `CheckInRepository`. |
+
+#### 2.6.3.4. Infrastructure Layer
+
+Clases que resuelven el acceso a la base de datos MySQL, implementando las abstracciones definidas en la capa Domain.
+
+**Sub-capa Persistence: JPA Entities**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInPreferencesPersistenceEntity | Representa una fila de la tabla `check_in_preferences`. | Usada por `CheckInPreferencesJpaRepository` y `CheckInPreferencesPersistenceMapper`. |
+| QuestionPausePersistenceEntity | Representa una fila de la tabla `question_pauses`. | Usada por `QuestionPauseJpaRepository` y `CheckInPreferencesPersistenceMapper`. |
+| CheckInPersistenceEntity | Representa una fila de la tabla `check_ins`. | Usada por `CheckInJpaRepository` y `CheckInPersistenceMapper`. |
+| CheckInQuestionPersistenceEntity | Representa una fila de la tabla `check_in_questions`. | Usada por `CheckInQuestionJpaRepository` y `CheckInQuestionPersistenceMapper`. |
+
+**Sub-capa Persistence: JPA Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInPreferencesJpaRepository | Interfaz de Spring Data JPA con la consulta por adulto mayor, resuelta sobre el índice único de `older_adult_id`. | Extiende `JpaRepository`; usada por `CheckInPreferencesRepositoryImpl`. |
+| QuestionPauseJpaRepository | Interfaz de Spring Data JPA con la consulta de la pausa más reciente de un adulto mayor, resuelta sobre el índice único `(older_adult_id, paused_date)`. | Extiende `JpaRepository`; usada por `CheckInPreferencesRepositoryImpl`. |
+| CheckInJpaRepository | Interfaz de Spring Data JPA. Las consultas por adulto mayor y fecha o rango de fechas usan el índice único `(older_adult_id, check_date)`. Las de check-ins por avisar o vencidos usan el índice `(status, deadline_at)`; como cada adulto mayor tiene a lo sumo un check-in pendiente, el conjunto que recorren es pequeño. | Extiende `JpaRepository`; usada por `CheckInRepositoryImpl`. |
+| CheckInQuestionJpaRepository | Interfaz de Spring Data JPA con la consulta de preguntas activas. | Extiende `JpaRepository`; usada por `CheckInQuestionRepositoryImpl`. |
+
+**Sub-capa Persistence: Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInPreferencesRepositoryImpl | Persiste y recupera el aggregate `CheckInPreferences`, componiéndolo con su pausa más reciente. Inserta una fila en `question_pauses` al activarse la pausa y la elimina cuando el adulto mayor reactiva las preguntas el mismo día. | Implementa `CheckInPreferencesRepository`; usa `CheckInPreferencesJpaRepository`, `QuestionPauseJpaRepository` y `CheckInPreferencesPersistenceMapper`. |
+| CheckInRepositoryImpl | Persiste y recupera el aggregate `CheckIn`. Si dos ejecuciones intentan abrir el mismo día, traduce la violación del índice único en una excepción de dominio, de modo que la apertura sea idempotente. | Implementa `CheckInRepository`; usa `CheckInJpaRepository` y `CheckInPersistenceMapper`. |
+| CheckInQuestionRepositoryImpl | Recupera el catálogo de preguntas y lo persiste durante la carga inicial. | Implementa `CheckInQuestionRepository`; usa `CheckInQuestionJpaRepository` y `CheckInQuestionPersistenceMapper`. |
+
+**Sub-capa Persistence: Mappers**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInPreferencesPersistenceMapper | Traduce entre el aggregate `CheckInPreferences`, con su pausa más reciente, y sus entidades de persistencia. | Usado por `CheckInPreferencesRepositoryImpl`. |
+| CheckInPersistenceMapper | Traduce entre el aggregate `CheckIn` y `CheckInPersistenceEntity`. | Usado por `CheckInRepositoryImpl`. |
+| CheckInQuestionPersistenceMapper | Traduce entre la entidad `CheckInQuestion` y `CheckInQuestionPersistenceEntity`. | Usado por `CheckInQuestionRepositoryImpl`. |
 
 #### 2.6.3.5. Bounded Context Software Architecture Component Level Diagrams
 
@@ -4751,145 +5246,139 @@ El diseño de base de datos transaccional para Daily Check-in (Imagen 46) incluy
 
 ### 2.6.4. Bounded Context: Wellbeing Monitoring
 
-El bounded context **Wellbeing Monitoring** es responsable de interpretar los check-ins registrados por el módulo **Daily Check-in** para producir el estado de bienestar del adulto mayor: registra cada estado de ánimo derivado de un check-in respondido (`WellbeingEntry`), genera el resumen diario que ve el cuidador a distancia (`StatusSummary`), detecta patrones sostenidos de malestar o de mejora en la tendencia (`WellbeingPattern`) y registra pequeños logros (`SmallWin`) cuando corresponde. A diferencia de otros contextos, no mantiene un agregado único: cada uno de estos cuatro conceptos es una raíz de agregado independiente, alineada 1 a 1 con las tablas `wellbeing_entries`, `status_summaries`, `small_wins` y `wellbeing_patterns` del diseño de base de datos oficial del equipo. El diseño táctico presentado a continuación está alineado directamente con los eventos de dominio levantados en la sesión de EventStorming del bounded context (ver imagen).
+El bounded context Wellbeing Monitoring interpreta las respuestas del check-in diario para que el familiar a distancia sepa cuándo conviene actuar y qué vale la pena celebrar. Evalúa cada check-in respondido junto con los días anteriores para detectar un malestar sostenido, emite una sugerencia de acción cuando lo detecta y registra pequeñas victorias cuando el adulto mayor tiene un buen día o comparte una actividad positiva. También permite a los familiares descartar las sugerencias que ya atendieron. Es un contexto de soporte: no recolecta datos propios, sino que transforma los datos de Daily Check-in en información útil para el familiar.
 
-<br>
+Su modelo se organiza en un único aggregate, `WellbeingInsight`, que reúne la interpretación del bienestar de un adulto mayor: los patrones de malestar, las sugerencias y las pequeñas victorias. Su identidad es la del adulto mayor y no requiere una tabla propia. Como el historial crece con cada día evaluado, el aggregate carga solo los elementos que intervienen en sus reglas: el patrón de malestar más reciente, para decidir si una racha continúa o comienza, y las sugerencias activas, para que un patrón no genere más de una sugerencia.
+
+El contexto reacciona al evento `CheckInAnswered` de Daily Check-in, del cual obtiene el estado de ánimo y la actividad del día, y consulta a ese mismo contexto los estados de ánimo de los días anteriores. Consulta a Care Circle la verificación de vínculos, para que solo los familiares vinculados vean y descarten sugerencias, y a Identity & Access la zona horaria del adulto mayor, para resolver los periodos consultados.
 
 #### 2.6.4.1. Domain Layer
 
-En esta capa se representan las reglas de negocio propias del bienestar del adulto mayor, sin dependencia de frameworks de persistencia, red ni interfaz.
+En esta capa se representan las reglas que convierten las respuestas diarias en señales de bienestar, sin dependencia de frameworks de persistencia, red ni interfaz.
 
 **Sub-capa Model: Aggregates**
 
-`WellbeingEntry` (Aggregate Root): representa el registro del estado de ánimo del adulto mayor derivado de un check-in respondido.
+`WellbeingInsight` (Aggregate Root): representa la interpretación del bienestar de un adulto mayor. Controla la detección de patrones de malestar, la emisión y el descarte de sugerencias y el registro de pequeñas victorias.
 
 | Atributo | Tipo | Visibilidad | Descripción |
 | --- | --- | --- | --- |
-| id | WellbeingEntryId | private | Identificador único del registro de bienestar. |
-| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el registro. |
-| checkInId | CheckInId | private | Identificador del check-in del cual se derivó este registro. |
-| mood | MoodLevel | private | Nivel de ánimo reportado en el check-in. |
-| moodScore | MoodScore | private | Puntaje numérico asociado al nivel de ánimo reportado. |
-| recordedAt | LocalDateTime | private | Fecha y hora en que se registró el estado de ánimo. |
+| olderAdultId | OlderAdultId | private | Adulto mayor al que corresponde la interpretación; es la identidad del aggregate. |
+| latestDiscomfortPattern | WellbeingPattern | private | Patrón de malestar más reciente; es nulo si nunca se detectó uno. |
+| activeSuggestions | List\<WellbeingSuggestion\> | private | Sugerencias vigentes, aún no descartadas. |
+| newSmallWins | List\<SmallWin\> | private | Pequeñas victorias registradas en la operación en curso; las anteriores no se cargan porque ninguna regla depende de ellas. |
 
 | Método | Visibilidad | Descripción |
 | --- | --- | --- |
-| recordFrom(checkInId, olderAdultId, mood, moodScore) | public (static) | Crea un nuevo registro de bienestar a partir de un check-in respondido. |
-| moodValue() | public | Devuelve el nivel de ánimo registrado. |
+| evaluate(checkInId, checkDate, mood, positiveActivity, recentMoods, evaluatedAt) | public | Evalúa el día respondido junto con los anteriores. Si se completan tres días consecutivos de malestar, detecta un patrón y registra el evento `DiscomfortPatternDetected`; si la racha ya tenía un patrón, lo extiende sin detectar uno nuevo. Si el día muestra bienestar positivo, registra el evento `WellbeingTrendImproved`. |
+| issueSuggestion(patternId, message, issuedAt) | public | Emite una sugerencia de acción para un patrón; rechaza una segunda sugerencia para el mismo patrón. Registra el evento `WellbeingSuggestionIssued`. |
+| recordSmallWin(checkInId, description, recordedAt) | public | Registra una pequeña victoria asociada a un check-in y el evento `SmallWinRecorded`. |
+| dismissSuggestion(suggestionId, relativeId, dismissedAt) | public | Descarta una sugerencia activa para todos los familiares y registra el evento `WellbeingSuggestionDismissed`. |
+| discomfortStreakEndingOn(date, recentMoods) | private | Cuenta los días consecutivos con ánimo bajo o muy bajo que terminan en la fecha indicada; un día sin respuesta interrumpe la racha. |
+| isPositiveDay(mood, positiveActivity) | private | Indica si el día muestra bienestar positivo: ánimo bueno o muy bueno, o una actividad positiva informada. |
 
-`WellbeingPattern` (Aggregate Root): representa un patrón detectado en el historial de check-ins de un adulto mayor, de malestar sostenido o de mejora en la tendencia de bienestar.
+**Sub-capa Model: Entities**
+
+`WellbeingPattern`: representa un periodo sostenido de malestar del adulto mayor. Pertenece al aggregate `WellbeingInsight`.
 
 | Atributo | Tipo | Visibilidad | Descripción |
 | --- | --- | --- | --- |
-| id | WellbeingPatternId | private | Identificador único del patrón detectado. |
-| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el patrón. |
-| type | PatternType | private | Tipo de patrón detectado: malestar sostenido o mejora. |
-| consecutiveDays | Integer | private | Cantidad de días consecutivos que sostienen el patrón. |
-| startDate | LocalDate | private | Fecha de inicio del periodo evaluado. |
-| endDate | LocalDate | private | Fecha de fin del periodo evaluado. |
-| detectedAt | LocalDateTime | private | Fecha y hora en que se detectó el patrón. |
+| id | WellbeingPatternId | private | Identificador único del patrón. |
+| type | PatternType | private | Tipo de patrón detectado. |
+| consecutiveDays | int | private | Cantidad de días consecutivos que sostienen el patrón. |
+| startDate | LocalDate | private | Primer día del patrón, en la zona horaria del adulto mayor. |
+| endDate | LocalDate | private | Último día del patrón, en la zona horaria del adulto mayor. |
+| detectedAt | Instant | private | Instante en que se detectó el patrón, en UTC. |
 
 | Método | Visibilidad | Descripción |
 | --- | --- | --- |
-| detect(olderAdultId, type, consecutiveDays, startDate, endDate) | public (static) | Crea un nuevo patrón a partir del análisis del historial de check-ins. |
-| isDiscomfort() | public | Indica si el patrón corresponde a malestar sostenido. |
-| isImprovement() | public | Indica si el patrón corresponde a una mejora de tendencia. |
+| extendTo(endDate) | public | Prolonga el patrón cuando la racha continúa al día siguiente y actualiza la cantidad de días. |
+| continuesOn(date) | public | Indica si la fecha indicada es el día siguiente al último día del patrón. |
 
-`SmallWin` (Aggregate Root): representa un pequeño logro del adulto mayor, generado a partir de una mejora detectada en su tendencia de bienestar y compartido con el cuidador a distancia.
+`WellbeingSuggestion`: representa una recomendación dirigida a los familiares, como llamar o visitar al adulto mayor, emitida a partir de un patrón de malestar. Pertenece al aggregate `WellbeingInsight`.
 
 | Atributo | Tipo | Visibilidad | Descripción |
 | --- | --- | --- | --- |
-| id | SmallWinId | private | Identificador único del pequeño logro. |
-| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el logro. |
-| checkInId | CheckInId | private | Identificador del check-in del cual se derivó el logro, cuando aplica. |
-| description | SmallWinDescription | private | Descripción del pequeño logro. |
-| recordedAt | LocalDateTime | private | Fecha y hora en que se registró el logro. |
+| id | WellbeingSuggestionId | private | Identificador único de la sugerencia. |
+| patternId | WellbeingPatternId | private | Patrón que originó la sugerencia. |
+| message | SuggestionMessage | private | Texto de la recomendación. |
+| status | SuggestionStatus | private | Estado de la sugerencia: activa o descartada. |
+| issuedAt | Instant | private | Instante de emisión, en UTC. |
+| dismissedBy | RelativeId | private | Familiar que descartó la sugerencia; es nulo mientras esté activa. |
+| dismissedAt | Instant | private | Instante del descarte; es nulo mientras esté activa. |
 
 | Método | Visibilidad | Descripción |
 | --- | --- | --- |
-| recordFrom(olderAdultId, checkInId, description) | public (static) | Crea un nuevo pequeño logro a partir de una mejora detectada. |
+| dismiss(relativeId, dismissedAt) | public | Marca la sugerencia como descartada. |
+| isActive() | public | Indica si la sugerencia sigue vigente. |
 
-`StatusSummary` (Aggregate Root): representa el resumen diario del estado del adulto mayor, mostrado al cuidador a distancia como una vista consolidada del día.
+`SmallWin`: representa un buen día o una actividad positiva del adulto mayor, que se muestra a los familiares para reforzar lo positivo. Pertenece al aggregate `WellbeingInsight`.
 
 | Atributo | Tipo | Visibilidad | Descripción |
 | --- | --- | --- | --- |
-| id | StatusSummaryId | private | Identificador único del resumen. |
-| olderAdultId | UserId | private | Identificador del adulto mayor al que pertenece el resumen. |
-| summaryDate | LocalDate | private | Fecha a la que corresponde el resumen. |
-| mood | MoodLevel | private | Estado de ánimo predominante del día resumido. |
-| hasAnswered | Boolean | private | Indica si el adulto mayor respondió su check-in ese día. |
-| highlight | String | private | Dato destacado del día, mostrado al cuidador a distancia. |
-| generatedAt | LocalDateTime | private | Fecha y hora en que se generó el resumen. |
-
-| Método | Visibilidad | Descripción |
-| --- | --- | --- |
-| generateFor(olderAdultId, summaryDate, mood, hasAnswered, highlight) | public (static) | Genera o actualiza el resumen diario de un adulto mayor. |
+| id | SmallWinId | private | Identificador único de la pequeña victoria. |
+| checkInId | CheckInId | private | Check-in del cual proviene; cada check-in genera a lo sumo una pequeña victoria. |
+| description | SmallWinDescription | private | Actividad positiva informada o, si no la hubo, una descripción del buen día. |
+| recordedAt | Instant | private | Instante del registro, en UTC. |
 
 **Sub-capa Model: Value Objects**
 
+Se implementan como records inmutables que validan su contenido al construirse. Los límites de longitud coinciden con las columnas de la base de datos.
+
 | Nombre | Atributos | Descripción |
 | --- | --- | --- |
-| WellbeingEntryId | value: UUID | Identidad inmutable de un registro de bienestar. |
-| WellbeingPatternId | value: UUID | Identidad inmutable de un patrón detectado. |
-| SmallWinId | value: UUID | Identidad inmutable de un pequeño logro. |
-| StatusSummaryId | value: UUID | Identidad inmutable de un resumen diario. |
-| MoodScore | value: Integer | Puntaje numérico de bienestar, validado dentro de un rango permitido. |
-| SmallWinDescription | value: String | Descripción del pequeño logro, con validación de longitud máxima. |
+| WellbeingPatternId, WellbeingSuggestionId, SmallWinId | value: UUID | Identidades inmutables de las entities del contexto. |
+| OlderAdultId | value: UUID | Referencia por identidad a una cuenta de adulto mayor de Identity & Access. |
+| RelativeId | value: UUID | Referencia por identidad a una cuenta de familiar a distancia de Identity & Access. |
+| CheckInId | value: UUID | Referencia por identidad a un check-in de Daily Check-in. |
+| SuggestionMessage | value: String | Texto de la sugerencia, obligatorio y de máximo 300 caracteres. |
+| SmallWinDescription | value: String | Descripción de la pequeña victoria, obligatoria y de máximo 200 caracteres. |
 
 **Sub-capa Model: Enumerations**
 
 | Nombre | Valores | Descripción |
 | --- | --- | --- |
-| MoodLevel | VERY_LOW, LOW, NEUTRAL, GOOD, VERY_GOOD | Nivel de ánimo reportado en un check-in. |
-| PatternType | SUSTAINED_DISCOMFORT, IMPROVEMENT | Tipo de patrón detectado en el historial de check-ins de un adulto mayor. |
+| MoodLevel | VERY_LOW, LOW, NEUTRAL, GOOD, VERY_GOOD | Estado de ánimo informado en un check-in, traducido desde los valores que publica Daily Check-in. |
+| PatternType | SUSTAINED_DISCOMFORT | Tipo de patrón detectado en el historial del adulto mayor. |
+| SuggestionStatus | ACTIVE, DISMISSED | Estado de una sugerencia. |
 
 **Sub-capa Model: Commands**
 
-| Nombre | Descripción |
-| --- | --- |
-| RecordWellbeingEntryCommand | Intención de registrar el estado de ánimo derivado de un check-in respondido. |
-| DetectWellbeingPatternCommand | Intención de analizar el historial de check-ins de un adulto mayor y determinar si existe un patrón de malestar sostenido o de mejora. |
-| RecordSmallWinCommand | Intención de registrar un pequeño logro a partir de una mejora detectada. |
-| GenerateStatusSummaryCommand | Intención de generar o actualizar el resumen diario del estado de un adulto mayor. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| EvaluateWellbeingPatternCommand | olderAdultId, checkInId, checkDate, mood, positiveActivity | Intención de evaluar el bienestar a partir de un check-in respondido. |
+| IssueWellbeingSuggestionCommand | olderAdultId, patternId | Intención de emitir una sugerencia de acción a partir de un patrón de malestar. |
+| RecordSmallWinCommand | olderAdultId, checkInId, positiveActivity | Intención de registrar una pequeña victoria a partir de un día positivo. |
+| DismissWellbeingSuggestionCommand | olderAdultId, suggestionId, relativeId | Intención de un familiar de descartar una sugerencia. |
 
 **Sub-capa Model: Queries**
 
-| Nombre | Descripción |
-| --- | --- |
-| GetWellbeingEntriesByOlderAdultIdQuery | Consulta del historial de registros de bienestar de un adulto mayor. |
-| GetWellbeingPatternsByOlderAdultIdQuery | Consulta de los patrones detectados para un adulto mayor. |
-| GetSmallWinsByOlderAdultIdQuery | Consulta de los pequeños logros registrados para un adulto mayor. |
-| GetStatusSummaryByDateQuery | Consulta del resumen diario de un adulto mayor en una fecha específica. |
-| GetLatestStatusSummaryQuery | Consulta del resumen diario más reciente de un adulto mayor. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| GetActiveWellbeingSuggestionsQuery | olderAdultId, requesterId | Consulta de las sugerencias vigentes de un adulto mayor. |
+| GetSmallWinsByPeriodQuery | olderAdultId, requesterId, fromDate, toDate | Consulta de las pequeñas victorias de un periodo, ordenadas por fecha. |
 
 **Sub-capa Model: Events**
 
-| Nombre | Descripción |
-| --- | --- |
-| WellbeingEntryRecorded | Se registró el estado de ánimo derivado de un check-in respondido. |
-| SustainedDiscomfortPatternDetected | Se detectó un patrón de malestar sostenido en el historial de check-ins. |
-| WellbeingImprovementPatternDetected | Se detectó una mejora en la tendencia de bienestar. |
-| SmallWinRecorded | Se registró un pequeño logro del adulto mayor. |
-| StatusSummaryGenerated | Se generó o actualizó el resumen diario del estado de un adulto mayor. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| DiscomfortPatternDetected | olderAdultId, patternId, consecutiveDays, startDate, endDate, occurredAt | Se detectó un malestar sostenido durante varios días consecutivos. |
+| WellbeingTrendImproved | olderAdultId, checkInId, checkDate, positiveActivity, occurredAt | El día evaluado mostró bienestar positivo. |
+| WellbeingSuggestionIssued | olderAdultId, suggestionId, patternId, occurredAt | Se emitió una sugerencia de acción para los familiares. |
+| SmallWinRecorded | olderAdultId, smallWinId, checkInId, occurredAt | Se registró una pequeña victoria. |
+| WellbeingSuggestionDismissed | olderAdultId, suggestionId, relativeId, occurredAt | Un familiar descartó una sugerencia. |
 
 **Sub-capa Repositories**
 
 | Tipo | Nombre | Métodos principales | Descripción |
 | --- | --- | --- | --- |
-| Interface | IWellbeingEntryRepository | save(entry), findById(id), findByOlderAdultId(olderAdultId), findByCheckInId(checkInId) | Contrato de persistencia del aggregate `WellbeingEntry`. Se implementa en Infrastructure. |
-| Interface | IWellbeingPatternRepository | save(pattern), findById(id), findByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `WellbeingPattern`. |
-| Interface | ISmallWinRepository | save(smallWin), findById(id), findByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `SmallWin`. |
-| Interface | IStatusSummaryRepository | save(summary), findByOlderAdultIdAndDate(olderAdultId, date), findLatestByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `StatusSummary`. |
+| Interface | WellbeingInsightRepository | findByOlderAdultId(olderAdultId), save(insight), findActiveSuggestionsByOlderAdultId(olderAdultId), findSmallWinsByOlderAdultIdBetween(olderAdultId, from, to) | Contrato de persistencia del aggregate `WellbeingInsight` y de las consultas de sugerencias y pequeñas victorias. Se implementa en Infrastructure. |
 
 **Sub-capa Services**
 
 | Tipo | Nombre | Métodos principales | Descripción |
 | --- | --- | --- | --- |
-| Interface | IWellbeingCommandService | handle(RecordWellbeingEntryCommand), handle(DetectWellbeingPatternCommand), handle(RecordSmallWinCommand), handle(GenerateStatusSummaryCommand) | Contrato de las operaciones de escritura del contexto. |
-| Interface | IWellbeingQueryService | handle(GetWellbeingEntriesByOlderAdultIdQuery), handle(GetWellbeingPatternsByOlderAdultIdQuery), handle(GetSmallWinsByOlderAdultIdQuery), handle(GetStatusSummaryByDateQuery), handle(GetLatestStatusSummaryQuery) | Contrato de las operaciones de lectura del contexto. |
-| Interface | IDomainEventPublisher | publish(event) | Abstracción para publicar los eventos de dominio hacia los demás módulos, compartida con los demás bounded contexts. |
-
-<br>
+| Interface | WellbeingInsightCommandService | handle(EvaluateWellbeingPatternCommand), handle(IssueWellbeingSuggestionCommand), handle(RecordSmallWinCommand), handle(DismissWellbeingSuggestionCommand) | Contrato de las operaciones de escritura del contexto. |
+| Interface | WellbeingInsightQueryService | handle(GetActiveWellbeingSuggestionsQuery), handle(GetSmallWinsByPeriodQuery) | Contrato de las operaciones de lectura del contexto. |
 
 #### 2.6.4.2. Interface Layer
 
@@ -4899,83 +5388,88 @@ Clases que exponen el bounded context hacia el exterior y traducen las peticione
 
 | Nombre | Endpoints | Descripción |
 | --- | --- | --- |
-| WellbeingEntriesController | GET /wellbeing-entries?olderAdultId={id} | Punto de entrada de consulta del historial de registros de bienestar de un adulto mayor. |
-| WellbeingPatternsController | GET /wellbeing-patterns?olderAdultId={id} | Punto de entrada de consulta de los patrones detectados. |
-| SmallWinsController | GET /small-wins?olderAdultId={id}, POST /small-wins | Punto de entrada de consulta y registro manual de pequeños logros. |
-| StatusSummariesController | GET /status-summaries/latest?olderAdultId={id}, GET /status-summaries?olderAdultId={id}&date={date} | Punto de entrada de consulta del resumen diario del adulto mayor. |
+| WellbeingSuggestionsController | GET /api/v1/wellbeing-suggestions?olderAdultId={olderAdultId}, POST /api/v1/wellbeing-suggestions/{suggestionId}/dismiss | Punto de entrada de la consulta de sugerencias vigentes y de su descarte. El descarte responde 409 Conflict si la sugerencia ya no está activa. Ambas operaciones están reservadas a familiares con vínculo activo. |
+| SmallWinsController | GET /api/v1/small-wins?olderAdultId={olderAdultId}&from={fromDate}&to={toDate} | Punto de entrada de la consulta de pequeñas victorias de un periodo, disponible para el adulto mayor y para sus familiares vinculados. |
+
+Las operaciones responden 403 Forbidden cuando el usuario autenticado no tiene el acceso indicado.
 
 **Sub-capa REST: Resources**
 
-| Nombre | Descripción |
-| --- | --- |
-| WellbeingEntryResource | Representación pública de un registro de bienestar. |
-| WellbeingPatternResource | Representación pública de un patrón detectado. |
-| SmallWinResource | Representación pública de un pequeño logro. |
-| RecordSmallWinResource | Datos de entrada para registrar manualmente un pequeño logro. |
-| StatusSummaryResource | Representación pública del resumen diario de un adulto mayor. |
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| WellbeingSuggestionResource | id, olderAdultId, patternId, message, status, issuedAt | Representación de una sugerencia de acción. |
+| SmallWinResource | id, olderAdultId, checkInId, description, recordedAt | Representación de una pequeña victoria. |
 
 **Sub-capa REST: Transform**
 
 | Nombre | Descripción |
 | --- | --- |
-| WellbeingEntryResourceFromEntityAssembler | Convierte el aggregate `WellbeingEntry` en su representación REST. |
-| WellbeingPatternResourceFromEntityAssembler | Convierte el aggregate `WellbeingPattern` en su representación REST. |
-| SmallWinResourceFromEntityAssembler | Convierte el aggregate `SmallWin` en su representación REST. |
-| RecordSmallWinCommandFromResourceAssembler | Convierte la petición de registro manual en el comando `RecordSmallWinCommand`. |
-| StatusSummaryResourceFromEntityAssembler | Convierte el aggregate `StatusSummary` en su representación REST. |
-
-**Sub-capa ACL: Consumers**
-
-| Nombre | Descripción |
-| --- | --- |
-| CheckInAnsweredConsumer | Escucha, dentro del monolito modular, el evento `CheckInAnswered` publicado por Daily Check-in y desencadena `RecordWellbeingEntryCommand`, `DetectWellbeingPatternCommand` y `GenerateStatusSummaryCommand`. |
-
-<br>
+| WellbeingSuggestionResourceFromEntityAssembler | Convierte la entidad `WellbeingSuggestion` en su representación REST. |
+| SmallWinResourceFromEntityAssembler | Convierte la entidad `SmallWin` en su representación REST. |
 
 #### 2.6.4.3. Application Layer
 
-Clases que orquestan los flujos del contexto, coordinando los cuatro aggregates y sus repositorios.
+Clases que orquestan los flujos del contexto, coordinando el aggregate, su repositorio y los servicios de otros contextos.
 
-**Sub-capa Internal: CommandServices**
+**Sub-capa Internal: CommandServices (Command Handlers)**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| WellbeingCommandService | Ejecuta los cuatro comandos del contexto: registra el estado de ánimo derivado de un check-in, analiza el historial para detectar patrones, registra pequeños logros y genera el resumen diario, publicando los eventos de dominio correspondientes en cada caso. | Implementa `IWellbeingCommandService`; usa `IWellbeingEntryRepository`, `IWellbeingPatternRepository`, `ISmallWinRepository`, `IStatusSummaryRepository` e `IDomainEventPublisher`. |
+| WellbeingInsightCommandServiceImpl | Para evaluar un check-in, obtiene los estados de ánimo de los siete días previos e invoca al aggregate. Para emitir una sugerencia, redacta el mensaje con la cantidad de días del patrón. Para registrar una pequeña victoria, usa la actividad positiva informada o, si no la hubo, una descripción del buen día. Para descartar una sugerencia, verifica que el familiar tenga un vínculo activo con el adulto mayor. Tras persistir, publica los eventos acumulados. | Implementa `WellbeingInsightCommandService`; usa `WellbeingInsightRepository`, `ExternalDailyCheckInService`, `ExternalCareCircleService` y `DomainEventPublisher`. |
 
 **Sub-capa Internal: QueryServices**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| WellbeingQueryService | Resuelve las consultas de registros de bienestar, patrones, pequeños logros y resúmenes diarios, sin modificar el estado. | Implementa `IWellbeingQueryService`; usa los cuatro repositorios del contexto. |
+| WellbeingInsightQueryServiceImpl | Resuelve las sugerencias vigentes y las pequeñas victorias de un periodo, convirtiendo las fechas a instantes según la zona horaria del adulto mayor, previa verificación de acceso del solicitante. | Implementa `WellbeingInsightQueryService`; usa `WellbeingInsightRepository`, `ExternalIamService` y `ExternalCareCircleService`. |
 
-<br>
+**Sub-capa Internal: Event Handlers**
 
-#### 2.6.4.4 Infrastructure Layer
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInAnsweredEventHandler | Inicia la evaluación del bienestar cuando el adulto mayor responde su check-in. Se ejecuta en una transacción propia, después de confirmarse la respuesta, de modo que una falla en la evaluación no impida registrar el check-in. | Escucha `CheckInAnswered` de Daily Check-in; envía `EvaluateWellbeingPatternCommand`. |
+| DiscomfortPatternDetectedEventHandler | Emite la sugerencia de acción correspondiente al patrón detectado, en la misma transacción de la evaluación. | Escucha `DiscomfortPatternDetected`; envía `IssueWellbeingSuggestionCommand`. |
+| WellbeingTrendImprovedEventHandler | Registra la pequeña victoria del día positivo, en la misma transacción de la evaluación. | Escucha `WellbeingTrendImproved`; envía `RecordSmallWinCommand`. |
 
-Clases que resuelven el acceso a la base de datos y a los mecanismos de mensajería, implementando las abstracciones definidas en el dominio.
+**Sub-capa Internal: Outbound Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Class | ExternalDailyCheckInService | fetchMoods(olderAdultId, fromDate, toDate) | Consume `DailyCheckInContextFacade` y traduce los estados de ánimo a `MoodLevel`. |
+| Class | ExternalCareCircleService | isActiveRelativeOf(relativeId, olderAdultId) | Consume `CareCircleContextFacade` para verificar que un familiar esté vinculado al adulto mayor. |
+| Class | ExternalIamService | fetchTimeZone(olderAdultId) | Consume `IamContextFacade` y devuelve la zona horaria del adulto mayor como `ZoneId`. |
+
+#### 2.6.4.4. Infrastructure Layer
+
+Clases que resuelven el acceso a la base de datos MySQL, implementando las abstracciones definidas en la capa Domain.
+
+**Sub-capa Persistence: JPA Entities**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| WellbeingPatternPersistenceEntity | Representa una fila de la tabla `wellbeing_patterns`. | Usada por `WellbeingPatternJpaRepository` y `WellbeingInsightPersistenceMapper`. |
+| WellbeingSuggestionPersistenceEntity | Representa una fila de la tabla `wellbeing_suggestions`. | Usada por `WellbeingSuggestionJpaRepository` y `WellbeingInsightPersistenceMapper`. |
+| SmallWinPersistenceEntity | Representa una fila de la tabla `small_wins`. | Usada por `SmallWinJpaRepository` y `WellbeingInsightPersistenceMapper`. |
+
+**Sub-capa Persistence: JPA Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| WellbeingPatternJpaRepository | Interfaz de Spring Data JPA con la consulta del patrón más reciente de un adulto mayor, resuelta sobre el índice `(older_adult_id, detected_at)`. | Extiende `JpaRepository`; usada por `WellbeingInsightRepositoryImpl`. |
+| WellbeingSuggestionJpaRepository | Interfaz de Spring Data JPA con la consulta de sugerencias activas, resuelta sobre el índice `(older_adult_id, status)`. | Extiende `JpaRepository`; usada por `WellbeingInsightRepositoryImpl`. |
+| SmallWinJpaRepository | Interfaz de Spring Data JPA con la consulta de pequeñas victorias por periodo, resuelta sobre el índice `(older_adult_id, recorded_at)`. | Extiende `JpaRepository`; usada por `WellbeingInsightRepositoryImpl`. |
 
 **Sub-capa Persistence: Repositories**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| WellbeingEntryRepository | Persiste y recupera el aggregate `WellbeingEntry` sobre la tabla `wellbeing_entries`. | Implementa `IWellbeingEntryRepository`. |
-| WellbeingPatternRepository | Persiste y recupera el aggregate `WellbeingPattern` sobre la tabla `wellbeing_patterns`. | Implementa `IWellbeingPatternRepository`. |
-| SmallWinRepository | Persiste y recupera el aggregate `SmallWin` sobre la tabla `small_wins`. | Implementa `ISmallWinRepository`. |
-| StatusSummaryRepository | Persiste y recupera el aggregate `StatusSummary` sobre la tabla `status_summaries`. | Implementa `IStatusSummaryRepository`. |
+| WellbeingInsightRepositoryImpl | Compone el aggregate `WellbeingInsight` a partir de su patrón más reciente y sus sugerencias activas, y persiste sus cambios en las tres tablas. Si un mismo check-in se evalúa dos veces, el índice único de `small_wins.check_in_id` impide duplicar la pequeña victoria. | Implementa `WellbeingInsightRepository`; usa `WellbeingPatternJpaRepository`, `WellbeingSuggestionJpaRepository`, `SmallWinJpaRepository` y `WellbeingInsightPersistenceMapper`. |
 
 **Sub-capa Persistence: Mappers**
 
 | Nombre | Responsabilidad principal | Relación con otros elementos |
 | --- | --- | --- |
-| WellbeingPersistenceMapper | Traduce entre los cuatro aggregates del contexto y su representación en base de datos, evitando que el modelo de persistencia se filtre al dominio. | Usado por los cuatro repositorios de Infrastructure. |
-
-**Sub-capa Messaging: Consumers**
-
-| Nombre | Responsabilidad principal | Relación con otros elementos |
-| --- | --- | --- |
-| CheckInAnsweredConsumerAdapter | Se suscribe al evento `CheckInAnswered` publicado por Daily Check-in dentro del monolito modular y lo traduce en la invocación de los comandos del contexto. | Implementa `CheckInAnsweredConsumer`; usado por la capa Interface. |
-
-<br>
+| WellbeingInsightPersistenceMapper | Traduce entre el aggregate `WellbeingInsight`, con sus patrones, sugerencias y pequeñas victorias, y sus entidades de persistencia. | Usado por `WellbeingInsightRepositoryImpl`. |
 
 #### 2.6.4.5. Bounded Context Software Architecture Component Level Diagrams
 
@@ -4984,7 +5478,7 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 <br>
 <div align="center">
 
-![Component Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-diagram.png)
+![Component Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/components-diagram.png)
   <br/><i>Imagen 47. Component Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
@@ -5000,7 +5494,7 @@ Diagrama de clases de la capa Domain: en la Imagen 48 se muestran las clases del
 <br>
 <div align="center">
 
-![Class Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-class-diagram.png)
+![Class Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/class-diagram.png)
   <br/><i>Imagen 48. Class Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
@@ -5059,7 +5553,7 @@ Diagrama de base de datos: en la Imagen 49 se muestra el diseño de las tablas c
 <br>
 <div align="center">
 
-![Database Design Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/wellbeing-database-diagram.png)
+![Database Design Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/db-diagram.png)
   <br/><i>Imagen 49. Database Design Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
@@ -5069,223 +5563,315 @@ Diagrama de base de datos: en la Imagen 49 se muestra el diseño de las tablas c
 
 ### 2.6.5. Bounded Context: Social Companionship
 
-Social Companionship es el bounded context que sostiene el vínculo emocional entre el adulto mayor y sus familiares, sin ningún fin de monitoreo. Cubre la grabación y envío de mensajes de audio del adulto mayor hacia el familiar, la reproducción de esos audios, y la gestión de recordatorios de contacto social como llamar a una amistad o asistir a una actividad, incluyendo posponerlos o marcarlos como completados.
-<br>
+El bounded context Social Companionship sostiene el vínculo emocional entre el adulto mayor y su familia, sin fines de monitoreo. Cubre el intercambio de mensajes multimedia asíncronos: el adulto mayor graba audios breves sobre su día para sus familiares, y los familiares le comparten fotografías de su vida cotidiana. También gestiona los recordatorios de contacto social con los que el adulto mayor mantiene activa su vida social, como llamar a una amistad o asistir a una actividad, que puede completar, posponer o cancelar. Es un contexto de soporte: complementa el check-in diario con una dimensión de compañía que va más allá de la seguridad física.
+
+Su modelo se organiza en tres aggregates. `AudioMessage` y `PhotoMessage` representan los mensajes de cada tipo; ambos se persisten en la misma tabla, diferenciados por su tipo, y se modelan por separado porque su origen y sus destinatarios difieren: el audio va del adulto mayor a todos sus familiares vinculados y la fotografía, de un familiar al adulto mayor. Ambos se crean primero como borrador, mientras el remitente revisa el contenido, y solo llegan a sus destinatarios al compartirse. `SocialReminder` representa un recordatorio programado por el adulto mayor y controla su presentación, postergación y cierre.
+
+El contexto consulta a Care Circle el círculo y los familiares vinculados del adulto mayor, para resolver los destinatarios de cada mensaje y verificar el acceso, y a Identity & Access la zona horaria del adulto mayor, para interpretar los horarios de los recordatorios. Los archivos de audio y fotografía se almacenan fuera de la base de datos y solo se entregan a través de la API, previa verificación de acceso.
 
 #### 2.6.5.1. Domain Layer
 
-Clases que representan el núcleo del negocio. No depende de ninguna otra capa; es el centro del que todo lo demás depende.
+En esta capa se representan las reglas de intercambio de mensajes y de gestión de recordatorios sociales, sin dependencia de frameworks de persistencia, red ni interfaz.
 
-**Sub-capa Domain Model: Aggregates**
+**Sub-capa Model: Aggregates**
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessage | Aggregate root del flujo de mensajes de audio. Gestiona su ciclo de vida: grabado, compartido y descartado. |
-| PhotoMessage | Aggregate root del flujo de mensajes de foto. Gestiona su compartición y visualización dentro del círculo. |
-| SocialReminder | Aggregate root de los recordatorios sociales. Gestiona su ciclo de vida: pendiente, completado y cancelado. |
+`AudioMessage` (Aggregate Root): representa un mensaje de voz que el adulto mayor graba para sus familiares. Controla su paso de borrador a compartido y registra su reproducción por cada familiar.
 
-**Sub-capa Domain Model: Value Objects**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | AudioMessageId | private | Identificador único del mensaje. |
+| careCircleId | CareCircleId | private | Círculo de cuidado en el que se comparte el mensaje. |
+| senderId | OlderAdultId | private | Adulto mayor que grabó el mensaje. |
+| mediaKey | MediaKey | private | Clave del archivo de audio en el almacenamiento. |
+| duration | AudioDuration | private | Duración del audio. |
+| status | MessageStatus | private | Estado del mensaje: borrador o compartido. |
+| createdAt | Instant | private | Instante de la grabación, en UTC. |
+| sentAt | Instant | private | Instante en que se compartió; es nulo mientras sea borrador. |
+| receipts | List\<MessageReceipt\> | private | Registro de reproducción por cada familiar destinatario. |
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageId | Identificador único de un mensaje de audio. Evita el uso de UUID primitivo en el dominio. |
-| PhotoMessageId | Identificador único de un mensaje de foto. |
-| SocialReminderId | Identificador único de un recordatorio social. |
-| CareCircleId | Referencia al círculo de cuidado al que pertenece el mensaje o recordatorio. Identifica el contexto sin acoplarse a su modelo. |
-| SenderId | Identificador del familiar que originó el mensaje o el recordatorio. |
-| AudioUrl | URL de reproducción del archivo de audio. Encapsula validación de formato. |
-| PhotoUrl | URL de visualización de la foto. Encapsula validación de formato. |
-| AudioMessageStatus | Estado del mensaje de audio: RECORDED, SHARED o DISCARDED. |
-| PhotoMessageStatus | Estado del mensaje de foto: SHARED. |
-| SocialReminderStatus | Estado del recordatorio: PENDING, COMPLETED o CANCELLED. |
-| ReminderTitle | Título del recordatorio. No puede ser cadena vacía. |
-| ReminderDescription | Descripción opcional del recordatorio. |
-| ScheduledDate | Fecha programada del recordatorio. Debe ser posterior al momento de creación. |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| record(careCircleId, senderId, mediaKey, duration, recordedAt) | public (static) | Factory que crea el mensaje como borrador a partir del audio grabado y registra el evento `AudioMessageRecorded`. |
+| share(recipientIds, sharedAt) | public | Comparte el borrador con los familiares vinculados, crea un registro de recepción por cada uno y registra el evento `AudioMessageShared`. Rechaza la operación si el mensaje ya fue compartido o si no hay destinatarios. |
+| discard(discardedAt) | public | Descarta el borrador antes de compartirlo y registra el evento `AudioMessageDiscarded`. Rechaza la operación si el mensaje ya fue compartido. |
+| play(relativeId, playedAt) | public | Registra la primera reproducción del audio por un familiar destinatario y el evento `AudioMessagePlayed`; las reproducciones siguientes no cambian el estado. |
+| isRecipient(userId) | public | Indica si el usuario es destinatario del mensaje. |
 
-**Sub-capa Domain Model: Commands**
+`PhotoMessage` (Aggregate Root): representa una fotografía que un familiar comparte con el adulto mayor. Controla su paso de borrador a compartida y registra su visualización.
 
-| Nombre | Descripción |
-|---|---|
-| RecordAudioMessageCommand | Intención de iniciar la grabación de un mensaje de audio. |
-| ShareAudioMessageCommand | Intención de compartir un audio ya grabado con el destinatario del círculo. |
-| DiscardAudioMessageCommand | Intención de descartar un mensaje de audio antes de compartirlo. |
-| PlayAudioMessageCommand | Intención de registrar la reproducción de un mensaje de audio. |
-| SharePhotoMessageCommand | Intención de compartir una foto con el círculo de cuidado. |
-| ScheduleSocialReminderCommand | Intención de programar un recordatorio social con título, descripción y fecha. |
-| CompleteSocialReminderCommand | Intención de marcar un recordatorio como completado. |
-| CancelSocialReminderCommand | Intención de cancelar un recordatorio pendiente. |
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | PhotoMessageId | private | Identificador único del mensaje. |
+| careCircleId | CareCircleId | private | Círculo de cuidado en el que se comparte la fotografía. |
+| senderId | RelativeId | private | Familiar que compartió la fotografía. |
+| mediaKey | MediaKey | private | Clave del archivo de imagen en el almacenamiento. |
+| status | MessageStatus | private | Estado del mensaje: borrador o compartido. |
+| createdAt | Instant | private | Instante de la selección, en UTC. |
+| sentAt | Instant | private | Instante en que se compartió; es nulo mientras sea borrador. |
+| receipt | MessageReceipt | private | Registro de visualización del adulto mayor. |
 
-**Sub-capa Domain Model: Queries**
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| select(careCircleId, senderId, mediaKey, selectedAt) | public (static) | Factory que crea el mensaje como borrador a partir de la fotografía seleccionada y registra el evento `PhotoMessageSelected`. |
+| share(olderAdultId, sharedAt) | public | Comparte el borrador con el adulto mayor del círculo, crea su registro de recepción y registra el evento `PhotoMessageShared`. Rechaza la operación si la fotografía ya fue compartida. |
+| discard(discardedAt) | public | Descarta el borrador antes de compartirlo y registra el evento `PhotoMessageDiscarded`. Rechaza la operación si la fotografía ya fue compartida. |
+| view(olderAdultId, viewedAt) | public | Registra la primera visualización de la fotografía por el adulto mayor y el evento `PhotoMessageViewed`; las visualizaciones siguientes no cambian el estado. |
+| isRecipient(userId) | public | Indica si el usuario es el destinatario de la fotografía. |
 
-| Nombre | Descripción |
-|---|---|
-| GetAudioMessageByIdQuery | Consulta para obtener un mensaje de audio por su identificador. |
-| GetPhotoMessageByIdQuery | Consulta para obtener un mensaje de foto por su identificador. |
-| GetSocialRemindersByCircleQuery | Consulta para obtener los recordatorios activos de un círculo de cuidado. |
+`SocialReminder` (Aggregate Root): representa un recordatorio de contacto social programado por el adulto mayor. Controla su presentación, postergación, completado, cancelación y cierre como no completado.
 
-**Sub-capa Domain Model: Events**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | SocialReminderId | private | Identificador único del recordatorio. |
+| olderAdultId | OlderAdultId | private | Adulto mayor que programó el recordatorio. |
+| title | ReminderTitle | private | Título del recordatorio. |
+| description | ReminderDescription | private | Descripción del recordatorio, opcional. |
+| remindAt | Instant | private | Instante en que debe presentarse el recordatorio, en UTC; se actualiza al posponerlo. |
+| status | ReminderStatus | private | Estado del recordatorio. |
+| completedAt | Instant | private | Instante en que se completó; es nulo mientras no se haya completado. |
+| createdAt | Instant | private | Instante de creación, en UTC. |
+| updatedAt | Instant | private | Instante de la última modificación, en UTC. |
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageRecordedEvent | Se emite cuando un mensaje de audio es grabado exitosamente. |
-| AudioMessageSharedEvent | Se emite cuando un mensaje de audio es compartido con el destinatario. |
-| AudioMessageDiscardedEvent | Se emite cuando un mensaje de audio es descartado antes de compartirse. |
-| AudioMessagePlayedEvent | Se emite cuando un mensaje de audio es reproducido. |
-| PhotoMessageSharedEvent | Se emite cuando una foto es compartida con el círculo de cuidado. |
-| SocialReminderScheduledEvent | Se emite cuando un recordatorio social es programado. |
-| SocialReminderCompletedEvent | Se emite cuando un recordatorio es marcado como completado. |
-| SocialReminderCancelledEvent | Se emite cuando un recordatorio pendiente es cancelado. |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| schedule(olderAdultId, title, description, remindAt, scheduledAt) | public (static) | Factory que programa el recordatorio; rechaza instantes ya transcurridos. Registra el evento `SocialReminderScheduled`. |
+| present(presentedAt) | public | Presenta el recordatorio al adulto mayor cuando llega su hora; solo procede si está programado o pospuesto. Registra el evento `SocialReminderPresented`. |
+| postpone(postponedAt, endOfDay) | public | Posterga el recordatorio presentado 60 minutos, dentro del mismo día local; rechaza la operación si ya no queda tiempo en el día. Registra el evento `SocialReminderPostponed`. |
+| complete(completedAt) | public | Marca el recordatorio como completado para que no vuelva a presentarse y registra el evento `SocialReminderCompleted`. |
+| cancel(canceledAt) | public | Cancela un recordatorio programado, presentado o pospuesto para que no vuelva a presentarse y registra el evento `SocialReminderCanceled`. |
+| markAsMissed(markedAt) | public | Cierra como no completado un recordatorio presentado o pospuesto cuyo día terminó sin que el adulto mayor lo completara ni lo cancelara. Registra el evento `SocialReminderMarkedAsMissed`. |
+| isAwaitingAction() | public | Indica si el recordatorio está presentado o pospuesto. |
 
-**Sub-capa Domain Model: Services**
+**Sub-capa Model: Entities**
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageCommandService | Interfaz que define los casos de uso de escritura sobre mensajes de audio. |
-| AudioMessageQueryService | Interfaz que define los casos de uso de lectura sobre mensajes de audio. |
-| PhotoMessageCommandService | Interfaz que define los casos de uso de escritura sobre mensajes de foto. |
-| PhotoMessageQueryService | Interfaz que define los casos de uso de lectura sobre mensajes de foto. |
-| SocialReminderCommandService | Interfaz que define los casos de uso de escritura sobre recordatorios sociales. |
-| SocialReminderQueryService | Interfaz que define los casos de uso de lectura sobre recordatorios sociales. |
+`MessageReceipt`: representa la recepción de un mensaje por un destinatario y el momento en que lo abrió. Pertenece a los aggregates `AudioMessage` y `PhotoMessage`.
 
-**Sub-capa Domain Model: Repositories**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| recipientId | UserId | private | Destinatario del mensaje; junto con el mensaje, identifica el registro. |
+| openedAt | Instant | private | Instante en que el destinatario reprodujo el audio o vio la fotografía; es nulo mientras no lo haya abierto. |
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageRepository | Puerto de salida que define las operaciones de persistencia para mensajes de audio. La implementación vive en la capa de infraestructura. |
-| PhotoMessageRepository | Puerto de salida que define las operaciones de persistencia para mensajes de foto. |
-| SocialReminderRepository | Puerto de salida que define las operaciones de persistencia para recordatorios sociales. |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| markAsOpened(openedAt) | public | Registra la primera apertura del mensaje por el destinatario. |
+| isOpened() | public | Indica si el destinatario ya abrió el mensaje. |
 
-<br>
+**Sub-capa Model: Value Objects**
+
+Se implementan como records inmutables que validan su contenido al construirse. Los límites de longitud coinciden con las columnas de la base de datos.
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| AudioMessageId, PhotoMessageId, SocialReminderId | value: UUID | Identidades inmutables de los aggregates del contexto. |
+| CareCircleId | value: UUID | Referencia por identidad a un círculo de Care Circle. |
+| OlderAdultId, RelativeId, UserId | value: UUID | Referencias por identidad a cuentas de Identity & Access, según el rol que cumplen en el mensaje. |
+| MediaKey | value: String | Clave del archivo en el almacenamiento, de máximo 500 caracteres; no es una URL pública. |
+| MediaFile | content: byte[], contentType: String | Archivo recibido para almacenar. Solo admite audio en formato AAC (`audio/mp4`) e imágenes JPEG o PNG, dentro del tamaño máximo configurado. |
+| AudioDuration | seconds: int | Duración del audio, entre 1 y 180 segundos. |
+| ReminderTitle | value: String | Título del recordatorio, obligatorio y de máximo 120 caracteres. |
+| ReminderDescription | value: String | Descripción del recordatorio, de máximo 300 caracteres. |
+
+**Sub-capa Model: Enumerations**
+
+| Nombre | Valores | Descripción |
+| --- | --- | --- |
+| MessageType | AUDIO, PHOTO | Tipo de mensaje; distingue ambos aggregates en la persistencia. |
+| MessageStatus | DRAFT, SHARED | Estado de un mensaje: borrador en revisión o compartido con sus destinatarios. |
+| ReminderStatus | SCHEDULED, PRESENTED, POSTPONED, COMPLETED, CANCELED, MISSED | Estado del ciclo de vida de un recordatorio social. |
+
+**Sub-capa Model: Commands**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| RecordAudioMessageCommand | senderId, audioFile, durationSeconds | Intención del adulto mayor de guardar un audio grabado como borrador. |
+| ShareAudioMessageCommand | audioMessageId, senderId | Intención de compartir el audio con los familiares vinculados. |
+| DiscardAudioMessageCommand | audioMessageId, senderId | Intención de descartar un audio antes de compartirlo. |
+| PlayAudioMessageCommand | audioMessageId, relativeId | Intención de un familiar de reproducir un audio recibido. |
+| SelectPhotoMessageCommand | careCircleId, senderId, photoFile | Intención de un familiar de cargar una fotografía como borrador. |
+| SharePhotoMessageCommand | photoMessageId, senderId | Intención de compartir la fotografía con el adulto mayor. |
+| DiscardPhotoMessageCommand | photoMessageId, senderId | Intención de descartar una fotografía antes de compartirla. |
+| ViewPhotoMessageCommand | photoMessageId, olderAdultId | Intención del adulto mayor de ver una fotografía recibida. |
+| ScheduleSocialReminderCommand | olderAdultId, title, description, remindAt | Intención de programar un recordatorio en una fecha y hora locales. |
+| PresentSocialReminderCommand | socialReminderId | Intención de presentar un recordatorio cuya hora llegó. |
+| PostponeSocialReminderCommand | socialReminderId, olderAdultId | Intención de posponer un recordatorio presentado. |
+| CompleteSocialReminderCommand | socialReminderId, olderAdultId | Intención de marcar un recordatorio como realizado. |
+| CancelSocialReminderCommand | socialReminderId, olderAdultId | Intención de cancelar un recordatorio que ya no se necesita. |
+| MarkSocialReminderMissedCommand | socialReminderId | Intención de cerrar como no completado un recordatorio cuyo día terminó sin acción del adulto mayor. |
+
+**Sub-capa Model: Queries**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| GetSharedAudioMessagesByCareCircleIdQuery | careCircleId, requesterId | Consulta de los audios compartidos de un círculo, del más reciente al más antiguo. |
+| GetAudioMessageMediaQuery | audioMessageId, requesterId | Consulta del archivo de un audio para su reproducción. |
+| GetSharedPhotoMessagesByCareCircleIdQuery | careCircleId, requesterId | Consulta de las fotografías compartidas de un círculo, de la más reciente a la más antigua. |
+| GetPhotoMessageMediaQuery | photoMessageId, requesterId | Consulta del archivo de una fotografía para su visualización. |
+| GetActiveSocialRemindersQuery | olderAdultId, requesterId | Consulta de los recordatorios programados, presentados o pospuestos de un adulto mayor. |
+| GetSocialRemindersDueForPresentationQuery | referenceTime | Consulta de los recordatorios programados o pospuestos cuya hora ya llegó. |
+| GetSocialRemindersAwaitingActionQuery | referenceTime | Consulta de los recordatorios presentados o pospuestos anteriores al instante indicado, candidatos a cerrarse como no completados. |
+
+**Sub-capa Model: Events**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| AudioMessageRecorded | audioMessageId, senderId, occurredAt | El adulto mayor grabó un audio, que quedó como borrador. |
+| AudioMessageShared | audioMessageId, careCircleId, recipientIds, occurredAt | El audio se compartió con los familiares vinculados. |
+| AudioMessageDiscarded | audioMessageId, senderId, occurredAt | El adulto mayor descartó un audio antes de compartirlo. |
+| AudioMessagePlayed | audioMessageId, relativeId, occurredAt | Un familiar reprodujo el audio por primera vez. |
+| PhotoMessageSelected | photoMessageId, senderId, occurredAt | Un familiar cargó una fotografía, que quedó como borrador. |
+| PhotoMessageShared | photoMessageId, careCircleId, olderAdultId, occurredAt | La fotografía se compartió con el adulto mayor. |
+| PhotoMessageDiscarded | photoMessageId, senderId, occurredAt | El familiar descartó una fotografía antes de compartirla. |
+| PhotoMessageViewed | photoMessageId, olderAdultId, occurredAt | El adulto mayor vio la fotografía por primera vez. |
+| SocialReminderScheduled | socialReminderId, olderAdultId, remindAt, occurredAt | Se programó un recordatorio social. |
+| SocialReminderPresented | socialReminderId, olderAdultId, occurredAt | Se presentó un recordatorio al adulto mayor. |
+| SocialReminderPostponed | socialReminderId, olderAdultId, remindAt, occurredAt | El adulto mayor pospuso un recordatorio para más tarde el mismo día. |
+| SocialReminderCompleted | socialReminderId, olderAdultId, occurredAt | El adulto mayor indicó que realizó la actividad del recordatorio. |
+| SocialReminderCanceled | socialReminderId, olderAdultId, occurredAt | El adulto mayor canceló un recordatorio. |
+| SocialReminderMarkedAsMissed | socialReminderId, olderAdultId, occurredAt | El día del recordatorio terminó sin que se completara. |
+
+**Sub-capa Repositories**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | AudioMessageRepository | save(audioMessage), findById(audioMessageId), delete(audioMessage), findAllSharedByCareCircleId(careCircleId) | Contrato de persistencia del aggregate `AudioMessage` junto con sus registros de recepción. Se implementa en Infrastructure. |
+| Interface | PhotoMessageRepository | save(photoMessage), findById(photoMessageId), delete(photoMessage), findAllSharedByCareCircleId(careCircleId) | Contrato de persistencia del aggregate `PhotoMessage` junto con su registro de recepción. Se implementa en Infrastructure. |
+| Interface | SocialReminderRepository | save(socialReminder), findById(socialReminderId), findActiveByOlderAdultId(olderAdultId), findAllDueForPresentation(referenceTime), findAllAwaitingActionBefore(referenceTime) | Contrato de persistencia del aggregate `SocialReminder`. Se implementa en Infrastructure. |
+
+**Sub-capa Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | AudioMessageCommandService | handle(RecordAudioMessageCommand), handle(ShareAudioMessageCommand), handle(DiscardAudioMessageCommand), handle(PlayAudioMessageCommand) | Contrato de las operaciones de escritura sobre los mensajes de audio. |
+| Interface | AudioMessageQueryService | handle(GetSharedAudioMessagesByCareCircleIdQuery), handle(GetAudioMessageMediaQuery) | Contrato de la lectura de mensajes de audio. |
+| Interface | PhotoMessageCommandService | handle(SelectPhotoMessageCommand), handle(SharePhotoMessageCommand), handle(DiscardPhotoMessageCommand), handle(ViewPhotoMessageCommand) | Contrato de las operaciones de escritura sobre los mensajes de fotografía. |
+| Interface | PhotoMessageQueryService | handle(GetSharedPhotoMessagesByCareCircleIdQuery), handle(GetPhotoMessageMediaQuery) | Contrato de la lectura de mensajes de fotografía. |
+| Interface | SocialReminderCommandService | handle(ScheduleSocialReminderCommand), handle(PresentSocialReminderCommand), handle(PostponeSocialReminderCommand), handle(CompleteSocialReminderCommand), handle(CancelSocialReminderCommand), handle(MarkSocialReminderMissedCommand) | Contrato de las operaciones de escritura sobre los recordatorios sociales. |
+| Interface | SocialReminderQueryService | handle(GetActiveSocialRemindersQuery), handle(GetSocialRemindersDueForPresentationQuery), handle(GetSocialRemindersAwaitingActionQuery) | Contrato de la lectura de recordatorios sociales. |
 
 #### 2.6.5.2. Interface Layer
 
-
 Clases que exponen el bounded context hacia el exterior y traducen las peticiones entrantes al lenguaje del dominio.
 
-***Sub-capa REST: Controllers***
+**Sub-capa REST: Controllers**
 
 | Nombre | Endpoints | Descripción |
-|---|---|---|
-| AudioMessagesController | POST /care-circles/{careCircleId}/audio-messages, POST /care-circles/{careCircleId}/audio-messages/{messageId}/share, DELETE /care-circles/{careCircleId}/audio-messages/{messageId}, PUT /care-circles/{careCircleId}/audio-messages/{messageId}/play | Punto de entrada de las operaciones de grabación, compartición, descarte y reproducción de mensajes de audio. Delega en los servicios de comandos y consultas. |
-| PhotoMessagesController | POST /care-circles/{careCircleId}/photo-messages, GET /care-circles/{careCircleId}/photo-messages/{messageId} | Punto de entrada de las operaciones de compartición y visualización de mensajes de foto. Delega en los servicios de comandos y consultas. |
-| SocialRemindersController | POST /care-circles/{careCircleId}/social-reminders, PUT /care-circles/{careCircleId}/social-reminders/{reminderId}/complete, DELETE /care-circles/{careCircleId}/social-reminders/{reminderId} | Punto de entrada de las operaciones de programación, completado y cancelación de recordatorios sociales. Delega en los servicios de comandos. |
+| --- | --- | --- |
+| AudioMessagesController | POST /api/v1/care-circles/{careCircleId}/audio-messages, POST /api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/share, DELETE /api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}, GET /api/v1/care-circles/{careCircleId}/audio-messages, GET /api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/media, POST /api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/play | Punto de entrada de la grabación, el envío y el descarte de audios por el adulto mayor, y de su consulta y reproducción por los familiares. La grabación recibe el archivo como `multipart/form-data` y responde 415 Unsupported Media Type si el formato no está admitido. El archivo se entrega con soporte de solicitudes por rango, de modo que el reproductor pueda desplazarse dentro del audio. |
+| PhotoMessagesController | POST /api/v1/care-circles/{careCircleId}/photo-messages, POST /api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/share, DELETE /api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}, GET /api/v1/care-circles/{careCircleId}/photo-messages, GET /api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/media, POST /api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/view | Punto de entrada de la carga, el envío y el descarte de fotografías por los familiares, y de la galería y visualización por el adulto mayor. La carga recibe el archivo como `multipart/form-data` y responde 415 Unsupported Media Type si el formato no está admitido. |
+| SocialRemindersController | POST /api/v1/social-reminders, GET /api/v1/social-reminders?olderAdultId={olderAdultId}, POST /api/v1/social-reminders/{socialReminderId}/postpone, POST /api/v1/social-reminders/{socialReminderId}/complete, POST /api/v1/social-reminders/{socialReminderId}/cancel | Punto de entrada de la programación y gestión de recordatorios por el propio adulto mayor. La programación responde 400 Bad Request si falta el título o la fecha y hora ya transcurrió; las demás operaciones responden 409 Conflict si el estado del recordatorio no admite la acción. |
 
-***Sub-capa REST: Resources***
+Los endpoints de mensajes responden 403 Forbidden cuando el usuario autenticado no pertenece al círculo, o cuando intenta reproducir o ver un mensaje del que no es destinatario. El envío y el descarte solo proceden para el remitente del borrador.
 
-| Nombre | Descripción |
-|---|---|
-| RecordAudioMessageResource | Datos de entrada para iniciar la grabación de un mensaje de audio. |
-| AudioMessageResource | Representación pública de un mensaje de audio, incluida su URL de reproducción. |
-| ShareAudioMessageResource | Datos de entrada para compartir un mensaje de audio grabado con el destinatario. |
-| SharePhotoMessageResource | Datos de entrada para compartir una foto con el círculo de cuidado. |
-| PhotoMessageResource | Representación pública de un mensaje de foto, incluida su URL de visualización. |
-| ScheduleSocialReminderResource | Datos de entrada para programar un recordatorio social, incluidos título, descripción y fecha. |
-| SocialReminderResource | Representación pública de un recordatorio social y su estado actual. |
+**Sub-capa REST: Resources**
 
-***Sub-capa REST: Transform***
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| RecordAudioMessageResource | file, durationSeconds | Datos de entrada de la grabación, recibidos como formulario multiparte. |
+| AudioMessageResource | id, careCircleId, senderId, status, durationSeconds, mediaUrl, createdAt, sentAt, played | Representación de un mensaje de audio. `mediaUrl` apunta al endpoint protegido del archivo y `played` indica si el solicitante ya lo reprodujo. |
+| SelectPhotoMessageResource | file | Datos de entrada de la carga de una fotografía, recibidos como formulario multiparte. |
+| PhotoMessageResource | id, careCircleId, senderId, status, mediaUrl, createdAt, sentAt, viewed | Representación de un mensaje de fotografía; `viewed` indica si el adulto mayor ya la vio. |
+| ScheduleSocialReminderResource | title, description, remindAt | Datos de entrada para programar un recordatorio en fecha y hora locales. |
+| SocialReminderResource | id, olderAdultId, title, description, remindAt, status, completedAt | Representación de un recordatorio social. |
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageResourceFromEntityAssembler | Convierte la entidad AudioMessage en su representación REST. |
-| PhotoMessageResourceFromEntityAssembler | Convierte la entidad PhotoMessage en su representación REST. |
-| SocialReminderResourceFromEntityAssembler | Convierte la entidad SocialReminder en su representación REST. |
-| RecordAudioMessageCommandFromResourceAssembler | Convierte la petición de grabación en el comando de dominio correspondiente. |
-| ShareAudioMessageCommandFromResourceAssembler | Convierte la petición de compartición de audio en su comando de dominio. |
-| SharePhotoMessageCommandFromResourceAssembler | Convierte la petición de compartición de foto en su comando de dominio. |
-| ScheduleSocialReminderCommandFromResourceAssembler | Convierte la petición de programación en el comando de recordatorio social. |
-
-***Sub-capa ACL***
+**Sub-capa REST: Transform**
 
 | Nombre | Descripción |
-|---|---|
-| CareCircleContextFacade | Puerto de salida que define el contrato de los datos que Social Companionship necesita del bounded context Care Circle. |
-| UserContextFacade | Puerto de salida que define el contrato de los datos que Social Companionship necesita del bounded context Identity & Access. |
-| CareCircleContextFacadeImpl | Implementación HTTP del CareCircleContextFacade. Llama a los endpoints del bounded context Care Circle y traduce la respuesta al modelo interno. |
-| UserContextFacadeImpl | Implementación HTTP del UserContextFacade. Llama a los endpoints del bounded context Identity & Access y traduce la respuesta al modelo interno. |
-| ExternalCareCircleMemberResource | Representación de la respuesta externa del bounded context Care Circle al consultar los miembros de un círculo. |
-| ExternalUserResource | Representación de la respuesta externa del bounded context Identity & Access al consultar datos de un usuario. |
-| CareCircleMemberFromExternalResourceAssembler | Traduce el ExternalCareCircleMemberResource al value object interno del dominio de Social Companionship. |
-| UserFromExternalResourceAssembler | Traduce el ExternalUserResource al value object interno del dominio de Social Companionship. |
+| --- | --- |
+| AudioMessageResourceFromEntityAssembler | Convierte el aggregate `AudioMessage` en su representación REST según el solicitante. |
+| PhotoMessageResourceFromEntityAssembler | Convierte el aggregate `PhotoMessage` en su representación REST. |
+| SocialReminderResourceFromEntityAssembler | Convierte el aggregate `SocialReminder` en su representación REST, expresando la hora en la zona horaria del adulto mayor. |
+| RecordAudioMessageCommandFromResourceAssembler | Combina el archivo recibido con el adulto mayor autenticado para construir el comando de grabación. |
+| SelectPhotoMessageCommandFromResourceAssembler | Combina el archivo recibido con el círculo y el familiar autenticado para construir el comando de selección. |
+| ScheduleSocialReminderCommandFromResourceAssembler | Combina la petición con el adulto mayor autenticado para construir el comando de programación. |
 
-<br>
+**Sub-capa Scheduling: Jobs**
+
+| Nombre | Descripción |
+| --- | --- |
+| SocialReminderScheduler | Tareas periódicas de los recordatorios. Cada minuto consulta los recordatorios cuya hora llegó y envía un `PresentSocialReminderCommand` por cada uno. Cada hora consulta los recordatorios presentados o pospuestos y envía un `MarkSocialReminderMissedCommand` por cada uno. |
 
 #### 2.6.5.3. Application Layer
 
-Clases que implementan los casos de uso del dominio. Orquesta los agregados, repositorios y eventos definidos en la capa de dominio sin contener lógica de negocio propia.
+Clases que orquestan los flujos del contexto, coordinando los aggregates, los repositorios, el almacenamiento de archivos y los servicios de otros contextos.
 
-**Sub-capa Application: Command Services**
+**Sub-capa Internal: CommandServices (Command Handlers)**
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageCommandServiceImpl | Implementa AudioMessageCommandService. Orquesta la grabación, compartición, descarte y reproducción de mensajes de audio. |
-| PhotoMessageCommandServiceImpl | Implementa PhotoMessageCommandService. Orquesta la compartición de mensajes de foto dentro del círculo. |
-| SocialReminderCommandServiceImpl | Implementa SocialReminderCommandService. Orquesta la programación, completado y cancelación de recordatorios sociales. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| AudioMessageCommandServiceImpl | Al grabar, obtiene el círculo del adulto mayor, almacena el archivo y crea el borrador. Al compartir, obtiene los familiares con vínculo activo como destinatarios. Al descartar, elimina el registro y luego el archivo, una vez confirmada la eliminación. Registra la reproducción verificando que el familiar sea destinatario. Tras persistir, publica los eventos acumulados. | Implementa `AudioMessageCommandService`; usa `AudioMessageRepository`, `MediaStorageService`, `ExternalCareCircleService` y `DomainEventPublisher`. |
+| PhotoMessageCommandServiceImpl | Al seleccionar, verifica que el familiar tenga un vínculo activo con el círculo, almacena el archivo y crea el borrador. Al compartir, obtiene el adulto mayor del círculo como destinatario. Al descartar, elimina el registro y luego el archivo. Registra la visualización verificando que el solicitante sea el adulto mayor destinatario. Tras persistir, publica los eventos acumulados. | Implementa `PhotoMessageCommandService`; usa `PhotoMessageRepository`, `MediaStorageService`, `ExternalCareCircleService` y `DomainEventPublisher`. |
+| SocialReminderCommandServiceImpl | Al programar, interpreta la fecha y hora en la zona horaria del adulto mayor. Presenta los recordatorios cuya hora llegó y posterga los presentados dentro del día local. Gestiona el completado y la cancelación verificando que provengan del propio adulto mayor. Al cerrar un recordatorio como no completado, solo actúa si su día local ya terminó; en otro caso no realiza cambios. Tras persistir, publica los eventos acumulados. | Implementa `SocialReminderCommandService`; usa `SocialReminderRepository`, `ExternalIamService` y `DomainEventPublisher`. |
 
-**Sub-capa Application: Query Services**
+**Sub-capa Internal: QueryServices**
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageQueryServiceImpl | Implementa AudioMessageQueryService. Resuelve las consultas de mensajes de audio por identificador. |
-| PhotoMessageQueryServiceImpl | Implementa PhotoMessageQueryService. Resuelve las consultas de mensajes de foto por identificador. |
-| SocialReminderQueryServiceImpl | Implementa SocialReminderQueryService. Resuelve las consultas de recordatorios activos de un círculo de cuidado. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| AudioMessageQueryServiceImpl | Resuelve los audios compartidos de un círculo, previa verificación de acceso, y entrega el archivo de un audio solo a su remitente o a sus destinatarios. | Implementa `AudioMessageQueryService`; usa `AudioMessageRepository`, `MediaStorageService` y `ExternalCareCircleService`. |
+| PhotoMessageQueryServiceImpl | Resuelve las fotografías compartidas de un círculo, previa verificación de acceso, y entrega el archivo de una fotografía solo a su remitente o a su destinatario. | Implementa `PhotoMessageQueryService`; usa `PhotoMessageRepository`, `MediaStorageService` y `ExternalCareCircleService`. |
+| SocialReminderQueryServiceImpl | Resuelve los recordatorios activos del propio adulto mayor y los recordatorios por presentar o por cerrar para las tareas periódicas. | Implementa `SocialReminderQueryService`; usa `SocialReminderRepository`. |
 
-<br>
+**Sub-capa Internal: Event Handlers**
 
-#### 2.6.5.4 Infrastructure Layer
+Las policies de este contexto dependen del paso del tiempo y las ejecuta `SocialReminderScheduler`; el contexto no consume eventos de otros contextos.
 
+**Sub-capa Internal: Outbound Services**
 
-Clases que implementan los detalles técnicos de persistencia y comunicación externa. Depende del dominio pero nunca al revés: toda referencia apunta hacia adentro.
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | MediaStorageService | store(mediaFile): MediaKey, load(mediaKey), delete(mediaKey) | Abstracción del almacenamiento de archivos de audio e imagen. |
+| Class | ExternalCareCircleService | fetchCareCircleId(olderAdultId), fetchOlderAdultId(careCircleId), fetchActiveRelativeIds(olderAdultId), hasAccessToCareCircle(userId, careCircleId) | Consume `CareCircleContextFacade` para resolver círculos, destinatarios y permisos de acceso. |
+| Class | ExternalIamService | fetchTimeZone(olderAdultId) | Consume `IamContextFacade` y devuelve la zona horaria del adulto mayor como `ZoneId`. |
 
-**Sub-capa Persistence: Room Entities**
+#### 2.6.5.4. Infrastructure Layer
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageEntity | Clase anotada con `@Entity` que representa la tabla `audio_messages` en SQLite. Contiene los campos de persistencia del agregado `AudioMessage`. |
-| PhotoMessageEntity | Clase anotada con `@Entity` que representa la tabla `photo_messages` en SQLite. Contiene los campos de persistencia del agregado `PhotoMessage`. |
-| SocialReminderEntity | Clase anotada con `@Entity` que representa la tabla `social_reminders` en SQLite. Contiene los campos de persistencia del agregado `SocialReminder`. |
+Clases que resuelven el acceso a la base de datos MySQL y al almacenamiento de archivos, implementando las abstracciones definidas en las capas Domain y Application.
 
-**Sub-capa Persistence: Room DAOs**
+**Sub-capa Persistence: JPA Entities**
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageDao | Interfaz anotada con `@Dao` que define las operaciones de acceso a datos de bajo nivel para mensajes de audio. |
-| PhotoMessageDao | Interfaz anotada con `@Dao` que define las operaciones de acceso a datos de bajo nivel para mensajes de foto. |
-| SocialReminderDao | Interfaz anotada con `@Dao` que define las operaciones de acceso a datos para recordatorios sociales, incluyendo consulta por círculo de cuidado y estado activo. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CompanionMessagePersistenceEntity | Representa una fila de la tabla `companion_messages`, cuyo tipo determina si corresponde a un audio o a una fotografía. Contiene la colección de registros de recepción, que se persisten en cascada junto con el mensaje. | Usada por `CompanionMessageJpaRepository` y por los mappers de mensajes. |
+| MessageReceiptPersistenceEntity | Representa una fila de la tabla `message_receipts`. | Contenida en `CompanionMessagePersistenceEntity`. |
+| SocialReminderPersistenceEntity | Representa una fila de la tabla `social_reminders`. | Usada por `SocialReminderJpaRepository` y `SocialReminderPersistenceMapper`. |
 
-**Sub-capa Persistence: Repository Implementations**
+**Sub-capa Persistence: JPA Repositories**
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageRepositoryImpl | Implementa AudioMessageRepository del dominio. Traduce entre el modelo de dominio y la entidad JPA usando los assemblers de persistencia. |
-| PhotoMessageRepositoryImpl | Implementa PhotoMessageRepository del dominio. |
-| SocialReminderRepositoryImpl | Implementa SocialReminderRepository del dominio. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CompanionMessageJpaRepository | Interfaz de Spring Data JPA con las consultas por identificador y tipo, y la de mensajes compartidos de un círculo por tipo ordenados por fecha de envío, resuelta sobre el índice `(care_circle_id, type, sent_at)`. | Extiende `JpaRepository`; usada por `AudioMessageRepositoryImpl` y `PhotoMessageRepositoryImpl`. |
+| SocialReminderJpaRepository | Interfaz de Spring Data JPA con la consulta de recordatorios activos de un adulto mayor, resuelta sobre el índice `(older_adult_id, remind_at)`, y las de recordatorios por presentar o por cerrar, resueltas sobre el índice `(status, remind_at)`. | Extiende `JpaRepository`; usada por `SocialReminderRepositoryImpl`. |
 
-**Sub-capa Persistence: Transform**
+**Sub-capa Persistence: Repositories**
 
-| Nombre | Descripción |
-|---|---|
-| AudioMessageEntityFromModelAssembler | Convierte el agregado AudioMessage del dominio en su entidad de persistencia AudioMessageEntity. |
-| AudioMessageModelFromEntityAssembler | Convierte la entidad de persistencia AudioMessageEntity en el agregado AudioMessage del dominio. |
-| PhotoMessageEntityFromModelAssembler | Convierte el agregado PhotoMessage en su entidad de persistencia. |
-| PhotoMessageModelFromEntityAssembler | Convierte la entidad de persistencia PhotoMessageEntity en el agregado PhotoMessage. |
-| SocialReminderEntityFromModelAssembler | Convierte el agregado SocialReminder en su entidad de persistencia. |
-| SocialReminderModelFromEntityAssembler | Convierte la entidad de persistencia SocialReminderEntity en el agregado SocialReminder. |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| AudioMessageRepositoryImpl | Persiste, recupera y elimina el aggregate `AudioMessage` sobre las filas de tipo AUDIO. | Implementa `AudioMessageRepository`; usa `CompanionMessageJpaRepository` y `AudioMessagePersistenceMapper`. |
+| PhotoMessageRepositoryImpl | Persiste, recupera y elimina el aggregate `PhotoMessage` sobre las filas de tipo PHOTO. | Implementa `PhotoMessageRepository`; usa `CompanionMessageJpaRepository` y `PhotoMessagePersistenceMapper`. |
+| SocialReminderRepositoryImpl | Persiste y recupera el aggregate `SocialReminder`. | Implementa `SocialReminderRepository`; usa `SocialReminderJpaRepository` y `SocialReminderPersistenceMapper`. |
 
-<br>
+**Sub-capa Persistence: Mappers**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| AudioMessagePersistenceMapper | Traduce entre el aggregate `AudioMessage`, con sus registros de recepción, y sus entidades de persistencia. | Usado por `AudioMessageRepositoryImpl`. |
+| PhotoMessagePersistenceMapper | Traduce entre el aggregate `PhotoMessage`, con su registro de recepción, y sus entidades de persistencia. | Usado por `PhotoMessageRepositoryImpl`. |
+| SocialReminderPersistenceMapper | Traduce entre el aggregate `SocialReminder` y `SocialReminderPersistenceEntity`. | Usado por `SocialReminderRepositoryImpl`. |
+
+**Sub-capa Storage: Services**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| AzureBlobMediaStorageService | Almacena los archivos en un contenedor privado de Azure Blob Storage, identificados por una clave aleatoria. Los archivos no tienen acceso público y solo se obtienen a través de la API, después de verificar el acceso del solicitante. | Implementa `MediaStorageService`. |
 
 #### 2.6.5.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Social Companionship, elaborado con la herramienta Structurizr (Imagen 50). El diagrama descompone el módulo de acompañamiento social dentro del container API REST y muestra cómo sus componentes se distribuyen entre las cuatro capas del diseño táctico, respetando la regla de dependencia unidireccional hacia el dominio.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Social Companionship, elaborado en Structurizr (Imagen 50). El diagrama detalla la arquitectura interna del módulo dentro del container API REST, organizada en las cuatro capas del diseño táctico: los *Controllers* (`AudioMessagesController`, `PhotoMessagesController` y `SocialRemindersController`) como puntos de entrada REST; los *Resources* y *Assemblers* para la transformación de datos; los servicios de aplicación de comando y de consulta, uno por cada aggregate; y el acceso a datos mediante los tres repositorios definidos en el dominio (`AudioMessageRepository`, `PhotoMessageRepository` y `SocialReminderRepository`), implementados en Infrastructure.
 
-El flujo de entrada llega desde la Aplicación Móvil hacia los tres componentes de la capa Interface: AudioMessagesController, que atiende la grabación, compartición, descarte y reproducción de mensajes de audio; PhotoMessagesController, que atiende la compartición y visualización de mensajes de foto; y SocialRemindersController, que atiende la programación, completado y cancelación de recordatorios sociales. Los tres delegan en la capa Application, donde los servicios de comando resuelven las operaciones de escritura y los servicios de consulta las de lectura, uno por cada aggregate del contexto.
-
-En el centro del diagrama se ubican los tres aggregates: AudioMessage, PhotoMessage y SocialReminder, junto con los Commands y Queries que expresan las intenciones del contexto y los Domain Events que se publican al completarse cada operación. Alrededor de los aggregates se muestran las abstracciones que el dominio declara y que ninguna capa superior implementa: IAudioMessageRepository, IPhotoMessageRepository, ISocialReminderRepository e IDomainEventPublisher.
-
-La capa Infrastructure aparece en el extremo opuesto, con las implementaciones concretas de esas abstracciones: AudioMessageRepository, PhotoMessageRepository y SocialReminderRepository, que persisten cada aggregate sobre SQLite apoyándose en sus respectivos mappers de persistencia; y DomainEventPublisherAdapter, que publica los eventos de dominio dentro del monolito modular para que otros módulos reaccionen a ellos. Las flechas evidencian que las dependencias apuntan siempre hacia el dominio y que ningún componente de Interface accede directamente a la base de datos.
+En el centro del diagrama se ubican los aggregates `AudioMessage`, `PhotoMessage` y `SocialReminder`, junto con los Commands, Queries y Domain Events del contexto. Los servicios de aplicación se apoyan en abstracciones salientes: `MediaStorageService`, implementado sobre Azure Blob Storage para guardar los archivos de audio e imagen; `ExternalCareCircleService`, que consulta a Care Circle los destinatarios y los permisos de acceso; y `ExternalIamService`, que consulta a Identity & Access la zona horaria del adulto mayor. El scheduler `SocialReminderScheduler` presenta los recordatorios cuya hora llegó y cierra como no completados los vencidos, y `DomainEventPublisherAdapter` publica los eventos de dominio dentro del monolito modular. Las flechas evidencian que las dependencias apuntan siempre hacia el dominio y que ningún componente de Interface accede directamente a la base de datos.
 
 <div align="center">
 
-![DComponent Level- Social Companionship](assets/img/bounded-context/social-companionship/social-companionship-components.png)
+![DComponent Level- Social Companionship](assets/img/bounded-context/social-companionship/socialcompanionship_components.png)
   <br/><i>Imagen 50. Component Level Diagram del Bounded Context Social Companionship.</i>
 
 </div>
@@ -5296,83 +5882,73 @@ La capa Infrastructure aparece en el extremo opuesto, con las implementaciones c
 En esta sección se presentan los diagramas de mayor nivel de detalle sobre la implementación del bounded context Social Companionship. Se incluye el diagrama de clases de la capa Domain y el diagrama de diseño de base de datos correspondiente a las tablas que dan persistencia al aggregate.
 <br>
 
+
 ##### 2.6.5.6.1. Bounded Context Domain Layer Class Diagrams
 
-El diagrama de clases representa la capa Domain del bounded context Social Companionship, elaborado con la herramienta PlantUML (Imagen 51). En él se muestran las clases, interfaces y enumeraciones del dominio junto con sus atributos, métodos y el scope de cada miembro.
+El siguiente diagrama de clases UML (Imagen 51) representa el bounded context Social Companionship organizado en sus cuatro capas: Interface, Application, Domain e Infrastructure. Acatando el EventStorming, en la capa de dominio se visualizan los tres Aggregate Roots principales: `AudioMessage`, `PhotoMessage` y `SocialReminder`. Los dos primeros contienen la entidad `MessageReceipt`, que registra la recepción de cada mensaje por su destinatario, mientras que `SocialReminder` controla el ciclo de vida del recordatorio. Junto a ellos se agrupan los value objects, las enumeraciones, los commands, las queries y los eventos de dominio.
 
-Los elementos centrales son los tres aggregate roots del contexto: AudioMessage, PhotoMessage y SocialReminder. Sus atributos son privados y solo se modifican a través de sus métodos públicos, lo que garantiza que ninguna regla del ciclo de vida de un mensaje o recordatorio pueda vulnerarse desde fuera del aggregate. AudioMessage gestiona los estados RECORDED, SHARED y DISCARDED mediante los métodos record, share, discard y play. PhotoMessage encapsula el acto de compartir una foto dentro del círculo. SocialReminder gestiona los estados PENDING, COMPLETED y CANCELLED mediante los métodos schedule, complete y cancel.
-
-Los value objects aparecen relacionados con cada aggregate por composición con multiplicidad 1, salvo ReminderDescription, que es opcional y se relaciona con multiplicidad 0..1. Estos tipos encapsulan las validaciones de formato y evitan la obsesión por primitivos: el dominio nunca maneja una URL de audio, un título de recordatorio o una fecha programada como cadenas o primitivos simples. Las enumeraciones AudioMessageStatus, PhotoMessageStatus y SocialReminderStatus se asocian también a sus respectivos aggregates con multiplicidad 1 y expresan el estado del ciclo de vida de cada uno.
-
-El diagrama incluye además los Commands y Queries que expresan las intenciones de escritura y lectura del contexto, y los Domain Events que cada aggregate registra al completarse cada operación. Finalmente se muestran las abstracciones declaradas por el dominio: IAudioMessageRepository, IPhotoMessageRepository e ISocialReminderRepository, que definen los contratos de persistencia de cada aggregate; IAudioMessageCommandService, IPhotoMessageCommandService e ISocialReminderCommandService, que definen las operaciones de escritura; IAudioMessageQueryService, IPhotoMessageQueryService e ISocialReminderQueryService, que definen las operaciones de lectura; e IDomainEventPublisher, que aísla al dominio del mecanismo técnico de publicación de eventos. Ninguna de estas interfaces depende de las capas superiores, de modo que las dependencias apuntan siempre hacia el dominio.
+El dominio declara además las interfaces de los servicios de aplicación (`AudioMessageCommandService`, `PhotoMessageCommandService`, `SocialReminderCommandService` y sus servicios de consulta) y de los repositorios (`AudioMessageRepository`, `PhotoMessageRepository` y `SocialReminderRepository`). Estas interfaces orquestan la lógica y son implementadas por las capas externas: la capa Application aporta los servicios `Impl` y los servicios salientes `MediaStorageService`, `ExternalCareCircleService` y `ExternalIamService`, y la capa Infrastructure aporta los repositorios, los mappers, las entidades JPA y `AzureBlobMediaStorageService` para el almacenamiento de archivos. Por su parte, la capa Interface expone los controladores REST y el scheduler `SocialReminderScheduler`.
 
 <div align="center">
 
-![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/social-companionship.svg)
-![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/social-companionship_class3.svg)
-![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/social-companionship_class2.svg)
-  <br/><i>Imagen 51. Class Diagram del Bounded Context Social Companionship.</i>
+![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/class-diagram-social.svg)
+<br/><i>Imagen 51. Bounded Context Domain Layer Class Diagram</i>
 
 </div>
 <br>
 
 ##### 2.6.5.6.2. Bounded Context Database Design Diagram
 
-El diagrama de base de datos (Imagen 52) presenta los objetos que permiten la persistencia del bounded context **Social Companionship** sobre el motor SQLite. El contexto se materializa en tres tablas que corresponden a los tres aggregates roots del dominio: `audio_messages`, `photo_messages` y `social_reminders`.
+El diagrama de base de datos presenta los objetos que permiten la persistencia del bounded context **Social Companionship** sobre el motor MySQL. El contexto se materializa en tres tablas: `companion_messages`, `message_receipts` y `social_reminders`. Las dos primeras sostienen el intercambio de mensajes multimedia, y la tercera, los recordatorios de contacto social. Los identificadores se almacenan como `BINARY(16)` y las fechas en UTC con `DATETIME(6)`.
 
-**Tabla audio_messages**
-
-| Columna | Tipo | Constraints | Descripción |
-|---|---|---|---|
-| id | uuid | PK | Identificador único del mensaje de audio. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo de cuidado al que pertenece el mensaje. |
-| sender_id | uuid | NOT NULL, FK → users.id | Usuario que grabó el mensaje. |
-| audio_url | varchar(500) | NOT NULL | URL de acceso al archivo de audio grabado. |
-| status | audio_message_status | NOT NULL, DEFAULT 'RECORDED' | Estado del mensaje: grabado, compartido o descartado. |
-| recorded_at | timestamp | NOT NULL | Fecha y hora en que se inició la grabación. |
-| shared_at | timestamp | - | Momento en que fue compartido. Nulo si status ≠ SHARED. |
-| discarded_at | timestamp | - | Momento en que fue descartado. Nulo si status ≠ DISCARDED. |
-
-Esta tabla es el aggregate root del flujo de mensajes de audio. Registra el ciclo de vida completo del mensaje desde su grabación hasta su compartición o descarte. Las columnas `shared_at` y `discarded_at` son mutuamente excluyentes: solo una puede estar poblada según el valor de `status`. Incluye un índice sobre `care_circle_id` para optimizar la consulta de mensajes por círculo.
-
-**Tabla photo_messages**
+**Tabla companion_messages**
 
 | Columna | Tipo | Constraints | Descripción |
 |---|---|---|---|
-| id | uuid | PK | Identificador único del mensaje de foto. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo de cuidado al que pertenece el mensaje. |
-| sender_id | uuid | NOT NULL, FK → users.id | Usuario que compartió la foto. |
-| photo_url | varchar(500) | NOT NULL | URL de acceso a la imagen compartida. |
-| status | photo_message_status | NOT NULL, DEFAULT 'SHARED' | Estado del mensaje: compartido. |
-| shared_at | timestamp | NOT NULL | Fecha y hora en que la foto fue compartida con el círculo. |
+| id | binary(16) | PK | Identificador único del mensaje. |
+| care_circle_id | binary(16) | NOT NULL, FK → care_circles.id | Círculo de cuidado en el que se comparte el mensaje. |
+| sender_id | binary(16) | NOT NULL, FK → users.id | Usuario que envía el mensaje. |
+| type | message_type | NOT NULL | Tipo de mensaje: AUDIO o PHOTO. |
+| media_url | varchar(500) | NOT NULL | Referencia al archivo de audio o imagen. |
+| duration_seconds | int | - | Duración del audio en segundos. Solo aplica cuando type = AUDIO. |
+| sent_at | datetime(6) | NOT NULL | Fecha y hora en que se envió el mensaje, en UTC. |
 
-Esta tabla es el aggregate root del flujo de mensajes de foto. A diferencia de los mensajes de audio, una foto se comparte directamente sin pasar por un estado intermedio de grabación, por lo que su ciclo de vida es más simple. Incluye un índice sobre `care_circle_id` para optimizar la consulta de fotos por círculo.
+Esta tabla almacena en una sola estructura los mensajes de audio y de fotografía, diferenciados por la columna `type`. Un audio va del adulto mayor a todos los familiares activos del círculo, y una fotografía va de un familiar al adulto mayor. La columna `duration_seconds` solo se llena para los audios. Incluye un índice compuesto sobre `(care_circle_id, type, sent_at)` para optimizar la consulta de los mensajes de un círculo por tipo y por fecha de envío.
+
+**Tabla message_receipts**
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| message_id | binary(16) | PK (compuesta), NOT NULL, FK → companion_messages.id | Mensaje recibido. |
+| recipient_id | binary(16) | PK (compuesta), NOT NULL, FK → users.id | Destinatario del mensaje. |
+| opened_at | datetime(6) | - | Momento en que el destinatario reprodujo el audio o vio la fotografía. Nulo mientras no lo haya abierto. |
+
+Esta tabla registra la recepción de cada mensaje por cada destinatario. Se crea una fila por destinatario en el momento de enviar el mensaje, y `opened_at` se completa la primera vez que el destinatario lo abre. Su llave primaria es compuesta por `(message_id, recipient_id)`, lo que impide registrar dos veces al mismo destinatario para un mismo mensaje.
 
 **Tabla social_reminders**
 
 | Columna | Tipo | Constraints | Descripción |
 |---|---|---|---|
-| id | uuid | PK | Identificador único del recordatorio. |
-| care_circle_id | uuid | NOT NULL, FK → care_circles.id | Círculo de cuidado al que pertenece el recordatorio. |
-| creator_id | uuid | NOT NULL, FK → users.id | Usuario que programó el recordatorio. |
-| title | varchar(200) | NOT NULL | Título del recordatorio. No puede ser cadena vacía. |
-| description | text | - | Descripción opcional del recordatorio. |
-| scheduled_date | date | NOT NULL | Fecha en que debe ejecutarse el recordatorio. Posterior a la fecha de creación. |
-| status | social_reminder_status | NOT NULL, DEFAULT 'PENDING' | Estado del recordatorio: pendiente, completado o cancelado. |
-| created_at | timestamp | NOT NULL | Fecha y hora de creación del recordatorio. |
-| completed_at | timestamp | - | Momento en que fue completado. Nulo si status ≠ COMPLETED. |
-| cancelled_at | timestamp | - | Momento en que fue cancelado. Nulo si status ≠ CANCELLED. |
+| id | binary(16) | PK | Identificador único del recordatorio. |
+| older_adult_id | binary(16) | NOT NULL, FK → users.id | Adulto mayor que programó el recordatorio. |
+| title | varchar(120) | NOT NULL | Título del recordatorio. |
+| description | varchar(300) | - | Descripción opcional del recordatorio. |
+| remind_at | datetime(6) | NOT NULL | Instante en que debe presentarse el recordatorio, en UTC. |
+| status | reminder_status | NOT NULL, DEFAULT 'SCHEDULED' | Estado del recordatorio: programado, presentado, pospuesto, completado, cancelado o no completado. |
+| completed_at | datetime(6) | - | Momento en que se completó. Nulo mientras no se haya completado. |
+| created_at | datetime(6) | NOT NULL | Fecha y hora de creación, en UTC. |
+| updated_at | datetime(6) | NOT NULL | Fecha y hora de la última modificación, en UTC. |
 
-Esta tabla es el aggregate root del flujo de recordatorios sociales. Gestiona el ciclo de vida del recordatorio desde su programación hasta su completado o cancelación. Las columnas `completed_at` y `cancelled_at` son mutuamente excluyentes según el valor de `status`. Incluye índices sobre `care_circle_id` y `status` para optimizar las consultas de recordatorios activos por círculo.
-
+Esta tabla gestiona el ciclo de vida del recordatorio desde su programación hasta su cierre. Los valores posibles de `status` son SCHEDULED, PRESENTED, POSTPONED, COMPLETED, CANCELED y MISSED. Incluye dos índices: `(older_adult_id, remind_at)`, para consultar los recordatorios de un adulto mayor, y `(status, remind_at)`, para que las tareas periódicas encuentren los recordatorios por presentar o por cerrar.
 
 **Relaciones entre tablas**
 
-Las tres tablas referencian a `care_circles`, que es el aggregate root del bounded context Care Circle y actúa como punto de entrada contextual: todo mensaje de audio, mensaje de foto o recordatorio social existe dentro de un círculo de cuidado concreto. Las columnas `sender_id` y `creator_id` referencian a `users`, que es la tabla del bounded context Identity & Access y actúa como referencia externa en este contexto. Ninguna de las tres tablas se relaciona entre sí, ya que representan flujos de dominio independientes dentro del mismo bounded context.
+La tabla `companion_messages` referencia a `care_circles`, que pertenece al bounded context Care Circle y actúa como punto de entrada contextual: todo mensaje existe dentro de un círculo de cuidado concreto. Las columnas `sender_id`, `recipient_id` y `older_adult_id` referencian a `users`, que pertenece al bounded context Identity & Access y actúa como referencia externa en este contexto. La tabla `message_receipts` depende de `companion_messages`, de modo que cada mensaje tiene una fila por destinatario. La tabla `social_reminders` es independiente de las otras dos, ya que representa un flujo de dominio distinto dentro del mismo bounded context.
+
 
 <div align="center">
 
-![Database Diagram - Social companionship](assets/img/bounded-context/social-companionship/database-diagram.png)
+![Database Diagram - Social companionship](assets/img/bounded-context/social-companionship/database.png)
   <br/><i>Imagen 52. Database Design Diagram del Bounded Context Social Companionship.</i>
 
 </div>
@@ -5381,131 +5957,254 @@ Las tres tablas referencian a `care_circles`, que es el aggregate root del bound
 
 ### 2.6.6. Bounded Context: Alerts & Safety
 
-El bounded context **Alerts and Safety** es responsable de garantizar que el familiar a distancia sea informado cuando la situación del adulto mayor lo amerite: ante una emergencia declarada explícitamente por el propio adulto mayor, ante una ausencia prolongada de respuesta al check-in diario, o ante un patrón sostenido de malestar detectado por **Wellbeing Monitoring**. A continuación se presenta el diseño táctico propuesto por el equipo para este bounded context, aplicando Domain-Driven Design, alineado con el diagrama de base de datos consolidado del equipo.
+El bounded context Alerts and Safety garantiza que los familiares a distancia se enteren cuando la situación del adulto mayor requiere su intervención. Gestiona dos tipos de alerta: la de emergencia, que el adulto mayor activa con el botón de auxilio, y la de inactividad, que se genera cuando no responde su check-in dentro del plazo. Para ambas registra quién la reconoce y quién la resuelve, de modo que todos los familiares sepan si alguien ya está actuando. Es un contexto core: concentra la función de seguridad de Serenia, de la que depende la confianza de las familias en el producto.
 
-<br>
+Su modelo se organiza en dos aggregates: `EmergencyAlert` e `InactivityAlert`. Ambos se persisten en la misma tabla, diferenciados por su tipo, y comparten el ciclo de reconocimiento y resolución por parte de los familiares. Se modelan por separado porque sus ciclos de vida difieren: la emergencia se despacha a los familiares y confirma su entrega al adulto mayor, mientras que la inactividad se origina en un check-in no respondido y queda disponible directamente en la vista de alertas.
+
+El contexto reacciona al evento `CheckInMissed` de Daily Check-in para evaluar la inactividad y consulta a Care Circle los familiares activos del adulto mayor, tanto para despachar las emergencias como para verificar que solo los familiares vinculados consulten y atiendan las alertas. Las notificaciones se registran dentro de la aplicación y se muestran en el apartado de alertas de cada familiar.
 
 #### 2.6.6.1. Domain Layer
 
-**Sub-capa Model - Aggregates:**
+En esta capa se representan las reglas de generación, despacho y atención de alertas, sin dependencia de frameworks de persistencia, red ni interfaz.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Aggregate | Alert | Entidad que representa un incidente crítico generado por el botón de auxilio, por inactividad sostenida o por un patrón de bienestar negativo | Mantener el ciclo de vida del incidente (apertura, notificación, atención y cierre), clasificando su tipo y severidad | Relacionado con Wellbeing Monitoring (origen del patrón cuando el tipo es WELLBEING) y con InactivityWindow (origen cuando el tipo es INACTIVITY) |
-| Entity | AlertNotification | Entidad que registra el envío de una notificación push de un Alert a un familiar vinculado específico | Trazar el estado de entrega de la notificación por cada familiar y canal | Pertenece al aggregate Alert; se crea una por cada familiar vinculado notificado |
-| Entity | AlertAttention | Entidad que registra la confirmación de atención de un Alert por parte de un familiar | Guardar quién atendió el incidente, cuándo y con qué nota de resolución | Pertenece al aggregate Alert |
-| Aggregate | InactivityWindow | Entidad que representa el plazo de espera entre un check-in no respondido y la eventual escalación a un Alert | Registrar la apertura de la ventana, el envío del recordatorio de contacto y, de vencer sin respuesta, marcar la escalación | Relacionado con el bounded context Daily Check-in (origen del check-in no respondido) y con Alert (destino cuando la ventana escala) |
+**Sub-capa Model: Aggregates**
 
-<br>
+`EmergencyAlert` (Aggregate Root): representa una solicitud de ayuda inmediata del adulto mayor. Controla su despacho a los familiares vinculados, la confirmación de entrega y su atención.
 
-**Sub-capa Model - Commands:**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | AlertId | private | Identificador único de la alerta. |
+| olderAdultId | OlderAdultId | private | Adulto mayor que activó el botón de auxilio. |
+| status | AlertStatus | private | Estado de la alerta. |
+| triggeredAt | Instant | private | Instante de la activación, en UTC. |
+| resolvedAt | Instant | private | Instante de la resolución; es nulo mientras la alerta no se haya resuelto. |
+| notifications | List\<AlertNotification\> | private | Notificaciones registradas para cada familiar vinculado al momento del despacho. |
+| attentions | List\<AlertAttention\> | private | Reconocimiento y resolución registrados por los familiares. |
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Command | TriggerEmergencyAlertCommand | Comando para registrar la activación del botón de auxilio | Representar la intención del adulto mayor de solicitar ayuda inmediata, creando un Alert de tipo EMERGENCY solo si existen familiares vinculados registrados localmente | Usado en la implementación del servicio de comandos de alertas |
-| Command | OpenInactivityWindowCommand | Comando para abrir una ventana de inactividad | Representar la intención de iniciar el plazo de espera tras un check-in no respondido | Ejecutado por el consumer del evento `UnansweredCheckIn` de Daily Check-in |
-| Command | SendInactivityReminderCommand | Comando para enviar un recordatorio de contacto al adulto mayor | Representar la intención de notificarlo antes de que la ventana de inactividad expire | Usado en la implementación del servicio de comandos de alertas |
-| Command | CloseInactivityWindowCommand | Comando para cerrar una ventana de inactividad sin escalamiento | Representar la intención de finalizar la ventana cuando el adulto mayor retoma actividad antes de que expire | Usado en la implementación del servicio de comandos de alertas |
-| Command | EscalateInactivityWindowCommand | Comando para escalar una ventana de inactividad vencida | Representar la intención de convertir la inactividad no atendida en un Alert de tipo INACTIVITY | Ejecutado automáticamente por una policy tras vencer la ventana sin respuesta al recordatorio |
-| Command | RaiseWellbeingAlertCommand | Comando para generar un Alert a partir de un patrón de malestar | Representar la intención de clasificar la severidad del patrón notificado por Wellbeing Monitoring y crear un Alert de tipo WELLBEING | Ejecutado por el consumer del evento `DiscomfortPatternDetected` de Wellbeing Monitoring |
-| Command | NotifyLinkedRelativesCommand | Comando para notificar un Alert a los familiares vinculados | Representar la intención de crear una AlertNotification por cada familiar vinculado y cambiar el estado del Alert a NOTIFIED | Ejecutado automáticamente por una policy tras la creación de cualquier Alert |
-| Command | ConfirmAlertAttentionCommand | Comando para registrar la atención de un Alert | Representar la intención del familiar de confirmar que atendió el incidente, creando una AlertAttention y cambiando el estado del Alert a ATTENDED | Usado en la implementación del servicio de comandos de alertas |
-| Command | CloseAlertCommand | Comando para cerrar un Alert atendido | Representar la intención del familiar de marcar el incidente como resuelto | Usado en la implementación del servicio de comandos de alertas |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| trigger(olderAdultId, triggeredAt) | public (static) | Factory que registra la activación del botón de auxilio y el evento `EmergencyAlertRaised`. |
+| dispatch(relativeIds, dispatchedAt) | public | Registra una notificación para cada familiar vinculado y registra el evento `EmergencyAlertDispatched`. Si no hay familiares vinculados, marca el despacho como fallido y registra el evento `EmergencyAlertDispatchFailed`. |
+| confirmDelivery(confirmedAt) | public | Marca las notificaciones como entregadas, de modo que la alerta queda visible para cada familiar, y registra el evento `EmergencyAlertDeliveryConfirmed`. Solo procede si la alerta fue despachada. |
+| acknowledge(relativeId, acknowledgedAt) | public | Registra que un familiar está atendiendo la emergencia y el evento `EmergencyAlertAcknowledged`. Solo procede si la alerta fue despachada y aún no ha sido reconocida. |
+| resolve(relativeId, resolutionNote, resolvedAt) | public | Marca como resuelta una emergencia previamente reconocida, guarda la nota de resolución y registra el evento `EmergencyAlertResolved`. |
+| isDeliveryConfirmed() | public | Indica si la entrega fue confirmada; con ello se informa al adulto mayor que su familia fue notificada. |
+| isOpen() | public | Indica si la alerta aún no ha sido resuelta. |
 
-<br>
+`InactivityAlert` (Aggregate Root): representa la falta de respuesta del adulto mayor a su check-in dentro del plazo. Se asocia al check-in que la originó y controla su atención.
 
-**Sub-capa Model - Queries:**
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | AlertId | private | Identificador único de la alerta. |
+| olderAdultId | OlderAdultId | private | Adulto mayor que no respondió su check-in. |
+| checkInId | CheckInId | private | Check-in no respondido que originó la alerta; cada check-in genera a lo sumo una alerta. |
+| status | AlertStatus | private | Estado de la alerta. |
+| triggeredAt | Instant | private | Instante en que se generó la alerta, en UTC. |
+| resolvedAt | Instant | private | Instante de la resolución; es nulo mientras la alerta no se haya resuelto. |
+| attentions | List\<AlertAttention\> | private | Reconocimiento y resolución registrados por los familiares. |
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Query | GetAlertByIdQuery | Consulta para obtener un Alert por su identificador | Representar la intención de obtener el detalle de un incidente específico | Usado en la implementación del servicio de consultas |
-| Query | GetAlertsByOlderAdultIdQuery | Consulta para obtener los Alerts de un adulto mayor | Representar la intención de listar el historial completo de incidentes (emergencia, inactividad y bienestar) asociado a un adulto mayor | Usado en la implementación del servicio de consultas |
-| Query | GetActiveAlertsByOlderAdultIdQuery | Consulta para obtener los Alerts activos de un adulto mayor | Representar la intención de listar únicamente los incidentes que aún no han sido cerrados | Usado en la implementación del servicio de consultas |
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| evaluate(alreadyRaisedForCheckIn, activeRelativeCount) | public (static) | Determina si un check-in no respondido constituye inactividad que debe alertarse: el check-in no debe tener una alerta previa y el adulto mayor debe tener al menos un familiar vinculado a quien informar. |
+| raise(olderAdultId, checkInId, raisedAt) | public (static) | Factory que genera la alerta de inactividad y registra el evento `InactivityAlertRaised`. |
+| acknowledge(relativeId, acknowledgedAt) | public | Registra que un familiar está atendiendo la alerta y el evento `InactivityAlertAcknowledged`. Solo procede si la alerta aún no ha sido reconocida. |
+| resolve(relativeId, resolutionNote, resolvedAt) | public | Marca como resuelta una alerta previamente reconocida, guarda la nota de resolución y registra el evento `InactivityAlertResolved`. |
+| isOpen() | public | Indica si la alerta aún no ha sido resuelta. |
 
-<br>
+**Sub-capa Model: Entities**
 
-**Sub-capa Repositories:**
+`AlertNotification`: representa el aviso de una alerta de emergencia dirigido a un familiar vinculado. Pertenece al aggregate `EmergencyAlert`.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Interface | IAlertRepository | Repositorio para operaciones de persistencia del modelo Alert, incluyendo sus entidades AlertNotification y AlertAttention | Definir contratos para operaciones CRUD sobre los incidentes | Implementado en la capa de Infrastructure |
-| Interface | IInactivityWindowRepository | Repositorio para operaciones de persistencia del modelo InactivityWindow | Definir contratos para operaciones CRUD sobre las ventanas de inactividad | Implementado en la capa de Infrastructure |
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | AlertNotificationId | private | Identificador único de la notificación. |
+| relativeId | RelativeId | private | Familiar al que se dirige la notificación; existe una por familiar y alerta. |
+| status | DeliveryStatus | private | Estado de la notificación: enviada o entregada. |
+| sentAt | Instant | private | Instante del registro de la notificación, en UTC. |
+| deliveredAt | Instant | private | Instante en que la notificación quedó disponible para el familiar; es nulo mientras no se confirme. |
 
-<br>
+| Método | Visibilidad | Descripción |
+| --- | --- | --- |
+| markAsDelivered(deliveredAt) | public | Marca la notificación como entregada. |
 
-**Sub-capa Services:**
+`AlertAttention`: representa una acción de un familiar sobre una alerta, ya sea su reconocimiento o su resolución. Pertenece a los aggregates `EmergencyAlert` e `InactivityAlert`.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Interface | IAlertCommandService | Servicio para métodos de comandos de alertas | Estipular una estructura clara a seguir para operaciones de escritura sobre incidentes y ventanas de inactividad | Usado en la capa "Application" para implementar los métodos dados |
-| Interface | IAlertQueryService | Servicio para métodos de consulta de alertas | Estipular una estructura clara a seguir para operaciones de lectura | Usado en la capa "Application" para la implementación de los métodos |
+| Atributo | Tipo | Visibilidad | Descripción |
+| --- | --- | --- | --- |
+| id | AlertAttentionId | private | Identificador único de la acción. |
+| relativeId | RelativeId | private | Familiar que realizó la acción. |
+| action | AttentionAction | private | Acción realizada; cada alerta admite un único reconocimiento y una única resolución. |
+| actedAt | Instant | private | Instante de la acción, en UTC. |
+| resolutionNote | ResolutionNote | private | Nota que describe cómo se resolvió la alerta, opcional y solo para la resolución. |
 
-<br>
+**Sub-capa Model: Value Objects**
+
+Se implementan como records inmutables que validan su contenido al construirse. Los límites de longitud coinciden con las columnas de la base de datos.
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| AlertId, AlertNotificationId, AlertAttentionId | value: UUID | Identidades inmutables de los aggregates y entities del contexto. |
+| OlderAdultId | value: UUID | Referencia por identidad a una cuenta de adulto mayor de Identity & Access. |
+| RelativeId | value: UUID | Referencia por identidad a una cuenta de familiar a distancia de Identity & Access. |
+| CheckInId | value: UUID | Referencia por identidad a un check-in de Daily Check-in. |
+| ResolutionNote | value: String | Nota de resolución, de máximo 300 caracteres. |
+
+**Sub-capa Model: Enumerations**
+
+| Nombre | Valores | Descripción |
+| --- | --- | --- |
+| AlertType | EMERGENCY, INACTIVITY | Tipo de alerta; distingue ambos aggregates en la persistencia. |
+| AlertStatus | RAISED, DISPATCHED, DISPATCH_FAILED, ACKNOWLEDGED, RESOLVED | Estado de la alerta. Una emergencia pasa por RAISED, DISPATCHED o DISPATCH_FAILED, ACKNOWLEDGED y RESOLVED; una inactividad, por RAISED, ACKNOWLEDGED y RESOLVED. |
+| DeliveryStatus | SENT, DELIVERED | Estado de una notificación de emergencia. |
+| AttentionAction | ACKNOWLEDGED, RESOLVED | Acción de un familiar sobre una alerta. |
+
+**Sub-capa Model: Commands**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| EvaluateInactivityCommand | olderAdultId, checkInId, checkDate | Intención de evaluar si un check-in no respondido debe generar una alerta. |
+| RaiseInactivityAlertCommand | olderAdultId, checkInId | Intención de generar una alerta de inactividad. |
+| TriggerEmergencyAlertCommand | olderAdultId | Intención del adulto mayor de solicitar ayuda inmediata. |
+| DispatchEmergencyAlertCommand | alertId | Intención de notificar una emergencia a los familiares vinculados. |
+| ConfirmEmergencyAlertDeliveryCommand | alertId | Intención de confirmar que la emergencia quedó disponible para los familiares. |
+| AcknowledgeEmergencyAlertCommand | alertId, relativeId | Intención de un familiar de indicar que está atendiendo una emergencia. |
+| AcknowledgeInactivityAlertCommand | alertId, relativeId | Intención de un familiar de indicar que está atendiendo una alerta de inactividad. |
+| ResolveEmergencyAlertCommand | alertId, relativeId, resolutionNote | Intención de un familiar de marcar una emergencia como resuelta. |
+| ResolveInactivityAlertCommand | alertId, relativeId, resolutionNote | Intención de un familiar de marcar una alerta de inactividad como resuelta. |
+
+**Sub-capa Model: Queries**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| GetAlertsByOlderAdultIdQuery | olderAdultId, requesterId | Consulta del historial de alertas de un adulto mayor, de ambos tipos, ordenadas de la más reciente a la más antigua. |
+| GetAlertByIdQuery | alertId, requesterId | Consulta del detalle de una alerta. |
+
+**Sub-capa Model: Events**
+
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| InactivityDetected | olderAdultId, checkInId, checkDate, occurredAt | Un check-in no respondido constituye inactividad que debe alertarse. |
+| InactivityAlertRaised | alertId, olderAdultId, checkInId, occurredAt | Se generó una alerta de inactividad. |
+| EmergencyAlertRaised | alertId, olderAdultId, occurredAt | El adulto mayor activó el botón de auxilio. |
+| EmergencyAlertDispatched | alertId, olderAdultId, relativeIds, occurredAt | La emergencia se notificó a todos los familiares vinculados. |
+| EmergencyAlertDispatchFailed | alertId, olderAdultId, occurredAt | La emergencia no pudo notificarse porque el adulto mayor no tiene familiares vinculados. |
+| EmergencyAlertDeliveryConfirmed | alertId, olderAdultId, occurredAt | La emergencia quedó disponible para los familiares y se confirmó al adulto mayor. |
+| EmergencyAlertAcknowledged | alertId, relativeId, occurredAt | Un familiar indicó que está atendiendo la emergencia. |
+| InactivityAlertAcknowledged | alertId, relativeId, occurredAt | Un familiar indicó que está atendiendo la alerta de inactividad. |
+| EmergencyAlertResolved | alertId, relativeId, occurredAt | Un familiar marcó la emergencia como resuelta. |
+| InactivityAlertResolved | alertId, relativeId, occurredAt | Un familiar marcó la alerta de inactividad como resuelta. |
+
+**Sub-capa Repositories**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | EmergencyAlertRepository | save(alert), findById(alertId), findAllByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `EmergencyAlert` junto con sus notificaciones y acciones de atención. Se implementa en Infrastructure. |
+| Interface | InactivityAlertRepository | save(alert), findById(alertId), existsByCheckInId(checkInId), findAllByOlderAdultId(olderAdultId) | Contrato de persistencia del aggregate `InactivityAlert` junto con sus acciones de atención. Se implementa en Infrastructure. |
+
+**Sub-capa Services**
+
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Interface | EmergencyAlertCommandService | handle(TriggerEmergencyAlertCommand), handle(DispatchEmergencyAlertCommand), handle(ConfirmEmergencyAlertDeliveryCommand), handle(AcknowledgeEmergencyAlertCommand), handle(ResolveEmergencyAlertCommand) | Contrato de las operaciones de escritura sobre las alertas de emergencia. |
+| Interface | InactivityAlertCommandService | handle(EvaluateInactivityCommand), handle(RaiseInactivityAlertCommand), handle(AcknowledgeInactivityAlertCommand), handle(ResolveInactivityAlertCommand) | Contrato de las operaciones de escritura sobre las alertas de inactividad. |
+| Interface | AlertQueryService | handle(GetAlertsByOlderAdultIdQuery), handle(GetAlertByIdQuery) | Contrato de la lectura de alertas de ambos tipos. |
 
 #### 2.6.6.2. Interface Layer
 
-**Sub-capa REST - Resources:**
+Clases que exponen el bounded context hacia el exterior y traducen las peticiones entrantes al lenguaje del dominio.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Resource | AlertResource | Estructura de datos de un Alert para API | Representar y exponer datos de un incidente (emergencia, inactividad o bienestar) de forma accesible y estructurada para el cliente | Usado en controladores para estructurar respuestas de alertas |
-| Resource | TriggerEmergencyAlertResource | Estructura de petición para activar una emergencia | Representar datos de entrada necesarios para solicitar la activación del botón de auxilio | Usado en controlador para procesar peticiones de activación |
-| Resource | ConfirmAlertAttentionResource | Estructura de petición para confirmar la atención de un Alert | Representar datos necesarios para identificar el Alert y registrar la nota de resolución | Usado en controlador para procesar peticiones de confirmación |
+**Sub-capa REST: Controllers**
 
-<br>
+| Nombre | Endpoints | Descripción |
+| --- | --- | --- |
+| EmergencyAlertsController | POST /api/v1/emergency-alerts, POST /api/v1/emergency-alerts/{alertId}/acknowledge, POST /api/v1/emergency-alerts/{alertId}/resolve | Punto de entrada de la activación del botón de auxilio, reservada al propio adulto mayor, y de la atención de emergencias por parte de los familiares. La activación responde 201 Created con el estado final de la alerta, que indica si la familia fue notificada o si el despacho falló. |
+| InactivityAlertsController | POST /api/v1/inactivity-alerts/{alertId}/acknowledge, POST /api/v1/inactivity-alerts/{alertId}/resolve | Punto de entrada de la atención de alertas de inactividad por parte de los familiares. |
+| AlertsController | GET /api/v1/alerts?olderAdultId={olderAdultId}, GET /api/v1/alerts/{alertId} | Punto de entrada de la vista de alertas, con su tipo y estado, para el adulto mayor y sus familiares vinculados. |
 
-**Sub-capa REST - Transform:**
+El reconocimiento y la resolución responden 409 Conflict cuando la alerta no admite la acción en su estado actual, por ejemplo si ya fue reconocida o si se intenta resolver sin un reconocimiento previo. Las operaciones responden 403 Forbidden cuando el usuario autenticado no es el adulto mayor ni un familiar con vínculo activo.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Assembler | AlertResourceFromEntityAssembler | Transformador de entidad Alert a AlertResource | Convertir la entidad del dominio a su representación REST correspondiente | Usado en controladores para transformar respuestas |
-| Assembler | TriggerEmergencyAlertCommandFromResourceAssembler | Transformador de TriggerEmergencyAlertResource a TriggerEmergencyAlertCommand | Convertir la petición REST a comando del dominio | Usado en controlador para procesar peticiones de activación |
-| Assembler | ConfirmAlertAttentionCommandFromResourceAssembler | Transformador de ConfirmAlertAttentionResource a ConfirmAlertAttentionCommand | Convertir la petición REST a comando del dominio | Usado en controlador para procesar peticiones de confirmación |
+**Sub-capa REST: Resources**
 
-<br>
+| Nombre | Atributos | Descripción |
+| --- | --- | --- |
+| AlertResource | id, olderAdultId, type, status, checkInId, triggeredAt, deliveryConfirmed, acknowledgedBy, acknowledgedAt, resolvedBy, resolvedAt, resolutionNote | Representación de una alerta de cualquier tipo, con su estado de atención. |
+| ResolveAlertResource | resolutionNote | Datos de entrada para resolver una alerta. |
 
-**Sub-capa ACL - Consumers:**
+**Sub-capa REST: Transform**
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Consumer | UnansweredCheckInConsumer | Consumidor interno del evento de dominio UnansweredCheckIn | Escuchar, dentro del monolito modular, el evento publicado por el módulo Daily Check-in para desencadenar el `OpenInactivityWindowCommand` correspondiente | Usado como puente entre el bounded context Daily Check-in y Alerts and Safety |
-| Consumer | DiscomfortPatternDetectedConsumer | Consumidor interno del evento de dominio DiscomfortPatternDetected | Escuchar, dentro del monolito modular, el evento publicado por el módulo Wellbeing Monitoring para desencadenar el `RaiseWellbeingAlertCommand` correspondiente | Usado como puente entre el bounded context Wellbeing Monitoring y Alerts and Safety |
-| Consumer | FamilyLinkEstablishedConsumer | Consumidor interno del evento de dominio FamilyLinkEstablished | Mantener localmente la referencia de familiares vinculados a cada adulto mayor, disponible por propagación desde Care Circle sin requerir consulta síncrona al momento de notificar un Alert | Usado como puente entre el bounded context Care Circle y Alerts and Safety |
-
-<br>
+| Nombre | Descripción |
+| --- | --- |
+| AlertResourceFromEntityAssembler | Convierte los aggregates `EmergencyAlert` e `InactivityAlert` en su representación REST común. |
+| ResolveEmergencyAlertCommandFromResourceAssembler | Combina la petición con la alerta y el familiar autenticado para construir el comando de resolución de emergencia. |
+| ResolveInactivityAlertCommandFromResourceAssembler | Combina la petición con la alerta y el familiar autenticado para construir el comando de resolución de inactividad. |
 
 #### 2.6.6.3. Application Layer
 
-**Sub-capa Internal - CommandServices:**
+Clases que orquestan los flujos del contexto, coordinando los aggregates, los repositorios y los servicios de otros contextos.
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| CommandHandler | AlertCommandService | Implementación de comandos de alertas | Implementar los métodos para abrir, recordar, escalar y cerrar ventanas de inactividad, así como para activar, notificar, confirmar y cerrar Alerts, publicando los eventos de dominio correspondientes | Implementa los métodos de la interface IAlertCommandService en la capa de "Services" |
+**Sub-capa Internal: CommandServices (Command Handlers)**
 
-<br>
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| EmergencyAlertCommandServiceImpl | Registra la emergencia verificando que la solicite el propio adulto mayor. En el despacho obtiene los familiares con vínculo activo e invoca al aggregate; en la confirmación marca la entrega. En el reconocimiento y la resolución verifica que el familiar tenga un vínculo activo con el adulto mayor. Tras persistir, publica los eventos acumulados. | Implementa `EmergencyAlertCommandService`; usa `EmergencyAlertRepository`, `ExternalCareCircleService` y `DomainEventPublisher`. |
+| InactivityAlertCommandServiceImpl | Evalúa la inactividad consultando si el check-in ya tiene una alerta y cuántos familiares vinculados tiene el adulto mayor; cuando corresponde, publica el evento `InactivityDetected`. Genera la alerta y gestiona su reconocimiento y resolución, verificando que el familiar tenga un vínculo activo. Tras persistir, publica los eventos acumulados. | Implementa `InactivityAlertCommandService`; usa `InactivityAlertRepository`, `ExternalCareCircleService` y `DomainEventPublisher`. |
 
-**Sub-capa Internal - QueryServices:**
+**Sub-capa Internal: QueryServices**
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| QueryHandler | AlertQueryService | Implementación de consultas de alertas | Implementar los métodos para las consultas de Alerts por identificador, por adulto mayor y por estado activo | Implementa los métodos de la interface IAlertQueryService en la capa de "Services" |
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| AlertQueryServiceImpl | Resuelve el historial y el detalle de alertas, combinando ambos tipos ordenados por fecha, previa verificación de que el solicitante sea el adulto mayor o un familiar con vínculo activo. | Implementa `AlertQueryService`; usa `EmergencyAlertRepository`, `InactivityAlertRepository` y `ExternalCareCircleService`. |
 
-<br>
+**Sub-capa Internal: Event Handlers**
 
-#### 2.6.6.4 Infrastructure Layer
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| CheckInMissedEventHandler | Inicia la evaluación de inactividad cuando un check-in vence sin respuesta. Se ejecuta en una transacción propia, después de confirmarse el cierre del check-in, de modo que una falla en este contexto no afecte a Daily Check-in. | Escucha `CheckInMissed` de Daily Check-in; envía `EvaluateInactivityCommand`. |
+| InactivityDetectedEventHandler | Genera la alerta de inactividad en la misma transacción de la evaluación. | Escucha `InactivityDetected`; envía `RaiseInactivityAlertCommand`. |
+| EmergencyAlertRaisedEventHandler | Despacha la emergencia a los familiares. Se ejecuta en el mismo hilo, pero en una transacción propia posterior al registro de la alerta, de modo que la emergencia queda registrada aunque el despacho falle y la respuesta al adulto mayor ya refleja el resultado. | Escucha `EmergencyAlertRaised`; envía `DispatchEmergencyAlertCommand`. |
+| EmergencyAlertDispatchedEventHandler | Confirma la entrega de la emergencia en la misma transacción del despacho. | Escucha `EmergencyAlertDispatched`; envía `ConfirmEmergencyAlertDeliveryCommand`. |
 
-**Sub-capa Persistence - Repositories:**
+**Sub-capa Internal: Outbound Services**
 
-| Tipo | Nombre | Descripción | Responsabilidad Principal | Relación con otros elementos |
-|---|---|---|---|---|
-| Repository | AlertRepository | Repositorio para uso del modelo "Alert" | Acceder y manipular datos persistidos de alertas, notificaciones y atenciones en la base de datos | Usado en la capa "Application" para implementar operaciones CRUD de Alerts |
-| Repository | InactivityWindowRepository | Repositorio para uso del modelo "InactivityWindow" | Acceder y manipular datos persistidos de ventanas de inactividad en la base de datos | Usado en la capa "Application" para implementar operaciones CRUD de ventanas de inactividad |
+| Tipo | Nombre | Métodos principales | Descripción |
+| --- | --- | --- | --- |
+| Class | ExternalCareCircleService | fetchActiveRelativeIds(olderAdultId), isActiveRelativeOf(relativeId, olderAdultId) | Consume `CareCircleContextFacade` para obtener los familiares vinculados y verificar vínculos. |
 
-<br>
+#### 2.6.6.4. Infrastructure Layer
+
+Clases que resuelven el acceso a la base de datos MySQL, implementando las abstracciones definidas en la capa Domain.
+
+**Sub-capa Persistence: JPA Entities**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| AlertPersistenceEntity | Representa una fila de la tabla `alerts`, cuyo tipo determina si corresponde a una emergencia o a una inactividad. Contiene las colecciones de notificaciones y acciones de atención, que se persisten en cascada junto con la alerta. | Usada por `AlertJpaRepository` y por los mappers del contexto. |
+| AlertNotificationPersistenceEntity | Representa una fila de la tabla `alert_notifications`. | Contenida en `AlertPersistenceEntity`. |
+| AlertAttentionPersistenceEntity | Representa una fila de la tabla `alert_attentions`. | Contenida en `AlertPersistenceEntity`. |
+
+**Sub-capa Persistence: JPA Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| AlertJpaRepository | Interfaz de Spring Data JPA con las consultas por identificador y tipo, por adulto mayor y tipo ordenadas por fecha, resueltas sobre el índice `(older_adult_id, triggered_at)`, y la verificación por check-in, resuelta sobre el índice único de `check_in_id`. | Extiende `JpaRepository`; usada por `EmergencyAlertRepositoryImpl` e `InactivityAlertRepositoryImpl`. |
+
+**Sub-capa Persistence: Repositories**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| EmergencyAlertRepositoryImpl | Persiste y recupera el aggregate `EmergencyAlert` sobre las filas de tipo EMERGENCY. Si dos familiares reconocen la misma alerta de forma simultánea, traduce la violación del índice único `(alert_id, action)` en una excepción de dominio. | Implementa `EmergencyAlertRepository`; usa `AlertJpaRepository` y `EmergencyAlertPersistenceMapper`. |
+| InactivityAlertRepositoryImpl | Persiste y recupera el aggregate `InactivityAlert` sobre las filas de tipo INACTIVITY. Si un mismo check-in se evalúa dos veces, el índice único de `check_in_id` impide duplicar la alerta. | Implementa `InactivityAlertRepository`; usa `AlertJpaRepository` y `InactivityAlertPersistenceMapper`. |
+
+**Sub-capa Persistence: Mappers**
+
+| Nombre | Responsabilidad principal | Relación con otros elementos |
+| --- | --- | --- |
+| EmergencyAlertPersistenceMapper | Traduce entre el aggregate `EmergencyAlert`, con sus notificaciones y acciones de atención, y sus entidades de persistencia. | Usado por `EmergencyAlertRepositoryImpl`. |
+| InactivityAlertPersistenceMapper | Traduce entre el aggregate `InactivityAlert`, con sus acciones de atención, y sus entidades de persistencia. | Usado por `InactivityAlertRepositoryImpl`. |
 
 #### 2.6.6.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Alerts and Safety, elaborado con la herramienta Structurizr (Imagen 53). El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: el `AlertController` como punto de entrada de las peticiones REST; los *Resources* (`AlertResource`, `TriggerEmergencyAlertResource`, `ConfirmAlertAttentionResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y la entidad de dominio `Alert`; los *Commands* y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `AlertCommandService` y `AlertQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IAlertCommandService` e `IAlertQueryService`; y finalmente `IAlertRepository` e `IInactivityWindowRepository`, implementados por sus respectivos repositorios concretos, que gestionan la persistencia de los dos aggregates. Se incluye además `UnansweredCheckInConsumer`, `DiscomfortPatternDetectedConsumer` y `FamilyLinkEstablishedConsumer`, componentes que escuchan los eventos `UnansweredCheckIn` (publicado por Daily Check-in), `DiscomfortPatternDetected` (publicado por Wellbeing Monitoring) y `FamilyLinkEstablished` (publicado por Care Circle), respectivamente, para desencadenar la apertura de la ventana de inactividad, la generación de un Alert de tipo WELLBEING y el mantenimiento local de la referencia de familiares vinculados, esta última sin requerir consulta síncrona a Care Circle al momento de notificar un Alert.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Alerts and Safety, elaborado con la herramienta Structurizr (Imagen 53). El diagrama muestra la descomposición interna del bounded context en sus componentes, agrupados según su rol dentro de la arquitectura: los *Controllers* `EmergencyAlertsController`, `InactivityAlertsController` y `AlertsController` como puntos de entrada de las peticiones REST; los *Resources* `AlertResource` y `ResolveAlertResource`, que estructuran los datos expuestos por la API; los *Assemblers*, que transforman entre resources, commands y los aggregates `EmergencyAlert` e `InactivityAlert`; los servicios de aplicación `EmergencyAlertCommandServiceImpl` e `InactivityAlertCommandServiceImpl`, que atienden las operaciones de escritura, y `AlertQueryServiceImpl`, que atiende la lectura del historial y del detalle de las alertas; y los repositorios `EmergencyAlertRepositoryImpl` e `InactivityAlertRepositoryImpl`, que se apoyan en `AlertJpaRepository` y en los *Persistence Mappers* para persistir ambos aggregates en MySQL. Se incluyen además cuatro *Event Handlers* que encadenan el flujo de las alertas: `CheckInMissedEventHandler`, que escucha el evento `CheckInMissed` publicado por Daily Check-in para iniciar la evaluación de inactividad; `InactivityDetectedEventHandler`, que genera la alerta de inactividad; `EmergencyAlertRaisedEventHandler`, que despacha la emergencia a los familiares; y `EmergencyAlertDispatchedEventHandler`, que confirma su entrega. Finalmente, `ExternalCareCircleService` actúa como capa anticorrupción: consulta a Care Circle, a través de `CareCircleContextFacade`, los familiares con vínculo activo, sin que Alerts and Safety dependa del modelo interno de ese contexto.
 
 <br>
 
@@ -5524,7 +6223,7 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 
 ##### 2.6.6.6.1. Bounded Context Domain Layer Class Diagrams
 
-Diagrama de clases de la capa Domain: en la Imagen 54 se muestran las clases del dominio Alerts and Safety, que incluyen `Alert` (con sus entidades internas `AlertNotification` y `AlertAttention`) e `InactivityWindow` como aggregate roots, los Commands para las operaciones de activación, apertura, recordatorio, escalamiento, notificación, confirmación y cierre, las Queries para las consultas de historial por adulto mayor, e interfaces para los servicios de dominio con sus respectivas implementaciones.
+Diagrama de clases de la capa Domain: en la Imagen 54 se muestran las clases del dominio Alerts and Safety. Los aggregate roots son `EmergencyAlert` e `InactivityAlert`, que comparten la clase base `Alert`. Ambos registran la atención de los familiares mediante la entity `AlertAttention`, y `EmergencyAlert` contiene además la entity `AlertNotification`, que representa el aviso dirigido a cada familiar vinculado. Las enumeraciones `AlertType`, `AlertStatus`, `DeliveryStatus` y `AttentionAction` expresan el tipo y el estado de cada alerta. También se muestran las interfaces de dominio: `EmergencyAlertRepository` e `InactivityAlertRepository` para la persistencia, `EmergencyAlertCommandService` e `InactivityAlertCommandService` para las operaciones de escritura, con los Commands que reciben, y `AlertQueryService` para la lectura del historial y del detalle de las alertas de ambos tipos.
 
 <br>
 <div align="center">
@@ -5538,12 +6237,56 @@ Diagrama de clases de la capa Domain: en la Imagen 54 se muestran las clases del
 
 ##### 2.6.6.6.2. Bounded Context Database Design Diagram
 
-A continuación se presentan las tablas del bounded context Alerts and Safety, a partir del diagrama de base de datos consolidado por el equipo (Imagen 55):
+El diagrama de base de datos (Imagen 55) presenta las tablas que permiten la persistencia del bounded context **Alerts and Safety** sobre el motor MySQL 8, a partir del esquema consolidado por el equipo. Los identificadores son UUID almacenados como `BINARY(16)` y las fechas se guardan en UTC con `DATETIME(6)`. El contexto se materializa en tres tablas: `alerts`, que guarda las alertas de ambos aggregates (`EmergencyAlert` e `InactivityAlert`) diferenciadas por la columna `type`; `alert_notifications`, que registra el aviso de una emergencia a cada familiar vinculado; y `alert_attentions`, que registra el reconocimiento y la resolución que realizan los familiares. Las claves foráneas hacia `users` (Identity & Access) y `check_ins` (Daily Check-in) apuntan a tablas de otros bounded contexts.
 
-- **inactivity_windows:** Temporizadores que miden el silencio antes de escalar a una alarma real. Atributos: `id`, `older_adult_id`, `check_in_id`, `opened_at`, `expires_at`, `reminder_sent_at`, `escalated_at`, `status`.
-- **alerts:** Incidentes críticos generados por el botón de pánico, inactividad o patrones negativos. Atributos: `id`, `older_adult_id`, `type`, `severity`, `status`, `pattern_id`, `inactivity_window_id`, `triggered_at`, `closed_at`.
-- **alert_notifications:** Trazabilidad de la entrega de notificaciones push para cada alerta. Atributos: `id`, `alert_id`, `relative_id`, `channel`, `status`, `sent_at`, `delivered_at`.
-- **alert_attentions:** Registro de resolución para saber qué familiar atendió la crisis. Atributos: `id`, `alert_id`, `relative_id`, `confirmed_at`, `resolution_note`.
+**Tabla alerts**
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | binary(16) | PK | Identificador único de la alerta. |
+| older_adult_id | binary(16) | NOT NULL, FK → users.id | Adulto mayor al que corresponde la alerta. |
+| type | alert_type | NOT NULL | Tipo de alerta: EMERGENCY o INACTIVITY. |
+| status | alert_status | NOT NULL, DEFAULT 'RAISED' | Estado de la alerta: RAISED, DISPATCHED, DISPATCH_FAILED, ACKNOWLEDGED o RESOLVED. |
+| check_in_id | binary(16) | UNIQUE, FK → check_ins.id | Check-in no respondido que originó la alerta. Solo se completa en las alertas de tipo INACTIVITY. |
+| triggered_at | datetime(6) | NOT NULL | Instante en que se generó la alerta, en UTC. |
+| resolved_at | datetime(6) | - | Instante de la resolución. Nulo mientras la alerta no se haya resuelto. |
+
+Esta tabla almacena las alertas de emergencia y de inactividad en una misma estructura, ya que ambas comparten el ciclo de reconocimiento y resolución por parte de los familiares. El índice único sobre `check_in_id` garantiza que un check-in genere a lo sumo una alerta. Incluye un índice sobre `(older_adult_id, triggered_at)` para consultar el historial de alertas de un adulto mayor ordenado por fecha.
+
+**Tabla alert_notifications**
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | binary(16) | PK | Identificador único de la notificación. |
+| alert_id | binary(16) | NOT NULL, FK → alerts.id | Alerta de emergencia a la que pertenece la notificación. |
+| relative_id | binary(16) | NOT NULL, FK → users.id | Familiar al que se dirige la notificación. |
+| status | delivery_status | NOT NULL | Estado de la notificación: SENT o DELIVERED. |
+| sent_at | datetime(6) | NOT NULL | Instante del envío de la notificación, en UTC. |
+| delivered_at | datetime(6) | - | Instante en que la notificación quedó disponible para el familiar. Nulo mientras no se confirme. |
+
+Esta tabla registra el despacho de una emergencia a cada familiar con vínculo activo. Un índice único sobre `(alert_id, relative_id)` asegura que exista una sola notificación por familiar y alerta.
+
+**Tabla alert_attentions**
+
+| Columna | Tipo | Constraints | Descripción |
+|---|---|---|---|
+| id | binary(16) | PK | Identificador único de la acción de atención. |
+| alert_id | binary(16) | NOT NULL, FK → alerts.id | Alerta sobre la que actúa el familiar. |
+| relative_id | binary(16) | NOT NULL, FK → users.id | Familiar que realizó la acción. |
+| action | attention_action | NOT NULL | Acción realizada: ACKNOWLEDGED o RESOLVED. |
+| acted_at | datetime(6) | NOT NULL | Instante de la acción, en UTC. |
+| resolution_note | varchar(300) | - | Nota que describe cómo se resolvió la alerta. Opcional y solo para la resolución. |
+
+Esta tabla deja constancia de qué familiar reconoció una alerta y cuál la resolvió, de modo que todos los familiares sepan si alguien ya está actuando. Un índice único sobre `(alert_id, action)` permite un único reconocimiento y una única resolución por alerta, por lo que si dos familiares reconocen la misma alerta a la vez, el segundo intento se rechaza.
+
+**Enumeraciones**
+
+| Nombre | Valores | Descripción |
+|---|---|---|
+| alert_type | EMERGENCY, INACTIVITY | Tipo de alerta; distingue ambos aggregates en la tabla `alerts`. |
+| alert_status | RAISED, DISPATCHED, DISPATCH_FAILED, ACKNOWLEDGED, RESOLVED | Estado de la alerta a lo largo de su ciclo de vida. |
+| delivery_status | SENT, DELIVERED | Estado de entrega de una notificación de emergencia. |
+| attention_action | ACKNOWLEDGED, RESOLVED | Acción de un familiar sobre una alerta. |
 
 <br>
 
@@ -5559,8 +6302,146 @@ A continuación se presentan las tablas del bounded context Alerts and Safety, a
 
 # Capítulo III: Solution UI/UX Design
 ## 3.1. Product design
+
+El diseño de producto de Serenia define cómo se ven, se siente y se usan sus tres piezas: la aplicación para adulto mayor, la aplicación para el familiar y la landing page. Aquí se recogen las decisiones que determinan la interacción entre las personas y el sistema: cómo se organiza la información, qué funcionalidades se muestran primero y qué lenguaje visual transmite calma y cercanía.
+
 ### 3.1.1. Style Guidelines
+
+Las Style Guidelines son el repositorio visual común del equipo. Reúnen los activos, las fuentes, los colores y las reglas de uso que mantienen coherentes las tres piezas del producto, sin importar quién diseñe o desarrolle en cada interfaz.
+
 #### 3.1.1.1. General Style Guidelines
+
+Serenia cuenta con una guía de estilo visual que define su marca, tipografía, color, espaciado y tono de comunicación. La guía se basa en adaptaciones pensadas para adultos mayores y familiares.
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/general-style-guidelines-image.png" alt="General Style Guidelines - Image" width="700"/>
+  <br/><i>Imagen X. Portada de la guía "General Style Guidelines".</i>
+</div>
+<br>
+
+**Branding**
+
+Serenia busca dar a los adultos mayores que viven solos una forma simple de comunicar su día a día, y a sus familias, la tranquilidad de saber cómo están sin recurrir a un monitoreo invasivo. Su personalidad es cálida, serena, cercana, respetuosa, confiable y humana, y se apoya en cuatro valores: cercanía, autonomía, confianza y conexión emocional.
+
+El isotipo aplica la ley de cierre de la Gestalt: las hojas rodean dos circulos de distinto tamaño, que representan al adulto mayor y a su familiar bajo un mismo cuidado. El logo tiene variantes horizontal, vertical con eslogan, sobre fondo oscuro y de ícono de app, para adaptarse a cada soporte.
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/variantes-logo.png" alt="Variantes del Logo - Image" width="700"/>
+  <br/><i>Imagen X. Variantes del logo de Serenia.</i>
+</div>
+<br>
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/justificacion-isotipo-paleta.png" alt="Justificación del isotipo y la paleta - Image" width="700"/>
+  <br/><i>Imagen X. Justificación del isotipo y la paleta.</i>
+</div>
+<br>
+
+**Typography**
+
+La fuente principal es Nunito (pesos 400, 600, 700 y 800). Sus terminales redondeadas repiten la suavidad de las hojas del isotipo y ofrece buena legibilidad de números y tildes en español. La fuente secundaria es DM Mono, reservada para etiquetas, marcas de tiempo y tokens. Nunca se usa en texto corrido ni en la app del adulto mayor.
+ 
+Definimos dos escalas dentro de un mismo sistema. La del familiar y la web usa un cuerpo de 16 px. La del adulto mayor usa un cuerpo de 20 sp, con un mínimo de 18 sp y sin textos de apoyo menores a 16 sp. Con esto respondemos a la pérdida de sensibilidad visual propia de la edad. Además, mantenemos alineación a la izquierda, interlineado de 1.4 a 1.5 y un máximo de tres niveles de jerarquía por pantalla.
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/familias-tipograficas.png" alt="Familias Tipográficas - Image" width="700"/>
+  <br/><i>Imagen X. Familias tipográficas de Serenia.</i>
+</div>
+<br>
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/escala-tipografica.png" alt="Escala Tipográfica - Image" width="700"/>
+  <br/><i>Imagen X. Escala tipográfica para la app del familiar y la app del adulto mayor.</i>
+</div>
+<br>
+
+**Colors**
+
+La paleta parte de cuatro familias con escalas tonales de 50 a 900: teal (primario, para botones y títulos), verde hoja (secundario, para estados positivos), durazno (acento, para momentos afectivos) y neutros cálidos (fondos, texto y bordes). Seguimos la proporción 60-30-10: 60 % crema y superficies, 30 % teal y 10 % durazno y verde.
+ 
+Cada color responde a una intención emocional. El teal transmite confianza sin el frío clínico del azul hospitalario, el verde evoca calma y bienestar, y el durazno aporta cercanía. Para los estados definimos cuatro colores semánticos: éxito, alerta (ámbar), auxilio o error (coral) e información. Elegimos ámbar y coral desaturados, y evitamos el rojo puro, para que las alertas llamen la atención sin generar pánico. Además, ningún estado se comunica solo con color: siempre se acompaña de texto o ícono.
+ 
+En accesibilidad, el texto principal (neutro-800 sobre crema) alcanza un contraste de 12.9:1, nivel AAA. Los colores que no cumplen para texto, como verde-500 (2.1:1) y durazno-300 (1.2:1) sobre crema, se limitan a usos decorativos. También definimos un modo de alto contraste (fondo blanco, texto negro, 21:1) que se activa desde Ajustes.
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/escalas-tonales.png" alt="Escalas Tonales - Image" width="700"/>
+  <br/><i>Imagen X. Escalas tonales de la paleta de Serenia.</i>
+</div>
+<br>
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/colores-semanticos.png" alt="Colores Semánticos - Image" width="700"/>
+  <br/><i>Imagen X. Colores semánticos.</i>
+</div>
+<br>
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/combinaciones-contraste.png" alt="Combinaciones de contraste - Image" width="700"/>
+  <br/><i>Imagen X. Combinaciones de contraste según WCAG 2.2.</i>
+</div>
+<br>
+
+**Spacing y layout**
+
+El espaciado sigue una base de 4 y 8 px, con valores desde 4 px (separación ícono-texto) hasta 64 px (secciones de la landing). Los radios de borde van de 12 a 36 px, y las esquinas muy redondeadas reproducen la suavidad de las hojas.
+ 
+Las áreas táctiles se dimensionaron según la ley de Fitts: 48 dp en la app del familiar, 56 a 64 dp en la del adulto mayor y 72 dp en el botón de auxilio, para reducir errores por temblor o poca precisión motriz. El botón de auxilio siempre está visible y separado del de check-in.
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/espaciado-radios-areas.png" alt="Espacio, Radios, Areas - Image" width="700"/>
+  <br/><i>Imagen X. Espaciado, radios de borde y áreas táctiles.</i>
+</div>
+<br>
+
+**Tono de comunicación y lenguaje**
+
+Definimos la voz de Serenia con las cuatro dimensiones del tono de voz propuestas por Moran (2016):
+ 
+- **Divertido / Serio:** ligeramente hacia lo divertido, con preguntas como "¿jugaste bingo?", pero con seriedad total en situaciones de emergencia.
+- **Formal / Casual:** casual y cercano, como un familiar. Evitamos el lenguaje administrativo.
+- **Respetuoso / Irreverente:** siempre respetuoso. El adulto mayor nunca es infantilizado ni tratado como paciente.
+- **Entusiasta / Sereno:** sereno, en coherencia con el nombre de la marca. Celebra sin exclamaciones excesivas y alerta sin dramatismo.
+Usamos un español peruano cercano, con tuteo afectuoso hacia el adulto mayor y frases cortas en segunda persona. Evitamos términos como "paciente", "monitoreo" o "vigilar", y preferimos "cómo amaneciste", "cuéntame" o "tranquilidad". Por ejemplo, ante una ausencia de respuesta el mensaje al familiar es "Mamá aún no responde hoy. Quizá una llamadita le alegre la mañana", en lugar de "ALERTA: paciente sin actividad por 6 horas".
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/dimensiones-tonos.png" alt="Dimensiones de tono - Image" width="700"/>
+  <br/><i>Imagen X. Posición de Serenia en las dimensiones de tono.</i>
+</div>
+<br>
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/microcopy.png" alt="Microcopy - Image" width="700"/>
+  <br/><i>Imagen X. Ejemplos de microcopy.</i>
+</div>
+<br>
+
+**Principios de diseño aplicados**
+
+Las decisiones anteriores se sustentan en los siguientes principios:
+ 
+- **Ley de Fitts:** botones grandes para reducir errores de precisión.
+- **Ley de Hick:** el check-in ofrece solo tres respuestas de un toque, para disminuir la carga cognitiva.
+- **Gestalt:** los botones de respuesta se agrupan y se separan del botón de auxilio, y los elementos del mismo rol comparten radio y tipografía.
+- **Heurísticas de Nielsen:** lenguaje cotidiano, reconocimiento antes que recuerdo (botones con texto e ícono) y control del usuario mediante la opción "hoy no me preguntes".
+
+<br>
+<div align="center">
+  <img src="assets/img/style-guidelines/decisiones-diseño.png" alt="Decisiones Diseño - Image" width="700"/>
+  <br/><i>Imagen X. Referencias adoptadas y adaptaciones realizadas.</i>
+</div>
+<br>
+
 ### 3.1.2. Information Architecture
 #### 3.1.2.1. Organization Systems
 
@@ -5574,22 +6455,23 @@ Un sistema de organización define cómo se agrupa y se ordena la información d
 | --- | --- | --- |
 | Jerárquica | El usuario parte de una vista general y baja al detalle de un elemento | Resumen de estado del adulto mayor que abre el detalle de su check-in |
 | Secuencial | La tarea tiene pasos ordenados que se completan de a uno | Check-in diario, con un paso por pantalla |
-| Matricial | El mismo conjunto de elementos se consulta desde más de una dimensión a la vez | Alertas filtradas por tipo, severidad y estado |
+| Matricial | El mismo conjunto de elementos se consulta desde más de una dimensión a la vez | Alertas filtradas por tipo y estado |
 
 <br>
 
 **Aplicación móvil del adulto mayor**
 
-La estructura se mantiene en un máximo de dos niveles desde la pantalla de inicio, en coherencia con los principios de la sección 3.1.2.5 (Navigation Systems). El botón de ayuda no pertenece a ninguna estructura: está disponible en todas las pantallas para que el adulto mayor pueda pedir auxilio sin importar dónde se encuentre.
+La estructura se mantiene en un máximo de dos niveles desde la pantalla de inicio, en coherencia con los principios de la sección 3.1.2.5 (Navigation Systems). La aplicación tiene cuatro destinos en una barra inferior (Inicio, Recordar, Familia y Cuenta), que forman el primer nivel. El botón de ayuda no pertenece a ninguna de estas estructuras: está siempre a la vista en la pantalla de inicio, para que el adulto mayor pueda pedir auxilio sin tener que buscarlo.
 
 <br>
 
 | Grupo de información | Estructura | Cómo se organiza | Justificación |
 | --- | --- | --- | --- |
-| Pantalla de inicio | Jerárquica de un solo nivel | Tres acciones al mismo nivel: responder el check-in del día, abrir los mensajes de la familia y activar el botón de ayuda | Sin menús ni pestañas, el usuario solo decide entre tres opciones |
-| Check-in diario | Secuencial | Un paso por pantalla: pregunta del día, estado de ánimo, nota opcional y confirmación | Cada pantalla pide una sola decisión; el modo simplificado reduce aún más los pasos |
-| Mensajes recibidos | Jerárquica de dos niveles | Lista de mensajes y fotos de la familia y, al elegir uno, su reproducción o vista | Mantiene la profundidad máxima de dos niveles |
-| Preferencias y cuenta (horario del check-in, pausa del día, modo simplificado, perfil, contraseña y cierre de sesión) | Jerárquica de dos niveles | Lista corta de ajustes; cada uno abre su propio detalle | Se consultan pocas veces, por lo que no compiten con las acciones del inicio |
+| Pantalla de inicio | Jerárquica de un solo nivel | Tres acciones al mismo nivel: responder el check-in del día con un toque, elegir "Hoy no quiero responder" y activar el botón de ayuda; debajo, la barra con los cuatro destinos | Las acciones del día están a la vista y el resto de la aplicación queda a un toque de distancia |
+| Check-in diario | Secuencial | Un paso por pantalla: la pregunta del día con tres opciones de respuesta y la confirmación de que la familia sabrá cómo está; si el usuario elige no responder, una pantalla le confirma la pausa del día | Cada pantalla pide una sola decisión; el modo simplificado reduce aún más los pasos |
+| Recordatorios (destino Recordar) | Jerárquica de un solo nivel | Lista de recordatorios ordenados por fecha y hora, cada uno con las acciones "Listo", "Más tarde" y descartar a un toque | Las acciones se resuelven en la misma lista, sin añadir un segundo nivel |
+| Familia (fotos, audios y círculo) | Jerárquica de dos niveles | La pantalla Familia muestra las fotos que envió la familia y ofrece dos accesos: grabar un audio para la familia y Mi círculo, donde están el código de invitación (que se puede copiar o renovar) y la lista de quienes acompañan al usuario | Reúne en un solo destino todo lo que tiene que ver con la familia y mantiene la profundidad máxima de dos niveles |
+| Cuenta (horario del check-in, modo simplificado, perfil, contraseña y cierre de sesión) | Jerárquica de dos niveles | Lista corta de ajustes; el perfil abre su propia pantalla para editar los datos y el cierre de sesión pide confirmación | Se consultan pocas veces, por lo que no compiten con las acciones del inicio |
 
 <br>
 
@@ -5603,7 +6485,7 @@ Esta aplicación concentra más contenido, por lo que combina las tres estructur
 | --- | --- | --- | --- |
 | Inicio | Jerárquica | Tarjeta de resumen del día que abre el detalle del check-in | Responde de un vistazo si el adulto mayor está bien y permite profundizar solo si hace falta |
 | Historial de check-ins y pequeños logros | Matricial | Registro ordenado en el tiempo, combinable con filtros por rango de fechas, estado de ánimo y estado de respuesta | El mismo historial se consulta por fecha, por ánimo o por respuestas perdidas |
-| Alertas | Matricial | Alertas combinables por tipo (inactividad, bienestar o emergencia), severidad y estado de atención, con una insignia que indica las pendientes | Lo urgente debe poder aislarse rápidamente entre muchas alertas |
+| Alertas | Matricial | Alertas combinables por tipo (emergencia o inactividad) y estado de atención (pendiente, reconocida o resuelta), con una insignia que indica las pendientes | Lo urgente debe poder aislarse rápidamente entre muchas alertas |
 | Círculo | Jerárquica | Tres pestañas internas: integrantes (desde donde se puede revocar un vínculo), turnos de atención y notas compartidas | Agrupa en un solo destino todo lo que sirve para coordinarse con los demás familiares |
 | Turnos de atención | Matricial | Calendario con los días en un eje y el familiar asignado en el otro; los turnos se asignan y se reasignan, y cada fecha admite un único turno | Evita que dos familiares se asignen el mismo día, permite cubrir imprevistos y muestra quién cubre cada fecha |
 | Mensajes | Jerárquica | Lista de mensajes de audio, fotos y texto, y recordatorios sociales; al elegir uno se abre su detalle, con filtro por tipo | Reúne el contenido afectivo en un solo destino, separado de lo operativo |
@@ -5628,8 +6510,8 @@ La estructura define la forma en que se presenta cada grupo; el esquema de categ
 
 | Esquema | Dónde se aplica | Justificación | Dónde no se aplica |
 | --- | --- | --- | --- |
-| Cronológico | Historial de check-ins, alertas, mensajes, notas compartidas y pequeños logros, del más reciente al más antiguo; turnos de atención por fecha | El valor de estos datos está en su evolución en el tiempo, y coincide con el orden por defecto definido en la sección 3.1.2.4 (Searching Systems) | Pantalla de inicio y landing page, que presentan una vista actual y no un registro |
-| Por tópicos | Los cinco destinos de la barra del familiar, las pestañas del Círculo y las secciones de la landing page | Cada tópico corresponde a una meta del usuario: saber, revisar, responder, coordinarse y acompañar | Aplicación del adulto mayor, donde agrupar por tópicos añadiría menús |
+| Cronológico | Historial de check-ins, alertas, mensajes, notas compartidas y pequeños logros, del más reciente al más antiguo; recordatorios del adulto mayor y turnos de atención por fecha | El valor de estos datos está en su evolución en el tiempo, y coincide con el orden por defecto definido en la sección 3.1.2.4 (Searching Systems) | Pantalla de inicio y landing page, que presentan una vista actual y no un registro |
+| Por tópicos | Los cinco destinos de la barra del familiar, los cuatro destinos de la barra del adulto mayor, las pestañas del Círculo y las secciones de la landing page | Cada tópico corresponde a una meta del usuario: saber, revisar, responder, coordinarse y acompañar | Dentro de cada destino de la aplicación del adulto mayor, donde agrupar por tópicos añadiría niveles |
 | Según audiencia | La separación en dos aplicaciones, una por tipo de usuario, y la sección Para quién de la landing page, con una tarjeta por perfil | El rol se define en el registro y determina la aplicación a la que accede la persona, de modo que cada una solo ve lo que necesita | Dentro de cada aplicación, que ya atiende a un único perfil |
 | Alfabético | Lista de integrantes del círculo familiar, ordenada por nombre | Es el único grupo en el que el usuario busca a una persona concreta por su nombre | Historial, alertas y mensajes, donde ordenar por letra rompería la secuencia en el tiempo |
 
@@ -5646,6 +6528,103 @@ Las etiquetas que nombran cada grupo se definen en la sección 3.1.2.2 (Labellin
 <br>
 
 #### 3.1.2.2. Labelling Systems
+El sistema de etiquetado de Serenia fue diseñado para garantizar claridad, coherencia y simplicidad en la comunicación de todos los elementos dentro de la experiencia digital. Las etiquetas, títulos y botones fueron redactados en un lenguaje cotidiano y cercano, con el mínimo número de palabras posible, de modo que los usuarios comprendan fácilmente las acciones que pueden realizar, reduciendo la carga cognitiva y reforzando la identidad de la marca.
+
+**Labeling System Landing Page**
+
+En la interfaz web se utilizan etiquetas sencillas y universales que guían la exploración inicial del visitante: Cómo funciona, Para quién, Funciones y Planes, ubicadas en la barra de navegación del encabezado principal. Estas se acompañan con botones de contraste como "Probar gratis" y "Descarga la app", redactados con verbos directos que invitan a la acción. El encabezado incluye además el selector de idioma ES/EN mediante i18n, y el título principal "Bienestar hoy, siempre contigo" comunica de forma breve la propuesta de valor de Serenia.
+
+navigation bar:
+
+- **Español:**
+
+![Barra de navegación - Landing Page (ES)](assets/img/labeling-system/navegationvar-es.png)
+
+
+- **Inglés:**
+
+![Barra de navegación - Landing Page (EN)](assets/img/labeling-system/navegationvar-en.png)
+
+
+Los títulos de cada sección siguen el mismo criterio: frases cortas, en tono cálido, que anticipan el contenido del bloque, como "Tres pasos, cada día. Nada más.", "Una app, dos formas de estar cerca." y "Acompaña sin invadir.". En la sección de precios, los planes se etiquetan como Básico (Gratis) y Familia (14 días gratis), de modo que el costo sea evidente desde el primer vistazo.
+
+![Hero de la Landing Page](assets/img/labeling-system/landing-hero.png)
+
+
+![Sección de planes de la Landing Page](assets/img/labeling-system/landing-plans.png)
+
+
+Luego, se mantiene una paleta de colores basada en verdes profundos sobre fondos crema, con acentos en café, que genera armonía visual y transmite calma y cercanía.
+
+**Labeling System App - Registro e inicio**
+
+En la versión móvil, el recorrido inicial usa etiquetas de una o dos palabras con verbos de acción: "Empezar", "Ya tengo cuenta", "Iniciar sesión", "Crear cuenta", "Continuar" y "Entrar a Serenia". Las pantallas se titulan con frases cortas y conversacionales, como "Qué bueno verte de nuevo", "Solo necesitamos tres datos." y "Elige tu plan". Para personalizar la experiencia, la pregunta "¿Quién eres?" ofrece dos opciones redactadas desde la identidad del usuario: "Soy familiar" y "Soy adulto mayor", cada una acompañada de una frase breve que explica su propósito.
+
+![Pantalla de bienvenida](assets/img/labeling-system/welcome-app.png)
+
+
+![Selección de rol](assets/img/labeling-system/rol.png)
+
+
+**Labeling System App para Adultos Mayores**
+
+En la vista del adulto mayor, las etiquetas se redactan en primera persona y con el menor número de palabras posible, de modo que el usuario sienta la app como propia: "Mi cuenta", "Mi pregunta", "Mi ayuda" y "Mi teléfono". La pantalla principal saluda por el nombre ("Buenos días, Rosa") y plantea una sola pregunta, "¿Cómo amaneciste hoy?", con tres opciones directas: Muy bien, Más o menos y No tan bien. Además, se ofrecen salidas sin presión como "Cuéntame algo" y "Hoy no quiero responder", y la acción final se expresa con claridad: "Enviar a mi familia". El lenguaje es afectuoso, evita términos técnicos y se complementa con un modo simplificado que muestra solo lo esencial: cómo está el usuario y pedir ayuda.
+
+![Inicio del adulto mayor](assets/img/labeling-system/app-adulto.png)
+
+
+Cuando el usuario necesita apoyo, la etiqueta "Ayuda" abre una confirmación en lenguaje claro: "¿Quieres que avisemos a tu familia?", con las respuestas "Sí, avisar" y "No, ya estoy bien".
+
+![Pantalla de ayuda](assets/img/labeling-system/app-adulto-ayuda.png)
+
+**Labeling System App para Familiares a distancia**
+
+En la vista del familiar se mantiene la coherencia estructural con la versión del adulto mayor, pero las etiquetas se redactan en tercera persona y mencionan a la persona cuidada, lo que da contexto inmediato: "¿Cómo amaneció Mamá Rosa hoy?", "Círculo de Mamá Rosa" y "Para Mamá Rosa". Las secciones principales son Inicio, Historial, Alertas, Círculo y Mensajes, y las acciones se expresan con verbos simples: Llamar, Mensaje, Responderle, "Llamar ahora" y "Programar recordatorio". Las sugerencias usan un tono suave, como "Un gesto suave" y "Un gesto sugerido", en línea con la propuesta de acompañar sin alarmar.
+
+![Inicio del familiar](assets/img/labeling-system/app-familiar.png)
+
+
+![Alertas del familiar](assets/img/labeling-system/app-familiar-alerta.png)
+
+
+**Iconografía estándar**
+
+En este apartado se consideran los íconos completamente intuitivos para el usuario, que se adaptan a una acción o funcionalidad específica: casa para Inicio, campana para Avisos y Alertas, burbuja de chat para Familia y Mensajes, reloj con flecha para Historial, grupo de personas para Círculo, micrófono para Audio y usuario para Cuenta. Todos pertenecen a un mismo set de íconos (Phosphor) para mantener un estilo uniforme, y siempre se acompañan de una etiqueta de texto, para no depender únicamente del símbolo, algo especialmente importante en adultos mayores.
+
+![Íconos estándar](assets/img/labeling-system/nav-icon1.png)
+![Íconos estándar](assets/img/labeling-system/nav-icon2.png)
+![Íconos estándar](assets/img/labeling-system/nav-icon3.png)
+![Íconos estándar](assets/img/labeling-system/nav-icon4.png)
+![Íconos estándar](assets/img/labeling-system/nav-icon5.png)
+
+
+
+**Elementos de interacción activa**
+
+Son los elementos con los que el usuario interactúa más seguido, como la navigation bar del móvil. La versión del adulto mayor se limita a cuatro pestañas (Inicio, Avisos, Familia y Cuenta) para reducir la carga cognitiva, mientras que la del familiar cuenta con cinco (Inicio, Historial, Alertas, Círculo y Mensajes) para cubrir el seguimiento del círculo de cuidado. La pestaña activa se resalta con color para indicar la ubicación del usuario.
+
+navigation bar adulto mayor:
+
+![Navigation bar - Adulto mayor](assets/img/labeling-system/navegationbar-mobile.png)
+
+
+navigation bar familiar:
+
+![Navigation bar - Familiar](assets/img/labeling-system/navbar-mobile2.png)
+<!-- 📷 IMAGEN 13 -->
+
+**Elementos de validación**
+
+Íconos y mensajes que informan al usuario el resultado de una acción, siempre con un tono tranquilizador. Por ejemplo, tras pedir ayuda, la app confirma "Ya avisamos a Lucía y a Martín." y agrega "Tranquila, Rosa. Te van a llamar en un momento."; al vincular a la familia, muestra "Lucía y Rosa ya están conectadas"; y al unirse a la lista de espera, "¡Listo, ya estás en la lista!". Ante errores, el mensaje explica cómo corregirlo, como "Escribe un correo válido para avisarte.".
+
+icons:
+
+![Validación exitosa](assets/img/labeling-system/alertsent-mobile.png)
+
+
+![Validación de error](assets/img/labeling-system/error-landing.png)
+
+
 #### 3.1.2.3. SEO Tags and Meta Tags
 
 #### 3.1.2.4. Searching Systems
@@ -5654,7 +6633,7 @@ Un sistema de búsqueda permite al usuario encontrar información escribiendo un
 
 <br>
 
-### Criterio de decisión. 
+**Criterio de decisión**
 Serenia atiende a dos perfiles con necesidades opuestas. El adulto mayor interactúa con pocas acciones, a diario y con baja tolerancia a la carga cognitiva y a la escritura en pantalla, por lo que cualquier campo de búsqueda sería una barrera. El familiar a distancia, en cambio, acumula con el tiempo un historial de check-ins, notas, mensajes y alertas que sí necesita consultar de forma puntual. El equipo aplicó la búsqueda únicamente en el segundo caso.
 
 <br>
@@ -5667,7 +6646,7 @@ Serenia atiende a dos perfiles con necesidades opuestas. El adulto mayor interac
 
 <br>
 
-### Zonas de búsqueda en la aplicación del familiar a distancia.
+**Zonas de búsqueda en la aplicación del familiar a distancia**
 
 Cada sección de contenido define su propia zona de búsqueda, de modo que el usuario siempre sabe en qué conjunto de información está buscando.
 
@@ -5687,7 +6666,7 @@ La búsqueda por texto libre se reserva a las notas compartidas, que es el únic
 
 <br>
 
-### Presentación de resultados.
+**Presentación de resultados**
 
 Los resultados se muestran como una lista cronológica en la misma pantalla de la sección, sin cambiar de pantalla al buscar. Los filtros aplicados quedan visibles en la parte superior como etiquetas que se pueden quitar de una en una, junto con el total de resultados encontrados (por ejemplo, "12 resultados") y un acceso de un solo toque para limpiar todos los filtros. Cada elemento del listado muestra la información mínima para identificarlo y abre su detalle al seleccionarlo. Los filtros por rango de fechas ofrecen atajos predefinidos (hoy, últimos 7 días, últimos 30 días) para evitar el ingreso manual de fechas.
 
@@ -5703,13 +6682,13 @@ Los resultados se muestran como una lista cronológica en la misma pantalla de l
 
 <br>
 
-### Resultados vacíos.
+**Resultados vacíos**
 
 Cuando una combinación de filtros no produce resultados, la sección lo comunica con un mensaje en lenguaje cotidiano y propone la acción siguiente (por ejemplo, ampliar el rango de fechas o limpiar los filtros), en lugar de mostrar una pantalla vacía.
 
 <br>
 
-### Criterios de accesibilidad.
+**Criterios de accesibilidad**
 
 Aunque el sistema de búsqueda solo se expone al familiar a distancia, el equipo mantiene los mismos criterios de legibilidad que en el resto de la aplicación: tamaño de texto adaptable, objetivos táctiles amplios en los controles de filtro y contraste suficiente en los filtros activos.
 
@@ -5718,11 +6697,11 @@ Aunque el sistema de búsqueda solo se expone al familiar a distancia, el equipo
 
 #### 3.1.2.5. Navigation Systems
 
-Un sistema de navegación define las acciones y técnicas que guían al usuario a través del producto: cómo se desplaza entre pantallas, cómo sabe en qué punto se encuentra y cómo regresa o avanza hacia su meta sin perderse. Para Serenia, el equipo diseñó la navegación de cada producto según las capacidades y metas de su usuario principal, y no con una estructura única para todos. El adulto mayor necesita avanzar con la menor cantidad de decisiones posible; el familiar a distancia necesita llegar rápido a información distinta según la urgencia; y el visitante de la landing page necesita entender la propuesta y llegar a probar la aplicación.
+Un sistema de navegación define las acciones y técnicas que guían al usuario a través del producto: cómo se desplaza entre pantallas, cómo sabe en qué punto se encuentra y cómo regresa o avanza hacia su meta sin perderse. Para Serenia, el equipo diseñó la navegación de cada producto según las capacidades y metas de su usuario principal. El adulto mayor necesita avanzar con la menor cantidad de decisiones posible; el familiar a distancia necesita llegar rápido a información distinta según la urgencia; y el visitante de la landing page necesita entender la propuesta y llegar a probar la aplicación. Las dos aplicaciones móviles comparten el mismo estilo de barra de navegación inferior, pero con destinos distintos, de modo que cada usuario encuentra solo lo que le corresponde.
 
 <br>
 
-## Principios de navegación.
+**Principios de navegación**
 
 Todos los productos comparten cuatro criterios: pocas opciones visibles a la vez, etiquetas coherentes con las definidas, una profundidad máxima de dos niveles desde la pantalla principal y una forma siempre disponible de volver o salir.
 
@@ -5730,65 +6709,83 @@ Todos los productos comparten cuatro criterios: pocas opciones visibles a la vez
 
 | Producto | Tipo de navegación principal | Elementos de apoyo |
 | --- | --- | --- |
-| Aplicación móvil del adulto mayor | Pantalla de inicio única con acciones directas, sin menú | Botón de ayuda visible en todas las pantallas, flecha de retorno, flujo lineal por pasos |
-| Aplicación móvil del familiar a distancia | Barra de navegación inferior con cinco destinos | Menú de perfil, navegación local por sección, enlaces contextuales y notificaciones push con acceso directo |
+| Aplicación móvil del adulto mayor | Barra de navegación inferior con cuatro destinos | Botón de ayuda visible en la pantalla de inicio, flecha de retorno en pantallas secundarias, flujos lineales por pasos |
+| Aplicación móvil del familiar a distancia | Barra de navegación inferior con cinco destinos | Acceso al perfil desde la pantalla de inicio, navegación local por sección, enlaces contextuales y notificaciones push con acceso directo |
 | Landing page web | Barra de navegación superior fija con anclas a secciones | Selector de idioma, botón "Probar gratis" repetido, menú adaptado a móvil, pie de página |
 
-### Aplicación móvil del adulto mayor. 
-La navegación se reduce deliberadamente al mínimo, ya que cualquier menú agregaría decisiones a un usuario con baja familiaridad tecnológica. La pantalla de inicio presenta tres acciones de gran tamaño y se desplaza con un solo toque, sin menús ni pestañas.
-
-<br>
-
-| Elemento | Descripción |
-| --- | --- |
-| Pantalla de inicio | Muestra únicamente tres acciones: responder el check-in del día, abrir los mensajes recibidos de la familia y activar el botón de ayuda. |
-| Botón de ayuda | Permanece visible en todas las pantallas para que el adulto mayor pueda pedir auxilio sin importar dónde se encuentre. Solicita una confirmación antes de enviar la alerta, para evitar activaciones accidentales. |
-| Flujo del check-in | Recorrido lineal de un paso por pantalla: pregunta del día, elección del estado de ánimo, nota opcional y confirmación. Cada pantalla muestra una sola decisión y una flecha para regresar al paso anterior. |
-| Modo simplificado | Reduce la cantidad de pasos y la complejidad visual del check-in, para adultos mayores con menor familiaridad tecnológica. |
-| Retorno | Toda pantalla secundaria incluye una flecha de retorno y un acceso a la pantalla de inicio. Al terminar una acción, la aplicación regresa sola al inicio con un mensaje de confirmación. |
-
-<br>
-
-### Aplicación móvil del familiar a distancia.
-Esta aplicación concentra más contenido, por lo que emplea una barra de navegación inferior con un máximo de cinco destinos, ubicada al alcance del pulgar y visible en todo momento. La pestaña activa se resalta con color y etiqueta para que el usuario siempre sepa dónde está.
-
-<br>
-
-| Destino | Contenido | Meta del usuario que atiende |
-| --- | --- | --- |
-| Inicio | Resumen de estado del adulto mayor: si respondió el check-in del día, su estado de ánimo y un dato destacado | Saber de un vistazo si su familiar está bien |
-| Historial | Registro de check-ins con filtros por fecha, ánimo y estado, y pequeños logros | Revisar cómo ha evolucionado el bienestar |
-| Alertas | Alertas de inactividad, bienestar y emergencia, con su estado de atención | Responder con rapidez ante una situación de riesgo |
-| Círculo | Integrantes del círculo familiar, turnos de cuidado y notas compartidas, organizados en pestañas internas | Coordinarse con los demás familiares |
-| Mensajes | Mensajes de audio, fotos y texto, y recordatorios sociales | Mantener el vínculo afectivo con el adulto mayor |
+### Aplicación móvil del adulto mayor.
+La navegación se mantiene lo más simple posible, ya que cada opción adicional es una decisión más para un usuario con baja familiaridad tecnológica. Por eso la aplicación usa una barra de navegación inferior con solo cuatro destinos, flotante y ubicada al alcance del pulgar. La pestaña activa se resalta con una píldora blanca que muestra el ícono y su nombre, mientras que las demás muestran solo el ícono, de modo que el usuario siempre sabe en qué sección está.
 
 <br>
 
 <div align="center">
 
-![Barra de navegación - Aplicación móvil del familiar a distancia](assets/img/navigation-systems/mobile-navbar.png)
-  <br/><i>Imagen 27: Barra de navegación inferior de la aplicación móvil del familiar a distancia.</i>
+<img src="assets/img/navigation-systems/nav-adultomayor.png" alt="Barra de navegación - Aplicación móvil del adulto mayor" width="350">
+  <br/><i>Imagen X. Barra de navegación inferior de la aplicación móvil del adulto mayor.</i>
 
 </div>
 
 <br>
 
-El perfil y los ajustes de la cuenta no ocupan un destino de la barra: se acceden desde un ícono en la esquina superior de la pantalla de inicio, ya que se consultan con poca frecuencia. La pestaña Alertas muestra una insignia numérica cuando existen alertas sin atender, de modo que lo urgente se perciba sin tener que entrar a la sección.
+| Destino | Contenido | Meta del usuario que atiende |
+| --- | --- | --- |
+| Inicio | Saludo, pregunta del día "¿Cómo amaneciste hoy?" con tres opciones de estado de ánimo, la opción "Hoy no quiero responder" y el botón de ayuda | Responder su check-in y pedir ayuda si la necesita |
+| Recordar | Lista de recordatorios con las acciones Listo, Más tarde y descartar, y la creación de nuevos recordatorios | Acordarse de llamar a una persona o de asistir a una actividad |
+| Familia | Fotos que le enviaron sus familiares, grabación de un audio para su familia, y acceso a su círculo y a su código de invitación | Sentirse cerca de su familia y gestionar quién está vinculado |
+| Cuenta | Datos personales, hora de la pregunta diaria, modo simplificado y cambio de contraseña | Ajustar la aplicación a sus necesidades |
 
-Dentro de cada destino, la navegación local se resuelve con pestañas internas o filtros visibles en la parte superior, como en Círculo (integrantes, turnos y notas) e Historial. Además, la aplicación ofrece enlaces contextuales que permiten saltar entre contenidos relacionados sin pasar por la barra:
+<br>
+
+| Elemento | Descripción |
+| --- | --- |
+| Pantalla de inicio | Presenta la pregunta del día con tres opciones grandes y una alternativa para omitirla. Es el punto de partida y de retorno de la aplicación. |
+| Botón de ayuda | Botón flotante de gran tamaño en la pantalla de inicio. Al tocarlo, la aplicación envía la alerta a la familia y muestra una pantalla de confirmación. Si el envío falla, informa el problema y ofrece reintentar. |
+| Flujo del check-in | Recorrido corto: pregunta del día, elección del estado de ánimo y pantalla de agradecimiento. Cada pantalla muestra una sola decisión. Si el adulto mayor prefiere no responder, la aplicación registra una pausa del día y no genera alerta. |
+| Modo simplificado | Se activa desde Cuenta y muestra solo lo esencial: cómo está el usuario y el botón de ayuda. |
+| Retorno | Las pantallas secundarias incluyen un botón "Atrás". Al terminar una acción, la aplicación regresa al inicio y muestra una confirmación. |
+
+<br>
+
+### Aplicación móvil del familiar a distancia.
+Esta aplicación concentra más contenido, por lo que emplea una barra de navegación inferior con cinco destinos, con el mismo estilo flotante en verde oscuro de la aplicación del adulto mayor. La pestaña activa se resalta con una píldora blanca que incluye el ícono y la etiqueta, para que el usuario siempre sepa dónde está.
+
+<br>
+
+<div align="center">
+
+<img src="assets/img/navigation-systems/nav-familiar.png" alt="Barra de navegación - Aplicación móvil del familiar a distancia" width="350">
+  <br/><i>Imagen X. Barra de navegación inferior de la aplicación móvil del familiar a distancia.</i>
+
+</div>
+
+<br>
+
+| Destino | Contenido | Meta del usuario que atiende |
+| --- | --- | --- |
+| Inicio | Resumen de cómo amaneció el adulto mayor, con la tarjeta del check-in del día, accesos rápidos a Historial, Alertas y Mensajes, y el turno de atención del día | Saber de un vistazo si su familiar está bien |
+| Historial | Registro de check-ins con filtros por estado de ánimo (Todos, Muy bien, Más o menos, No tan bien) | Revisar cómo ha evolucionado el bienestar |
+| Alertas | Alertas de emergencia y de inactividad, con su estado de atención | Responder con rapidez ante una situación de riesgo |
+| Círculo | Integrantes del círculo familiar, turnos de atención, notas compartidas y la opción de quitar el vínculo | Coordinarse con los demás familiares |
+| Mensajes | Audios que graba el adulto mayor y envío de fotos | Mantener el vínculo afectivo con el adulto mayor |
+
+<br>
+
+El perfil y los ajustes de la cuenta no ocupan un destino de la barra: se acceden desde la etiqueta con el nombre del usuario en la parte superior de la pantalla de inicio, ya que se consultan con poca frecuencia. La pestaña Alertas muestra una insignia numérica cuando existen alertas sin atender, de modo que lo urgente se perciba sin tener que entrar a la sección.
+
+Dentro de cada destino, la navegación local se resuelve con filtros o bloques visibles en la parte superior, como los filtros de Historial y los accesos a Turnos de atención y Notas compartidas dentro de Círculo. Además, la aplicación ofrece enlaces contextuales que permiten saltar entre contenidos relacionados sin pasar por la barra:
 
 <br>
 
 | Desde | Hacia | Cómo se accede |
 | --- | --- | --- |
-| Tarjeta de resumen en Inicio | Detalle del check-in en Historial | Toque sobre la tarjeta |
-| Alerta de bienestar | Check-ins que originaron el patrón detectado | Enlace dentro del detalle de la alerta |
-| Alerta | Mensaje o llamada al adulto mayor | Acción directa dentro del detalle de la alerta |
-| Notificación push | Detalle de la alerta o del mensaje correspondiente | Toque sobre la notificación, que abre directamente la pantalla destino |
+| Tarjeta de check-in en Inicio | Detalle del check-in | Toque sobre la tarjeta |
+| Accesos rápidos en Inicio | Historial, Alertas o Mensajes | Toque sobre el acceso rápido |
+| Lista de alertas | Detalle de la alerta con su seguimiento | Toque sobre la alerta |
+| Notificación push | Detalle de la alerta correspondiente | Toque sobre la notificación, que abre directamente la pantalla destino |
 
 <br>
 
-### Landing page web.
+**Landing page web**
 
 La landing page tiene un propósito de conversión: que el visitante comprenda la propuesta de Serenia y llegue a probar la aplicación. Se organiza como una página de desplazamiento continuo, con una barra de navegación superior fija que permanece visible mientras se recorre el contenido.
 
@@ -5808,14 +6805,14 @@ La landing page tiene un propósito de conversión: que el visitante comprenda l
 
 <div align="center">
 
-![Barra de navegación - Landing page](assets/img/navigation-systems/landing-page-nav.png)
-  <br/><i>Imagen 28: Barra de navegación superior de la landing page.</i>
+![Barra de navegación - Landing page](assets/img/navigation-systems/nav-landingpage.png)
+  <br/><i>Imagen X. Barra de navegación superior de la landing page.</i>
 
 </div>
 
 <br>
 
-### Recorridos principales.
+**Recorridos principales**
 
 Las técnicas anteriores se combinan para que cada usuario llegue a su meta en la menor cantidad de pasos posible.
 
@@ -5823,11 +6820,13 @@ Las técnicas anteriores se combinan para que cada usuario llegue a su meta en l
 
 | Usuario | Meta | Recorrido |
 | --- | --- | --- |
-| Adulto mayor | Responder su check-in del día | Inicio → Responder check-in → Estado de ánimo → Nota opcional → Confirmación |
-| Adulto mayor | Pedir ayuda | Botón de ayuda (desde cualquier pantalla) → Confirmación → Alerta enviada |
-| Familiar a distancia | Saber cómo está su familiar | Inicio → Resumen de estado |
-| Familiar a distancia | Atender una alerta | Notificación push → Detalle de la alerta → Contactar al adulto mayor → Confirmar atención |
-| Familiar a distancia | Enviar un mensaje de audio | Mensajes → Nuevo mensaje → Grabar → Enviar |
+| Adulto mayor | Responder su check-in del día | Inicio → Elegir cómo amaneció → Pantalla de agradecimiento |
+| Adulto mayor | Pedir ayuda | Inicio → Botón de ayuda → Alerta enviada |
+| Adulto mayor | Enviar un audio a su familia | Familia → Grabar un audio para mi familia → Hablar → Enviar a mi familia |
+| Adulto mayor | Crear un recordatorio | Recordar → Nuevo recordatorio → Guardar |
+| Familiar a distancia | Saber cómo está su familiar | Inicio → Tarjeta del check-in del día |
+| Familiar a distancia | Atender una alerta | Notificación push → Detalle de la alerta → Estoy atendiendo esta alerta |
+| Familiar a distancia | Escuchar un audio del adulto mayor | Mensajes → Audio → Reproducir |
 | Visitante | Probar la aplicación | Landing page → Botón "Probar gratis" → Planes → Descarga en la tienda de aplicaciones |
 
 <br>
@@ -5864,7 +6863,7 @@ En la versión de escritorio, las secciones de Cómo funciona, Funciones y Plane
 
 ![Landing Page Wireframe Desktop](assets/img/ux-design/landing-page/web-wireframe.png)
 
-<br/><i>Imagen 29: Wireframe de la landing page en versión de escritorio.</i>
+<br/><i>Imagen X. Wireframe de la landing page en versión de escritorio.</i>
 
 <br>
 
@@ -5874,7 +6873,7 @@ En la versión de escritorio, las secciones de Cómo funciona, Funciones y Plane
 
 ![Landing Page Wireframe Mobile](assets/img/ux-design/landing-page/mobile-wireframe.png)
 
-<br/><i>Imagen 30: Wireframe de la landing page en versión móvil.</i>
+<br/><i>Imagen X. Wireframe de la landing page en versión móvil.</i>
 
 </div>
 
@@ -5898,49 +6897,1003 @@ Los elementos clave del mock-up son:
 
 <br>
 
-**Landing Page:** [https://sereniaa.netlify.app/](https://sereniaa.netlify.app/).
+La landing page publicada puede consultarse en [sereniaa.netlify.app](https://sereniaa.netlify.app/).
 
 <br>
 <div align="center">
 
 **Desktop Web Browser**
 
-*Elaboración propia*
+*Elaboración propia en Figma*
 
 ![Landing Page Mock-up Desktop](assets/img/ux-design/landing-page/web-mockup.png)
 
-<br/><i>Imagen 31: Mock-up de la landing page en versión de escritorio.</i>
+<br/><i>Imagen X. Mock-up de la landing page en versión de escritorio.</i>
 
 <br>
 
 **Mobile Web Browser**
 
-*Elaboración propia*
+*Elaboración propia en Figma*
 
 ![Landing Page Mock-up Mobile](assets/img/ux-design/landing-page/mobile-mockup.png)
 
-<br/><i>Imagen 32: Mock-up de la landing page en versión móvil.</i>
+<br/><i>Imagen X. Mock-up de la landing page en versión móvil.</i>
+
+</div>
+
+<br>
+
+### 3.1.4. Mobile Applications UX/UI Design
+#### 3.1.4.1. Mobile Applications Wireframes
+
+Los wireframes de Serenia son la versión de baja fidelidad de las pantallas de las dos aplicaciones móviles del producto: la del adulto mayor y la del familiar. Se elaboraron en escala de grises, sin color, tipografías de marca ni imágenes, para concentrar la atención en la estructura de cada pantalla, la jerarquía de la información, la ubicación de los botones y la secuencia de navegación. De este modo el equipo pudo validar la distribución y el flujo antes de definir el diseño visual que se presenta en los mock-ups.
+
+<br>
+
+
+**Criterios de elaboración** 
+
+Cada wireframe corresponde a una pantalla del prototipo y conserva sus mismos elementos y textos, representados con formas simples: bloques para tarjetas y botones, contornos para campos y chips, y una barra de navegación inferior de cuatro destinos en la aplicación del adulto mayor y de cinco en la del familiar. 
+
+<br>
+
+## Flujo del adulto mayor
+
+El recorrido del adulto mayor comienza con la bienvenida, la creación de la cuenta y el inicio de sesión. Luego accede a su aplicación, organizada en cuatro secciones: Inicio, Recordar, Familia y Cuenta. Desde el inicio responde su check-in diario con un toque, puede omitirlo si prefiere no responder y dispone del botón "Ayuda" para avisar a su familia. En las demás secciones gestiona sus recordatorios, comparte fotos y audios con su familia, consulta su círculo y su código de invitación, y administra su cuenta.
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/1.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/2.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/3.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/inicio-sesion.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/4.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/5.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/6.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/7.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/8.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/9.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/10.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/11.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/12.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/13.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/14.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/15.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/16.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/17.png)
 
 </div>
 
 <br>
 
 
-### 3.1.4. Mobile Applications UX/UI Design
-#### 3.1.4.1. Mobile Applications Wireframes
+## Flujo del familiar
+
+El recorrido del familiar comienza con la misma bienvenida, creación de cuenta e inicio de sesión. Luego accede a su aplicación, organizada en cinco secciones: Inicio, Historial, Alertas, Círculo y Mensajes. En el inicio ve cómo amaneció su adulto mayor y accede al detalle de su check-in; en Historial revisa los registros anteriores y en Alertas atiende las emergencias y las inactividades. En Círculo gestiona a los familiares vinculados, los turnos de atención y las notas compartidas, y en Mensajes reproduce los audios y envía fotos.
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/1.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/2.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/3.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/inicio-sesion.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/18.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/19.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/20.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/21.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/22.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/23.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/24.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/25.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/26.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/27.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/28.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/29.png)
+
+</div>
+
+<br>
+
 #### 3.1.4.2. Mobile Applications Wireflow Diagrams
+
+Un wireflow combina los wireframes de las pantallas con las flechas que muestran cómo avanza el usuario de una a otra, de modo que cada paso del flujo se representa con la pantalla en el estado que el usuario ve en ese momento. En esta sección se presentan los wireflows de los user goals que el equipo consideró prioritarios para esta entrega, agrupados por segmento de usuario: el **Segmento 1** (adultos mayores que viven solos) y el **Segmento 2** (familiares a distancia), que corresponden a los user personas de la sección 2.3.1. En conjunto cubren la propuesta de valor de Serenia: que el adulto mayor cree su círculo, cuente cómo amaneció y pueda pedir ayuda, y que su familia pueda vincularse y acompañarlo a distancia. Los wireflows parten de los wireframes de la sección 3.1.4.1 y se elaboraron en Miro.
+
+Antes de dibujarlos se definieron los pasos típicos de cada objetivo como una secuencia de acciones (task flow), tomando como base las historias de usuario del capítulo II y la organización de la información de las secciones 3.1.2.1 y 3.1.2.5. En los diagramas, la flecha verde marca el camino feliz, la flecha naranja un camino alternativo, el recuadro amarillo una decisión y la caja blanca el resultado final de cada camino. Los nombres que aparecen en las pantallas (Rosa, Lucía y Martín) son datos de ejemplo del prototipo.
+
+**URL del tablero en Miro:** https://miro.com/app/board/uXjVEch8qjo=/?share_link_id=85197687422 (contiene los wireflows y los user flows en mayor tamaño).
+
+**Segmento 1: adultos mayores que viven solos**
+
+**Wireflow 1. Registro y vinculación con la familia (Segmento 1)**
+
+**User goal:** como adulto mayor que vive solo (user persona del primer segmento, sección 2.3.1), quiero registrarme y crear mi círculo familiar para obtener el código de invitación que compartiré con mis familiares (historias US01, US05 y US40). El flujo se muestra en la Imagen X.
+
+<div align="center">
+
+![Wireflow 1 - Registro y vinculación con la familia](assets/img/ux-design/mobile-app/flows/wireflow-1-registro-adulto.png)
+  <br/><i>Imagen X. Wireflow 1. Registro y vinculación con la familia (Segmento 1).</i>
+</div>
+
+El flujo comienza en la pantalla de bienvenida: el adulto mayor toca "Empezar" y, en "¿Quién eres?", elige "Soy adulto mayor". Luego crea su cuenta con su nombre, su correo o celular y una contraseña. La decisión del flujo es si los datos de la cuenta son válidos. Después elige la hora a la que quiere recibir la pregunta del día, crea su círculo familiar y obtiene su código de invitación, que podrá copiar y compartir.
+
+- **Camino feliz:** los datos son válidos, por lo que la aplicación continúa con la elección de la hora, la creación del círculo, la pantalla con el código de cuatro números y, al tocar "Entrar a Serenia", el inicio de la aplicación.
+- **Camino alternativo:** los datos no son válidos. Se muestran los errores en la misma pantalla y la persona corrige sus datos para volver a intentarlo.
+
+**Wireflow 2. Check-in diario (Segmento 1)**
+
+**User goal:** como adulto mayor que vive solo, quiero contar en un toque cómo amaneció, o dejar pasar el día sin responder si no lo deseo (historias US03 y US07). El flujo se muestra en la Imagen X.
+
+<div align="center">
+
+![Wireflow 2 - Check-in diario](assets/img/ux-design/mobile-app/flows/wireflow-2-checkin.png)
+  <br/><i>Imagen X. Wireflow 2. Check-in diario (Segmento 1).</i>
+</div>
+
+El flujo comienza en la pantalla de inicio de la aplicación del adulto mayor, donde una notificación del horario configurado le pregunta "¿Cómo amaneciste hoy?" y le ofrece tres opciones: "Muy bien", "Más o menos" y "No tan bien". El único punto de decisión es si el usuario responde ese día.
+
+- **Camino feliz:** el adulto mayor toca una de las tres opciones y la aplicación muestra la pantalla de agradecimiento, que le confirma que su familia sabrá cómo está. Desde allí vuelve al inicio con un solo botón.
+- **Camino alternativo:** el adulto mayor toca "Hoy no quiero responder". La aplicación muestra una pantalla que le confirma que hoy no se le preguntará nada y que su familia sabe que eligió una pausa; desde allí puede retomar sus preguntas o volver al inicio. Esta pausa es una decisión del usuario y no genera alerta.
+
+**Wireflow 3. Pedir ayuda (Segmento 1)**
+
+**User goal:** como adulto mayor que vive solo, quiero pedir ayuda de inmediato y que mi familia lo sepa, sin tener que buscar a quién llamar (historias US13 y US14). El flujo cruza las dos aplicaciones: empieza en la del adulto mayor y termina en la del familiar a distancia (Imagen X).
+
+<div align="center">
+
+![Wireflow 3 - Pedir ayuda](assets/img/ux-design/mobile-app/flows/wireflow-3-ayuda.png)
+  <br/><i>Imagen X. Wireflow 3. Pedir ayuda (Segmento 1).</i>
+</div>
+
+El botón "Ayuda" está disponible en la pantalla de inicio del adulto mayor. Al tocarlo, la aplicación muestra una pantalla de confirmación ("Ya avisamos a tu familia") y el sistema despacha la alerta. La decisión del flujo es si el círculo del adulto mayor tiene familiares vinculados.
+
+- **Camino feliz:** hay familiares vinculados, por lo que la alerta les llega a todos al mismo tiempo. El familiar abre su aplicación, donde el ícono de Alertas muestra una insignia de pendientes, y entra a Alertas, donde la emergencia aparece como pendiente.
+- **Camino alternativo:** el círculo no tiene familiares vinculados. Según las reglas del bounded context Alerts and Safety (sección 2.6.6), el despacho se marca como fallido y la emergencia queda registrada sin notificar a nadie. Este camino no tiene una pantalla propia y se representa como el resultado final del flujo.
+
+**Segmento 2: familiares a distancia**
+
+**Wireflow 4. Registro y vinculación con el adulto mayor (Segmento 2)**
+
+**User goal:** como familiar a distancia (user persona del segundo segmento, sección 2.3.1), quiero vincular mi cuenta con la de mi adulto mayor mediante un código de invitación, para ver cómo amaneció (historias US02 y US40). El flujo se muestra en la Imagen X.
+
+<div align="center">
+
+![Wireflow 4 - Registro y vinculación con el adulto mayor](assets/img/ux-design/mobile-app/flows/wireflow-4-registro-familiar.png)
+  <br/><i>Imagen X. Wireflow 4. Registro y vinculación con el adulto mayor (Segmento 2).</i>
+</div>
+
+El familiar abre Serenia, toca "Empezar", elige "Soy familiar" y crea su cuenta con su nombre, su correo o celular y una contraseña. Luego escribe en el teclado numérico el código de cuatro números que el adulto mayor generó en su propia aplicación y toca "Vincularme". La decisión del flujo es si el código es válido y vigente.
+
+- **Camino feliz:** el código es válido, la aplicación confirma que ambos quedaron conectados y, al continuar, el familiar llega a su inicio, donde ve cómo amaneció el adulto mayor.
+- **Camino alternativo:** el código es inválido o ya venció. Se rechaza el código, no se crea el vínculo y el familiar vuelve a la pantalla del código para intentarlo con otro, como establece el escenario 2 de la historia US02.
+
+**Wireflow 5. Seguimiento del bienestar (Segmento 2)**
+
+**User goal:** como familiar a distancia (user persona del segundo segmento, sección 2.3.1), quiero saber cómo está mi adulto mayor día a día, sin tener que llamarlo (historias US15, US17, US18 y US19). El flujo se muestra en la Imagen X.
+
+<div align="center">
+
+![Wireflow 5 - Seguimiento del bienestar](assets/img/ux-design/mobile-app/flows/wireflow-5-seguimiento-bienestar.png)
+  <br/><i>Imagen X. Wireflow 5. Seguimiento del bienestar (Segmento 2).</i>
+</div>
+
+El flujo comienza en la pantalla de inicio de la aplicación del familiar, donde ve el estado del check-in de hoy. Al desplazarse por el inicio encuentra las "Pequeñas victorias" de la semana y, cuando el adulto mayor lleva varios días seguidos con poco ánimo, la sugerencia de bienestar. Luego entra a Historial, donde revisa los registros anteriores. La decisión del flujo es si abre el detalle de un día.
+
+- **Camino feliz:** el familiar abre el detalle de un día y la aplicación muestra el check-in de esa fecha, con la respuesta del adulto mayor y la pregunta del día. Esa pantalla se presenta en el user flow correspondiente, con su mock-up.
+- **Camino alternativo:** el familiar no abre ningún detalle y sigue revisando el historial con los filtros por estado ("Todos", "Muy bien", "Más o menos" y "No tan bien").
+
+**Wireflow 6. Atender una alerta (Segmento 2)**
+
+**User goal:** como familiar a distancia, quiero atender las alertas de mi adulto mayor y saber cuáles siguen pendientes (historias US14, US38 y US39). El flujo se muestra en la Imagen X.
+
+<div align="center">
+
+![Wireflow 6 - Atender una alerta](assets/img/ux-design/mobile-app/flows/wireflow-6-atender-alerta.png)
+  <br/><i>Imagen X. Wireflow 6. Atender una alerta (Segmento 2).</i>
+</div>
+
+El flujo comienza en el inicio del familiar, donde el ícono de Alertas muestra una insignia con las alertas pendientes. Al tocarlo, el familiar entra a Alertas y ve la lista con los dos tipos de alerta ("Emergencia" e "Inactividad"), cada una con su estado de atención ("Pendiente" o "Resuelta"). La decisión del flujo es si atiende una alerta pendiente.
+
+- **Camino feliz:** el familiar atiende la alerta. El sistema la reconoce y, cuando se resuelve, pasa a "Resuelta" en la lista, con el nombre de quien la resolvió.
+- **Camino alternativo:** el familiar no atiende la alerta, que sigue "Pendiente", y la insignia de Alertas se mantiene hasta que alguien la atienda.
+
 #### 3.1.4.3. Mobile Applications Mock-ups
+
+Los mock-ups de Serenia traducen los requisitos funcionales del proyecto en pantallas de alta fidelidad. Su objetivo es validar con el equipo la jerarquía visual, la navegación y los estados de cada pantalla antes del desarrollo.
+
+<br>
+
+### Lineamientos de diseño
+
+Se usó la identidad visual de Serenia, con una paleta cálida basada en verde azulado, fondos crema y acentos suaves. Los títulos van en Young Serif, el texto en Nunito y los datos puntuales en DM Mono, con íconos Phosphor. Ambas aplicaciones comparten el mismo menú inferior flotante en verde oscuro, donde la pestaña activa se resalta en blanco. La interfaz del adulto mayor prioriza textos grandes, botones amplios y una acción principal por pantalla. La del familiar prioriza un resumen rápido del estado de su ser querido, con el detalle a un toque.
+
+
+### Decisiones de producto reflejadas
+
+El acceso es solo con correo y contraseña. La vinculación se hace con un código que genera el adulto mayor y que el familiar ingresa en su aplicación. No hay planes ni precios, ni llamadas desde la aplicación, y la aplicación del adulto mayor no incluye audios que lean textos en voz alta. El único audio es el mensaje que el adulto mayor graba para su familia.
+
+<br>
+
+## Flujo del adulto mayor
+
+El recorrido del adulto mayor comienza con la bienvenida, el ingreso a la cuenta y la creación de la cuenta. Luego accede a su aplicación, organizada en cuatro secciones: Inicio, Recordar, Familia y Cuenta. Desde el inicio responde su check-in diario con un toque, puede omitirlo si prefiere no responder, y dispone del botón "Ayuda" para avisar a su familia en una emergencia. En las demás secciones gestiona sus recordatorios, comparte fotos y audios con su familia, consulta su círculo y su código de invitación, y administra su cuenta.
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/bienvenida.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/2.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/3.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/4.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/5.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/6.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/7.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/8.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/9.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/10.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/11.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/12.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/13.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/14.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/15.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/16.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/17.png)
+
+</div>
+
+<br>
+
+## Flujo del familiar
+
+El recorrido del familiar comienza con la misma bienvenida, ingreso y creación de cuenta. Luego accede a su aplicación, organizada en cinco secciones: Inicio, Historial, Alertas, Círculo y Mensajes. En el inicio ve cómo amaneció su adulto mayor y accede al detalle de su check-in. En Historial revisa los registros anteriores y en Alertas atiende las emergencias y las inactividades. En Círculo gestiona a los familiares vinculados, los turnos de atención y las notas compartidas, y en Mensajes reproduce los audios y envía fotos.
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/bienvenida.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/2.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/3.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/18.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/19.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/20.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/21.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/22.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/23.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/24.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/25.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/26.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/27.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/28.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/29.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/30.png)
+
+</div>
+
+<br>
+
 #### 3.1.4.4. Mobile Applications User Flow Diagrams
+
+Un user flow muestra la ruta que sigue el usuario para lograr su objetivo, con las pantallas finales de la aplicación, el camino esperado (happy path) y las rutas alternativas (unhappy paths). Los user flows de esta sección se derivan de los wireflows de la sección 3.1.4.2, con la misma numeración y la misma organización por segmento: mantienen los mismos pasos, decisiones y resultados, y reemplazan los wireframes por los mock-ups de la sección 3.1.4.3, que incluyen el diseño visual definitivo. La lectura de los diagramas es la misma: flecha verde para el camino feliz, flecha naranja para el camino alternativo, recuadro amarillo para las decisiones y caja blanca para el resultado final.
+
+**URL del tablero en Miro:** https://miro.com/app/board/uXjVEch8qjo=/?share_link_id=85197687422 (contiene los wireflows y los user flows en mayor tamaño).
+
+**Segmento 1: adultos mayores que viven solos**
+
+**User Flow 1. Registro y vinculación con la familia (Segmento 1)**
+
+**User goal:** registrarse y crear su círculo familiar para obtener el código de invitación que compartirá con sus familiares. Esta ruta cumple las historias US01 (registro de cuenta de usuario), US05 (configuración del horario del check-in) y US40 (generación de código de invitación) y se muestra en la Imagen X.
+
+<div align="center">
+
+![User Flow 1 - Registro y vinculación con la familia](assets/img/ux-design/mobile-app/flows/user-flow-1-registro-adulto.png)
+  <br/><i>Imagen X. User Flow 1. Registro y vinculación con la familia (Segmento 1).</i>
+</div>
+
+**Condiciones del flujo:** el adulto mayor crea su cuenta con los datos básicos que la aplicación pide; si algún dato no es válido, la pantalla indica el error y no avanza hasta que se corrige. Con la cuenta creada, elige la hora del día en que quiere recibir su pregunta (puede cambiarla después desde Cuenta), y la aplicación crea su círculo familiar, que desde ese momento tiene un único adulto mayor. El código de cuatro números que recibe se usa una sola vez, y es el adulto mayor quien decide con quién lo comparte; sin círculo y sin código, ninguna otra función de la aplicación tiene destinatario.
+
+**User Flow 2. Check-in diario (Segmento 1)**
+
+**User goal:** contar en un toque cómo amaneció, o dejar pasar el día sin responder si no lo desea. Esta ruta cumple las historias US03 (registro de respuesta del check-in) y US07 (pausa diaria de preguntas) y se muestra en la Imagen X.
+
+<div align="center">
+
+![User Flow 2 - Check-in diario](assets/img/ux-design/mobile-app/flows/user-flow-2-checkin.png)
+  <br/><i>Imagen X. User Flow 2. Check-in diario (Segmento 1).</i>
+</div>
+
+**Condiciones del flujo:** el check-in llega a la hora que el adulto mayor configuró, y el usuario decide si responde ese día. Si responde, la aplicación registra su estado de ánimo y lo agradece; si prefiere no hacerlo, activa la pausa del día, con lo que el sistema omite el check-in e informa a los familiares vinculados que hoy optó por no participar. En ninguno de los dos casos se genera una alerta. Si el adulto mayor no hace ninguna de las dos cosas y el plazo vence, se activa la evaluación de inactividad del bounded context Alerts and Safety (sección 2.6.6), que corresponde a otro flujo.
+
+**User Flow 3. Pedir ayuda (Segmento 1)**
+
+**User goal:** pedir ayuda de inmediato y que la familia lo sepa sin buscar a quién llamar. Esta ruta cumple las historias US13 (activación del botón de auxilio) y US14 (alerta inmediata al familiar) y se muestra en la Imagen X.
+
+<div align="center">
+
+![User Flow 3 - Pedir ayuda](assets/img/ux-design/mobile-app/flows/user-flow-3-ayuda.png)
+  <br/><i>Imagen X. User Flow 3. Pedir ayuda (Segmento 1).</i>
+</div>
+
+**Condiciones del flujo:** el botón "Ayuda" está siempre a la vista en la pantalla de inicio del adulto mayor, de modo que puede activarlo sin tener que buscarlo. Al activarlo, el sistema registra la emergencia y confirma al usuario que avisó a su familia. Si el círculo tiene familiares vinculados, todos reciben la alerta al mismo tiempo y la ven en la sección Alertas de su aplicación con las etiquetas "Emergencia" y "Pendiente". Si no hay familiares vinculados, la emergencia queda registrada con un despacho fallido y nadie es notificado.
+
+**Segmento 2: familiares a distancia**
+
+**User Flow 4. Registro y vinculación con el adulto mayor (Segmento 2)**
+
+**User goal:** vincular su cuenta con la de su adulto mayor mediante un código de invitación, para ver cómo amaneció. Esta ruta cumple las historias US02 (vinculación familiar por código de invitación) y US40 (generación de código de invitación) y se muestra en la Imagen X.
+
+<div align="center">
+
+![User Flow 4 - Registro y vinculación con el adulto mayor](assets/img/ux-design/mobile-app/flows/user-flow-4-registro-familiar.png)
+  <br/><i>Imagen X. User Flow 4. Registro y vinculación con el adulto mayor (Segmento 2).</i>
+</div>
+
+**Condiciones del flujo:** el adulto mayor genera previamente su código de invitación desde su aplicación; el código es de cuatro números y se usa una sola vez, por lo que él decide quién se vincula. El familiar crea su cuenta y escribe el código. Si es válido y vigente, el sistema registra el vínculo y habilita el acceso al panel de estado del adulto mayor. Si es inválido o ya venció, no se crea el vínculo y el familiar puede ingresar otro código.
+
+**User Flow 5. Seguimiento del bienestar (Segmento 2)**
+
+**User goal:** saber cómo está su adulto mayor día a día, sin tener que llamarlo. Esta ruta cumple las historias US15 (consulta del panel de estado diario), US17 (historial de check-ins), US18 (sugerencia de acción por patrón de malestar) y US19 (registro de pequeñas victorias) y se muestra en la Imagen X.
+
+<div align="center">
+
+![User Flow 5 - Seguimiento del bienestar](assets/img/ux-design/mobile-app/flows/user-flow-5-seguimiento-bienestar.png)
+  <br/><i>Imagen X. User Flow 5. Seguimiento del bienestar (Segmento 2).</i>
+</div>
+
+**Condiciones del flujo:** el inicio del familiar muestra el check-in de hoy: si el adulto mayor respondió, aparece su estado de ánimo; si todavía no responde, aparece "Aún no responde" hasta que venza el plazo. Al desplazarse, el familiar ve las "Pequeñas victorias" de la semana y, si el adulto mayor completó tres días consecutivos de malestar, la sugerencia de bienestar, que puede descartar (historia US37). En Historial ve los registros ordenados del más reciente al más antiguo y puede filtrarlos por estado; al elegir un día se abre el detalle del check-in, con la respuesta y la pregunta de esa fecha.
+
+**User Flow 6. Atender una alerta (Segmento 2)**
+
+**User goal:** atender las alertas de su adulto mayor y saber cuáles siguen pendientes. Esta ruta cumple las historias US14 (alerta inmediata al familiar), US38 (reconocimiento de alertas) y US39 (resolución de alertas) y se muestra en la Imagen X.
+
+<div align="center">
+
+![User Flow 6 - Atender una alerta](assets/img/ux-design/mobile-app/flows/user-flow-6-atender-alerta.png)
+  <br/><i>Imagen X. User Flow 6. Atender una alerta (Segmento 2).</i>
+</div>
+
+**Condiciones del flujo:** la insignia del ícono de Alertas indica cuántas alertas siguen pendientes. En la lista, cada alerta muestra su tipo ("Emergencia" o "Inactividad") y su estado ("Pendiente" o "Resuelta"). Cada alerta admite un único reconocimiento y una única resolución: si dos familiares actúan al mismo tiempo, solo se aplica la primera acción, y así todos saben que alguien ya está atendiendo. Al resolverse, la alerta pasa a "Resuelta" y, si quien la resolvió lo desea, deja una nota que describe cómo se resolvió.
+
 #### 3.1.4.5. Mobile Applications Prototyping
 
-<div style="page-break-after: always;"></div>
+El prototipo interactivo de Serenia se construyó como una página navegable en Claude Artifacts. Muestra un solo teléfono en pantalla, con chips debajo para saltar entre los pasos del flujo (registro, vinculación, aplicación del adulto mayor y aplicación del familiar). Además de recorrerlo pantalla por pantalla, se puede probar la interacción entre ambas aplicaciones. Por ejemplo, la respuesta al check-in del adulto mayor se refleja en el inicio del familiar, una alerta de ayuda aparece en la lista de alertas del familiar, y un audio grabado por el adulto mayor queda disponible para su reproducción.
+
+Enlace al prototipo: https://claude.ai/artifact/PQLMrSNqDntp1Fu4cfuvJu
+
+Para probar la vinculación en el prototipo, el código válido es 4821 y el código expirado es 0000. Cualquier otro valor muestra el estado de código inválido.
+
+<br>
+
+<div align="center">
+
+
+**Mobile Prototyping**
+
+![Mobile Video Prototype](.png)
+
+[Ver video de prototipo Mobile en Microsoft Stream]()
+
+</div>
+
+<br>
 
 # Capítulo IV: Product Implementation & Validation
 ## 4. Product Implementation & Validation
 ## 4.1. Software Configuration Management
 ### 4.1.1. Software Development Environment Configuration
 ### 4.1.2. Source Code Management
+El equipo utiliza GitHub como plataforma principal de control de versiones y colaboración. A continuación se indican los repositorios correspondientes a cada
+producto del proyecto:
+
+- **Informe:** https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-report
+- **Landing Page:** https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website
+- **Platform:** https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform
+
+**Implementacion de Gitflow:**
+El equipo implementa el modelo de ramificación GitFlow propuesto por Vincent Driessen como workflow de control de versiones. Este modelo establece una
+estructura clara de ramas que permite gestionar el desarrollo de features, releases y correcciones de forma ordenada y trazable.
+
+**Ramas principales**
+- main: rama de producción. Contiene únicamente versiones estables y desplegadas del producto. Todo merge a esta rama representa una nueva versión
+publicada.
+- develop: rama de integración continua. Concentra el trabajo completado de cada feature branch antes de ser promovido a producción. Es la rama base
+para el desarrollo del equipo.
+
+**Feature branches**
+Cada historia de usuario, tarea técnica o sección del informe requiere su propia rama de feature, creada a partir de develop y reintegrada a develop mediante
+Pull Request una vez completada y revisada.
+
+Convención de nomenclatura:
+
+feature/<descripción-en-kebab-case>
+
+Ejemplos aplicados durante el Sprint 1 en el repositorio del informe:
+- feature/labeling-system
+- feature/sprint-planning
+- feature/source-code-style-guide
+- feature/software-deployment-configuration
+- feature/bounded-wellbeing
+- feature/general-style-guidelines
+- feature/product-design
+- feature/new-event-storming
+- feature/organization-systems
+- feature/validation-interview
+- feature/teams-collaboration-insights
+
+
+Ejemplos aplicados durante el Sprint 1 en el repositorio del backend:
+
+- feature/alerts-and-safety-application-layer
+- feature/social-companionship
+- feature/wellbeing-monitoring
+- feature/daily-check-in
+- feature/care-circle
+- feature/identity-and-access
+
+**Release branches**
+Las ramas de release se crean a partir de develop cuando el conjunto de features planificado para una versión está completo y listo para ser estabilizado antes del despliegue a producción. Se aplica Semantic Versioning con el esquema MAJOR.MINOR.PATCH.
+
+**Convención de nomenclatura:**
+Ejemplos:
+- release/v1.0.0 — primera versión estable de la Landing Page (Sprint 1)
+- release/v1.1.0 — incorporacion del backend primera version (Sprint 1)
+- release/v2.0.0 —  incorporacion del backend primera version (Sprint 2)
+
+**Conventional Commits** 
+
+El equipo aplica la especificación Conventional Commits para estandarizar los mensajes de commit, facilitando la trazabilidad del historial y la generaciónautomática de changelogs. La estructura adoptada es la siguiente:
+
+Los tipos utilizados por el equipo son:
+
+| Tipo | Uso |
+|------|-----|
+| `feat` | Implementación de una nueva funcionalidad o sección |
+| `fix` | Corrección de un error en el código o documentación |
+| `docs` | Cambios exclusivos en documentación del informe |
+| `chore` | Tareas de configuración, setup o mantenimiento |
+| `refactor` | Reestructuración de código sin cambio de funcionalidad |
+| `style` | Cambios de estilos visuales o formato sin lógica |
+| `test` | Adición o modificación de pruebas |
+
+Ejemplos aplicados durante el Sprint 1:
+- docs: add landing page UI design section
+- feat(shared): add unsupported media type and payload too large errors
+- fix(product):re-order us
+- chore: ignore local tool settings
+
+
 ### 4.1.3. Source Code Style Guide & Conventions
+
+Esta sección define cómo se nombran los elementos y cómo se escribe el código en cada lenguaje de la solución, con el fin de que cualquier integrante pueda leer y modificar el trabajo de otro sin esfuerzo. Aplica una regla común a todos los lenguajes: **todos los identificadores (clases, métodos, variables, tablas, columnas, archivos y pruebas) se escriben en inglés**, igual que los eventos y comandos definidos en el EventStorming (sección 2.5.1). El texto que ve el usuario final es la única excepción: se redacta en español y, en la landing page, se ofrece también en inglés.
+
+<br>
+
+**Lenguajes y referencias adoptadas**
+
+| Producto | Lenguaje o formato | Convención estándar adoptada | Estado |
+| --- | --- | --- | --- |
+| Landing page web | HTML, CSS y JavaScript (Vite) | [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html) y [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html) | Aplicada en la landing page |
+| Web Services | Java 26 con Spring Boot | [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) en nombres y organización del código, con sangría de 4 espacios, y [Spring Boot Features](https://docs.spring.io/spring-boot/reference/features/index.html) | Aplicada en el backend |
+| Aplicación móvil | Kotlin | [Kotlin Coding Conventions](https://kotlinlang.org/docs/coding-conventions.html) y [Android Kotlin Style Guide](https://developer.android.com/kotlin/style-guide) | Definida |
+| Pruebas de aceptación | Gherkin (archivos .feature) | [Gherkin Reference](https://cucumber.io/docs/gherkin/reference) | Definida |
+
+<br>
+
+**Nomenclatura por capa (Web Services)**
+
+Los nombres de las clases siguen los que el equipo definió para cada bounded context en la sección 2.6, de modo que el código y el diseño usen el mismo lenguaje ubicuo. La tabla resume el patrón que cumple el backend, con ejemplos reales de los contextos Alerts and Safety y Care Circle. El patrón se midió sobre los 549 archivos Java de `serenia-platform` al 8 de octubre de 2026, y cada categoría se cumple sin excepciones: por ejemplo, los 55 commands terminan en `Command` y los 26 servicios de aplicación terminan en `Impl`.
+
+<br>
+
+| Elemento | Regla | Ejemplo |
+| --- | --- | --- |
+| Aggregate y entidad | Clase con sustantivo en singular, en PascalCase | `Alert`, `EmergencyAlert`, `CareCircle` |
+| Value object | `record` con un sustantivo que describe el dato; los identificadores llevan el sufijo `Id` y los estados son `enum` | `ResolutionNote`, `AlertId`, `AlertStatus` |
+| Command | `record` con verbo en imperativo y sufijo `Command` | `TriggerEmergencyAlertCommand` |
+| Query | `record` con prefijo `Get` y sufijo `Query` | `GetAlertByIdQuery` |
+| Evento de dominio | `record` con un hecho en pasado, sin sufijo | `EmergencyAlertDispatched` |
+| Repositorio y servicio de dominio | Interfaz sin prefijo, con el nombre del concepto | `EmergencyAlertRepository`, `AlertQueryService` |
+| Implementación | Nombre de la interfaz más el sufijo `Impl` | `EmergencyAlertCommandServiceImpl`, `EmergencyAlertRepositoryImpl` |
+| Manejador de eventos | Evento que atiende, más el sufijo `EventHandler` | `CheckInMissedEventHandler` |
+| Servicio hacia otro contexto | Prefijo `External`, nombre del contexto y sufijo `Service` | `ExternalCareCircleService` |
+| Persistencia | Sufijos `PersistenceEntity`, `JpaRepository` y `PersistenceMapper` | `AlertPersistenceEntity`, `AlertJpaRepository`, `EmergencyAlertPersistenceMapper` |
+| Capa REST | Sufijos `Controller`, `Resource` (un `record`) y `Assembler`; los assemblers se nombran `<Resultado>From<Origen>Assembler` | `AlertsController`, `AlertResource`, `AlertResourceFromEntityAssembler` |
+| Excepción | Sufijo `Exception`; las de cada contexto heredan de la excepción de dominio de ese contexto | `AlertAlreadyAcknowledgedException`, que hereda de `AlertsAndSafetyDomainException` |
+| Métodos y variables | camelCase, con verbos para las acciones | `acknowledge`, `isOpen` |
+| Constantes y valores de enumeración | MAYÚSCULAS con guion bajo | `MAX_LENGTH`, `DISPATCH_FAILED` |
+| Tablas y columnas de base de datos | snake_case; tablas en plural; claves foráneas con sufijo `_id` y marcas de tiempo con sufijo `_at` | `alert_notifications`, `older_adult_id`, `triggered_at` |
+| Rutas de la API | Prefijo `/api/v1`, con los recursos en plural y en kebab-case | `/api/v1/care-circles`, `/api/v1/check-in-preferences` |
+
+<br>
+
+**Formato y estilo del código Java**
+
+| Aspecto | Convención aplicada |
+| --- | --- |
+| Sangría | 4 espacios y ninguna tabulación (ninguno de los 549 archivos usa tabulaciones) |
+| Importaciones | Explícitas, sin comodines (solo 1 excepción en los 549 archivos) |
+| Documentación | Javadoc en inglés en las clases (519 de 549 archivos), con enlaces `{@link}` y párrafos `<p>` para explicar las reglas de negocio |
+| Objetos inmutables | `record` para commands, queries, eventos, value objects y resources (229 en total) |
+| Persistencia | Entidades JPA con Lombok (`@Getter`, `@Setter` y `@NoArgsConstructor`) y tipos de columna explícitos, como `BINARY(16)` para los identificadores y `DATETIME(6)` para las fechas |
+| Resultados | Los servicios de aplicación devuelven `Result<T, ApplicationError>` (por ejemplo, `Result<EmergencyAlert, ApplicationError>`) en lugar de lanzar excepciones hacia la capa REST |
+| Valores ausentes | `Optional` en las consultas, en lugar de `null` |
+| Mensajes de error | Claves en minúsculas separadas por puntos (`alert.resolution.note.blank`), cuyos textos están en `messages.properties` y `messages_es.properties` |
+| Idioma | Identificadores, Javadoc y mensajes de commit en inglés |
+
+<br>
+
+**Landing page: convenciones aplicadas**
+
+El sitio se construye con Vite, sin biblioteca de interfaz, por lo que sus convenciones se resumen en lo que el código ya cumple.
+
+<br>
+
+| Aspecto | Convención aplicada |
+| --- | --- |
+| Módulos | JavaScript con módulos ES (`import` y `export`), separados por responsabilidad: contenido y lógica en `main.js`, textos en inglés y español en `i18n.js` y plantillas en `templates.js` |
+| Formato | Sangría de 2 espacios, comillas simples y ninguna tabulación |
+| Declaraciones | `const` por defecto y `let` solo cuando el valor cambia; no se usa `var`; funciones flecha para la lógica |
+| Nombres | camelCase para variables y funciones (`setState`); MAYÚSCULAS con guion bajo para constantes de contenido (`NAV`, `MOODS`, `FEATURES`) |
+| Comentarios | Bloques con título para separar las partes del archivo (contenido, acciones, renderizado e idioma) y comentarios de una línea para explicar decisiones puntuales |
+| HTML | Documento con `lang="es"`; estructura semántica con `header`, `nav`, `section` y `footer`; un solo `h1`; atributos `alt` en las imágenes y atributos `aria-` en los controles interactivos |
+| Identificadores de sección | `id` en minúsculas, usados como anclas del menú: `como`, `familia`, `funciones` y `planes` |
+| Internacionalización | El español es el idioma de origen y un diccionario lo traduce al inglés; el idioma elegido se recuerda en el navegador |
+| SEO | Etiquetas `meta` de descripción, palabras clave y Open Graph, y datos estructurados, definidos en el encabezado de `index.html` |
+
+<br>
+
+**Convenciones para pruebas de aceptación**
+
+Los archivos .feature se redactan en inglés con las palabras clave `Feature`, `Scenario`, `Given`, `When` y `Then`. Cada escenario verifica un único comportamiento y toma como base los criterios de aceptación de la historia de usuario a la que corresponde, cuyo identificador (por ejemplo, US13) se incluye en una etiqueta sobre el escenario.
+
+<br>
+
 ### 4.1.4. Software Deployment Configuration
 
 Esta sección explica cómo publicar cada producto de Serenia a partir de su repositorio de código, con los pasos suficientes para que otro integrante del equipo pueda repetir el despliegue. La evidencia de lo ejecutado en cada sprint, con sus capturas, se presenta en la sección 4.2.1.8 (Software Deployment Evidence for Sprint Review). Los tres productos de la solución se publican en plataformas distintas, como muestra el Deployment Diagram de la sección 2.5.3.3, que se repite en la Imagen X.
@@ -5958,11 +7911,11 @@ Esta sección explica cómo publicar cada producto de Serenia a partir de su rep
 
 | Producto | Repositorio | Plataforma de despliegue | Qué se publica | Estado |
 | --- | --- | --- | --- | --- |
-| Landing page web | `serenia-website` | Netlify | La carpeta `dist`, generada con `npm run build` | Desplegada en https://sereniaa.netlify.app/ |
-| Web Services | `serenia-web-services` | Microsoft Azure (Azure Web App Service para la API y base de datos MySQL en Azure) | Por definir | Por completar cuando el repositorio contenga el código |
+| Landing page web | `serenia-website` | Netlify | La carpeta `dist`, generada con `npm run build` | Publicada en https://sereniaa.netlify.app/ |
+| Web Services | `serenia-platform` | Microsoft Azure (Azure Web App Service para la API y MySQL Flexible Server para la base de datos) | El archivo JAR ejecutable de Spring Boot, generado con Maven | Configuración de despliegue documentada |
 | Aplicación móvil | `serenia-app-native` | Firebase App Distribution | Por definir | Por completar cuando el repositorio contenga el código |
 
-Todos los repositorios pertenecen a la organización del equipo en GitHub (https://github.com/upc-pre-202620-1acc0238-4945-vitalcare). El código que se publica proviene siempre de la rama `main`, que recibe los cambios desde `develop` mediante Pull Requests, según el flujo GitFlow adoptado por el equipo.
+Todos los repositorios pertenecen a la organización del equipo en GitHub (https://github.com/upc-pre-202620-1acc0238-4945-vitalcare). El código que se publica proviene de la rama `main`, que recibe los cambios desde `develop` mediante Pull Requests en cada entrega, según el flujo GitFlow adoptado por el equipo.
 
 <br>
 
@@ -5976,7 +7929,7 @@ La landing page es un sitio estático construido con Vite, sin backend, sin vari
 
 | Requisito | Detalle |
 | --- | --- |
-| Node.js | Versión 20 LTS o superior. El repositorio no fija una versión; el mínimo que exige Vite 6 es la 18, y la construcción se verificó con la versión 24 |
+| Node.js | Versión 20 LTS o superior. El repositorio no fija una versión; el mínimo que exige Vite 6 es la 18, y la construcción se verificó con la versión 24 y npm 11 |
 | npm | El que se instala junto con Node.js |
 | Git | Para clonar el repositorio |
 | Cuenta de Netlify | Con acceso al sitio de Serenia |
@@ -5987,8 +7940,8 @@ La landing page es un sitio estático construido con Vite, sin backend, sin vari
 
 | Paso | Acción | Comando o detalle |
 | --- | --- | --- |
-| 1 | Clonar el repositorio y ubicarse en la rama `main` | `git clone https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website.git` y luego `cd serenia-website` |
-| 2 | Instalar las dependencias | `npm install` |
+| 1 | Clonar el repositorio y ubicarse en la rama que se va a publicar | `git clone https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website.git` y luego `cd serenia-website` |
+| 2 | Instalar las dependencias exactas del archivo `package-lock.json` | `npm ci` |
 | 3 | Revisar el sitio en local (opcional) | `npm run dev` abre el servidor de desarrollo |
 | 4 | Construir el sitio para producción | `npm run build`, que ejecuta `vite build` y genera la carpeta `dist` |
 | 5 | Comprobar el resultado de la construcción (opcional) | `npm run preview` sirve la carpeta `dist` en local |
@@ -5997,28 +7950,87 @@ La landing page es un sitio estático construido con Vite, sin backend, sin vari
 
 <br>
 
-La carpeta `dist` no forma parte del repositorio: se genera en el paso 4 y contiene el `index.html` final, la subcarpeta `assets` con los archivos JavaScript y CSS compilados, la subcarpeta `fonts`, los íconos del sitio, `robots.txt`, `sitemap.xml` y `site.webmanifest`. Se publica la carpeta `dist` completa; no se sube la carpeta del proyecto, cuyo código fuente (`src`) no debe quedar expuesto en el sitio.
+El resultado de la construcción queda en la carpeta `dist`, que se genera en el paso 4 y no se versiona en el repositorio. Su contenido es el sitio final: el `index.html`, la subcarpeta `assets` con los archivos JavaScript y CSS compilados y las imágenes, la subcarpeta `fonts`, los íconos del sitio, `robots.txt`, `sitemap.xml` y `site.webmanifest`. El despliegue en Netlify publica ese contenido.
 
 <br>
 
 *Verificación*
 
-| Comprobación | Resultado esperado |
+| Comprobación | Resultado |
 | --- | --- |
+| Construir la rama `develop` (commit `3967591`, 8 de octubre de 2026) | Genera `dist/assets/index-C64a7uLj.js` e `index-Db2Lbha2.css`, los mismos nombres que sirve el sitio publicado |
 | Abrir https://sereniaa.netlify.app/ | La landing page carga con sus secciones y los enlaces del menú desplazan hasta cada una |
-| Revisar el código fuente de la página | Los archivos `.js` y `.css` provienen de `/assets/` con un nombre generado por la construcción (por ejemplo, `index-C64a7uLj.js`) |
-| Abrir `/src/main.js` y `/package.json` en el sitio | Responden con un error 404, lo que confirma que solo se publicó el resultado de la construcción |
+| Abrir `/src/main.js` y `/package.json` en el sitio | Responden con un error 404, lo que confirma que el sitio sirve únicamente el resultado de la construcción |
 | Cambiar el idioma entre ES y EN | El texto se traduce y el idioma elegido se conserva al recargar |
 
 <br>
 
-**Web Services y aplicación móvil**
+**Web Services: configuración de despliegue**
 
-El Deployment Diagram establece que la API REST se aloja en un Azure Web App Service, con la base de datos MySQL en Azure, y que la aplicación móvil se distribuye mediante Firebase App Distribution. Los repositorios `serenia-web-services` y `serenia-app-native` todavía no contienen el código que se desplegará, por lo que sus pasos concretos se documentarán cuando se ejecute el primer despliegue de cada uno. Para cada producto se registrarán los siguientes puntos:
+La API de Serenia es un monolito modular de Spring Boot (sección 2.5.3.2) que se empaqueta como un único archivo JAR ejecutable. Según el Deployment Diagram, el JAR se aloja en un Azure Web App Service y la base de datos MySQL en Azure. El archivo `application.properties` define dos perfiles: `dev`, el predeterminado, para trabajar en local, y `prod`, que toma toda su configuración de variables de entorno.
+
+<br>
+
+*Requisitos previos*
+
+| Requisito | Detalle |
+| --- | --- |
+| JDK | Versión 26, la que fija el archivo `pom.xml` |
+| Maven | Incluido en el repositorio mediante el wrapper `mvnw` (`mvnw.cmd` en Windows), por lo que no requiere instalación aparte |
+| MySQL | Un servidor MySQL con una base de datos ya creada, porque el perfil `prod` no la crea (`createDatabaseIfNotExist=false`); las tablas las genera Hibernate al arrancar la aplicación (`ddl-auto=update`) |
+| Azure Blob Storage | Una cuenta de almacenamiento con un contenedor privado, donde la aplicación guarda los audios y las fotos de Social Companionship |
+| Cuenta de Azure | Con permiso para crear el Web App Service |
+
+<br>
+
+*Variables de entorno de la API*
+
+El perfil `prod` toma su configuración de las variables de la tabla siguiente. Las credenciales y las claves (`DATABASE_PASSWORD`, `JWT_SECRET` y `AZURE_STORAGE_CONNECTION_STRING`) se definen en la configuración del servicio donde se ejecuta la API y no forman parte del código ni del repositorio.
+
+| Variable | Qué configura | Valor por defecto |
+| --- | --- | --- |
+| `SPRING_PROFILES_ACTIVE` | Activa el perfil de producción cuando toma el valor `prod` | `dev` |
+| `DATABASE_URL` | Servidor MySQL al que se conecta la API | Ninguno (obligatoria) |
+| `DATABASE_PORT` | Puerto del servidor MySQL | `3306` |
+| `DATABASE_NAME` | Nombre de la base de datos | Ninguno (obligatoria) |
+| `DATABASE_USER` y `DATABASE_PASSWORD` | Credenciales de la base de datos | Ninguno (obligatorias) |
+| `JWT_SECRET` | Clave con la que se firman los tokens de sesión | Ninguno (obligatoria) |
+| `AZURE_STORAGE_CONNECTION_STRING` | Cadena de conexión de la cuenta de Blob Storage | Ninguno (obligatoria) |
+| `AZURE_STORAGE_CONTAINER` | Nombre del contenedor de archivos | `serenia-media` |
+| `MEDIA_STORAGE_PROVIDER` | Proveedor de almacenamiento de archivos | `azure` en el perfil `prod` |
+| `PORT` | Puerto en el que escucha la API | `8080` |
+
+<br>
+
+*Pasos*
+
+| Paso | Acción | Comando o detalle |
+| --- | --- | --- |
+| 1 | Clonar el repositorio y ubicarse en la rama que se va a publicar | `git clone https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform.git` |
+| 2 | Construir el JAR ejecutable | `./mvnw clean package`, que genera el archivo en la carpeta `target` (`platform-0.0.1-SNAPSHOT.jar`, según el `pom.xml`) |
+| 3 | Crear en Azure la base de datos MySQL y el contenedor privado de Blob Storage | Desde el portal de Azure |
+| 4 | Crear el Azure Web App Service para Java e ingresar las variables de entorno de la tabla anterior | Desde el portal de Azure, en la configuración de la aplicación |
+| 5 | Publicar el JAR en el Web App Service | Subir el archivo generado en el paso 2 |
+| 6 | Verificar que la API responde | Ver la tabla siguiente |
+
+<br>
+
+*Verificación*
+
+| Comprobación | Resultado |
+| --- | --- |
+| Revisar el registro de arranque del Web App Service | La aplicación inicia con el perfil `prod` y se conecta a la base de datos sin errores |
+| Abrir `/swagger-ui/index.html` en la URL del servicio | Se muestra la documentación interactiva de la API generada por springdoc |
+| Abrir `/v3/api-docs` | Devuelve la definición OpenAPI de los endpoints, que parten de `/api/v1` |
+
+<br>
+
+**Aplicación móvil**
+
+El Deployment Diagram establece que la aplicación móvil se distribuye mediante Firebase App Distribution. El repositorio `serenia-app-native` todavía no contiene el código que se desplegará, por lo que su procedimiento se completará cuando exista.
 
 | Producto | Información que se documentará |
 | --- | --- |
-| Web Services | Versión de Java y de Spring Boot, comando de construcción del archivo ejecutable, creación y configuración del Azure Web App Service, creación de la base de datos MySQL, variables de entorno requeridas (sin sus valores) y la forma de verificar que la API responde |
 | Aplicación móvil | Tecnología y versión de las herramientas de construcción, generación del instalable, creación del proyecto y del grupo de testers en Firebase App Distribution, carga de cada versión y la forma de instalarla en un dispositivo de prueba |
 
 <br>
@@ -6026,6 +8038,18 @@ El Deployment Diagram establece que la API REST se aloja en un Azure Web App Ser
 ## 4.2. Landing Page & Mobile Application Implementation
 ### 4.2.1. Sprint 1
 #### 4.2.1.1. Sprint Planning 1
+| **Sprint 1** | Sprint 1 |
+|---|---|
+| **Sprint Planning Background** | |
+| Date | 2026-09-23 |
+| Time | 16:00 PM |
+| Location | Universidad Peruana de Ciencias Aplicadas - Pabellon I |
+| Prepared By | Gallardo Morales, Carla Alejandra |
+| Attendees (to planning meeting) | Contreras Torres, Arturo Valentino / Gallardo Morales, Carla Alejandra /Garcia Paredes, Victor Manuel / Salinas Guzman, Brianna Cristina / Sandoval Aiquipa, Kelber Yamir
+| **Sprint Goal & User Stories** | |
+| Sprint 1 Goal | Nuestro objetivo es presentar la propuesta de valor de Serenia. Creemos brinda confianza y seguridad a los adultos mayores y a sus familiares, los cuales buscan una plataforma en la que puedan apoyarse para tener bajo supervicion a su familiar adulto mayor que vive solo|
+| Sprint 1 Velocity | 80 |
+| Sum of Story Points | 64 |
 #### 4.2.1.2. Aspect Leaders and Collaborators
 #### 4.2.1.3. Sprint Backlog 1
 #### 4.2.1.4. Development Evidence for Sprint Review
@@ -6035,7 +8059,65 @@ El Deployment Diagram establece que la API REST se aloja en un Azure Web App Ser
 #### 4.2.1.8. Software Deployment Evidence for Sprint Review
 #### 4.2.1.9. Team Collaboration Insights during Sprint
 ## 4.3. Validation Interviews
+
+En esta sección se registra y explica el proceso de validación de Serenia con usuarios reales de los segmentos objetivo: adultos mayores que viven solos y familiares que los acompañan a distancia. Cada participante interactúa con el landing page y con las aplicaciones móviles, completando tareas sobre los *user flows* principales del producto mientras expresan sus observaciones. La sección se organiza en tres partes: el diseño de las entrevistas, que define los elementos y flujos a evaluar en cada segmento; el registro de las entrevistas, que documenta a cada participante, la evidencia en video y el resumen de sus apreciaciones; y las evaluaciones según heurísticas de usabilidad, arquitectura de información y diseño inclusivo.
+
 ### 4.3.1. Diseño de Entrevistas
+
+#### Segmento 1: Adultos mayores que viven solos
+
+Personas de 60 años a más, residentes en zonas urbanas del Perú, que viven solas y cuentan con un teléfono celular. Para las entrevistas de validación se evaluará la usabilidad, la claridad y la accesibilidad de Serenia desde la perspectiva del adulto mayor. Ello se conseguirá considerando los avances del proyecto hasta el Sprint 1, que comprenden el landing page y el prototipo interactivo de la aplicación del adulto mayor, y podrá ajustarse según el avance del equipo de desarrollo y el acuerdo con los entrevistados. Se validará el feedback de cada participante en el uso del prototipo junto con el landing page, poniendo especial atención en si puede completar cada tarea sin ayuda y con la menor cantidad de toques posible.
+
+##### Objetivos de la Entrevista:
+
+1) Validar la experiencia de usuario (UX) y la interfaz de usuario (UI) de la aplicación del adulto mayor, evaluando si comprende los textos, reconoce los botones y completa las tareas principales de forma autónoma, sin necesidad de que alguien le explique cómo hacerlo.
+
+2) Evaluar si Serenia resulta para el adulto mayor una alternativa útil y aceptable frente a la llamada diaria de verificación, y si las funcionalidades base (registro y creación del círculo familiar, check-in diario y botón de ayuda) le transmiten seguridad sin sentirse vigilado.
+
+##### Criterios de Evaluación:
+
+- Evaluar si el adulto mayor completa el registro y la creación del círculo familiar sin asistencia, comprendiendo para qué sirve el código de 4 dígitos y a quién debe compartirlo.
+- Medir el tiempo y el número de toques que necesita para responder el check-in diario desde que abre la notificación hasta que ve la confirmación "Tu familia sabrá que estás bien".
+- Evaluar si comprende la opción "Hoy no quiero responder" y sabe cómo retomar sus preguntas desde la pantalla de pausa.
+- Evaluar si identifica el botón "Ayuda" en la pantalla de inicio sin indicaciones y si entiende, a partir de la confirmación "Ya avisamos a tu familia", que su familia fue notificada.
+- Evaluar la legibilidad de los textos, el tamaño de los botones y el contraste de la interfaz, registrando si el participante necesita acercarse a la pantalla o se equivoca de botón.
+- Evaluar la comprensión de la propuesta de valor del landing page, verificando si el adulto mayor entiende qué hace Serenia y qué información recibe su familia.
+
+*Se considerarán los siguientes User Flows*:
+
+- **User Flow 1**: Registro y vinculación con la familia.
+- **User Flow 2**: Check-in diario.
+- **User Flow 3**: Pedir ayuda.
+
+Los User Flows propuestos son los principales de la aplicación del adulto mayor: el primero habilita el círculo familiar al que se dirigen todas las demás funciones, el segundo entrega el valor central de Serenia al reemplazar la llamada de verificación diaria, y el tercero es el flujo crítico por seguridad, que debe resolverse en un solo toque.
+
+#### Segmento 2: Familiares a distancia
+
+Hijos, hijas o parientes cercanos de 25 a 59 años que no conviven con el adulto mayor y buscan saber de él sin recurrir a llamadas constantes. Para las entrevistas de validación se evaluará la usabilidad, la utilidad y la eficiencia de Serenia desde la perspectiva del familiar. Ello se conseguirá considerando los avances del proyecto hasta el Sprint 1, que comprenden el landing page y el prototipo interactivo de la aplicación del familiar, y podrá ajustarse según el avance del equipo de desarrollo y el acuerdo con los entrevistados. Se validará el feedback de cada participante en el uso del prototipo junto con el landing page, enfocándose en si la información que recibe le da tranquilidad y le permite actuar a tiempo cuando el adulto mayor lo necesita.
+
+##### Objetivos de la Entrevista:
+
+1) Validar la experiencia de usuario (UX) y la interfaz de usuario (UI) de la aplicación del familiar, evaluando si comprende la arquitectura de navegación (Inicio, Historial y Alertas) y accede a la información del adulto mayor de manera rápida e intuitiva.
+
+2) Evaluar si Serenia ofrece al familiar una propuesta de valor diferencial frente a las llamadas y los mensajes de verificación, y si las funcionalidades base (vinculación por código, seguimiento del bienestar y atención de alertas) cubren su necesidad de estar presente a distancia.
+
+##### Criterios de Evaluación:
+
+- Evaluar si el familiar completa el registro y la vinculación con el código de 4 dígitos sin ambigüedades, y si entiende qué ocurre cuando el código es inválido o ya venció.
+- Medir el tiempo que necesita para identificar, desde Inicio, si el adulto mayor respondió el check-in del día y cuál fue su estado de ánimo.
+- Evaluar si navega con facilidad por el Historial, aplica los filtros por estado y abre el detalle de un día, comprendiendo la información que se le muestra.
+- Evaluar si interpreta correctamente las "Pequeñas victorias" y la sugerencia de bienestar que aparece cuando hay varios días seguidos con poco ánimo.
+- Evaluar si distingue en la sección Alertas una alerta de Emergencia de una de Inactividad, reconoce cuáles están pendientes y sabe qué acción tomar para atenderlas.
+- Evaluar la comprensión de la propuesta de valor del landing page orientada al familiar, verificando si percibe con claridad los beneficios de usar Serenia frente a llamar a diario.
+
+*Se considerarán los siguientes User Flows*:
+
+- **User Flow 4**: Registro y vinculación con el adulto mayor.
+- **User Flow 5**: Seguimiento del bienestar.
+- **User Flow 6**: Atender una alerta.
+
+Los User Flows propuestos corresponden a las funcionalidades core de la aplicación del familiar y cubren su ciclo completo: conectarse con el adulto mayor, mantenerse al tanto de cómo está día a día y actuar cuando el sistema le avisa que necesita ayuda. También se mostrará nuestra landing page para conocer su opinión.
+
 ### 4.3.2. Registro de Entrevistas
 ### 4.3.3. Evaluaciones según heurísticas
 
@@ -6099,6 +8181,7 @@ Esta primera entrega abarca el análisis del problema, la propuesta de valor y e
 
 # Bibliografía
 
+
 **Dominio de negocio**
 
 > Agencia Andina. (2025, 26 de marzo). *INEI: En Lima Metropolitana, uno de cada cuatro adulto mayor vive solo*. Andina. https://andina.pe/agencia/noticia-inei-lima-metropolitana-uno-cada-cuatro-adulto-mayor-vive-solo-1023716.aspx
@@ -6132,6 +8215,16 @@ Esta primera entrega abarca el análisis del problema, la propuesta de valor y e
 > Baykoca, J., Hurtado Barbeito, G., Pearce, C. J., Milne-Ives, M., Hudson, J., Norton, S., & Moss-Morris, R. (2026). Mechanisms of engagement with mobile health apps for adults with long-term conditions: Overview of systematic reviews. *JMIR mHealth and uHealth*, *14*(1), Article e88382. https://doi.org/10.2196/88382
 
 > Collazo-Castiñeira, P., Rodríguez-Rey, R., Cruz-Jentoft, A. J., Ben Allouch, S., Eglseer, D., Schoufour, J., Topinková, E., Weijs, P. J. M., Boirie, Y., & Sánchez-Izquierdo, M. (2025). Tailoring mHealth for healthy aging: Focus group study with retirement-age adults. *JMIR mHealth and uHealth*, *13*, Article e70051. https://doi.org/10.2196/70051
+
+**Diseño de interfaz y experiencia de usuario**
+
+> Apple. (s. f.). *Human Interface Guidelines*. https://developer.apple.com/design/human-interface-guidelines/
+
+> Google. (s. f.). *Material Design 3*. https://m3.material.io/
+
+> Moran, K. (2016, 17 de julio). *The four dimensions of tone of voice*. Nielsen Norman Group. https://www.nngroup.com/articles/tone-of-voice-dimensions/
+
+> World Wide Web Consortium. (2023). *Web Content Accessibility Guidelines (WCAG) 2.2*. https://www.w3.org/TR/WCAG22/
 
 <br>
 
