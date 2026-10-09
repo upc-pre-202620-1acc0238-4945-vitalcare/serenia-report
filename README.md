@@ -7945,11 +7945,63 @@ Los archivos .feature se redactan en inglés con las palabras clave `Feature`, `
 | Sprint 1 Goal | Nuestro objetivo es presentar la propuesta de valor de Serenia. Creemos brinda confianza y seguridad a los adultos mayores y a sus familiares, los cuales buscan una plataforma en la que puedan apoyarse para tener bajo supervicion a su familiar adulto mayor que vive solo|
 | Sprint 1 Velocity | 80 |
 | Sum of Story Points | 64 |
+
 #### 4.2.1.2. Aspect Leaders and Collaborators
+
+Durante el Sprint 1, el equipo se organizó distribuyendo las responsabilidades tácticas y estratégicas de la siguiente manera:
+
+| Integrante | Rol / Responsabilidad en el Sprint 1 |
+| :--- | :--- |
+| Arturo Contreras | Desarrollo Backend (Spring Boot), Arquitectura de BD y Despliegue. |
+| Carla Gallardo | Apoyo en Frontend, Pruebas y Reportes de Arquitectura. |
+| Victor García | Desarrollo de agregados en Backend y Mappers de persistencia. |
+| Brianna Salinas | Documentación técnica, diseño de interfaces y Landing Page. |
+| Kelber Sandoval | Gestión Ágil (Trello/ClickUp), Integración de Backend (Interfaces REST) y Landing Page. |
+
 #### 4.2.1.3. Sprint Backlog 1
+
+A continuación se evidencia el tablero de Trello utilizado durante el Sprint 1, mostrando las User Stories y Technical Stories priorizadas, en progreso y terminadas.
+
+<div align="center">
+
+![Evidencia de Trello](ruta/a/tu/captura-de-trello.png)
+  <br/><i>Imagen X. Tablero de Trello del Sprint 1.</i>
+
+</div>
+
 #### 4.2.1.4. Development Evidence for Sprint Review
+
+La siguiente evidencia muestra el desarrollo de los controladores, ensambladores y recursos REST correspondientes a la capa de Interfaz del contexto Alerts and Safety, así como el historial de commits integrados en la rama develop.
+
+<div align="center">
+
+![Evidencia de Código/Commits](ruta/a/tu/captura-de-commits-github-o-vscode.png)
+  <br/><i>Imagen X. Evidencia de desarrollo en GitHub (Alerts and Safety).</i>
+
+</div>
+
 #### 4.2.1.5. Testing Suite Evidence for Sprint Review
+
+Se realizaron pruebas de los endpoints desarrollados utilizando Postman para validar las respuestas HTTP (200 OK, 201 Created, 400 Bad Request) de las alertas de emergencia e inactividad.
+
+<div align="center">
+
+![Evidencia de Postman](ruta/a/tu/captura-de-postman.png)
+  <br/><i>Imagen X. Evidencia de pruebas de los servicios REST.</i>
+
+</div>
+
 #### 4.2.1.6. Execution Evidence for Sprint Review
+
+A continuación se presentan las capturas de la aplicación ejecutándose, demostrando el resultado visual de las tareas completadas durante el Sprint 1.
+
+<div align="center">
+
+![Evidencia de App Funcionando](ruta/a/tu/captura-de-la-app.png)
+  <br/><i>Imagen X. Evidencia de la ejecución del aplicativo.</i>
+
+</div>
+
 #### 4.2.1.7. Services Documentation Evidence for Sprint Review
 #### 4.2.1.8. Software Deployment Evidence for Sprint Review
 #### 4.2.1.9. Team Collaboration Insights during Sprint
