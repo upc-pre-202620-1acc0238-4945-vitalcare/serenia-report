@@ -8002,18 +8002,13 @@ El perfil `prod` toma su configuración de las variables de la tabla siguiente. 
 
 <br>
 
-*Pasos*
+*Construcción y despliegue*
 
 | Paso | Acción | Comando o detalle |
 | --- | --- | --- |
 | 1 | Clonar el repositorio y ubicarse en la rama que se va a publicar | `git clone https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform.git` |
 | 2 | Construir el JAR ejecutable | `./mvnw clean package -DskipTests`, que genera el archivo en la carpeta `target` (`platform-0.0.1-SNAPSHOT.jar`, según el `pom.xml`) |
-| 3 | Crear en Azure la base de datos MySQL y el contenedor privado de Blob Storage | Desde el portal de Azure |
-| 4 | Crear el Azure Web App Service para Java e ingresar las variables de entorno de la tabla anterior | Desde el portal de Azure, en la configuración de la aplicación |
-| 5 | Publicar el JAR en el Web App Service | Subir el archivo generado en el paso 2 |
-| 6 | Verificar que la API responde | Ver la tabla siguiente |
-
-<br>
+| 3 | Alojar la API | El JAR se ejecuta en el Azure Web App Service del Deployment Diagram, con las variables de entorno de la tabla anterior, la base de datos en MySQL Flexible Server y los archivos en el contenedor privado de Blob Storage |
 
 La única prueba del proyecto, `SereniaPlatformApplicationTests`, levanta la aplicación completa y necesita un servidor MySQL accesible con las credenciales del perfil `dev`; por eso la construcción del JAR para el despliegue omite las pruebas con `-DskipTests`.
 
@@ -8024,9 +8019,8 @@ La única prueba del proyecto, `SereniaPlatformApplicationTests`, levanta la apl
 | Comprobación | Resultado |
 | --- | --- |
 | Construir el proyecto con Java 26 (8 de octubre de 2026) | Se compilan los 557 archivos fuente sin errores |
-| Revisar el registro de arranque del Web App Service | La aplicación inicia con el perfil `prod` y se conecta a la base de datos sin errores |
-| Abrir `/swagger-ui/index.html` en la URL del servicio | Se muestra la documentación interactiva de la API generada por springdoc |
-| Abrir `/v3/api-docs` | Devuelve la definición OpenAPI de los endpoints, que parten de `/api/v1` |
+| Consultar `/swagger-ui/index.html` en la API en ejecución | Muestra la documentación interactiva de la API, generada por springdoc |
+| Consultar `/v3/api-docs` | Devuelve la definición OpenAPI de los endpoints, que parten de `/api/v1` |
 
 <br>
 
