@@ -7741,6 +7741,27 @@ Para probar la vinculación en el prototipo, el código válido es 4821 y el có
 ## 4. Product Implementation & Validation
 ## 4.1. Software Configuration Management
 ### 4.1.1. Software Development Environment Configuration
+
+Para el desarrollo, pruebas y despliegue de Serenia, el equipo ha configurado un entorno de trabajo distribuido que cubre las dos aplicaciones móviles, la landing page, los servicios backend y la base de datos. La selección de estas herramientas no solo responde a los requerimientos técnicos de cada plataforma, sino a la necesidad de mantener un ciclo de entrega continuo e integrado.
+
+**1. Entorno de Desarrollo (Lenguajes y Frameworks)**
+*   **Backend API REST:** Desarrollado en **Java 17** utilizando **Spring Boot 3.x**. Se eligió esta pila por su robustez para implementar el monolito modular y su compatibilidad nativa con patrones de Domain-Driven Design (DDD).
+*   **App Adulto Mayor (Nativa):** Construida con **Kotlin** y **Jetpack Compose**. La elección de desarrollo nativo en Android garantiza un control absoluto sobre la accesibilidad del dispositivo (tamaños de fuente nativos, alto contraste y manejo eficiente de hardware para la grabación de audio).
+*   **App Familiar (Cross-platform):** Desarrollada con **Flutter (Dart)**. Dado que este segmento requiere una interfaz orientada a gestión y visualización de datos (dashboards, historial, notificaciones), el enfoque multiplataforma permite iterar rápido y cubrir iOS y Android con un solo código base.
+*   **Landing Page Web:** Maquetación estática con **HTML5, CSS3 y JavaScript vanilla**, optimizando la velocidad de carga para SEO.
+
+**2. Entorno de Despliegue y Cloud (Infraestructura)**
+La configuración del entorno de producción se distribuyó estratégicamente para optimizar costos y latencia:
+*   **Microsoft Azure (App Service & MySQL Flexible Server):** El backend y la base de datos transaccional se alojan en la misma región de Azure. Esta proximidad de red reduce drásticamente la latencia en las consultas, lo cual es crítico para el procesamiento del *Daily Check-in* y el disparo de las *Alertas de Seguridad*.
+*   **Azure Blob Storage:** Se configuró un contenedor privado para el almacenamiento de los archivos multimedia del contexto de *Social Companionship* (fotos y audios), manteniendo la base de datos MySQL libre de almacenamiento binario pesado.
+*   **Netlify:** Seleccionado para alojar la Landing Page debido a su integración de Despliegue Continuo (CI/CD) nativa con GitHub, sirviendo el contenido estático globalmente a través de su CDN.
+*   **Firebase Cloud Messaging (FCM):** Configurado como el proveedor externo de mensajería para empujar las alertas de emergencia y los recordatorios sociales en tiempo real hacia los dispositivos móviles, saltándose las limitaciones de las consultas en segundo plano.
+
+**3. Entorno de Gestión y Colaboración**
+*   **Control de Versiones y Código:** **Git y GitHub**. Todo el equipo opera bajo el modelo *GitFlow*, utilizando la convención *Conventional Commits* para mantener una trazabilidad semántica en repositorios separados (`serenia-app-native`, `serenia-web-services`, `serenia-website`, `serenia-report`).
+*   **Modelado y Diseño:** **Figma** para prototipos de alta fidelidad, **Miro** para el descubrimiento del dominio (EventStorming interactivo), **Structurizr** para los diagramas de arquitectura C4 Model, y **dbdiagram.io** para la esquematización relacional (DBML).
+*   **Project Management:** **Trello** para la ejecución del flujo ágil (Sprint Backlog) y **ClickUp** para el seguimiento y asignación de la documentación del Project Report.
+
 ### 4.1.2. Source Code Management
 El equipo utiliza GitHub como plataforma principal de control de versiones y colaboración. A continuación se indican los repositorios correspondientes a cada
 producto del proyecto:
