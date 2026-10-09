@@ -8014,9 +8014,25 @@ Hijos, hijas o parientes cercanos de 25 a 59 años que no conviven con el adulto
 Los User Flows propuestos corresponden a las funcionalidades core de la aplicación del familiar y cubren su ciclo completo: conectarse con el adulto mayor, mantenerse al tanto de cómo está día a día y actuar cuando el sistema le avisa que necesita ayuda. También se mostrará nuestra landing page para conocer su opinión.
 
 ### 4.3.2. Registro de Entrevistas
+
 ### 4.3.3. Evaluaciones según heurísticas
 
 <div style="page-break-after: always;"></div>
+
+Para asegurar que Serenia sea intuitiva tanto para los adultos mayores (quienes priorizan la claridad visual y operativa) como para los familiares a distancia (quienes requieren información rápida para mitigar la ansiedad), las interfaces de ambas aplicaciones móviles fueron evaluadas utilizando las **10 Heurísticas de Usabilidad de Jakob Nielsen**.
+
+| Heurística de Nielsen | Aplicación y Evaluación en Serenia |
+| :--- | :--- |
+| **1. Visibilidad del estado del sistema** | **Familiar:** El panel de alertas actualiza en tiempo real quién se hace cargo de una emergencia (ej. *"Atendido por papá"*), evitando esfuerzos duplicados. **Adulto Mayor:** Al ingresar el código de vinculación, el sistema confirma inmediatamente *"Conexión exitosa"*, dando certeza del enlace. |
+| **2. Relación entre el sistema y el mundo real** | Se omite por completo la jerga médica o técnica ("monitoreo", "signos vitales", "logs"). La interfaz utiliza un lenguaje cercano y emocional: el botón de audio se llama *"Cuéntame algo"* y los reportes diarios indican *"Hoy se siente muy bien"*. |
+| **3. Control y libertad del usuario** | El adulto mayor posee el control total sobre su privacidad: puede utilizar la función *"Pausar preguntas de hoy"* para omitir su check-in diario sin que el sistema dispare una falsa alerta de inactividad, preservando su autonomía. |
+| **4. Consistencia y estándares** | Se mantienen patrones de diseño universales para minimizar la curva de aprendizaje: el botón de *Ayuda* utiliza el color rojo estándar de alerta y se sitúa en un área de fácil acceso, mientras que el flujo de vinculación utiliza códigos de 4 dígitos típicos de emparejamiento de dispositivos. |
+| **5. Prevención de errores** | Para el adulto mayor, los botones de estado de ánimo poseen un área táctil expandida (touch target) que evita selecciones erróneas. El botón de auxilio requiere una interacción sostenida o confirmación breve para evitar activaciones accidentales desde el bolsillo. |
+| **6. Reconocer en lugar de recordar** | **Familiar:** No requiere memorizar el estado de ánimo de días anteriores. El módulo de *Wellbeing Monitoring* evalúa el historial y, si detecta una racha de malestar, expone proactivamente una *"Sugerencia"* en pantalla (ej. *"Tu papá lleva 3 días sintiéndose no tan bien"*). |
+| **7. Flexibilidad y eficiencia de uso** | La aplicación del adulto mayor incorpora un *"Modo Simplificado"*. En días de menor energía, esta función oculta opciones secundarias (como recordatorios sociales o fotos) y presenta únicamente el check-in diario y el botón de ayuda. |
+| **8. Estética y diseño minimalista** | El flujo principal del adulto mayor requiere de **un solo toque**. Se descartaron los campos de texto y los formularios extensos, reduciendo la carga cognitiva a su mínima expresión ("Muy bien", "Más o menos", "No tan bien"). |
+| **9. Ayudar a los usuarios a reconocer errores** | En el proceso de vinculación, si el familiar ingresa un código que ya venció, la interfaz no devuelve un error genérico (ej. "Código 404"), sino que indica claramente: *"El código ingresado ha expirado. Por favor, solicita uno nuevo a tu familiar"*. |
+| **10. Ayuda y documentación** | El *onboarding* inicial cuenta con un tutorial paso a paso guiado que explica al adulto mayor cómo generar su primer código de invitación y dictarlo, cubriendo el único momento que representa fricción técnica. |
 
 # Conclusiones
 ## Conclusiones y Recomendaciones
