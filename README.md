@@ -7966,7 +7966,7 @@ El objetivo principal del Sprint 1 fue establecer la arquitectura base de la API
 
 <div align="center">
 
-![Evidencia de Trello](assets/img/sprint1/trello-board.jpg)
+![Evidencia de Trello](assets/img/sprint-1/trello-board.png)
   <br/><i>Imagen X. Board de Trello correspondiente al Sprint 1.</i>
 
 </div>
