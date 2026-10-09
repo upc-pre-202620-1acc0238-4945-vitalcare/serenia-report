@@ -7917,7 +7917,741 @@ Los archivos .feature se redactan en inglés con las palabras clave `Feature`, `
 #### 4.2.1.5. Testing Suite Evidence for Sprint Review
 #### 4.2.1.6. Execution Evidence for Sprint Review
 #### 4.2.1.7. Services Documentation Evidence for Sprint Review
+Durante el Sprint 1 el alcance del equipo estuvo centrado en el desarrollo y despliegue de la Landing Page de Serenia, correspondiente a un sitio estático informativo, y en el avance de aproximadamente el 70 % del backend de la plataforma (**Serenia Platform**). Dicho backend está construido con Spring Boot 4.0.6 y Java 26, organizado bajo Domain-Driven Design en seis bounded contexts (`iam`, `carecircle`, `dailycheckin`, `alertsandsafety`, `socialcompanionship` y `wellbeingmonitoring`), y expone una RESTful API versionada bajo el prefijo `/api/v1`.
+
+Como parte de este avance, se documentaron con OpenAPI **56 endpoints agrupados en 17 recursos**. La especificación se genera automáticamente a partir de las anotaciones de los controladores (`@Tag`, `@Operation`, `@ApiResponses`, `@Schema`) mediante `springdoc-openapi-starter-webmvc-ui` 3.0.3, y se publica en Swagger UI. 
+
+| Recurso | URL |
+|---|---|
+| Swagger UI | .. |
+| Especificación OpenAPI (JSON) | .. |
+
+### Convenciones generales de la API
+
+- **URL base:** `colocar`.
+- **Formato:** todas las peticiones y respuestas usan `application/json`, salvo la subida de audios y fotos (`multipart/form-data`) y la descarga de archivos multimedia (`/media`).
+- **Autenticación:** la API es *stateless* y usa JWT. Solo `POST /api/v1/users` (registro) y `POST /api/v1/sessions` (inicio de sesión) son públicos; el resto de endpoints exige la cabecera `Authorization: Bearer <token>`, con el token obtenido al iniciar sesión (válido por 7 días). La documentación declara el esquema de seguridad `bearerAuth` (HTTP, bearer, JWT), lo que habilita el botón **Authorize** de Swagger UI.
+- **Identificadores y fechas:** los identificadores son UUID. Los instantes se almacenan y devuelven en UTC (ISO-8601, p. ej. `2026-10-07T15:00:00Z`); las fechas y horas locales (`shiftDate`, `checkDate`, `remindAt`, `reminderTime`) se interpretan en la zona horaria del adulto mayor.
+- **Formato de error:** toda respuesta de error devuelve un objeto con `code` (código de máquina, p. ej. `VALIDATION_ERROR`, `FORBIDDEN`, `BUSINESS_RULE_VIOLATION`, `<ENTIDAD>_NOT_FOUND`, `<ENTIDAD>_CONFLICT`), `message` (mensaje localizado según el idioma de la petición) y `details` (opcional).
+
+```json
+{
+  "code": "VALIDATION_ERROR",
+  "message": "<mensaje localizado>",
+  "details": "<detalle del campo o de la regla incumplida>"
+}
+```
+
+| Código HTTP | Significado en Serenia Platform |
+|---|---|
+| `400` | Datos de entrada inválidos (`VALIDATION_ERROR`) |
+| `401` | Token ausente o inválido, o credenciales incorrectas |
+| `403` | El usuario no tiene permiso sobre el recurso (no es el dueño, ni familiar vinculado) |
+| `404` | Recurso no encontrado (`*_NOT_FOUND`) |
+| `409` | Conflicto de estado (`*_CONFLICT`), p. ej. alerta ya reconocida |
+| `413` / `415` | Archivo demasiado grande (máx. 10 MB) / tipo de archivo no soportado |
+| `422` | Regla de negocio incumplida (`BUSINESS_RULE_VIOLATION`) |
+
+### Relación de endpoints documentados
+
+Los enlaces de la columna *Documentación* apuntan a la sección (tag) correspondiente de Swagger UI en el entorno local.
+
+| Bounded context | Endpoint | Acciones implementadas | Documentación (URL local) |
+|---|---|---|---|
+| IAM | `/api/v1/users` | `POST` registrar usuario · `GET` obtener por id · `PUT` actualizar perfil · `PUT` actualizar foto · `PUT` cambiar contraseña | [Users](http://localhost:8080/swagger-ui/index.html#/Users) |
+| IAM | `/api/v1/sessions` | `POST` iniciar sesión · `DELETE` cerrar sesión | [Sessions](http://localhost:8080/swagger-ui/index.html#/Sessions) |
+| Care Circle | `/api/v1/care-circles` | `GET` por id · `GET` por adulto mayor | [Care Circles](http://localhost:8080/swagger-ui/index.html#/Care%20Circles) |
+| Care Circle | `/api/v1/care-circles/{careCircleId}/invitation-codes` | `POST` generar código · `GET` códigos pendientes | [Invitation Codes](http://localhost:8080/swagger-ui/index.html#/Invitation%20Codes) |
+| Care Circle | `/api/v1/family-links` y `/api/v1/care-circles/{careCircleId}/family-links` | `POST` canjear código · `GET` vínculos de un familiar · `GET` vínculos de un círculo · `DELETE` revocar vínculo | [Family Links](http://localhost:8080/swagger-ui/index.html#/Family%20Links) |
+| Care Circle | `/api/v1/care-circles/{careCircleId}/care-shifts` | `POST` asignar turno · `GET` consultar turnos · `PUT` reasignar turno | [Care Shifts](http://localhost:8080/swagger-ui/index.html#/Care%20Shifts) |
+| Care Circle | `/api/v1/care-circles/{careCircleId}/shared-notes` | `POST` crear nota · `GET` listar notas · `PUT` editar nota | [Shared Notes](http://localhost:8080/swagger-ui/index.html#/Shared%20Notes) |
+| Daily Check-in | `/api/v1/check-ins` | `GET` check-in de hoy · `GET` historial · `POST` responder check-in | [Check-ins](http://localhost:8080/swagger-ui/index.html#/Check-ins) |
+| Daily Check-in | `/api/v1/check-in-preferences` | `GET` preferencias · `PUT` hora del check-in · `POST` pausar hoy · `DELETE` reanudar hoy · `PUT` modo simplificado | [Check-in Preferences](http://localhost:8080/swagger-ui/index.html#/Check-in%20Preferences) |
+| Alerts and Safety | `/api/v1/alerts` | `GET` alertas de un adulto mayor · `GET` detalle de alerta | [Alerts](http://localhost:8080/swagger-ui/index.html#/Alerts) |
+| Alerts and Safety | `/api/v1/emergency-alerts` | `POST` botón de ayuda · `POST` reconocer · `POST` resolver | [Emergency Alerts](http://localhost:8080/swagger-ui/index.html#/Emergency%20Alerts) |
+| Alerts and Safety | `/api/v1/inactivity-alerts` | `POST` reconocer · `POST` resolver | [Inactivity Alerts](http://localhost:8080/swagger-ui/index.html#/Inactivity%20Alerts) |
+| Social Companionship | `/api/v1/care-circles/{careCircleId}/audio-messages` | `POST` grabar · `POST` compartir · `DELETE` descartar · `GET` listar · `GET` archivo · `POST` reproducir | [Audio Messages](http://localhost:8080/swagger-ui/index.html#/Audio%20Messages) |
+| Social Companionship | `/api/v1/care-circles/{careCircleId}/photo-messages` | `POST` subir · `POST` compartir · `DELETE` descartar · `GET` listar · `GET` archivo · `POST` marcar como vista | [Photo Messages](http://localhost:8080/swagger-ui/index.html#/Photo%20Messages) |
+| Social Companionship | `/api/v1/social-reminders` | `POST` programar · `GET` activos · `POST` posponer · `POST` completar · `POST` cancelar | [Social Reminders](http://localhost:8080/swagger-ui/index.html#/Social%20Reminders) |
+| Wellbeing Monitoring | `/api/v1/small-wins` | `GET` pequeños logros por rango de fechas | [Small Wins](http://localhost:8080/swagger-ui/index.html#/Small%20Wins) |
+| Wellbeing Monitoring | `/api/v1/wellbeing-suggestions` | `GET` sugerencias activas · `POST` descartar sugerencia | [Wellbeing Suggestions](http://localhost:8080/swagger-ui/index.html#/Wellbeing%20Suggestions) |
+
+### Detalle de acciones por endpoint
+
+En cada tabla, los parámetros marcados con `*` son obligatorios. Los *path parameters* y *query parameters* son de tipo UUID, salvo que se indique otro tipo. Salvo que se indique lo contrario, todas las acciones requieren `Authorization: Bearer <token>`.
+
+---
+
+#### Users — `/api/v1/users`
+
+Registro de adultos mayores y familiares lejanos, y gestión del perfil. Las modificaciones solo proceden si `{userId}` corresponde al usuario autenticado.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/users` (pública) | **Body** `RegisterUserRequest`: `email`*, `password`* (8–72), `role`* (`OLDER_ADULT` \| `DISTANT_RELATIVE`), `fullName`* (≤120), `phoneNumber` (E.164), `birthDate` (no futura), `locale`*, `timeZone`* | `201` `UserResponse` · `400` datos inválidos · `409` correo ya registrado |
+| `GET` | `/api/v1/users/{userId}` | **Path** `userId`* | `200` `UserResponse` · `401` · `404` usuario no encontrado |
+| `PUT` | `/api/v1/users/{userId}/profile` | **Path** `userId`* · **Body** `fullName`*, `phoneNumber`, `birthDate`, `locale`*, `timeZone`* | `200` `UserResponse` · `400` · `403` no es el dueño de la cuenta · `404` |
+| `PUT` | `/api/v1/users/{userId}/photo` | **Path** `userId`* · **Body** `photoUrl`* | `200` `UserResponse` · `400` · `403` · `404` |
+| `PUT` | `/api/v1/users/{userId}/password` | **Path** `userId`* · **Body** `currentPassword`*, `newPassword`* (8–72) | `204` sin contenido; revoca las demás sesiones activas · `400` · `403` · `404` · `422` contraseña actual incorrecta |
+
+**Ejemplo — registrar usuario** (`POST /api/v1/users`)
+
+```json
+{
+  "email": "rosa.mendez@example.com",
+  "password": "secret123",
+  "role": "OLDER_ADULT",
+  "fullName": "Rosa Mendez Solorzano",
+  "phoneNumber": "+51987654321",
+  "birthDate": "1948-05-12",
+  "locale": "es-PE",
+  "timeZone": "America/Lima"
+}
+```
+
+**Response `201 Created`:** devuelve la representación pública de la cuenta, sin datos sensibles (no incluye la contraseña). El campo `status` indica el estado de la cuenta.
+
+```json
+{
+  "id": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "email": "rosa.mendez@example.com",
+  "role": "OLDER_ADULT",
+  "fullName": "Rosa Mendez Solorzano",
+  "phoneNumber": "+51987654321",
+  "birthDate": "1948-05-12",
+  "photoUrl": null,
+  "locale": "es-PE",
+  "timeZone": "America/Lima",
+  "status": "ACTIVE"
+}
+```
+
+---
+
+#### Sessions — `/api/v1/sessions`
+
+Inicio y cierre de sesión. Al iniciar sesión se abre una sesión y se emite el token JWT que se usa en el resto de la API.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/sessions` (pública) | **Body** `SignInRequest`: `email`*, `password`*, `deviceInfo` (≤200) | `201` `AuthenticatedUserResponse` · `400` · `401` correo o contraseña inválidos · `422` cuenta no activa |
+| `DELETE` | `/api/v1/sessions/{sessionId}` | **Path** `sessionId`* | `204` sesión cerrada · `401` · `403` la sesión es de otro usuario · `404` |
+
+**Ejemplo — iniciar sesión** (`POST /api/v1/sessions`)
+
+```json
+{
+  "email": "rosa.mendez@example.com",
+  "password": "secret123",
+  "deviceInfo": "Android 14 - Samsung A54"
+}
+```
+
+**Response `201 Created`:** `sessionId` identifica la sesión abierta (se usa para cerrarla), `token` es el JWT que debe enviarse como `Bearer`, `expiresAt` indica su vencimiento en UTC y `user` es el usuario autenticado.
+
+```json
+{
+  "sessionId": "9a7c1e2d-3b4f-4c5d-8e6f-7a8b9c0d1e2f",
+  "token": "eyJhbGciOiJIUzI1NiJ9...",
+  "expiresAt": "2026-10-14T15:30:00Z",
+  "user": {
+    "id": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+    "email": "rosa.mendez@example.com",
+    "role": "OLDER_ADULT",
+    "fullName": "Rosa Mendez Solorzano",
+    "locale": "es-PE",
+    "timeZone": "America/Lima",
+    "status": "ACTIVE"
+  }
+}
+```
+
+---
+
+#### Care Circles — `/api/v1/care-circles`
+
+Círculo de cuidado de un adulto mayor. Pueden consultarlo su dueño y los familiares con vínculo activo.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `GET` | `/api/v1/care-circles/{careCircleId}` | **Path** `careCircleId`* | `200` `CareCircleResponse` · `403` no es dueño ni familiar activo · `404` |
+| `GET` | `/api/v1/care-circles?olderAdultId={olderAdultId}` | **Query** `olderAdultId`* | `200` `CareCircleResponse` · `403` · `404` |
+
+**Response `200 OK`:**
+
+```json
+{
+  "id": "6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f",
+  "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "createdAt": "2026-10-07T15:30:00Z"
+}
+```
+
+---
+
+#### Invitation Codes — `/api/v1/care-circles/{careCircleId}/invitation-codes`
+
+Códigos de invitación que el adulto mayor comparte con un familiar para que se una a su círculo. Cada código vence a las 48 horas.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/care-circles/{careCircleId}/invitation-codes` | **Path** `careCircleId`* · sin body | `201` `InvitationCodeResponse` · `403` solo el adulto mayor dueño puede generar códigos · `404` |
+| `GET` | `/api/v1/care-circles/{careCircleId}/invitation-codes` | **Path** `careCircleId`* | `200` lista de `InvitationCodeResponse` canjeables · `403` · `404` |
+
+**Response `201 Created`:** `code` es el valor que se comparte con el familiar, `status` es `PENDING` hasta que se canjea (`USED`) o vence (`EXPIRED`), y `expiresAt` indica hasta cuándo puede canjearse.
+
+```json
+{
+  "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+  "code": "K7M4QX2P",
+  "status": "PENDING",
+  "expiresAt": "2026-10-09T15:30:00Z"
+}
+```
+
+---
+
+#### Family Links — `/api/v1/family-links` y `/api/v1/care-circles/{careCircleId}/family-links`
+
+Vínculo de un familiar con un círculo de cuidado. El adulto mayor puede revocar cualquier vínculo de su círculo; un familiar, solo el suyo.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/family-links` | **Body** `RedeemInvitationCodeRequest`: `code`*, `relationshipLabel` (≤60) | `201` `FamilyLinkResponse` · `403` no es un familiar lejano activo · `404` código no encontrado · `409` código usado, vencido o familiar ya vinculado |
+| `GET` | `/api/v1/family-links?relativeId={relativeId}` | **Query** `relativeId`* | `200` lista de `FamilyLinkResponse` activos · `403` un familiar solo consulta sus propios vínculos |
+| `GET` | `/api/v1/care-circles/{careCircleId}/family-links` | **Path** `careCircleId`* | `200` lista de `FamilyLinkResponse` · `403` · `404` |
+| `DELETE` | `/api/v1/care-circles/{careCircleId}/family-links/{familyLinkId}` | **Path** `careCircleId`*, `familyLinkId`* | `204` vínculo revocado · `403` · `404` · `409` ya revocado |
+
+**Ejemplo — canjear código** (`POST /api/v1/family-links`)
+
+```json
+{
+  "code": "K7M4QX2P",
+  "relationshipLabel": "hija"
+}
+```
+
+**Response `201 Created`:**
+
+```json
+{
+  "id": "c3d4e5f6-a7b8-4c9d-8e0f-1a2b3c4d5e6f",
+  "careCircleId": "6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f",
+  "relativeId": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+  "relationshipLabel": "hija",
+  "status": "ACTIVE",
+  "linkedAt": "2026-10-07T16:00:00Z"
+}
+```
+
+---
+
+#### Care Shifts — `/api/v1/care-circles/{careCircleId}/care-shifts`
+
+Turnos diarios de cuidado que se reparten los familiares del círculo.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/care-circles/{careCircleId}/care-shifts` | **Path** `careCircleId`* · **Body** `shiftDate`* (`yyyy-MM-dd`) | `201` `CareShiftResponse` · `403` no es familiar activo · `404` · `409` fecha ya cubierta · `422` fecha anterior al día actual del adulto mayor |
+| `GET` | `/api/v1/care-circles/{careCircleId}/care-shifts?from={yyyy-MM-dd}&to={yyyy-MM-dd}` | **Path** `careCircleId`* · **Query** `from`*, `to`* (ambos inclusive) | `200` lista de `CareShiftResponse` · `400` rango inválido · `403` · `404` |
+| `PUT` | `/api/v1/care-circles/{careCircleId}/care-shifts/{careShiftId}` | **Path** `careCircleId`*, `careShiftId`* · **Body** `relativeId`* | `200` `CareShiftResponse` · `403` · `404` · `422` turno pasado, mismo familiar o familiar no vinculado |
+
+**Ejemplo — asignar turno** (`POST`)
+
+```json
+{ "shiftDate": "2026-10-10" }
+```
+
+**Response `201 Created`:** el turno queda asignado al familiar autenticado.
+
+```json
+{
+  "id": "e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7a8b",
+  "careCircleId": "6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f",
+  "relativeId": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+  "shiftDate": "2026-10-10"
+}
+```
+
+---
+
+#### Shared Notes — `/api/v1/care-circles/{careCircleId}/shared-notes`
+
+Notas visibles para todos los familiares del círculo; solo su autor puede editarlas.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/care-circles/{careCircleId}/shared-notes` | **Path** `careCircleId`* · **Body** `content`* | `201` `SharedNoteResponse` · `400` · `403` no es familiar activo · `404` |
+| `GET` | `/api/v1/care-circles/{careCircleId}/shared-notes` | **Path** `careCircleId`* | `200` lista de `SharedNoteResponse`, de la más reciente a la más antigua · `403` · `404` |
+| `PUT` | `/api/v1/care-circles/{careCircleId}/shared-notes/{sharedNoteId}` | **Path** `careCircleId`*, `sharedNoteId`* · **Body** `content`* | `200` `SharedNoteResponse` · `400` · `403` no es el autor · `404` |
+
+**Ejemplo — crear nota** (`POST`)
+
+```json
+{ "content": "Mamá tiene cita con el cardiólogo el viernes a las 10:00." }
+```
+
+**Response `201 Created`:**
+
+```json
+{
+  "id": "f6a7b8c9-d0e1-4f2a-9b3c-4d5e6f7a8b9c",
+  "careCircleId": "6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f",
+  "authorId": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+  "content": "Mamá tiene cita con el cardiólogo el viernes a las 10:00.",
+  "createdAt": "2026-10-07T16:00:00Z",
+  "updatedAt": "2026-10-07T16:00:00Z"
+}
+```
+
+---
+#### Check-ins — `/api/v1/check-ins`
+
+Pregunta diaria de ánimo al adulto mayor. Un check-in puede estar `PENDING`, `ANSWERED`, `MISSED` o `SKIPPED`.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `GET` | `/api/v1/check-ins/today?olderAdultId={olderAdultId}` | **Query** `olderAdultId`* | `200` `CheckInResponse` del día actual · `403` no es el adulto mayor ni familiar activo · `404` el check-in de hoy aún no se abrió |
+| `GET` | `/api/v1/check-ins?olderAdultId={olderAdultId}&from={yyyy-MM-dd}&to={yyyy-MM-dd}` | **Query** `olderAdultId`*, `from`*, `to`* (inclusive) | `200` lista de `CheckInResponse` ordenada por fecha · `400` rango inválido · `403` |
+| `POST` | `/api/v1/check-ins/{checkInId}/answer` | **Path** `checkInId`* · **Body** `mood`* (`VERY_LOW`, `LOW`, `NEUTRAL`, `GOOD`, `VERY_GOOD`), `positiveActivity` (≤200) | `200` `CheckInResponse` · `400` · `403` solo el adulto mayor responde · `404` · `409` ya no está pendiente o venció el plazo |
+
+**Ejemplo — responder check-in** (`POST /api/v1/check-ins/1c2d3e4f-5a6b-4c7d-8e9f-0a1b2c3d4e5f/answer`)
+
+```json
+{
+  "mood": "GOOD",
+  "positiveActivity": "Caminé en el parque"
+}
+```
+
+**Response `200 OK`:** el check-in pasa a `ANSWERED` y registra el ánimo, la actividad positiva y el instante de la respuesta (`answeredAt`). `scheduledFor` y `deadlineAt` indican cuándo se presenta la pregunta y hasta cuándo puede responderse.
+
+```json
+{
+  "id": "1c2d3e4f-5a6b-4c7d-8e9f-0a1b2c3d4e5f",
+  "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "checkDate": "2026-10-08",
+  "questionText": "¿Cómo se siente hoy?",
+  "scheduledFor": "2026-10-08T15:00:00Z",
+  "deadlineAt": "2026-10-08T18:00:00Z",
+  "status": "ANSWERED",
+  "paused": false,
+  "mood": "GOOD",
+  "positiveActivity": "Caminé en el parque",
+  "answeredAt": "2026-10-08T15:20:00Z"
+}
+```
+
+---
+
+#### Check-in Preferences — `/api/v1/check-in-preferences`
+
+Preferencias del check-in diario. Solo el adulto mayor propietario puede consultarlas y modificarlas.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `GET` | `/api/v1/check-in-preferences?olderAdultId={olderAdultId}` | **Query** `olderAdultId`* | `200` `CheckInPreferencesResponse` · `403` · `404` |
+| `PUT` | `/api/v1/check-in-preferences/{preferencesId}/reminder-time` | **Path** `preferencesId`* · **Body** `reminderTime`* (`HH:mm`, entre 06:00 y 20:00) | `200` `CheckInPreferencesResponse`; aplica desde el siguiente check-in · `400` hora fuera de rango · `403` |
+| `POST` | `/api/v1/check-in-preferences/{preferencesId}/daily-pause` | **Path** `preferencesId`* · sin body | `200` `CheckInPreferencesResponse` con `pausedToday: true` · `403` · `409` ya estaba pausado |
+| `DELETE` | `/api/v1/check-in-preferences/{preferencesId}/daily-pause` | **Path** `preferencesId`* | `200` `CheckInPreferencesResponse` con `pausedToday: false` · `403` · `409` no estaba pausado |
+| `PUT` | `/api/v1/check-in-preferences/{preferencesId}/simplified-mode` | **Path** `preferencesId`* · **Body** `enabled`* (boolean) | `200` `CheckInPreferencesResponse` · `403` |
+
+**Ejemplo — cambiar hora del check-in** (`PUT .../reminder-time`)
+
+```json
+{ "reminderTime": "09:30" }
+```
+
+**Response `200 OK`:** `reminderTime` es la hora local de la pregunta diaria y `timeLimitMinutes` el tiempo (en minutos) que tiene el adulto mayor para responder desde esa hora.
+
+```json
+{
+  "id": "7a8b9c0d-1e2f-4a3b-8c4d-5e6f7a8b9c0d",
+  "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "reminderTime": "09:30:00",
+  "timeLimitMinutes": 180,
+  "simplifiedMode": false,
+  "pausedToday": false
+}
+```
+
+---
+
+#### Alerts — `/api/v1/alerts`
+
+Vista unificada de las alertas de un adulto mayor, de ambos tipos (`EMERGENCY` e `INACTIVITY`).
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `GET` | `/api/v1/alerts?olderAdultId={olderAdultId}` | **Query** `olderAdultId`* | `200` lista de `AlertResponse`, de la más reciente a la más antigua · `403` no es el adulto mayor ni familiar activo |
+| `GET` | `/api/v1/alerts/{alertId}` | **Path** `alertId`* | `200` `AlertResponse` · `403` · `404` |
+
+**Response `200 OK`** (detalle de una alerta; el estado puede ser `RAISED`, `DISPATCHED`, `DISPATCH_FAILED`, `ACKNOWLEDGED` o `RESOLVED`):
+
+```json
+{
+  "id": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+  "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "type": "EMERGENCY",
+  "status": "ACKNOWLEDGED",
+  "checkInId": null,
+  "triggeredAt": "2026-10-07T15:00:00Z",
+  "deliveryConfirmed": true,
+  "acknowledgedBy": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+  "acknowledgedAt": "2026-10-07T15:02:00Z",
+  "resolvedBy": null,
+  "resolvedAt": null,
+  "resolutionNote": null
+}
+```
+
+---
+
+#### Emergency Alerts — `/api/v1/emergency-alerts`
+
+Botón de ayuda del adulto mayor y atención de la emergencia por parte de los familiares.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/emergency-alerts` | sin body (el adulto mayor se toma del token) | `201` `AlertResponse` en su estado final: `DISPATCHED` con `deliveryConfirmed: true` si se notificó a la familia, o `DISPATCH_FAILED` si el envío falló · `403` solo el adulto mayor puede pulsar el botón |
+| `POST` | `/api/v1/emergency-alerts/{alertId}/acknowledge` | **Path** `alertId`* | `200` `AlertResponse` con estado `ACKNOWLEDGED` · `403` no es familiar activo · `404` · `409` ya reconocida o no despachada |
+| `POST` | `/api/v1/emergency-alerts/{alertId}/resolve` | **Path** `alertId`* · **Body** (opcional) `resolutionNote` (≤300) | `200` `AlertResponse` con estado `RESOLVED` · `400` nota demasiado larga · `403` · `404` · `409` no reconocida o ya resuelta |
+
+**Ejemplo — resolver emergencia** (`POST /api/v1/emergency-alerts/4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b/resolve`)
+
+```json
+{ "resolutionNote": "Llamé a mamá, estaba bien" }
+```
+
+**Response `200 OK`:**
+
+```json
+{
+  "id": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+  "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "type": "EMERGENCY",
+  "status": "RESOLVED",
+  "checkInId": null,
+  "triggeredAt": "2026-10-07T15:00:00Z",
+  "deliveryConfirmed": true,
+  "acknowledgedBy": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+  "acknowledgedAt": "2026-10-07T15:02:00Z",
+  "resolvedBy": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+  "resolvedAt": "2026-10-07T15:10:00Z",
+  "resolutionNote": "Llamé a mamá, estaba bien"
+}
+```
+
+---
+
+#### Inactivity Alerts — `/api/v1/inactivity-alerts`
+
+Atención de las alertas que se generan cuando el adulto mayor no responde un check-in (`checkInId` identifica el check-in perdido que originó la alerta).
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/inactivity-alerts/{alertId}/acknowledge` | **Path** `alertId`* | `200` `AlertResponse` · `403` no es familiar activo · `404` · `409` ya reconocida |
+| `POST` | `/api/v1/inactivity-alerts/{alertId}/resolve` | **Path** `alertId`* · **Body** (opcional) `resolutionNote` (≤300) | `200` `AlertResponse` · `400` · `403` · `404` · `409` no reconocida o ya resuelta |
+
+El body y el response de `resolve` son los mismos del ejemplo de Emergency Alerts, con `"type": "INACTIVITY"` y `checkInId` informado.
+
+---
+
+#### Audio Messages — `/api/v1/care-circles/{careCircleId}/audio-messages`
+
+Mensajes de voz que el adulto mayor graba para sus familiares. Un audio nace como borrador (`DRAFT`) y pasa a `SHARED` al compartirse. Formato AAC (`audio/mp4`), máximo 10 MB y entre 1 y 180 segundos.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/care-circles/{careCircleId}/audio-messages` (`multipart/form-data`) | **Path** `careCircleId`* · **Form** `file`* (AAC), `durationSeconds`* (1–180) | `201` `AudioMessageResponse` como borrador · `400` falta archivo o duración inválida · `403` · `413` supera el tamaño máximo · `415` no es AAC |
+| `POST` | `/api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/share` | **Path** `careCircleId`*, `audioMessageId`* | `200` `AudioMessageResponse` · `403` solo el remitente · `404` · `409` ya compartido · `422` el adulto mayor no tiene familiares vinculados |
+| `DELETE` | `/api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}` | **Path** `careCircleId`*, `audioMessageId`* | `204` borrador descartado y archivo eliminado · `403` · `404` · `409` ya compartido |
+| `GET` | `/api/v1/care-circles/{careCircleId}/audio-messages` | **Path** `careCircleId`* | `200` lista de `AudioMessageResponse` reproducibles por el solicitante · `403` no pertenece al círculo |
+| `GET` | `/api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/media` | **Path** `careCircleId`*, `audioMessageId`* · **Header** `Range` (opcional) | `200` archivo de audio · `206` rango solicitado (soporta *byte-range*) · `403` · `404` |
+| `POST` | `/api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/play` | **Path** `careCircleId`*, `audioMessageId`* | `200` `AudioMessageResponse` con `played: true`; solo cuenta la primera reproducción · `403` · `404` |
+
+**Ejemplo — grabar audio** (`POST`, formulario multipart)
+
+```bash
+curl -X POST "http://localhost:8080/api/v1/care-circles/6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f/audio-messages" \
+  -H "Authorization: Bearer <token>" \
+  -F "file=@saludo.m4a;type=audio/mp4" \
+  -F "durationSeconds=42"
+```
+
+**Response `201 Created`:** el audio queda como borrador (`sentAt` es `null`) y `mediaUrl` es el endpoint protegido que sirve el archivo.
+
+```json
+{
+  "id": "0a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c4d",
+  "careCircleId": "6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f",
+  "senderId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "status": "DRAFT",
+  "durationSeconds": 42,
+  "mediaUrl": "/api/v1/care-circles/6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f/audio-messages/0a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c4d/media",
+  "createdAt": "2026-10-07T15:00:00Z",
+  "sentAt": null,
+  "played": false
+}
+```
+
+---
+
+#### Photo Messages — `/api/v1/care-circles/{careCircleId}/photo-messages`
+
+Fotos que los familiares comparten con el adulto mayor. Siguen el mismo ciclo borrador → compartida que los audios. Formatos JPEG o PNG, máximo 10 MB.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/care-circles/{careCircleId}/photo-messages` (`multipart/form-data`) | **Path** `careCircleId`* · **Form** `file`* (JPEG/PNG) | `201` `PhotoMessageResponse` como borrador · `400` falta archivo · `403` no es familiar vinculado · `413` · `415` no es JPEG ni PNG |
+| `POST` | `/api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/share` | **Path** `careCircleId`*, `photoMessageId`* | `200` `PhotoMessageResponse` · `403` solo el remitente vinculado · `404` · `409` ya compartida |
+| `DELETE` | `/api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}` | **Path** `careCircleId`*, `photoMessageId`* | `204` borrador descartado · `403` · `404` · `409` ya compartida |
+| `GET` | `/api/v1/care-circles/{careCircleId}/photo-messages` | **Path** `careCircleId`* | `200` lista de `PhotoMessageResponse` (galería del adulto mayor, o fotos enviadas por el familiar) · `403` |
+| `GET` | `/api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/media` | **Path** `careCircleId`*, `photoMessageId`* | `200` archivo de imagen · `403` · `404` |
+| `POST` | `/api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/view` | **Path** `careCircleId`*, `photoMessageId`* | `200` `PhotoMessageResponse` con `viewed: true`; solo cuenta la primera vista · `403` solo el destinatario · `404` |
+
+**Response `200 OK`** (tras compartir una foto):
+
+```json
+{
+  "id": "1b2c3d4e-5f6a-4b7c-8d9e-0f1a2b3c4d5e",
+  "careCircleId": "6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f",
+  "senderId": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+  "status": "SHARED",
+  "mediaUrl": "/api/v1/care-circles/6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f/photo-messages/1b2c3d4e-5f6a-4b7c-8d9e-0f1a2b3c4d5e/media",
+  "createdAt": "2026-10-07T15:00:00Z",
+  "sentAt": "2026-10-07T15:05:00Z",
+  "viewed": false
+}
+```
+
+---
+
+#### Social Reminders — `/api/v1/social-reminders`
+
+Recordatorios para que el adulto mayor se contacte con sus seres queridos. Estados: `SCHEDULED`, `PRESENTED`, `POSTPONED`, `COMPLETED`, `CANCELED` y `MISSED`.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/social-reminders` | **Body** `title`* (≤120), `description` (≤300), `remindAt`* (`yyyy-MM-ddTHH:mm:ss`, hora local) | `201` `SocialReminderResponse` · `400` falta título o la fecha ya pasó · `403` solo adultos mayores |
+| `GET` | `/api/v1/social-reminders?olderAdultId={olderAdultId}` | **Query** `olderAdultId`* | `200` lista de recordatorios activos (`SCHEDULED`, `PRESENTED`, `POSTPONED`) ordenados por hora · `403` |
+| `POST` | `/api/v1/social-reminders/{socialReminderId}/postpone` | **Path** `socialReminderId`* | `200` `SocialReminderResponse`; pospone 60 minutos dentro del mismo día · `403` · `404` · `409` no está presentado o no queda tiempo hoy |
+| `POST` | `/api/v1/social-reminders/{socialReminderId}/complete` | **Path** `socialReminderId`* | `200` `SocialReminderResponse` con estado `COMPLETED` · `403` · `404` · `409` ya cerrado |
+| `POST` | `/api/v1/social-reminders/{socialReminderId}/cancel` | **Path** `socialReminderId`* | `200` `SocialReminderResponse` con estado `CANCELED` · `403` · `404` · `409` ya cerrado |
+
+**Ejemplo — programar recordatorio** (`POST /api/v1/social-reminders`)
+
+```json
+{
+  "title": "Llamar a Marta",
+  "description": "Preguntarle cómo le fue en su viaje",
+  "remindAt": "2026-10-08T17:30:00"
+}
+```
+
+**Response `201 Created`:**
+
+```json
+{
+  "id": "2c3d4e5f-6a7b-4c8d-9e0f-1a2b3c4d5e6f",
+  "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "title": "Llamar a Marta",
+  "description": "Preguntarle cómo le fue en su viaje",
+  "remindAt": "2026-10-08T17:30:00",
+  "status": "SCHEDULED",
+  "completedAt": null
+}
+```
+
+---
+
+#### Small Wins — `/api/v1/small-wins`
+
+Pequeños logros: buenos días o actividades positivas que el adulto mayor reporta al responder un check-in.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `GET` | `/api/v1/small-wins?olderAdultId={olderAdultId}&from={yyyy-MM-dd}&to={yyyy-MM-dd}` | **Query** `olderAdultId`*, `from`*, `to`* (inclusive, en la zona horaria del adulto mayor) | `200` lista de `SmallWinResponse` · `400` rango inválido · `403` no es el adulto mayor ni familiar activo |
+
+**Response `200 OK`:**
+
+```json
+[
+  {
+    "id": "5e6f7a8b-9c0d-4e1f-8a2b-3c4d5e6f7a8b",
+    "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+    "checkInId": "1c2d3e4f-5a6b-4c7d-8e9f-0a1b2c3d4e5f",
+    "description": "Regué mis plantas",
+    "recordedAt": "2026-10-08T15:20:00Z"
+  }
+]
+```
+
+---
+
+#### Wellbeing Suggestions — `/api/v1/wellbeing-suggestions`
+
+Sugerencias de acción dirigidas a los familiares cuando se detecta un patrón de malestar en el adulto mayor.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `GET` | `/api/v1/wellbeing-suggestions?olderAdultId={olderAdultId}` | **Query** `olderAdultId`* | `200` lista de `WellbeingSuggestionResponse` activas · `403` no es familiar activo |
+| `POST` | `/api/v1/wellbeing-suggestions/{suggestionId}/dismiss?olderAdultId={olderAdultId}` | **Path** `suggestionId`* · **Query** `olderAdultId`* | `200` `WellbeingSuggestionResponse` con estado `DISMISSED`; se descarta para todos los familiares · `403` · `409` la sugerencia ya no está activa |
+
+**Response `200 OK`:**
+
+```json
+{
+  "id": "2b3c4d5e-6f7a-4b8c-9d0e-1f2a3b4c5d6e",
+  "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "patternId": "4d5e6f7a-8b9c-4d0e-8f1a-2b3c4d5e6f7a",
+  "message": "Lleva 3 días seguidos con el ánimo bajo. Puede ser un buen momento para llamarle o visitarle.",
+  "status": "ACTIVE",
+  "issuedAt": "2026-10-08T15:30:00Z"
+}
+```
+
+### Repositorio y commits relacionados con la documentación
+
+- **Repositorio de Web Services:** https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform
+- **Rama:** `develop`
+
+| Commit ID | Descripción |
+|---|---|
+| a01dc5a | Documentación OpenAPI del contexto IAM (`Users`, `Sessions`) |
+| f6009be | Documentación OpenAPI del contexto Care Circle |
+| ed45b0f | Documentación OpenAPI del contexto Daily Check-in |
+| df6ea7c | Documentación OpenAPI del contexto Alerts and Safety |
+| 2702159| Documentación OpenAPI del contexto Social Companionship |
+| 428f213| Documentación OpenAPI del contexto Wellbeing Monitoring |
 #### 4.2.1.8. Software Deployment Evidence for Sprint Review
+Durante el Sprint 1 el alcance del equipo en materia de despliegue abarcó los tres tipos de productos digitales de Serenia: la **Landing Page**, los **Web Services** (Serenia Platform) y el **prototipo de la aplicación móvil**. La Landing Page, correspondiente a un sitio estático informativo, fue publicada en Netlify. Para los Web Services se definió la arquitectura de despliegue sobre Microsoft Azure, se identificó la configuración necesaria del backend y se prepararon los recursos en la nube. Finalmente, el prototipo de la aplicación móvil se encuentra disponible a través del enlace documentado en la sección de Mobile Applications Prototyping.
+
+| Producto digital | Plataforma | Estado al cierre del Sprint 1 |
+|---|---|---|
+| Landing Page | Netlify (integración con GitHub) | Desplegada |
+| Web Services (Serenia Platform) | Azure App Service  | Desplegada |
+| Prototipo de aplicación móvil | Prototipo navegable | Disponible |
+
+---
+
+### 1. Landing Page — Netlify
+
+Para el despliegue de la Landing Page se utilizó Netlify como plataforma de hosting, aprovechando su integración nativa con GitHub para automatizar el despliegue continuo. La configuración establecida permite que cada merge realizado a la rama `main` del repositorio `serenia-website` dispare automáticamente un nuevo build y publicación en producción, sin intervención manual del equipo.
+
+El proceso se llevó a cabo siguiendo los pasos detallados a continuación:
+
+**1.1. Creación de la cuenta en Netlify**
+
+Se creó la cuenta del equipo en Netlify y se autorizó el acceso a la organización de GitHub que aloja el repositorio.
+
+
+**1.2. Vinculación del repositorio con Netlify**
+
+Se importó el repositorio `upc-pre-202620-1acc0238-4945-vitalcare
+serenia-website` como un nuevo sitio desde GitHub, configurando la rama `main` como fuente de despliegue de producción y estableciendo el pipeline de integración continua entre ambas plataformas.
+
+
+**1.3. Configuración del despliegue automático (CI/CD)**
+
+Netlify ejecuta automáticamente el proceso de build y publicación cada vez que se integra un cambio a la rama `main` mediante Pull Request. Durante el Sprint 1 se realizaron `6` Pull Requests, el último de los cuales activó el despliegue final de la versión completa de la Landing Page.
+
+**1.4. Verificación del despliegue en producción**
+
+Se verificó que el despliegue se encontrara en estado **Published** en el panel de Netlify, confirmando el despliegue exitoso de la Landing Page con el dominio asignado `serenia.netlify.app` y el commit `ba8f35b` como última versión publicada.
+
+
+
+**1.6. Verificación de la Landing Page en producción**
+
+Se comprobó que todas las secciones de la Landing Page de Serenia se visualizaran correctamente en el navegador, incluyendo el diseño responsivo y los estilos aplicados.
+
+![Landing Page de Serenia en producción](./assets/img/labeling-system/landing-hero.png)
+
+---
+
+### 2. Web Services (Serenia Platform) — Azure
+
+El backend de Serenia es una aplicación Spring Boot (Java 26) que persiste su información en MySQL y almacena los archivos multimedia (audios y fotos) en un contenedor privado de Azure. Para su despliegue se definió el uso de **Azure App Service para contenedores (Docker)** como servicio de aplicación y **Azure Database for MySQL** como base de datos administrada, siguiendo la configuración ya preparada en el perfil `prod` del proyecto, que lee todos sus parámetros desde variables de entorno.
+
+> **Estado:** los recursos y la configuración descritos a continuación corresponden al plan de despliegue del Sprint 1. El despliegue final del servicio se encuentra pendiente y será completado por el equipo; al hacerlo, las capturas y URLs de esta sección se reemplazarán por las del entorno desplegado.
+
+**2.1. Creación de la cuenta y el grupo de recursos en Azure**
+
+Se creó la suscripción de Azure del equipo y un grupo de recursos (`<nombre-del-grupo-de-recursos>`) que agrupa todos los recursos de Serenia Platform.
+
+![Grupo de recursos en Azure](./assets/img/sprint-1/deploy/azure-resource-group.png)
+
+**2.2. Provisión de Azure Database for MySQL**
+
+Se creó una instancia de Azure Database for MySQL (Flexible Server) para el entorno de producción. Se creó previamente la base de datos `<DATABASE_NAME>`, ya que el perfil `prod` del backend no la crea automáticamente (`createDatabaseIfNotExist=false`). La conexión usa SSL (`useSSL=true`), compatible con la configuración por defecto de Azure.
+
+![Instancia de Azure Database for MySQL](./assets/img/sprint-1/deploy/azure-mysql.png)
+
+**2.3. Creación de la cuenta de almacenamiento (Azure Blob Storage)**
+
+Se creó una cuenta de almacenamiento con un contenedor privado (`serenia-media`) para los audios y fotos que comparten los usuarios. El backend se conecta mediante la cadena de conexión de la cuenta, y en producción usa Azure como proveedor de almacenamiento por defecto.
+
+![Cuenta de almacenamiento y contenedor en Azure](./assets/img/sprint-1/deploy/azure-storage.png)
+
+**2.4. Contenerización del backend con Docker**
+
+Se preparó la imagen Docker del backend a partir del código del repositorio `<URL-del-repositorio-de-web-services>`, empaquetando la aplicación con Maven (`./mvnw package`) y ejecutándola sobre una imagen con JDK 26. La imagen se publica en un registro de contenedores (`<registro-de-contenedores>`).
+
+![Imagen del backend en el registro de contenedores](./assets/img/sprint-1/deploy/azure-registry.png)
+
+**2.5. Creación del Azure App Service**
+
+Se creó un App Service para contenedores con la imagen del backend como origen. El servicio expone la aplicación en el puerto indicado por la variable `PORT` (por defecto `8080`).
+
+![Creación del App Service](./assets/img/sprint-1/deploy/azure-app-service.png)
+
+**2.6. Configuración de variables de entorno**
+
+Se configuraron en el App Service las variables que consume el perfil `prod` del backend. Los valores sensibles se registran como configuración de la aplicación y no se almacenan en el repositorio.
+
+| Variable | Propósito |
+|---|---|
+| `SPRING_PROFILES_ACTIVE` | `prod`; activa el perfil de producción (por defecto el proyecto usa `dev`) |
+| `DATABASE_URL`, `DATABASE_PORT`, `DATABASE_NAME` | Servidor, puerto y nombre de la base de datos MySQL |
+| `DATABASE_USER`, `DATABASE_PASSWORD` | Credenciales de la base de datos |
+| `JWT_SECRET` | Clave de firma de los tokens JWT (obligatoria en producción) |
+| `AZURE_STORAGE_CONNECTION_STRING` | Cadena de conexión de la cuenta de almacenamiento (obligatoria en producción) |
+| `AZURE_STORAGE_CONTAINER` | Nombre del contenedor de medios (`serenia-media`) |
+| `PORT` | Puerto de la aplicación |
+
+![Variables de entorno del App Service](./assets/img/sprint-1/deploy/azure-app-settings.png)
+
+**2.7. Configuración de red y acceso a la base de datos**
+
+Se habilitó el acceso del App Service al servidor MySQL mediante las reglas de firewall de Azure Database for MySQL.
+
+![Reglas de red de Azure Database for MySQL](./assets/img/sprint-1/deploy/azure-mysql-firewall.png)
+
+**2.8. Verificación del despliegue**
+
+Una vez desplegado, se verifica que el servicio responda y que la documentación OpenAPI esté disponible, ya que las rutas de documentación son públicas:
+
+| Recurso | URL |
+|---|---|
+| Swagger UI | `https://<nombre-del-app-service>.azurewebsites.net/swagger-ui.html` |
+| Especificación OpenAPI | `https://<nombre-del-app-service>.azurewebsites.net/v3/api-docs` |
+| URL base de la API | `https://<nombre-del-app-service>.azurewebsites.net/api/v1` |
+
+Adicionalmente, se realiza una prueba de humo registrando un usuario (`POST /api/v1/users`) e iniciando sesión (`POST /api/v1/sessions`) contra el servicio desplegado.
+
+![Swagger UI en el entorno desplegado](./assets/img/sprint-1/deploy/azure-swagger.png)
+
+---
+
+### Resumen de enlaces de despliegue
+
+| Producto | URL |
+|---|---|
+| Landing Page | `https://sereniaa.netlify.app/` |
+| Web Services (Swagger UI) | `https://<nombre-del-app-service>.azurewebsites.net/swagger-ui.html` — *pendiente de despliegue* |
+| Prototipo móvil | `https://claude.ai/artifact/PQLMrSNqDntp1Fu4cfuvJu` |
+
 #### 4.2.1.9. Team Collaboration Insights during Sprint
 ## 4.3. Validation Interviews
 
