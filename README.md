@@ -126,8 +126,8 @@ La Imagen 1 muestra el resumen de actividad (Pulse) del repositorio entre el 18 
 
 
 <p align="center">
-  <img src="" alt="TB1 Insights" width="900"/>
-    <br/><i>Imagen X. Insights de la Segunda Entrega (TB1)</i>
+  <img src="assets/img/insights/insights1.png" alt="TB1 Insights" width="900"/>
+    <br/><i>Imagen 2. Insights de la Segunda Entrega (TB1)</i>
 </p>
 
 <div style="page-break-after: always;"></div>
@@ -8653,6 +8653,40 @@ Adicionalmente, se realiza una prueba de humo registrando un usuario (`POST /api
 | Prototipo móvil | `https://claude.ai/artifact/PQLMrSNqDntp1Fu4cfuvJu` |
 
 #### 4.2.1.9. Team Collaboration Insights during Sprint
+Durante el Sprint 1 el equipo mantuvo un flujo de trabajo colaborativo y organizado aplicando la estrategia de control de versiones GitFlow. Todo el desarrollo tanto de la documentación del informe,Landing Page y backend se trabajó en ramas independientes (feature branches), integrando los cambios exclusivamente
+mediante Pull Requests hacia la rama principal. Esto garantizó la revisión por pares y la trazabilidad de cada contribución individual.
+A continuación se presentan los analíticos de colaboración extraídos de GitHub Insights para ambos repositorios durante el período del Sprint 1.
+
+![insight](./assets/img/insights/insights1.png)
+
+**Resumen de actividad — Repositorio serenia-report**
+Top Committers — Repositorio serenia-report
+En el repositorio de documentación los integrantes registraron las siguientes contribuciones: Arturouu con 107 commits, Carlsss28 con 38 commits, brianna-salinas con 38
+commits, vicmaccode con 51 commits y kyesei con 23 commits, evidenciando una participación activa y relativamente equitativa de todos los miembros del
+equipo.
+
+![insight](./assets/img/insights/insights3.png)
+
+Pull Requests mergeados — Repositorio serenia-report
+Se gestionaron los Pull Requests mergeados durante el Sprint, cubriendo la documentación de todos los capítulos del informe, incluyendo correcciones de
+wireflows, actualización de mockups, evidencias de desarrollo y backlog del Sprint 1.
+
+![insight](./assets/img/insights/insights2.png)
+
+**Resumen de actividad — Repositorio serenia-website (Landing Page)**
+Los 5 integrantes del equipo participaron en la implementación de la Landing Page, cada uno responsable de una o más secciones mediante feature branches
+independientes.
+
+![insight](./assets/img/insights/insights4.png)
+
+
+**Resumen de actividad — Repositorio serenia-platform (backend)**
+Los 5 integrantes del equipo participaron en la implementación de la plataforma, cada uno responsable de un bounded conext
+
+![insight](./assets/img/insights/insights5.png)
+
+
+
 ## 4.3. Validation Interviews
 
 En esta sección se registra y explica el proceso de validación de Serenia con usuarios reales de los segmentos objetivo: adultos mayores que viven solos y familiares que los acompañan a distancia. Cada participante interactúa con el landing page y con las aplicaciones móviles, completando tareas sobre los *user flows* principales del producto mientras expresan sus observaciones. La sección se organiza en tres partes: el diseño de las entrevistas, que define los elementos y flujos a evaluar en cada segmento; el registro de las entrevistas, que documenta a cada participante, la evidencia en video y el resumen de sus apreciaciones; y las evaluaciones según heurísticas de usabilidad, arquitectura de información y diseño inclusivo.
