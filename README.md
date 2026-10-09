@@ -7896,6 +7896,146 @@ Los archivos .feature se redactan en inglés con las palabras clave `Feature`, `
 <br>
 
 ### 4.1.4. Software Deployment Configuration
+
+Esta sección explica cómo publicar cada producto de Serenia a partir de su repositorio de código, con los pasos suficientes para que otro integrante del equipo pueda repetir el despliegue. La evidencia de lo ejecutado en cada sprint, con sus capturas, se presenta en la sección 4.2.1.8 (Software Deployment Evidence for Sprint Review). Los tres productos de la solución se publican en plataformas distintas, como muestra el Deployment Diagram de la sección 2.5.3.3, que se repite en la Imagen X.
+
+<br>
+
+<div align="center">
+  <img src="assets/img/software-architecture/deployment-diagram.png" alt="Deployment Diagram - Serenia" width="700"/>
+  <br/><i>Imagen X. Deployment Diagram de Serenia.</i>
+</div>
+
+<br>
+
+**Resumen por producto**
+
+| Producto | Repositorio | Plataforma de despliegue | Qué se publica | Estado |
+| --- | --- | --- | --- | --- |
+| Landing page web | `serenia-website` | Netlify, conectado al repositorio de GitHub | La carpeta `dist`, generada con `npm run build` | Publicada en https://sereniaa.netlify.app/ |
+| Web Services | `serenia-platform` | Microsoft Azure (Azure Web App Service para la API y MySQL Flexible Server para la base de datos) | El archivo JAR ejecutable de Spring Boot, generado con Maven | Configuración de despliegue documentada |
+| Aplicación móvil | `serenia-app-native` | Firebase App Distribution | Por definir | Por completar cuando el repositorio contenga el código |
+
+Todos los repositorios pertenecen a la organización del equipo en GitHub (https://github.com/upc-pre-202620-1acc0238-4945-vitalcare). El código que se publica proviene de la rama `main`, que recibe los cambios desde `develop` mediante Pull Requests en cada entrega, según el flujo GitFlow adoptado por el equipo.
+
+<br>
+
+**Landing page web: despliegue en Netlify**
+
+La landing page es un sitio estático construido con Vite, sin backend, sin variables de entorno ni servicios externos: el formulario de la lista de espera valida el correo en el propio navegador y no envía datos a ningún servidor. Por eso su despliegue consiste únicamente en construir el sitio y publicar el resultado. El sitio `sereniaa` de Netlify está conectado al repositorio `serenia-website` mediante la integración de Netlify con GitHub: cada Pull Request genera una verificación de despliegue y, al integrar cambios en la rama de producción, Netlify vuelve a construir y publicar el sitio.
+
+<br>
+
+*Requisitos previos*
+
+| Requisito | Detalle |
+| --- | --- |
+| Node.js | Versión 20 LTS o superior. El repositorio no fija una versión; el mínimo que exige Vite 6 es la 18, y la construcción se verificó con la versión 24 y npm 11 |
+| npm | El que se instala junto con Node.js |
+| Git | Para clonar el repositorio |
+| Cuenta de Netlify | Con acceso al sitio de Serenia |
+
+<br>
+
+*Pasos*
+
+| Paso | Acción | Comando o detalle |
+| --- | --- | --- |
+| 1 | Clonar el repositorio y ubicarse en la rama que se va a publicar | `git clone https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website.git` y luego `cd serenia-website` |
+| 2 | Instalar las dependencias exactas del archivo `package-lock.json` | `npm ci` |
+| 3 | Revisar el sitio en local (opcional) | `npm run dev` abre el servidor de desarrollo |
+| 4 | Construir el sitio para producción | `npm run build`, que ejecuta `vite build` y genera la carpeta `dist` |
+| 5 | Comprobar el resultado de la construcción (opcional) | `npm run preview` sirve la carpeta `dist` en local |
+| 6 | Publicar la carpeta `dist` completa en Netlify | Con la integración de GitHub, Netlify ejecuta `npm run build` y publica `dist` al integrar cambios en la rama de producción. También puede publicarse de forma manual, arrastrando la carpeta al panel de despliegues del sitio en Netlify o ejecutando `netlify deploy --prod --dir=dist` con la herramienta de línea de comandos de Netlify (`netlify-cli`) |
+| 7 | Verificar el despliegue | Ver la tabla siguiente |
+
+<br>
+
+El resultado de la construcción queda en la carpeta `dist`, que se genera en el paso 4 y no se versiona en el repositorio. Su contenido es el sitio final: el `index.html`, la subcarpeta `assets` con los archivos JavaScript y CSS compilados y las imágenes, la subcarpeta `fonts`, los íconos del sitio, `robots.txt`, `sitemap.xml` y `site.webmanifest`. El despliegue en Netlify publica ese contenido.
+
+<br>
+
+*Verificación*
+
+| Comprobación | Resultado |
+| --- | --- |
+| Construir la rama `develop` (commit `3967591`, 8 de octubre de 2026) | Genera `dist/assets/index-C64a7uLj.js` e `index-Db2Lbha2.css`, los mismos nombres que sirve el sitio publicado |
+| Abrir https://sereniaa.netlify.app/ | La landing page carga con sus secciones y los enlaces del menú desplazan hasta cada una |
+| Abrir `/src/main.js` y `/package.json` en el sitio | Responden con un error 404, lo que confirma que el sitio sirve únicamente el resultado de la construcción |
+| Revisar las verificaciones de un Pull Request hacia `main` (por ejemplo, el PR #8 del 9 de octubre de 2026) | Netlify registra, para el proyecto `sereniaa`, las verificaciones Header rules, Redirect rules y Pages changed, con el enlace al despliegue correspondiente |
+| Cambiar el idioma entre ES y EN | El texto se traduce y el idioma elegido se conserva al recargar |
+
+<br>
+
+**Web Services: configuración de despliegue**
+
+La API de Serenia es un monolito modular de Spring Boot (sección 2.5.3.2) que se empaqueta como un único archivo JAR ejecutable. Según el Deployment Diagram, el JAR se aloja en un Azure Web App Service y la base de datos MySQL en Azure. El archivo `application.properties` define dos perfiles: `dev`, el predeterminado, para trabajar en local, y `prod`, que toma toda su configuración de variables de entorno.
+
+<br>
+
+*Requisitos previos*
+
+| Requisito | Detalle |
+| --- | --- |
+| JDK | Versión 26, la que fija el archivo `pom.xml` |
+| Maven | Incluido en el repositorio mediante el wrapper `mvnw` (`mvnw.cmd` en Windows), por lo que no requiere instalación aparte |
+| MySQL | Un servidor MySQL con una base de datos ya creada, porque el perfil `prod` no la crea (`createDatabaseIfNotExist=false`); las tablas las genera Hibernate al arrancar la aplicación (`ddl-auto=update`) |
+| Azure Blob Storage | Una cuenta de almacenamiento con un contenedor privado, donde la aplicación guarda los audios y las fotos de Social Companionship |
+| Cuenta de Azure | Con permiso para crear el Web App Service |
+
+<br>
+
+*Variables de entorno de la API*
+
+El perfil `prod` toma su configuración de las variables de la tabla siguiente. Las credenciales y las claves (`DATABASE_PASSWORD`, `JWT_SECRET` y `AZURE_STORAGE_CONNECTION_STRING`) se definen en la configuración del servicio donde se ejecuta la API y no forman parte del código ni del repositorio.
+
+| Variable | Qué configura | Valor por defecto |
+| --- | --- | --- |
+| `SPRING_PROFILES_ACTIVE` | Activa el perfil de producción cuando toma el valor `prod` | `dev` |
+| `DATABASE_URL` | Servidor MySQL al que se conecta la API | Ninguno (obligatoria) |
+| `DATABASE_PORT` | Puerto del servidor MySQL | `3306` |
+| `DATABASE_NAME` | Nombre de la base de datos | Ninguno (obligatoria) |
+| `DATABASE_USER` y `DATABASE_PASSWORD` | Credenciales de la base de datos | Ninguno (obligatorias) |
+| `JWT_SECRET` | Clave con la que se firman los tokens de sesión | Ninguno (obligatoria) |
+| `AZURE_STORAGE_CONNECTION_STRING` | Cadena de conexión de la cuenta de Blob Storage | Ninguno (obligatoria) |
+| `AZURE_STORAGE_CONTAINER` | Nombre del contenedor de archivos | `serenia-media` |
+| `MEDIA_STORAGE_PROVIDER` | Proveedor de almacenamiento de archivos | `azure` en el perfil `prod` |
+| `PORT` | Puerto en el que escucha la API | `8080` |
+
+<br>
+
+*Construcción y despliegue*
+
+| Paso | Acción | Comando o detalle |
+| --- | --- | --- |
+| 1 | Clonar el repositorio y ubicarse en la rama que se va a publicar | `git clone https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform.git` |
+| 2 | Construir el JAR ejecutable | `./mvnw clean package -DskipTests`, que genera el archivo en la carpeta `target` (`platform-0.0.1-SNAPSHOT.jar`, según el `pom.xml`) |
+| 3 | Alojar la API | El JAR se ejecuta en el Azure Web App Service del Deployment Diagram, con las variables de entorno de la tabla anterior, la base de datos en MySQL Flexible Server y los archivos en el contenedor privado de Blob Storage |
+
+La única prueba del proyecto, `SereniaPlatformApplicationTests`, levanta la aplicación completa y necesita un servidor MySQL accesible con las credenciales del perfil `dev`; por eso la construcción del JAR para el despliegue omite las pruebas con `-DskipTests`.
+
+<br>
+
+*Verificación*
+
+| Comprobación | Resultado |
+| --- | --- |
+| Construir el proyecto con Java 26 (8 de octubre de 2026) | Se compilan los 557 archivos fuente sin errores |
+| Consultar `/swagger-ui/index.html` en la API en ejecución | Muestra la documentación interactiva de la API, generada por springdoc |
+| Consultar `/v3/api-docs` | Devuelve la definición OpenAPI de los endpoints, que parten de `/api/v1` |
+
+<br>
+
+**Aplicación móvil**
+
+El Deployment Diagram establece que la aplicación móvil se distribuye mediante Firebase App Distribution. El repositorio `serenia-app-native` todavía no contiene el código que se desplegará, por lo que su procedimiento se completará cuando exista.
+
+| Producto | Información que se documentará |
+| --- | --- |
+| Aplicación móvil | Tecnología y versión de las herramientas de construcción, generación del instalable, creación del proyecto y del grupo de testers en Firebase App Distribution, carga de cada versión y la forma de instalarla en un dispositivo de prueba |
+
+<br>
+
 ## 4.2. Landing Page & Mobile Application Implementation
 ### 4.2.1. Sprint 1
 #### 4.2.1.1. Sprint Planning 1
