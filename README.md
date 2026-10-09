@@ -7948,59 +7948,56 @@ Los archivos .feature se redactan en inglés con las palabras clave `Feature`, `
 
 #### 4.2.1.2. Aspect Leaders and Collaborators
 
-Durante el Sprint 1, el equipo se organizó distribuyendo las responsabilidades tácticas y estratégicas de la siguiente manera:
+En el Sprint 1, el desarrollo se organizó en torno a la estructuración de la arquitectura base del monolito modular y la implementación de los Bounded Contexts fundacionales. A continuación, se presenta la matriz Leadership-and-Collaboration (LACX) que define las responsabilidades del equipo sobre los cuatro aspectos principales del sprint: el núcleo de identidad (IAM), el dominio de interacciones diarias (Care Circle & Daily Check-in), el sistema de respuesta (Alerts & Safety) y la interfaz web (Landing Page).
 
-| Integrante | Rol / Responsabilidad en el Sprint 1 |
-| :--- | :--- |
-| Arturo Contreras | Desarrollo Backend (Spring Boot), Arquitectura de BD y Despliegue. |
-| Carla Gallardo | Apoyo en Frontend, Pruebas y Reportes de Arquitectura. |
-| Victor García | Desarrollo de agregados en Backend y Mappers de persistencia. |
-| Brianna Salinas | Documentación técnica, diseño de interfaces y Landing Page. |
-| Kelber Sandoval | Gestión Ágil (Trello/ClickUp), Integración de Backend (Interfaces REST) y Landing Page. |
+| Team Member (Last Name, First Name) | GitHub Username | IAM & Core Backend Leader (L) / Collaborator (C) | Care Circle & Daily Check-in Leader (L) / Collaborator (C) | Alerts & Safety Leader (L) / Collaborator (C) | Landing Page & UX/UI Leader (L) / Collaborator (C) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Contreras Torres, Arturo Valentino | Arturouu | L | L | C | C |
+| Gallardo Morales, Carla Alejandra | Carlsss28 | C | C | L | C |
+| García Paredes, Victor Manuel | vicmacode | C | C | C | L |
+| Salinas Guzman, Brianna Cristina | brianna-salinas | C | C | C | L |
+| Sandoval Aiquipa, Kelber Yamir | Kyesei | C | C | L | C |
 
 #### 4.2.1.3. Sprint Backlog 1
 
-A continuación se evidencia el tablero de Trello utilizado durante el Sprint 1, mostrando las User Stories y Technical Stories priorizadas, en progreso y terminadas.
+El objetivo principal del Sprint 1 fue establecer la arquitectura base de la API REST (Spring Boot), garantizando el flujo de autenticación (IAM), la configuración de los vínculos familiares (Care Circle), el registro del chequeo diario (Daily Check-in) y la maquetación de la Landing Page. A continuación, se presenta el Board del Sprint 1 en Trello, donde se gestionaron los User Stories y Technical Stories priorizados.
+
+**URL público del Board:** [https://trello.com/invite/b/6aa8e6d78ed225cd21e9e93c/ATTI46cbaeeceb1072274d9c62399714ddaeF68A89AE/serenia]
 
 <div align="center">
 
-![Evidencia de Trello](ruta/a/tu/captura-de-trello.png)
-  <br/><i>Imagen X. Tablero de Trello del Sprint 1.</i>
+![Evidencia de Trello](assets/img/sprint1/trello-board.jpg)
+  <br/><i>Imagen X. Board de Trello correspondiente al Sprint 1.</i>
 
 </div>
+
+| Sprint # | User Story Id | User Story Title | Work-Item / Task Id | Work-Item / Task Title | Description | Estimation (Hours) | Assigned To | Status (Todo / InProcess / To-Review / Done) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Sprint 1 | TS01 | Gestión de usuarios del sistema | TK-01 | Setup IAM Aggregate | Implementar `User` aggregate, entities y enums de persistencia base. | 5 | Arturo Contreras | Done |
+| Sprint 1 | TS02 | Gestión de sesiones de autenticación | TK-02 | Auth Controllers | Desarrollar servicios de dominio para tokens JWT y login. | 5 | Arturo Contreras | Done |
+| Sprint 1 | TS03 | Gestión de vínculos familiares | TK-03 | Care Circle API | Implementar repositorios y endpoints para vinculación de familiares. | 5 | Arturo Contreras | Done |
+| Sprint 1 | TS04 | Gestión de check-ins diarios | TK-04 | Check-in Logic | Desarrollar command services para registrar y evaluar check-ins. | 5 | Arturo Contreras | Done |
+| Sprint 1 | NF02 | Latencia de entrega de alertas | TK-05 | Alertas Event Handlers | Implementar la lógica de negocio y listeners para despacho de alertas. | 3 | Carla Gallardo | Done |
+| Sprint 1 | NF02 | Latencia de entrega de alertas | TK-06 | Alertas Persistence | Configurar JPA repositories y mappers para la persistencia de emergencias. | 3 | Victor García | Done |
+| Sprint 1 | NF02 | Latencia de entrega de alertas | TK-07 | Alertas REST Controllers | Exponer endpoints de alertas, resolución e inactividad en la capa Interface. | 3 | Kelber Sandoval | Done |
+| Sprint 1 | US23 | Propuesta de valor landing page | TK-08 | Maquetación y SEO | Desarrollar HTML/CSS e implementar metadatos para SEO y Open Graph. | 1 | Brianna Salinas | Done |
 
 #### 4.2.1.4. Development Evidence for Sprint Review
 
-La siguiente evidencia muestra el desarrollo de los controladores, ensambladores y recursos REST correspondientes a la capa de Interfaz del contexto Alerts and Safety, así como el historial de commits integrados en la rama develop.
+Durante el Sprint 1, la implementación se enfocó en el desarrollo del backend bajo el enfoque de Domain-Driven Design (DDD). Se priorizó la creación de los *Aggregates*, *Command/Query Services* y *Repositories* de los contextos IAM, Care Circle y Daily Check-in, finalizando con la integración de los *Controllers* de Alerts & Safety. A continuación, se detallan los commits más críticos que evidencian esta arquitectura estructural.
 
-<div align="center">
-
-![Evidencia de Código/Commits](ruta/a/tu/captura-de-commits-github-o-vscode.png)
-  <br/><i>Imagen X. Evidencia de desarrollo en GitHub (Alerts and Safety).</i>
-
-</div>
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Commited on (Date) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| serenia-platform | feature/iam | a4d5ae2 | feat(iam): add user aggregate with registration and profile behavior | Creación del aggregate root User, validaciones de dominio y enumeraciones para IAM. | 07/10/2026 |
+| serenia-platform | feature/care-circle | 6f099ec | feat(care-circle): implement care circle, care shift and shared note query services | Implementación de la capa de aplicación para gestionar los vínculos de cuidado. | 07/10/2026 |
+| serenia-platform | feature/daily-check-in | 977fda8 | feat(daily-check-in): add check-in aggregate | Diseño del aggregate root de Check-ins y validación de estados diarios. | 07/10/2026 |
+| serenia-platform | feature/alertsandsafety | 8a64aa4 | feat(alertsandsafety): add emergency alert dispatched event handler | Configuración de listeners para notificar emergencias entre contextos. | 07/10/2026 |
+| serenia-platform | feature/alerts-and-safety | 7da87f3 | feat(alerts-and-safety): add emergency alert repository implementation | Implementación de persistencia física en MySQL mediante repositorios Spring Data JPA. | 08/10/2026 |
+| serenia-platform | feature/alerts-and-safety | f7fdcfe | feat(alerts-and-safety): add emergency alerts controller endpoints | Exposición de la API REST mediante controladores para la integración con clientes móviles. | 08/10/2026 |
 
 #### 4.2.1.5. Testing Suite Evidence for Sprint Review
 
-Se realizaron pruebas de los endpoints desarrollados utilizando Postman para validar las respuestas HTTP (200 OK, 201 Created, 400 Bad Request) de las alertas de emergencia e inactividad.
-
-<div align="center">
-
-![Evidencia de Postman](ruta/a/tu/captura-de-postman.png)
-  <br/><i>Imagen X. Evidencia de pruebas de los servicios REST.</i>
-
-</div>
-
 #### 4.2.1.6. Execution Evidence for Sprint Review
-
-A continuación se presentan las capturas de la aplicación ejecutándose, demostrando el resultado visual de las tareas completadas durante el Sprint 1.
-
-<div align="center">
-
-![Evidencia de App Funcionando](ruta/a/tu/captura-de-la-app.png)
-  <br/><i>Imagen X. Evidencia de la ejecución del aplicativo.</i>
-
-</div>
 
 #### 4.2.1.7. Services Documentation Evidence for Sprint Review
 #### 4.2.1.8. Software Deployment Evidence for Sprint Review
