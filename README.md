@@ -7827,7 +7827,7 @@ Esta sección define cómo se nombran los elementos y cómo se escribe el códig
 
 **Nomenclatura por capa (Web Services)**
 
-Los nombres de las clases siguen los que el equipo definió para cada bounded context en la sección 2.6, de modo que el código y el diseño usen el mismo lenguaje ubicuo. La tabla resume el patrón que cumple el backend, con ejemplos reales de los contextos Alerts and Safety y Care Circle. El patrón se midió sobre los 549 archivos Java de `serenia-platform` al 8 de octubre de 2026, y cada categoría se cumple sin excepciones: por ejemplo, los 55 commands terminan en `Command` y los 26 servicios de aplicación terminan en `Impl`.
+Los nombres de las clases siguen los que el equipo definió para cada bounded context en la sección 2.6, de modo que el código y el diseño usen el mismo lenguaje ubicuo. La tabla resume el patrón que cumple el backend, con ejemplos reales de los contextos Alerts and Safety y Care Circle. El patrón se midió sobre los 557 archivos Java de `serenia-platform` al 8 de octubre de 2026, y cada categoría se cumple sin excepciones: por ejemplo, los 55 commands terminan en `Command` y los 26 servicios de aplicación terminan en `Impl`.
 
 <br>
 
@@ -7856,10 +7856,10 @@ Los nombres de las clases siguen los que el equipo definió para cada bounded co
 
 | Aspecto | Convención aplicada |
 | --- | --- |
-| Sangría | 4 espacios y ninguna tabulación (ninguno de los 549 archivos usa tabulaciones) |
-| Importaciones | Explícitas, sin comodines (solo 1 excepción en los 549 archivos) |
-| Documentación | Javadoc en inglés en las clases (519 de 549 archivos), con enlaces `{@link}` y párrafos `<p>` para explicar las reglas de negocio |
-| Objetos inmutables | `record` para commands, queries, eventos, value objects y resources (229 en total) |
+| Sangría | 4 espacios y ninguna tabulación (ninguno de los 557 archivos usa tabulaciones) |
+| Importaciones | Explícitas, sin comodines (solo 1 excepción en los 557 archivos) |
+| Documentación | Javadoc en inglés en las clases (525 de 557 archivos), con enlaces `{@link}` y párrafos `<p>` para explicar las reglas de negocio |
+| Objetos inmutables | `record` para commands, queries, eventos, value objects y resources (231 en total) |
 | Persistencia | Entidades JPA con Lombok (`@Getter`, `@Setter` y `@NoArgsConstructor`) y tipos de columna explícitos, como `BINARY(16)` para los identificadores y `DATETIME(6)` para las fechas |
 | Resultados | Los servicios de aplicación devuelven `Result<T, ApplicationError>` (por ejemplo, `Result<EmergencyAlert, ApplicationError>`) en lugar de lanzar excepciones hacia la capa REST |
 | Valores ausentes | `Optional` en las consultas, en lugar de `null` |
