@@ -7809,6 +7809,91 @@ Ejemplos aplicados durante el Sprint 1:
 
 
 ### 4.1.3. Source Code Style Guide & Conventions
+
+Esta sección define cómo se nombran los elementos y cómo se escribe el código en cada lenguaje de la solución, con el fin de que cualquier integrante pueda leer y modificar el trabajo de otro sin esfuerzo. Aplica una regla común a todos los lenguajes: **todos los identificadores (clases, métodos, variables, tablas, columnas, archivos y pruebas) se escriben en inglés**, igual que los eventos y comandos definidos en el EventStorming (sección 2.5.1). El texto que ve el usuario final es la única excepción: se redacta en español y, en la landing page, se ofrece también en inglés.
+
+<br>
+
+**Lenguajes y referencias adoptadas**
+
+| Producto | Lenguaje o formato | Convención estándar adoptada | Estado |
+| --- | --- | --- | --- |
+| Landing page web | HTML, CSS y JavaScript (Vite) | [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html) y [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html) | Aplicada en la landing page |
+| Web Services | Java 26 con Spring Boot | [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) en nombres y organización del código, con sangría de 4 espacios, y [Spring Boot Features](https://docs.spring.io/spring-boot/reference/features/index.html) | Aplicada en el backend |
+| Aplicación móvil | Kotlin | [Kotlin Coding Conventions](https://kotlinlang.org/docs/coding-conventions.html) y [Android Kotlin Style Guide](https://developer.android.com/kotlin/style-guide) | Definida |
+| Pruebas de aceptación | Gherkin (archivos .feature) | [Gherkin Reference](https://cucumber.io/docs/gherkin/reference) | Definida |
+
+<br>
+
+**Nomenclatura por capa (Web Services)**
+
+Los nombres de las clases siguen los que el equipo definió para cada bounded context en la sección 2.6, de modo que el código y el diseño usen el mismo lenguaje ubicuo. La tabla resume el patrón que cumple el backend, con ejemplos reales de los contextos Alerts and Safety y Care Circle. El patrón se midió sobre los 549 archivos Java de `serenia-platform` al 8 de octubre de 2026, y cada categoría se cumple sin excepciones: por ejemplo, los 55 commands terminan en `Command` y los 26 servicios de aplicación terminan en `Impl`.
+
+<br>
+
+| Elemento | Regla | Ejemplo |
+| --- | --- | --- |
+| Aggregate y entidad | Clase con sustantivo en singular, en PascalCase | `Alert`, `EmergencyAlert`, `CareCircle` |
+| Value object | `record` con un sustantivo que describe el dato; los identificadores llevan el sufijo `Id` y los estados son `enum` | `ResolutionNote`, `AlertId`, `AlertStatus` |
+| Command | `record` con verbo en imperativo y sufijo `Command` | `TriggerEmergencyAlertCommand` |
+| Query | `record` con prefijo `Get` y sufijo `Query` | `GetAlertByIdQuery` |
+| Evento de dominio | `record` con un hecho en pasado, sin sufijo | `EmergencyAlertDispatched` |
+| Repositorio y servicio de dominio | Interfaz sin prefijo, con el nombre del concepto | `EmergencyAlertRepository`, `AlertQueryService` |
+| Implementación | Nombre de la interfaz más el sufijo `Impl` | `EmergencyAlertCommandServiceImpl`, `EmergencyAlertRepositoryImpl` |
+| Manejador de eventos | Evento que atiende, más el sufijo `EventHandler` | `CheckInMissedEventHandler` |
+| Servicio hacia otro contexto | Prefijo `External`, nombre del contexto y sufijo `Service` | `ExternalCareCircleService` |
+| Persistencia | Sufijos `PersistenceEntity`, `JpaRepository` y `PersistenceMapper` | `AlertPersistenceEntity`, `AlertJpaRepository`, `EmergencyAlertPersistenceMapper` |
+| Capa REST | Sufijos `Controller`, `Resource` (un `record`) y `Assembler`; los assemblers se nombran `<Resultado>From<Origen>Assembler` | `AlertsController`, `AlertResource`, `AlertResourceFromEntityAssembler` |
+| Excepción | Sufijo `Exception`; las de cada contexto heredan de la excepción de dominio de ese contexto | `AlertAlreadyAcknowledgedException`, que hereda de `AlertsAndSafetyDomainException` |
+| Métodos y variables | camelCase, con verbos para las acciones | `acknowledge`, `isOpen` |
+| Constantes y valores de enumeración | MAYÚSCULAS con guion bajo | `MAX_LENGTH`, `DISPATCH_FAILED` |
+| Tablas y columnas de base de datos | snake_case; tablas en plural; claves foráneas con sufijo `_id` y marcas de tiempo con sufijo `_at` | `alert_notifications`, `older_adult_id`, `triggered_at` |
+| Rutas de la API | Prefijo `/api/v1`, con los recursos en plural y en kebab-case | `/api/v1/care-circles`, `/api/v1/check-in-preferences` |
+
+<br>
+
+**Formato y estilo del código Java**
+
+| Aspecto | Convención aplicada |
+| --- | --- |
+| Sangría | 4 espacios y ninguna tabulación (ninguno de los 549 archivos usa tabulaciones) |
+| Importaciones | Explícitas, sin comodines (solo 1 excepción en los 549 archivos) |
+| Documentación | Javadoc en inglés en las clases (519 de 549 archivos), con enlaces `{@link}` y párrafos `<p>` para explicar las reglas de negocio |
+| Objetos inmutables | `record` para commands, queries, eventos, value objects y resources (229 en total) |
+| Persistencia | Entidades JPA con Lombok (`@Getter`, `@Setter` y `@NoArgsConstructor`) y tipos de columna explícitos, como `BINARY(16)` para los identificadores y `DATETIME(6)` para las fechas |
+| Resultados | Los servicios de aplicación devuelven `Result<T, ApplicationError>` (por ejemplo, `Result<EmergencyAlert, ApplicationError>`) en lugar de lanzar excepciones hacia la capa REST |
+| Valores ausentes | `Optional` en las consultas, en lugar de `null` |
+| Mensajes de error | Claves en minúsculas separadas por puntos (`alert.resolution.note.blank`), cuyos textos están en `messages.properties` y `messages_es.properties` |
+| Idioma | Identificadores, Javadoc y mensajes de commit en inglés |
+
+<br>
+
+**Landing page: convenciones aplicadas**
+
+El sitio se construye con Vite, sin biblioteca de interfaz, por lo que sus convenciones se resumen en lo que el código ya cumple.
+
+<br>
+
+| Aspecto | Convención aplicada |
+| --- | --- |
+| Módulos | JavaScript con módulos ES (`import` y `export`), separados por responsabilidad: contenido y lógica en `main.js`, textos en inglés y español en `i18n.js` y plantillas en `templates.js` |
+| Formato | Sangría de 2 espacios, comillas simples y ninguna tabulación |
+| Declaraciones | `const` por defecto y `let` solo cuando el valor cambia; no se usa `var`; funciones flecha para la lógica |
+| Nombres | camelCase para variables y funciones (`setState`); MAYÚSCULAS con guion bajo para constantes de contenido (`NAV`, `MOODS`, `FEATURES`) |
+| Comentarios | Bloques con título para separar las partes del archivo (contenido, acciones, renderizado e idioma) y comentarios de una línea para explicar decisiones puntuales |
+| HTML | Documento con `lang="es"`; estructura semántica con `header`, `nav`, `section` y `footer`; un solo `h1`; atributos `alt` en las imágenes y atributos `aria-` en los controles interactivos |
+| Identificadores de sección | `id` en minúsculas, usados como anclas del menú: `como`, `familia`, `funciones` y `planes` |
+| Internacionalización | El español es el idioma de origen y un diccionario lo traduce al inglés; el idioma elegido se recuerda en el navegador |
+| SEO | Etiquetas `meta` de descripción, palabras clave y Open Graph, y datos estructurados, definidos en el encabezado de `index.html` |
+
+<br>
+
+**Convenciones para pruebas de aceptación**
+
+Los archivos .feature se redactan en inglés con las palabras clave `Feature`, `Scenario`, `Given`, `When` y `Then`. Cada escenario verifica un único comportamiento y toma como base los criterios de aceptación de la historia de usuario a la que corresponde, cuyo identificador (por ejemplo, US13) se incluye en una etiqueta sobre el escenario.
+
+<br>
+
 ### 4.1.4. Software Deployment Configuration
 ## 4.2. Landing Page & Mobile Application Implementation
 ### 4.2.1. Sprint 1
