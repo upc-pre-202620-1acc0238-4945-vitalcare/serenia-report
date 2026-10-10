@@ -157,8 +157,13 @@ La Imagen 4 muestra el resumen de actividad (Pulse) del repositorio entre el 3 y
 </p>
 
 **serenia-mobile-android:**
+
+Para la aplicación móvil el equipo trabajó sobre el repositorio `serenia-mobile-android`, desarrollando cada funcionalidad en ramas `feature/` independientes, como `feature/home`, `feature/welcome` y `feature/care-circle-kelber`, que se integraron mediante Pull Requests a la rama de desarrollo `develop` y, al cierre del sprint, a la rama principal `main`. El código se organizó por funcionalidad, con una carpeta para cada una (Home, Check-in, Alerts and Safety, Social Companionship, Identity and Access y Care Circle), lo que permitió que cada integrante construyera sus pantallas sin interferir con las de los demás.
+
+La Imagen 5 muestra el resumen de actividad (Pulse) del repositorio entre el 10 de septiembre y el 10 de octubre de 2026: 12 Pull Requests integrados y ninguno pendiente, con 63 commits realizados por los 5 integrantes del equipo. El gráfico de Top committers evidencia que los 5 integrantes aportaron commits a la aplicación.
+
 <p align="center">
-  <img src="" alt="TB1 Insights" width="900"/>
+  <img src="assets/img/project-report-collaboration-insights/insights-mobile.png" alt="TB1 Insights" width="900"/>
     <br/><i>Imagen 5. Insights de la Segunda Entrega (TB1)</i>
 </p>
 
