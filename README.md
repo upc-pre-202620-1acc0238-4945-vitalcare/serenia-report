@@ -7821,8 +7821,7 @@ Esta sección define cómo se nombran los elementos y cómo se escribe el códig
 | --- | --- | --- | --- |
 | Landing page web | HTML, CSS y JavaScript (Vite) | [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html) y [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html) | Aplicada en la landing page |
 | Web Services | Java 26 con Spring Boot | [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) en nombres y organización del código, con sangría de 4 espacios, y [Spring Boot Features](https://docs.spring.io/spring-boot/reference/features/index.html) | Aplicada en el backend |
-| Aplicación móvil | Kotlin | [Kotlin Coding Conventions](https://kotlinlang.org/docs/coding-conventions.html) y [Android Kotlin Style Guide](https://developer.android.com/kotlin/style-guide) | Definida |
-| Pruebas de aceptación | Gherkin (archivos .feature) | [Gherkin Reference](https://cucumber.io/docs/gherkin/reference) | Definida |
+| Aplicación móvil | Kotlin con Jetpack Compose | [Kotlin Coding Conventions](https://kotlinlang.org/docs/coding-conventions.html) y [Android Kotlin Style Guide](https://developer.android.com/kotlin/style-guide) | Aplicada en la aplicación móvil |
 
 <br>
 
@@ -7889,9 +7888,35 @@ El sitio se construye con Vite, sin biblioteca de interfaz, por lo que sus conve
 
 <br>
 
-**Convenciones para pruebas de aceptación**
+**Nomenclatura y estilo de la aplicación móvil (Kotlin)**
 
-Los archivos .feature se redactan en inglés con las palabras clave `Feature`, `Scenario`, `Given`, `When` y `Then`. Cada escenario verifica un único comportamiento y toma como base los criterios de aceptación de la historia de usuario a la que corresponde, cuyo identificador (por ejemplo, US13) se incluye en una etiqueta sobre el escenario.
+La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario de la landing y del backend: Home, Check-in y Alerts and Safety. Las convenciones de la tabla se midieron sobre los 29 archivos Kotlin de `serenia-app-native` al 9 de octubre de 2026, y se cumplen en todos los casos que alcanza cada regla: por ejemplo, los 3 ViewModels llevan `@HiltViewModel` y los 3 estados de pantalla son `data class`.
+
+<br>
+
+| Elemento | Regla | Ejemplo |
+| --- | --- | --- |
+| Paquetes | Base `com.vitalcare.serenia`, con una carpeta por funcionalidad que separa `domain` y `presentation`, más `core/designsystem` y `navigation` | `features/checkin/presentation/thanks` |
+| Pantalla | Función `@Composable` en PascalCase con sufijo `Screen`, en un archivo propio | `HomeScreen`, `CheckInThanksScreen` |
+| Estado de la pantalla | `data class` con sufijo `UiState` y valores por defecto | `HomeUiState` |
+| ViewModel | Sufijo `ViewModel`, anotado con `@HiltViewModel` y con constructor `@Inject`; expone el estado como `StateFlow` de solo lectura mediante `asStateFlow()` | `HomeViewModel` |
+| Navegación | Un grafo por funcionalidad con sufijo `NavGraph`, rutas tipadas con `@Serializable` y registro de cada grafo en `AppNavHost` | `CheckInNavGraph`, `AlertsAndSafetyNavGraph` |
+| Dominio | Tipos propios de la funcionalidad; las constantes de un `enum` van en MAYÚSCULAS con guion bajo | `Mood.NOT_GOOD` |
+| Sistema de diseño | Componentes reutilizables y tema de Material 3 en `core/designsystem`, dividido en `components`, `icon` y `theme` | `SereniaButtons`, `Theme` |
+
+<br>
+
+**Formato y estilo del código Kotlin**
+
+| Aspecto | Convención aplicada |
+| --- | --- |
+| Sangría | 4 espacios y ninguna tabulación (ninguno de los 29 archivos usa tabulaciones) |
+| Importaciones | Explícitas, sin comodines |
+| Interfaz de usuario | Jetpack Compose con Material 3 (13 archivos); 34 funciones `@Composable` en 14 archivos y vistas previas con `@Preview` en 11 |
+| Estado | Un `MutableStateFlow` privado dentro del ViewModel y actualizaciones con `update` y `copy` sobre el estado inmutable |
+| Inyección de dependencias | Hilt, con `hilt-navigation-compose` para obtener los ViewModels en las pantallas |
+| Comentarios | En inglés y de una línea, para explicar decisiones puntuales de diseño |
+| Versiones | Kotlin 2.4.20, Android Gradle Plugin 9.4.1, `minSdk` 24 y `targetSdk` 37 |
 
 <br>
 
@@ -7913,7 +7938,7 @@ Esta sección explica cómo publicar cada producto de Serenia a partir de su rep
 | Producto | Repositorio | Plataforma de despliegue | Qué se publica | Estado |
 | --- | --- | --- | --- | --- |
 | Landing page web | `serenia-website` | Netlify, conectado al repositorio de GitHub | La carpeta `dist`, generada con `npm run build` | Publicada en https://sereniaa.netlify.app/ |
-| Web Services | `serenia-platform` | Microsoft Azure (Azure Web App Service para la API y MySQL Flexible Server para la base de datos) | El archivo JAR ejecutable de Spring Boot, generado con Maven | Configuración de despliegue documentada |
+| Web Services | `serenia-platform` | Microsoft Azure (Azure Web App Service para la API y MySQL Flexible Server para la base de datos) | Una imagen Docker de la API, que empaqueta el JAR ejecutable de Spring Boot | Desplegada en https://serenia-platform-api.azurewebsites.net |
 | Aplicación móvil | `serenia-app-native` | Firebase App Distribution | Por definir | Por completar cuando el repositorio contenga el código |
 
 Todos los repositorios pertenecen a la organización del equipo en GitHub (https://github.com/upc-pre-202620-1acc0238-4945-vitalcare). El código que se publica proviene de la rama `main`, que recibe los cambios desde `develop` mediante Pull Requests en cada entrega, según el flujo GitFlow adoptado por el equipo.
@@ -7969,7 +7994,7 @@ El resultado de la construcción queda en la carpeta `dist`, que se genera en el
 
 **Web Services: configuración de despliegue**
 
-La API de Serenia es un monolito modular de Spring Boot (sección 2.5.3.2) que se empaqueta como un único archivo JAR ejecutable. Según el Deployment Diagram, el JAR se aloja en un Azure Web App Service y la base de datos MySQL en Azure. El archivo `application.properties` define dos perfiles: `dev`, el predeterminado, para trabajar en local, y `prod`, que toma toda su configuración de variables de entorno.
+La API de Serenia es un monolito modular de Spring Boot (sección 2.5.3.2) que se empaqueta como un único archivo JAR ejecutable, incluido en una imagen Docker. Según el Deployment Diagram, la imagen se ejecuta en un Azure Web App Service y la base de datos MySQL se aloja en Azure. El archivo `application.properties` define dos perfiles: `dev`, el predeterminado, para trabajar en local, y `prod`, que toma toda su configuración de variables de entorno.
 
 <br>
 
@@ -7979,6 +8004,8 @@ La API de Serenia es un monolito modular de Spring Boot (sección 2.5.3.2) que s
 | --- | --- |
 | JDK | Versión 26, la que fija el archivo `pom.xml` |
 | Maven | Incluido en el repositorio mediante el wrapper `mvnw` (`mvnw.cmd` en Windows), por lo que no requiere instalación aparte |
+| Docker | Docker Desktop o Docker Engine, para construir y probar la imagen |
+| Azure CLI | Para publicar la imagen y configurar el servicio desde la línea de comandos |
 | MySQL | Un servidor MySQL con una base de datos ya creada, porque el perfil `prod` no la crea (`createDatabaseIfNotExist=false`); las tablas las genera Hibernate al arrancar la aplicación (`ddl-auto=update`) |
 | Azure Blob Storage | Una cuenta de almacenamiento con un contenedor privado, donde la aplicación guarda los audios y las fotos de Social Companionship |
 | Cuenta de Azure | Con permiso para crear el Web App Service |
@@ -8006,11 +8033,16 @@ El perfil `prod` toma su configuración de las variables de la tabla siguiente. 
 
 *Construcción y despliegue*
 
+El repositorio incluye un `Dockerfile` y un `docker-compose.yml`. El `Dockerfile` tiene dos etapas: la primera compila con Maven sobre una imagen con JDK 26 (`./mvnw -DskipTests package`) y la segunda ejecuta el JAR sobre una imagen con JRE 26, con un usuario sin privilegios y el perfil `prod` activo. El `docker-compose.yml` expone el puerto 8080 y toma todos los valores de variables de entorno.
+
 | Paso | Acción | Comando o detalle |
 | --- | --- | --- |
 | 1 | Clonar el repositorio y ubicarse en la rama que se va a publicar | `git clone https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform.git` |
-| 2 | Construir el JAR ejecutable | `./mvnw clean package -DskipTests`, que genera el archivo en la carpeta `target` (`platform-0.0.1-SNAPSHOT.jar`, según el `pom.xml`) |
-| 3 | Alojar la API | El JAR se ejecuta en el Azure Web App Service del Deployment Diagram, con las variables de entorno de la tabla anterior, la base de datos en MySQL Flexible Server y los archivos en el contenedor privado de Blob Storage |
+| 2 | Construir la imagen Docker | `docker build -t serenia-platform:1.0.0 .` |
+| 3 | Probar la imagen en local | `docker compose --env-file <archivo de variables> up --build`, con las variables obligatorias de la tabla anterior y la API disponible en `http://localhost:8080` |
+| 4 | Publicar la imagen en un Azure Container Registry | `az acr login`, `docker tag` y `docker push` hacia el registro de contenedores |
+| 5 | Crear el Azure Web App Service para contenedores con esa imagen | Puerto 8080 y las variables de entorno de la tabla anterior, configuradas en el servicio |
+| 6 | Verificar el despliegue | Ver la tabla siguiente |
 
 La única prueba del proyecto, `SereniaPlatformApplicationTests`, levanta la aplicación completa y necesita un servidor MySQL accesible con las credenciales del perfil `dev`; por eso la construcción del JAR para el despliegue omite las pruebas con `-DskipTests`.
 
@@ -8021,18 +8053,23 @@ La única prueba del proyecto, `SereniaPlatformApplicationTests`, levanta la apl
 | Comprobación | Resultado |
 | --- | --- |
 | Construir el proyecto con Java 26 (8 de octubre de 2026) | Se compilan los 557 archivos fuente sin errores |
-| Consultar `/swagger-ui/index.html` en la API en ejecución | Muestra la documentación interactiva de la API, generada por springdoc |
-| Consultar `/v3/api-docs` | Devuelve la definición OpenAPI de los endpoints, que parten de `/api/v1` |
+| Abrir https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html (9 de octubre de 2026) | Responde 200 y muestra la documentación interactiva de la API, generada por springdoc |
+| Consultar `/v3/api-docs` en el servicio | Devuelve la definición OpenAPI con 56 operaciones en 17 grupos, que parten de `/api/v1` |
+| Consultar un endpoint protegido sin token, por ejemplo `/api/v1/alerts` | Responde 401 Unauthorized, lo que confirma que la API exige el token JWT |
 
 <br>
 
 **Aplicación móvil**
 
-El Deployment Diagram establece que la aplicación móvil se distribuye mediante Firebase App Distribution. El repositorio `serenia-app-native` todavía no contiene el código que se desplegará, por lo que su procedimiento se completará cuando exista.
+El Deployment Diagram establece que la aplicación móvil se distribuye mediante Firebase App Distribution. El repositorio `serenia-app-native` contiene el proyecto Android de la aplicación, escrito en Kotlin con Jetpack Compose y construido con Gradle.
 
-| Producto | Información que se documentará |
+| Aspecto | Detalle |
 | --- | --- |
-| Aplicación móvil | Tecnología y versión de las herramientas de construcción, generación del instalable, creación del proyecto y del grupo de testers en Firebase App Distribution, carga de cada versión y la forma de instalarla en un dispositivo de prueba |
+| Repositorio | `serenia-app-native`, con las ramas `main` y `develop` y una rama `feature/<funcionalidad>` por cada funcionalidad |
+| Identificador de la aplicación | `com.vitalcare.serenia`, versión 1.0 (`versionCode` 1) |
+| Versiones de construcción | Android Gradle Plugin 9.4.1, Kotlin 2.4.20, `minSdk` 24 y `targetSdk` 37 |
+| Construcción | Abrir el proyecto en Android Studio y ejecutarlo en un emulador o en un dispositivo; desde la línea de comandos, `./gradlew assembleDebug` genera el APK de depuración |
+| Distribución | Firebase App Distribution, según el Deployment Diagram: se sube cada versión al proyecto de Firebase y se invita a los testers para instalarla |
 
 <br>
 
