@@ -64,7 +64,7 @@
   </tr>
   <tr>
     <td><b>Segunda Entrega (TB1)</b></td>
-    <td>8/10/2026</td>
+    <td>10/10/2026</td>
     <td>
       Contreras Torres, Arturo Valentino <br>
       <p></p>
@@ -436,7 +436,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
 
 # Objetivos SMART
 
-Eh esta sección, cada integrante del equipo formula un plan de dos objetivos SMART orientados a su desarrollo profesional una vez finalizada la carrera. Estos objetivos reflejan de manera clara y medible las metas de crecimiento profesional continuo que cada miembro se propone alcanzar tras su graduación.
+En esta sección, cada integrante del equipo formula un plan de dos objetivos SMART orientados a su desarrollo profesional una vez finalizada la carrera. Estos objetivos reflejan de manera clara y medible las metas de crecimiento profesional continuo que cada miembro se propone alcanzar tras su graduación.
 
 **Contreras Torres, Arturo Valentino**
 
@@ -6725,8 +6725,6 @@ icons:
 
 #### 3.1.2.3. SEO Tags and Meta Tags
 
-#### 3.1.2.3. SEO Tags and Meta Tags
-
 En esta sección se definen los SEO Tags y Meta Tags implementados en la Landing Page de Serenia. Más allá de los metadatos tradicionales para motores de búsqueda, el equipo ha integrado etiquetas Open Graph y Twitter Cards. Esto es estratégico para nuestro modelo de adquisición: el descubrimiento y la recomendación entre familiares (Segmento 2) se da frecuentemente a través de enlaces compartidos en aplicaciones de mensajería como WhatsApp, donde estas etiquetas garantizan una previsualización visualmente atractiva y confiable.
 
 **Landing Page:**
@@ -9459,7 +9457,7 @@ Kevin evaluó el prototipo móvil y la Landing Page enfocándose en la usabilida
 
 <br>
 
-Link Gerneral de las entrevistas: <a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQDn538IGl08RaD1JoxM1lhlAVCw6JTRhdzwJzu76cFYdV8?e=ZoftnJ&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Enlace de entrevistas</a>
+Link general de las entrevistas: <a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQDn538IGl08RaD1JoxM1lhlAVCw6JTRhdzwJzu76cFYdV8?e=ZoftnJ&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Enlace de entrevistas</a>
 
 </div>
 
