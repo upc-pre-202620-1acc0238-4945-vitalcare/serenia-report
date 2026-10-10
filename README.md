@@ -3881,60 +3881,64 @@ La selección de escenarios no buscó cobertura funcional completa, sino aquello
  
 <br>
 
-**Domain Story 1: Registro y vinculación familiar**
-
-Este escenario resuelve el caso en que un adulto mayor se registra en Serenia y habilita a un familiar a distancia para acceder a su estado. Es la historia que da origen a toda relación posterior en el sistema: sin un vínculo familiar establecido, ningún otro flujo puede ejecutarse. La Imagen 30 presenta el diagrama de esta historia.
-
+**Escenario 1: Registro y vinculación familiar**
+ 
+Este escenario resuelve el caso en que un adulto mayor se registra en Serenia y habilita a un familiar a distancia para acceder a su estado. Es el escenario que da origen a toda relación posterior en el sistema: sin un vínculo familiar establecido, ningún otro flujo puede ejecutarse. La Imagen 30 presenta el diagrama de este escenario.
+ 
 <br>
-
 <div align="center">
-  <img src="assets/img/domain-message-flows-modeling/domain-story-1.png" alt="Domain Story 1" width="700"/>
-  <br/><i>Imagen 30. Domain Story 1 - Registro y vinculación familiar.</i>
-</div>
-
-<br>
-
-El adulto mayor crea su cuenta en Identity & Access (1), el cual comunica la identidad registrada a Care Circle (2). Care Circle genera entonces un código de invitación y lo entrega al adulto mayor (3), quien se lo transmite al familiar a distancia por un medio ajeno al sistema (4). El familiar crea su propia cuenta en Identity & Access (5), ingresa el código de invitación en Care Circle (6) y recibe la confirmación del vínculo familiar establecido (7).
-
-<br>
-
-**Domain Story 2: Check-in diario y consulta del estado**
-
-Este escenario representa la operación cotidiana de Serenia y el caso de uso que sostiene su propuesta de valor: el adulto mayor comunica su bienestar sin necesidad de una llamada, y el familiar a distancia lo verifica sin necesidad de interrumpirlo. La Imagen 31 presenta el diagrama de esta historia.
-
-<br>
-
-<div align="center">
-  <img src="assets/img/domain-message-flows-modeling/domain-story-2.png" alt="Domain Story 2" width="700"/>
-  <br/><i>Imagen 31. Domain Story 2 - Check-in diario y consulta del estado.</i>
+  <img src="assets/img/domain-message-flows-modeling/domain-story-1.png" alt="Escenario 1" width="900"/>
+  <br/><i>Imagen 30. Domain Message Flow 1 - Registro y vinculación familiar.</i>
 </div>
 <br>
-
-Daily Check-in envía la pregunta diaria al adulto mayor (1), quien responde el check-in (2). Daily Check-in comunica entonces el check-in registrado a Wellbeing Monitoring (3), que lo incorpora al historial del adulto mayor. Posteriormente, el familiar a distancia consulta el resumen de estado (4) y Wellbeing Monitoring se lo muestra (5).
-
+El adulto mayor crea su cuenta en Identity & Access (1), que publica el evento de adulto mayor registrado para que Care Circle cree su círculo de cuidado (2). El adulto mayor solicita a Care Circle un código de invitación (3) y lo comparte con el familiar a distancia por un medio ajeno al sistema (4). El familiar crea su propia cuenta en Identity & Access (5) y canjea el código en Care Circle (6), que consulta a Identity & Access el rol del solicitante para confirmar que se trata de un familiar a distancia (7). Por último, Care Circle establece el vínculo familiar (8).
+ 
 <br>
 
-**Domain Story 3: Detección de un patrón de malestar**
-
-Este escenario resuelve el caso en que el adulto mayor reporta malestar durante varios días consecutivos sin que ello constituya una emergencia. Es el flujo que distingue a Serenia de una aplicación de alertas reactivas, ya que actúa sobre una tendencia y no sobre un evento aislado. La Imagen 32 presenta el diagrama de esta historia.
-
+**Escenario 2: Check-in diario y consulta del estado**
+ 
+Este escenario representa la operación cotidiana de Serenia y el caso de uso que sostiene su propuesta de valor: el adulto mayor comunica su bienestar sin necesidad de una llamada, y el familiar a distancia lo verifica sin necesidad de interrumpirlo. La Imagen 31 presenta el diagrama de este escenario.
+ 
 <br>
-
 <div align="center">
-  <img src="assets/img/domain-message-flows-modeling/domain-story-3.png" alt="Domain Story 3" width="700"/>
-  <br/><i>Imagen 32. Domain Story 3 - Detección de un patrón de malestar.</i>
+  <img src="assets/img/domain-message-flows-modeling/domain-story-2.png" alt="Escenario 2" width="900"/>
+  <br/><i>Imagen 31. Domain Message Flow 2 - Check-in diario y consulta del estado.</i>
 </div>
 <br>
-
-Wellbeing Monitoring evalúa el historial de check-ins del adulto mayor (1) y, al identificar un patrón sostenido de malestar, lo comunica a Alerts and Safety (2). Este último clasifica la alerta de bienestar según su severidad (3), envía una sugerencia de acción al familiar a distancia (4) y registra la confirmación de atención por parte de este (5).
-
+Al llegar la hora configurada, el sistema solicita avisar el check-in del día (1) y Daily Check-in presenta la pregunta al adulto mayor (2), quien la responde con su estado de ánimo (3). Daily Check-in publica el check-in respondido (4) y Wellbeing Monitoring consulta los estados de ánimo de los días anteriores para evaluarlo (5). Más tarde, el familiar a distancia consulta el check-in del día en Daily Check-in (6), que verifica con Care Circle que el familiar esté vinculado al adulto mayor antes de responder (7).
+ 
 <br>
 
-El modelado de los flujos de mensajes permitió comprobar que la descomposición propuesta resiste la ejecución de los casos de negocio reales de Serenia. Las tres historias muestran una cadena de colaboración coherente: Care Circle origina el vínculo familiar del que dependen todas las comunicaciones posteriores, Daily Check-in captura la señal diaria, Wellbeing Monitoring la acumula e interpreta, y Alerts and Safety actúa únicamente cuando esa interpretación lo amerita. Cada contexto recibe lo que necesita para cumplir su responsabilidad y ninguno requiere asumir la de otro, lo que confirma que las fronteras trazadas son operativas y no solo conceptuales.
-
-Adicionalmente, los diagramas identificaron con precisión los tres puntos de integración del sistema (identidad registrada, check-in registrado y patrón de malestar detectado), que constituyen el insumo directo para definir los patrones de relación entre contextos.
-
+**Escenario 3: Detección de un patrón de malestar**
+ 
+Este escenario resuelve el caso en que el adulto mayor reporta malestar durante varios días consecutivos sin que ello constituya una emergencia. Es el flujo que distingue a Serenia de una aplicación de alertas reactivas, ya que actúa sobre una tendencia y no sobre un evento aislado. La Imagen 32 presenta el diagrama de este escenario.
+ 
 <br>
+<div align="center">
+  <img src="assets/img/domain-message-flows-modeling/domain-story-3.png" alt="Escenario 3" width="900"/>
+  <br/><i>Imagen 32. Domain Message Flow 3 - Detección de un patrón de malestar.</i>
+</div>
+<br>
+El adulto mayor responde su check-in con ánimo bajo por tercer día consecutivo (1). Daily Check-in publica el check-in respondido (2) y Wellbeing Monitoring consulta los estados de ánimo de los días anteriores (3); al confirmar la racha, detecta el patrón de malestar y emite una sugerencia de acción. El familiar a distancia consulta las sugerencias vigentes (4), Wellbeing Monitoring verifica su vínculo con Care Circle (5) y, una vez atendida la situación, el familiar descarta la sugerencia, que deja de mostrarse para todos los familiares (6).
+ 
+<br>
+
+**Escenario 4: Check-in no respondido y alerta de inactividad**
+ 
+Este escenario resuelve el caso en que el adulto mayor no responde su check-in dentro del plazo. Es el flujo que da tranquilidad al familiar: no necesita verificar cada día si hubo respuesta, porque el sistema le avisa cuando no la hubo. La Imagen 33 presenta el diagrama de este escenario.
+ 
+<br>
+<div align="center">
+  <img src="assets/img/domain-message-flows-modeling/domain-story-4.png" alt="Escenario 4" width="900"/>
+  <br/><i>Imagen 33. Domain Message Flow 4 - Check-in no respondido y alerta de inactividad.</i>
+</div>
+<br>
+Al vencer el plazo sin respuesta, el sistema solicita cerrar el check-in (1) y Daily Check-in publica el check-in no respondido (2). Alerts and Safety consulta a Care Circle los familiares vinculados al adulto mayor (3) y, al confirmar que tiene al menos uno, genera la alerta de inactividad, que queda visible en el apartado de alertas de la aplicación del familiar (4). El familiar indica que está atendiendo la alerta (5) y, luego de comunicarse con el adulto mayor, la marca como resuelta (6).
+ 
+<br>
+El modelado de los flujos de mensajes permitió comprobar que la descomposición propuesta resiste la ejecución de los casos de negocio reales de Serenia. Los cuatro escenarios muestran una cadena de colaboración coherente: Identity & Access origina la identidad de cada usuario, Care Circle establece el vínculo familiar del que dependen todas las comunicaciones posteriores, Daily Check-in captura la señal diaria, Wellbeing Monitoring la interpreta y Alerts and Safety actúa cuando esa señal no llega. Cada contexto recibe lo que necesita para cumplir su responsabilidad y ninguno requiere asumir la de otro, lo que confirma que las fronteras trazadas son operativas y no solo conceptuales.
+ 
+Adicionalmente, los diagramas identificaron con precisión los puntos de integración del sistema. Por un lado, tres eventos: adulto mayor registrado, check-in respondido y check-in no respondido. Por otro, las consultas que los contextos dirigen a Care Circle para verificar vínculos y a Daily Check-in para obtener estados de ánimo. Ambos tipos de integración constituyen el insumo directo para definir los patrones de relación entre contextos.
 
 #### 2.5.1.3. Bounded Context Canvases
 
