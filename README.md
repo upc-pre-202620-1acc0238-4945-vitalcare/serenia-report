@@ -9192,13 +9192,14 @@ Los User Flows propuestos corresponden a las funcionalidades core de la aplicaci
   <tr><td><b>Edad</b></td><td>61 años</td></tr>
   <tr><td><b>Distrito</b></td><td>Tarapoto, San Martín</td></tr>
   <tr><td><b>Entrevistador</b></td><td>Victor Manuel García Paredes</td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Por completar</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>00:03</i></td></tr>
   <tr><td><b>Duración</b></td><td>11 min 03 s</td></tr>
 </table>
 
+</div>
+
 **Resumen:**
 
-</div>
 
 Yrma participó por videollamada y probó el prototipo a través del enlace que se le envió. Antes de empezar, cuando se le preguntó qué creía que hacía Serenia, respondió que le permite estar comunicada con sus familiares para que conozcan sus emociones, sus sentimientos y lo que le pasa durante el día; es decir, entendió la propuesta sin ayuda.
 
@@ -9212,6 +9213,37 @@ Lo más fácil fue identificar los botones por su color llamativo; lo más difí
 
 ##### Entrevista 2
 
+<img src="assets/img/interviews/entrevista-validacion-yolanda.png" alt="" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td>Yolanda Bardalez Hernandez</td></tr>
+  <tr><td><b>Edad</b></td><td>74 años</td></tr>
+  <tr><td><b>Distrito</b></td><td>Chorrillos</td></tr>
+  <tr><td><b>Entrevistador</b></td><td>Carla Gallardo Morales</td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>11:05</i></td></tr>
+  <tr><td><b>Duración</b></td><td>07 min 50 s</td></tr>
+</table>
+
+</div>
+
+**Resumen:**
+
+**Yolanda** señaló que la página de presentación resulta fácil de leer debido a que la interfaz luce nítida y clara. Asimismo, afirmó que la paleta de colores se siente estable y no está saturada, lo cual permite distinguir los elementos y botones con facilidad. Además, logró identificar correctamente la sección que menciona la prueba gratuita de siete días.
+
+Al ser consultada sobre su estado general, **Yolanda** mencionó que se encontraba bien. Durante la simulación del registro en la aplicación, eligió las **9:00 a. m.** como su horario preferido para recibir la consulta diaria sobre su estado de ánimo, explicando que esa es la hora a la que habitualmente se levanta. Al revisar la pantalla con el código de invitación destinado a conectar su dispositivo con sus familiares a distancia, **Yolanda** leyó el número 4821 y aseguró que le resulta muy sencillo de leer, dictar y compartir con su familia.
+
+En cuanto a su contexto personal, **Yolanda** compartió que sus hijos y nietas la visitan con frecuencia y están siempre al pendiente de ella. Al evaluar la pantalla principal de la aplicación, que presenta las opciones "Muy bien", "Más o menos" y "No tan bien", explicó que la interfaz es fácil de entender y que basta con presionar o "machucar" el botón para seleccionar una respuesta. De igual forma, consideró que la sección de **recordatorios de actividades** es importante, destacando el ejemplo del taller de tejido. Respecto a la función para enviar mensajes de voz a sus familiares, **Yolanda** comentó que es muy fácil de usar, detallando que solo se debe presionar la pantalla y hablar como al grabar un audio normal.
+
+Finalmente, tras revisar la sección de la cuenta y el flujo completo de la interfaz, **Yolanda** afirmó que todo está bien diseñado y que la estructura resulta fácil de recordar. Concluyó que no considera necesario modificar ningún elemento de la aplicación y finalizó la sesión agradeciendo la atención recibida y deseando éxito al proyecto
+</div>
+
+<br>
+
+##### Entrevista 3
+
 <img src="assets/img/interviews/validation-interview-arturo-eva.png" alt="Screenshot de entrevista de validación - Eva Martinez" width="700"/>
 
 <br>
@@ -9222,7 +9254,7 @@ Lo más fácil fue identificar los botones por su color llamativo; lo más difí
   <tr><td><b>Edad</b></td><td>67 años</td></tr>
   <tr><td><b>Distrito</b></td><td>Chanchamayo - Junín</td></tr>
   <tr><td><b>Entrevistador</b></td><td>Arturo Contreras Torres</td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Por completar</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>18:54</i></td></tr>
   <tr><td><b>Duración</b></td><td>12 min 03 s</td></tr>
 </table>
 
@@ -9240,29 +9272,6 @@ Luego probó el prototipo de la aplicación móvil y valoró de forma positiva l
 
 <div align="center">
 
-##### Entrevista 3
-
-<img src="" alt="" width="700"/>
-
-<br>
-
-<table align="center">
-  <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td></td></tr>
-  <tr><td><b>Edad</b></td><td></td></tr>
-  <tr><td><b>Distrito</b></td><td></td></tr>
-  <tr><td><b>Entrevistador</b></td><td></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i></i></td></tr>
-  <tr><td><b>Duración</b></td><td></td></tr>
-</table>
-
-**Resumen:**
-
-</div>
-
-
-
-<br>
 
 #### Segmento 2: Familiares a distancia
 
@@ -9280,7 +9289,7 @@ Luego probó el prototipo de la aplicación móvil y valoró de forma positiva l
   <tr><td><b>Edad</b></td><td><i>20 años</i></td></tr>
   <tr><td><b>Distrito</b></td><td><i>Surco</i></td></tr>
   <tr><td><b>Entrevistador</b></td><td>Kelber Sandoval Aiquipa</td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Por completar</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>38:13</i></td></tr>
   <tr><td><b>Duración</b></td><td>5 min 04 s</td></tr>
 </table>
 
@@ -9305,7 +9314,7 @@ Durante la sesión de validación, José interactuó con la Landing Page y los f
   <tr><td><b>Edad</b></td><td><i>27 años</i></td></tr>
   <tr><td><b>Distrito</b></td><td><i>San Juan de Miraflores</i></td></tr>
   <tr><td><b>Entrevistador</b></td><td>Kelber Sandoval Aiquipa</td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Por completar</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>31:01</i></td></tr>
   <tr><td><b>Duración</b></td><td>6 min 54 s</td></tr>
 </table>
 
@@ -9332,7 +9341,7 @@ Kevin evaluó el prototipo móvil y la Landing Page enfocándose en la usabilida
   <tr><td><b>Edad</b></td><td></td></tr>
   <tr><td><b>Distrito</b></td><td></td></tr>
   <tr><td><b>Entrevistador</b></td><td></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i></i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>42:59</i></td></tr>
   <tr><td><b>Duración</b></td><td></td></tr>
 </table>
 
@@ -9344,6 +9353,11 @@ Kevin evaluó el prototipo móvil y la Landing Page enfocándose en la usabilida
 
 <br>
 
+Link Gerneral de las entrevistas: <a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQDn538IGl08RaD1JoxM1lhlAVCw6JTRhdzwJzu76cFYdV8?e=ZoftnJ&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Enlace de entrevistas</a>
+
+</div>
+
+### 4.3.3. Evaluaciones según heurísticas
 
 ### 4.3.3. Evaluaciones según heurísticas.
 
