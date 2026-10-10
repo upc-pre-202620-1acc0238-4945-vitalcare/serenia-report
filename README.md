@@ -100,7 +100,7 @@ URL del repositorio (Report): https://github.com/upc-pre-202620-1acc0238-4945-vi
 
 URL del repositorio (Web Services): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-web-services
 
-URL del repositorio (App Native): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-app-native
+URL del repositorio (App Native): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android
 
 URL del repositorio (Website): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website
 
@@ -7780,7 +7780,7 @@ La configuración del entorno de producción se distribuyó estratégicamente pa
 *   **Firebase Cloud Messaging (FCM):** Configurado como el proveedor externo de mensajería para empujar las alertas de emergencia y los recordatorios sociales en tiempo real hacia los dispositivos móviles, saltándose las limitaciones de las consultas en segundo plano.
 
 **3. Entorno de Gestión y Colaboración**
-*   **Control de Versiones y Código:** **Git y GitHub**. Todo el equipo opera bajo el modelo *GitFlow*, utilizando la convención *Conventional Commits* para mantener una trazabilidad semántica en repositorios separados (`serenia-app-native`, `serenia-web-services`, `serenia-website`, `serenia-report`).
+*   **Control de Versiones y Código:** **Git y GitHub**. Todo el equipo opera bajo el modelo *GitFlow*, utilizando la convención *Conventional Commits* para mantener una trazabilidad semántica en repositorios separados (`serenia-mobile-android`, `serenia-web-services`, `serenia-website`, `serenia-report`).
 *   **Modelado y Diseño:** **Figma** para prototipos de alta fidelidad, **Miro** para el descubrimiento del dominio (EventStorming interactivo), **Structurizr** para los diagramas de arquitectura C4 Model, y **dbdiagram.io** para la esquematización relacional (DBML).
 *   **Project Management:** **Trello** para la ejecución del flujo ágil (Sprint Backlog) y **ClickUp** para el seguimiento y asignación de la documentación del Project Report.
 
@@ -7946,17 +7946,17 @@ El sitio se construye con Vite, sin biblioteca de interfaz, por lo que sus conve
 
 **Nomenclatura y estilo de la aplicación móvil (Kotlin)**
 
-La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario de la landing y del backend: Home, Check-in y Alerts and Safety. Las convenciones de la tabla se midieron sobre los 29 archivos Kotlin de `serenia-app-native` al 9 de octubre de 2026, y se cumplen en todos los casos que alcanza cada regla: por ejemplo, los 3 ViewModels llevan `@HiltViewModel` y los 3 estados de pantalla son `data class`.
+La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario de la landing y del backend: Home, Check-in, Alerts and Safety y Social Companionship. Las convenciones de la tabla se midieron sobre los 72 archivos Kotlin de `serenia-mobile-android` al 10 de octubre de 2026, y se cumplen en todos los casos que alcanza cada regla: por ejemplo, los 8 ViewModels llevan `@HiltViewModel` y los 8 estados de pantalla son `data class`.
 
 <br>
 
 | Elemento | Regla | Ejemplo |
 | --- | --- | --- |
 | Paquetes | Base `com.vitalcare.serenia`, con una carpeta por funcionalidad que separa `domain` y `presentation`, más `core/designsystem` y `navigation` | `features/checkin/presentation/thanks` |
-| Pantalla | Función `@Composable` en PascalCase con sufijo `Screen`, en un archivo propio | `HomeScreen`, `CheckInThanksScreen` |
-| Estado de la pantalla | `data class` con sufijo `UiState` y valores por defecto | `HomeUiState` |
+| Pantalla | Función `@Composable` en PascalCase con sufijo `Screen`, en un archivo propio; lee el ViewModel y delega el dibujo en un `...Content` sin estado, y los componentes propios van en una carpeta `components` | `HomeScreen`, `FamilyScreen` |
+| Estado de la pantalla | `data class` con sufijo `UiState` y valores por defecto; los eventos de una sola vez, como los mensajes, se modelan con un `sealed interface` de sufijo `Event` enviado por un `Channel` | `HomeUiState`, `FamilyUiState` |
 | ViewModel | Sufijo `ViewModel`, anotado con `@HiltViewModel` y con constructor `@Inject`; expone el estado como `StateFlow` de solo lectura mediante `asStateFlow()` | `HomeViewModel` |
-| Navegación | Un grafo por funcionalidad con sufijo `NavGraph`, rutas tipadas con `@Serializable` y registro de cada grafo en `AppNavHost` | `CheckInNavGraph`, `AlertsAndSafetyNavGraph` |
+| Navegación | Un grafo por funcionalidad con sufijo `NavGraph` (5 grafos), rutas tipadas con `@Serializable` (14 rutas) y registro de cada grafo en `AppNavHost` | `CheckInNavGraph`, `AlertsAndSafetyNavGraph` |
 | Dominio | Tipos propios de la funcionalidad; las constantes de un `enum` van en MAYÚSCULAS con guion bajo | `Mood.NOT_GOOD` |
 | Sistema de diseño | Componentes reutilizables y tema de Material 3 en `core/designsystem`, dividido en `components`, `icon` y `theme` | `SereniaButtons`, `Theme` |
 
@@ -7966,9 +7966,9 @@ La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario
 
 | Aspecto | Convención aplicada |
 | --- | --- |
-| Sangría | 4 espacios y ninguna tabulación (ninguno de los 29 archivos usa tabulaciones) |
+| Sangría | 4 espacios y ninguna tabulación (ninguno de los 72 archivos usa tabulaciones) |
 | Importaciones | Explícitas, sin comodines |
-| Interfaz de usuario | Jetpack Compose con Material 3 (13 archivos); 34 funciones `@Composable` en 14 archivos y vistas previas con `@Preview` en 11 |
+| Interfaz de usuario | Jetpack Compose con Material 3 (29 archivos); 77 funciones `@Composable` en 30 archivos y 30 vistas previas con `@Preview` |
 | Estado | Un `MutableStateFlow` privado dentro del ViewModel y actualizaciones con `update` y `copy` sobre el estado inmutable |
 | Inyección de dependencias | Hilt, con `hilt-navigation-compose` para obtener los ViewModels en las pantallas |
 | Comentarios | En inglés y de una línea, para explicar decisiones puntuales de diseño |
@@ -7995,7 +7995,7 @@ Esta sección explica cómo publicar cada producto de Serenia a partir de su rep
 | --- | --- | --- | --- | --- |
 | Landing page web | `serenia-website` | Netlify, conectado al repositorio de GitHub | La carpeta `dist`, generada con `npm run build` | Publicada en https://sereniawebsite.netlify.app/ |
 | Web Services | `serenia-platform` | Microsoft Azure (Azure Web App Service para la API y MySQL Flexible Server para la base de datos) | Una imagen Docker de la API, que empaqueta el JAR ejecutable de Spring Boot | Desplegada en https://serenia-platform-api.azurewebsites.net |
-| Aplicación móvil | `serenia-app-native` | Firebase App Distribution | El instalable (APK) de la aplicación Android, generado con Gradle | Proyecto Android disponible en el repositorio, con las funcionalidades Home, Check-in y Alerts and Safety |
+| Aplicación móvil | `serenia-mobile-android` | Firebase App Distribution | El instalable (APK) de la aplicación Android, generado con Gradle | Proyecto Android disponible en el repositorio, con las funcionalidades Home, Check-in, Alerts and Safety y Social Companionship |
 
 Todos los repositorios pertenecen a la organización del equipo en GitHub (https://github.com/upc-pre-202620-1acc0238-4945-vitalcare). El código que se publica proviene de la rama `main`, que recibe los cambios desde `develop` mediante Pull Requests en cada entrega, según el flujo GitFlow adoptado por el equipo.
 
@@ -8117,14 +8117,14 @@ La única prueba del proyecto, `SereniaPlatformApplicationTests`, levanta la apl
 
 **Aplicación móvil**
 
-El Deployment Diagram establece que la aplicación móvil se distribuye mediante Firebase App Distribution. El repositorio `serenia-app-native` contiene el proyecto Android de la aplicación, escrito en Kotlin con Jetpack Compose y construido con Gradle.
+El Deployment Diagram establece que la aplicación móvil se distribuye mediante Firebase App Distribution. El repositorio `serenia-mobile-android` contiene el proyecto Android de la aplicación, escrito en Kotlin con Jetpack Compose y construido con Gradle.
 
 | Aspecto | Detalle |
 | --- | --- |
-| Repositorio | `serenia-app-native`, con las ramas `main` y `develop` y una rama `feature/<funcionalidad>` por cada funcionalidad |
+| Repositorio | `serenia-mobile-android`, con las ramas `main` y `develop` y una rama `feature/<funcionalidad>` por cada funcionalidad |
 | Identificador de la aplicación | `com.vitalcare.serenia`, versión 1.0 (`versionCode` 1) |
 | Versiones de construcción | Android Gradle Plugin 9.4.1, Kotlin 2.4.20, `minSdk` 24 y `targetSdk` 37 |
-| Construcción | Abrir el proyecto en Android Studio y ejecutarlo en un emulador o en un dispositivo; desde la línea de comandos, `./gradlew assembleDebug` genera el APK de depuración |
+| Construcción | Abrir el proyecto en Android Studio y ejecutarlo en un emulador o en un dispositivo; desde la línea de comandos, `./gradlew assembleDebug` genera el APK de depuración en `app/build/outputs/apk/debug`; la compilación terminó sin errores el 10 de octubre de 2026 |
 | Distribución | Firebase App Distribution, según el Deployment Diagram: se sube cada versión al proyecto de Firebase y se invita a los testers para instalarla |
 
 <br>
@@ -9618,6 +9618,6 @@ URL del repositorio (Report):  [Repositorio Reporte](https://github.com/upc-pre-
 
 URL del repositorio (Web Services):  [Repositorio Web Services](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-web-services)
 
-URL del repositorio (App Native):  [Repositorio App Native](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-app-native)
+URL del repositorio (App Native):  [Repositorio App Native](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android)
 
 URL del repositorio (Website):  [Repositorio Website](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website)
