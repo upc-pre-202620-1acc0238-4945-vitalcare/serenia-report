@@ -126,8 +126,8 @@ La Imagen 1 muestra el resumen de actividad (Pulse) del repositorio entre el 18 
 
 
 <p align="center">
-  <img src="" alt="TB1 Insights" width="900"/>
-    <br/><i>Imagen X. Insights de la Segunda Entrega (TB1)</i>
+  <img src="assets/img/insights/insights1.png" alt="TB1 Insights" width="900"/>
+    <br/><i>Imagen 2. Insights de la Segunda Entrega (TB1)</i>
 </p>
 
 <div style="page-break-after: always;"></div>
@@ -6201,6 +6201,7 @@ Clases que resuelven el acceso a la base de datos MySQL, implementando las abstr
 | --- | --- | --- |
 | EmergencyAlertPersistenceMapper | Traduce entre el aggregate `EmergencyAlert`, con sus notificaciones y acciones de atención, y sus entidades de persistencia. | Usado por `EmergencyAlertRepositoryImpl`. |
 | InactivityAlertPersistenceMapper | Traduce entre el aggregate `InactivityAlert`, con sus acciones de atención, y sus entidades de persistencia. | Usado por `InactivityAlertRepositoryImpl`. |
+| AlertAttentionPersistenceMapper | Traduce las acciones de atención entre el aggregate y `AlertAttentionPersistenceEntity`, común a ambos tipos de alerta. Solo agrega las acciones que la fila aún no tiene y nunca modifica ni elimina las existentes, de modo que la acción simultánea de otro familiar choca con el índice único en lugar de perderse. | Usado por `EmergencyAlertPersistenceMapper` e `InactivityAlertPersistenceMapper`. |
 
 #### 2.6.6.5. Bounded Context Software Architecture Component Level Diagrams
 
@@ -6897,7 +6898,7 @@ Los elementos clave del mock-up son:
 
 <br>
 
-La landing page publicada puede consultarse en [sereniaa.netlify.app](https://sereniaa.netlify.app/).
+La landing page publicada puede consultarse en [sereniawebsite.netlify.app](https://sereniawebsite.netlify.app/).
 
 <br>
 <div align="center">
@@ -7820,8 +7821,7 @@ Esta sección define cómo se nombran los elementos y cómo se escribe el códig
 | --- | --- | --- | --- |
 | Landing page web | HTML, CSS y JavaScript (Vite) | [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html) y [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html) | Aplicada en la landing page |
 | Web Services | Java 26 con Spring Boot | [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) en nombres y organización del código, con sangría de 4 espacios, y [Spring Boot Features](https://docs.spring.io/spring-boot/reference/features/index.html) | Aplicada en el backend |
-| Aplicación móvil | Kotlin | [Kotlin Coding Conventions](https://kotlinlang.org/docs/coding-conventions.html) y [Android Kotlin Style Guide](https://developer.android.com/kotlin/style-guide) | Definida |
-| Pruebas de aceptación | Gherkin (archivos .feature) | [Gherkin Reference](https://cucumber.io/docs/gherkin/reference) | Definida |
+| Aplicación móvil | Kotlin con Jetpack Compose | [Kotlin Coding Conventions](https://kotlinlang.org/docs/coding-conventions.html) y [Android Kotlin Style Guide](https://developer.android.com/kotlin/style-guide) | Aplicada en la aplicación móvil |
 
 <br>
 
@@ -7888,13 +7888,191 @@ El sitio se construye con Vite, sin biblioteca de interfaz, por lo que sus conve
 
 <br>
 
-**Convenciones para pruebas de aceptación**
+**Nomenclatura y estilo de la aplicación móvil (Kotlin)**
 
-Los archivos .feature se redactan en inglés con las palabras clave `Feature`, `Scenario`, `Given`, `When` y `Then`. Cada escenario verifica un único comportamiento y toma como base los criterios de aceptación de la historia de usuario a la que corresponde, cuyo identificador (por ejemplo, US13) se incluye en una etiqueta sobre el escenario.
+La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario de la landing y del backend: Home, Check-in y Alerts and Safety. Las convenciones de la tabla se midieron sobre los 29 archivos Kotlin de `serenia-app-native` al 9 de octubre de 2026, y se cumplen en todos los casos que alcanza cada regla: por ejemplo, los 3 ViewModels llevan `@HiltViewModel` y los 3 estados de pantalla son `data class`.
+
+<br>
+
+| Elemento | Regla | Ejemplo |
+| --- | --- | --- |
+| Paquetes | Base `com.vitalcare.serenia`, con una carpeta por funcionalidad que separa `domain` y `presentation`, más `core/designsystem` y `navigation` | `features/checkin/presentation/thanks` |
+| Pantalla | Función `@Composable` en PascalCase con sufijo `Screen`, en un archivo propio | `HomeScreen`, `CheckInThanksScreen` |
+| Estado de la pantalla | `data class` con sufijo `UiState` y valores por defecto | `HomeUiState` |
+| ViewModel | Sufijo `ViewModel`, anotado con `@HiltViewModel` y con constructor `@Inject`; expone el estado como `StateFlow` de solo lectura mediante `asStateFlow()` | `HomeViewModel` |
+| Navegación | Un grafo por funcionalidad con sufijo `NavGraph`, rutas tipadas con `@Serializable` y registro de cada grafo en `AppNavHost` | `CheckInNavGraph`, `AlertsAndSafetyNavGraph` |
+| Dominio | Tipos propios de la funcionalidad; las constantes de un `enum` van en MAYÚSCULAS con guion bajo | `Mood.NOT_GOOD` |
+| Sistema de diseño | Componentes reutilizables y tema de Material 3 en `core/designsystem`, dividido en `components`, `icon` y `theme` | `SereniaButtons`, `Theme` |
+
+<br>
+
+**Formato y estilo del código Kotlin**
+
+| Aspecto | Convención aplicada |
+| --- | --- |
+| Sangría | 4 espacios y ninguna tabulación (ninguno de los 29 archivos usa tabulaciones) |
+| Importaciones | Explícitas, sin comodines |
+| Interfaz de usuario | Jetpack Compose con Material 3 (13 archivos); 34 funciones `@Composable` en 14 archivos y vistas previas con `@Preview` en 11 |
+| Estado | Un `MutableStateFlow` privado dentro del ViewModel y actualizaciones con `update` y `copy` sobre el estado inmutable |
+| Inyección de dependencias | Hilt, con `hilt-navigation-compose` para obtener los ViewModels en las pantallas |
+| Comentarios | En inglés y de una línea, para explicar decisiones puntuales de diseño |
+| Versiones | Kotlin 2.4.20, Android Gradle Plugin 9.4.1, `minSdk` 24 y `targetSdk` 37 |
 
 <br>
 
 ### 4.1.4. Software Deployment Configuration
+
+Esta sección explica cómo publicar cada producto de Serenia a partir de su repositorio de código, con los pasos suficientes para que otro integrante del equipo pueda repetir el despliegue. La evidencia de lo ejecutado en cada sprint, con sus capturas, se presenta en la sección 4.2.1.8 (Software Deployment Evidence for Sprint Review). Los tres productos de la solución se publican en plataformas distintas, como muestra el Deployment Diagram de la sección 2.5.3.3, que se repite en la Imagen X.
+
+<br>
+
+<div align="center">
+  <img src="assets/img/software-architecture/deployment-diagram.png" alt="Deployment Diagram - Serenia" width="700"/>
+  <br/><i>Imagen X. Deployment Diagram de Serenia.</i>
+</div>
+
+<br>
+
+**Resumen por producto**
+
+| Producto | Repositorio | Plataforma de despliegue | Qué se publica | Estado |
+| --- | --- | --- | --- | --- |
+| Landing page web | `serenia-website` | Netlify, conectado al repositorio de GitHub | La carpeta `dist`, generada con `npm run build` | Publicada en https://sereniawebsite.netlify.app/ |
+| Web Services | `serenia-platform` | Microsoft Azure (Azure Web App Service para la API y MySQL Flexible Server para la base de datos) | Una imagen Docker de la API, que empaqueta el JAR ejecutable de Spring Boot | Desplegada en https://serenia-platform-api.azurewebsites.net |
+| Aplicación móvil | `serenia-app-native` | Firebase App Distribution | El instalable (APK) de la aplicación Android, generado con Gradle | Proyecto Android disponible en el repositorio, con las funcionalidades Home, Check-in y Alerts and Safety |
+
+Todos los repositorios pertenecen a la organización del equipo en GitHub (https://github.com/upc-pre-202620-1acc0238-4945-vitalcare). El código que se publica proviene de la rama `main`, que recibe los cambios desde `develop` mediante Pull Requests en cada entrega, según el flujo GitFlow adoptado por el equipo.
+
+<br>
+
+**Landing page web: despliegue en Netlify**
+
+La landing page es un sitio estático construido con Vite, sin backend, sin variables de entorno ni servicios externos: el formulario de la lista de espera valida el correo en el propio navegador y no envía datos a ningún servidor. Por eso su despliegue consiste únicamente en construir el sitio y publicar el resultado. El sitio de Netlify está conectado al repositorio `serenia-website` mediante la integración de Netlify con GitHub: cada Pull Request genera una verificación de despliegue y, al integrar cambios en la rama de producción, Netlify vuelve a construir y publicar el sitio.
+
+<br>
+
+*Requisitos previos*
+
+| Requisito | Detalle |
+| --- | --- |
+| Node.js | Versión 20 LTS o superior. El repositorio no fija una versión; el mínimo que exige Vite 6 es la 18, y la construcción se verificó con la versión 24 y npm 11 |
+| npm | El que se instala junto con Node.js |
+| Git | Para clonar el repositorio |
+| Cuenta de Netlify | Con acceso al sitio de Serenia |
+
+<br>
+
+*Pasos*
+
+| Paso | Acción | Comando o detalle |
+| --- | --- | --- |
+| 1 | Clonar el repositorio y ubicarse en la rama que se va a publicar | `git clone https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website.git` y luego `cd serenia-website` |
+| 2 | Instalar las dependencias exactas del archivo `package-lock.json` | `npm ci` |
+| 3 | Revisar el sitio en local (opcional) | `npm run dev` abre el servidor de desarrollo |
+| 4 | Construir el sitio para producción | `npm run build`, que ejecuta `vite build` y genera la carpeta `dist` |
+| 5 | Comprobar el resultado de la construcción (opcional) | `npm run preview` sirve la carpeta `dist` en local |
+| 6 | Publicar la carpeta `dist` completa en Netlify | Con la integración de GitHub, Netlify ejecuta `npm run build` y publica `dist` al integrar cambios en la rama de producción. También puede publicarse de forma manual, arrastrando la carpeta al panel de despliegues del sitio en Netlify o ejecutando `netlify deploy --prod --dir=dist` con la herramienta de línea de comandos de Netlify (`netlify-cli`) |
+| 7 | Verificar el despliegue | Ver la tabla siguiente |
+
+<br>
+
+El resultado de la construcción queda en la carpeta `dist`, que se genera en el paso 4 y no se versiona en el repositorio. Su contenido es el sitio final: el `index.html`, la subcarpeta `assets` con los archivos JavaScript y CSS compilados y las imágenes, la subcarpeta `fonts`, los íconos del sitio, `robots.txt`, `sitemap.xml` y `site.webmanifest`. El despliegue en Netlify publica ese contenido.
+
+<br>
+
+*Verificación*
+
+| Comprobación | Resultado |
+| --- | --- |
+| Construir la rama `develop` (commit `3967591`, 8 de octubre de 2026) | Genera `dist/assets/index-C64a7uLj.js` e `index-Db2Lbha2.css`, los mismos nombres que sirve el sitio publicado |
+| Abrir https://sereniawebsite.netlify.app/ | La landing page carga con sus secciones y los enlaces del menú desplazan hasta cada una |
+| Abrir `/src/main.js` y `/package.json` en el sitio | Responden con un error 404, lo que confirma que el sitio sirve únicamente el resultado de la construcción |
+| Revisar las verificaciones de un Pull Request hacia `main` (por ejemplo, el PR #8 del 9 de octubre de 2026) | Netlify registra, para el proyecto del sitio, las verificaciones Header rules, Redirect rules y Pages changed, con el enlace al despliegue correspondiente |
+| Cambiar el idioma entre ES y EN | El texto se traduce y el idioma elegido se conserva al recargar |
+
+<br>
+
+**Web Services: configuración de despliegue**
+
+La API de Serenia es un monolito modular de Spring Boot (sección 2.5.3.2) que se empaqueta como un único archivo JAR ejecutable, incluido en una imagen Docker. Según el Deployment Diagram, la imagen se ejecuta en un Azure Web App Service y la base de datos MySQL se aloja en Azure. El archivo `application.properties` define dos perfiles: `dev`, el predeterminado, para trabajar en local, y `prod`, que toma toda su configuración de variables de entorno.
+
+<br>
+
+*Requisitos previos*
+
+| Requisito | Detalle |
+| --- | --- |
+| JDK | Versión 26, la que fija el archivo `pom.xml` |
+| Maven | Incluido en el repositorio mediante el wrapper `mvnw` (`mvnw.cmd` en Windows), por lo que no requiere instalación aparte |
+| Docker | Docker Desktop o Docker Engine, para construir y probar la imagen |
+| Azure CLI | Para publicar la imagen y configurar el servicio desde la línea de comandos |
+| MySQL | Un servidor MySQL con una base de datos ya creada, porque el perfil `prod` no la crea (`createDatabaseIfNotExist=false`); las tablas las genera Hibernate al arrancar la aplicación (`ddl-auto=update`) |
+| Azure Blob Storage | Una cuenta de almacenamiento con un contenedor privado, donde la aplicación guarda los audios y las fotos de Social Companionship |
+| Cuenta de Azure | Con permiso para crear el Web App Service |
+
+<br>
+
+*Variables de entorno de la API*
+
+El perfil `prod` toma su configuración de las variables de la tabla siguiente. Las credenciales y las claves (`DATABASE_PASSWORD`, `JWT_SECRET` y `AZURE_STORAGE_CONNECTION_STRING`) se definen en la configuración del servicio donde se ejecuta la API y no forman parte del código ni del repositorio.
+
+| Variable | Qué configura | Valor por defecto |
+| --- | --- | --- |
+| `SPRING_PROFILES_ACTIVE` | Activa el perfil de producción cuando toma el valor `prod` | `dev` |
+| `DATABASE_URL` | Servidor MySQL al que se conecta la API | Ninguno (obligatoria) |
+| `DATABASE_PORT` | Puerto del servidor MySQL | `3306` |
+| `DATABASE_NAME` | Nombre de la base de datos | Ninguno (obligatoria) |
+| `DATABASE_USER` y `DATABASE_PASSWORD` | Credenciales de la base de datos | Ninguno (obligatorias) |
+| `JWT_SECRET` | Clave con la que se firman los tokens de sesión | Ninguno (obligatoria) |
+| `AZURE_STORAGE_CONNECTION_STRING` | Cadena de conexión de la cuenta de Blob Storage | Ninguno (obligatoria) |
+| `AZURE_STORAGE_CONTAINER` | Nombre del contenedor de archivos | `serenia-media` |
+| `MEDIA_STORAGE_PROVIDER` | Proveedor de almacenamiento de archivos | `azure` en el perfil `prod` |
+| `PORT` | Puerto en el que escucha la API | `8080` |
+
+<br>
+
+*Construcción y despliegue*
+
+El repositorio incluye un `Dockerfile` y un `docker-compose.yml`. El `Dockerfile` tiene dos etapas: la primera compila con Maven sobre una imagen con JDK 26 (`./mvnw -DskipTests package`) y la segunda ejecuta el JAR sobre una imagen con JRE 26, con un usuario sin privilegios y el perfil `prod` activo. El `docker-compose.yml` expone el puerto 8080 y toma todos los valores de variables de entorno.
+
+| Paso | Acción | Comando o detalle |
+| --- | --- | --- |
+| 1 | Clonar el repositorio y ubicarse en la rama que se va a publicar | `git clone https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform.git` |
+| 2 | Construir la imagen Docker | `docker build -t serenia-platform:1.0.0 .` |
+| 3 | Probar la imagen en local | `docker compose --env-file <archivo de variables> up --build`, con las variables obligatorias de la tabla anterior y la API disponible en `http://localhost:8080` |
+| 4 | Publicar la imagen en un Azure Container Registry | `az acr login`, `docker tag` y `docker push` hacia el registro de contenedores |
+| 5 | Crear el Azure Web App Service para contenedores con esa imagen | Puerto 8080 y las variables de entorno de la tabla anterior, configuradas en el servicio |
+| 6 | Verificar el despliegue | Ver la tabla siguiente |
+
+La única prueba del proyecto, `SereniaPlatformApplicationTests`, levanta la aplicación completa y necesita un servidor MySQL accesible con las credenciales del perfil `dev`; por eso la construcción del JAR para el despliegue omite las pruebas con `-DskipTests`.
+
+<br>
+
+*Verificación*
+
+| Comprobación | Resultado |
+| --- | --- |
+| Construir el proyecto con Java 26 (8 de octubre de 2026) | Se compilan los 557 archivos fuente sin errores |
+| Abrir https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html (9 de octubre de 2026) | Responde 200 y muestra la documentación interactiva de la API, generada por springdoc |
+| Consultar `/v3/api-docs` en el servicio | Devuelve la definición OpenAPI con 56 operaciones en 17 grupos, que parten de `/api/v1` |
+| Consultar un endpoint protegido sin token, por ejemplo `/api/v1/alerts` | Responde 401 Unauthorized, lo que confirma que la API exige el token JWT |
+
+<br>
+
+**Aplicación móvil**
+
+El Deployment Diagram establece que la aplicación móvil se distribuye mediante Firebase App Distribution. El repositorio `serenia-app-native` contiene el proyecto Android de la aplicación, escrito en Kotlin con Jetpack Compose y construido con Gradle.
+
+| Aspecto | Detalle |
+| --- | --- |
+| Repositorio | `serenia-app-native`, con las ramas `main` y `develop` y una rama `feature/<funcionalidad>` por cada funcionalidad |
+| Identificador de la aplicación | `com.vitalcare.serenia`, versión 1.0 (`versionCode` 1) |
+| Versiones de construcción | Android Gradle Plugin 9.4.1, Kotlin 2.4.20, `minSdk` 24 y `targetSdk` 37 |
+| Construcción | Abrir el proyecto en Android Studio y ejecutarlo en un emulador o en un dispositivo; desde la línea de comandos, `./gradlew assembleDebug` genera el APK de depuración |
+| Distribución | Firebase App Distribution, según el Deployment Diagram: se sube cada versión al proyecto de Firebase y se invita a los testers para instalarla |
+
+<br>
+
 ## 4.2. Landing Page & Mobile Application Implementation
 ### 4.2.1. Sprint 1
 #### 4.2.1.1. Sprint Planning 1
@@ -7916,8 +8094,876 @@ Los archivos .feature se redactan en inglés con las palabras clave `Feature`, `
 #### 4.2.1.5. Testing Suite Evidence for Sprint Review
 #### 4.2.1.6. Execution Evidence for Sprint Review
 #### 4.2.1.7. Services Documentation Evidence for Sprint Review
+
+Durante el Sprint 1 el alcance del equipo estuvo centrado en el desarrollo y despliegue de la Landing Page de Serenia, correspondiente a un sitio estático informativo, y en el avance de aproximadamente el 70 % del backend de la plataforma (**Serenia Platform**). Dicho backend está construido con Spring Boot 4.0.6 y Java 26, organizado bajo Domain-Driven Design en seis bounded contexts (`iam`, `carecircle`, `dailycheckin`, `alertsandsafety`, `socialcompanionship` y `wellbeingmonitoring`), y expone una RESTful API versionada bajo el prefijo `/api/v1`.
+
+Como parte de este avance, se documentaron con OpenAPI **56 endpoints agrupados en 17 recursos**. La especificación se genera automáticamente a partir de las anotaciones de los controladores (`@Tag`, `@Operation`, `@ApiResponses`, `@Schema`) mediante `springdoc-openapi-starter-webmvc-ui` 3.0.3, y se publica en Swagger UI. Los Web Services fueron desplegados en Microsoft Azure como un contenedor Docker sobre Azure App Service (el proceso se detalla en la sección 5.2.1.7), por lo que la documentación se encuentra disponible públicamente en las siguientes URLs:
+
+| Recurso | URL |
+|---|---|
+| Swagger UI | [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html) |
+| Especificación OpenAPI (JSON) | `https://serenia-platform-api.azurewebsites.net/v3/api-docs` |
+
+### Convenciones generales de la API
+
+- **URL base:** `https://serenia-platform-api.azurewebsites.net/api/v1`.
+- **Formato:** todas las peticiones y respuestas usan `application/json`, salvo la subida de audios y fotos (`multipart/form-data`) y la descarga de archivos multimedia (`/media`).
+- **Autenticación:** la API es *stateless* y usa JWT. Solo `POST /api/v1/users` (registro) y `POST /api/v1/sessions` (inicio de sesión) son públicos; el resto de endpoints exige la cabecera `Authorization: Bearer <token>`, con el token obtenido al iniciar sesión (válido por 7 días). La documentación declara el esquema de seguridad `bearerAuth` (HTTP, bearer, JWT), lo que habilita el botón **Authorize** de Swagger UI.
+- **Identificadores y fechas:** los identificadores son UUID. Los instantes se almacenan y devuelven en UTC (ISO-8601, p. ej. `2026-10-07T15:00:00Z`); las fechas y horas locales (`shiftDate`, `checkDate`, `remindAt`, `reminderTime`) se interpretan en la zona horaria del adulto mayor.
+- **Formato de error:** toda respuesta de error devuelve un objeto con `code` (código de máquina, p. ej. `VALIDATION_ERROR`, `FORBIDDEN`, `BUSINESS_RULE_VIOLATION`, `<ENTIDAD>_NOT_FOUND`, `<ENTIDAD>_CONFLICT`), `message` (mensaje del error) y `details` (opcional).
+
+```json
+{
+  "code": "VALIDATION_ERROR",
+  "message": "Validation failed: request-body",
+  "details": "Field password: La contraseña debe tener entre 8 y 72 caracteres; Field email: Debe ser un correo electrónico válido"
+}
+```
+
+| Código HTTP | Significado en Serenia Platform |
+|---|---|
+| `400` | Datos de entrada inválidos (`VALIDATION_ERROR`) |
+| `401` | Token ausente o inválido, o credenciales incorrectas |
+| `403` | El usuario no tiene permiso sobre el recurso (no es el dueño, ni familiar vinculado) |
+| `404` | Recurso no encontrado (`*_NOT_FOUND`) |
+| `409` | Conflicto de estado (`*_CONFLICT`), p. ej. alerta ya reconocida |
+| `413` / `415` | Archivo demasiado grande (máx. 10 MB) / tipo de archivo no soportado |
+| `422` | Regla de negocio incumplida (`BUSINESS_RULE_VIOLATION`) |
+
+### Relación de endpoints documentados
+
+Los enlaces de la columna *Documentación* apuntan a la sección (tag) correspondiente de Swagger UI en el entorno desplegado en Azure.
+
+| Bounded context | Endpoint | Acciones implementadas | Documentación (Swagger UI) |
+|---|---|---|---|
+| IAM | `/api/v1/users` | `POST` registrar usuario · `GET` obtener por id · `PUT` actualizar perfil · `PUT` actualizar foto · `PUT` cambiar contraseña | [Users](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Users) |
+| IAM | `/api/v1/sessions` | `POST` iniciar sesión · `DELETE` cerrar sesión | [Sessions](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Sessions) |
+| Care Circle | `/api/v1/care-circles` | `GET` por id · `GET` por adulto mayor | [Care Circles](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Care%20Circles) |
+| Care Circle | `/api/v1/care-circles/{careCircleId}/invitation-codes` | `POST` generar código · `GET` códigos pendientes | [Invitation Codes](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Invitation%20Codes) |
+| Care Circle | `/api/v1/family-links` y `/api/v1/care-circles/{careCircleId}/family-links` | `POST` canjear código · `GET` vínculos de un familiar · `GET` vínculos de un círculo · `DELETE` revocar vínculo | [Family Links](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Family%20Links) |
+| Care Circle | `/api/v1/care-circles/{careCircleId}/care-shifts` | `POST` asignar turno · `GET` consultar turnos · `PUT` reasignar turno | [Care Shifts](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Care%20Shifts) |
+| Care Circle | `/api/v1/care-circles/{careCircleId}/shared-notes` | `POST` crear nota · `GET` listar notas · `PUT` editar nota | [Shared Notes](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Shared%20Notes) |
+| Daily Check-in | `/api/v1/check-ins` | `GET` check-in de hoy · `GET` historial · `POST` responder check-in | [Check-ins](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Check-ins) |
+| Daily Check-in | `/api/v1/check-in-preferences` | `GET` preferencias · `PUT` hora del check-in · `POST` pausar hoy · `DELETE` reanudar hoy · `PUT` modo simplificado | [Check-in Preferences](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Check-in%20Preferences) |
+| Alerts and Safety | `/api/v1/alerts` | `GET` alertas de un adulto mayor · `GET` detalle de alerta | [Alerts](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Alerts) |
+| Alerts and Safety | `/api/v1/emergency-alerts` | `POST` botón de ayuda · `POST` reconocer · `POST` resolver | [Emergency Alerts](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Emergency%20Alerts) |
+| Alerts and Safety | `/api/v1/inactivity-alerts` | `POST` reconocer · `POST` resolver | [Inactivity Alerts](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Inactivity%20Alerts) |
+| Social Companionship | `/api/v1/care-circles/{careCircleId}/audio-messages` | `POST` grabar · `POST` compartir · `DELETE` descartar · `GET` listar · `GET` archivo · `POST` reproducir | [Audio Messages](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Audio%20Messages) |
+| Social Companionship | `/api/v1/care-circles/{careCircleId}/photo-messages` | `POST` subir · `POST` compartir · `DELETE` descartar · `GET` listar · `GET` archivo · `POST` marcar como vista | [Photo Messages](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Photo%20Messages) |
+| Social Companionship | `/api/v1/social-reminders` | `POST` programar · `GET` activos · `POST` posponer · `POST` completar · `POST` cancelar | [Social Reminders](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Social%20Reminders) |
+| Wellbeing Monitoring | `/api/v1/small-wins` | `GET` pequeños logros por rango de fechas | [Small Wins](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Small%20Wins) |
+| Wellbeing Monitoring | `/api/v1/wellbeing-suggestions` | `GET` sugerencias activas · `POST` descartar sugerencia | [Wellbeing Suggestions](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Wellbeing%20Suggestions) |
+
+### Detalle de acciones por endpoint
+
+En cada tabla, los parámetros marcados con `*` son obligatorios. Los *path parameters* y *query parameters* son de tipo UUID, salvo que se indique otro tipo. Salvo que se indique lo contrario, todas las acciones requieren `Authorization: Bearer <token>`.
+
+---
+
+#### Users — `/api/v1/users`
+
+Registro de adultos mayores y familiares lejanos, y gestión del perfil. Las modificaciones solo proceden si `{userId}` corresponde al usuario autenticado.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/users` (pública) | **Body** `RegisterUserRequest`: `email`*, `password`* (8–72), `role`* (`OLDER_ADULT` \| `DISTANT_RELATIVE`), `fullName`* (≤120), `phoneNumber` (E.164), `birthDate` (no futura), `locale`*, `timeZone`* | `201` `UserResponse` · `400` datos inválidos · `409` correo ya registrado |
+| `GET` | `/api/v1/users/{userId}` | **Path** `userId`* | `200` `UserResponse` · `401` · `404` usuario no encontrado |
+| `PUT` | `/api/v1/users/{userId}/profile` | **Path** `userId`* · **Body** `fullName`*, `phoneNumber`, `birthDate`, `locale`*, `timeZone`* | `200` `UserResponse` · `400` · `403` no es el dueño de la cuenta · `404` |
+| `PUT` | `/api/v1/users/{userId}/photo` | **Path** `userId`* · **Body** `photoUrl`* | `200` `UserResponse` · `400` · `403` · `404` |
+| `PUT` | `/api/v1/users/{userId}/password` | **Path** `userId`* · **Body** `currentPassword`*, `newPassword`* (8–72) | `204` sin contenido; revoca las demás sesiones activas · `400` · `403` · `404` · `422` contraseña actual incorrecta |
+
+**Ejemplo — registrar usuario** (`POST /api/v1/users`)
+
+```json
+{
+  "email": "rosa.quispe@example.com",
+  "password": "secret123",
+  "role": "OLDER_ADULT",
+  "fullName": "Rosa Quispe Mamani",
+  "phoneNumber": "+51987654321",
+  "birthDate": "1948-05-12",
+  "locale": "es-PE",
+  "timeZone": "America/Lima"
+}
+```
+
+**Response `201 Created`:** devuelve la representación pública de la cuenta, sin datos sensibles (no incluye la contraseña). El campo `status` indica el estado de la cuenta.
+
+```json
+{
+  "id": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "email": "rosa.quispe@example.com",
+  "role": "OLDER_ADULT",
+  "fullName": "Rosa Quispe Mamani",
+  "phoneNumber": "+51987654321",
+  "birthDate": "1948-05-12",
+  "photoUrl": null,
+  "locale": "es-PE",
+  "timeZone": "America/Lima",
+  "status": "ACTIVE"
+}
+```
+
+---
+
+#### Sessions — `/api/v1/sessions`
+
+Inicio y cierre de sesión. Al iniciar sesión se abre una sesión y se emite el token JWT que se usa en el resto de la API.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/sessions` (pública) | **Body** `SignInRequest`: `email`*, `password`*, `deviceInfo` (≤200) | `201` `AuthenticatedUserResponse` · `400` · `401` correo o contraseña inválidos · `422` cuenta no activa |
+| `DELETE` | `/api/v1/sessions/{sessionId}` | **Path** `sessionId`* | `204` sesión cerrada · `401` · `403` la sesión es de otro usuario · `404` |
+
+**Ejemplo — iniciar sesión** (`POST /api/v1/sessions`)
+
+```json
+{
+  "email": "rosa.quispe@example.com",
+  "password": "secret123",
+  "deviceInfo": "Android 14 - Samsung A54"
+}
+```
+
+**Response `201 Created`:** `sessionId` identifica la sesión abierta (se usa para cerrarla), `token` es el JWT que debe enviarse como `Bearer`, `expiresAt` indica su vencimiento en UTC y `user` es el usuario autenticado.
+
+```json
+{
+  "sessionId": "9a7c1e2d-3b4f-4c5d-8e6f-7a8b9c0d1e2f",
+  "token": "eyJhbGciOiJIUzI1NiJ9...",
+  "expiresAt": "2026-10-14T15:30:00Z",
+  "user": {
+    "id": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+    "email": "rosa.quispe@example.com",
+    "role": "OLDER_ADULT",
+    "fullName": "Rosa Quispe Mamani",
+    "locale": "es-PE",
+    "timeZone": "America/Lima",
+    "status": "ACTIVE"
+  }
+}
+```
+
+---
+
+#### Care Circles — `/api/v1/care-circles`
+
+Círculo de cuidado de un adulto mayor. Pueden consultarlo su dueño y los familiares con vínculo activo.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `GET` | `/api/v1/care-circles/{careCircleId}` | **Path** `careCircleId`* | `200` `CareCircleResponse` · `403` no es dueño ni familiar activo · `404` |
+| `GET` | `/api/v1/care-circles?olderAdultId={olderAdultId}` | **Query** `olderAdultId`* | `200` `CareCircleResponse` · `403` · `404` |
+
+**Response `200 OK`:**
+
+```json
+{
+  "id": "6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f",
+  "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "createdAt": "2026-10-07T15:30:00Z"
+}
+```
+
+---
+
+#### Invitation Codes — `/api/v1/care-circles/{careCircleId}/invitation-codes`
+
+Códigos de invitación que el adulto mayor comparte con un familiar para que se una a su círculo. Cada código vence a las 48 horas.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/care-circles/{careCircleId}/invitation-codes` | **Path** `careCircleId`* · sin body | `201` `InvitationCodeResponse` · `403` solo el adulto mayor dueño puede generar códigos · `404` |
+| `GET` | `/api/v1/care-circles/{careCircleId}/invitation-codes` | **Path** `careCircleId`* | `200` lista de `InvitationCodeResponse` canjeables · `403` · `404` |
+
+**Response `201 Created`:** `code` es el valor que se comparte con el familiar, `status` es `PENDING` hasta que se canjea (`USED`) o vence (`EXPIRED`), y `expiresAt` indica hasta cuándo puede canjearse.
+
+```json
+{
+  "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+  "code": "K7M4QX2P",
+  "status": "PENDING",
+  "expiresAt": "2026-10-09T15:30:00Z"
+}
+```
+
+---
+
+#### Family Links — `/api/v1/family-links` y `/api/v1/care-circles/{careCircleId}/family-links`
+
+Vínculo de un familiar con un círculo de cuidado. El adulto mayor puede revocar cualquier vínculo de su círculo; un familiar, solo el suyo.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/family-links` | **Body** `RedeemInvitationCodeRequest`: `code`*, `relationshipLabel` (≤60) | `201` `FamilyLinkResponse` · `403` no es un familiar lejano activo · `404` código no encontrado · `409` código usado, vencido o familiar ya vinculado |
+| `GET` | `/api/v1/family-links?relativeId={relativeId}` | **Query** `relativeId`* | `200` lista de `FamilyLinkResponse` activos · `403` un familiar solo consulta sus propios vínculos |
+| `GET` | `/api/v1/care-circles/{careCircleId}/family-links` | **Path** `careCircleId`* | `200` lista de `FamilyLinkResponse` · `403` · `404` |
+| `DELETE` | `/api/v1/care-circles/{careCircleId}/family-links/{familyLinkId}` | **Path** `careCircleId`*, `familyLinkId`* | `204` vínculo revocado · `403` · `404` · `409` ya revocado |
+
+**Ejemplo — canjear código** (`POST /api/v1/family-links`)
+
+```json
+{
+  "code": "K7M4QX2P",
+  "relationshipLabel": "hija"
+}
+```
+
+**Response `201 Created`:**
+
+```json
+{
+  "id": "c3d4e5f6-a7b8-4c9d-8e0f-1a2b3c4d5e6f",
+  "careCircleId": "6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f",
+  "relativeId": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+  "relationshipLabel": "hija",
+  "status": "ACTIVE",
+  "linkedAt": "2026-10-07T16:00:00Z"
+}
+```
+
+---
+
+#### Care Shifts — `/api/v1/care-circles/{careCircleId}/care-shifts`
+
+Turnos diarios de cuidado que se reparten los familiares del círculo.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/care-circles/{careCircleId}/care-shifts` | **Path** `careCircleId`* · **Body** `shiftDate`* (`yyyy-MM-dd`) | `201` `CareShiftResponse` · `403` no es familiar activo · `404` · `409` fecha ya cubierta · `422` fecha anterior al día actual del adulto mayor |
+| `GET` | `/api/v1/care-circles/{careCircleId}/care-shifts?from={yyyy-MM-dd}&to={yyyy-MM-dd}` | **Path** `careCircleId`* · **Query** `from`*, `to`* (ambos inclusive) | `200` lista de `CareShiftResponse` · `400` rango inválido · `403` · `404` |
+| `PUT` | `/api/v1/care-circles/{careCircleId}/care-shifts/{careShiftId}` | **Path** `careCircleId`*, `careShiftId`* · **Body** `relativeId`* | `200` `CareShiftResponse` · `403` · `404` · `422` turno pasado, mismo familiar o familiar no vinculado |
+
+**Ejemplo — asignar turno** (`POST`)
+
+```json
+{ "shiftDate": "2026-10-10" }
+```
+
+**Response `201 Created`:** el turno queda asignado al familiar autenticado.
+
+```json
+{
+  "id": "e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7a8b",
+  "careCircleId": "6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f",
+  "relativeId": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+  "shiftDate": "2026-10-10"
+}
+```
+
+---
+
+#### Shared Notes — `/api/v1/care-circles/{careCircleId}/shared-notes`
+
+Notas visibles para todos los familiares del círculo; solo su autor puede editarlas.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/care-circles/{careCircleId}/shared-notes` | **Path** `careCircleId`* · **Body** `content`* | `201` `SharedNoteResponse` · `400` · `403` no es familiar activo · `404` |
+| `GET` | `/api/v1/care-circles/{careCircleId}/shared-notes` | **Path** `careCircleId`* | `200` lista de `SharedNoteResponse`, de la más reciente a la más antigua · `403` · `404` |
+| `PUT` | `/api/v1/care-circles/{careCircleId}/shared-notes/{sharedNoteId}` | **Path** `careCircleId`*, `sharedNoteId`* · **Body** `content`* | `200` `SharedNoteResponse` · `400` · `403` no es el autor · `404` |
+
+**Ejemplo — crear nota** (`POST`)
+
+```json
+{ "content": "Mamá tiene cita con el cardiólogo el viernes a las 10:00." }
+```
+
+**Response `201 Created`:**
+
+```json
+{
+  "id": "f6a7b8c9-d0e1-4f2a-9b3c-4d5e6f7a8b9c",
+  "careCircleId": "6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f",
+  "authorId": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+  "content": "Mamá tiene cita con el cardiólogo el viernes a las 10:00.",
+  "createdAt": "2026-10-07T16:00:00Z",
+  "updatedAt": "2026-10-07T16:00:00Z"
+}
+```
+
+---
+#### Check-ins — `/api/v1/check-ins`
+
+Pregunta diaria de ánimo al adulto mayor. Un check-in puede estar `PENDING`, `ANSWERED`, `MISSED` o `SKIPPED`.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `GET` | `/api/v1/check-ins/today?olderAdultId={olderAdultId}` | **Query** `olderAdultId`* | `200` `CheckInResponse` del día actual · `403` no es el adulto mayor ni familiar activo · `404` el check-in de hoy aún no se abrió |
+| `GET` | `/api/v1/check-ins?olderAdultId={olderAdultId}&from={yyyy-MM-dd}&to={yyyy-MM-dd}` | **Query** `olderAdultId`*, `from`*, `to`* (inclusive) | `200` lista de `CheckInResponse` ordenada por fecha · `400` rango inválido · `403` |
+| `POST` | `/api/v1/check-ins/{checkInId}/answer` | **Path** `checkInId`* · **Body** `mood`* (`VERY_LOW`, `LOW`, `NEUTRAL`, `GOOD`, `VERY_GOOD`), `positiveActivity` (≤200) | `200` `CheckInResponse` · `400` · `403` solo el adulto mayor responde · `404` · `409` ya no está pendiente o venció el plazo |
+
+**Ejemplo — responder check-in** (`POST /api/v1/check-ins/1c2d3e4f-5a6b-4c7d-8e9f-0a1b2c3d4e5f/answer`)
+
+```json
+{
+  "mood": "GOOD",
+  "positiveActivity": "Caminé en el parque"
+}
+```
+
+**Response `200 OK`:** el check-in pasa a `ANSWERED` y registra el ánimo, la actividad positiva y el instante de la respuesta (`answeredAt`). `scheduledFor` y `deadlineAt` indican cuándo se presenta la pregunta y hasta cuándo puede responderse.
+
+```json
+{
+  "id": "1c2d3e4f-5a6b-4c7d-8e9f-0a1b2c3d4e5f",
+  "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "checkDate": "2026-10-08",
+  "questionText": "¿Cómo se siente hoy?",
+  "scheduledFor": "2026-10-08T15:00:00Z",
+  "deadlineAt": "2026-10-08T18:00:00Z",
+  "status": "ANSWERED",
+  "paused": false,
+  "mood": "GOOD",
+  "positiveActivity": "Caminé en el parque",
+  "answeredAt": "2026-10-08T15:20:00Z"
+}
+```
+
+---
+
+#### Check-in Preferences — `/api/v1/check-in-preferences`
+
+Preferencias del check-in diario. Solo el adulto mayor propietario puede consultarlas y modificarlas.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `GET` | `/api/v1/check-in-preferences?olderAdultId={olderAdultId}` | **Query** `olderAdultId`* | `200` `CheckInPreferencesResponse` · `403` · `404` |
+| `PUT` | `/api/v1/check-in-preferences/{preferencesId}/reminder-time` | **Path** `preferencesId`* · **Body** `reminderTime`* (`HH:mm`, entre 06:00 y 20:00) | `200` `CheckInPreferencesResponse`; aplica desde el siguiente check-in · `400` hora fuera de rango · `403` |
+| `POST` | `/api/v1/check-in-preferences/{preferencesId}/daily-pause` | **Path** `preferencesId`* · sin body | `200` `CheckInPreferencesResponse` con `pausedToday: true` · `403` · `409` ya estaba pausado |
+| `DELETE` | `/api/v1/check-in-preferences/{preferencesId}/daily-pause` | **Path** `preferencesId`* | `200` `CheckInPreferencesResponse` con `pausedToday: false` · `403` · `409` no estaba pausado |
+| `PUT` | `/api/v1/check-in-preferences/{preferencesId}/simplified-mode` | **Path** `preferencesId`* · **Body** `enabled`* (boolean) | `200` `CheckInPreferencesResponse` · `403` |
+
+**Ejemplo — cambiar hora del check-in** (`PUT .../reminder-time`)
+
+```json
+{ "reminderTime": "09:30" }
+```
+
+**Response `200 OK`:** `reminderTime` es la hora local de la pregunta diaria y `timeLimitMinutes` el tiempo (en minutos) que tiene el adulto mayor para responder desde esa hora.
+
+```json
+{
+  "id": "7a8b9c0d-1e2f-4a3b-8c4d-5e6f7a8b9c0d",
+  "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "reminderTime": "09:30:00",
+  "timeLimitMinutes": 180,
+  "simplifiedMode": false,
+  "pausedToday": false
+}
+```
+
+---
+
+#### Alerts — `/api/v1/alerts`
+
+Vista unificada de las alertas de un adulto mayor, de ambos tipos (`EMERGENCY` e `INACTIVITY`).
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `GET` | `/api/v1/alerts?olderAdultId={olderAdultId}` | **Query** `olderAdultId`* | `200` lista de `AlertResponse`, de la más reciente a la más antigua · `403` no es el adulto mayor ni familiar activo |
+| `GET` | `/api/v1/alerts/{alertId}` | **Path** `alertId`* | `200` `AlertResponse` · `403` · `404` |
+
+**Response `200 OK`** (detalle de una alerta; el estado puede ser `RAISED`, `DISPATCHED`, `DISPATCH_FAILED`, `ACKNOWLEDGED` o `RESOLVED`):
+
+```json
+{
+  "id": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+  "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "type": "EMERGENCY",
+  "status": "ACKNOWLEDGED",
+  "checkInId": null,
+  "triggeredAt": "2026-10-07T15:00:00Z",
+  "deliveryConfirmed": true,
+  "acknowledgedBy": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+  "acknowledgedAt": "2026-10-07T15:02:00Z",
+  "resolvedBy": null,
+  "resolvedAt": null,
+  "resolutionNote": null
+}
+```
+
+---
+
+#### Emergency Alerts — `/api/v1/emergency-alerts`
+
+Botón de ayuda del adulto mayor y atención de la emergencia por parte de los familiares.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/emergency-alerts` | sin body (el adulto mayor se toma del token) | `201` `AlertResponse` en su estado final: `DISPATCHED` con `deliveryConfirmed: true` si se notificó a la familia, o `DISPATCH_FAILED` si el envío falló · `403` solo el adulto mayor puede pulsar el botón |
+| `POST` | `/api/v1/emergency-alerts/{alertId}/acknowledge` | **Path** `alertId`* | `200` `AlertResponse` con estado `ACKNOWLEDGED` · `403` no es familiar activo · `404` · `409` ya reconocida o no despachada |
+| `POST` | `/api/v1/emergency-alerts/{alertId}/resolve` | **Path** `alertId`* · **Body** (opcional) `resolutionNote` (≤300) | `200` `AlertResponse` con estado `RESOLVED` · `400` nota demasiado larga · `403` · `404` · `409` no reconocida o ya resuelta |
+
+**Ejemplo — resolver emergencia** (`POST /api/v1/emergency-alerts/4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b/resolve`)
+
+```json
+{ "resolutionNote": "Llamé a mamá, estaba bien" }
+```
+
+**Response `200 OK`:**
+
+```json
+{
+  "id": "4e5f6a7b-8c9d-4e0f-9a1b-2c3d4e5f6a7b",
+  "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "type": "EMERGENCY",
+  "status": "RESOLVED",
+  "checkInId": null,
+  "triggeredAt": "2026-10-07T15:00:00Z",
+  "deliveryConfirmed": true,
+  "acknowledgedBy": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+  "acknowledgedAt": "2026-10-07T15:02:00Z",
+  "resolvedBy": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+  "resolvedAt": "2026-10-07T15:10:00Z",
+  "resolutionNote": "Llamé a mamá, estaba bien"
+}
+```
+
+---
+
+#### Inactivity Alerts — `/api/v1/inactivity-alerts`
+
+Atención de las alertas que se generan cuando el adulto mayor no responde un check-in (`checkInId` identifica el check-in perdido que originó la alerta).
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/inactivity-alerts/{alertId}/acknowledge` | **Path** `alertId`* | `200` `AlertResponse` · `403` no es familiar activo · `404` · `409` ya reconocida |
+| `POST` | `/api/v1/inactivity-alerts/{alertId}/resolve` | **Path** `alertId`* · **Body** (opcional) `resolutionNote` (≤300) | `200` `AlertResponse` · `400` · `403` · `404` · `409` no reconocida o ya resuelta |
+
+El body y el response de `resolve` son los mismos del ejemplo de Emergency Alerts, con `"type": "INACTIVITY"` y `checkInId` informado.
+
+---
+
+#### Audio Messages — `/api/v1/care-circles/{careCircleId}/audio-messages`
+
+Mensajes de voz que el adulto mayor graba para sus familiares. Un audio nace como borrador (`DRAFT`) y pasa a `SHARED` al compartirse. Formato AAC (`audio/mp4`), máximo 10 MB y entre 1 y 180 segundos.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/care-circles/{careCircleId}/audio-messages` (`multipart/form-data`) | **Path** `careCircleId`* · **Form** `file`* (AAC), `durationSeconds`* (1–180) | `201` `AudioMessageResponse` como borrador · `400` falta archivo o duración inválida · `403` · `413` supera el tamaño máximo · `415` no es AAC |
+| `POST` | `/api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/share` | **Path** `careCircleId`*, `audioMessageId`* | `200` `AudioMessageResponse` · `403` solo el remitente · `404` · `409` ya compartido · `422` el adulto mayor no tiene familiares vinculados |
+| `DELETE` | `/api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}` | **Path** `careCircleId`*, `audioMessageId`* | `204` borrador descartado y archivo eliminado · `403` · `404` · `409` ya compartido |
+| `GET` | `/api/v1/care-circles/{careCircleId}/audio-messages` | **Path** `careCircleId`* | `200` lista de `AudioMessageResponse` reproducibles por el solicitante · `403` no pertenece al círculo |
+| `GET` | `/api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/media` | **Path** `careCircleId`*, `audioMessageId`* · **Header** `Range` (opcional) | `200` archivo de audio · `206` rango solicitado (soporta *byte-range*) · `403` · `404` |
+| `POST` | `/api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/play` | **Path** `careCircleId`*, `audioMessageId`* | `200` `AudioMessageResponse` con `played: true`; solo cuenta la primera reproducción · `403` · `404` |
+
+**Ejemplo — grabar audio** (`POST`, formulario multipart)
+
+```bash
+curl -X POST "https://serenia-platform-api.azurewebsites.net/api/v1/care-circles/6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f/audio-messages" \
+  -H "Authorization: Bearer <token>" \
+  -F "file=@saludo.m4a;type=audio/mp4" \
+  -F "durationSeconds=42"
+```
+
+**Response `201 Created`:** el audio queda como borrador (`sentAt` es `null`) y `mediaUrl` es el endpoint protegido que sirve el archivo.
+
+```json
+{
+  "id": "0a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c4d",
+  "careCircleId": "6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f",
+  "senderId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "status": "DRAFT",
+  "durationSeconds": 42,
+  "mediaUrl": "/api/v1/care-circles/6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f/audio-messages/0a1b2c3d-4e5f-4a6b-8c7d-9e0f1a2b3c4d/media",
+  "createdAt": "2026-10-07T15:00:00Z",
+  "sentAt": null,
+  "played": false
+}
+```
+
+---
+
+#### Photo Messages — `/api/v1/care-circles/{careCircleId}/photo-messages`
+
+Fotos que los familiares comparten con el adulto mayor. Siguen el mismo ciclo borrador → compartida que los audios. Formatos JPEG o PNG, máximo 10 MB.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/care-circles/{careCircleId}/photo-messages` (`multipart/form-data`) | **Path** `careCircleId`* · **Form** `file`* (JPEG/PNG) | `201` `PhotoMessageResponse` como borrador · `400` falta archivo · `403` no es familiar vinculado · `413` · `415` no es JPEG ni PNG |
+| `POST` | `/api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/share` | **Path** `careCircleId`*, `photoMessageId`* | `200` `PhotoMessageResponse` · `403` solo el remitente vinculado · `404` · `409` ya compartida |
+| `DELETE` | `/api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}` | **Path** `careCircleId`*, `photoMessageId`* | `204` borrador descartado · `403` · `404` · `409` ya compartida |
+| `GET` | `/api/v1/care-circles/{careCircleId}/photo-messages` | **Path** `careCircleId`* | `200` lista de `PhotoMessageResponse` (galería del adulto mayor, o fotos enviadas por el familiar) · `403` |
+| `GET` | `/api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/media` | **Path** `careCircleId`*, `photoMessageId`* | `200` archivo de imagen · `403` · `404` |
+| `POST` | `/api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/view` | **Path** `careCircleId`*, `photoMessageId`* | `200` `PhotoMessageResponse` con `viewed: true`; solo cuenta la primera vista · `403` solo el destinatario · `404` |
+
+**Response `200 OK`** (tras compartir una foto):
+
+```json
+{
+  "id": "1b2c3d4e-5f6a-4b7c-8d9e-0f1a2b3c4d5e",
+  "careCircleId": "6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f",
+  "senderId": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+  "status": "SHARED",
+  "mediaUrl": "/api/v1/care-circles/6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f/photo-messages/1b2c3d4e-5f6a-4b7c-8d9e-0f1a2b3c4d5e/media",
+  "createdAt": "2026-10-07T15:00:00Z",
+  "sentAt": "2026-10-07T15:05:00Z",
+  "viewed": false
+}
+```
+
+---
+
+#### Social Reminders — `/api/v1/social-reminders`
+
+Recordatorios para que el adulto mayor se contacte con sus seres queridos. Estados: `SCHEDULED`, `PRESENTED`, `POSTPONED`, `COMPLETED`, `CANCELED` y `MISSED`.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `POST` | `/api/v1/social-reminders` | **Body** `title`* (≤120), `description` (≤300), `remindAt`* (`yyyy-MM-ddTHH:mm:ss`, hora local) | `201` `SocialReminderResponse` · `400` falta título o la fecha ya pasó · `403` solo adultos mayores |
+| `GET` | `/api/v1/social-reminders?olderAdultId={olderAdultId}` | **Query** `olderAdultId`* | `200` lista de recordatorios activos (`SCHEDULED`, `PRESENTED`, `POSTPONED`) ordenados por hora · `403` |
+| `POST` | `/api/v1/social-reminders/{socialReminderId}/postpone` | **Path** `socialReminderId`* | `200` `SocialReminderResponse`; pospone 60 minutos dentro del mismo día · `403` · `404` · `409` no está presentado o no queda tiempo hoy |
+| `POST` | `/api/v1/social-reminders/{socialReminderId}/complete` | **Path** `socialReminderId`* | `200` `SocialReminderResponse` con estado `COMPLETED` · `403` · `404` · `409` ya cerrado |
+| `POST` | `/api/v1/social-reminders/{socialReminderId}/cancel` | **Path** `socialReminderId`* | `200` `SocialReminderResponse` con estado `CANCELED` · `403` · `404` · `409` ya cerrado |
+
+**Ejemplo — programar recordatorio** (`POST /api/v1/social-reminders`)
+
+```json
+{
+  "title": "Llamar a Marta",
+  "description": "Preguntarle cómo le fue en su viaje",
+  "remindAt": "2026-10-08T17:30:00"
+}
+```
+
+**Response `201 Created`:**
+
+```json
+{
+  "id": "2c3d4e5f-6a7b-4c8d-9e0f-1a2b3c4d5e6f",
+  "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "title": "Llamar a Marta",
+  "description": "Preguntarle cómo le fue en su viaje",
+  "remindAt": "2026-10-08T17:30:00",
+  "status": "SCHEDULED",
+  "completedAt": null
+}
+```
+
+---
+
+#### Small Wins — `/api/v1/small-wins`
+
+Pequeños logros: buenos días o actividades positivas que el adulto mayor reporta al responder un check-in.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `GET` | `/api/v1/small-wins?olderAdultId={olderAdultId}&from={yyyy-MM-dd}&to={yyyy-MM-dd}` | **Query** `olderAdultId`*, `from`*, `to`* (inclusive, en la zona horaria del adulto mayor) | `200` lista de `SmallWinResponse` · `400` rango inválido · `403` no es el adulto mayor ni familiar activo |
+
+**Response `200 OK`:**
+
+```json
+[
+  {
+    "id": "5e6f7a8b-9c0d-4e1f-8a2b-3c4d5e6f7a8b",
+    "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+    "checkInId": "1c2d3e4f-5a6b-4c7d-8e9f-0a1b2c3d4e5f",
+    "description": "Regué mis plantas",
+    "recordedAt": "2026-10-08T15:20:00Z"
+  }
+]
+```
+
+---
+
+#### Wellbeing Suggestions — `/api/v1/wellbeing-suggestions`
+
+Sugerencias de acción dirigidas a los familiares cuando se detecta un patrón de malestar en el adulto mayor.
+
+| Verbo | Sintaxis de llamada | Parámetros | Response |
+|---|---|---|---|
+| `GET` | `/api/v1/wellbeing-suggestions?olderAdultId={olderAdultId}` | **Query** `olderAdultId`* | `200` lista de `WellbeingSuggestionResponse` activas · `403` no es familiar activo |
+| `POST` | `/api/v1/wellbeing-suggestions/{suggestionId}/dismiss?olderAdultId={olderAdultId}` | **Path** `suggestionId`* · **Query** `olderAdultId`* | `200` `WellbeingSuggestionResponse` con estado `DISMISSED`; se descarta para todos los familiares · `403` · `409` la sugerencia ya no está activa |
+
+**Response `200 OK`:**
+
+```json
+{
+  "id": "2b3c4d5e-6f7a-4b8c-9d0e-1f2a3b4c5d6e",
+  "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "patternId": "4d5e6f7a-8b9c-4d0e-8f1a-2b3c4d5e6f7a",
+  "message": "Lleva 3 días seguidos con el ánimo bajo. Puede ser un buen momento para llamarle o visitarle.",
+  "status": "ACTIVE",
+  "issuedAt": "2026-10-08T15:30:00Z"
+}
+```
+
+---
+
+### Evidencia de interacción con la documentación
+
+Las siguientes capturas muestran la interacción con la documentación OpenAPI desplegada en Azure, accesible en `https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html`, utilizando datos de muestra (usuario *Rosa Quispe Mamani*, adulto mayor, y su hija como familiar vinculada). Las peticiones se ejecutaron directamente desde Swagger UI con la opción *Try it out*.
+
+**Swagger UI en el entorno desplegado.** Se observa en la barra del navegador la URL del servicio en Azure (`serenia-platform-api.azurewebsites.net/swagger-ui/index.html`), la información de la API (*Serenia Platform*, versión `0.0.1-SNAPSHOT`, especificación OAS 3.1), el servidor `Current environment`, el botón **Authorize** para el token Bearer y la sección *Users* con sus endpoints (`PUT` perfil, foto y contraseña, `POST` registro y `GET` por id).
+
+<p align="center">
+  <img src="./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-swagger.png" alt="Swagger UI de Serenia Platform en el entorno desplegado" width="900">
+</p>
+<p align="center"><em>Imagen X. Swagger UI de Serenia Platform en el entorno desplegado.</em></p>
+
+**Registro de usuario (`POST /api/v1/users`).** Se despliega el endpoint con el ejemplo del *Request body* (`RegisterUserRequest`) y la tabla de respuestas documentadas: `201` (*User registered successfully*), `400` (*Invalid input data*) y `409` (*Email already registered*).
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/post-users-doc.png" alt="Documentación de POST /api/v1/users" width="900">
+</p>
+<p align="center"><em>Imagen X  . Documentación de POST /api/v1/users.</em></p>
+
+**Respuesta `201 Created` al registrar un usuario.** Se ejecuta la petición con *Try it out* contra `https://serenia-platform-api.azurewebsites.net/api/v1/users`, con los datos de muestra de *Rosa Quispe Mamani* (`rosa.quispe.demo@example.com`, rol `OLDER_ADULT`). El servidor devuelve la cuenta creada con `status: "ACTIVE"` y `photoUrl: null`, sin incluir la contraseña.
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/post-users-response.png" alt="Respuesta 201 de POST /api/v1/users" width="900">
+</p>
+<p align="center"><em>Imagen 3. Respuesta 201 de POST /api/v1/users.</em></p>
+
+**Inicio de sesión (`POST /api/v1/sessions`).** La respuesta `201` incluye el `sessionId`, el `token` JWT, la fecha de vencimiento `expiresAt` (7 días después del inicio de sesión) y los datos del usuario autenticado.
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/post-sessions-response.png" alt="Respuesta 201 de POST /api/v1/sessions" width="900">
+</p>
+<p align="center"><em>Imagen 4. Respuesta 201 de POST /api/v1/sessions.</em></p>
+
+**Autorización con el token Bearer.** Se pega el token en el botón **Authorize** (esquema `bearerAuth`, *http, Bearer*). El diálogo confirma el estado *Authorized* y oculta el valor del token; a partir de ese momento Swagger UI envía la cabecera `Authorization: Bearer <token>` en cada petición.
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/swagger-authorize.png" alt="Diálogo Authorize de Swagger UI con el token Bearer aplicado" width="900">
+</p>
+<p align="center"><em>Imagen 5. Diálogo Authorize de Swagger UI con el token Bearer aplicado.</em></p>
+
+**Generación de un código de invitación (`POST /api/v1/care-circles/{careCircleId}/invitation-codes`).** Con el token de Rosa y el identificador de su círculo de cuidado (`2e7a5bda-fc5c-4b40-8639-35f166d32b22`), la API responde `201` con el código `KQ6TEM76` en estado `PENDING` y su fecha de vencimiento `expiresAt`. La captura incluye el *Curl* equivalente con la cabecera `Authorization`.
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/post-invitation-codes-response.png" alt="Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/invitation-codes" width="900">
+</p>
+<p align="center"><em>Imagen 6. Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/invitation-codes.</em></p>
+
+**Canje del código por un familiar (`POST /api/v1/family-links`).** Con el token de la hija (rol `DISTANT_RELATIVE`), se envía el código `KQ6TEM76` y la etiqueta de parentesco `hija`. La API responde `201` y establece el vínculo `ACTIVE` entre la familiar (`relativeId`) y el círculo de cuidado de Rosa (`careCircleId`).
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/post-family-links-response.png" alt="Respuesta 201 de POST /api/v1/family-links" width="900">
+</p>
+<p align="center"><em>Imagen 7. Respuesta 201 de POST /api/v1/family-links.</em></p>
+
+**Botón de ayuda (`POST /api/v1/emergency-alerts`).** Con el token de Rosa, la API registra la emergencia y responde `201` con la alerta de tipo `EMERGENCY` en estado `DISPATCHED` y `deliveryConfirmed: true`, lo que indica que la familia vinculada fue notificada. Los campos de reconocimiento y resolución permanecen en `null` hasta que un familiar atienda la alerta.
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/post-emergency-alerts-response.png" alt="Respuesta 201 de POST /api/v1/emergency-alerts" width="900">
+</p>
+<p align="center"><em>Imagen 8. Respuesta 201 de POST /api/v1/emergency-alerts.</em></p>
+
+**Respuesta de error de validación.** Al enviar un correo inválido (`no-es-un-correo`) y una contraseña de 3 caracteres, la API responde `400` con el objeto de error `{ code, message, details }`: `code` es `VALIDATION_ERROR` y `details` lista los campos incumplidos (*Field password: La contraseña debe tener entre 8 y 72 caracteres; Field email: Debe ser un correo electrónico válido*).
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/error-400-response.png" alt="Respuesta de error 400 de POST /api/v1/users" width="900">
+</p>
+<p align="center"><em>Imagen 9. Respuesta de error 400 de POST /api/v1/users.</em></p>
+
+**Respuesta de error de conflicto.** Al registrar un correo que ya existe, la API responde `409` con `code: "USER_CONFLICT"` y el detalle `user.email.already.registered`, tal como se documenta para este endpoint (*Email already registered*).
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/post-users-409.png" alt="Respuesta de error 409 de POST /api/v1/users" width="900">
+</p>
+<p align="center"><em>Imagen 10. Respuesta de error 409 de POST /api/v1/users.</em></p>
+
+### Repositorio y commits relacionados con la documentación
+
+- **Repositorio de Web Services:** `upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform`
+- **Rama:** `develop`
+
+| Commit ID | Descripción |
+|---|---|
+| `a01dc5a` | Documentación OpenAPI del contexto IAM (`Users`, `Sessions`) |
+| `f6009be` | Documentación OpenAPI del contexto Care Circle |
+| `ed45b0f` | Documentación OpenAPI del contexto Daily Check-in |
+| `df6ea7c` | Documentación OpenAPI del contexto Alerts and Safety |
+| `2702159` | Documentación OpenAPI del contexto Social Companionship |
+| `428f213` | Documentación OpenAPI del contexto Wellbeing Monitoring |
+
 #### 4.2.1.8. Software Deployment Evidence for Sprint Review
+
+Durante el Sprint 1 el equipo realizó el despliegue de los dos productos digitales que forman parte del alcance de esta iteración: la **Landing Page** de Serenia, publicada en Netlify, y los **Web Services** (Serenia Platform), desplegados en Microsoft Azure como un contenedor Docker sobre Azure App Service, con base de datos MySQL administrada y almacenamiento de archivos multimedia en Azure Blob Storage. Ambos despliegues se configuraron a partir de los repositorios de la organización de GitHub del equipo (`upc-pre-202620-1acc0238-4945-vitalcare`): `serenia-website` para la Landing Page y `serenia-platform` para los Web Services.
+
+Las actividades realizadas comprendieron la creación de cuentas y recursos en los proveedores cloud, la vinculación de los repositorios con la plataforma de despliegue, la configuración de las variables de entorno del backend y la verificación de ambos productos en producción.
+
+| Producto digital | Plataforma | Estado | URL |
+|---|---|---|---|
+| Landing Page | Netlify (despliegue continuo desde GitHub) | Desplegada | [https://sereniawebsite.netlify.app](https://sereniawebsite.netlify.app/) |
+| Web Services (Serenia Platform) | Azure App Service (contenedor Docker) | Desplegados | [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html) |
+
+
+---
+
+### 1. Landing Page — Netlify
+
+Para el despliegue de la Landing Page se utilizó Netlify como plataforma de hosting, aprovechando su integración nativa con GitHub para automatizar el despliegue continuo. La Landing Page es un sitio estático (HTML) alojado en el repositorio `serenia-website`. La configuración establecida permite que cada cambio integrado a la rama `main` dispare automáticamente un nuevo build y publicación en producción, sin intervención manual del equipo.
+
+El proceso se llevó a cabo siguiendo los pasos detallados a continuación:
+
+**1.1. Creación de la cuenta en Netlify**
+
+Se creó la cuenta en Netlify y se autorizó el acceso a la organización de GitHub `upc-pre-202620-1acc0238-4945-vitalcare`, que aloja los repositorios del proyecto.
+
+**1.2. Vinculación del repositorio con Netlify**
+
+Desde la opción de importar un proyecto existente, se conectó Netlify con el proveedor Git (GitHub), se seleccionó la organización del equipo y se eligió el repositorio `serenia-website` (el listado también muestra los repositorios `serenia-report`, `serenia-platform`, `serenia-mobile-android` y `serenia-app-cross`). Luego se pasó a la configuración del proyecto y su despliegue.
+
+![Selección del repositorio serenia-website en Netlify](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/netlify-import-repo.jpg)
+
+**1.3. Configuración del proyecto y del build**
+
+Se configuró el proyecto `sereniawebsite` con la rama `main` como fuente de despliegue de producción. Los parámetros de construcción definidos fueron:
+
+| Parámetro | Valor |
+|---|---|
+| Repositorio | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-website` |
+| Rama de producción | `main` |
+
+
+**1.4. Despliegue automático (CI/CD) y verificación en producción**
+
+Netlify ejecuta automáticamente el build y la publicación cada vez que se integra un cambio a la rama `main` mediante Pull Request. En el historial de despliegues de producción se observan los Pull Requests #6 y #8 desde la rama `develop`; el Pull Request #8 (commit `9865b70`) activó el despliegue final de la versión completa de la Landing Page, que se encuentra en estado **Published**. El primer despliegue, correspondiente al commit inicial, falló en la etapa de construcción y fue superado en los despliegues posteriores.
+
+El sitio quedó publicado con el dominio asignado `sereniawebsite.netlify.app`, con origen en GitHub.
+
+![Panel del proyecto sereniawebsite en Netlify con el despliegue publicado](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/netlify-production.jpg)
+
+**1.5. Verificación de la Landing Page en producción**
+
+Se comprobó que todas las secciones de la Landing Page de Serenia se visualizaran correctamente en el navegador desde la URL pública, incluyendo el diseño responsivo y los estilos aplicados: [https://sereniawebsite.netlify.app](https://sereniawebsite.netlify.app/).
+
+![Landing Page de Serenia en producción](./assets/img/labeling-system/landing-hero.png)
+
+---
+
+### 2. Web Services (Serenia Platform) — Microsoft Azure
+
+El backend de Serenia es una aplicación Spring Boot (Java) que persiste su información en MySQL y almacena los audios y fotos que comparten los usuarios en un contenedor privado de Azure Blob Storage. Para su despliegue se empaquetó la aplicación como una imagen Docker, que se publicó en Azure Container Registry y se ejecuta en Azure App Service para contenedores, usando la configuración del perfil de producción del proyecto, que lee todos sus parámetros desde variables de entorno. Todos los recursos se crearon en la región **Mexico Central**, bajo la suscripción *Azure for Students*.
+
+**2.1. Creación del grupo de recursos en Azure**
+
+Se creó el grupo de recursos `serenia-rg`, que agrupa los cinco recursos de Serenia Platform:
+
+| Recurso | Tipo | Función |
+|---|---|---|
+| `serenia-mysql` | Servidor flexible de Azure Database for MySQL | Base de datos del backend |
+| `serenia-plan` | Plan de App Service | Capacidad de cómputo (Linux, nivel B1) |
+| `serenia-platform-api` | App Service | Ejecuta el contenedor del backend |
+| `sereniaplatformacr` | Container Registry | Almacena la imagen Docker |
+| `sereniaplatformsa` | Cuenta de almacenamiento | Archivos multimedia (audios y fotos) |
+
+![Grupo de recursos serenia-rg en Azure](./assets/img//sprint/capturas-azure-sprint1/serenia-deploy-img/azure-resource-group.png)
+
+**2.2. Provisión de Azure Database for MySQL**
+
+Se creó el servidor flexible `serenia-mysql` y, dentro de él, la base de datos de usuario `serenia`, que utiliza el backend. La base de datos se crea previamente porque el perfil de producción de la aplicación no la genera automáticamente. Las demás bases de datos listadas (`mysql`, `information_schema`, `performance_schema` y `sys`) son del sistema.
+
+![Servidor serenia-mysql y base de datos serenia](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-mysql.png)
+
+**2.3. Configuración de red y seguridad de la base de datos**
+
+En la sección de redes de `serenia-mysql` se verificó que la conexión TLS/SSL es obligatoria de forma predeterminada, en línea con la conexión segura (`useSSL=true`) que usa el backend. Se habilitó el acceso público al servidor con reglas de firewall y la opción *Permitir acceso público a este servidor desde cualquier servicio de Azure*, que permite que el App Service se conecte a la base de datos.
+
+![Configuración de red de serenia-mysql](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-mysql-firewall.png)
+
+**2.4. Creación de la cuenta de almacenamiento (Azure Blob Storage)**
+
+Se creó la cuenta de almacenamiento `sereniaplatformsa` con el contenedor `serenia-media`, de nivel de acceso anónimo **Privado**, donde el backend guarda los audios y las fotos. El acceso a los archivos se realiza únicamente a través de la API, que valida la autenticación del usuario.
+
+![Cuenta de almacenamiento y contenedor serenia-media](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-storage.png)
+
+**2.5. Publicación de la imagen Docker en Azure Container Registry**
+
+Se construyó la imagen Docker del backend a partir del repositorio `serenia-platform` y se publicó en el registro `sereniaplatformacr`, en el repositorio `serenia-platform`, con las etiquetas `1.0.0` y `tb1`. Ambas etiquetas apuntan a la misma imagen (mismo digest), publicada el 9 de octubre de 2026.
+
+![Imagen serenia-platform con las etiquetas 1.0.0 y tb1 en Container Registry](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-registry.png)
+
+**2.6. Creación y configuración del Azure App Service**
+
+Se creó la aplicación web `serenia-platform-api` sobre Linux, con el plan `serenia-plan` (B1) y modelo de publicación **Contenedor**, tomando como origen la imagen `sereniaplatformacr.azurecr.io/serenia-platform:tb1`. El servicio se encuentra en estado **En ejecución** y su estado en tiempo de ejecución es **Correcto**. El dominio predeterminado asignado es `serenia-platform-api.azurewebsites.net`.
+
+![Azure App Service serenia-platform-api en ejecución](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-app-service.png)
+
+**2.7. Configuración de las variables de entorno**
+
+Se configuraron en el App Service las variables de entorno que consume el backend. Los valores sensibles se registran como configuración de la aplicación y no se almacenan en el repositorio; en la captura se mantienen ocultos.
+
+| Variable | Propósito |
+|---|---|
+| `DATABASE_URL`, `DATABASE_PORT`, `DATABASE_NAME` | Servidor, puerto y nombre de la base de datos MySQL |
+| `DATABASE_USER`, `DATABASE_PASSWORD` | Credenciales de la base de datos |
+| `JWT_SECRET` | Clave de firma de los tokens JWT |
+| `AZURE_STORAGE_CONNECTION_STRING` | Cadena de conexión de la cuenta de almacenamiento |
+| `AZURE_STORAGE_CONTAINER` | Nombre del contenedor de medios (`serenia-media`) |
+| `MEDIA_STORAGE_PROVIDER` | Proveedor de almacenamiento de archivos (Azure Blob Storage) |
+| `DOCKER_REGISTRY_SERVER_URL`, `DOCKER_REGISTRY_SERVER_USERNAME`, `DOCKER_REGISTRY_SERVER_PASSWORD` | Credenciales con las que App Service descarga la imagen desde Container Registry |
+
+![Variables de entorno del App Service](./assets/img//sprint/capturas-azure-sprint1/serenia-deploy-img/azure-app-settings.png)
+
+**2.8. Verificación del despliegue**
+
+Se verificó que el servicio respondiera y que la documentación OpenAPI estuviera disponible públicamente en el entorno desplegado, accediendo a Swagger UI desde la URL del App Service. La documentación muestra el título *Serenia Platform*, la especificación OAS 3.1, el servidor *Current environment* y los endpoints de cada recurso, empezando por Users, junto con el botón **Authorize** para autenticarse con el token Bearer.
+
+| Recurso | URL |
+|---|---|
+| Swagger UI | [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html) |
+| Especificación OpenAPI | `https://serenia-platform-api.azurewebsites.net/v3/api-docs` |
+| URL base de la API | `https://serenia-platform-api.azurewebsites.net/api/v1` |
+
+![Swagger UI de Serenia Platform en el entorno desplegado](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-swagger.png)
+
+---
+
+### 3. Aplicaciones móviles
+
+Los repositorios de las aplicaciones móviles del proyecto, `serenia-mobile-android`, se encuentran en la misma organización de GitHub y se ha desarrollado en Android Studio.
+
+![Aplicación móvil de Serenia](./assets/img/sprint/serenia-app.png)
+
+---
+
+### Resumen de enlaces de despliegue
+
+| Producto | Repositorio | URL |
+|---|---|---|
+| Landing Page | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-website` | https://sereniawebsite.netlify.app |
+| Web Services | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform` | https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html |
+| Prototipo móvil | `https://claude.ai/artifact/PQLMrSNqDntp1Fu4cfuvJu` |
+
 #### 4.2.1.9. Team Collaboration Insights during Sprint
+Durante el Sprint 1 el equipo mantuvo un flujo de trabajo colaborativo y organizado aplicando la estrategia de control de versiones GitFlow. Todo el desarrollo tanto de la documentación del informe,Landing Page y backend se trabajó en ramas independientes (feature branches), integrando los cambios exclusivamente
+mediante Pull Requests hacia la rama principal. Esto garantizó la revisión por pares y la trazabilidad de cada contribución individual.
+A continuación se presentan los analíticos de colaboración extraídos de GitHub Insights para ambos repositorios durante el período del Sprint 1.
+
+![insight](./assets/img/insights/insights1.png)
+
+**Resumen de actividad — Repositorio serenia-report**
+Top Committers — Repositorio serenia-report
+En el repositorio de documentación los integrantes registraron las siguientes contribuciones: Arturouu con 107 commits, Carlsss28 con 38 commits, brianna-salinas con 38
+commits, vicmaccode con 51 commits y kyesei con 23 commits, evidenciando una participación activa y relativamente equitativa de todos los miembros del
+equipo.
+
+![insight](./assets/img/insights/insights3.png)
+
+Pull Requests mergeados — Repositorio serenia-report
+Se gestionaron los Pull Requests mergeados durante el Sprint, cubriendo la documentación de todos los capítulos del informe, incluyendo correcciones de
+wireflows, actualización de mockups, evidencias de desarrollo y backlog del Sprint 1.
+
+![insight](./assets/img/insights/insights2.png)
+
+**Resumen de actividad — Repositorio serenia-website (Landing Page)**
+Los 5 integrantes del equipo participaron en la implementación de la Landing Page, cada uno responsable de una o más secciones mediante feature branches
+independientes.
+
+![insight](./assets/img/insights/insights4.png)
+
+
+**Resumen de actividad — Repositorio serenia-platform (backend)**
+Los 5 integrantes del equipo participaron en la implementación de la plataforma, cada uno responsable de un bounded conext
+
+![insight](./assets/img/insights/insights5.png)
+
+
+
 ## 4.3. Validation Interviews
 
 En esta sección se registra y explica el proceso de validación de Serenia con usuarios reales de los segmentos objetivo: adultos mayores que viven solos y familiares que los acompañan a distancia. Cada participante interactúa con el landing page y con las aplicaciones móviles, completando tareas sobre los *user flows* principales del producto mientras expresan sus observaciones. La sección se organiza en tres partes: el diseño de las entrevistas, que define los elementos y flujos a evaluar en cada segmento; el registro de las entrevistas, que documenta a cada participante, la evidencia en video y el resumen de sus apreciaciones; y las evaluaciones según heurísticas de usabilidad, arquitectura de información y diseño inclusivo.
