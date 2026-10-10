@@ -7984,20 +7984,55 @@ El objetivo principal del Sprint 1 fue establecer la arquitectura base de la API
 
 #### 4.2.1.4. Development Evidence for Sprint Review
 
-Durante el Sprint 1, la implementación se enfocó en el desarrollo del backend bajo el enfoque de Domain-Driven Design (DDD). Se priorizó la creación de los *Aggregates*, *Command/Query Services* y *Repositories* de los contextos IAM, Care Circle y Daily Check-in, finalizando con la integración de los *Controllers* de Alerts & Safety. A continuación, se detallan los commits más críticos que evidencian esta arquitectura estructural.
+#### 4.2.1.5. Testing Suite Evidence for Sprint Review
+
+Durante el Sprint 1, dado que el objetivo principal fue establecer la arquitectura base (monolito modular) y los despliegues iniciales, el equipo aún no ha integrado un framework de pruebas automatizadas en el código fuente. Por ello, la validación se enfocó en **Acceptance Tests y Pruebas Funcionales manuales**. Para los Web Services se utilizaron peticiones HTTP directas para verificar la respuesta de los controladores, y para la Landing Page se realizaron pruebas de responsividad y usabilidad en el navegador.
+
+A continuación, se presentan las tablas de control por repositorio, detallando los commits representativos cuyas funcionalidades fueron sometidas a este primer ciclo de validación.
+
+**Repositorio 1: Web Services (Backend)**
+**Ruta del repositorio:** `https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform`
 
 | Repository | Branch | Commit Id | Commit Message | Commit Message Body | Commited on (Date) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| serenia-platform | feature/iam | a4d5ae2 | feat(iam): add user aggregate with registration and profile behavior | Creación del aggregate root User, validaciones de dominio y enumeraciones para IAM. | 07/10/2026 |
-| serenia-platform | feature/care-circle | 6f099ec | feat(care-circle): implement care circle, care shift and shared note query services | Implementación de la capa de aplicación para gestionar los vínculos de cuidado. | 07/10/2026 |
-| serenia-platform | feature/daily-check-in | 977fda8 | feat(daily-check-in): add check-in aggregate | Diseño del aggregate root de Check-ins y validación de estados diarios. | 07/10/2026 |
-| serenia-platform | feature/alertsandsafety | 8a64aa4 | feat(alertsandsafety): add emergency alert dispatched event handler | Configuración de listeners para notificar emergencias entre contextos. | 07/10/2026 |
-| serenia-platform | feature/alerts-and-safety | 7da87f3 | feat(alerts-and-safety): add emergency alert repository implementation | Implementación de persistencia física en MySQL mediante repositorios Spring Data JPA. | 08/10/2026 |
-| serenia-platform | feature/alerts-and-safety | f7fdcfe | feat(alerts-and-safety): add emergency alerts controller endpoints | Exposición de la API REST mediante controladores para la integración con clientes móviles. | 08/10/2026 |
+| serenia-platform | feature/alerts-interface-kelber | f7fdcfe | feat(alerts-and-safety): add emergency alerts controller endpoints | Endpoints de emergencia sometidos a validación de aceptación y respuestas HTTP. | 08/10/2026 |
+| serenia-platform | feature/identity-and-access | 0bb46eb | feat(iam): add users and sessions controllers | Controladores de identidad autenticados y validados funcionalmente. | 07/10/2026 |
 
-#### 4.2.1.5. Testing Suite Evidence for Sprint Review
+**Repositorio 2: Landing Page (Website)**
+**Ruta del repositorio:** `https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website`
+
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Commited on (Date) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| serenia-website | feature/index-html | 22f8ffe | feat(index):add hero section | Implementación de la vista principal, sometida a pruebas manuales de usabilidad y responsividad. | 08/10/2026 |
+| serenia-website | feature/index-html | 309551e | feat(index):add head and seo metadata | Inserción de metadatos, validados mediante previsualización de Open Graph. | 08/10/2026 |
 
 #### 4.2.1.6. Execution Evidence for Sprint Review
+
+En este Sprint se logró un avance significativo en la estructuración e implementación de la solución, tanto a nivel de interfaces de usuario como de servicios backend. 
+
+Por un lado, el backend fue desplegado exitosamente en Microsoft Azure, y su documentación generada automáticamente puede visualizarse y probarse a través de Swagger UI, donde se exponen los endpoints funcionales desarrollados durante el sprint (ver Imagen X1).
+
+**Enlace de la API REST (Swagger UI):** [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/]
+
+Por otro lado, se completó la maquetación de la Landing Page pública, la cual ya se encuentra en un entorno de producción accesible para los usuarios finales, comunicando la propuesta de valor y los planes de Serenia (ver Imagen X2).
+
+**Enlace de la Landing Page:** [https://sereniawebsite.netlify.app/]
+
+**Video de visualización y navegación:** [Landing Page - Sprint 1](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202418645_upc_edu_pe/IQBZUTVEcamsQZmA6LaGQ2-TAfqqMtdvO80uCvuJ-l4Yyzc?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=lBEgPU)
+
+<div align="center">
+
+![Ejecución API Swagger](assets/img/sprint-1/api-execution.png)
+  <br/><i>Imagen X. Ejecución del entorno de pruebas de la API REST documentada en Swagger UI.</i>
+
+</div>
+
+<div align="center">
+
+![Ejecución Landing Page](assets/img/sprint-1/landing-execution.png)
+  <br/><i>Imagen X. Ejecución en producción de la Landing Page de Serenia.</i>
+
+</div>
 
 #### 4.2.1.7. Services Documentation Evidence for Sprint Review
 #### 4.2.1.8. Software Deployment Evidence for Sprint Review
