@@ -7709,8 +7709,6 @@ Estas decisiones se relacionan con la arquitectura de información. Separamos lo
 
 A continuación se presenta, para cada aplicación, un screenshot del video y el enlace al video en Microsoft Stream, donde se demuestran y explican los principales flujos de interacción.
 
-Enlace al prototipo: https://claude.ai/artifact/PQLMrSNqDntp1Fu4cfuvJu
-
 Para probar la vinculación en el prototipo, el código válido es 4821 y el código expirado es 0000. Cualquier otro valor muestra el estado de código inválido.
 
 
@@ -8948,7 +8946,6 @@ Los repositorios de las aplicaciones móviles del proyecto, `serenia-mobile-andr
 |---|---|---|
 | Landing Page | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-website` | https://sereniawebsite.netlify.app |
 | Web Services | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform` | https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html |
-| Prototipo móvil | `https://claude.ai/artifact/PQLMrSNqDntp1Fu4cfuvJu` |
 
 #### 4.2.1.9. Team Collaboration Insights during Sprint
 Durante el Sprint 1 el equipo mantuvo un flujo de trabajo colaborativo y organizado aplicando la estrategia de control de versiones GitFlow. Todo el desarrollo tanto de la documentación del informe,Landing Page y backend se trabajó en ramas independientes (feature branches), integrando los cambios exclusivamente
