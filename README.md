@@ -9763,7 +9763,7 @@ URL de la organización (Serenia):  [Organización Serenia](https://github.com/u
 
 URL del repositorio (Report):  [Repositorio Reporte](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-report)
 
-URL del repositorio (Web Services):  [Repositorio Web Services](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-web-services)
+URL del repositorio (Platform): [Repositorio Platform](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform)
 
 URL del repositorio (App Native):  [Repositorio App Native](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android)
 
