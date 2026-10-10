@@ -4408,44 +4408,47 @@ El diagrama incluye además los Commands y Queries que expresan las intenciones 
 
 ##### 2.6.1.6.2. Bounded Context Database Design Diagram
 
-El diagrama de base de datos (Imagen 40) presenta los objetos que permiten la persistencia del bounded context Identity & Access sobre el motor MySQL. El contexto se materializa en dos tablas, `users` y `sessions`, que corresponden respectivamente al aggregate root `User` y a la entidad `Session` que este contiene.
+El diagrama de base de datos (Imagen 40) presenta los objetos que permiten la persistencia del bounded context Identity & Access sobre el motor MySQL 8.0. El contexto se materializa en dos tablas, `users` y `sessions`, que corresponden respectivamente a los aggregates `User` y `Session`. Los identificadores se almacenan como `BINARY(16)`, la representación compacta de un UUID, y los instantes como `DATETIME(6)` en UTC, de modo que el modelo no depende de la zona horaria del servidor.
 
 **Tabla `users`**
 
 | Columna | Tipo | Constraints | Descripción |
 | --- | --- | --- | --- |
-| id | uuid | PK | Identificador único de la cuenta. |
+| id | binary(16) | PK | Identificador único de la cuenta. |
 | email | varchar(160) | NOT NULL, UNIQUE | Correo electrónico con el que el usuario inicia sesión. |
-| password_hash | varchar(255) | NOT NULL | Contraseña cifrada de la cuenta. |
-| role | user_role | NOT NULL | Rol del usuario: adulto mayor o familiar a distancia. |
+| password_hash | varchar(255) | NOT NULL | Hash BCrypt de la contraseña; nunca se almacena en claro. |
+| role | enum user_role | NOT NULL | Rol del usuario: OLDER_ADULT o DISTANT_RELATIVE. |
 | full_name | varchar(120) | NOT NULL | Nombre completo del usuario. |
-| phone_number | varchar(20) | - | Número de contacto del usuario. |
-| birth_date | date | - | Fecha de nacimiento del usuario. |
-| photo_url | varchar(500) | - | Ubicación de la fotografía de perfil del usuario. |
+| phone_number | varchar(20) | - | Número de contacto del usuario, opcional. |
+| birth_date | date | - | Fecha de nacimiento del usuario, opcional. |
 | locale | varchar(10) | NOT NULL, DEFAULT 'es_419' | Idioma y región de la interfaz. |
-| status | account_status | NOT NULL, DEFAULT 'ACTIVE' | Estado de la cuenta: activa, suspendida o eliminada. |
-| created_at | timestamp | NOT NULL | Fecha y hora de creación de la cuenta. |
-| updated_at | timestamp | NOT NULL | Fecha y hora de la última modificación. |
+| time_zone | varchar(50) | NOT NULL, DEFAULT 'America/Lima' | Zona horaria del usuario; los demás contextos la usan para determinar su día en curso. |
+| status | enum account_status | NOT NULL, DEFAULT 'ACTIVE' | Estado de la cuenta: ACTIVE, SUSPENDED o DELETED. |
+| photo_url | varchar(500) | - | Ubicación de la fotografía de perfil, opcional. |
+| created_at | datetime(6) | NOT NULL | Instante de creación de la cuenta, en UTC. |
+| updated_at | datetime(6) | NOT NULL | Instante de la última modificación, en UTC. |
 
-La tabla incluye un índice único sobre `email`, que garantiza a nivel de base de datos la regla de unicidad de cuentas, y un índice sobre `role`, que optimiza las consultas que filtran usuarios según el tipo de aplicación a la que acceden.
+La tabla incluye un índice único sobre `email`, que garantiza a nivel de base de datos la unicidad de las cuentas incluso ante registros simultáneos.
 
 **Tabla `sessions`**
 
 | Columna | Tipo | Constraints | Descripción |
 | --- | --- | --- | --- |
-| id | uuid | PK | Identificador único de la sesión. |
-| user_id | uuid | NOT NULL, FK → users.id | Cuenta a la que pertenece la sesión. |
-| token_hash | varchar(255) | NOT NULL | Token de sesión cifrado entregado al cliente. |
-| device_info | varchar(200) | - | Descripción del dispositivo desde el que se inició la sesión. |
-| issued_at | timestamp | NOT NULL | Fecha y hora de emisión del token. |
-| expires_at | timestamp | NOT NULL | Fecha y hora en que el token deja de ser válido. |
-| revoked_at | timestamp | - | Fecha y hora del cierre de sesión, si este ocurrió. |
+| id | binary(16) | PK | Identificador único de la sesión. |
+| user_id | binary(16) | NOT NULL, FK → users.id | Cuenta a la que pertenece la sesión. |
+| token_hash | varchar(255) | NOT NULL | Hash SHA-256 del token entregado al cliente; el token nunca se almacena en claro. |
+| device_info | varchar(200) | - | Descripción del dispositivo desde el que se inició la sesión, opcional. |
+| issued_at | datetime(6) | NOT NULL | Instante de emisión del token, en UTC. |
+| expires_at | datetime(6) | NOT NULL | Instante en que el token deja de ser válido, en UTC. |
+| revoked_at | datetime(6) | - | Instante del cierre o la revocación de la sesión; es nulo mientras la sesión siga abierta. |
 
-La tabla cuenta con un índice sobre `user_id`, que soporta la consulta de las sesiones vigentes de una cuenta.
+La clave foránea `user_id` cuenta con un índice, que MySQL crea automáticamente para toda clave foránea y que soporta la consulta de las sesiones vigentes de una cuenta. La columna `revoked_at` permite que el filtro de autorización rechace un token cerrado o revocado aunque su firma siga siendo válida.
 
 **Relación entre tablas**
 
-Existe una relación de uno a muchos entre `users` y `sessions`: una cuenta puede tener cero o varias sesiones registradas, mientras que toda sesión pertenece obligatoriamente a una única cuenta. Esta relación se implementa mediante la clave foránea `sessions.user_id`, que referencia a `users.id` y que refleja en la base de datos la composición definida en el modelo de dominio entre el aggregate `User` y la entidad `Session`.
+Existe una relación de uno a muchos entre `users` y `sessions`: una cuenta puede tener cero o varias sesiones a lo largo del tiempo, mientras que toda sesión pertenece obligatoriamente a una única cuenta. La relación se implementa mediante la clave foránea `sessions.user_id`, que referencia a `users.id`. En la base de datos refleja la referencia por identidad entre los aggregates `Session` y `User`, y la clave foránea garantiza que ninguna sesión apunte a una cuenta inexistente.
+
+La tabla `users` también es referenciada por las tablas de los demás bounded contexts, que identifican a adultos mayores y familiares por su `id`. Esas relaciones se presentan en el diagrama de base de datos de cada contexto.
 
 <div align="center">
 
