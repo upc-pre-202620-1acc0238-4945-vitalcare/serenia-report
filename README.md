@@ -9238,9 +9238,11 @@ Al ser consultada sobre su estado general, **Yolanda** mencionó que se encontra
 En cuanto a su contexto personal, **Yolanda** compartió que sus hijos y nietas la visitan con frecuencia y están siempre al pendiente de ella. Al evaluar la pantalla principal de la aplicación, que presenta las opciones "Muy bien", "Más o menos" y "No tan bien", explicó que la interfaz es fácil de entender y que basta con presionar o "machucar" el botón para seleccionar una respuesta. De igual forma, consideró que la sección de **recordatorios de actividades** es importante, destacando el ejemplo del taller de tejido. Respecto a la función para enviar mensajes de voz a sus familiares, **Yolanda** comentó que es muy fácil de usar, detallando que solo se debe presionar la pantalla y hablar como al grabar un audio normal.
 
 Finalmente, tras revisar la sección de la cuenta y el flujo completo de la interfaz, **Yolanda** afirmó que todo está bien diseñado y que la estructura resulta fácil de recordar. Concluyó que no considera necesario modificar ningún elemento de la aplicación y finalizó la sesión agradeciendo la atención recibida y deseando éxito al proyecto
+
 </div>
 
 <br>
+<div align="center">
 
 ##### Entrevista 3
 
@@ -9270,7 +9272,7 @@ Luego probó el prototipo de la aplicación móvil y valoró de forma positiva l
 
 <br>
 
-<div align="center">
+
 
 
 #### Segmento 2: Familiares a distancia
@@ -9293,10 +9295,12 @@ Luego probó el prototipo de la aplicación móvil y valoró de forma positiva l
   <tr><td><b>Duración</b></td><td>5 min 04 s</td></tr>
 </table>
 
-**Resumen:**
-Durante la sesión de validación, José interactuó con la Landing Page y los flujos principales de la aplicación móvil (vinculación, historial de bienestar y gestión de alertas). Destacó que el diseño de la web le transmite tranquilidad al ser limpio y no asemejarse a la página de un hospital o seguro médico, lo cual reduce la fricción inicial. Sobre el flujo de vinculación por código, lo consideró un proceso rápido y mucho menos invasivo que alternativas de rastreo por GPS, lo que generaría mayor confianza en su abuela. Apreció especialmente el panel de historial y las sugerencias automáticas, mencionando que le aliviarían la ansiedad diaria durante sus horas de trabajo. Valoró de forma muy positiva la función de coordinación de alertas, indicando que evitaría la duplicidad de esfuerzos en su familia. Calificó la solución general con un 9 a 10 sobre 10.
 
 </div>
+</br>
+
+**Resumen:**
+Durante la sesión de validación, José interactuó con la Landing Page y los flujos principales de la aplicación móvil (vinculación, historial de bienestar y gestión de alertas). Destacó que el diseño de la web le transmite tranquilidad al ser limpio y no asemejarse a la página de un hospital o seguro médico, lo cual reduce la fricción inicial. Sobre el flujo de vinculación por código, lo consideró un proceso rápido y mucho menos invasivo que alternativas de rastreo por GPS, lo que generaría mayor confianza en su abuela. Apreció especialmente el panel de historial y las sugerencias automáticas, mencionando que le aliviarían la ansiedad diaria durante sus horas de trabajo. Valoró de forma muy positiva la función de coordinación de alertas, indicando que evitaría la duplicidad de esfuerzos en su familia. Calificó la solución general con un 9 a 10 sobre 10.
 
 <br>
 
@@ -9317,6 +9321,8 @@ Durante la sesión de validación, José interactuó con la Landing Page y los f
   <tr><td><b>Timing en el video</b></td><td><i>31:01</i></td></tr>
   <tr><td><b>Duración</b></td><td>6 min 54 s</td></tr>
 </table>
+
+</div>
 
 **Resumen:**
 Kevin evaluó el prototipo móvil y la Landing Page enfocándose en la usabilidad y la reducción de la preocupación constante. Al observar la web, resaltó que el mensaje principal logra comunicar acompañamiento sin sentirse invasivo. Durante la prueba del prototipo móvil, validó positivamente el registro y la vinculación con el adulto mayor mediante un código de 4 dígitos, considerándolo una medida segura y nada complicada para personas de edad avanzada. Al revisar el flujo del historial y las notificaciones de inactividad o emergencia, confirmó que la aplicación le ahorraría el estrés y las llamadas innecesarias que suele hacer por preocupación, otorgándole paz mental para continuar con su rutina laboral. Concluyó calificando la aplicación con un 9 sobre 10, destacando que es una propuesta sólida y adaptada a las necesidades reales de cuidado a distancia.
