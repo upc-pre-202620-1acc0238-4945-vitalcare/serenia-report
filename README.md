@@ -6631,6 +6631,19 @@ icons:
 
 #### 3.1.2.3. SEO Tags and Meta Tags
 
+#### 3.1.2.3. SEO Tags and Meta Tags
+
+En esta sección se definen los SEO Tags y Meta Tags implementados en la Landing Page de Serenia. Más allá de los metadatos tradicionales para motores de búsqueda, el equipo ha integrado etiquetas Open Graph y Twitter Cards. Esto es estratégico para nuestro modelo de adquisición: el descubrimiento y la recomendación entre familiares (Segmento 2) se da frecuentemente a través de enlaces compartidos en aplicaciones de mensajería como WhatsApp, donde estas etiquetas garantizan una previsualización visualmente atractiva y confiable.
+
+**Landing Page:**
+
+| Elemento | Valor |
+| :--- | :--- |
+| **Title** | Serenia - Bienestar hoy, siempre contigo |
+| **Meta Description** | Serenia es la app para familias a distancia: tu mamá o tu papá te cuenta cómo se siente con un toque al día y tú sabes cuándo es momento de estar más cerca. Plan básico gratis. |
+| **Meta Keywords** | Serenia, bienestar adultos mayores, cuidado de padres a distancia, check-in diario, círculo de cuidado, app para familias, acompañamiento |
+| **Author** | Serenia |
+
 #### 3.1.2.4. Searching Systems
 
 Un sistema de búsqueda permite al usuario encontrar información escribiendo una consulta o acotando un conjunto de resultados mediante filtros, en lugar de recorrer la estructura de navegación. En arquitectura de información, su inclusión se justifica cuando el volumen de contenido es suficientemente grande o cuando el usuario sabe de antemano qué busca; en caso contrario, agrega complejidad sin aportar valor. Por ello, el equipo no incorporó un buscador global en Serenia, sino que decidió, producto por producto, dónde la búsqueda es necesaria y dónde resulta contraproducente.
@@ -7750,6 +7763,27 @@ Las decisiones de interacción responden a la necesidad de enterarse rápido y c
 ## 4. Product Implementation & Validation
 ## 4.1. Software Configuration Management
 ### 4.1.1. Software Development Environment Configuration
+
+Para el desarrollo, pruebas y despliegue de Serenia, el equipo ha configurado un entorno de trabajo distribuido que cubre las dos aplicaciones móviles, la landing page, los servicios backend y la base de datos. La selección de estas herramientas no solo responde a los requerimientos técnicos de cada plataforma, sino a la necesidad de mantener un ciclo de entrega continuo e integrado.
+
+**1. Entorno de Desarrollo (Lenguajes y Frameworks)**
+*   **Backend API REST:** Desarrollado en **Java 17** utilizando **Spring Boot 3.x**. Se eligió esta pila por su robustez para implementar el monolito modular y su compatibilidad nativa con patrones de Domain-Driven Design (DDD).
+*   **App Adulto Mayor (Nativa):** Construida con **Kotlin** y **Jetpack Compose**. La elección de desarrollo nativo en Android garantiza un control absoluto sobre la accesibilidad del dispositivo (tamaños de fuente nativos, alto contraste y manejo eficiente de hardware para la grabación de audio).
+*   **App Familiar (Cross-platform):** Desarrollada con **Flutter (Dart)**. Dado que este segmento requiere una interfaz orientada a gestión y visualización de datos (dashboards, historial, notificaciones), el enfoque multiplataforma permite iterar rápido y cubrir iOS y Android con un solo código base.
+*   **Landing Page Web:** Maquetación estática con **HTML5, CSS3 y JavaScript vanilla**, optimizando la velocidad de carga para SEO.
+
+**2. Entorno de Despliegue y Cloud (Infraestructura)**
+La configuración del entorno de producción se distribuyó estratégicamente para optimizar costos y latencia:
+*   **Microsoft Azure (App Service & MySQL Flexible Server):** El backend y la base de datos transaccional se alojan en la misma región de Azure. Esta proximidad de red reduce drásticamente la latencia en las consultas, lo cual es crítico para el procesamiento del *Daily Check-in* y el disparo de las *Alertas de Seguridad*.
+*   **Azure Blob Storage:** Se configuró un contenedor privado para el almacenamiento de los archivos multimedia del contexto de *Social Companionship* (fotos y audios), manteniendo la base de datos MySQL libre de almacenamiento binario pesado.
+*   **Netlify:** Seleccionado para alojar la Landing Page debido a su integración de Despliegue Continuo (CI/CD) nativa con GitHub, sirviendo el contenido estático globalmente a través de su CDN.
+*   **Firebase Cloud Messaging (FCM):** Configurado como el proveedor externo de mensajería para empujar las alertas de emergencia y los recordatorios sociales en tiempo real hacia los dispositivos móviles, saltándose las limitaciones de las consultas en segundo plano.
+
+**3. Entorno de Gestión y Colaboración**
+*   **Control de Versiones y Código:** **Git y GitHub**. Todo el equipo opera bajo el modelo *GitFlow*, utilizando la convención *Conventional Commits* para mantener una trazabilidad semántica en repositorios separados (`serenia-app-native`, `serenia-web-services`, `serenia-website`, `serenia-report`).
+*   **Modelado y Diseño:** **Figma** para prototipos de alta fidelidad, **Miro** para el descubrimiento del dominio (EventStorming interactivo), **Structurizr** para los diagramas de arquitectura C4 Model, y **dbdiagram.io** para la esquematización relacional (DBML).
+*   **Project Management:** **Trello** para la ejecución del flujo ágil (Sprint Backlog) y **ClickUp** para el seguimiento y asignación de la documentación del Project Report.
+
 ### 4.1.2. Source Code Management
 El equipo utiliza GitHub como plataforma principal de control de versiones y colaboración. A continuación se indican los repositorios correspondientes a cada
 producto del proyecto:
@@ -8110,11 +8144,106 @@ El Deployment Diagram establece que la aplicación móvil se distribuye mediante
 | Sprint 1 Goal | Nuestro objetivo es presentar la propuesta de valor de Serenia. Creemos brinda confianza y seguridad a los adultos mayores y a sus familiares, los cuales buscan una plataforma en la que puedan apoyarse para tener bajo supervicion a su familiar adulto mayor que vive solo|
 | Sprint 1 Velocity | 80 |
 | Sum of Story Points | 64 |
+
 #### 4.2.1.2. Aspect Leaders and Collaborators
+
+En el Sprint 1, el desarrollo se organizó en torno a la estructuración de la arquitectura base del monolito modular y la implementación de los Bounded Contexts fundacionales. A continuación, se presenta la matriz Leadership-and-Collaboration (LACX) que define las responsabilidades del equipo sobre los cuatro aspectos principales del sprint: el núcleo de identidad (IAM), el dominio de interacciones diarias (Care Circle & Daily Check-in), el sistema de respuesta (Alerts & Safety) y la interfaz web (Landing Page).
+
+| Team Member (Last Name, First Name) | GitHub Username | IAM & Core Backend Leader (L) / Collaborator (C) | Care Circle & Daily Check-in Leader (L) / Collaborator (C) | Alerts & Safety Leader (L) / Collaborator (C) | Landing Page & UX/UI Leader (L) / Collaborator (C) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| Contreras Torres, Arturo Valentino | Arturouu | L | L | C | C |
+| Gallardo Morales, Carla Alejandra | Carlsss28 | C | C | L | C |
+| García Paredes, Victor Manuel | vicmacode | C | C | C | L |
+| Salinas Guzman, Brianna Cristina | brianna-salinas | C | C | C | L |
+| Sandoval Aiquipa, Kelber Yamir | Kyesei | C | C | L | C |
+
 #### 4.2.1.3. Sprint Backlog 1
+
+El objetivo principal del Sprint 1 fue establecer la arquitectura base de la API REST (Spring Boot), garantizando el flujo de autenticación (IAM), la configuración de los vínculos familiares (Care Circle), el registro del chequeo diario (Daily Check-in) y la maquetación de la Landing Page. A continuación, se presenta el Board del Sprint 1 en Trello, donde se gestionaron los User Stories y Technical Stories priorizados.
+
+**URL público del Board:** [https://trello.com/invite/b/6aa8e6d78ed225cd21e9e93c/ATTI46cbaeeceb1072274d9c62399714ddaeF68A89AE/serenia]
+
+<div align="center">
+
+![Evidencia de Trello](assets/img/sprint-1/trello-board.png)
+  <br/><i>Imagen X. Board de Trello correspondiente al Sprint 1.</i>
+
+</div>
+
+| Sprint # | User Story Id | User Story Title | Work-Item / Task Id | Work-Item / Task Title | Description | Estimation (Hours) | Assigned To | Status (Todo / InProcess / To-Review / Done) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Sprint 1 | TS01 | Gestión de usuarios del sistema | TK-01 | Setup IAM Aggregate | Implementar `User` aggregate, entities y enums de persistencia base. | 5 | Arturo Contreras | Done |
+| Sprint 1 | TS02 | Gestión de sesiones de autenticación | TK-02 | Auth Controllers | Desarrollar servicios de dominio para tokens JWT y login. | 5 | Arturo Contreras | Done |
+| Sprint 1 | TS03 | Gestión de vínculos familiares | TK-03 | Care Circle API | Implementar repositorios y endpoints para vinculación de familiares. | 5 | Arturo Contreras | Done |
+| Sprint 1 | TS04 | Gestión de check-ins diarios | TK-04 | Check-in Logic | Desarrollar command services para registrar y evaluar check-ins. | 5 | Arturo Contreras | Done |
+| Sprint 1 | NF02 | Latencia de entrega de alertas | TK-05 | Alertas Event Handlers | Implementar la lógica de negocio y listeners para despacho de alertas. | 3 | Carla Gallardo | Done |
+| Sprint 1 | NF02 | Latencia de entrega de alertas | TK-06 | Alertas Persistence | Configurar JPA repositories y mappers para la persistencia de emergencias. | 3 | Victor García | Done |
+| Sprint 1 | NF02 | Latencia de entrega de alertas | TK-07 | Alertas REST Controllers | Exponer endpoints de alertas, resolución e inactividad en la capa Interface. | 3 | Kelber Sandoval | Done |
+| Sprint 1 | US23 | Propuesta de valor landing page | TK-08 | Maquetación y SEO | Desarrollar HTML/CSS e implementar metadatos para SEO y Open Graph. | 1 | Brianna Salinas | Done |
+
 #### 4.2.1.4. Development Evidence for Sprint Review
+
+Durante el Sprint 1, la implementación se enfocó en el desarrollo del backend bajo el enfoque de Domain-Driven Design (DDD). Se priorizó la creación de los Aggregates, Command/Query Services y Repositories de los contextos IAM, Care Circle y Daily Check-in, finalizando con la integración de los Controllers de Alerts & Safety. A continuación, se detallan los commits más críticos que evidencian esta arquitectura estructural.
+
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Commited on (Date) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| serenia-platform | feature/iam | a4d5ae2 | feat(iam): add user aggregate with registration and profile behavior | Creación del aggregate root User, validaciones de dominio y enumeraciones para IAM. | 07/10/2026 |
+| serenia-platform | feature/care-circle | 6f099ec | feat(care-circle): implement care circle, care shift and shared note query services | Implementación de la capa de aplicación para gestionar los vínculos de cuidado. | 07/10/2026 |
+| serenia-platform | feature/daily-check-in | 977fda8 | feat(daily-check-in): add check-in aggregate | Diseño del aggregate root de Check-ins y validación de estados diarios. | 07/10/2026 |
+| serenia-platform | feature/alertsandsafety | 8a64aa4 | feat(alertsandsafety): add emergency alert dispatched event handler | Configuración de listeners para notificar emergencias entre contextos. | 07/10/2026 |
+| serenia-platform | feature/alerts-and-safety | 7da87f3 | feat(alerts-and-safety): add emergency alert repository implementation | Implementación de persistencia física en MySQL mediante repositorios Spring Data JPA. | 08/10/2026 |
+| serenia-platform | feature/alerts-and-safety | f7fdcfe | feat(alerts-and-safety): add emergency alerts controller endpoints | Exposición de la API REST mediante controladores para la integración con clientes móviles. | 08/10/2026 |
+
 #### 4.2.1.5. Testing Suite Evidence for Sprint Review
+
+Durante el Sprint 1, dado que el objetivo principal fue establecer la arquitectura base (monolito modular) y los despliegues iniciales, el equipo aún no ha integrado un framework de pruebas automatizadas en el código fuente. Por ello, la validación se enfocó en **Acceptance Tests y Pruebas Funcionales manuales**. Para los Web Services se utilizaron peticiones HTTP directas para verificar la respuesta de los controladores, y para la Landing Page se realizaron pruebas de responsividad y usabilidad en el navegador.
+
+A continuación, se presentan las tablas de control por repositorio, detallando los commits representativos cuyas funcionalidades fueron sometidas a este primer ciclo de validación.
+
+**Repositorio 1: Web Services (Backend)**
+**Ruta del repositorio:** `https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform`
+
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Commited on (Date) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| serenia-platform | feature/alerts-interface-kelber | f7fdcfe | feat(alerts-and-safety): add emergency alerts controller endpoints | Endpoints de emergencia sometidos a validación de aceptación y respuestas HTTP. | 08/10/2026 |
+| serenia-platform | feature/identity-and-access | 0bb46eb | feat(iam): add users and sessions controllers | Controladores de identidad autenticados y validados funcionalmente. | 07/10/2026 |
+
+**Repositorio 2: Landing Page (Website)**
+**Ruta del repositorio:** `https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website`
+
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Commited on (Date) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| serenia-website | feature/index-html | 22f8ffe | feat(index):add hero section | Implementación de la vista principal, sometida a pruebas manuales de usabilidad y responsividad. | 08/10/2026 |
+| serenia-website | feature/index-html | 309551e | feat(index):add head and seo metadata | Inserción de metadatos, validados mediante previsualización de Open Graph. | 08/10/2026 |
+
 #### 4.2.1.6. Execution Evidence for Sprint Review
+
+En este Sprint se logró un avance significativo en la estructuración e implementación de la solución, tanto a nivel de interfaces de usuario como de servicios backend. 
+
+Por un lado, el backend fue desplegado exitosamente en Microsoft Azure, y su documentación generada automáticamente puede visualizarse y probarse a través de Swagger UI, donde se exponen los endpoints funcionales desarrollados durante el sprint (ver Imagen X1).
+
+**Enlace de la API REST (Swagger UI):** [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/]
+
+Por otro lado, se completó la maquetación de la Landing Page pública, la cual ya se encuentra en un entorno de producción accesible para los usuarios finales, comunicando la propuesta de valor y los planes de Serenia (ver Imagen X2).
+
+**Enlace de la Landing Page:** [https://sereniawebsite.netlify.app/]
+
+**Video de visualización y navegación:** [Landing Page - Sprint 1](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202418645_upc_edu_pe/IQBZUTVEcamsQZmA6LaGQ2-TAfqqMtdvO80uCvuJ-l4Yyzc?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=lBEgPU)
+
+<div align="center">
+
+![Ejecución API Swagger](assets/img/sprint-1/api-execution.png)
+  <br/><i>Imagen X. Ejecución del entorno de pruebas de la API REST documentada en Swagger UI.</i>
+
+</div>
+
+<div align="center">
+
+![Ejecución Landing Page](assets/img/sprint-1/landing-execution.png)
+  <br/><i>Imagen X. Ejecución en producción de la Landing Page de Serenia.</i>
+
+</div>
+
 #### 4.2.1.7. Services Documentation Evidence for Sprint Review
 
 Durante el Sprint 1 el alcance del equipo estuvo centrado en el desarrollo y despliegue de la Landing Page de Serenia, correspondiente a un sitio estático informativo, y en el avance de aproximadamente el 70 % del backend de la plataforma (**Serenia Platform**). Dicho backend está construido con Spring Boot 4.0.6 y Java 26, organizado bajo Domain-Driven Design en seis bounded contexts (`iam`, `carecircle`, `dailycheckin`, `alertsandsafety`, `socialcompanionship` y `wellbeingmonitoring`), y expone una RESTful API versionada bajo el prefijo `/api/v1`.
@@ -9150,21 +9279,22 @@ Luego probó el prototipo de la aplicación móvil y valoró de forma positiva l
 
 ##### Entrevista 1
 
-<img src="" alt="" width="700"/>
+<img src="assets/img/interviews/validacion-jose.png" alt="Screenshot validación José Cámara" width="700"/>
 
 <br>
 
 <table align="center">
   <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td>kevin</td></tr>
-  <tr><td><b>Edad</b></td><td></td></tr>
-  <tr><td><b>Distrito</b></td><td></td></tr>
-  <tr><td><b>Entrevistador</b></td><td></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>31:01</i></td></tr>
-  <tr><td><b>Duración</b></td><td></td></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>José Cámara</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>20 años</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>Surco</i></td></tr>
+  <tr><td><b>Entrevistador</b></td><td>Kelber Sandoval Aiquipa</td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>38:13</i></td></tr>
+  <tr><td><b>Duración</b></td><td>5 min 04 s</td></tr>
 </table>
 
 **Resumen:**
+Durante la sesión de validación, José interactuó con la Landing Page y los flujos principales de la aplicación móvil (vinculación, historial de bienestar y gestión de alertas). Destacó que el diseño de la web le transmite tranquilidad al ser limpio y no asemejarse a la página de un hospital o seguro médico, lo cual reduce la fricción inicial. Sobre el flujo de vinculación por código, lo consideró un proceso rápido y mucho menos invasivo que alternativas de rastreo por GPS, lo que generaría mayor confianza en su abuela. Apreció especialmente el panel de historial y las sugerencias automáticas, mencionando que le aliviarían la ansiedad diaria durante sus horas de trabajo. Valoró de forma muy positiva la función de coordinación de alertas, indicando que evitaría la duplicidad de esfuerzos en su familia. Calificó la solución general con un 9 a 10 sobre 10.
 
 </div>
 
@@ -9174,21 +9304,22 @@ Luego probó el prototipo de la aplicación móvil y valoró de forma positiva l
 
 ##### Entrevista 2
 
-<img src="" alt="" width="700"/>
+<img src="assets/img/interviews/validacion-kevin.png" alt="Screenshot validación Kevin" width="700"/>
 
 <br>
 
 <table align="center">
   <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td>jose</td></tr>
-  <tr><td><b>Edad</b></td><td></td></tr>
-  <tr><td><b>Distrito</b></td><td></td></tr>
-  <tr><td><b>Entrevistador</b></td><td></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>38:13</i></td></tr>
-  <tr><td><b>Duración</b></td><td></td></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>Kevin</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>27 años</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>San Juan de Miraflores</i></td></tr>
+  <tr><td><b>Entrevistador</b></td><td>Kelber Sandoval Aiquipa</td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>31:01</i></td></tr>
+  <tr><td><b>Duración</b></td><td>6 min 54 s</td></tr>
 </table>
 
 **Resumen:**
+Kevin evaluó el prototipo móvil y la Landing Page enfocándose en la usabilidad y la reducción de la preocupación constante. Al observar la web, resaltó que el mensaje principal logra comunicar acompañamiento sin sentirse invasivo. Durante la prueba del prototipo móvil, validó positivamente el registro y la vinculación con el adulto mayor mediante un código de 4 dígitos, considerándolo una medida segura y nada complicada para personas de edad avanzada. Al revisar el flujo del historial y las notificaciones de inactividad o emergencia, confirmó que la aplicación le ahorraría el estrés y las llamadas innecesarias que suele hacer por preocupación, otorgándole paz mental para continuar con su rutina laboral. Concluyó calificando la aplicación con un 9 sobre 10, destacando que es una propuesta sólida y adaptada a las necesidades reales de cuidado a distancia.
 
 </div>
 
@@ -9228,7 +9359,143 @@ Link Gerneral de las entrevistas: <a href="https://upcedupe-my.sharepoint.com/:v
 
 ### 4.3.3. Evaluaciones según heurísticas
 
-<div style="page-break-after: always;"></div>
+### 4.3.3. Evaluaciones según heurísticas.
+
+**UX Heuristics & Principles Evaluation**
+**Usability - Inclusive Design - Information Architecture**
+
+**CARRERA:** Ingeniería de Software
+**CURSO:** 1acc0238 Aplicaciones para dispositivos móviles
+**NRC:** 4945
+**PROFESORES:** Mayta Guillermo, Jorge Luis
+**AUDITOR:** Grupo 2: BlockVoluntariado team
+**CLIENTE(S):** VitalCare (Contreras A., Gallardo C., García V., Salinas B., Sandoval K.)
+**SITE o APP A EVALUAR:** Serenia (Mobile Apps)
+
+**TAREAS A EVALUAR:**
+
+El alcance de esta evaluación incluye la revisión de las siguientes tareas en los prototipos de alta fidelidad:
+
+1. Grabación y envío de mensaje de audio (Adulto mayor).
+2. Consulta del historial de alertas (Familiar).
+3. Visualización del panel de estado diario (Familiar).
+4. Coordinación de turnos de atención (Familiar).
+5. Interacción con el botón de auxilio (Adulto mayor).
+
+---
+
+**ESCALA DE SEVERIDAD**
+
+Los errores serán puntuados tomando en cuenta la siguiente escala de severidad:
+
+| Nivel | Descripción |
+| :--- | :--- |
+| **1** | **Problema superficial:** puede ser fácilmente superado por el usuario u ocurre con muy poca frecuencia. No necesita ser arreglado a no ser que exista disponibilidad de tiempo. |
+| **2** | **Problema menor:** puede ocurrir un poco más frecuentemente o es un poco más difícil de superar para el usuario. Se le debería asignar una prioridad baja resolverlo de cara al siguiente release. |
+| **3** | **Problema mayor:** ocurre frecuentemente o los usuarios no son capaces de resolverlos. Es importante que sean corregidos y se les debe asignar una prioridad alta. |
+| **4** | **Problema muy grave:** un error de gran impacto que impide al usuario continuar con el uso de la herramienta. Es imperativo que sea corregido antes del lanzamiento. |
+
+**TABLA RESUMEN DE PROBLEMAS**
+
+| # | Problema | Escala de severidad | Heurística/Principio violado |
+| :--- | :--- | :--- | :--- |
+| 1 | El envío de audio se realiza directamente sin opción a escuchar o cancelar la grabación. | 3 | Usability: Control y libertad del usuario |
+| 2 | Las alertas de "Emergencia" e "Inactividad" no presentan una jerarquía de color que distinga su nivel de gravedad. | 3 | Information Architecture: Is it communicative? |
+| 3 | El estado de pausa se muestra al familiar con un mensaje ambiguo ("Hoy prefirió no responder") que puede generar ansiedad. | 2 | Usability: Consistencia y estándares |
+| 4 | La pantalla de turnos de atención carece de confirmación visual al intentar cancelar o liberar un día asignado. | 3 | Usability: Prevención de errores |
+| 5 | El botón de auxilio es susceptible a toques accidentales por falta de un gesto de confirmación (ej. mantener presionado). | 4 | Usability: Prevención de errores |
+
+---
+
+**DESCRIPCIÓN DE PROBLEMAS:**
+
+**PROBLEMA #1: Falta de revisión y cancelación antes de enviar un audio**
+
+**Severidad:** 3 
+**Heurística violada:** Usability — Control y libertad del usuario (Salida de emergencia) 
+**Problema:**
+En la vista "Cuéntale cómo estuvo tu día" del adulto mayor, la instrucción indica "Toca el botón y habla con calma. Se envía a tu familia". Esto sugiere que al detener la grabación, el audio se enviará automáticamente. Los adultos mayores suelen equivocarse al grabar audios o presionar botones por accidente. Al no existir una opción clara de "Escuchar", "Descartar" o "Cancelar" antes del envío definitivo, el usuario queda atrapado en una acción irreversible que vulnera su privacidad.
+
+<div align="center">
+
+![Evidencia Problema 1](assets/img/heuristics/problema-1-audio.png)
+  <br/><i>Captura: Pantalla de grabación de audio del adulto mayor.</i>
+</div>
+
+**Recomendación:**
+Implementar un paso intermedio tras finalizar la grabación donde se muestren dos botones claros: "Escuchar / Descartar" y "Enviar a mi familia", otorgando al usuario una salida de emergencia.
+
+<br>
+
+**PROBLEMA #2: Alertas sin jerarquía visual de criticidad**
+
+**Severidad:** 3 
+**Principio violado:** Information Architecture — Is it communicative? 
+**Problema:**
+En la vista de "Alertas" de la aplicación del familiar, tanto la notificación de "Emergencia" (activación del botón de ayuda) como la de "Inactividad" (no respondió el check-in) se muestran bajo el mismo formato de etiqueta "Pendiente". Visualmente no hay una diferenciación de color o iconografía de alto impacto que ayude al familiar a distinguir en milisegundos una urgencia médica real de un simple olvido de responder el celular.
+
+<div align="center">
+
+![Evidencia Problema 2](assets/img/heuristics/problema-2-alertas.png)
+  <br/><i>Captura: Historial de alertas del familiar a distancia.</i>
+</div>
+
+**Recomendación:**
+Aplicar un código cromático estricto: utilizar rojo intenso y un ícono de advertencia grueso exclusivamente para "Emergencia", y utilizar un tono naranja o amarillo preventivo para "Inactividad".
+
+<br>
+
+**PROBLEMA #3: Mensaje ambiguo en el estado de pausa**
+
+**Severidad:** 2 
+**Heurística violada:** Usability — Consistencia y estándares 
+**Problema:**
+Cuando el adulto mayor activa la función de "Pausa diaria" (no recibir preguntas hoy), el panel de estado del familiar muestra el mensaje: "Hoy prefirió no responder". Esta redacción es ambigua y alarmante, ya que el familiar puede interpretar que su padre/madre está molesto, deprimido o ignorando la aplicación intencionalmente, y no que simplemente usó la función legítima de pausa de la app.
+
+<div align="center">
+
+![Evidencia Problema 3](assets/img/heuristics/problema-3-pausa.png)
+  <br/><i>Captura: Panel de estado diario mostrando "Hoy prefirió no responder".</i>
+</div>
+
+**Recomendación:**
+Estandarizar el lenguaje (Ubiquitous Language). Si la función se llama "Día de Pausa", el panel del familiar debe decir explícitamente: "Mamá Rosa activó su día de pausa" o "Preguntas pausadas por hoy", eliminando el sesgo negativo.
+
+<br>
+
+**PROBLEMA #4: Modificación de turnos sin prevención de errores**
+
+**Severidad:** 3 
+**Heurística violada:** Usability — Prevención de errores 
+**Problema:**
+En la vista "Turnos de atención", los familiares coordinan qué día se hace cargo cada uno. Si un familiar presiona accidentalmente sobre su turno asignado para cancelarlo, no existe un *Modal* (cuadro de diálogo) de confirmación. Una cancelación accidental dejaría un día del adulto mayor sin cobertura familiar, lo que representa una falla grave en la logística del cuidado.
+
+<div align="center">
+
+![Evidencia Problema 4](assets/img/heuristics/problema-4-turnos.png)
+  <br/><i>Captura: Pantalla de asignación de turnos de atención.</i>
+</div>
+
+**Recomendación:**
+Añadir un *dialog box* de confirmación al intentar remover o cambiar un turno: "¿Estás seguro de que deseas liberar este turno? El día quedará sin responsable".
+
+<br>
+
+**PROBLEMA #5: Activación accidental del Botón de Auxilio**
+
+**Severidad:** 4 
+**Heurística violada:** Usability — Prevención de errores 
+**Problema:**
+El botón de emergencia, por su naturaleza, debe ser de fácil acceso. Sin embargo, si este se activa con un simple toque (tap) en la pantalla principal, es altamente probable que el adulto mayor lo dispare por accidente al guardar el celular en el bolsillo o al intentar limpiar la pantalla, enviando alertas de pánico erróneas a toda la familia. 
+
+<div align="center">
+
+![Evidencia Problema 5](assets/img/heuristics/problema-5-sos.png)
+  <br/><i>Captura: Pantalla principal / navegación del adulto mayor.</i>
+</div>
+
+**Recomendación:**
+Requerir una interacción intencional para confirmar la emergencia. En lugar de un solo toque, implementar un botón de "Mantener presionado por 3 segundos" (con una animación de llenado circular) o un "Deslizar para pedir ayuda" (Swipe to SOS).
 
 # Conclusiones
 ## Conclusiones y Recomendaciones
