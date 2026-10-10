@@ -3978,7 +3978,7 @@ Este escenario resuelve el caso en que el adulto mayor no responde su check-in d
   <br/><i>Imagen 37. Domain Message Flow 4 - Check-in no respondido y alerta de inactividad.</i>
 </div>
 <br>
-Al vencer el plazo sin respuesta, el sistema solicita cerrar el check-in (1) y Daily Check-in publica el check-in no respondido (2). Alerts and Safety consulta a Care Circle los familiares vinculados al adulto mayor (3) y, al confirmar que tiene al menos uno, genera la alerta de inactividad, que queda visible en el apartado de alertas de la aplicación del familiar (4). El familiar indica que está atendiendo la alerta (5) y, luego de comunicarse con el adulto mayor, la marca como resuelta (6).
+Al vencer el plazo sin respuesta, el sistema solicita cerrar el check-in (1) y Daily Check-in publica el check-in no respondido (2). Alerts and Safety consulta a Care Circle los familiares vinculados al adulto mayor (3) y, al confirmar que tiene al menos uno, genera la alerta de inactividad, que queda visible en la sección de alertas de la aplicación del familiar (4). El familiar indica que está atendiendo la alerta (5) y, luego de comunicarse con el adulto mayor, la marca como resuelta (6).
  
 <br>
 El modelado de los flujos de mensajes permitió comprobar que la descomposición propuesta resiste la ejecución de los casos de negocio reales de Serenia. Los cuatro escenarios muestran una cadena de colaboración coherente: Identity & Access origina la identidad de cada usuario, Care Circle establece el vínculo familiar del que dependen todas las comunicaciones posteriores, Daily Check-in captura la señal diaria, Wellbeing Monitoring la interpreta y Alerts and Safety actúa cuando esa señal no llega. Cada contexto recibe lo que necesita para cumplir su responsabilidad y ninguno requiere asumir la de otro, lo que confirma que las fronteras trazadas son operativas y no solo conceptuales.
@@ -6058,7 +6058,7 @@ El bounded context Alerts and Safety garantiza que los familiares a distancia se
 
 Su modelo se organiza en dos aggregates: `EmergencyAlert` e `InactivityAlert`. Ambos se persisten en la misma tabla, diferenciados por su tipo, y comparten el ciclo de reconocimiento y resolución por parte de los familiares. Se modelan por separado porque sus ciclos de vida difieren: la emergencia se despacha a los familiares y confirma su entrega al adulto mayor, mientras que la inactividad se origina en un check-in no respondido y queda disponible directamente en la vista de alertas.
 
-El contexto reacciona al evento `CheckInMissed` de Daily Check-in para evaluar la inactividad y consulta a Care Circle los familiares activos del adulto mayor, tanto para despachar las emergencias como para verificar que solo los familiares vinculados consulten y atiendan las alertas. Las notificaciones se registran dentro de la aplicación y se muestran en el apartado de alertas de cada familiar.
+El contexto reacciona al evento `CheckInMissed` de Daily Check-in para evaluar la inactividad y consulta a Care Circle los familiares activos del adulto mayor, tanto para despachar las emergencias como para verificar que solo los familiares vinculados consulten y atiendan las alertas. Las notificaciones se registran dentro de la aplicación y se muestran en la sección de alertas de cada familiar.
 
 #### 2.6.6.1. Domain Layer
 
@@ -6687,7 +6687,7 @@ En la vista del familiar se mantiene la coherencia estructural con la versión d
 
 **Iconografía estándar**
 
-En este apartado se consideran los íconos completamente intuitivos para el usuario, que se adaptan a una acción o funcionalidad específica: casa para Inicio, campana para Avisos y Alertas, burbuja de chat para Familia y Mensajes, reloj con flecha para Historial, grupo de personas para Círculo, micrófono para Audio y usuario para Cuenta. Todos pertenecen a un mismo set de íconos (Phosphor) para mantener un estilo uniforme, y siempre se acompañan de una etiqueta de texto, para no depender únicamente del símbolo, algo especialmente importante en adultos mayores.
+En esta sección se consideran los íconos completamente intuitivos para el usuario, que se adaptan a una acción o funcionalidad específica: casa para Inicio, campana para Avisos y Alertas, burbuja de chat para Familia y Mensajes, reloj con flecha para Historial, grupo de personas para Círculo, micrófono para Audio y usuario para Cuenta. Todos pertenecen a un mismo set de íconos (Phosphor) para mantener un estilo uniforme, y siempre se acompañan de una etiqueta de texto, para no depender únicamente del símbolo, algo especialmente importante en adultos mayores.
 
 ![Íconos estándar](assets/img/labeling-system/nav-icon1.png)
 ![Íconos estándar](assets/img/labeling-system/nav-icon2.png)
@@ -7858,7 +7858,7 @@ Las decisiones de interacción responden a la necesidad de enterarse rápido y c
 ## 4.1. Software Configuration Management
 ### 4.1.1. Software Development Environment Configuration
 
-Para el desarrollo, pruebas y despliegue de Serenia, el equipo ha configurado un entorno de trabajo distribuido que cubre las dos aplicaciones móviles, la landing page, los servicios backend y la base de datos. La selección de estas herramientas no solo responde a los requerimientos técnicos de cada plataforma, sino a la necesidad de mantener un ciclo de entrega continuo e integrado.
+Para el desarrollo, pruebas y despliegue de Serenia, el equipo ha configurado un entorno de trabajo distribuido que cubre las dos aplicaciones móviles, la landing page, los servicios backend y la base de datos. La selección de estas herramientas no solo responde a los requisitos técnicos de cada plataforma, sino a la necesidad de mantener un ciclo de entrega continuo e integrado.
 
 **1. Entorno de Desarrollo (Lenguajes y Frameworks)**
 *   **Backend API REST:** Desarrollado en **Java 17** utilizando **Spring Boot 3.x**. Se eligió esta pila por su robustez para implementar el monolito modular y su compatibilidad nativa con patrones de Domain-Driven Design (DDD).
