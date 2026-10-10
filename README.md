@@ -7725,7 +7725,181 @@ Ejemplos aplicados durante el Sprint 1:
 En esta sección se registra y explica el proceso de validación de Serenia con usuarios reales de los segmentos objetivo: adultos mayores que viven solos y familiares que los acompañan a distancia. Cada participante interactúa con el landing page y con las aplicaciones móviles, completando tareas sobre los *user flows* principales del producto mientras expresan sus observaciones. La sección se organiza en tres partes: el diseño de las entrevistas, que define los elementos y flujos a evaluar en cada segmento; el registro de las entrevistas, que documenta a cada participante, la evidencia en video y el resumen de sus apreciaciones; y las evaluaciones según heurísticas de usabilidad, arquitectura de información y diseño inclusivo.
 
 ### 4.3.1. Diseño de Entrevistas
+
 ### 4.3.2. Registro de Entrevistas
+<br>
+
+#### Segmento 1: Adultos mayores que viven solos
+
+<div align="center">
+
+##### Entrevista 1
+
+<img src="assets/img/interviews/entrevista.png" alt="Screenshot entrevista" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>-</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="">Enlace de entrevistas</a></i></td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+
+<br>
+
+<div align="center">
+
+##### Entrevista 2
+
+<img src="assets/img/interviews/entrevista.png" alt="Screenshot entrevista" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>-</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="">Enlace de entrevistas</a></i></td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+
+<br>
+
+
+<div align="center">
+
+##### Entrevista 3
+
+<img src="assets/img/interviews/entrevista.png" alt="Screenshot entrevista" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>-</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="">Enlace de entrevistas</a></i></td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+<br>
+
+#### Segmento 2: Familiares a distancia
+
+<div align="center">
+
+##### Entrevista 1
+
+
+<img src="assets/img/interviews/entrevista.png" alt="Screenshot entrevista" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>-</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="">Enlace de entrevistas</a></i></td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+
+<br>
+
+<div align="center">
+
+##### Entrevista 2
+
+<img src="assets/img/interviews/entrevista.png" alt="Screenshot entrevista" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>-</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="">Enlace de entrevistas</a></i></td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+
+<br>
+
+<div align="center">
+
+##### Entrevista 3
+
+
+<img src="assets/img/interviews/entrevista.png" alt="Screenshot entrevista" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>-</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="">Enlace de entrevistas</a></i></td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+
+<br>
+
+
+<div align="center">
+
+##### Entrevista 4
+
+<img src="assets/img/interviews/entrevista.png" alt="Screenshot entrevista" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>-</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="">Enlace de entrevistas</a></i></td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+
+
+
+<br>
+
+
 ### 4.3.3. Evaluaciones según heurísticas
 
 <div style="page-break-after: always;"></div>
