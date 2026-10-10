@@ -4368,13 +4368,13 @@ Clases que resuelven el acceso a la base de datos MySQL y a los mecanismos técn
 
 #### 2.6.1.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Identity & Access, elaborado con la herramienta Structurizr (Imagen 38). El diagrama descompone el módulo de identidad dentro del container API REST y muestra cómo sus componentes se distribuyen entre las cuatro capas del diseño táctico, respetando la regla de dependencia unidireccional hacia el dominio.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Identity & Access, elaborado con la herramienta Structurizr (Imagen 38). El diagrama descompone el container Serenia RESTful API, construido con Java y Spring Boot, para mostrar los componentes que conforman el módulo de identidad, sus responsabilidades y su relación con los demás bounded contexts del monolito modular.
 
-El flujo de entrada llega desde la Aplicación Móvil hacia los dos componentes de la capa Interface: `UsersController`, que atiende el registro, la consulta de cuentas y las operaciones de perfil, y `SessionsController`, que atiende la autenticación y el cierre de sesión. Ambos delegan en la capa Application, donde `UserCommandService` resuelve las operaciones de escritura y `UserQueryService` las de lectura.
+Las peticiones llegan desde la aplicación del adulto mayor, desarrollada en Kotlin con Jetpack Compose, y desde la aplicación del familiar, desarrollada en Flutter. Antes de alcanzar los controladores atraviesan `BearerAuthorizationRequestFilter`, que valida la firma del token con `JwtTokenServiceImpl` y comprueba con `SessionQueryServiceImpl` que la sesión siga vigente. Luego, `UsersController` atiende el registro, la consulta de cuentas y la gestión del perfil y la contraseña, mientras que `SessionsController` atiende el inicio y el cierre de sesión.
 
-En el centro del diagrama se ubica el aggregate `User`, junto con la entidad `Session` que contiene, los Commands y Queries que expresan las intenciones del contexto y los Domain Events que se publican al completarse cada operación. Alrededor del aggregate se muestran las abstracciones que el dominio declara y que ninguna capa superior implementa: `IUserRepository`, `IPasswordHashingService`, `ITokenService` e `IDomainEventPublisher`.
+Los controladores delegan en los servicios de la capa Application. `UserCommandServiceImpl` y `SessionCommandServiceImpl` ejecutan las operaciones de escritura sobre los aggregates `User` y `Session`, agrupados en el componente IAM Domain Model; para ello se apoyan en `BCryptHashingServiceImpl`, que cifra y verifica contraseñas, y en `JwtTokenServiceImpl`, que emite los tokens. `UserQueryServiceImpl` y `SessionQueryServiceImpl` resuelven las lecturas. `UserRepositoryImpl` y `SessionRepositoryImpl` persisten ambos aggregates en las tablas `users` y `sessions` de la base de datos MySQL mediante Spring Data JPA.
 
-La capa Infrastructure aparece en el extremo opuesto, con las implementaciones concretas de esas abstracciones: `UserRepository`, que persiste el aggregate sobre las tablas `users` y `sessions` apoyándose en `UserPersistenceMapper`; `BCryptPasswordHashingService`, encargado del cifrado y la verificación de credenciales; `JwtTokenService`, que emite los tokens de sesión y calcula su hash; y `DomainEventPublisherAdapter`, que publica los eventos de dominio dentro del monolito modular para que otros módulos reaccionen a ellos. Las flechas evidencian que las dependencias apuntan siempre hacia el dominio y que ningún componente de Interface accede directamente a la base de datos.
+`SpringDomainEventPublisher` publica los eventos de dominio dentro del monolito. Entrega `PasswordChanged` a `PasswordChangedEventHandler`, que solicita la revocación de las demás sesiones del usuario, y `OlderAdultRegistered` a Care Circle y Daily Check-in, que crean el círculo de cuidado y las preferencias del adulto mayor. Por último, `IamContextFacade` expone a Care Circle, Daily Check-in, Wellbeing Monitoring y Social Companionship el rol, el nombre y la zona horaria de un usuario, sin que esos contextos dependan del modelo interno de Identity & Access.
 
 <div align="center">
 
@@ -4389,13 +4389,13 @@ En esta sección se presentan los diagramas de mayor nivel de detalle sobre la i
 
 ##### 2.6.1.6.1. Bounded Context Domain Layer Class Diagrams
 
-El diagrama de clases representa la capa Domain del bounded context Identity & Access, elaborado con la herramienta UML correspondiente (Imagen 39). En él se muestran las clases, interfaces y enumeraciones del dominio junto con sus atributos, métodos y el scope de cada miembro.
+El diagrama de clases representa la capa Domain del bounded context Identity & Access (Imagen 39). En él se muestran las clases, interfaces y enumeraciones del dominio junto con sus atributos, métodos y el scope de cada miembro.
 
-El elemento central es `User`, el aggregate root del contexto. Sus atributos son privados y solo se modifican a través de sus métodos públicos, lo que garantiza que ninguna regla de identidad pueda vulnerarse desde fuera del aggregate. `User` mantiene una relación de composición con `Session`, con multiplicidad 1 a 0..*: una cuenta puede tener varias sesiones a lo largo del tiempo y ninguna sesión existe de forma independiente de la cuenta que la originó. Por ello, la apertura y la revocación de sesiones se realizan mediante los métodos `openSession` y `closeSession` del aggregate, y no sobre la entidad directamente.
+El modelo se compone de dos aggregate roots, `User` y `Session`, que extienden la clase base `AggregateRoot` del shared kernel. Sus atributos son privados y solo se modifican a través de sus métodos públicos, lo que garantiza que ninguna regla de identidad pueda vulnerarse desde fuera del aggregate. Ambos se relacionan por identidad y no por referencia: `Session` conserva el `UserId` de su dueño, con multiplicidad 0..* sesiones por cuenta. Esta separación evita que cada modificación de la cuenta cargue el historial completo de accesos. Las sesiones se crean mediante la factory `open`, se cierran por decisión del usuario con `close` y se revocan por seguridad con `revoke`.
 
-Los value objects aparecen relacionados con `User` y con `Session` por composición, cada uno con multiplicidad 1, salvo aquellos que corresponden a datos opcionales de la cuenta. Estos tipos encapsulan las validaciones de formato y evitan la obsesión por primitivos: el dominio nunca maneja un correo, una contraseña o un token como cadenas simples. Las enumeraciones `UserRole` y `AccountStatus` se asocian también a `User` con multiplicidad 1, y expresan respectivamente el rol inmutable definido en el registro y el estado del ciclo de vida de la cuenta.
+Los value objects se relacionan por composición con el aggregate que los contiene. `User` se compone de `UserId`, `EmailAddress`, `PasswordHash`, `PersonName`, `PhoneNumber` y `LocaleCode`; `Session`, de `SessionId`, `TokenHash` y `DeviceInfo`. Cada value object tiene multiplicidad 1, salvo `PhoneNumber` y `DeviceInfo`, que corresponden a datos opcionales y tienen multiplicidad 0..1. Estos tipos validan su formato y longitud al construirse, de modo que el dominio nunca maneja un correo, una contraseña o un token como cadenas simples. Las enumeraciones `UserRole` y `AccountStatus` se asocian a `User` con multiplicidad 1 y expresan, respectivamente, el rol inmutable definido en el registro y el estado del ciclo de vida de la cuenta.
 
-El diagrama incluye además los Commands y Queries que expresan las intenciones de escritura y lectura del contexto, y los Domain Events que el aggregate registra al completarse cada operación. Finalmente se muestran las abstracciones declaradas por el dominio: `IUserRepository`, que define el contrato de persistencia del aggregate; `IUserCommandService` e `IUserQueryService`, que definen las operaciones de escritura y lectura; e `IPasswordHashingService`, `ITokenService` e `IDomainEventPublisher`, que aíslan al dominio de los mecanismos técnicos de cifrado, emisión de tokens y publicación de eventos. Ninguna de estas interfaces depende de las capas superiores, de modo que las dependencias apuntan siempre hacia el dominio.
+El diagrama incluye además los Commands y Queries que expresan las intenciones de escritura y lectura del contexto, y los Domain Events que registran los aggregates al completarse cada operación. Finalmente se muestran las interfaces declaradas por el dominio: `UserRepository` y `SessionRepository`, que definen los contratos de persistencia de cada aggregate, y `UserCommandService`, `UserQueryService`, `SessionCommandService` y `SessionQueryService`, que definen las operaciones de escritura y lectura del contexto. Estas interfaces no dependen de ninguna capa superior; sus implementaciones se ubican en las capas Application e Infrastructure.
 
 <div align="center">
 
@@ -4408,44 +4408,47 @@ El diagrama incluye además los Commands y Queries que expresan las intenciones 
 
 ##### 2.6.1.6.2. Bounded Context Database Design Diagram
 
-El diagrama de base de datos (Imagen 40) presenta los objetos que permiten la persistencia del bounded context Identity & Access sobre el motor MySQL. El contexto se materializa en dos tablas, `users` y `sessions`, que corresponden respectivamente al aggregate root `User` y a la entidad `Session` que este contiene.
+El diagrama de base de datos (Imagen 40) presenta los objetos que permiten la persistencia del bounded context Identity & Access sobre el motor MySQL 8.0. El contexto se materializa en dos tablas, `users` y `sessions`, que corresponden respectivamente a los aggregates `User` y `Session`. Los identificadores se almacenan como `BINARY(16)`, la representación compacta de un UUID, y los instantes como `DATETIME(6)` en UTC, de modo que el modelo no depende de la zona horaria del servidor.
 
 **Tabla `users`**
 
 | Columna | Tipo | Constraints | Descripción |
 | --- | --- | --- | --- |
-| id | uuid | PK | Identificador único de la cuenta. |
+| id | binary(16) | PK | Identificador único de la cuenta. |
 | email | varchar(160) | NOT NULL, UNIQUE | Correo electrónico con el que el usuario inicia sesión. |
-| password_hash | varchar(255) | NOT NULL | Contraseña cifrada de la cuenta. |
-| role | user_role | NOT NULL | Rol del usuario: adulto mayor o familiar a distancia. |
+| password_hash | varchar(255) | NOT NULL | Hash BCrypt de la contraseña; nunca se almacena en claro. |
+| role | enum user_role | NOT NULL | Rol del usuario: OLDER_ADULT o DISTANT_RELATIVE. |
 | full_name | varchar(120) | NOT NULL | Nombre completo del usuario. |
-| phone_number | varchar(20) | - | Número de contacto del usuario. |
-| birth_date | date | - | Fecha de nacimiento del usuario. |
-| photo_url | varchar(500) | - | Ubicación de la fotografía de perfil del usuario. |
+| phone_number | varchar(20) | - | Número de contacto del usuario, opcional. |
+| birth_date | date | - | Fecha de nacimiento del usuario, opcional. |
 | locale | varchar(10) | NOT NULL, DEFAULT 'es_419' | Idioma y región de la interfaz. |
-| status | account_status | NOT NULL, DEFAULT 'ACTIVE' | Estado de la cuenta: activa, suspendida o eliminada. |
-| created_at | timestamp | NOT NULL | Fecha y hora de creación de la cuenta. |
-| updated_at | timestamp | NOT NULL | Fecha y hora de la última modificación. |
+| time_zone | varchar(50) | NOT NULL, DEFAULT 'America/Lima' | Zona horaria del usuario; los demás contextos la usan para determinar su día en curso. |
+| status | enum account_status | NOT NULL, DEFAULT 'ACTIVE' | Estado de la cuenta: ACTIVE, SUSPENDED o DELETED. |
+| photo_url | varchar(500) | - | Ubicación de la fotografía de perfil, opcional. |
+| created_at | datetime(6) | NOT NULL | Instante de creación de la cuenta, en UTC. |
+| updated_at | datetime(6) | NOT NULL | Instante de la última modificación, en UTC. |
 
-La tabla incluye un índice único sobre `email`, que garantiza a nivel de base de datos la regla de unicidad de cuentas, y un índice sobre `role`, que optimiza las consultas que filtran usuarios según el tipo de aplicación a la que acceden.
+La tabla incluye un índice único sobre `email`, que garantiza a nivel de base de datos la unicidad de las cuentas incluso ante registros simultáneos.
 
 **Tabla `sessions`**
 
 | Columna | Tipo | Constraints | Descripción |
 | --- | --- | --- | --- |
-| id | uuid | PK | Identificador único de la sesión. |
-| user_id | uuid | NOT NULL, FK → users.id | Cuenta a la que pertenece la sesión. |
-| token_hash | varchar(255) | NOT NULL | Token de sesión cifrado entregado al cliente. |
-| device_info | varchar(200) | - | Descripción del dispositivo desde el que se inició la sesión. |
-| issued_at | timestamp | NOT NULL | Fecha y hora de emisión del token. |
-| expires_at | timestamp | NOT NULL | Fecha y hora en que el token deja de ser válido. |
-| revoked_at | timestamp | - | Fecha y hora del cierre de sesión, si este ocurrió. |
+| id | binary(16) | PK | Identificador único de la sesión. |
+| user_id | binary(16) | NOT NULL, FK → users.id | Cuenta a la que pertenece la sesión. |
+| token_hash | varchar(255) | NOT NULL | Hash SHA-256 del token entregado al cliente; el token nunca se almacena en claro. |
+| device_info | varchar(200) | - | Descripción del dispositivo desde el que se inició la sesión, opcional. |
+| issued_at | datetime(6) | NOT NULL | Instante de emisión del token, en UTC. |
+| expires_at | datetime(6) | NOT NULL | Instante en que el token deja de ser válido, en UTC. |
+| revoked_at | datetime(6) | - | Instante del cierre o la revocación de la sesión; es nulo mientras la sesión siga abierta. |
 
-La tabla cuenta con un índice sobre `user_id`, que soporta la consulta de las sesiones vigentes de una cuenta.
+La clave foránea `user_id` cuenta con un índice, que MySQL crea automáticamente para toda clave foránea y que soporta la consulta de las sesiones vigentes de una cuenta. La columna `revoked_at` permite que el filtro de autorización rechace un token cerrado o revocado aunque su firma siga siendo válida.
 
 **Relación entre tablas**
 
-Existe una relación de uno a muchos entre `users` y `sessions`: una cuenta puede tener cero o varias sesiones registradas, mientras que toda sesión pertenece obligatoriamente a una única cuenta. Esta relación se implementa mediante la clave foránea `sessions.user_id`, que referencia a `users.id` y que refleja en la base de datos la composición definida en el modelo de dominio entre el aggregate `User` y la entidad `Session`.
+Existe una relación de uno a muchos entre `users` y `sessions`: una cuenta puede tener cero o varias sesiones a lo largo del tiempo, mientras que toda sesión pertenece obligatoriamente a una única cuenta. La relación se implementa mediante la clave foránea `sessions.user_id`, que referencia a `users.id`. En la base de datos refleja la referencia por identidad entre los aggregates `Session` y `User`, y la clave foránea garantiza que ninguna sesión apunte a una cuenta inexistente.
+
+La tabla `users` también es referenciada por las tablas de los demás bounded contexts, que identifican a adultos mayores y familiares por su `id`. Esas relaciones se presentan en el diagrama de base de datos de cada contexto.
 
 <div align="center">
 
