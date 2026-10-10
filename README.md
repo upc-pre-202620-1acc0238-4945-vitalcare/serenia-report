@@ -126,8 +126,8 @@ La Imagen 1 muestra el resumen de actividad (Pulse) del repositorio entre el 18 
 
 
 <p align="center">
-  <img src="" alt="TB1 Insights" width="900"/>
-    <br/><i>Imagen X. Insights de la Segunda Entrega (TB1)</i>
+  <img src="assets/img/insights/insights1.png" alt="TB1 Insights" width="900"/>
+    <br/><i>Imagen 2. Insights de la Segunda Entrega (TB1)</i>
 </p>
 
 <div style="page-break-after: always;"></div>
@@ -8525,134 +8525,191 @@ Sugerencias de acción dirigidas a los familiares cuando se detecta un patrón d
 | 2702159| Documentación OpenAPI del contexto Social Companionship |
 | 428f213| Documentación OpenAPI del contexto Wellbeing Monitoring |
 #### 4.2.1.8. Software Deployment Evidence for Sprint Review
-Durante el Sprint 1 el alcance del equipo en materia de despliegue abarcó los tres tipos de productos digitales de Serenia: la **Landing Page**, los **Web Services** (Serenia Platform) y el **prototipo de la aplicación móvil**. La Landing Page, correspondiente a un sitio estático informativo, fue publicada en Netlify. Para los Web Services se definió la arquitectura de despliegue sobre Microsoft Azure, se identificó la configuración necesaria del backend y se prepararon los recursos en la nube. Finalmente, el prototipo de la aplicación móvil se encuentra disponible a través del enlace documentado en la sección de Mobile Applications Prototyping.
+#### 5.2.1.7. Software Deployment Configuration
 
-| Producto digital | Plataforma | Estado al cierre del Sprint 1 |
-|---|---|---|
-| Landing Page | Netlify (integración con GitHub) | Desplegada |
-| Web Services (Serenia Platform) | Azure App Service  | Desplegada |
-| Prototipo de aplicación móvil | Prototipo navegable | Disponible |
+Durante el Sprint 1 el equipo realizó el despliegue de los dos productos digitales que forman parte del alcance de esta iteración: la **Landing Page** de Serenia, publicada en Netlify, y los **Web Services** (Serenia Platform), desplegados en Microsoft Azure como un contenedor Docker sobre Azure App Service, con base de datos MySQL administrada y almacenamiento de archivos multimedia en Azure Blob Storage. Ambos despliegues se configuraron a partir de los repositorios de la organización de GitHub del equipo (`upc-pre-202620-1acc0238-4945-vitalcare`): `serenia-website` para la Landing Page y `serenia-platform` para los Web Services.
+
+Las actividades realizadas comprendieron la creación de cuentas y recursos en los proveedores cloud, la vinculación de los repositorios con la plataforma de despliegue, la configuración de las variables de entorno del backend y la verificación de ambos productos en producción.
+
+| Producto digital | Plataforma | Estado | URL |
+|---|---|---|---|
+| Landing Page | Netlify (despliegue continuo desde GitHub) | Desplegada | [https://sereniawebsite.netlify.app](https://sereniawebsite.netlify.app/) |
+| Web Services (Serenia Platform) | Azure App Service (contenedor Docker) | Desplegados | [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html) |
+
 
 ---
 
 ### 1. Landing Page — Netlify
 
-Para el despliegue de la Landing Page se utilizó Netlify como plataforma de hosting, aprovechando su integración nativa con GitHub para automatizar el despliegue continuo. La configuración establecida permite que cada merge realizado a la rama `main` del repositorio `serenia-website` dispare automáticamente un nuevo build y publicación en producción, sin intervención manual del equipo.
+Para el despliegue de la Landing Page se utilizó Netlify como plataforma de hosting, aprovechando su integración nativa con GitHub para automatizar el despliegue continuo. La Landing Page es un sitio estático (HTML) alojado en el repositorio `serenia-website`. La configuración establecida permite que cada cambio integrado a la rama `main` dispare automáticamente un nuevo build y publicación en producción, sin intervención manual del equipo.
 
 El proceso se llevó a cabo siguiendo los pasos detallados a continuación:
 
 **1.1. Creación de la cuenta en Netlify**
 
-Se creó la cuenta del equipo en Netlify y se autorizó el acceso a la organización de GitHub que aloja el repositorio.
-
+Se creó la cuenta en Netlify y se autorizó el acceso a la organización de GitHub `upc-pre-202620-1acc0238-4945-vitalcare`, que aloja los repositorios del proyecto.
 
 **1.2. Vinculación del repositorio con Netlify**
 
-Se importó el repositorio `upc-pre-202620-1acc0238-4945-vitalcare
-serenia-website` como un nuevo sitio desde GitHub, configurando la rama `main` como fuente de despliegue de producción y estableciendo el pipeline de integración continua entre ambas plataformas.
+Desde la opción de importar un proyecto existente, se conectó Netlify con el proveedor Git (GitHub), se seleccionó la organización del equipo y se eligió el repositorio `serenia-website` (el listado también muestra los repositorios `serenia-report`, `serenia-platform`, `serenia-mobile-android` y `serenia-app-cross`). Luego se pasó a la configuración del proyecto y su despliegue.
+
+![Selección del repositorio serenia-website en Netlify](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/netlify-import-repo.jpg)
+
+**1.3. Configuración del proyecto y del build**
+
+Se configuró el proyecto `sereniawebsite` con la rama `main` como fuente de despliegue de producción. Los parámetros de construcción definidos fueron:
+
+| Parámetro | Valor |
+|---|---|
+| Repositorio | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-website` |
+| Rama de producción | `main` |
 
 
-**1.3. Configuración del despliegue automático (CI/CD)**
+**1.4. Despliegue automático (CI/CD) y verificación en producción**
 
-Netlify ejecuta automáticamente el proceso de build y publicación cada vez que se integra un cambio a la rama `main` mediante Pull Request. Durante el Sprint 1 se realizaron `6` Pull Requests, el último de los cuales activó el despliegue final de la versión completa de la Landing Page.
+Netlify ejecuta automáticamente el build y la publicación cada vez que se integra un cambio a la rama `main` mediante Pull Request. En el historial de despliegues de producción se observan los Pull Requests #6 y #8 desde la rama `develop`; el Pull Request #8 (commit `9865b70`) activó el despliegue final de la versión completa de la Landing Page, que se encuentra en estado **Published**. El primer despliegue, correspondiente al commit inicial, falló en la etapa de construcción y fue superado en los despliegues posteriores.
 
-**1.4. Verificación del despliegue en producción**
+El sitio quedó publicado con el dominio asignado `sereniawebsite.netlify.app`, con origen en GitHub.
 
-Se verificó que el despliegue se encontrara en estado **Published** en el panel de Netlify, confirmando el despliegue exitoso de la Landing Page con el dominio asignado `serenia.netlify.app` y el commit `ba8f35b` como última versión publicada.
+![Panel del proyecto sereniawebsite en Netlify con el despliegue publicado](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/netlify-production.jpg)
 
+**1.5. Verificación de la Landing Page en producción**
 
-
-**1.6. Verificación de la Landing Page en producción**
-
-Se comprobó que todas las secciones de la Landing Page de Serenia se visualizaran correctamente en el navegador, incluyendo el diseño responsivo y los estilos aplicados.
+Se comprobó que todas las secciones de la Landing Page de Serenia se visualizaran correctamente en el navegador desde la URL pública, incluyendo el diseño responsivo y los estilos aplicados: [https://sereniawebsite.netlify.app](https://sereniawebsite.netlify.app/).
 
 ![Landing Page de Serenia en producción](./assets/img/labeling-system/landing-hero.png)
 
 ---
 
-### 2. Web Services (Serenia Platform) — Azure
+### 2. Web Services (Serenia Platform) — Microsoft Azure
 
-El backend de Serenia es una aplicación Spring Boot (Java 26) que persiste su información en MySQL y almacena los archivos multimedia (audios y fotos) en un contenedor privado de Azure. Para su despliegue se definió el uso de **Azure App Service para contenedores (Docker)** como servicio de aplicación y **Azure Database for MySQL** como base de datos administrada, siguiendo la configuración ya preparada en el perfil `prod` del proyecto, que lee todos sus parámetros desde variables de entorno.
+El backend de Serenia es una aplicación Spring Boot (Java) que persiste su información en MySQL y almacena los audios y fotos que comparten los usuarios en un contenedor privado de Azure Blob Storage. Para su despliegue se empaquetó la aplicación como una imagen Docker, que se publicó en Azure Container Registry y se ejecuta en Azure App Service para contenedores, usando la configuración del perfil de producción del proyecto, que lee todos sus parámetros desde variables de entorno. Todos los recursos se crearon en la región **Mexico Central**, bajo la suscripción *Azure for Students*.
 
-> **Estado:** los recursos y la configuración descritos a continuación corresponden al plan de despliegue del Sprint 1. El despliegue final del servicio se encuentra pendiente y será completado por el equipo; al hacerlo, las capturas y URLs de esta sección se reemplazarán por las del entorno desplegado.
+**2.1. Creación del grupo de recursos en Azure**
 
-**2.1. Creación de la cuenta y el grupo de recursos en Azure**
+Se creó el grupo de recursos `serenia-rg`, que agrupa los cinco recursos de Serenia Platform:
 
-Se creó la suscripción de Azure del equipo y un grupo de recursos (`<nombre-del-grupo-de-recursos>`) que agrupa todos los recursos de Serenia Platform.
+| Recurso | Tipo | Función |
+|---|---|---|
+| `serenia-mysql` | Servidor flexible de Azure Database for MySQL | Base de datos del backend |
+| `serenia-plan` | Plan de App Service | Capacidad de cómputo (Linux, nivel B1) |
+| `serenia-platform-api` | App Service | Ejecuta el contenedor del backend |
+| `sereniaplatformacr` | Container Registry | Almacena la imagen Docker |
+| `sereniaplatformsa` | Cuenta de almacenamiento | Archivos multimedia (audios y fotos) |
 
-![Grupo de recursos en Azure](./assets/img/sprint-1/deploy/azure-resource-group.png)
+![Grupo de recursos serenia-rg en Azure](./assets/img//sprint/capturas-azure-sprint1/serenia-deploy-img/azure-resource-group.png)
 
 **2.2. Provisión de Azure Database for MySQL**
 
-Se creó una instancia de Azure Database for MySQL (Flexible Server) para el entorno de producción. Se creó previamente la base de datos `<DATABASE_NAME>`, ya que el perfil `prod` del backend no la crea automáticamente (`createDatabaseIfNotExist=false`). La conexión usa SSL (`useSSL=true`), compatible con la configuración por defecto de Azure.
+Se creó el servidor flexible `serenia-mysql` y, dentro de él, la base de datos de usuario `serenia`, que utiliza el backend. La base de datos se crea previamente porque el perfil de producción de la aplicación no la genera automáticamente. Las demás bases de datos listadas (`mysql`, `information_schema`, `performance_schema` y `sys`) son del sistema.
 
-![Instancia de Azure Database for MySQL](./assets/img/sprint-1/deploy/azure-mysql.png)
+![Servidor serenia-mysql y base de datos serenia](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-mysql.png)
 
-**2.3. Creación de la cuenta de almacenamiento (Azure Blob Storage)**
+**2.3. Configuración de red y seguridad de la base de datos**
 
-Se creó una cuenta de almacenamiento con un contenedor privado (`serenia-media`) para los audios y fotos que comparten los usuarios. El backend se conecta mediante la cadena de conexión de la cuenta, y en producción usa Azure como proveedor de almacenamiento por defecto.
+En la sección de redes de `serenia-mysql` se verificó que la conexión TLS/SSL es obligatoria de forma predeterminada, en línea con la conexión segura (`useSSL=true`) que usa el backend. Se habilitó el acceso público al servidor con reglas de firewall y la opción *Permitir acceso público a este servidor desde cualquier servicio de Azure*, que permite que el App Service se conecte a la base de datos.
 
-![Cuenta de almacenamiento y contenedor en Azure](./assets/img/sprint-1/deploy/azure-storage.png)
+![Configuración de red de serenia-mysql](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-mysql-firewall.png)
 
-**2.4. Contenerización del backend con Docker**
+**2.4. Creación de la cuenta de almacenamiento (Azure Blob Storage)**
 
-Se preparó la imagen Docker del backend a partir del código del repositorio `<URL-del-repositorio-de-web-services>`, empaquetando la aplicación con Maven (`./mvnw package`) y ejecutándola sobre una imagen con JDK 26. La imagen se publica en un registro de contenedores (`<registro-de-contenedores>`).
+Se creó la cuenta de almacenamiento `sereniaplatformsa` con el contenedor `serenia-media`, de nivel de acceso anónimo **Privado**, donde el backend guarda los audios y las fotos. El acceso a los archivos se realiza únicamente a través de la API, que valida la autenticación del usuario.
 
-![Imagen del backend en el registro de contenedores](./assets/img/sprint-1/deploy/azure-registry.png)
+![Cuenta de almacenamiento y contenedor serenia-media](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-storage.png)
 
-**2.5. Creación del Azure App Service**
+**2.5. Publicación de la imagen Docker en Azure Container Registry**
 
-Se creó un App Service para contenedores con la imagen del backend como origen. El servicio expone la aplicación en el puerto indicado por la variable `PORT` (por defecto `8080`).
+Se construyó la imagen Docker del backend a partir del repositorio `serenia-platform` y se publicó en el registro `sereniaplatformacr`, en el repositorio `serenia-platform`, con las etiquetas `1.0.0` y `tb1`. Ambas etiquetas apuntan a la misma imagen (mismo digest), publicada el 9 de octubre de 2026.
 
-![Creación del App Service](./assets/img/sprint-1/deploy/azure-app-service.png)
+![Imagen serenia-platform con las etiquetas 1.0.0 y tb1 en Container Registry](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-registry.png)
 
-**2.6. Configuración de variables de entorno**
+**2.6. Creación y configuración del Azure App Service**
 
-Se configuraron en el App Service las variables que consume el perfil `prod` del backend. Los valores sensibles se registran como configuración de la aplicación y no se almacenan en el repositorio.
+Se creó la aplicación web `serenia-platform-api` sobre Linux, con el plan `serenia-plan` (B1) y modelo de publicación **Contenedor**, tomando como origen la imagen `sereniaplatformacr.azurecr.io/serenia-platform:tb1`. El servicio se encuentra en estado **En ejecución** y su estado en tiempo de ejecución es **Correcto**. El dominio predeterminado asignado es `serenia-platform-api.azurewebsites.net`.
+
+![Azure App Service serenia-platform-api en ejecución](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-app-service.png)
+
+**2.7. Configuración de las variables de entorno**
+
+Se configuraron en el App Service las variables de entorno que consume el backend. Los valores sensibles se registran como configuración de la aplicación y no se almacenan en el repositorio; en la captura se mantienen ocultos.
 
 | Variable | Propósito |
 |---|---|
-| `SPRING_PROFILES_ACTIVE` | `prod`; activa el perfil de producción (por defecto el proyecto usa `dev`) |
 | `DATABASE_URL`, `DATABASE_PORT`, `DATABASE_NAME` | Servidor, puerto y nombre de la base de datos MySQL |
 | `DATABASE_USER`, `DATABASE_PASSWORD` | Credenciales de la base de datos |
-| `JWT_SECRET` | Clave de firma de los tokens JWT (obligatoria en producción) |
-| `AZURE_STORAGE_CONNECTION_STRING` | Cadena de conexión de la cuenta de almacenamiento (obligatoria en producción) |
+| `JWT_SECRET` | Clave de firma de los tokens JWT |
+| `AZURE_STORAGE_CONNECTION_STRING` | Cadena de conexión de la cuenta de almacenamiento |
 | `AZURE_STORAGE_CONTAINER` | Nombre del contenedor de medios (`serenia-media`) |
-| `PORT` | Puerto de la aplicación |
+| `MEDIA_STORAGE_PROVIDER` | Proveedor de almacenamiento de archivos (Azure Blob Storage) |
+| `DOCKER_REGISTRY_SERVER_URL`, `DOCKER_REGISTRY_SERVER_USERNAME`, `DOCKER_REGISTRY_SERVER_PASSWORD` | Credenciales con las que App Service descarga la imagen desde Container Registry |
 
-![Variables de entorno del App Service](./assets/img/sprint-1/deploy/azure-app-settings.png)
-
-**2.7. Configuración de red y acceso a la base de datos**
-
-Se habilitó el acceso del App Service al servidor MySQL mediante las reglas de firewall de Azure Database for MySQL.
-
-![Reglas de red de Azure Database for MySQL](./assets/img/sprint-1/deploy/azure-mysql-firewall.png)
+![Variables de entorno del App Service](./assets/img//sprint/capturas-azure-sprint1/serenia-deploy-img/azure-app-settings.png)
 
 **2.8. Verificación del despliegue**
 
-Una vez desplegado, se verifica que el servicio responda y que la documentación OpenAPI esté disponible, ya que las rutas de documentación son públicas:
+Se verificó que el servicio respondiera y que la documentación OpenAPI estuviera disponible públicamente en el entorno desplegado, accediendo a Swagger UI desde la URL del App Service. La documentación muestra el título *Serenia Platform*, la especificación OAS 3.1, el servidor *Current environment* y los endpoints de cada recurso, empezando por Users, junto con el botón **Authorize** para autenticarse con el token Bearer.
 
 | Recurso | URL |
 |---|---|
-| Swagger UI | `https://<nombre-del-app-service>.azurewebsites.net/swagger-ui.html` |
-| Especificación OpenAPI | `https://<nombre-del-app-service>.azurewebsites.net/v3/api-docs` |
-| URL base de la API | `https://<nombre-del-app-service>.azurewebsites.net/api/v1` |
+| Swagger UI | [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html) |
+| Especificación OpenAPI | `https://serenia-platform-api.azurewebsites.net/v3/api-docs` |
+| URL base de la API | `https://serenia-platform-api.azurewebsites.net/api/v1` |
 
-Adicionalmente, se realiza una prueba de humo registrando un usuario (`POST /api/v1/users`) e iniciando sesión (`POST /api/v1/sessions`) contra el servicio desplegado.
+![Swagger UI de Serenia Platform en el entorno desplegado](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-swagger.png)
 
-![Swagger UI en el entorno desplegado](./assets/img/sprint-1/deploy/azure-swagger.png)
+---
+
+### 3. Aplicaciones móviles
+
+Los repositorios de las aplicaciones móviles del proyecto, `serenia-mobile-android`, se encuentran en la misma organización de GitHub y se ha desarrollado en Android Studio.
+
+![Aplicación móvil de Serenia](./assets/img/sprint/serenia-app.png)
 
 ---
 
 ### Resumen de enlaces de despliegue
 
-| Producto | URL |
-|---|---|
-| Landing Page | `https://sereniaa.netlify.app/` |
-| Web Services (Swagger UI) | `https://<nombre-del-app-service>.azurewebsites.net/swagger-ui.html` — *pendiente de despliegue* |
+| Producto | Repositorio | URL |
+|---|---|---|
+| Landing Page | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-website` | https://sereniawebsite.netlify.app |
+| Web Services | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform` | https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html |
 | Prototipo móvil | `https://claude.ai/artifact/PQLMrSNqDntp1Fu4cfuvJu` |
 
 #### 4.2.1.9. Team Collaboration Insights during Sprint
+Durante el Sprint 1 el equipo mantuvo un flujo de trabajo colaborativo y organizado aplicando la estrategia de control de versiones GitFlow. Todo el desarrollo tanto de la documentación del informe,Landing Page y backend se trabajó en ramas independientes (feature branches), integrando los cambios exclusivamente
+mediante Pull Requests hacia la rama principal. Esto garantizó la revisión por pares y la trazabilidad de cada contribución individual.
+A continuación se presentan los analíticos de colaboración extraídos de GitHub Insights para ambos repositorios durante el período del Sprint 1.
+
+![insight](./assets/img/insights/insights1.png)
+
+**Resumen de actividad — Repositorio serenia-report**
+Top Committers — Repositorio serenia-report
+En el repositorio de documentación los integrantes registraron las siguientes contribuciones: Arturouu con 107 commits, Carlsss28 con 38 commits, brianna-salinas con 38
+commits, vicmaccode con 51 commits y kyesei con 23 commits, evidenciando una participación activa y relativamente equitativa de todos los miembros del
+equipo.
+
+![insight](./assets/img/insights/insights3.png)
+
+Pull Requests mergeados — Repositorio serenia-report
+Se gestionaron los Pull Requests mergeados durante el Sprint, cubriendo la documentación de todos los capítulos del informe, incluyendo correcciones de
+wireflows, actualización de mockups, evidencias de desarrollo y backlog del Sprint 1.
+
+![insight](./assets/img/insights/insights2.png)
+
+**Resumen de actividad — Repositorio serenia-website (Landing Page)**
+Los 5 integrantes del equipo participaron en la implementación de la Landing Page, cada uno responsable de una o más secciones mediante feature branches
+independientes.
+
+![insight](./assets/img/insights/insights4.png)
+
+
+**Resumen de actividad — Repositorio serenia-platform (backend)**
+Los 5 integrantes del equipo participaron en la implementación de la plataforma, cada uno responsable de un bounded conext
+
+![insight](./assets/img/insights/insights5.png)
+
+
+
 ## 4.3. Validation Interviews
 
 En esta sección se registra y explica el proceso de validación de Serenia con usuarios reales de los segmentos objetivo: adultos mayores que viven solos y familiares que los acompañan a distancia. Cada participante interactúa con el landing page y con las aplicaciones móviles, completando tareas sobre los *user flows* principales del producto mientras expresan sus observaciones. La sección se organiza en tres partes: el diseño de las entrevistas, que define los elementos y flujos a evaluar en cada segmento; el registro de las entrevistas, que documenta a cada participante, la evidencia en video y el resumen de sus apreciaciones; y las evaluaciones según heurísticas de usabilidad, arquitectura de información y diseño inclusivo.
