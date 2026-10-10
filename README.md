@@ -8966,7 +8966,7 @@ Los User Flows propuestos corresponden a las funcionalidades core de la aplicaci
   <tr><td><b>Distrito</b></td><td>Tarapoto, San Martín</td></tr>
   <tr><td><b>Entrevistador</b></td><td>Victor Manuel García Paredes</td></tr>
   <tr><td><b>Modalidad</b></td><td>Videollamada, con el prototipo de la aplicación</td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>00:00</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>Por completar</i></td></tr>
   <tr><td><b>Duración</b></td><td>11 min 03 s</td></tr>
 </table>
 
