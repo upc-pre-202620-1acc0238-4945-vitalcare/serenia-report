@@ -100,7 +100,7 @@ URL del repositorio (Report): https://github.com/upc-pre-202620-1acc0238-4945-vi
 
 URL del repositorio (Web Services): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-web-services
 
-URL del repositorio (App Native): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-app-native
+URL del repositorio (App Native): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android
 
 URL del repositorio (Website): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website
 
@@ -3938,37 +3938,82 @@ Adicionalmente, los diagramas identificaron con precisión los tres puntos de in
 
 #### 2.5.1.3. Bounded Context Canvases
 
-Con los bounded contexts identificados y sus flujos de colaboración visualizados, el equipo procedió a diseñar cada uno de ellos mediante la técnica del Bounded Context Canvas. A diferencia de las secciones anteriores, cuyo propósito fue descubrir y validar las fronteras, esta busca definir el contrato de diseño de cada contexto: su razón de existir, las reglas de negocio que encapsula, los mensajes que expone y las dependencias que mantiene con los demás.
+Con los bounded contexts identificados y sus flujos de colaboración visualizados, el equipo diseñó cada uno con el Bounded Context Canvas V5 propuesto por la comunidad DDD Crew. Mientras las secciones anteriores sirvieron para descubrir y validar las fronteras, el canvas fija el contrato de diseño de cada contexto: su propósito, su clasificación estratégica, el rol que cumple, los mensajes que recibe y envía, su lenguaje, sus reglas de negocio y lo que aún se asume o queda por resolver.
+ 
+En la comunicación entrante y saliente, los mensajes se distinguen por color: azul para los commands, verde para las queries y amarillo para los events. Los colaboradores pueden ser otros bounded contexts, las aplicaciones del adulto mayor y del familiar a distancia, el paso del tiempo (System) o un sistema externo. Los contextos se presentan en orden de importancia: primero los Core, luego los Supporting y al final el Generic.
 
-Los contextos se presentan por orden de importancia, iniciando por los clasificados como Core, continuando con los Supporting y cerrando con el Generic.
+##### Daily Check-in
+ 
+Es el contexto que concentra la propuesta de valor de Serenia: una pregunta diaria que el adulto mayor responde con un toque, en reemplazo de la llamada de control. Se clasifica como Core, Engagement Creator y Custom Built, y cumple el rol de Execution Context porque ejecuta el ciclo de cada día sin interpretar las respuestas. Recibe las acciones del adulto mayor sobre su check-in y sus preferencias, y las tareas periódicas que abren, avisan y cierran cada check-in. Publica `CheckInAnswered` para Wellbeing Monitoring y `CheckInMissed` para Alerts and Safety. Sus reglas giran en torno a la ventana de respuesta y a la pausa diaria, que el adulto mayor puede activar y revertir el mismo día sin que el sistema lo interprete como una ausencia.
+ 
+<div align="center">
 
-<table> <tr><th colspan="2">Bounded Context Canvas 1: Daily Check-in</th></tr> <tr><td><b>Purpose</b></td><td>Permitir que el adulto mayor comunique su bienestar cotidiano mediante una interacción de un solo toque, sin necesidad de una llamada telefónica ni de dar explicaciones extensas, preservando su autonomía y evitando que la interacción se perciba como vigilancia clínica.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Core, es el mecanismo primario de generación de valor.<br><b>Business Model:</b> Engagement Creator, el adulto mayor no paga por esta funcionalidad, pero su uso sostenido es la condición de todo lo demás.<br><b>Evolution:</b> Custom Built, existen check-ins en otras soluciones, pero Serenia los diferencia por su tono no clínico y su variabilidad.</td></tr> <tr><td><b>Domain Roles</b></td><td>Execution context, ejecuta el ciclo diario de captura de respuesta. No interpreta ni acumula: esa responsabilidad corresponde a Wellbeing Monitoring.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Check-in response (Command): Older Adult, interacción directa de UI<br>Pausa de preguntas activada (Command): Older Adult, interacción directa de UI<br>Family link established (Event): Care Circle, Published Language</td></tr> <tr><td><b>Outbound Communication</b></td><td>Daily question (Event): Older Adult, interacción directa de UI<br>Registered check-in (Event): Wellbeing Monitoring, Customer/Supplier<br>Unanswered check-in (Event): Alerts and Safety, Customer/Supplier</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Check-in:</b> respuesta diaria del adulto mayor sobre su estado.<br><b>Daily Question:</b> estímulo variable que inicia el check-in.<br><b>Time Limit Window:</b> plazo desde el horario configurado dentro del cual se espera la respuesta.<br><b>Daily Pause:</b> suspensión voluntaria del check-in por el día en curso.</td></tr> <tr><td><b>Business Decisions</b></td><td>El check-in se responde con un solo toque, sin formularios ni campos adicionales (US03).<br>El adulto mayor puede activar la pausa de preguntas para el día en curso; en ese caso no se evalúa la ausencia de respuesta (US16).<br>La pregunta diaria es variable y de tono de compañía, no clínico.</td></tr> <tr><td><b>Assumptions</b></td><td>El adulto mayor dispone de un smartphone táctil y puede realizar interacciones simples sin asistencia.<br>El horario de la pregunta diaria es configurable por el adulto mayor.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Tasa de check-ins diarios completados.<br>Frecuencia de uso de la pausa de preguntas.<br>Tiempo promedio entre el envío de la pregunta y la respuesta.</td></tr> <tr><td><b>Open Questions</b></td><td>¿La pregunta diaria varía en contenido o únicamente en horario de aparición?<br>¿Existe un número máximo de recordatorios si el adulto mayor abre la aplicación pero no responde?</td></tr> </table>
-
+![Bounded Context Canvas - Daily Check-in](assets/img/bounded-context-canvas/daily-check-in-canvas.png)
+  <br/><i>Imagen N. Bounded Context Canvas de Daily Check-in.</i>
+ 
+</div>
 <br>
 
-<table> <tr><th colspan="2">Bounded Context Canvas 2: Wellbeing Monitoring</th></tr> <tr><td><b>Purpose</b></td><td>Convertir las respuestas diarias del adulto mayor en información significativa para el familiar a distancia, distinguiendo un mal día puntual de un patrón sostenido de deterioro, de modo que el familiar conozca su estado sin necesidad de interrumpirlo.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Core, concentra la lógica de negocio más distintiva de Serenia.<br><b>Business Model:</b> Revenue Generator, el panel de estado y el historial constituyen el núcleo de las funciones familiares del modelo freemium.<br><b>Evolution:</b> Custom Built, la interpretación emocional no clínica de patrones no tiene equivalente estandarizado.</td></tr> <tr><td><b>Domain Roles</b></td><td>Analysis context, recibe señales, las acumula y las interpreta para producir información derivada. No ejecuta acciones sobre el usuario.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Registered check-in (Event): Daily Check-in, Customer/Supplier<br>Status summary request (Query): Distant Relative, interacción directa de UI<br>Check-in history request (Query): Distant Relative, interacción directa de UI<br>Family link established (Event): Care Circle, Published Language</td></tr> <tr><td><b>Outbound Communication</b></td><td>Status summary (Query response): Distant Relative, interacción directa de UI<br>Discomfort pattern detected (Event): Alerts and Safety, Customer/Supplier</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Check-in History:</b> secuencia ordenada de respuestas del adulto mayor.<br><b>Status Summary:</b> vista del día en curso que consulta el familiar.<br><b>Discomfort Pattern:</b> tendencia sostenida de respuestas negativas en días consecutivos.<br><b>Small Win:</b> actividad positiva registrada en un check-in.</td></tr> <tr><td><b>Business Decisions</b></td><td>Un patrón de malestar requiere varios días consecutivos de reporte negativo; una respuesta aislada no lo constituye (US18).<br>El historial se presenta ordenado por fecha y no se limita al día en curso (US17).<br>Se registran también las actividades positivas, de modo que el familiar no reciba únicamente señales negativas (US19).</td></tr> <tr><td><b>Assumptions</b></td><td>El familiar revisa el panel de estado con frecuencia suficiente como para que la consulta bajo demanda sea adecuada y no se requiera notificación activa.<br>La información de vinculación familiar se encuentra disponible localmente por propagación desde Care Circle.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Frecuencia de consulta del panel de estado por familiar.<br>Proporción de patrones detectados que derivan en atención efectiva del familiar.<br>Reducción de llamadas motivadas por ansiedad reportadas por los usuarios.</td></tr> <tr><td><b>Open Questions</b></td><td>¿Cuántos días consecutivos configuran un patrón de malestar?<br>¿El umbral es fijo o se ajusta al comportamiento habitual de cada adulto mayor?</td></tr> </table>
+##### Wellbeing Monitoring
+ 
+Convierte las respuestas diarias en información útil para el familiar: distingue un mal día de un malestar sostenido y también registra los buenos días. Se clasifica como Core, Revenue Generator y Custom Built, y cumple el rol de Analysis Context, ya que interpreta señales sin ejecutar acciones sobre el adulto mayor. Su único estímulo de dominio es `CheckInAnswered`, a partir del cual consulta los estados de ánimo de días anteriores. La regla central es que tres días consecutivos de ánimo bajo forman un patrón, que origina una sola sugerencia para todos los familiares vinculados.
+ 
+<div align="center">
 
+![Bounded Context Canvas - Wellbeing Monitoring](assets/img/bounded-context-canvas/wellbeing-monitoring-canvas.png)
+  <br/><i>Imagen N. Bounded Context Canvas de Wellbeing Monitoring.</i>
+ 
+</div>
 <br>
 
-<table> <tr><th colspan="2">Bounded Context Canvas 3: Alerts and Safety</th></tr> <tr><td><b>Purpose</b></td><td>Garantizar que el familiar a distancia sea informado cuando la situación del adulto mayor lo amerite, ya sea por ausencia prolongada de respuesta, por un patrón de malestar sostenido o por una emergencia declarada, de modo que no necesite verificar por su cuenta ante cada duda.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Core, es la garantía de tranquilidad que sostiene la decisión de adopción del familiar.<br><b>Business Model:</b> Revenue Generator, las alertas selectivas forman parte de las funciones familiares de pago.<br><b>Evolution:</b> Product, existen soluciones de alerta de emergencia en el mercado, aunque sin la selectividad que Serenia propone.</td></tr> <tr><td><b>Domain Roles</b></td><td>Execution context con rol de notificación, aplica reglas de escalamiento y decide a quién y cuándo notificar.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Unanswered check-in (Event): Daily Check-in, Customer/Supplier<br>Discomfort pattern detected (Event): Wellbeing Monitoring, Customer/Supplier<br>Emergency alert triggered (Command): Older Adult, interacción directa de UI<br>Alert attention confirmed (Command): Distant Relative, interacción directa de UI<br>Family link established (Event): Care Circle, Published Language</td></tr> <tr><td><b>Outbound Communication</b></td><td>Action suggestion (Event): Distant Relative, interacción directa de UI<br>Inactivity alert (Event): Distant Relative, interacción directa de UI<br>Emergency alert (Event): Distant Relative, interacción directa de UI<br>Contact reminder (Event): Older Adult, interacción directa de UI</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Inactivity Alert:</b> notificación generada por ausencia de check-in dentro del plazo.<br><b>Emergency Alert:</b> notificación iniciada explícitamente por el adulto mayor.<br><b>Inactivity Window:</b> plazo que transcurre antes de escalar una ausencia de respuesta.<br><b>Suggested Action:</b> recomendación dirigida al familiar ante un patrón de malestar.<br><b>Severity:</b> nivel asignado a una alerta según su origen y urgencia.</td></tr> <tr><td><b>Business Decisions</b></td><td>La alerta de inactividad se genera solo si el check-in no fue respondido dentro del tiempo límite y la pausa de preguntas no está activa (US16).<br>Una alerta de emergencia dirigida a un adulto mayor sin familiares vinculados no puede procesarse (TS08).<br>La alerta escala a emergencia únicamente tras vencer la ventana de inactividad sin respuesta al recordatorio de contacto.</td></tr> <tr><td><b>Assumptions</b></td><td>El familiar tiene las notificaciones habilitadas en su dispositivo.<br>La lista de familiares vinculados se encuentra disponible localmente por propagación desde Care Circle, sin requerir consulta síncrona.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Proporción de alertas confirmadas como atendidas por el familiar.<br>Tasa de falsos positivos reportados.<br>Tiempo entre la generación de la alerta y su atención.</td></tr> <tr><td><b>Open Questions</b></td><td>¿Cuál es la duración de la ventana de inactividad y es configurable por el familiar?<br>¿Todos los familiares vinculados reciben la alerta simultáneamente o se respeta el turno de atención vigente?</td></tr> </table>
+##### Alerts and Safety
+ 
+Garantiza que la familia se entere cuando el adulto mayor necesita ayuda, ya sea porque activó el botón de auxilio o porque no respondió su check-in a tiempo. Se clasifica como Core, Revenue Generator y Product, y cumple el rol de Execution Context. Reacciona a `CheckInMissed` y consulta a Care Circle los familiares vinculados para despachar las emergencias. Sus reglas aseguran que cada alerta tenga un único reconocimiento y una única resolución, de modo que los familiares sepan si alguien ya está actuando.
+ 
+<div align="center">
 
+![Bounded Context Canvas - Alerts and Safety](assets/img/bounded-context-canvas/alerts-and-safety-canvas.png)
+  <br/><i>Imagen N. Bounded Context Canvas de Alerts and Safety.</i>
+ 
+</div>
 <br>
 
-<table> <tr><th colspan="2">Bounded Context Canvas 4: Care Circle</th></tr> <tr><td><b>Purpose</b></td><td>Establecer y administrar la relación entre el adulto mayor y sus familiares a distancia, determinando quiénes están vinculados a él, quién asume el turno de atención y qué información comparten entre sí, de modo que los demás contextos sepan a quién corresponde informar.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Supporting, no genera valor por sí solo, pero ningún contexto Core puede operar sin él.<br><b>Business Model:</b> Engagement Creator, la coordinación entre familiares incrementa el uso pero no se cobra de forma directa.<br><b>Evolution:</b> Custom Built, la estructura del círculo de cuidado responde a la dinámica familiar específica que Serenia atiende.</td></tr> <tr><td><b>Domain Roles</b></td><td>Registry context, mantiene y publica la estructura de relaciones. No interpreta información de bienestar ni emite alertas.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Registered identity (Event): Identity &amp; Access, Shared Kernel<br>Invitation code entered (Command): Distant Relative, interacción directa de UI<br>Care shift assigned (Command): Distant Relative, interacción directa de UI<br>Shared note added (Command): Distant Relative, interacción directa de UI</td></tr> <tr><td><b>Outbound Communication</b></td><td>Invitation code (Event): Older Adult, interacción directa de UI<br>Family link established (Event): Daily Check-in, Wellbeing Monitoring, Alerts and Safety y Social Companionship, Published Language<br>Care shift confirmation (Event): Distant Relative, interacción directa de UI</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Care Circle:</b> conjunto de familiares vinculados a un adulto mayor.<br><b>Family Link:</b> relación establecida entre la cuenta de un familiar y la de un adulto mayor.<br><b>Invitation Code:</b> credencial de un solo uso generada por el adulto mayor para habilitar un vínculo.<br><b>Care Shift:</b> responsabilidad de seguimiento asignada a un familiar para una fecha determinada.</td></tr> <tr><td><b>Business Decisions</b></td><td>El código de invitación es generado por el adulto mayor y corresponde a un solo uso; un código ya utilizado o expirado no permite vinculación (US02).<br>Una fecha admite un único turno de atención asignado; un segundo intento sobre la misma fecha se rechaza (US20).<br>Un adulto mayor puede tener varios familiares vinculados simultáneamente.</td></tr> <tr><td><b>Assumptions</b></td><td>La transmisión del código de invitación del adulto mayor al familiar ocurre por un canal externo al sistema.<br>El adulto mayor es siempre quien origina el vínculo, nunca el familiar.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Proporción de códigos de invitación generados que derivan en un vínculo efectivo.<br>Número promedio de familiares vinculados por adulto mayor.<br>Frecuencia de uso de la asignación de turnos.</td></tr> <tr><td><b>Open Questions</b></td><td>¿El código de invitación tiene un plazo de expiración definido?<br>¿Puede un vínculo familiar ser revocado y por quién?</td></tr> </table>
+##### Care Circle
+ 
+Gestiona la red de apoyo de cada adulto mayor: la incorporación de familiares mediante códigos de invitación, los vínculos, los turnos de atención y las notas compartidas. Se clasifica como Supporting, Engagement Creator y Custom Built, y cumple el rol de Execution Context. Es el contexto con más colaboradores entrantes, porque los demás contextos le consultan quiénes son los familiares vinculados y si un usuario tiene acceso a un círculo. Sus reglas protegen la integridad de esos vínculos: un código de un solo uso, un vínculo por familiar y un turno por fecha.
+ 
+<div align="center">
 
+![Bounded Context Canvas - Care Circle](assets/img/bounded-context-canvas/care-circle-canvas.png)
+  <br/><i>Imagen N. Bounded Context Canvas de Care Circle.</i>
+ 
+</div>
 <br>
 
-<table> <tr><th colspan="2">Bounded Context Canvas 5: Social Companionship</th></tr> <tr><td><b>Purpose</b></td><td>Enriquecer la relación entre el adulto mayor y su familia mediante intercambios afectivos ligeros (mensajes de audio, fotografías y recordatorios sociales) que refuercen el sentido de compañía más allá de la verificación de bienestar.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Supporting, aporta valor percibido pero no valor operativo; ninguna de sus interacciones produce señal evaluable.<br><b>Business Model:</b> Engagement Creator, incrementa la frecuencia de uso sin constituir en sí mismo una fuente de ingreso.<br><b>Evolution:</b> Product, la mensajería multimedia es una capacidad ampliamente disponible en el mercado.</td></tr> <tr><td><b>Domain Roles</b></td><td>Communication context, transporta contenido entre personas sin interpretarlo ni evaluarlo.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Audio message sent (Command): Distant Relative y Older Adult, interacción directa de UI<br>Photo shared (Command): Distant Relative, interacción directa de UI<br>Family link established (Event): Care Circle, Published Language</td></tr> <tr><td><b>Outbound Communication</b></td><td>Message delivered (Event): Older Adult y Distant Relative, interacción directa de UI<br>Social reminder (Event): Older Adult, interacción directa de UI</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Audio Message:</b> grabación de voz enviada entre miembros del círculo de cuidado.<br><b>Social Reminder:</b> aviso de una fecha o evento familiar relevante.<br><b>Reaction:</b> respuesta breve a un mensaje recibido.</td></tr> <tr><td><b>Business Decisions</b></td><td>Solo pueden intercambiar mensajes los miembros de un mismo círculo de cuidado.<br>Ningún contenido intercambiado en este contexto se evalúa, interpreta ni deriva en alerta.</td></tr> <tr><td><b>Assumptions</b></td><td>El adulto mayor sabe grabar y reproducir un mensaje de audio sin asistencia.<br>El volumen de contenido multimedia no requiere políticas de retención específicas en esta etapa.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Frecuencia de mensajes intercambiados por círculo de cuidado.<br>Proporción de mensajes recibidos que obtienen respuesta o reacción.</td></tr> <tr><td><b>Open Questions</b></td><td>¿Existe un límite de duración o tamaño para los mensajes de audio y las fotografías?<br>¿Los recordatorios sociales son creados manualmente por el familiar o se derivan de fechas registradas en el perfil?</td></tr> </table>
+##### Social Companionship
+ 
+Sostiene la relación afectiva entre el adulto mayor y su familia mediante audios, fotografías y recordatorios sociales, sin fines de monitoreo. Se clasifica como Supporting, Engagement Creator y Product, y cumple el rol de Engagement Context, ya que su valor está en que la familia siga usando la aplicación. Es el único contexto con un sistema externo como colaborador, Azure Blob Storage, donde se guardan los archivos. Sus reglas definen el sentido de cada mensaje, su paso de borrador a compartido y el ciclo de los recordatorios dentro del día del adulto mayor.
+ 
+<div align="center">
 
+![Bounded Context Canvas - Social Companionship](assets/img/bounded-context-canvas/social-companionship-canvas.png)
+  <br/><i>Imagen N. Bounded Context Canvas de Social Companionship.</i>
+ 
+</div>
 <br>
 
-<table> <tr><th colspan="2">Bounded Context Canvas 6: Identity & Access</th></tr> <tr><td><b>Purpose</b></td><td>Administrar el registro, la autenticación y la sesión de los usuarios de Serenia, garantizando que cada persona acceda únicamente a la información que le corresponde según su rol y sus vínculos establecidos.</td></tr> <tr><td><b>Strategic Classification</b></td><td><b>Domain:</b> Generic, resuelve un problema estándar cuyas reglas no cambian por tratarse de Serenia.<br><b>Business Model:</b> Compliance Enforcer, protege los datos de los usuarios y la responsabilidad legal del producto.<br><b>Evolution:</b> Commodity, existen soluciones altamente estandarizadas para esta capacidad.</td></tr> <tr><td><b>Domain Roles</b></td><td>Gatekeeper context, valida credenciales y autoriza accesos. No participa en ninguna regla de negocio del dominio de cuidado.</td></tr> <tr><td><b>Inbound Communication</b></td><td>Account creation (Command): Older Adult y Distant Relative, interacción directa de UI<br>Session request (Command): Older Adult y Distant Relative, interacción directa de UI<br>Profile update (Command): Older Adult y Distant Relative, interacción directa de UI</td></tr> <tr><td><b>Outbound Communication</b></td><td>Registered identity (Event): Care Circle, Published Language<br>Session token (Query response): Older Adult y Distant Relative, interacción directa de UI</td></tr> <tr><td><b>Ubiquitous Language</b></td><td><b>Account:</b> registro de un usuario en el sistema.<br><b>Session:</b> periodo de acceso autenticado.<br><b>Profile:</b> datos personales asociados a una cuenta.<br><b>Role:</b> tipo de usuario, adulto mayor o familiar a distancia.</td></tr> <tr><td><b>Business Decisions</b></td><td>El registro se rechaza si existen campos obligatorios vacíos o con formato incorrecto (US01).<br>Una solicitud de sesión con credenciales inválidas se rechaza sin revelar cuál de los campos es incorrecto (TS02).<br>El rol del usuario se define en el momento del registro y determina la aplicación a la que accede.</td></tr> <tr><td><b>Assumptions</b></td><td>El registro no requiere verificación mediante código enviado por correo electrónico o mensaje de texto en esta etapa del producto.<br>Un usuario mantiene un único rol durante toda la vida de su cuenta.</td></tr> <tr><td><b>Verification Metrics</b></td><td>Tasa de registros completados respecto de los iniciados.<br>Proporción de intentos de sesión fallidos.<br>Frecuencia de solicitudes de recuperación de acceso.</td></tr> <tr><td><b>Open Questions</b></td><td>¿Se contempla incorporar verificación de identidad en una fase posterior del producto?<br>¿Cómo se gestiona la recuperación de acceso para un adulto mayor con baja familiaridad digital?</td></tr> </table>
+##### Identity & Access
+ 
+Administra el registro, la autenticación, las sesiones y los perfiles de los usuarios. Se clasifica como Generic, Compliance Enforcer y Commodity, y cumple el rol de Gateway Context porque está en el borde del sistema y toda petición pasa por él. Publica `OlderAdultRegistered`, a partir del cual Care Circle crea el círculo y Daily Check-in inicializa las preferencias, y responde a los demás contextos el rol, el nombre y la zona horaria de un usuario. Sus reglas son estándar, pero dos de ellas responden a Serenia: el rol es inmutable y define la aplicación que usa cada persona, y cambiar la contraseña revoca las demás sesiones.
+ 
+<div align="center">
 
+![Bounded Context Canvas - Identity & Access](assets/img/bounded-context-canvas/identity-and-access-canvas.png)
+  <br/><i>Imagen N. Bounded Context Canvas de Identity & Access.</i>
+ 
+</div>
 <br>
-
-La elaboración de los seis canvases permitió pasar de una descripción de los bounded contexts a una definición formal de su contrato de diseño. Al exigir que cada contexto declarara explícitamente las reglas de negocio que encapsula y los mensajes que expone, el ejercicio hizo evidente que ninguna regla del dominio quedó sin un contexto responsable y que ningún contexto aplica reglas que correspondan a otro.
-
-<br>
+Los seis canvases muestran que cada regla del dominio tiene un único contexto responsable y que las dependencias entre contextos se resuelven mediante eventos o consultas acotadas, sin compartir modelos internos. Las preguntas abiertas que quedaron registradas, como la vigencia del código de invitación o la incorporación de notificaciones push, se resolverán en las siguientes iteraciones del producto.
 
 ### 2.5.2. Context Mapping
 
@@ -7780,7 +7825,7 @@ La configuración del entorno de producción se distribuyó estratégicamente pa
 *   **Firebase Cloud Messaging (FCM):** Configurado como el proveedor externo de mensajería para empujar las alertas de emergencia y los recordatorios sociales en tiempo real hacia los dispositivos móviles, saltándose las limitaciones de las consultas en segundo plano.
 
 **3. Entorno de Gestión y Colaboración**
-*   **Control de Versiones y Código:** **Git y GitHub**. Todo el equipo opera bajo el modelo *GitFlow*, utilizando la convención *Conventional Commits* para mantener una trazabilidad semántica en repositorios separados (`serenia-app-native`, `serenia-web-services`, `serenia-website`, `serenia-report`).
+*   **Control de Versiones y Código:** **Git y GitHub**. Todo el equipo opera bajo el modelo *GitFlow*, utilizando la convención *Conventional Commits* para mantener una trazabilidad semántica en repositorios separados (`serenia-mobile-android`, `serenia-web-services`, `serenia-website`, `serenia-report`).
 *   **Modelado y Diseño:** **Figma** para prototipos de alta fidelidad, **Miro** para el descubrimiento del dominio (EventStorming interactivo), **Structurizr** para los diagramas de arquitectura C4 Model, y **dbdiagram.io** para la esquematización relacional (DBML).
 *   **Project Management:** **Trello** para la ejecución del flujo ágil (Sprint Backlog) y **ClickUp** para el seguimiento y asignación de la documentación del Project Report.
 
@@ -7946,17 +7991,17 @@ El sitio se construye con Vite, sin biblioteca de interfaz, por lo que sus conve
 
 **Nomenclatura y estilo de la aplicación móvil (Kotlin)**
 
-La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario de la landing y del backend: Home, Check-in y Alerts and Safety. Las convenciones de la tabla se midieron sobre los 29 archivos Kotlin de `serenia-app-native` al 9 de octubre de 2026, y se cumplen en todos los casos que alcanza cada regla: por ejemplo, los 3 ViewModels llevan `@HiltViewModel` y los 3 estados de pantalla son `data class`.
+La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario de la landing y del backend: Home, Check-in, Alerts and Safety y Social Companionship. Las convenciones de la tabla se midieron sobre los 72 archivos Kotlin de `serenia-mobile-android` al 10 de octubre de 2026, y se cumplen en todos los casos que alcanza cada regla: por ejemplo, los 8 ViewModels llevan `@HiltViewModel` y los 8 estados de pantalla son `data class`.
 
 <br>
 
 | Elemento | Regla | Ejemplo |
 | --- | --- | --- |
 | Paquetes | Base `com.vitalcare.serenia`, con una carpeta por funcionalidad que separa `domain` y `presentation`, más `core/designsystem` y `navigation` | `features/checkin/presentation/thanks` |
-| Pantalla | Función `@Composable` en PascalCase con sufijo `Screen`, en un archivo propio | `HomeScreen`, `CheckInThanksScreen` |
-| Estado de la pantalla | `data class` con sufijo `UiState` y valores por defecto | `HomeUiState` |
+| Pantalla | Función `@Composable` en PascalCase con sufijo `Screen`, en un archivo propio; lee el ViewModel y delega el dibujo en un `...Content` sin estado, y los componentes propios van en una carpeta `components` | `HomeScreen`, `FamilyScreen` |
+| Estado de la pantalla | `data class` con sufijo `UiState` y valores por defecto; los eventos de una sola vez, como los mensajes, se modelan con un `sealed interface` de sufijo `Event` enviado por un `Channel` | `HomeUiState`, `FamilyUiState` |
 | ViewModel | Sufijo `ViewModel`, anotado con `@HiltViewModel` y con constructor `@Inject`; expone el estado como `StateFlow` de solo lectura mediante `asStateFlow()` | `HomeViewModel` |
-| Navegación | Un grafo por funcionalidad con sufijo `NavGraph`, rutas tipadas con `@Serializable` y registro de cada grafo en `AppNavHost` | `CheckInNavGraph`, `AlertsAndSafetyNavGraph` |
+| Navegación | Un grafo por funcionalidad con sufijo `NavGraph` (5 grafos), rutas tipadas con `@Serializable` (14 rutas) y registro de cada grafo en `AppNavHost` | `CheckInNavGraph`, `AlertsAndSafetyNavGraph` |
 | Dominio | Tipos propios de la funcionalidad; las constantes de un `enum` van en MAYÚSCULAS con guion bajo | `Mood.NOT_GOOD` |
 | Sistema de diseño | Componentes reutilizables y tema de Material 3 en `core/designsystem`, dividido en `components`, `icon` y `theme` | `SereniaButtons`, `Theme` |
 
@@ -7966,9 +8011,9 @@ La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario
 
 | Aspecto | Convención aplicada |
 | --- | --- |
-| Sangría | 4 espacios y ninguna tabulación (ninguno de los 29 archivos usa tabulaciones) |
+| Sangría | 4 espacios y ninguna tabulación (ninguno de los 72 archivos usa tabulaciones) |
 | Importaciones | Explícitas, sin comodines |
-| Interfaz de usuario | Jetpack Compose con Material 3 (13 archivos); 34 funciones `@Composable` en 14 archivos y vistas previas con `@Preview` en 11 |
+| Interfaz de usuario | Jetpack Compose con Material 3 (29 archivos); 77 funciones `@Composable` en 30 archivos y 30 vistas previas con `@Preview` |
 | Estado | Un `MutableStateFlow` privado dentro del ViewModel y actualizaciones con `update` y `copy` sobre el estado inmutable |
 | Inyección de dependencias | Hilt, con `hilt-navigation-compose` para obtener los ViewModels en las pantallas |
 | Comentarios | En inglés y de una línea, para explicar decisiones puntuales de diseño |
@@ -7995,7 +8040,7 @@ Esta sección explica cómo publicar cada producto de Serenia a partir de su rep
 | --- | --- | --- | --- | --- |
 | Landing page web | `serenia-website` | Netlify, conectado al repositorio de GitHub | La carpeta `dist`, generada con `npm run build` | Publicada en https://sereniawebsite.netlify.app/ |
 | Web Services | `serenia-platform` | Microsoft Azure (Azure Web App Service para la API y MySQL Flexible Server para la base de datos) | Una imagen Docker de la API, que empaqueta el JAR ejecutable de Spring Boot | Desplegada en https://serenia-platform-api.azurewebsites.net |
-| Aplicación móvil | `serenia-app-native` | Firebase App Distribution | El instalable (APK) de la aplicación Android, generado con Gradle | Proyecto Android disponible en el repositorio, con las funcionalidades Home, Check-in y Alerts and Safety |
+| Aplicación móvil | `serenia-mobile-android` | Firebase App Distribution | El instalable (APK) de la aplicación Android, generado con Gradle | Proyecto Android disponible en el repositorio, con las funcionalidades Home, Check-in, Alerts and Safety y Social Companionship |
 
 Todos los repositorios pertenecen a la organización del equipo en GitHub (https://github.com/upc-pre-202620-1acc0238-4945-vitalcare). El código que se publica proviene de la rama `main`, que recibe los cambios desde `develop` mediante Pull Requests en cada entrega, según el flujo GitFlow adoptado por el equipo.
 
@@ -8117,14 +8162,14 @@ La única prueba del proyecto, `SereniaPlatformApplicationTests`, levanta la apl
 
 **Aplicación móvil**
 
-El Deployment Diagram establece que la aplicación móvil se distribuye mediante Firebase App Distribution. El repositorio `serenia-app-native` contiene el proyecto Android de la aplicación, escrito en Kotlin con Jetpack Compose y construido con Gradle.
+El Deployment Diagram establece que la aplicación móvil se distribuye mediante Firebase App Distribution. El repositorio `serenia-mobile-android` contiene el proyecto Android de la aplicación, escrito en Kotlin con Jetpack Compose y construido con Gradle.
 
 | Aspecto | Detalle |
 | --- | --- |
-| Repositorio | `serenia-app-native`, con las ramas `main` y `develop` y una rama `feature/<funcionalidad>` por cada funcionalidad |
+| Repositorio | `serenia-mobile-android`, con las ramas `main` y `develop` y una rama `feature/<funcionalidad>` por cada funcionalidad |
 | Identificador de la aplicación | `com.vitalcare.serenia`, versión 1.0 (`versionCode` 1) |
 | Versiones de construcción | Android Gradle Plugin 9.4.1, Kotlin 2.4.20, `minSdk` 24 y `targetSdk` 37 |
-| Construcción | Abrir el proyecto en Android Studio y ejecutarlo en un emulador o en un dispositivo; desde la línea de comandos, `./gradlew assembleDebug` genera el APK de depuración |
+| Construcción | Abrir el proyecto en Android Studio y ejecutarlo en un emulador o en un dispositivo; desde la línea de comandos, `./gradlew assembleDebug` genera el APK de depuración en `app/build/outputs/apk/debug`; la compilación terminó sin errores el 10 de octubre de 2026 |
 | Distribución | Firebase App Distribution, según el Deployment Diagram: se sube cada versión al proyecto de Firebase y se invita a los testers para instalarla |
 
 <br>
@@ -9369,13 +9414,14 @@ Los User Flows propuestos corresponden a las funcionalidades core de la aplicaci
   <tr><td><b>Edad</b></td><td>61 años</td></tr>
   <tr><td><b>Distrito</b></td><td>Tarapoto, San Martín</td></tr>
   <tr><td><b>Entrevistador</b></td><td>Victor Manuel García Paredes</td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Por completar</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>00:03</i></td></tr>
   <tr><td><b>Duración</b></td><td>11 min 03 s</td></tr>
 </table>
 
+</div>
+
 **Resumen:**
 
-</div>
 
 Yrma participó por videollamada y probó el prototipo a través del enlace que se le envió. Antes de empezar, cuando se le preguntó qué creía que hacía Serenia, respondió que le permite estar comunicada con sus familiares para que conozcan sus emociones, sus sentimientos y lo que le pasa durante el día; es decir, entendió la propuesta sin ayuda.
 
@@ -9389,6 +9435,39 @@ Lo más fácil fue identificar los botones por su color llamativo; lo más difí
 
 ##### Entrevista 2
 
+<img src="assets/img/interviews/entrevista-validacion-yolanda.png" alt="" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td>Yolanda Bardalez Hernandez</td></tr>
+  <tr><td><b>Edad</b></td><td>74 años</td></tr>
+  <tr><td><b>Distrito</b></td><td>Chorrillos</td></tr>
+  <tr><td><b>Entrevistador</b></td><td>Carla Gallardo Morales</td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>11:05</i></td></tr>
+  <tr><td><b>Duración</b></td><td>07 min 50 s</td></tr>
+</table>
+
+</div>
+
+**Resumen:**
+
+**Yolanda** señaló que la página de presentación resulta fácil de leer debido a que la interfaz luce nítida y clara. Asimismo, afirmó que la paleta de colores se siente estable y no está saturada, lo cual permite distinguir los elementos y botones con facilidad. Además, logró identificar correctamente la sección que menciona la prueba gratuita de siete días.
+
+Al ser consultada sobre su estado general, **Yolanda** mencionó que se encontraba bien. Durante la simulación del registro en la aplicación, eligió las **9:00 a. m.** como su horario preferido para recibir la consulta diaria sobre su estado de ánimo, explicando que esa es la hora a la que habitualmente se levanta. Al revisar la pantalla con el código de invitación destinado a conectar su dispositivo con sus familiares a distancia, **Yolanda** leyó el número 4821 y aseguró que le resulta muy sencillo de leer, dictar y compartir con su familia.
+
+En cuanto a su contexto personal, **Yolanda** compartió que sus hijos y nietas la visitan con frecuencia y están siempre al pendiente de ella. Al evaluar la pantalla principal de la aplicación, que presenta las opciones "Muy bien", "Más o menos" y "No tan bien", explicó que la interfaz es fácil de entender y que basta con presionar o "machucar" el botón para seleccionar una respuesta. De igual forma, consideró que la sección de **recordatorios de actividades** es importante, destacando el ejemplo del taller de tejido. Respecto a la función para enviar mensajes de voz a sus familiares, **Yolanda** comentó que es muy fácil de usar, detallando que solo se debe presionar la pantalla y hablar como al grabar un audio normal.
+
+Finalmente, tras revisar la sección de la cuenta y el flujo completo de la interfaz, **Yolanda** afirmó que todo está bien diseñado y que la estructura resulta fácil de recordar. Concluyó que no considera necesario modificar ningún elemento de la aplicación y finalizó la sesión agradeciendo la atención recibida y deseando éxito al proyecto
+
+</div>
+
+<br>
+<div align="center">
+
+##### Entrevista 3
+
 <img src="assets/img/interviews/validation-interview-arturo-eva.png" alt="Screenshot de entrevista de validación - Eva Martinez" width="700"/>
 
 <br>
@@ -9399,7 +9478,7 @@ Lo más fácil fue identificar los botones por su color llamativo; lo más difí
   <tr><td><b>Edad</b></td><td>67 años</td></tr>
   <tr><td><b>Distrito</b></td><td>Chanchamayo - Junín</td></tr>
   <tr><td><b>Entrevistador</b></td><td>Arturo Contreras Torres</td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Por completar</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>18:54</i></td></tr>
   <tr><td><b>Duración</b></td><td>12 min 03 s</td></tr>
 </table>
 
@@ -9415,31 +9494,8 @@ Luego probó el prototipo de la aplicación móvil y valoró de forma positiva l
 
 <br>
 
-<div align="center">
-
-##### Entrevista 3
-
-<img src="" alt="" width="700"/>
-
-<br>
-
-<table align="center">
-  <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td></td></tr>
-  <tr><td><b>Edad</b></td><td></td></tr>
-  <tr><td><b>Distrito</b></td><td></td></tr>
-  <tr><td><b>Entrevistador</b></td><td></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i></i></td></tr>
-  <tr><td><b>Duración</b></td><td></td></tr>
-</table>
-
-**Resumen:**
-
-</div>
 
 
-
-<br>
 
 #### Segmento 2: Familiares a distancia
 
@@ -9457,14 +9513,16 @@ Luego probó el prototipo de la aplicación móvil y valoró de forma positiva l
   <tr><td><b>Edad</b></td><td><i>20 años</i></td></tr>
   <tr><td><b>Distrito</b></td><td><i>Surco</i></td></tr>
   <tr><td><b>Entrevistador</b></td><td>Kelber Sandoval Aiquipa</td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Por completar</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>38:13</i></td></tr>
   <tr><td><b>Duración</b></td><td>5 min 04 s</td></tr>
 </table>
 
-**Resumen:**
-Durante la sesión de validación, José interactuó con la Landing Page y los flujos principales de la aplicación móvil (vinculación, historial de bienestar y gestión de alertas). Destacó que el diseño de la web le transmite tranquilidad al ser limpio y no asemejarse a la página de un hospital o seguro médico, lo cual reduce la fricción inicial. Sobre el flujo de vinculación por código, lo consideró un proceso rápido y mucho menos invasivo que alternativas de rastreo por GPS, lo que generaría mayor confianza en su abuela. Apreció especialmente el panel de historial y las sugerencias automáticas, mencionando que le aliviarían la ansiedad diaria durante sus horas de trabajo. Valoró de forma muy positiva la función de coordinación de alertas, indicando que evitaría la duplicidad de esfuerzos en su familia. Calificó la solución general con un 9 a 10 sobre 10.
 
 </div>
+</br>
+
+**Resumen:**
+Durante la sesión de validación, José interactuó con la Landing Page y los flujos principales de la aplicación móvil (vinculación, historial de bienestar y gestión de alertas). Destacó que el diseño de la web le transmite tranquilidad al ser limpio y no asemejarse a la página de un hospital o seguro médico, lo cual reduce la fricción inicial. Sobre el flujo de vinculación por código, lo consideró un proceso rápido y mucho menos invasivo que alternativas de rastreo por GPS, lo que generaría mayor confianza en su abuela. Apreció especialmente el panel de historial y las sugerencias automáticas, mencionando que le aliviarían la ansiedad diaria durante sus horas de trabajo. Valoró de forma muy positiva la función de coordinación de alertas, indicando que evitaría la duplicidad de esfuerzos en su familia. Calificó la solución general con un 9 a 10 sobre 10.
 
 <br>
 
@@ -9482,9 +9540,11 @@ Durante la sesión de validación, José interactuó con la Landing Page y los f
   <tr><td><b>Edad</b></td><td><i>27 años</i></td></tr>
   <tr><td><b>Distrito</b></td><td><i>San Juan de Miraflores</i></td></tr>
   <tr><td><b>Entrevistador</b></td><td>Kelber Sandoval Aiquipa</td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i>Por completar</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>31:01</i></td></tr>
   <tr><td><b>Duración</b></td><td>6 min 54 s</td></tr>
 </table>
+
+</div>
 
 **Resumen:**
 Kevin evaluó el prototipo móvil y la Landing Page enfocándose en la usabilidad y la reducción de la preocupación constante. Al observar la web, resaltó que el mensaje principal logra comunicar acompañamiento sin sentirse invasivo. Durante la prueba del prototipo móvil, validó positivamente el registro y la vinculación con el adulto mayor mediante un código de 4 dígitos, considerándolo una medida segura y nada complicada para personas de edad avanzada. Al revisar el flujo del historial y las notificaciones de inactividad o emergencia, confirmó que la aplicación le ahorraría el estrés y las llamadas innecesarias que suele hacer por preocupación, otorgándole paz mental para continuar con su rutina laboral. Concluyó calificando la aplicación con un 9 sobre 10, destacando que es una propuesta sólida y adaptada a las necesidades reales de cuidado a distancia.
@@ -9509,7 +9569,7 @@ Kevin evaluó el prototipo móvil y la Landing Page enfocándose en la usabilida
   <tr><td><b>Edad</b></td><td></td></tr>
   <tr><td><b>Distrito</b></td><td></td></tr>
   <tr><td><b>Entrevistador</b></td><td></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i></i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>42:59</i></td></tr>
   <tr><td><b>Duración</b></td><td></td></tr>
 </table>
 
@@ -9521,6 +9581,11 @@ Kevin evaluó el prototipo móvil y la Landing Page enfocándose en la usabilida
 
 <br>
 
+Link Gerneral de las entrevistas: <a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQDn538IGl08RaD1JoxM1lhlAVCw6JTRhdzwJzu76cFYdV8?e=ZoftnJ&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D">Enlace de entrevistas</a>
+
+</div>
+
+### 4.3.3. Evaluaciones según heurísticas
 
 ### 4.3.3. Evaluaciones según heurísticas.
 
@@ -9775,6 +9840,6 @@ URL del repositorio (Report):  [Repositorio Reporte](https://github.com/upc-pre-
 
 URL del repositorio (Web Services):  [Repositorio Web Services](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-web-services)
 
-URL del repositorio (App Native):  [Repositorio App Native](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-app-native)
+URL del repositorio (App Native):  [Repositorio App Native](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android)
 
 URL del repositorio (Website):  [Repositorio Website](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website)
