@@ -7822,7 +7822,6 @@ Esta sección define cómo se nombran los elementos y cómo se escribe el códig
 | Landing page web | HTML, CSS y JavaScript (Vite) | [Google HTML/CSS Style Guide](https://google.github.io/styleguide/htmlcssguide.html) y [Google JavaScript Style Guide](https://google.github.io/styleguide/jsguide.html) | Aplicada en la landing page |
 | Web Services | Java 26 con Spring Boot | [Google Java Style Guide](https://google.github.io/styleguide/javaguide.html) en nombres y organización del código, con sangría de 4 espacios, y [Spring Boot Features](https://docs.spring.io/spring-boot/reference/features/index.html) | Aplicada en el backend |
 | Aplicación móvil | Kotlin con Jetpack Compose | [Kotlin Coding Conventions](https://kotlinlang.org/docs/coding-conventions.html) y [Android Kotlin Style Guide](https://developer.android.com/kotlin/style-guide) | Aplicada en la aplicación móvil |
-| Pruebas de aceptación | Gherkin (archivos .feature) | [Gherkin Reference](https://cucumber.io/docs/gherkin/reference) | Definida |
 
 <br>
 
@@ -7918,12 +7917,6 @@ La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario
 | Inyección de dependencias | Hilt, con `hilt-navigation-compose` para obtener los ViewModels en las pantallas |
 | Comentarios | En inglés y de una línea, para explicar decisiones puntuales de diseño |
 | Versiones | Kotlin 2.4.20, Android Gradle Plugin 9.4.1, `minSdk` 24 y `targetSdk` 37 |
-
-<br>
-
-**Convenciones para pruebas de aceptación**
-
-Los archivos .feature se redactan en inglés con las palabras clave `Feature`, `Scenario`, `Given`, `When` y `Then`. Cada escenario verifica un único comportamiento y toma como base los criterios de aceptación de la historia de usuario a la que corresponde, cuyo identificador (por ejemplo, US13) se incluye en una etiqueta sobre el escenario.
 
 <br>
 
