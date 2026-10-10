@@ -3947,6 +3947,7 @@ En la comunicación entrante y saliente, los mensajes se distinguen por color: a
 Es el contexto que concentra la propuesta de valor de Serenia: una pregunta diaria que el adulto mayor responde con un toque, en reemplazo de la llamada de control. Se clasifica como Core, Engagement Creator y Custom Built, y cumple el rol de Execution Context porque ejecuta el ciclo de cada día sin interpretar las respuestas. Recibe las acciones del adulto mayor sobre su check-in y sus preferencias, y las tareas periódicas que abren, avisan y cierran cada check-in. Publica `CheckInAnswered` para Wellbeing Monitoring y `CheckInMissed` para Alerts and Safety. Sus reglas giran en torno a la ventana de respuesta y a la pausa diaria, que el adulto mayor puede activar y revertir el mismo día sin que el sistema lo interprete como una ausencia.
  
 <div align="center">
+
 ![Bounded Context Canvas - Daily Check-in](assets/img/bounded-context-canvas/daily-check-in-canvas.png)
   <br/><i>Imagen N. Bounded Context Canvas de Daily Check-in.</i>
  
@@ -3958,6 +3959,7 @@ Es el contexto que concentra la propuesta de valor de Serenia: una pregunta diar
 Convierte las respuestas diarias en información útil para el familiar: distingue un mal día de un malestar sostenido y también registra los buenos días. Se clasifica como Core, Revenue Generator y Custom Built, y cumple el rol de Analysis Context, ya que interpreta señales sin ejecutar acciones sobre el adulto mayor. Su único estímulo de dominio es `CheckInAnswered`, a partir del cual consulta los estados de ánimo de días anteriores. La regla central es que tres días consecutivos de ánimo bajo forman un patrón, que origina una sola sugerencia para todos los familiares vinculados.
  
 <div align="center">
+
 ![Bounded Context Canvas - Wellbeing Monitoring](assets/img/bounded-context-canvas/wellbeing-monitoring-canvas.png)
   <br/><i>Imagen N. Bounded Context Canvas de Wellbeing Monitoring.</i>
  
@@ -3969,6 +3971,7 @@ Convierte las respuestas diarias en información útil para el familiar: disting
 Garantiza que la familia se entere cuando el adulto mayor necesita ayuda, ya sea porque activó el botón de auxilio o porque no respondió su check-in a tiempo. Se clasifica como Core, Revenue Generator y Product, y cumple el rol de Execution Context. Reacciona a `CheckInMissed` y consulta a Care Circle los familiares vinculados para despachar las emergencias. Sus reglas aseguran que cada alerta tenga un único reconocimiento y una única resolución, de modo que los familiares sepan si alguien ya está actuando.
  
 <div align="center">
+
 ![Bounded Context Canvas - Alerts and Safety](assets/img/bounded-context-canvas/alerts-and-safety-canvas.png)
   <br/><i>Imagen N. Bounded Context Canvas de Alerts and Safety.</i>
  
@@ -3980,6 +3983,7 @@ Garantiza que la familia se entere cuando el adulto mayor necesita ayuda, ya sea
 Gestiona la red de apoyo de cada adulto mayor: la incorporación de familiares mediante códigos de invitación, los vínculos, los turnos de atención y las notas compartidas. Se clasifica como Supporting, Engagement Creator y Custom Built, y cumple el rol de Execution Context. Es el contexto con más colaboradores entrantes, porque los demás contextos le consultan quiénes son los familiares vinculados y si un usuario tiene acceso a un círculo. Sus reglas protegen la integridad de esos vínculos: un código de un solo uso, un vínculo por familiar y un turno por fecha.
  
 <div align="center">
+
 ![Bounded Context Canvas - Care Circle](assets/img/bounded-context-canvas/care-circle-canvas.png)
   <br/><i>Imagen N. Bounded Context Canvas de Care Circle.</i>
  
@@ -3991,6 +3995,7 @@ Gestiona la red de apoyo de cada adulto mayor: la incorporación de familiares m
 Sostiene la relación afectiva entre el adulto mayor y su familia mediante audios, fotografías y recordatorios sociales, sin fines de monitoreo. Se clasifica como Supporting, Engagement Creator y Product, y cumple el rol de Engagement Context, ya que su valor está en que la familia siga usando la aplicación. Es el único contexto con un sistema externo como colaborador, Azure Blob Storage, donde se guardan los archivos. Sus reglas definen el sentido de cada mensaje, su paso de borrador a compartido y el ciclo de los recordatorios dentro del día del adulto mayor.
  
 <div align="center">
+
 ![Bounded Context Canvas - Social Companionship](assets/img/bounded-context-canvas/social-companionship-canvas.png)
   <br/><i>Imagen N. Bounded Context Canvas de Social Companionship.</i>
  
@@ -4002,6 +4007,7 @@ Sostiene la relación afectiva entre el adulto mayor y su familia mediante audio
 Administra el registro, la autenticación, las sesiones y los perfiles de los usuarios. Se clasifica como Generic, Compliance Enforcer y Commodity, y cumple el rol de Gateway Context porque está en el borde del sistema y toda petición pasa por él. Publica `OlderAdultRegistered`, a partir del cual Care Circle crea el círculo y Daily Check-in inicializa las preferencias, y responde a los demás contextos el rol, el nombre y la zona horaria de un usuario. Sus reglas son estándar, pero dos de ellas responden a Serenia: el rol es inmutable y define la aplicación que usa cada persona, y cambiar la contraseña revoca las demás sesiones.
  
 <div align="center">
+
 ![Bounded Context Canvas - Identity & Access](assets/img/bounded-context-canvas/identity-and-access-canvas.png)
   <br/><i>Imagen N. Bounded Context Canvas de Identity & Access.</i>
  
