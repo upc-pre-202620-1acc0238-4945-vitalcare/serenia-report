@@ -8094,28 +8094,29 @@ El Deployment Diagram establece que la aplicación móvil se distribuye mediante
 #### 4.2.1.5. Testing Suite Evidence for Sprint Review
 #### 4.2.1.6. Execution Evidence for Sprint Review
 #### 4.2.1.7. Services Documentation Evidence for Sprint Review
+
 Durante el Sprint 1 el alcance del equipo estuvo centrado en el desarrollo y despliegue de la Landing Page de Serenia, correspondiente a un sitio estático informativo, y en el avance de aproximadamente el 70 % del backend de la plataforma (**Serenia Platform**). Dicho backend está construido con Spring Boot 4.0.6 y Java 26, organizado bajo Domain-Driven Design en seis bounded contexts (`iam`, `carecircle`, `dailycheckin`, `alertsandsafety`, `socialcompanionship` y `wellbeingmonitoring`), y expone una RESTful API versionada bajo el prefijo `/api/v1`.
 
-Como parte de este avance, se documentaron con OpenAPI **56 endpoints agrupados en 17 recursos**. La especificación se genera automáticamente a partir de las anotaciones de los controladores (`@Tag`, `@Operation`, `@ApiResponses`, `@Schema`) mediante `springdoc-openapi-starter-webmvc-ui` 3.0.3, y se publica en Swagger UI. 
+Como parte de este avance, se documentaron con OpenAPI **56 endpoints agrupados en 17 recursos**. La especificación se genera automáticamente a partir de las anotaciones de los controladores (`@Tag`, `@Operation`, `@ApiResponses`, `@Schema`) mediante `springdoc-openapi-starter-webmvc-ui` 3.0.3, y se publica en Swagger UI. Los Web Services fueron desplegados en Microsoft Azure como un contenedor Docker sobre Azure App Service (el proceso se detalla en la sección 5.2.1.7), por lo que la documentación se encuentra disponible públicamente en las siguientes URLs:
 
 | Recurso | URL |
 |---|---|
-| Swagger UI | .. |
-| Especificación OpenAPI (JSON) | .. |
+| Swagger UI | [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html) |
+| Especificación OpenAPI (JSON) | `https://serenia-platform-api.azurewebsites.net/v3/api-docs` |
 
 ### Convenciones generales de la API
 
-- **URL base:** `colocar`.
+- **URL base:** `https://serenia-platform-api.azurewebsites.net/api/v1`.
 - **Formato:** todas las peticiones y respuestas usan `application/json`, salvo la subida de audios y fotos (`multipart/form-data`) y la descarga de archivos multimedia (`/media`).
 - **Autenticación:** la API es *stateless* y usa JWT. Solo `POST /api/v1/users` (registro) y `POST /api/v1/sessions` (inicio de sesión) son públicos; el resto de endpoints exige la cabecera `Authorization: Bearer <token>`, con el token obtenido al iniciar sesión (válido por 7 días). La documentación declara el esquema de seguridad `bearerAuth` (HTTP, bearer, JWT), lo que habilita el botón **Authorize** de Swagger UI.
 - **Identificadores y fechas:** los identificadores son UUID. Los instantes se almacenan y devuelven en UTC (ISO-8601, p. ej. `2026-10-07T15:00:00Z`); las fechas y horas locales (`shiftDate`, `checkDate`, `remindAt`, `reminderTime`) se interpretan en la zona horaria del adulto mayor.
-- **Formato de error:** toda respuesta de error devuelve un objeto con `code` (código de máquina, p. ej. `VALIDATION_ERROR`, `FORBIDDEN`, `BUSINESS_RULE_VIOLATION`, `<ENTIDAD>_NOT_FOUND`, `<ENTIDAD>_CONFLICT`), `message` (mensaje localizado según el idioma de la petición) y `details` (opcional).
+- **Formato de error:** toda respuesta de error devuelve un objeto con `code` (código de máquina, p. ej. `VALIDATION_ERROR`, `FORBIDDEN`, `BUSINESS_RULE_VIOLATION`, `<ENTIDAD>_NOT_FOUND`, `<ENTIDAD>_CONFLICT`), `message` (mensaje del error) y `details` (opcional).
 
 ```json
 {
   "code": "VALIDATION_ERROR",
-  "message": "<mensaje localizado>",
-  "details": "<detalle del campo o de la regla incumplida>"
+  "message": "Validation failed: request-body",
+  "details": "Field password: La contraseña debe tener entre 8 y 72 caracteres; Field email: Debe ser un correo electrónico válido"
 }
 ```
 
@@ -8131,27 +8132,27 @@ Como parte de este avance, se documentaron con OpenAPI **56 endpoints agrupados 
 
 ### Relación de endpoints documentados
 
-Los enlaces de la columna *Documentación* apuntan a la sección (tag) correspondiente de Swagger UI en el entorno local.
+Los enlaces de la columna *Documentación* apuntan a la sección (tag) correspondiente de Swagger UI en el entorno desplegado en Azure.
 
-| Bounded context | Endpoint | Acciones implementadas | Documentación (URL local) |
+| Bounded context | Endpoint | Acciones implementadas | Documentación (Swagger UI) |
 |---|---|---|---|
-| IAM | `/api/v1/users` | `POST` registrar usuario · `GET` obtener por id · `PUT` actualizar perfil · `PUT` actualizar foto · `PUT` cambiar contraseña | [Users](http://localhost:8080/swagger-ui/index.html#/Users) |
-| IAM | `/api/v1/sessions` | `POST` iniciar sesión · `DELETE` cerrar sesión | [Sessions](http://localhost:8080/swagger-ui/index.html#/Sessions) |
-| Care Circle | `/api/v1/care-circles` | `GET` por id · `GET` por adulto mayor | [Care Circles](http://localhost:8080/swagger-ui/index.html#/Care%20Circles) |
-| Care Circle | `/api/v1/care-circles/{careCircleId}/invitation-codes` | `POST` generar código · `GET` códigos pendientes | [Invitation Codes](http://localhost:8080/swagger-ui/index.html#/Invitation%20Codes) |
-| Care Circle | `/api/v1/family-links` y `/api/v1/care-circles/{careCircleId}/family-links` | `POST` canjear código · `GET` vínculos de un familiar · `GET` vínculos de un círculo · `DELETE` revocar vínculo | [Family Links](http://localhost:8080/swagger-ui/index.html#/Family%20Links) |
-| Care Circle | `/api/v1/care-circles/{careCircleId}/care-shifts` | `POST` asignar turno · `GET` consultar turnos · `PUT` reasignar turno | [Care Shifts](http://localhost:8080/swagger-ui/index.html#/Care%20Shifts) |
-| Care Circle | `/api/v1/care-circles/{careCircleId}/shared-notes` | `POST` crear nota · `GET` listar notas · `PUT` editar nota | [Shared Notes](http://localhost:8080/swagger-ui/index.html#/Shared%20Notes) |
-| Daily Check-in | `/api/v1/check-ins` | `GET` check-in de hoy · `GET` historial · `POST` responder check-in | [Check-ins](http://localhost:8080/swagger-ui/index.html#/Check-ins) |
-| Daily Check-in | `/api/v1/check-in-preferences` | `GET` preferencias · `PUT` hora del check-in · `POST` pausar hoy · `DELETE` reanudar hoy · `PUT` modo simplificado | [Check-in Preferences](http://localhost:8080/swagger-ui/index.html#/Check-in%20Preferences) |
-| Alerts and Safety | `/api/v1/alerts` | `GET` alertas de un adulto mayor · `GET` detalle de alerta | [Alerts](http://localhost:8080/swagger-ui/index.html#/Alerts) |
-| Alerts and Safety | `/api/v1/emergency-alerts` | `POST` botón de ayuda · `POST` reconocer · `POST` resolver | [Emergency Alerts](http://localhost:8080/swagger-ui/index.html#/Emergency%20Alerts) |
-| Alerts and Safety | `/api/v1/inactivity-alerts` | `POST` reconocer · `POST` resolver | [Inactivity Alerts](http://localhost:8080/swagger-ui/index.html#/Inactivity%20Alerts) |
-| Social Companionship | `/api/v1/care-circles/{careCircleId}/audio-messages` | `POST` grabar · `POST` compartir · `DELETE` descartar · `GET` listar · `GET` archivo · `POST` reproducir | [Audio Messages](http://localhost:8080/swagger-ui/index.html#/Audio%20Messages) |
-| Social Companionship | `/api/v1/care-circles/{careCircleId}/photo-messages` | `POST` subir · `POST` compartir · `DELETE` descartar · `GET` listar · `GET` archivo · `POST` marcar como vista | [Photo Messages](http://localhost:8080/swagger-ui/index.html#/Photo%20Messages) |
-| Social Companionship | `/api/v1/social-reminders` | `POST` programar · `GET` activos · `POST` posponer · `POST` completar · `POST` cancelar | [Social Reminders](http://localhost:8080/swagger-ui/index.html#/Social%20Reminders) |
-| Wellbeing Monitoring | `/api/v1/small-wins` | `GET` pequeños logros por rango de fechas | [Small Wins](http://localhost:8080/swagger-ui/index.html#/Small%20Wins) |
-| Wellbeing Monitoring | `/api/v1/wellbeing-suggestions` | `GET` sugerencias activas · `POST` descartar sugerencia | [Wellbeing Suggestions](http://localhost:8080/swagger-ui/index.html#/Wellbeing%20Suggestions) |
+| IAM | `/api/v1/users` | `POST` registrar usuario · `GET` obtener por id · `PUT` actualizar perfil · `PUT` actualizar foto · `PUT` cambiar contraseña | [Users](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Users) |
+| IAM | `/api/v1/sessions` | `POST` iniciar sesión · `DELETE` cerrar sesión | [Sessions](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Sessions) |
+| Care Circle | `/api/v1/care-circles` | `GET` por id · `GET` por adulto mayor | [Care Circles](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Care%20Circles) |
+| Care Circle | `/api/v1/care-circles/{careCircleId}/invitation-codes` | `POST` generar código · `GET` códigos pendientes | [Invitation Codes](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Invitation%20Codes) |
+| Care Circle | `/api/v1/family-links` y `/api/v1/care-circles/{careCircleId}/family-links` | `POST` canjear código · `GET` vínculos de un familiar · `GET` vínculos de un círculo · `DELETE` revocar vínculo | [Family Links](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Family%20Links) |
+| Care Circle | `/api/v1/care-circles/{careCircleId}/care-shifts` | `POST` asignar turno · `GET` consultar turnos · `PUT` reasignar turno | [Care Shifts](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Care%20Shifts) |
+| Care Circle | `/api/v1/care-circles/{careCircleId}/shared-notes` | `POST` crear nota · `GET` listar notas · `PUT` editar nota | [Shared Notes](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Shared%20Notes) |
+| Daily Check-in | `/api/v1/check-ins` | `GET` check-in de hoy · `GET` historial · `POST` responder check-in | [Check-ins](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Check-ins) |
+| Daily Check-in | `/api/v1/check-in-preferences` | `GET` preferencias · `PUT` hora del check-in · `POST` pausar hoy · `DELETE` reanudar hoy · `PUT` modo simplificado | [Check-in Preferences](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Check-in%20Preferences) |
+| Alerts and Safety | `/api/v1/alerts` | `GET` alertas de un adulto mayor · `GET` detalle de alerta | [Alerts](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Alerts) |
+| Alerts and Safety | `/api/v1/emergency-alerts` | `POST` botón de ayuda · `POST` reconocer · `POST` resolver | [Emergency Alerts](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Emergency%20Alerts) |
+| Alerts and Safety | `/api/v1/inactivity-alerts` | `POST` reconocer · `POST` resolver | [Inactivity Alerts](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Inactivity%20Alerts) |
+| Social Companionship | `/api/v1/care-circles/{careCircleId}/audio-messages` | `POST` grabar · `POST` compartir · `DELETE` descartar · `GET` listar · `GET` archivo · `POST` reproducir | [Audio Messages](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Audio%20Messages) |
+| Social Companionship | `/api/v1/care-circles/{careCircleId}/photo-messages` | `POST` subir · `POST` compartir · `DELETE` descartar · `GET` listar · `GET` archivo · `POST` marcar como vista | [Photo Messages](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Photo%20Messages) |
+| Social Companionship | `/api/v1/social-reminders` | `POST` programar · `GET` activos · `POST` posponer · `POST` completar · `POST` cancelar | [Social Reminders](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Social%20Reminders) |
+| Wellbeing Monitoring | `/api/v1/small-wins` | `GET` pequeños logros por rango de fechas | [Small Wins](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Small%20Wins) |
+| Wellbeing Monitoring | `/api/v1/wellbeing-suggestions` | `GET` sugerencias activas · `POST` descartar sugerencia | [Wellbeing Suggestions](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Wellbeing%20Suggestions) |
 
 ### Detalle de acciones por endpoint
 
@@ -8175,10 +8176,10 @@ Registro de adultos mayores y familiares lejanos, y gestión del perfil. Las mod
 
 ```json
 {
-  "email": "rosa.mendez@example.com",
+  "email": "rosa.quispe@example.com",
   "password": "secret123",
   "role": "OLDER_ADULT",
-  "fullName": "Rosa Mendez Solorzano",
+  "fullName": "Rosa Quispe Mamani",
   "phoneNumber": "+51987654321",
   "birthDate": "1948-05-12",
   "locale": "es-PE",
@@ -8191,9 +8192,9 @@ Registro de adultos mayores y familiares lejanos, y gestión del perfil. Las mod
 ```json
 {
   "id": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
-  "email": "rosa.mendez@example.com",
+  "email": "rosa.quispe@example.com",
   "role": "OLDER_ADULT",
-  "fullName": "Rosa Mendez Solorzano",
+  "fullName": "Rosa Quispe Mamani",
   "phoneNumber": "+51987654321",
   "birthDate": "1948-05-12",
   "photoUrl": null,
@@ -8218,7 +8219,7 @@ Inicio y cierre de sesión. Al iniciar sesión se abre una sesión y se emite el
 
 ```json
 {
-  "email": "rosa.mendez@example.com",
+  "email": "rosa.quispe@example.com",
   "password": "secret123",
   "deviceInfo": "Android 14 - Samsung A54"
 }
@@ -8233,9 +8234,9 @@ Inicio y cierre de sesión. Al iniciar sesión se abre una sesión y se emite el
   "expiresAt": "2026-10-14T15:30:00Z",
   "user": {
     "id": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
-    "email": "rosa.mendez@example.com",
+    "email": "rosa.quispe@example.com",
     "role": "OLDER_ADULT",
-    "fullName": "Rosa Mendez Solorzano",
+    "fullName": "Rosa Quispe Mamani",
     "locale": "es-PE",
     "timeZone": "America/Lima",
     "status": "ACTIVE"
@@ -8550,7 +8551,7 @@ Mensajes de voz que el adulto mayor graba para sus familiares. Un audio nace com
 **Ejemplo — grabar audio** (`POST`, formulario multipart)
 
 ```bash
-curl -X POST "http://localhost:8080/api/v1/care-circles/6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f/audio-messages" \
+curl -X POST "https://serenia-platform-api.azurewebsites.net/api/v1/care-circles/6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f/audio-messages" \
   -H "Authorization: Bearer <token>" \
   -F "file=@saludo.m4a;type=audio/mp4" \
   -F "durationSeconds=42"
@@ -8688,21 +8689,97 @@ Sugerencias de acción dirigidas a los familiares cuando se detecta un patrón d
 }
 ```
 
+---
+
+### Evidencia de interacción con la documentación
+
+Las siguientes capturas muestran la interacción con la documentación OpenAPI desplegada en Azure, accesible en `https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html`, utilizando datos de muestra (usuario *Rosa Quispe Mamani*, adulto mayor, y su hija como familiar vinculada). Las peticiones se ejecutaron directamente desde Swagger UI con la opción *Try it out*.
+
+**Swagger UI en el entorno desplegado.** Se observa en la barra del navegador la URL del servicio en Azure (`serenia-platform-api.azurewebsites.net/swagger-ui/index.html`), la información de la API (*Serenia Platform*, versión `0.0.1-SNAPSHOT`, especificación OAS 3.1), el servidor `Current environment`, el botón **Authorize** para el token Bearer y la sección *Users* con sus endpoints (`PUT` perfil, foto y contraseña, `POST` registro y `GET` por id).
+
+<p align="center">
+  <img src="./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-swagger.png" alt="Swagger UI de Serenia Platform en el entorno desplegado" width="900">
+</p>
+<p align="center"><em>Imagen X. Swagger UI de Serenia Platform en el entorno desplegado.</em></p>
+
+**Registro de usuario (`POST /api/v1/users`).** Se despliega el endpoint con el ejemplo del *Request body* (`RegisterUserRequest`) y la tabla de respuestas documentadas: `201` (*User registered successfully*), `400` (*Invalid input data*) y `409` (*Email already registered*).
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/post-users-doc.png" alt="Documentación de POST /api/v1/users" width="900">
+</p>
+<p align="center"><em>Imagen X  . Documentación de POST /api/v1/users.</em></p>
+
+**Respuesta `201 Created` al registrar un usuario.** Se ejecuta la petición con *Try it out* contra `https://serenia-platform-api.azurewebsites.net/api/v1/users`, con los datos de muestra de *Rosa Quispe Mamani* (`rosa.quispe.demo@example.com`, rol `OLDER_ADULT`). El servidor devuelve la cuenta creada con `status: "ACTIVE"` y `photoUrl: null`, sin incluir la contraseña.
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/post-users-response.png" alt="Respuesta 201 de POST /api/v1/users" width="900">
+</p>
+<p align="center"><em>Imagen 3. Respuesta 201 de POST /api/v1/users.</em></p>
+
+**Inicio de sesión (`POST /api/v1/sessions`).** La respuesta `201` incluye el `sessionId`, el `token` JWT, la fecha de vencimiento `expiresAt` (7 días después del inicio de sesión) y los datos del usuario autenticado.
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/post-sessions-response.png" alt="Respuesta 201 de POST /api/v1/sessions" width="900">
+</p>
+<p align="center"><em>Imagen 4. Respuesta 201 de POST /api/v1/sessions.</em></p>
+
+**Autorización con el token Bearer.** Se pega el token en el botón **Authorize** (esquema `bearerAuth`, *http, Bearer*). El diálogo confirma el estado *Authorized* y oculta el valor del token; a partir de ese momento Swagger UI envía la cabecera `Authorization: Bearer <token>` en cada petición.
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/swagger-authorize.png" alt="Diálogo Authorize de Swagger UI con el token Bearer aplicado" width="900">
+</p>
+<p align="center"><em>Imagen 5. Diálogo Authorize de Swagger UI con el token Bearer aplicado.</em></p>
+
+**Generación de un código de invitación (`POST /api/v1/care-circles/{careCircleId}/invitation-codes`).** Con el token de Rosa y el identificador de su círculo de cuidado (`2e7a5bda-fc5c-4b40-8639-35f166d32b22`), la API responde `201` con el código `KQ6TEM76` en estado `PENDING` y su fecha de vencimiento `expiresAt`. La captura incluye el *Curl* equivalente con la cabecera `Authorization`.
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/post-invitation-codes-response.png" alt="Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/invitation-codes" width="900">
+</p>
+<p align="center"><em>Imagen 6. Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/invitation-codes.</em></p>
+
+**Canje del código por un familiar (`POST /api/v1/family-links`).** Con el token de la hija (rol `DISTANT_RELATIVE`), se envía el código `KQ6TEM76` y la etiqueta de parentesco `hija`. La API responde `201` y establece el vínculo `ACTIVE` entre la familiar (`relativeId`) y el círculo de cuidado de Rosa (`careCircleId`).
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/post-family-links-response.png" alt="Respuesta 201 de POST /api/v1/family-links" width="900">
+</p>
+<p align="center"><em>Imagen 7. Respuesta 201 de POST /api/v1/family-links.</em></p>
+
+**Botón de ayuda (`POST /api/v1/emergency-alerts`).** Con el token de Rosa, la API registra la emergencia y responde `201` con la alerta de tipo `EMERGENCY` en estado `DISPATCHED` y `deliveryConfirmed: true`, lo que indica que la familia vinculada fue notificada. Los campos de reconocimiento y resolución permanecen en `null` hasta que un familiar atienda la alerta.
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/post-emergency-alerts-response.png" alt="Respuesta 201 de POST /api/v1/emergency-alerts" width="900">
+</p>
+<p align="center"><em>Imagen 8. Respuesta 201 de POST /api/v1/emergency-alerts.</em></p>
+
+**Respuesta de error de validación.** Al enviar un correo inválido (`no-es-un-correo`) y una contraseña de 3 caracteres, la API responde `400` con el objeto de error `{ code, message, details }`: `code` es `VALIDATION_ERROR` y `details` lista los campos incumplidos (*Field password: La contraseña debe tener entre 8 y 72 caracteres; Field email: Debe ser un correo electrónico válido*).
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/error-400-response.png" alt="Respuesta de error 400 de POST /api/v1/users" width="900">
+</p>
+<p align="center"><em>Imagen 9. Respuesta de error 400 de POST /api/v1/users.</em></p>
+
+**Respuesta de error de conflicto.** Al registrar un correo que ya existe, la API responde `409` con `code: "USER_CONFLICT"` y el detalle `user.email.already.registered`, tal como se documenta para este endpoint (*Email already registered*).
+
+<p align="center">
+  <img src="./assets/img/sprint/serenia-api-img/post-users-409.png" alt="Respuesta de error 409 de POST /api/v1/users" width="900">
+</p>
+<p align="center"><em>Imagen 10. Respuesta de error 409 de POST /api/v1/users.</em></p>
+
 ### Repositorio y commits relacionados con la documentación
 
-- **Repositorio de Web Services:** https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform
+- **Repositorio de Web Services:** `upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform`
 - **Rama:** `develop`
 
 | Commit ID | Descripción |
 |---|---|
-| a01dc5a | Documentación OpenAPI del contexto IAM (`Users`, `Sessions`) |
-| f6009be | Documentación OpenAPI del contexto Care Circle |
-| ed45b0f | Documentación OpenAPI del contexto Daily Check-in |
-| df6ea7c | Documentación OpenAPI del contexto Alerts and Safety |
-| 2702159| Documentación OpenAPI del contexto Social Companionship |
-| 428f213| Documentación OpenAPI del contexto Wellbeing Monitoring |
+| `a01dc5a` | Documentación OpenAPI del contexto IAM (`Users`, `Sessions`) |
+| `f6009be` | Documentación OpenAPI del contexto Care Circle |
+| `ed45b0f` | Documentación OpenAPI del contexto Daily Check-in |
+| `df6ea7c` | Documentación OpenAPI del contexto Alerts and Safety |
+| `2702159` | Documentación OpenAPI del contexto Social Companionship |
+| `428f213` | Documentación OpenAPI del contexto Wellbeing Monitoring |
+
 #### 4.2.1.8. Software Deployment Evidence for Sprint Review
-#### 5.2.1.7. Software Deployment Configuration
 
 Durante el Sprint 1 el equipo realizó el despliegue de los dos productos digitales que forman parte del alcance de esta iteración: la **Landing Page** de Serenia, publicada en Netlify, y los **Web Services** (Serenia Platform), desplegados en Microsoft Azure como un contenedor Docker sobre Azure App Service, con base de datos MySQL administrada y almacenamiento de archivos multimedia en Azure Blob Storage. Ambos despliegues se configuraron a partir de los repositorios de la organización de GitHub del equipo (`upc-pre-202620-1acc0238-4945-vitalcare`): `serenia-website` para la Landing Page y `serenia-platform` para los Web Services.
 
