@@ -9461,25 +9461,25 @@ Kevin evaluó el prototipo móvil y la Landing Page enfocándose en la usabilida
 
 ##### Entrevista 3
 
-<img src="" alt="" width="700"/>
+<img src="assets/img/interviews/validacion-brianna.png" alt="" width="700"/>
 
 <br>
 
 <table align="center">
   <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td></td></tr>
-  <tr><td><b>Edad</b></td><td></td></tr>
-  <tr><td><b>Distrito</b></td><td></td></tr>
-  <tr><td><b>Entrevistador</b></td><td></td></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td>Enrique Isaias Guzmán Miranda</td></tr>
+  <tr><td><b>Edad</b></td><td>74 años</td></tr>
+  <tr><td><b>Distrito</b></td><td>Mollendo - Arequipa</td></tr>
+  <tr><td><b>Entrevistador</b></td><td>Brianna Salinas Guzmán</td></tr>
   <tr><td><b>Timing en el video</b></td><td><i>42:59</i></td></tr>
-  <tr><td><b>Duración</b></td><td></td></tr>
+  <tr><td><b>Duración</b></td><td>11 min 39 s</td></tr>
 </table>
 
 **Resumen:**
 
 </div>
 
-
+La entrevista se realizó a Enrique Guzmán, procedente de Mollendo, Arequipa, quien evaluó la landing page y el prototipo de una aplicación diseñada para facilitar el seguimiento del bienestar de los adultos mayores y la comunicación con sus familiares a distancia. El entrevistado valoró positivamente sus funcionalidades, como el registro diario del estado de ánimo, el círculo familiar, los recordatorios, los mensajes de audio y el botón de ayuda para emergencias. Destacó que la aplicación es útil, intuitiva y fácil de manejar, y sugirió incorporar un video tutorial en la landing page para guiar a los nuevos usuarios en el uso de la plataforma. Asimismo, planteó considerar la comunicación con cuidadores o enfermeros, la accesibilidad para personas con dificultades auditivas o del habla y los costos de los planes. En conclusión, consideró que la aplicación está bien diseñada y representa una gran ayuda para las familias que desean mantenerse informadas y organizar el cuidado de sus adultos mayores.
 
 <br>
 
