@@ -6898,7 +6898,7 @@ Los elementos clave del mock-up son:
 
 <br>
 
-La landing page publicada puede consultarse en [sereniaa.netlify.app](https://sereniaa.netlify.app/).
+La landing page publicada puede consultarse en [sereniawebsite.netlify.app](https://sereniawebsite.netlify.app/).
 
 <br>
 <div align="center">
@@ -7937,7 +7937,7 @@ Esta sección explica cómo publicar cada producto de Serenia a partir de su rep
 
 | Producto | Repositorio | Plataforma de despliegue | Qué se publica | Estado |
 | --- | --- | --- | --- | --- |
-| Landing page web | `serenia-website` | Netlify, conectado al repositorio de GitHub | La carpeta `dist`, generada con `npm run build` | Publicada en https://sereniaa.netlify.app/ |
+| Landing page web | `serenia-website` | Netlify, conectado al repositorio de GitHub | La carpeta `dist`, generada con `npm run build` | Publicada en https://sereniawebsite.netlify.app/ |
 | Web Services | `serenia-platform` | Microsoft Azure (Azure Web App Service para la API y MySQL Flexible Server para la base de datos) | Una imagen Docker de la API, que empaqueta el JAR ejecutable de Spring Boot | Desplegada en https://serenia-platform-api.azurewebsites.net |
 | Aplicación móvil | `serenia-app-native` | Firebase App Distribution | El instalable (APK) de la aplicación Android, generado con Gradle | Proyecto Android disponible en el repositorio, con las funcionalidades Home, Check-in y Alerts and Safety |
 
@@ -7947,7 +7947,7 @@ Todos los repositorios pertenecen a la organización del equipo en GitHub (https
 
 **Landing page web: despliegue en Netlify**
 
-La landing page es un sitio estático construido con Vite, sin backend, sin variables de entorno ni servicios externos: el formulario de la lista de espera valida el correo en el propio navegador y no envía datos a ningún servidor. Por eso su despliegue consiste únicamente en construir el sitio y publicar el resultado. El sitio `sereniaa` de Netlify está conectado al repositorio `serenia-website` mediante la integración de Netlify con GitHub: cada Pull Request genera una verificación de despliegue y, al integrar cambios en la rama de producción, Netlify vuelve a construir y publicar el sitio.
+La landing page es un sitio estático construido con Vite, sin backend, sin variables de entorno ni servicios externos: el formulario de la lista de espera valida el correo en el propio navegador y no envía datos a ningún servidor. Por eso su despliegue consiste únicamente en construir el sitio y publicar el resultado. El sitio de Netlify está conectado al repositorio `serenia-website` mediante la integración de Netlify con GitHub: cada Pull Request genera una verificación de despliegue y, al integrar cambios en la rama de producción, Netlify vuelve a construir y publicar el sitio.
 
 <br>
 
@@ -7985,9 +7985,9 @@ El resultado de la construcción queda en la carpeta `dist`, que se genera en el
 | Comprobación | Resultado |
 | --- | --- |
 | Construir la rama `develop` (commit `3967591`, 8 de octubre de 2026) | Genera `dist/assets/index-C64a7uLj.js` e `index-Db2Lbha2.css`, los mismos nombres que sirve el sitio publicado |
-| Abrir https://sereniaa.netlify.app/ | La landing page carga con sus secciones y los enlaces del menú desplazan hasta cada una |
+| Abrir https://sereniawebsite.netlify.app/ | La landing page carga con sus secciones y los enlaces del menú desplazan hasta cada una |
 | Abrir `/src/main.js` y `/package.json` en el sitio | Responden con un error 404, lo que confirma que el sitio sirve únicamente el resultado de la construcción |
-| Revisar las verificaciones de un Pull Request hacia `main` (por ejemplo, el PR #8 del 9 de octubre de 2026) | Netlify registra, para el proyecto `sereniaa`, las verificaciones Header rules, Redirect rules y Pages changed, con el enlace al despliegue correspondiente |
+| Revisar las verificaciones de un Pull Request hacia `main` (por ejemplo, el PR #8 del 9 de octubre de 2026) | Netlify registra, para el proyecto del sitio, las verificaciones Header rules, Redirect rules y Pages changed, con el enlace al despliegue correspondiente |
 | Cambiar el idioma entre ES y EN | El texto se traduce y el idioma elegido se conserva al recargar |
 
 <br>
@@ -8825,7 +8825,7 @@ Adicionalmente, se realiza una prueba de humo registrando un usuario (`POST /api
 
 | Producto | URL |
 |---|---|
-| Landing Page | `https://sereniaa.netlify.app/` |
+| Landing Page | `https://sereniawebsite.netlify.app/` |
 | Web Services (Swagger UI) | `https://<nombre-del-app-service>.azurewebsites.net/swagger-ui.html` — *pendiente de despliegue* |
 | Prototipo móvil | `https://claude.ai/artifact/PQLMrSNqDntp1Fu4cfuvJu` |
 
