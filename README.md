@@ -7939,7 +7939,7 @@ Esta sección explica cómo publicar cada producto de Serenia a partir de su rep
 | --- | --- | --- | --- | --- |
 | Landing page web | `serenia-website` | Netlify, conectado al repositorio de GitHub | La carpeta `dist`, generada con `npm run build` | Publicada en https://sereniaa.netlify.app/ |
 | Web Services | `serenia-platform` | Microsoft Azure (Azure Web App Service para la API y MySQL Flexible Server para la base de datos) | Una imagen Docker de la API, que empaqueta el JAR ejecutable de Spring Boot | Desplegada en https://serenia-platform-api.azurewebsites.net |
-| Aplicación móvil | `serenia-app-native` | Firebase App Distribution | Por definir | Por completar cuando el repositorio contenga el código |
+| Aplicación móvil | `serenia-app-native` | Firebase App Distribution | El instalable (APK) de la aplicación Android, generado con Gradle | Proyecto Android disponible en el repositorio, con las funcionalidades Home, Check-in y Alerts and Safety |
 
 Todos los repositorios pertenecen a la organización del equipo en GitHub (https://github.com/upc-pre-202620-1acc0238-4945-vitalcare). El código que se publica proviene de la rama `main`, que recibe los cambios desde `develop` mediante Pull Requests en cada entrega, según el flujo GitFlow adoptado por el equipo.
 
