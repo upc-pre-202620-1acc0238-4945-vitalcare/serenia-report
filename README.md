@@ -7851,6 +7851,8 @@ Las decisiones de interacción responden a la necesidad de enterarse rápido y c
 **Video de la app del familiar:** [Prototipo del familiar a distancia](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQBY8hFWqFp4T5gpWxH0pwxXAYg_Z92yIvNsQhUq_43SeX0?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=szvj5b)
 <br>
 
+<div style="page-break-after: always;"></div>
+
 # Capítulo IV: Product Implementation & Validation
 ## 4. Product Implementation & Validation
 ## 4.1. Software Configuration Management
@@ -9601,9 +9603,13 @@ El botón de emergencia, por su naturaleza, debe ser de fácil acceso. Sin embar
 Requerir una interacción intencional para confirmar la emergencia. En lugar de un solo toque, implementar un botón de "Mantener presionado por 3 segundos" (con una animación de llenado circular) o un "Deslizar para pedir ayuda" (Swipe to SOS).
 
 
+<div style="page-break-after: always;"></div>
+
+# Conclusiones
+
 ## Conclusiones y Recomendaciones
 
-Esta primera entrega abarca el análisis del problema, la propuesta de valor y el diseño de la solución. Todavía no hay desarrollo de código ni pruebas con usuarios sobre el producto, por lo que las conclusiones contrastan lo planteado en el proceso de Lean UX (sección 1.2.2) con lo encontrado en las entrevistas de descubrimiento (sección 2.2), y las recomendaciones señalan lo que debe validarse en las siguientes entregas.
+Esta segunda entrega suma al análisis y al diseño de la primera el diseño de la interfaz (Capítulo III) y la implementación y validación del Sprint 1 (Capítulo IV). Las conclusiones contrastan lo planteado en el proceso de Lean UX (sección 1.2.2) con lo encontrado en las entrevistas de descubrimiento (sección 2.2) y de validación (sección 4.3), y las recomendaciones señalan lo que sigue para las próximas entregas.
 
 **Conclusiones**
 
@@ -9611,69 +9617,39 @@ Esta primera entrega abarca el análisis del problema, la propuesta de valor y e
 
 2. **Los assumptions de usuario se cumplen en su mayoría, con dos matices.** Los 3 adultos mayores cuentan con smartphone, tal como se asumió, pero los 3 reportan dificultades con funciones nuevas o con la lentitud de las aplicaciones. Esto exige mantener el check-in de un solo toque y el modo simplificado, y no dar por hecho que sabrán resolver cualquier interacción. Por otro lado, la desconfianza hacia soluciones de vigilancia se confirmó en el segmento de familiares (2 de 4 la expresaron de forma directa), mientras que en los adultos mayores el freno observado fue el temor a ser una carga, más que a ser vigilados.
 
-3. **Los Hypothesis Statements siguen sin validarse.** Las cuatro hipótesis (adopción diaria del check-in, "cuéntame algo", panel de estado con alertas selectivas y botón de auxilio) y sus criterios de éxito (alta tasa de check-ins, menos llamadas por ansiedad y uso recurrente del panel) requieren observar el uso real del producto. Las entrevistas de descubrimiento muestran que la necesidad existe, pero no demuestran adopción. La asunción de mayor riesgo continúa siendo que el Segmento 1 adopte el check-in diario como hábito, tal como se señaló en el Lean UX Canvas. Una revisión reciente indica que el uso sostenido de aplicaciones móviles de salud depende sobre todo de motivos intrínsecos, como la autonomía, la competencia y la relación con otras personas (Baykoca et al., 2026), lo que refuerza la decisión de mantener el check-in simple.
+3. **Las entrevistas de validación respaldan la propuesta, con matices.** Con la landing y el prototipo (sección 4.3.2), las tres personas entrevistadas del Segmento 1 entendieron qué hace Serenia y consideraron fácil el recorrido; la excepción puntual fueron las palabras pequeñas, que a Yrma le costó leer, mientras que Eva valoró los colores, el tamaño de los botones y la tipografía. En el Segmento 2, José y Kevin valoraron la vinculación por código como un proceso rápido y menos invasivo que el rastreo por GPS, y el historial y las alertas como una forma de reducir la preocupación diaria. Son opiniones de pocas personas ante un prototipo, por lo que muestran comprensión y aceptación, pero no adopción sostenida.
 
-4. **El modelado estratégico dio como resultado seis bounded contexts con fronteras justificadas.** El proceso de EventStorming en diez pasos (sección 2.5.1) permitió delimitar tres contextos Core (Daily Check-in, Wellbeing Monitoring y Alerts & Safety), dos Supporting (Care Circle y Social Companionship) y uno Generic (Identity & Access). Los tres Core coinciden con la propuesta de valor: capturar la señal diaria, interpretarla y alertar cuando corresponde. El Context Map (sección 2.5.2) formaliza sus relaciones con un Shared Kernel mínimo (Account ID y Role), relaciones Customer/Supplier entre los demás contextos y una Anti-Corruption Layer frente al proveedor externo de notificaciones push.
+4. **Los Hypothesis Statements siguen sin validarse con uso real.** Las cuatro hipótesis (adopción diaria del check-in, "cuéntame algo", panel de estado con alertas selectivas y botón de auxilio) y sus criterios de éxito (alta tasa de check-ins, menos llamadas por ansiedad y uso recurrente del panel) requieren observar el uso del producto durante varios días. La asunción de mayor riesgo continúa siendo que el Segmento 1 adopte el check-in diario como hábito, tal como se señaló en el Lean UX Canvas. Una revisión reciente indica que el uso sostenido de aplicaciones móviles de salud depende sobre todo de motivos intrínsecos, como la autonomía, la competencia y la relación con otras personas (Baykoca et al., 2026), lo que refuerza la decisión de mantener el check-in simple.
 
-5. **El diseño es coherente entre sus artefactos, pero deja decisiones abiertas.** Diez de las preguntas abiertas de los Bounded Context Canvases (por ejemplo, la vigencia del código de invitación, quién revoca un vínculo, cuántos días forman un patrón de malestar y cuánto dura la ventana de inactividad) se llevaron al EventStorming como pain points (paso 3) y siguen sin respuesta definitiva. El Product Backlog de 46 ítems distribuidos en tres sprints (sección 2.4.3) y la arquitectura de monolito modular con un módulo por bounded context (sección 2.5.3) son consistentes con esa delimitación.
+5. **La evaluación heurística identificó cinco problemas de usabilidad.** La sección 4.3.3 registra uno de severidad 4, la activación accidental del botón de auxilio con un solo toque; tres de severidad 3, que son el envío de audio sin revisión ni cancelación, las alertas sin jerarquía visual de criticidad y la modificación de turnos sin prevención de errores; y uno de severidad 2, el mensaje ambiguo en el estado de pausa. Los cinco tienen una recomendación concreta.
 
-6. **Backend con arquitectura clara.** Se construyó en Spring Boot y Java siguiendo Domain-Driven Design, con seis bounded contexts: `iam`, `carecircle`, `dailycheckin`, `alertsandsafety`, `socialcompanionship` y `wellbeingmonitoring`. Cada contexto se organiza en las capas Interface, Application, Domain e Infrastructure, con dependencias apuntando hacia el dominio.
+6. **El modelado estratégico dio como resultado seis bounded contexts con fronteras justificadas.** El proceso de EventStorming en diez pasos (sección 2.5.1) permitió delimitar tres contextos Core (Daily Check-in, Wellbeing Monitoring y Alerts & Safety), dos Supporting (Care Circle y Social Companionship) y uno Generic (Identity & Access). Los tres Core coinciden con la propuesta de valor: capturar la señal diaria, interpretarla y alertar cuando corresponde. El Context Map (sección 2.5.2) formaliza sus relaciones mediante Customer/Supplier entre los contextos internos y Anti-Corruption Layer frente a los sistemas externos, el proveedor de notificaciones push y el almacenamiento de archivos; no se aplicaron Shared Kernel ni Conformist.
 
-7. **API documentada y verificada contra el código.** Se documentaron 56 endpoints en 17 recursos REST, con verbos, parámetros y ejemplos de petición y respuesta. La documentación se contrastó con el código fuente.
+7. **El backend está implementado y desplegado.** Se construyó en Spring Boot con Java 26 siguiendo Domain-Driven Design, con seis bounded contexts y las capas domain, application, infrastructure e interfaces en cada uno. Expone 56 operaciones en 17 grupos REST, documentadas con OpenAPI, y se ejecuta en Azure como imagen Docker sobre Azure App Service, con Azure Database for MySQL y un contenedor privado de Azure Blob Storage para los archivos multimedia (sección 4.1.4).
 
-8. **Despliegue real en la nube.**
-   - El backend corre como imagen Docker en Azure App Service, publicada en Azure Container Registry, con Azure Database for MySQL y Azure Blob Storage privado para los archivos multimedia. Todos los recursos están en el grupo `serenia-rg`.
-   - La landing page está publicada en Netlify.
+8. **La landing y la aplicación Android ya existen.** La landing page está publicada en Netlify con despliegue continuo desde GitHub. La aplicación Android del adulto mayor, construida en Kotlin con Jetpack Compose, incluye las pantallas de Home, Check-in, Alerts and Safety y Social Companionship, navegables y con datos de ejemplo (sección 4.1.3).
 
-9. **Documentación de diseño por bounded context.** Para Care Circle y Social Companionship se elaboraron diagrama de clases, Component Diagram (C4) y diagrama de base de datos con su redacción.
-
-10. **Prototipo y sistema de etiquetado.** Se definió una identidad de etiquetas distinta para cada rol: primera persona para el adulto mayor ("Mi cuenta", "Mi ayuda") y tercera persona para el familiar ("Círculo de Mamá Rosa"). El prototipo móvil se recorrió completo para documentarlo en video.
-
-11. **Evidencia reproducible.** Hay capturas de Azure, de Netlify y de Swagger con datos de ejemplo, además de commits reales por contexto.
-
+9. **El diseño de la interfaz cubre ambos segmentos.** Se definieron seis wireflows y seis user flows, tres por segmento, y un sistema de etiquetas propio para cada rol: primera persona para el adulto mayor ("Mi cuenta", "Mi ayuda") y tercera persona para el familiar ("Círculo de Mamá Rosa").
 
 **Recomendaciones**
 
-1. **Validar primero la asunción de mayor riesgo.** En las entrevistas de validación (Capítulo IV), medir con usuarios reales de ambos segmentos si el adulto mayor responde el check-in diario de forma sostenida. Los criterios de éxito del Problem Statement deben convertirse en métricas concretas antes de esas sesiones.
+1. **Validar con uso real la asunción de mayor riesgo.** Con la aplicación conectada al backend, medir durante varios días la tasa de check-ins diarios de los adultos mayores y convertir los criterios de éxito del Problem Statement en métricas concretas.
 
-2. **Resolver las preguntas abiertas antes de implementar el contexto que las contiene.** Las que afectan al Sprint 1 son la vigencia y la revocación de vínculos (US02, TS03) y a quién se notifica ante una emergencia (US14). Las que afectan al Sprint 2 son la ventana de inactividad (US16) y los días que configuran un patrón de malestar (US18).
+2. **Corregir los problemas de la evaluación heurística por severidad.** Empezar por el botón de auxilio, que debe requerir una confirmación intencional, y seguir con el envío de audio, la jerarquía visual de las alertas, la modificación de turnos y el mensaje de pausa.
 
-3. **Mantener el orden de construcción del Product Backlog.** El Sprint 1 concentra el núcleo mínimo (registro, vínculo familiar, check-in, botón de auxilio y recepción de alertas), el Sprint 2 agrega la interpretación de bienestar, las alertas por inactividad y los turnos de atención, y el Sprint 3 completa Social Companionship (recordatorios sociales y fotografías), agrega las notas compartidas e integra las notificaciones push (SP01). Este orden respeta que Identity & Access y Care Circle son prerequisitos de los demás contextos.
+3. **Mejorar la legibilidad para adultos mayores.** Aumentar el tamaño de las palabras pequeñas señaladas en la entrevista de Yrma y ofrecer una opción de letra más grande, en línea con los requisitos de accesibilidad (NF01, NF04 y US08).
 
-4. **Tratar la accesibilidad y la privacidad como requisitos de primer nivel.** Dado que los 3 adultos mayores reportaron dificultades tecnológicas, conviene probar la interfaz con ellos desde el primer prototipo (NF01, NF04, US08). Un estudio con personas en edad de jubilación coincide en que las aplicaciones de salud requieren interfaces intuitivas y tutoriales iniciales que compensen la limitada alfabetización digital (Collazo-Castiñeira et al., 2025). Dado que 2 de 4 familiares desconfían de la vigilancia, las alertas deben mantenerse selectivas y el producto debe dejar claro qué información se comparte (NF03).
+4. **Conectar la aplicación Android al backend y distribuirla.** Reemplazar los datos de ejemplo por los servicios de la API y distribuir cada versión mediante Firebase App Distribution; después construir la aplicación del familiar a distancia.
 
-5. **Confirmar la configuración de producción.** Verifica que `SPRING_PROFILES_ACTIVE=prod` esté definida en el App Service. Sin ella la aplicación arranca con el perfil `dev` y busca MySQL en `localhost`. **Por confirmar**: tu captura de variables se cortaba antes de llegar a ese valor.
+5. **Agregar pruebas automáticas a las reglas de dominio más críticas.** Las prioritarias son el canje de códigos de invitación (un solo uso y un solo vínculo activo por familiar), la unicidad de turnos por fecha y las transiciones de estado de las alertas, junto con escenarios de aceptación asociados a las historias de usuario.
 
-6. **Revisar el primer despliegue fallido en Netlify.** El primer despliegue aparece como "Failed". Entender la causa evita que se repita y te permite explicarlo si te lo preguntan.
+6. **Resolver las preguntas abiertas de los Bounded Context Canvases antes de implementar el contexto que las contiene.** Las más importantes son la vigencia y la revocación de los vínculos, la duración de la ventana de inactividad y cuántos días forman un patrón de malestar.
 
-7. **Añadir pruebas automáticas a las reglas de dominio más críticas.** Las prioritarias son el canje de códigos de invitación (un solo uso y un solo vínculo activo por familiar), la unicidad de turnos por fecha y las transiciones de estado de los recordatorios. No revisé los tests existentes, así que **por confirmar** qué cobertura hay.
+7. **Definir e integrar el proveedor de notificaciones push.** Firebase Cloud Messaging, estudiado en el spike SP01, es la opción planteada para las notificaciones de check-in, inactividad y emergencia.
 
-8. **Probar el flujo completo entre contextos.** Hay dependencias que merecen una prueba de punta a punta: el registro de un adulto mayor crea su círculo, un canje de código crea el vínculo, y las alertas se dirigen solo a familiares con vínculo activo.
+8. **Evaluar las funciones que pidieron las personas entrevistadas.** Yrma propuso poder hacer videollamadas con su familia; conviene analizarlo junto con el envío de fotos y audios del contexto Social Companionship.
 
-9. **Manejo de errores y códigos HTTP coherentes.** Mantener los criterios que ya describen los controladores (400, 403, 404, 409, 415) y verificarlos en Swagger con casos de error, no solo con casos exitosos.
-
-10. **Seguridad del despliegue.**
-   - Mantener los secretos solo en variables de entorno, con los valores ocultos en las capturas.
-   - Revisar las reglas de firewall de MySQL: la opción "permitir servicios de Azure" es práctica en el sprint, pero conviene restringirla más adelante.
-   - Confirmar que el contenedor de archivos siga con acceso privado.
-
-11. **Una sola fuente de verdad por tema.** Cada decisión técnica (motor de base de datos, modelo de mensajes, URLs, nombres de clases) debe definirse una vez y copiarse a todas las secciones, no reescribirse.
-
-12. **Numeración de imágenes consistente.** Mantener el formato centrado "Imagen N. descripción." y revisar que las referencias del texto coincidan con los números reales después de cualquier cambio.
-
-13. **Privacidad en las capturas.** Recortar el ID de suscripción de Azure y confirmar que no se vea ningún secreto o token en Swagger ni en las variables de entorno.
-
-14. **Evidencia móvil.** Si la aplicación Android se probará en emulador, documentarlo así; si se entrega APK, indicar qué versión y qué pantallas están completas.
-
-15. **Revisión cruzada entre compañeros.** Con cinco integrantes, que cada sección la lea alguien distinto a quien la escribió. Es la forma más barata de detectar las inconsistencias de la sección 2.
-
-16. **Medir la velocidad real del Sprint 1.** Cuenta los puntos de historia efectivamente terminados y úsalos como base para planificar el Sprint 2. Los rangos de referencia que revisamos para un equipo de cinco personas (unos 25 a 40 puntos en un sprint de dos semanas) sirven como guía, pero tu dato real es mejor.
-
-17. **Definir qué significa "terminado".** Acordar una Definition of Done que incluya código en la rama principal, documentación actualizada y evidencia, para que el "70 % del backend" se pueda medir con el mismo criterio por todos.
-
-18. **Un solo flujo de ramas.** Mantener una rama por funcionalidad, con integración regular a la rama principal, para evitar conflictos grandes antes de cada entrega.
-
-19. **Registrar la deuda técnica.** Anotar en el backlog lo que quedó fuera del 70 % del backend, para que no se pierda de vista en el Sprint 2.
+<div style="page-break-after: always;"></div>
 
 # Glosario
 
