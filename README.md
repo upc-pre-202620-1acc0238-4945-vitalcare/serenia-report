@@ -8183,6 +8183,17 @@ El objetivo principal del Sprint 1 fue establecer la arquitectura base de la API
 
 #### 4.2.1.4. Development Evidence for Sprint Review
 
+Durante el Sprint 1, la implementación se enfocó en el desarrollo del backend bajo el enfoque de Domain-Driven Design (DDD). Se priorizó la creación de los Aggregates, Command/Query Services y Repositories de los contextos IAM, Care Circle y Daily Check-in, finalizando con la integración de los Controllers de Alerts & Safety. A continuación, se detallan los commits más críticos que evidencian esta arquitectura estructural.
+
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Commited on (Date) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| serenia-platform | feature/iam | a4d5ae2 | feat(iam): add user aggregate with registration and profile behavior | Creación del aggregate root User, validaciones de dominio y enumeraciones para IAM. | 07/10/2026 |
+| serenia-platform | feature/care-circle | 6f099ec | feat(care-circle): implement care circle, care shift and shared note query services | Implementación de la capa de aplicación para gestionar los vínculos de cuidado. | 07/10/2026 |
+| serenia-platform | feature/daily-check-in | 977fda8 | feat(daily-check-in): add check-in aggregate | Diseño del aggregate root de Check-ins y validación de estados diarios. | 07/10/2026 |
+| serenia-platform | feature/alertsandsafety | 8a64aa4 | feat(alertsandsafety): add emergency alert dispatched event handler | Configuración de listeners para notificar emergencias entre contextos. | 07/10/2026 |
+| serenia-platform | feature/alerts-and-safety | 7da87f3 | feat(alerts-and-safety): add emergency alert repository implementation | Implementación de persistencia física en MySQL mediante repositorios Spring Data JPA. | 08/10/2026 |
+| serenia-platform | feature/alerts-and-safety | f7fdcfe | feat(alerts-and-safety): add emergency alerts controller endpoints | Exposición de la API REST mediante controladores para la integración con clientes móviles. | 08/10/2026 |
+
 #### 4.2.1.5. Testing Suite Evidence for Sprint Review
 
 Durante el Sprint 1, dado que el objetivo principal fue establecer la arquitectura base (monolito modular) y los despliegues iniciales, el equipo aún no ha integrado un framework de pruebas automatizadas en el código fuente. Por ello, la validación se enfocó en **Acceptance Tests y Pruebas Funcionales manuales**. Para los Web Services se utilizaron peticiones HTTP directas para verificar la respuesta de los controladores, y para la Landing Page se realizaron pruebas de responsividad y usabilidad en el navegador.
