@@ -9259,21 +9259,22 @@ Luego probó el prototipo de la aplicación móvil y valoró de forma positiva l
 
 ##### Entrevista 1
 
-<img src="" alt="" width="700"/>
+<img src="assets/img/interviews/validacion-jose.png" alt="Screenshot validación José Cámara" width="700"/>
 
 <br>
 
 <table align="center">
   <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td></td></tr>
-  <tr><td><b>Edad</b></td><td></td></tr>
-  <tr><td><b>Distrito</b></td><td></td></tr>
-  <tr><td><b>Entrevistador</b></td><td></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i></i></td></tr>
-  <tr><td><b>Duración</b></td><td></td></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>José Cámara</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>20 años</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>Surco</i></td></tr>
+  <tr><td><b>Entrevistador</b></td><td>Kelber Sandoval Aiquipa</td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>Por completar</i></td></tr>
+  <tr><td><b>Duración</b></td><td>5 min 04 s</td></tr>
 </table>
 
 **Resumen:**
+Durante la sesión de validación, José interactuó con la Landing Page y los flujos principales de la aplicación móvil (vinculación, historial de bienestar y gestión de alertas). Destacó que el diseño de la web le transmite tranquilidad al ser limpio y no asemejarse a la página de un hospital o seguro médico, lo cual reduce la fricción inicial. Sobre el flujo de vinculación por código, lo consideró un proceso rápido y mucho menos invasivo que alternativas de rastreo por GPS, lo que generaría mayor confianza en su abuela. Apreció especialmente el panel de historial y las sugerencias automáticas, mencionando que le aliviarían la ansiedad diaria durante sus horas de trabajo. Valoró de forma muy positiva la función de coordinación de alertas, indicando que evitaría la duplicidad de esfuerzos en su familia. Calificó la solución general con un 9 a 10 sobre 10.
 
 </div>
 
@@ -9283,21 +9284,22 @@ Luego probó el prototipo de la aplicación móvil y valoró de forma positiva l
 
 ##### Entrevista 2
 
-<img src="" alt="" width="700"/>
+<img src="assets/img/interviews/validacion-kevin.png" alt="Screenshot validación Kevin" width="700"/>
 
 <br>
 
 <table align="center">
   <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td></td></tr>
-  <tr><td><b>Edad</b></td><td></td></tr>
-  <tr><td><b>Distrito</b></td><td></td></tr>
-  <tr><td><b>Entrevistador</b></td><td></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i></i></td></tr>
-  <tr><td><b>Duración</b></td><td></td></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>Kevin</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>27 años</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>San Juan de Miraflores</i></td></tr>
+  <tr><td><b>Entrevistador</b></td><td>Kelber Sandoval Aiquipa</td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>Por completar</i></td></tr>
+  <tr><td><b>Duración</b></td><td>6 min 54 s</td></tr>
 </table>
 
 **Resumen:**
+Kevin evaluó el prototipo móvil y la Landing Page enfocándose en la usabilidad y la reducción de la preocupación constante. Al observar la web, resaltó que el mensaje principal logra comunicar acompañamiento sin sentirse invasivo. Durante la prueba del prototipo móvil, validó positivamente el registro y la vinculación con el adulto mayor mediante un código de 4 dígitos, considerándolo una medida segura y nada complicada para personas de edad avanzada. Al revisar el flujo del historial y las notificaciones de inactividad o emergencia, confirmó que la aplicación le ahorraría el estrés y las llamadas innecesarias que suele hacer por preocupación, otorgándole paz mental para continuar con su rutina laboral. Concluyó calificando la aplicación con un 9 sobre 10, destacando que es una propuesta sólida y adaptada a las necesidades reales de cuidado a distancia.
 
 </div>
 
