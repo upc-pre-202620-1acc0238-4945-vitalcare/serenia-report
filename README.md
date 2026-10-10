@@ -9025,6 +9025,40 @@ Hijos, hijas o parientes cercanos de 25 a 59 años que no conviven con el adulto
 Los User Flows propuestos corresponden a las funcionalidades core de la aplicación del familiar y cubren su ciclo completo: conectarse con el adulto mayor, mantenerse al tanto de cómo está día a día y actuar cuando el sistema le avisa que necesita ayuda. También se mostrará nuestra landing page para conocer su opinión.
 
 ### 4.3.2. Registro de Entrevistas
+
+#### Segmento 1: Adultos mayores que viven solos
+
+<div align="center">
+
+##### Entrevista 1
+
+<img src="assets/img/interviews/validacion-segmento1-yrma.png" alt="Screenshot entrevista de validación Yrma Huamán" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td>Yrma Huamán Jiménez</td></tr>
+  <tr><td><b>Edad</b></td><td>61 años</td></tr>
+  <tr><td><b>Distrito</b></td><td>Tarapoto, San Martín</td></tr>
+  <tr><td><b>Entrevistador</b></td><td>Victor Manuel García Paredes</td></tr>
+  <tr><td><b>Modalidad</b></td><td>Videollamada, con el prototipo de la aplicación</td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>Por completar</i></td></tr>
+  <tr><td><b>Duración</b></td><td>11 min 03 s</td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+
+Yrma participó por videollamada y probó el prototipo a través del enlace que se le envió. Antes de empezar, cuando se le preguntó qué creía que hacía Serenia, respondió que le permite estar comunicada con sus familiares para que conozcan sus emociones, sus sentimientos y lo que le pasa durante el día; es decir, entendió la propuesta sin ayuda.
+
+En el registro y la vinculación identificó el botón "Empezar", eligió "Adulto mayor", completó sus datos, escogió las 8 de la mañana como hora de la pregunta diaria y creó el círculo familiar, sin equivocarse de botón. En el check-in diario respondió "Más o menos" porque, con la edad, "siempre hay algunos inconvenientes en la salud", y leyó la confirmación en pantalla. En el flujo de ayuda leyó "Ya avisamos a tu familia" y entendió que el aviso había llegado a su familia al mismo tiempo.
+
+Lo más fácil fue identificar los botones por su color llamativo; lo más difícil, encontrar algunas palabras pequeñas, que tuvo que leer con cuidado. Dijo que usaría la aplicación todos los días, que contaría su estado de ánimo a su familia porque le permitiría sentirla cerca, y que la aplicación y la llamada diaria "podrían ir de la mano". Como mejora propuso poder hacer videollamadas y tomar y enviar fotos a sus familiares. Al cierre agradeció la entrevista, dijo que le gusta la innovación y quedó disponible para una próxima.
+
+<br>
+
 ### 4.3.3. Evaluaciones según heurísticas
 
 <div style="page-break-after: always;"></div>
