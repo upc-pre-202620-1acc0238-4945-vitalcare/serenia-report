@@ -149,7 +149,7 @@ La Imagen 3 muestra el resumen de actividad (Pulse) del repositorio entre el 3 y
 
 Para el backend de la plataforma el equipo trabajó sobre el repositorio `serenia-platform`, desarrollando cada funcionalidad en ramas `feature/` independientes, como `feature/docker-support` y `feature/alerts-interface`, que se integraron mediante Pull Requests a la rama de desarrollo `develop` y, desde allí, a la rama principal. El código se organizó siguiendo Domain-Driven Design por bounded context, de modo que cada integrante pudo avanzar en su contexto sin interferir con el de los demás. Entre las funcionalidades integradas se encuentra el soporte para Docker, que permitió empaquetar la aplicación como imagen y desplegarla en Azure. Con el cierre del sprint se publicó la primera versión estable del backend con la etiqueta `v1.0.0`.
 
-La Imagen  muestra el resumen de actividad (Pulse) del repositorio entre el 3 y el 10 de octubre de 2026: 10 Pull Requests integrados y ninguno pendiente, con 148 commits realizados por los 5 integrantes del equipo, y 1 release publicada, `v1.0.0`. El gráfico de Top committers evidencia que los 5 integrantes aportaron commits al backend.
+La Imagen 4 muestra el resumen de actividad (Pulse) del repositorio entre el 3 y el 10 de octubre de 2026: 10 Pull Requests integrados y ninguno pendiente, con 148 commits realizados por los 5 integrantes del equipo, y 1 release publicada, `v1.0.0`. El gráfico de Top committers evidencia que los 5 integrantes aportaron commits al backend.
 
 <p align="center">
   <img src="assets/img/project-report-collaboration-insights/insights-platform.png" alt="TB1 Insights" width="900"/>
@@ -8054,7 +8054,7 @@ El sitio se construye con Vite, sin biblioteca de interfaz, por lo que sus conve
 
 **Nomenclatura y estilo de la aplicación móvil (Kotlin)**
 
-La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario de la landing y del backend: Home, Check-in, Alerts and Safety y Social Companionship. Las convenciones de la tabla se midieron sobre los 72 archivos Kotlin de `serenia-mobile-android` al 10 de octubre de 2026, y se cumplen en todos los casos que alcanza cada regla: por ejemplo, los 8 ViewModels llevan `@HiltViewModel` y los 8 estados de pantalla son `data class`.
+La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario de la landing y del backend: Home, Check-in, Alerts and Safety, Social Companionship, Identity and Access y Care Circle. Las convenciones de la tabla se midieron sobre los 95 archivos Kotlin de `serenia-mobile-android` al 10 de octubre de 2026, y se cumplen en todos los casos que alcanza cada regla: por ejemplo, los 10 ViewModels llevan `@HiltViewModel` y los 10 estados de pantalla son `data class`.
 
 <br>
 
@@ -8064,7 +8064,7 @@ La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario
 | Pantalla | Función `@Composable` en PascalCase con sufijo `Screen`, en un archivo propio; lee el ViewModel y delega el dibujo en un `...Content` sin estado, y los componentes propios van en una carpeta `components` | `HomeScreen`, `FamilyScreen` |
 | Estado de la pantalla | `data class` con sufijo `UiState` y valores por defecto; los eventos de una sola vez, como los mensajes, se modelan con un `sealed interface` de sufijo `Event` enviado por un `Channel` | `HomeUiState`, `FamilyUiState` |
 | ViewModel | Sufijo `ViewModel`, anotado con `@HiltViewModel` y con constructor `@Inject`; expone el estado como `StateFlow` de solo lectura mediante `asStateFlow()` | `HomeViewModel` |
-| Navegación | Un grafo por funcionalidad con sufijo `NavGraph` (5 grafos), rutas tipadas con `@Serializable` (14 rutas) y registro de cada grafo en `AppNavHost` | `CheckInNavGraph`, `AlertsAndSafetyNavGraph` |
+| Navegación | Un grafo por funcionalidad con sufijo `NavGraph` (6 grafos), rutas tipadas con `@Serializable` (19 rutas) y registro de cada grafo en `AppNavHost` | `CheckInNavGraph`, `AlertsAndSafetyNavGraph` |
 | Dominio | Tipos propios de la funcionalidad; las constantes de un `enum` van en MAYÚSCULAS con guion bajo | `Mood.NOT_GOOD` |
 | Sistema de diseño | Componentes reutilizables y tema de Material 3 en `core/designsystem`, dividido en `components`, `icon` y `theme` | `SereniaButtons`, `Theme` |
 
@@ -8074,9 +8074,8 @@ La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario
 
 | Aspecto | Convención aplicada |
 | --- | --- |
-| Sangría | 4 espacios y ninguna tabulación (ninguno de los 72 archivos usa tabulaciones) |
-| Importaciones | Explícitas, sin comodines |
-| Interfaz de usuario | Jetpack Compose con Material 3 (29 archivos); 77 funciones `@Composable` en 30 archivos y 30 vistas previas con `@Preview` |
+| Sangría | 4 espacios y ninguna tabulación (ninguno de los 95 archivos usa tabulaciones) |
+| Interfaz de usuario | Jetpack Compose con Material 3 (42 archivos); 118 funciones `@Composable` en 46 archivos y 46 vistas previas con `@Preview` |
 | Estado | Un `MutableStateFlow` privado dentro del ViewModel y actualizaciones con `update` y `copy` sobre el estado inmutable |
 | Inyección de dependencias | Hilt, con `hilt-navigation-compose` para obtener los ViewModels en las pantallas |
 | Comentarios | En inglés y de una línea, para explicar decisiones puntuales de diseño |
@@ -8103,7 +8102,7 @@ Esta sección explica cómo publicar cada producto de Serenia a partir de su rep
 | --- | --- | --- | --- | --- |
 | Landing page web | `serenia-website` | Netlify, conectado al repositorio de GitHub | La carpeta `dist`, generada con `npm run build` | Publicada en https://sereniawebsite.netlify.app/ |
 | Web Services | `serenia-platform` | Microsoft Azure (Azure Web App Service para la API y MySQL Flexible Server para la base de datos) | Una imagen Docker de la API, que empaqueta el JAR ejecutable de Spring Boot | Desplegada en https://serenia-platform-api.azurewebsites.net |
-| Aplicación móvil | `serenia-mobile-android` | Firebase App Distribution | El instalable (APK) de la aplicación Android, generado con Gradle | Proyecto Android disponible en el repositorio, con las funcionalidades Home, Check-in, Alerts and Safety y Social Companionship |
+| Aplicación móvil | `serenia-mobile-android` | Firebase App Distribution | El instalable (APK) de la aplicación Android, generado con Gradle | Proyecto Android disponible en el repositorio, con las funcionalidades Home, Check-in, Alerts and Safety, Social Companionship, Identity and Access y Care Circle |
 
 Todos los repositorios pertenecen a la organización del equipo en GitHub (https://github.com/upc-pre-202620-1acc0238-4945-vitalcare). El código que se publica proviene de la rama `main`, que recibe los cambios desde `develop` mediante Pull Requests en cada entrega, según el flujo GitFlow adoptado por el equipo.
 
@@ -9653,7 +9652,7 @@ Esta segunda entrega suma al análisis y al diseño de la primera el diseño de 
 
 7. **El backend está implementado y desplegado.** Se construyó en Spring Boot con Java 26 siguiendo Domain-Driven Design, con seis bounded contexts y las capas domain, application, infrastructure e interfaces en cada uno. Expone 56 operaciones en 17 grupos REST, documentadas con OpenAPI, y se ejecuta en Azure como imagen Docker sobre Azure App Service, con Azure Database for MySQL y un contenedor privado de Azure Blob Storage para los archivos multimedia (sección 4.1.4).
 
-8. **La landing y la aplicación Android ya existen.** La landing page está publicada en Netlify con despliegue continuo desde GitHub. La aplicación Android del adulto mayor, construida en Kotlin con Jetpack Compose, incluye las pantallas de Home, Check-in, Alerts and Safety y Social Companionship, navegables y con datos de ejemplo (sección 4.1.3).
+8. **La landing y la aplicación Android ya existen.** La landing page está publicada en Netlify con despliegue continuo desde GitHub. La aplicación Android del adulto mayor, construida en Kotlin con Jetpack Compose, incluye las pantallas de Home, Check-in, Alerts and Safety, Social Companionship, Identity and Access y Care Circle, navegables y con datos de ejemplo (sección 4.1.3).
 
 9. **El diseño de la interfaz cubre ambos segmentos.** Se definieron seis wireflows y seis user flows, tres por segmento, y un sistema de etiquetas propio para cada rol: primera persona para el adulto mayor ("Mi cuenta", "Mi ayuda") y tercera persona para el familiar ("Círculo de Mamá Rosa").
 
