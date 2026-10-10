@@ -3874,11 +3874,11 @@ La Imagen 29 reúne los seis bounded contexts en un solo tablero y muestra cómo
 #### 2.5.1.2. Domain Message Flows Modeling
 
 Una vez delimitados los bounded contexts candidatos, el equipo desarrolló una sesión de Domain Message Flows Modeling con el fin de visualizar cómo deben colaborar dichos contextos para resolver los casos de negocio que enfrentan los usuarios del sistema. Mientras que la sesión anterior respondió dónde trazar las fronteras, esta buscó responder qué mensajes deben cruzarlas.
-
-La técnica aplicada fue Domain Storytelling, empleando la herramienta Egon.io. La notación representa cada escenario mediante actores, objetos de trabajo y actividades numeradas que se leen como oraciones completas, lo que permite validar el flujo con lenguaje natural del dominio. El equipo introdujo una variante deliberada sobre la notación clásica: además de los actores humanos, cada bounded context fue modelado como un actor de tipo sistema. De esta forma, toda flecha que va de un contexto a otro constituye un mensaje de dominio explícito, y el diagrama evidencia directamente la colaboración entre fronteras en lugar de tratar al sistema como una caja negra.
-
-La selección de escenarios no buscó cobertura funcional completa, sino aquellos casos en los que más de un bounded context debe intervenir para resolver una necesidad del usuario. Bajo ese criterio se modelaron tres domain stories, cada una correspondiente a un escenario de camino feliz. Los casos de rechazo y las variantes excepcionales quedaron fuera del alcance, ya que en Domain Storytelling cada variación constituye una historia independiente y no una ramificación del mismo diagrama.
-
+ 
+La técnica se aplicó con la notación de Domain Message Flow Modelling propuesta por la comunidad DDD Crew. Cada escenario se representa en un diagrama donde los actores, los bounded contexts (nubes) y los sistemas se conectan mediante flechas que van del emisor al receptor. Sobre cada flecha se ubica el mensaje que la cruza, con un color según su tipo: azul para los commands, naranja para los events y verde para las queries. Cada mensaje indica su nombre, su orden dentro del flujo y los datos significativos que transporta, de modo que el diagrama muestra no solo quién se comunica con quién, sino también qué información necesita cada contexto. Los mensajes que dispara el paso del tiempo se identifican con un reloj e indican la condición que los origina.
+ 
+La selección de escenarios no buscó cobertura funcional completa, sino aquellos casos en los que más de un bounded context debe intervenir para resolver una necesidad del usuario. Bajo ese criterio se modelaron cuatro escenarios de "happy path", cada uno con entre seis y ocho mensajes. Los casos de rechazo y las variantes excepcionales quedaron fuera del alcance, ya que cada variación constituye un escenario independiente y no una ramificación del mismo diagrama.
+ 
 <br>
 
 **Domain Story 1: Registro y vinculación familiar**
