@@ -9461,7 +9461,9 @@ Kevin evaluó el prototipo móvil y la Landing Page enfocándose en la usabilida
 
 ##### Entrevista 3
 
-<img src="assets/img/interviews/validacion-brianna.png" alt="" width="700"/>
+<img src="assets/img/interviews/validacion-brianna.png" alt="Screenshot entrevista de validación Enrique Guzmán" width="700"/>
+
+<p align="center"><i>Imagen 126. Captura de la entrevista de validación con Enrique Guzmán.</i></p>
 
 <br>
 
@@ -9477,9 +9479,9 @@ Kevin evaluó el prototipo móvil y la Landing Page enfocándose en la usabilida
 
 **Resumen:**
 
-</div>
-
 La entrevista se realizó a Enrique Guzmán, procedente de Mollendo, Arequipa, quien evaluó la landing page y el prototipo de una aplicación diseñada para facilitar el seguimiento del bienestar de los adultos mayores y la comunicación con sus familiares a distancia. El entrevistado valoró positivamente sus funcionalidades, como el registro diario del estado de ánimo, el círculo familiar, los recordatorios, los mensajes de audio y el botón de ayuda para emergencias. Destacó que la aplicación es útil, intuitiva y fácil de manejar, y sugirió incorporar un video tutorial en la landing page para guiar a los nuevos usuarios en el uso de la plataforma. Asimismo, planteó considerar la comunicación con cuidadores o enfermeros, la accesibilidad para personas con dificultades auditivas o del habla y los costos de los planes. En conclusión, consideró que la aplicación está bien diseñada y representa una gran ayuda para las familias que desean mantenerse informadas y organizar el cuidado de sus adultos mayores.
+
+</div>
 
 <br>
 
