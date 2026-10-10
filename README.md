@@ -9083,25 +9083,29 @@ Lo más fácil fue identificar los botones por su color llamativo; lo más difí
 
 ##### Entrevista 2
 
-<img src="" alt="" width="700"/>
+<img src="assets/img/interviews/validation-interview-arturo-eva.png" alt="Screenshot de entrevista de validación - Eva Martinez" width="700"/>
 
 <br>
 
 <table align="center">
-  <tr><th>Campo</th><th>Detalle</th></tr>
-  <tr><td><b>Nombres y apellidos</b></td><td></td></tr>
-  <tr><td><b>Edad</b></td><td></td></tr>
-  <tr><td><b>Distrito</b></td><td></td></tr>
-  <tr><td><b>Entrevistador</b></td><td></td></tr>
-  <tr><td><b>Timing en el video</b></td><td><i></i></td></tr>
-  <tr><td><b>Duración</b></td><td></td></tr>
+    <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td>Eva Martinez Torres</td></tr>
+  <tr><td><b>Edad</b></td><td>67 años</td></tr>
+  <tr><td><b>Distrito</b></td><td>Chanchamayo - Junín</td></tr>
+  <tr><td><b>Entrevistador</b></td><td>Arturo Contreras Torres</td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>Por completar</i></td></tr>
+  <tr><td><b>Duración</b></td><td>12 min 03 s</td></tr>
 </table>
 
 **Resumen:**
 
 </div>
 
+Eva Martínez Torres tiene 67 años y reside en el distrito de Chanchamayo, provincia de Junín. Es casada y tiene 2 hijas, aunque vive sola desde hace 16 años. Anteriormente tenía un negocio de ropa deportiva que cerró por la pandemia, y hoy se dedica a las labores del hogar y trabaja ocasionalmente como costurera. Cuenta con un celular táctil que usa a diario para Facebook, TikTok y WhatsApp, por lo que ya está familiarizada con el uso de aplicaciones.
 
+Durante la validación revisó primero el landing page, que le pareció muy completo e informativo, y destacó que sus colores son llamativos y que explica con claridad qué ofrece Serenia. También consideró que los precios planteados para una futura implementación son accesibles para lo que el servicio brinda.
+
+Luego probó el prototipo de la aplicación móvil y valoró de forma positiva la paleta de colores, el tamaño de los botones y la tipografía, que le resultaron cómodos de leer y de presionar. Señaló que la distribución de cada sección le pareció muy adecuada, ya que le fue muy fácil moverse por la aplicación y encontrar lo que buscaba sin ayuda.
 
 <br>
 
