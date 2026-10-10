@@ -9120,6 +9120,7 @@ En esta sección se registra y explica el proceso de validación de Serenia con 
 
 ### 4.3.1. Diseño de Entrevistas
 
+
 #### Segmento 1: Adultos mayores que viven solos
 
 Personas de 60 años a más, residentes en zonas urbanas del Perú, que viven solas y cuentan con un teléfono celular. Para las entrevistas de validación se evaluará la usabilidad, la claridad y la accesibilidad de Serenia desde la perspectiva del adulto mayor. Ello se conseguirá considerando los avances del proyecto hasta el Sprint 1, que comprenden el landing page y el prototipo interactivo de la aplicación del adulto mayor, y podrá ajustarse según el avance del equipo de desarrollo y el acuerdo con los entrevistados. Se validará el feedback de cada participante en el uso del prototipo junto con el landing page, poniendo especial atención en si puede completar cada tarea sin ayuda y con la menor cantidad de toques posible.
@@ -9175,6 +9176,182 @@ Hijos, hijas o parientes cercanos de 25 a 59 años que no conviven con el adulto
 Los User Flows propuestos corresponden a las funcionalidades core de la aplicación del familiar y cubren su ciclo completo: conectarse con el adulto mayor, mantenerse al tanto de cómo está día a día y actuar cuando el sistema le avisa que necesita ayuda. También se mostrará nuestra landing page para conocer su opinión.
 
 ### 4.3.2. Registro de Entrevistas
+<br>
+
+#### Segmento 1: Adultos mayores que viven solos
+
+<div align="center">
+
+##### Entrevista 1
+
+<img src="assets/img/interviews/entrevista.png" alt="Screenshot entrevista" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>-</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="">Enlace de entrevistas</a></i></td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+
+<br>
+
+<div align="center">
+
+##### Entrevista 2
+
+<img src="assets/img/interviews/entrevista.png" alt="Screenshot entrevista" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>-</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="">Enlace de entrevistas</a></i></td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+
+<br>
+
+
+<div align="center">
+
+##### Entrevista 3
+
+<img src="assets/img/interviews/entrevista.png" alt="Screenshot entrevista" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>-</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="">Enlace de entrevistas</a></i></td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+<br>
+
+#### Segmento 2: Familiares a distancia
+
+<div align="center">
+
+##### Entrevista 1
+
+
+<img src="assets/img/interviews/entrevista.png" alt="Screenshot entrevista" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>-</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="">Enlace de entrevistas</a></i></td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+
+<br>
+
+<div align="center">
+
+##### Entrevista 2
+
+<img src="assets/img/interviews/entrevista.png" alt="Screenshot entrevista" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>-</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="">Enlace de entrevistas</a></i></td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+
+<br>
+
+<div align="center">
+
+##### Entrevista 3
+
+
+<img src="assets/img/interviews/entrevista.png" alt="Screenshot entrevista" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>-</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="">Enlace de entrevistas</a></i></td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+
+<br>
+
+
+<div align="center">
+
+##### Entrevista 4
+
+<img src="assets/img/interviews/entrevista.png" alt="Screenshot entrevista" width="700"/>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Edad</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Distrito</b></td><td><i>-</i></td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>-</i></td></tr>
+  <tr><td><b>URL del video</b></td><td><i> <a href="">Enlace de entrevistas</a></i></td></tr>
+</table>
+
+**Resumen:**
+
+</div>
+
+
+
+<br>
+
+
+### 4.3.3. Evaluaciones según heurísticas
+
+<div style="page-break-after: always;"></div>
 
 #### Segmento 1: Adultos mayores que viven solos
 
