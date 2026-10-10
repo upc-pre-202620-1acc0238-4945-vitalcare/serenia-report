@@ -7703,25 +7703,46 @@ Un user flow muestra la ruta que sigue el usuario para lograr su objetivo, con l
 
 #### 3.1.4.5. Mobile Applications Prototyping
 
-El prototipo interactivo de Serenia se construyó como una página navegable en Claude Artifacts. Muestra un solo teléfono en pantalla, con chips debajo para saltar entre los pasos del flujo (registro, vinculación, aplicación del adulto mayor y aplicación del familiar). Además de recorrerlo pantalla por pantalla, se puede probar la interacción entre ambas aplicaciones. Por ejemplo, la respuesta al check-in del adulto mayor se refleja en el inicio del familiar, una alerta de ayuda aparece en la lista de alertas del familiar, y un audio grabado por el adulto mayor queda disponible para su reproducción.
+Los prototipos de Serenia simulan la interacción y la navegación de dos aplicaciones móviles, una para el adulto mayor y otra para el familiar a distancia, siguiendo los paths definidos en los User Flow Diagrams. Las decisiones de interacción buscan que el uso diario sea simple y sin fricción. Por eso cada pantalla tiene una acción principal clara, con botones grandes y textos legibles, y una paleta de verdes y tonos cálidos que transmite tranquilidad.
+
+Estas decisiones se relacionan con la arquitectura de información. Separamos los caminos por rol desde el inicio (¿Quién eres?), para que cada persona vea solo lo que necesita. En la app del adulto mayor, el sistema de navegación es una barra inferior con pocas secciones (Inicio, Recordar, Familia y Cuenta). En la del familiar, la barra inferior incluye también el Historial, las Alertas y los Mensajes. Las interacciones seleccionadas son de un solo toque, como responder el check-in, pedir ayuda o escribir un código con teclado numérico. Los errores se comunican con color y con un mensaje que explica cómo resolverlos.
+
+A continuación se presenta, para cada aplicación, un screenshot del video y el enlace al video en Microsoft Stream, donde se demuestran y explican los principales flujos de interacción.
 
 Enlace al prototipo: https://claude.ai/artifact/PQLMrSNqDntp1Fu4cfuvJu
 
 Para probar la vinculación en el prototipo, el código válido es 4821 y el código expirado es 0000. Cualquier otro valor muestra el estado de código inválido.
 
-<br>
+
+
+**App del adulto mayor**
+
+La app del adulto mayor está pensada para que una persona con poca experiencia digital pueda confirmar cómo está en pocos segundos. El video muestra el registro, la creación del círculo familiar con su código de invitación, y el uso diario: el check-in "¿Cómo amaneciste hoy?" con tres respuestas, el botón de ayuda, los recordatorios, la sección Familia y la cuenta con modo simplificado.
+
+Las decisiones de interacción más importantes son el check-in de un toque, la opción respetuosa "Hoy no quiero responder" y un botón de ayuda siempre visible que avisa a todo el círculo a la vez. Con ellas se busca reducir el esfuerzo del usuario y darle confirmación inmediata de que su familia fue informada.
 
 <div align="center">
 
-
-**Mobile Prototyping**
-
-![Mobile Video Prototype](.png)
-
-[Ver video de prototipo Mobile en Microsoft Stream]()
-
+![prototipo](assets/img/insights/video-proto-adulto.png)
+  <br/><i>Imagen X. Prototipo del adulto mayor.</i>
 </div>
 
+**Video de la app del adulto mayor:** [Prototipo del adulto mayor](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQAFCb9JvRsCRZOACF3hmsxcAVYs0CxhCY7lhd7hUdkSD4A?e=HnP1Gb&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
+
+
+**App del familiar**
+
+La app del familiar permite dar seguimiento a distancia sin necesidad de llamar todos los días. El video muestra cómo se vincula con el adulto mayor mediante el código de cuatro números, incluyendo los casos de código inválido y código vencido. Luego recorre el inicio con el estado del check-in, el historial con filtros, las alertas, los mensajes con audios y fotos, el círculo familiar y los turnos de atención.
+
+Las decisiones de interacción responden a la necesidad de enterarse rápido y coordinarse. El estado de hoy aparece primero, las alertas se distinguen por tipo y estado (emergencia, inactividad, pendiente, resuelta) y los turnos evitan que dos familiares asuman que el otro ya llamó. Los errores del código explican qué hacer en cada caso.
+
+<div align="center">
+
+![prototipo](assets/img/insights/video-proto-familia.png)
+  <br/><i>Imagen X. Prototipo del familiar a distancia.</i>
+</div>
+
+**Video de la app del familiar:** [Prototipo del familiar a distancia](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQBY8hFWqFp4T5gpWxH0pwxXAYg_Z92yIvNsQhUq_43SeX0?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=szvj5b)
 <br>
 
 # Capítulo IV: Product Implementation & Validation
