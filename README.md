@@ -8064,24 +8064,145 @@ Los User Flows propuestos corresponden a las funcionalidades core de la aplicaci
 
 ### 4.3.2. Registro de Entrevistas
 
-### 4.3.3. Evaluaciones según heurísticas
 
-<div style="page-break-after: always;"></div>
 
-Para asegurar que Serenia sea intuitiva tanto para los adultos mayores (quienes priorizan la claridad visual y operativa) como para los familiares a distancia (quienes requieren información rápida para mitigar la ansiedad), las interfaces de ambas aplicaciones móviles fueron evaluadas utilizando las **10 Heurísticas de Usabilidad de Jakob Nielsen**.
+### 4.3.3. Evaluaciones según heurísticas.
 
-| Heurística de Nielsen | Aplicación y Evaluación en Serenia |
+**UX Heuristics & Principles Evaluation**
+**Usability - Inclusive Design - Information Architecture**
+
+**CARRERA:** Ingeniería de Software
+**CURSO:** 1acc0238 Aplicaciones para dispositivos móviles
+**NRC:** 4945
+**PROFESORES:** Mayta Guillermo, Jorge Luis
+**AUDITOR:** Grupo 2: BlockVoluntariado team
+**CLIENTE(S):** VitalCare (Contreras A., Gallardo C., García V., Salinas B., Sandoval K.)
+**SITE o APP A EVALUAR:** Serenia (Mobile Apps)
+
+**TAREAS A EVALUAR:**
+
+El alcance de esta evaluación incluye la revisión de las siguientes tareas en los prototipos de alta fidelidad:
+
+1. Grabación y envío de mensaje de audio (Adulto mayor).
+2. Consulta del historial de alertas (Familiar).
+3. Visualización del panel de estado diario (Familiar).
+4. Coordinación de turnos de atención (Familiar).
+5. Interacción con el botón de auxilio (Adulto mayor).
+
+---
+
+**ESCALA DE SEVERIDAD**
+
+Los errores serán puntuados tomando en cuenta la siguiente escala de severidad:
+
+| Nivel | Descripción |
 | :--- | :--- |
-| **1. Visibilidad del estado del sistema** | **Familiar:** El panel de alertas actualiza en tiempo real quién se hace cargo de una emergencia (ej. *"Atendido por papá"*), evitando esfuerzos duplicados. **Adulto Mayor:** Al ingresar el código de vinculación, el sistema confirma inmediatamente *"Conexión exitosa"*, dando certeza del enlace. |
-| **2. Relación entre el sistema y el mundo real** | Se omite por completo la jerga médica o técnica ("monitoreo", "signos vitales", "logs"). La interfaz utiliza un lenguaje cercano y emocional: el botón de audio se llama *"Cuéntame algo"* y los reportes diarios indican *"Hoy se siente muy bien"*. |
-| **3. Control y libertad del usuario** | El adulto mayor posee el control total sobre su privacidad: puede utilizar la función *"Pausar preguntas de hoy"* para omitir su check-in diario sin que el sistema dispare una falsa alerta de inactividad, preservando su autonomía. |
-| **4. Consistencia y estándares** | Se mantienen patrones de diseño universales para minimizar la curva de aprendizaje: el botón de *Ayuda* utiliza el color rojo estándar de alerta y se sitúa en un área de fácil acceso, mientras que el flujo de vinculación utiliza códigos de 4 dígitos típicos de emparejamiento de dispositivos. |
-| **5. Prevención de errores** | Para el adulto mayor, los botones de estado de ánimo poseen un área táctil expandida (touch target) que evita selecciones erróneas. El botón de auxilio requiere una interacción sostenida o confirmación breve para evitar activaciones accidentales desde el bolsillo. |
-| **6. Reconocer en lugar de recordar** | **Familiar:** No requiere memorizar el estado de ánimo de días anteriores. El módulo de *Wellbeing Monitoring* evalúa el historial y, si detecta una racha de malestar, expone proactivamente una *"Sugerencia"* en pantalla (ej. *"Tu papá lleva 3 días sintiéndose no tan bien"*). |
-| **7. Flexibilidad y eficiencia de uso** | La aplicación del adulto mayor incorpora un *"Modo Simplificado"*. En días de menor energía, esta función oculta opciones secundarias (como recordatorios sociales o fotos) y presenta únicamente el check-in diario y el botón de ayuda. |
-| **8. Estética y diseño minimalista** | El flujo principal del adulto mayor requiere de **un solo toque**. Se descartaron los campos de texto y los formularios extensos, reduciendo la carga cognitiva a su mínima expresión ("Muy bien", "Más o menos", "No tan bien"). |
-| **9. Ayudar a los usuarios a reconocer errores** | En el proceso de vinculación, si el familiar ingresa un código que ya venció, la interfaz no devuelve un error genérico (ej. "Código 404"), sino que indica claramente: *"El código ingresado ha expirado. Por favor, solicita uno nuevo a tu familiar"*. |
-| **10. Ayuda y documentación** | El *onboarding* inicial cuenta con un tutorial paso a paso guiado que explica al adulto mayor cómo generar su primer código de invitación y dictarlo, cubriendo el único momento que representa fricción técnica. |
+| **1** | **Problema superficial:** puede ser fácilmente superado por el usuario u ocurre con muy poca frecuencia. No necesita ser arreglado a no ser que exista disponibilidad de tiempo. |
+| **2** | **Problema menor:** puede ocurrir un poco más frecuentemente o es un poco más difícil de superar para el usuario. Se le debería asignar una prioridad baja resolverlo de cara al siguiente release. |
+| **3** | **Problema mayor:** ocurre frecuentemente o los usuarios no son capaces de resolverlos. Es importante que sean corregidos y se les debe asignar una prioridad alta. |
+| **4** | **Problema muy grave:** un error de gran impacto que impide al usuario continuar con el uso de la herramienta. Es imperativo que sea corregido antes del lanzamiento. |
+
+**TABLA RESUMEN DE PROBLEMAS**
+
+| # | Problema | Escala de severidad | Heurística/Principio violado |
+| :--- | :--- | :--- | :--- |
+| 1 | El envío de audio se realiza directamente sin opción a escuchar o cancelar la grabación. | 3 | Usability: Control y libertad del usuario |
+| 2 | Las alertas de "Emergencia" e "Inactividad" no presentan una jerarquía de color que distinga su nivel de gravedad. | 3 | Information Architecture: Is it communicative? |
+| 3 | El estado de pausa se muestra al familiar con un mensaje ambiguo ("Hoy prefirió no responder") que puede generar ansiedad. | 2 | Usability: Consistencia y estándares |
+| 4 | La pantalla de turnos de atención carece de confirmación visual al intentar cancelar o liberar un día asignado. | 3 | Usability: Prevención de errores |
+| 5 | El botón de auxilio es susceptible a toques accidentales por falta de un gesto de confirmación (ej. mantener presionado). | 4 | Usability: Prevención de errores |
+
+---
+
+**DESCRIPCIÓN DE PROBLEMAS:**
+
+**PROBLEMA #1: Falta de revisión y cancelación antes de enviar un audio**
+
+**Severidad:** 3 
+**Heurística violada:** Usability — Control y libertad del usuario (Salida de emergencia) 
+**Problema:**
+En la vista "Cuéntale cómo estuvo tu día" del adulto mayor, la instrucción indica "Toca el botón y habla con calma. Se envía a tu familia". Esto sugiere que al detener la grabación, el audio se enviará automáticamente. Los adultos mayores suelen equivocarse al grabar audios o presionar botones por accidente. Al no existir una opción clara de "Escuchar", "Descartar" o "Cancelar" antes del envío definitivo, el usuario queda atrapado en una acción irreversible que vulnera su privacidad.
+
+<div align="center">
+
+![Evidencia Problema 1](assets/img/heuristics/problema-1-audio.png)
+  <br/><i>Captura: Pantalla de grabación de audio del adulto mayor.</i>
+</div>
+
+**Recomendación:**
+Implementar un paso intermedio tras finalizar la grabación donde se muestren dos botones claros: "Escuchar / Descartar" y "Enviar a mi familia", otorgando al usuario una salida de emergencia.
+
+<br>
+
+**PROBLEMA #2: Alertas sin jerarquía visual de criticidad**
+
+**Severidad:** 3 
+**Principio violado:** Information Architecture — Is it communicative? 
+**Problema:**
+En la vista de "Alertas" de la aplicación del familiar, tanto la notificación de "Emergencia" (activación del botón de ayuda) como la de "Inactividad" (no respondió el check-in) se muestran bajo el mismo formato de etiqueta "Pendiente". Visualmente no hay una diferenciación de color o iconografía de alto impacto que ayude al familiar a distinguir en milisegundos una urgencia médica real de un simple olvido de responder el celular.
+
+<div align="center">
+
+![Evidencia Problema 2](assets/img/heuristics/problema-2-alertas.png)
+  <br/><i>Captura: Historial de alertas del familiar a distancia.</i>
+</div>
+
+**Recomendación:**
+Aplicar un código cromático estricto: utilizar rojo intenso y un ícono de advertencia grueso exclusivamente para "Emergencia", y utilizar un tono naranja o amarillo preventivo para "Inactividad".
+
+<br>
+
+**PROBLEMA #3: Mensaje ambiguo en el estado de pausa**
+
+**Severidad:** 2 
+**Heurística violada:** Usability — Consistencia y estándares 
+**Problema:**
+Cuando el adulto mayor activa la función de "Pausa diaria" (no recibir preguntas hoy), el panel de estado del familiar muestra el mensaje: "Hoy prefirió no responder". Esta redacción es ambigua y alarmante, ya que el familiar puede interpretar que su padre/madre está molesto, deprimido o ignorando la aplicación intencionalmente, y no que simplemente usó la función legítima de pausa de la app.
+
+<div align="center">
+
+![Evidencia Problema 3](assets/img/heuristics/problema-3-pausa.png)
+  <br/><i>Captura: Panel de estado diario mostrando "Hoy prefirió no responder".</i>
+</div>
+
+**Recomendación:**
+Estandarizar el lenguaje (Ubiquitous Language). Si la función se llama "Día de Pausa", el panel del familiar debe decir explícitamente: "Mamá Rosa activó su día de pausa" o "Preguntas pausadas por hoy", eliminando el sesgo negativo.
+
+<br>
+
+**PROBLEMA #4: Modificación de turnos sin prevención de errores**
+
+**Severidad:** 3 
+**Heurística violada:** Usability — Prevención de errores 
+**Problema:**
+En la vista "Turnos de atención", los familiares coordinan qué día se hace cargo cada uno. Si un familiar presiona accidentalmente sobre su turno asignado para cancelarlo, no existe un *Modal* (cuadro de diálogo) de confirmación. Una cancelación accidental dejaría un día del adulto mayor sin cobertura familiar, lo que representa una falla grave en la logística del cuidado.
+
+<div align="center">
+
+![Evidencia Problema 4](assets/img/heuristics/problema-4-turnos.png)
+  <br/><i>Captura: Pantalla de asignación de turnos de atención.</i>
+</div>
+
+**Recomendación:**
+Añadir un *dialog box* de confirmación al intentar remover o cambiar un turno: "¿Estás seguro de que deseas liberar este turno? El día quedará sin responsable".
+
+<br>
+
+**PROBLEMA #5: Activación accidental del Botón de Auxilio**
+
+**Severidad:** 4 
+**Heurística violada:** Usability — Prevención de errores 
+**Problema:**
+El botón de emergencia, por su naturaleza, debe ser de fácil acceso. Sin embargo, si este se activa con un simple toque (tap) en la pantalla principal, es altamente probable que el adulto mayor lo dispare por accidente al guardar el celular en el bolsillo o al intentar limpiar la pantalla, enviando alertas de pánico erróneas a toda la familia. 
+
+<div align="center">
+
+![Evidencia Problema 5](assets/img/heuristics/problema-5-sos.png)
+  <br/><i>Captura: Pantalla principal / navegación del adulto mayor.</i>
+</div>
+
+**Recomendación:**
+Requerir una interacción intencional para confirmar la emergencia. En lugar de un solo toque, implementar un botón de "Mantener presionado por 3 segundos" (con una animación de llenado circular) o un "Deslizar para pedir ayuda" (Swipe to SOS).
 
 # Conclusiones
 ## Conclusiones y Recomendaciones
