@@ -9267,7 +9267,16 @@ Los 5 integrantes del equipo participaron en la implementación de la plataforma
 
 ![insight](./assets/img/insights/insights5.png)
 
-
+### 4.2.2. Sprint 2
+#### 4.2.2.1. Sprint Planning 2
+#### 4.2.2.2. Aspect Leaders and Collaborators
+#### 4.2.2.3. Sprint Backlog 2
+#### 4.2.2.4. Development Evidence for Sprint Review
+#### 4.2.2.5. Testing Suite Evidence for Sprint Review
+#### 4.2.2.6. Execution Evidence for Sprint Review
+#### 4.2.2.7. Services Documentation Evidence for Sprint Review
+#### 4.2.2.8. Software Deployment Evidence for Sprint Review
+#### 4.2.2.9. Team Collaboration Insights during Sprint
 
 ## 4.3. Validation Interviews
 
@@ -9723,6 +9732,10 @@ Esta segunda entrega suma al análisis y al diseño de la primera el diseño de 
 8. **Evaluar las funciones que pidieron las personas entrevistadas.** Yrma propuso poder hacer videollamadas con su familia; conviene analizarlo junto con el envío de fotos y audios del contexto Social Companionship.
 
 <div style="page-break-after: always;"></div>
+
+## Video App Validation
+## Video About the product
+## Video About the team
 
 # Glosario
 
