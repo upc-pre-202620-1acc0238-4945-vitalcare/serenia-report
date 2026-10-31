@@ -127,7 +127,9 @@ URL del repositorio (Report): https://github.com/upc-pre-202620-1acc0238-4945-vi
 
 URL del repositorio (Platform): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform
 
-URL del repositorio (App Native): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android
+URL del repositorio (Mobile Android): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android
+
+URL del repositorio (Mobile Flutter): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-flutter
 
 URL del repositorio (Website): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website
 
@@ -9847,6 +9849,8 @@ URL del repositorio (Report):  [Repositorio Reporte](https://github.com/upc-pre-
 
 URL del repositorio (Platform): [Repositorio Platform](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform)
 
-URL del repositorio (App Native):  [Repositorio App Native](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android)
+URL del repositorio (Mobile Android): [Repositorio Mobile Android](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android)
+
+URL del repositorio (Mobile Flutter): [Repositorio Mobile Flutter](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-flutter)
 
 URL del repositorio (Website):  [Repositorio Website](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website)
