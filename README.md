@@ -27,7 +27,7 @@
 </table>
 <br>
 <p align="center"><strong>Período 202620</strong></p>
-<p align="center"><strong>Octubre 2026</strong></p>
+<p align="center"><strong>Noviembre 2026</strong></p>
 
 <br>
 
@@ -85,7 +85,34 @@
       Capítulo III: Solution UI/UX Design <br>
       Capítulo IV: Product Implementation & Validation (Sprint 1) <br>
     </td>
-  </tr>
+    </tr>
+      <tr>
+      <td><b>Tercera Entrega (AV2)</b></td>
+      <td>X/11/2026</td>
+      <td>
+        Contreras Torres, Arturo Valentino <br>
+        <p></p>
+        Gallardo Morales, Carla Alejandra <br>
+        <p></p>
+        García Paredes, Victor Manuel <br>
+        <p></p>
+        Salinas Guzman, Brianna Cristina <br>
+        <p></p>
+        Sandoval Aiquipa, Kelber Yamir <br>
+      </td>
+      <td>
+        Corrección del reporte <br>
+        Mejora de artefactos <br>
+        Nueva versión desplegada de Landing Page <br>
+        Nueva versión desplegada de Web Services <br>
+        Nueva versión de Android Application <br>
+        Primera versión de Flutter Application <br>
+        Primera versión del video con la validación de la aplicación <br>
+        Primera versión del video About-the-Product <br>
+        Primera versión del video About-the-Team <br>
+        Capítulo IV: Product Implementation & Validation (Sprint 2) <br>
+      </td>
+    </tr>
   </table>
 
 <br>
@@ -100,7 +127,9 @@ URL del repositorio (Report): https://github.com/upc-pre-202620-1acc0238-4945-vi
 
 URL del repositorio (Platform): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform
 
-URL del repositorio (App Native): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android
+URL del repositorio (Mobile Android): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android
+
+URL del repositorio (Mobile Flutter): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-flutter
 
 URL del repositorio (Website): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website
 
@@ -166,6 +195,9 @@ La Imagen 5 muestra el resumen de actividad (Pulse) del repositorio entre el 10 
   <img src="assets/img/project-report-collaboration-insights/insights-mobile.png" alt="TB1 Insights" width="900"/>
     <br/><i>Imagen 5. Insights de la Segunda Entrega (TB1)</i>
 </p>
+
+**Tercera Entrega (AV2)**
+
 
 
 <div style="page-break-after: always;"></div>
@@ -276,7 +308,7 @@ La Imagen 5 muestra el resumen de actividad (Pulse) del repositorio entre el 10 
       - [2.6.6.6. Bounded Context Software Architecture Code Level Diagrams](#2666-bounded-context-software-architecture-code-level-diagrams)
         - [2.6.6.6.1. Bounded Context Domain Layer Class Diagrams](#26661-bounded-context-domain-layer-class-diagrams)
         - [2.6.6.6.2. Bounded Context Database Design Diagram](#26662-bounded-context-database-design-diagram)
-        - [Capítulo III: Solution UI/UX Design](#capítulo-iii-solution-uiux-design)
+- [Capítulo III: Solution UI/UX Design](#capítulo-iii-solution-uiux-design)
   - [3.1. Product design](#31-product-design)
     - [3.1.1. Style Guidelines](#311-style-guidelines)
       - [3.1.1.1. General Style Guidelines](#3111-general-style-guidelines)
@@ -313,12 +345,25 @@ La Imagen 5 muestra el resumen de actividad (Pulse) del repositorio entre el 10 
       - [4.2.1.7. Services Documentation Evidence for Sprint Review](#4217-services-documentation-evidence-for-sprint-review)
       - [4.2.1.8. Software Deployment Evidence for Sprint Review](#4218-software-deployment-evidence-for-sprint-review)
       - [4.2.1.9. Team Collaboration Insights during Sprint](#4219-team-collaboration-insights-during-sprint)
+    - [4.2.2. Sprint 2](#422-sprint-2)
+      - [4.2.2.1. Sprint Planning 2](#4221-sprint-planning-2)
+      - [4.2.2.2. Aspect Leaders and Collaborators](#4222-aspect-leaders-and-collaborators)
+      - [4.2.2.3. Sprint Backlog 2](#4223-sprint-backlog-2)
+      - [4.2.2.4. Development Evidence for Sprint Review](#4224-development-evidence-for-sprint-review)
+      - [4.2.2.5. Testing Suite Evidence for Sprint Review](#4225-testing-suite-evidence-for-sprint-review)
+      - [4.2.2.6. Execution Evidence for Sprint Review](#4226-execution-evidence-for-sprint-review)
+      - [4.2.2.7. Services Documentation Evidence for Sprint Review](#4227-services-documentation-evidence-for-sprint-review)
+      - [4.2.2.8. Software Deployment Evidence for Sprint Review](#4228-software-deployment-evidence-for-sprint-review)
+      - [4.2.2.9. Team Collaboration Insights during Sprint](#4229-team-collaboration-insights-during-sprint)
   - [4.3. Validation Interviews](#43-validation-interviews)
     - [4.3.1. Diseño de Entrevistas](#431-diseño-de-entrevistas)
     - [4.3.2. Registro de Entrevistas](#432-registro-de-entrevistas)
     - [4.3.3. Evaluaciones según heurísticas](#433-evaluaciones-según-heurísticas)
 - [Conclusiones](#conclusiones)
   - [Conclusiones y Recomendaciones](#conclusiones-y-recomendaciones)
+  - [Video App Validation](#video-app-validation)
+  - [Video About the product](#video-about-the-product)
+  - [Video About the team](#video-about-the-team)
 - [Glosario](#glosario)
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
@@ -353,12 +398,16 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Apliqué Kotlin y Jetpack Compose en el desarrollo de la aplicación Android y corregí los Bounded Context Canvases, los Domain Message Flows y el diseño táctico con lo aprendido durante la implementación. Además, definí las Style Guidelines y diseñé las entrevistas de validación.
             <br><br>
+            <u>AV2</u><br>
+            <br><br>
             <b>Gallardo Morales, Carla Alejandra</b><br>
             <u>AV1</u><br>
             Aprendí y apliqué técnicas de UX Research (User Personas y User Journey Mapping) a partir del análisis de entrevistas, e incorporé prácticas ágiles al estructurar el Product Backlog priorizado.
             <br><br>
             <u>TB1</u><br>
             Apliqué GitFlow y Conventional Commits en la gestión del código fuente y construí el prototipo de la aplicación móvil, además de participar en la planificación del Sprint 1 bajo el marco Scrum.
+            <br><br>
+            <u>AV2</u><br>
             <br><br>
             <b>García Paredes, Victor Manuel</b><br>
             <u>AV1</u><br>
@@ -367,12 +416,16 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Investigué y definí las convenciones de código del proyecto y configuré el despliegue del software, además de modelar la navegación de la aplicación mediante Wireflow y User Flow Diagrams.
             <br><br>
+            <u>AV2</u><br>
+            <br><br>
             <b>Salinas Guzman, Brianna Cristina</b><br>
             <u>AV1</u><br>
             Incorporé el modelo C4 para documentar la arquitectura por niveles de abstracción, y apliqué técnicas de investigación en el análisis competitivo y en la problemática sustentada con fuentes.
             <br><br>
             <u>TB1</u><br>
             Apliqué principios de arquitectura de información, como los sistemas de búsqueda y navegación, al elaborar los wireframes y mock-ups del landing page y de la aplicación móvil, que luego llevamos a código.
+            <br><br>
+            <u>AV2</u><br>
             <br><br>
             <b>Sandoval Aiquipa, Kelber Yamir</b><br>
             <u>AV1</u><br>
@@ -381,12 +434,15 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Apliqué Scrum en la planificación del Sprint 1 y aprendí a documentar los servicios desarrollados y a evidenciar su despliegue, mientras participaba en el desarrollo de la plataforma y la aplicación Android.
             <br><br>
+            <u>AV2</u><br>
+            <br><br>
         </td>
         <td>
             <u>AV1</u><br>
             El equipo incorporó marcos que no conocía previamente (Lean UX, Needfinding, Domain-Driven Design, EventStorming y el modelo C4); cada integrante estudió por su cuenta la técnica asignada y la explicó al resto, convirtiendo el aprendizaje individual en conocimiento compartido. Además, sustentamos las decisiones del proyecto con técnicas de investigación como entrevistas y análisis competitivo, en lugar de basarnos en supuestos. <br><br>
             <u>TB1</u><br>
-            En este entregable el equipo pasó de la documentación a la implementación: aprendimos Kotlin y Jetpack Compose para la aplicación Android, desarrollamos la plataforma y el sitio web, y adoptamos prácticas de ingeniería como GitFlow, guías de estilo, configuración de despliegue y Scrum. Las entrevistas de validación y la implementación nos permitieron corregir los artefactos de diseño del AV1 con base en lo aprendido.
+            En este entregable el equipo pasó de la documentación a la implementación: aprendimos Kotlin y Jetpack Compose para la aplicación Android, desarrollamos la plataforma y el sitio web, y adoptamos prácticas de ingeniería como GitFlow, guías de estilo, configuración de despliegue y Scrum. Las entrevistas de validación y la implementación nos permitieron corregir los artefactos de diseño del AV1 con base en lo aprendido. <br><br>
+            <u>AV2</u><br>
         </td>
     </tr>
       <tr>
@@ -399,12 +455,16 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Implementar el backend confirmó mi interés en la arquitectura de software; como avance de mi plan, corregí los artefactos de DDD con lo aprendido, y lo siguiente es incorporar pruebas automatizadas a mi formación.
             <br><br>
+            <u>AV2</u><br>
+            <br><br>
             <b>Gallardo Morales, Carla Alejandra</b><br>
             <u>AV1</u><br>
             Reconozco que necesito fortalecer la investigación de usuarios y la gestión de producto; mi plan es seguir formándome en UX Research y validar mis supuestos con usuarios reales en cada entregable.
             <br><br>
             <u>TB1</u><br>
             Gestionar el repositorio y planificar el sprint me mostró que la gestión de producto también exige disciplina técnica; amplío mi plan para formarme en Scrum y control de versiones, además de UX Research.
+            <br><br>
+            <u>AV2</u><br>
             <br><br>
             <b>García Paredes, Victor Manuel</b><br>
             <u>AV1</u><br>
@@ -413,12 +473,16 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Configurar el despliegue me hizo ver la importancia de la operación del software; sumo a mi plan aprender integración y despliegue continuo para automatizar este proceso en los siguientes sprints.
             <br><br>
+            <u>AV2</u><br>
+            <br><br>
             <b>Salinas Guzman, Brianna Cristina</b><br>
             <u>AV1</u><br>
             Identifico la arquitectura de software y la infraestructura en la nube como mi área de crecimiento; mi plan es formarme en servicios cloud y documentación arquitectónica.
             <br><br>
             <u>TB1</u><br>
             Pasar de los mock-ups al desarrollo me mostró la brecha entre diseño e implementación; sumo a mi plan reforzar el desarrollo de interfaces, sin dejar mi formación en arquitectura y cloud.
+            <br><br>
+            <u>AV2</u><br>
             <br><br>
             <b>Sandoval Aiquipa, Kelber Yamir</b><br>
             <u>AV1</u><br>
@@ -427,12 +491,15 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Documentar los servicios y evidenciar su despliegue me hizo notar que debo fortalecer mis bases de backend; mi plan es estudiar el diseño y documentación de APIs REST y aplicarlo en los siguientes sprints.
             <br><br>
+            <u>AV2</u><br>
+            <br><br>
         </td>
         <td>
             <u>AV1</u><br>
             El entregable evidenció que lo visto en clase no basta para sostener un proyecto real: cada técnica exigió estudio adicional del responsable y aprendizaje entre pares. A partir de ello, cada integrante identificó un área concreta de crecimiento profesional y un plan de formación alineado a ella, asumiendo el aprendizaje permanente como una condición del ejercicio profesional y no como una etapa que termina con el curso. <br><br>
             <u>TB1</u><br>
-            El paso al desarrollo reveló necesidades que no eran visibles en el AV1, como dominar un nuevo lenguaje y las prácticas de despliegue. Cada integrante ajustó su plan de crecimiento según lo que este entregable le exigió, y como equipo reconocemos que la tecnología del curso cambiará en cada etapa, por lo que seguir aprendiendo de forma continua será indispensable para los siguientes entregables.
+            El paso al desarrollo reveló necesidades que no eran visibles en el AV1, como dominar un nuevo lenguaje y las prácticas de despliegue. Cada integrante ajustó su plan de crecimiento según lo que este entregable le exigió, y como equipo reconocemos que la tecnología del curso cambiará en cada etapa, por lo que seguir aprendiendo de forma continua será indispensable para los siguientes entregables. <br><br>
+            <u>AV2</u><br>
         </td>
     </tr>
 </table>
@@ -9224,7 +9291,16 @@ Los 5 integrantes del equipo participaron en la implementación de la plataforma
 
 ![insight](./assets/img/insights/insights5.png)
 
-
+### 4.2.2. Sprint 2
+#### 4.2.2.1. Sprint Planning 2
+#### 4.2.2.2. Aspect Leaders and Collaborators
+#### 4.2.2.3. Sprint Backlog 2
+#### 4.2.2.4. Development Evidence for Sprint Review
+#### 4.2.2.5. Testing Suite Evidence for Sprint Review
+#### 4.2.2.6. Execution Evidence for Sprint Review
+#### 4.2.2.7. Services Documentation Evidence for Sprint Review
+#### 4.2.2.8. Software Deployment Evidence for Sprint Review
+#### 4.2.2.9. Team Collaboration Insights during Sprint
 
 ## 4.3. Validation Interviews
 
@@ -9681,6 +9757,10 @@ Esta segunda entrega suma al análisis y al diseño de la primera el diseño de 
 
 <div style="page-break-after: always;"></div>
 
+## Video App Validation
+## Video About the product
+## Video About the team
+
 # Glosario
 
 - **ACL (Anti-Corruption Layer):** Capa de traducción que aísla el modelo de dominio de los modelos externos (DTOs de red o de base de datos local), evitando que estructuras ajenas al negocio contaminen las capas superiores.
@@ -9769,6 +9849,8 @@ URL del repositorio (Report):  [Repositorio Reporte](https://github.com/upc-pre-
 
 URL del repositorio (Platform): [Repositorio Platform](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform)
 
-URL del repositorio (App Native):  [Repositorio App Native](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android)
+URL del repositorio (Mobile Android): [Repositorio Mobile Android](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android)
+
+URL del repositorio (Mobile Flutter): [Repositorio Mobile Flutter](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-flutter)
 
 URL del repositorio (Website):  [Repositorio Website](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website)
