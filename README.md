@@ -396,12 +396,16 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Apliqué Kotlin y Jetpack Compose en el desarrollo de la aplicación Android y corregí los Bounded Context Canvases, los Domain Message Flows y el diseño táctico con lo aprendido durante la implementación. Además, definí las Style Guidelines y diseñé las entrevistas de validación.
             <br><br>
+            <u>AV2</u><br>
+            <br><br>
             <b>Gallardo Morales, Carla Alejandra</b><br>
             <u>AV1</u><br>
             Aprendí y apliqué técnicas de UX Research (User Personas y User Journey Mapping) a partir del análisis de entrevistas, e incorporé prácticas ágiles al estructurar el Product Backlog priorizado.
             <br><br>
             <u>TB1</u><br>
             Apliqué GitFlow y Conventional Commits en la gestión del código fuente y construí el prototipo de la aplicación móvil, además de participar en la planificación del Sprint 1 bajo el marco Scrum.
+            <br><br>
+            <u>AV2</u><br>
             <br><br>
             <b>García Paredes, Victor Manuel</b><br>
             <u>AV1</u><br>
@@ -410,12 +414,16 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Investigué y definí las convenciones de código del proyecto y configuré el despliegue del software, además de modelar la navegación de la aplicación mediante Wireflow y User Flow Diagrams.
             <br><br>
+            <u>AV2</u><br>
+            <br><br>
             <b>Salinas Guzman, Brianna Cristina</b><br>
             <u>AV1</u><br>
             Incorporé el modelo C4 para documentar la arquitectura por niveles de abstracción, y apliqué técnicas de investigación en el análisis competitivo y en la problemática sustentada con fuentes.
             <br><br>
             <u>TB1</u><br>
             Apliqué principios de arquitectura de información, como los sistemas de búsqueda y navegación, al elaborar los wireframes y mock-ups del landing page y de la aplicación móvil, que luego llevamos a código.
+            <br><br>
+            <u>AV2</u><br>
             <br><br>
             <b>Sandoval Aiquipa, Kelber Yamir</b><br>
             <u>AV1</u><br>
@@ -424,12 +432,15 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Apliqué Scrum en la planificación del Sprint 1 y aprendí a documentar los servicios desarrollados y a evidenciar su despliegue, mientras participaba en el desarrollo de la plataforma y la aplicación Android.
             <br><br>
+            <u>AV2</u><br>
+            <br><br>
         </td>
         <td>
             <u>AV1</u><br>
             El equipo incorporó marcos que no conocía previamente (Lean UX, Needfinding, Domain-Driven Design, EventStorming y el modelo C4); cada integrante estudió por su cuenta la técnica asignada y la explicó al resto, convirtiendo el aprendizaje individual en conocimiento compartido. Además, sustentamos las decisiones del proyecto con técnicas de investigación como entrevistas y análisis competitivo, en lugar de basarnos en supuestos. <br><br>
             <u>TB1</u><br>
-            En este entregable el equipo pasó de la documentación a la implementación: aprendimos Kotlin y Jetpack Compose para la aplicación Android, desarrollamos la plataforma y el sitio web, y adoptamos prácticas de ingeniería como GitFlow, guías de estilo, configuración de despliegue y Scrum. Las entrevistas de validación y la implementación nos permitieron corregir los artefactos de diseño del AV1 con base en lo aprendido.
+            En este entregable el equipo pasó de la documentación a la implementación: aprendimos Kotlin y Jetpack Compose para la aplicación Android, desarrollamos la plataforma y el sitio web, y adoptamos prácticas de ingeniería como GitFlow, guías de estilo, configuración de despliegue y Scrum. Las entrevistas de validación y la implementación nos permitieron corregir los artefactos de diseño del AV1 con base en lo aprendido. <br><br>
+            <u>AV2</u><br>
         </td>
     </tr>
       <tr>
@@ -442,12 +453,16 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Implementar el backend confirmó mi interés en la arquitectura de software; como avance de mi plan, corregí los artefactos de DDD con lo aprendido, y lo siguiente es incorporar pruebas automatizadas a mi formación.
             <br><br>
+            <u>AV2</u><br>
+            <br><br>
             <b>Gallardo Morales, Carla Alejandra</b><br>
             <u>AV1</u><br>
             Reconozco que necesito fortalecer la investigación de usuarios y la gestión de producto; mi plan es seguir formándome en UX Research y validar mis supuestos con usuarios reales en cada entregable.
             <br><br>
             <u>TB1</u><br>
             Gestionar el repositorio y planificar el sprint me mostró que la gestión de producto también exige disciplina técnica; amplío mi plan para formarme en Scrum y control de versiones, además de UX Research.
+            <br><br>
+            <u>AV2</u><br>
             <br><br>
             <b>García Paredes, Victor Manuel</b><br>
             <u>AV1</u><br>
@@ -456,12 +471,16 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Configurar el despliegue me hizo ver la importancia de la operación del software; sumo a mi plan aprender integración y despliegue continuo para automatizar este proceso en los siguientes sprints.
             <br><br>
+            <u>AV2</u><br>
+            <br><br>
             <b>Salinas Guzman, Brianna Cristina</b><br>
             <u>AV1</u><br>
             Identifico la arquitectura de software y la infraestructura en la nube como mi área de crecimiento; mi plan es formarme en servicios cloud y documentación arquitectónica.
             <br><br>
             <u>TB1</u><br>
             Pasar de los mock-ups al desarrollo me mostró la brecha entre diseño e implementación; sumo a mi plan reforzar el desarrollo de interfaces, sin dejar mi formación en arquitectura y cloud.
+            <br><br>
+            <u>AV2</u><br>
             <br><br>
             <b>Sandoval Aiquipa, Kelber Yamir</b><br>
             <u>AV1</u><br>
@@ -470,12 +489,15 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Documentar los servicios y evidenciar su despliegue me hizo notar que debo fortalecer mis bases de backend; mi plan es estudiar el diseño y documentación de APIs REST y aplicarlo en los siguientes sprints.
             <br><br>
+            <u>AV2</u><br>
+            <br><br>
         </td>
         <td>
             <u>AV1</u><br>
             El entregable evidenció que lo visto en clase no basta para sostener un proyecto real: cada técnica exigió estudio adicional del responsable y aprendizaje entre pares. A partir de ello, cada integrante identificó un área concreta de crecimiento profesional y un plan de formación alineado a ella, asumiendo el aprendizaje permanente como una condición del ejercicio profesional y no como una etapa que termina con el curso. <br><br>
             <u>TB1</u><br>
-            El paso al desarrollo reveló necesidades que no eran visibles en el AV1, como dominar un nuevo lenguaje y las prácticas de despliegue. Cada integrante ajustó su plan de crecimiento según lo que este entregable le exigió, y como equipo reconocemos que la tecnología del curso cambiará en cada etapa, por lo que seguir aprendiendo de forma continua será indispensable para los siguientes entregables.
+            El paso al desarrollo reveló necesidades que no eran visibles en el AV1, como dominar un nuevo lenguaje y las prácticas de despliegue. Cada integrante ajustó su plan de crecimiento según lo que este entregable le exigió, y como equipo reconocemos que la tecnología del curso cambiará en cada etapa, por lo que seguir aprendiendo de forma continua será indispensable para los siguientes entregables. <br><br>
+            <u>AV2</u><br>
         </td>
     </tr>
 </table>
