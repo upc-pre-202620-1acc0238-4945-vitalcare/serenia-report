@@ -27,7 +27,7 @@
 </table>
 <br>
 <p align="center"><strong>Período 202620</strong></p>
-<p align="center"><strong>Octubre 2026</strong></p>
+<p align="center"><strong>Noviembre 2026</strong></p>
 
 <br>
 
@@ -85,7 +85,34 @@
       Capítulo III: Solution UI/UX Design <br>
       Capítulo IV: Product Implementation & Validation (Sprint 1) <br>
     </td>
-  </tr>
+    </tr>
+      <tr>
+      <td><b>Tercera Entrega (AV2)</b></td>
+      <td>X/11/2026</td>
+      <td>
+        Contreras Torres, Arturo Valentino <br>
+        <p></p>
+        Gallardo Morales, Carla Alejandra <br>
+        <p></p>
+        García Paredes, Victor Manuel <br>
+        <p></p>
+        Salinas Guzman, Brianna Cristina <br>
+        <p></p>
+        Sandoval Aiquipa, Kelber Yamir <br>
+      </td>
+      <td>
+        Corrección del reporte <br>
+        Mejora de artefactos <br>
+        Nueva versión desplegada de Landing Page <br>
+        Nueva versión desplegada de Web Services <br>
+        Nueva versión de Android Application <br>
+        Primera versión de Flutter Application <br>
+        Primera versión del video con la validación de la aplicación <br>
+        Primera versión del video About-the-Product <br>
+        Primera versión del video About-the-Team <br>
+        Capítulo IV: Product Implementation & Validation (Sprint 2) <br>
+      </td>
+    </tr>
   </table>
 
 <br>
