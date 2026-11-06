@@ -9252,7 +9252,7 @@ Los repositorios de las aplicaciones móviles del proyecto, `serenia-mobile-andr
 
 ---
 
-### Resumen de enlaces de despliegue
+**Resumen de enlaces de despliegue**
 
 | Producto | Repositorio | URL |
 |---|---|---|
