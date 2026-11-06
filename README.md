@@ -8434,7 +8434,7 @@ Como parte de este avance, se documentaron con OpenAPI **56 endpoints agrupados 
 | Swagger UI | [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html) |
 | Especificación OpenAPI (JSON) | `https://serenia-platform-api.azurewebsites.net/v3/api-docs` |
 
-### Convenciones generales de la API
+**Convenciones generales de la API**
 
 - **URL base:** `https://serenia-platform-api.azurewebsites.net/api/v1`.
 - **Formato:** todas las peticiones y respuestas usan `application/json`, salvo la subida de audios y fotos (`multipart/form-data`) y la descarga de archivos multimedia (`/media`).
@@ -8460,7 +8460,7 @@ Como parte de este avance, se documentaron con OpenAPI **56 endpoints agrupados 
 | `413` / `415` | Archivo demasiado grande (máx. 10 MB) / tipo de archivo no soportado |
 | `422` | Regla de negocio incumplida (`BUSINESS_RULE_VIOLATION`) |
 
-### Relación de endpoints documentados
+**Relación de endpoints documentados**
 
 Los enlaces de la columna *Documentación* apuntan a la sección (tag) correspondiente de Swagger UI en el entorno desplegado en Azure.
 
@@ -8484,13 +8484,13 @@ Los enlaces de la columna *Documentación* apuntan a la sección (tag) correspon
 | Wellbeing Monitoring | `/api/v1/small-wins` | `GET` pequeños logros por rango de fechas | [Small Wins](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Small%20Wins) |
 | Wellbeing Monitoring | `/api/v1/wellbeing-suggestions` | `GET` sugerencias activas · `POST` descartar sugerencia | [Wellbeing Suggestions](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Wellbeing%20Suggestions) |
 
-### Detalle de acciones por endpoint
+**Detalle de acciones por endpoint**
 
 En cada tabla, los parámetros marcados con `*` son obligatorios. Los *path parameters* y *query parameters* son de tipo UUID, salvo que se indique otro tipo. Salvo que se indique lo contrario, todas las acciones requieren `Authorization: Bearer <token>`.
 
 ---
 
-#### Users: `/api/v1/users`
+**Users: `/api/v1/users`**
 
 Registro de adultos mayores y familiares lejanos, y gestión del perfil. Las modificaciones solo proceden si `{userId}` corresponde al usuario autenticado.
 
@@ -8536,7 +8536,7 @@ Registro de adultos mayores y familiares lejanos, y gestión del perfil. Las mod
 
 ---
 
-#### Sessions: `/api/v1/sessions`
+**Sessions: `/api/v1/sessions`**
 
 Inicio y cierre de sesión. Al iniciar sesión se abre una sesión y se emite el token JWT que se usa en el resto de la API.
 
@@ -8576,7 +8576,7 @@ Inicio y cierre de sesión. Al iniciar sesión se abre una sesión y se emite el
 
 ---
 
-#### Care Circles: `/api/v1/care-circles`
+**Care Circles: `/api/v1/care-circles`**
 
 Círculo de cuidado de un adulto mayor. Pueden consultarlo su dueño y los familiares con vínculo activo.
 
@@ -8597,7 +8597,8 @@ Círculo de cuidado de un adulto mayor. Pueden consultarlo su dueño y los famil
 
 ---
 
-#### Invitation Codes: `/api/v1/care-circles/{careCircleId}/invitation-codes`
+
+**Invitation Codes: `/api/v1/care-circles/{careCircleId}/invitation-codes`**
 
 Códigos de invitación que el adulto mayor comparte con un familiar para que se una a su círculo. Cada código vence a las 48 horas.
 
@@ -8619,7 +8620,7 @@ Códigos de invitación que el adulto mayor comparte con un familiar para que se
 
 ---
 
-#### Family Links: `/api/v1/family-links` y `/api/v1/care-circles/{careCircleId}/family-links`
+**Family Links: `/api/v1/family-links` y `/api/v1/care-circles/{careCircleId}/family-links`**
 
 Vínculo de un familiar con un círculo de cuidado. El adulto mayor puede revocar cualquier vínculo de su círculo; un familiar, solo el suyo.
 
@@ -8654,7 +8655,7 @@ Vínculo de un familiar con un círculo de cuidado. El adulto mayor puede revoca
 
 ---
 
-#### Care Shifts: `/api/v1/care-circles/{careCircleId}/care-shifts`
+**Care Shifts: `/api/v1/care-circles/{careCircleId}/care-shifts`**
 
 Turnos diarios de cuidado que se reparten los familiares del círculo.
 
@@ -8683,7 +8684,7 @@ Turnos diarios de cuidado que se reparten los familiares del círculo.
 
 ---
 
-#### Shared Notes: `/api/v1/care-circles/{careCircleId}/shared-notes`
+**Shared Notes: `/api/v1/care-circles/{careCircleId}/shared-notes`**
 
 Notas visibles para todos los familiares del círculo; solo su autor puede editarlas.
 
@@ -8713,7 +8714,7 @@ Notas visibles para todos los familiares del círculo; solo su autor puede edita
 ```
 
 ---
-#### Check-ins: `/api/v1/check-ins`
+**Check-ins: `/api/v1/check-ins`**
 
 Pregunta diaria de ánimo al adulto mayor. Un check-in puede estar `PENDING`, `ANSWERED`, `MISSED` o `SKIPPED`.
 
@@ -8752,7 +8753,7 @@ Pregunta diaria de ánimo al adulto mayor. Un check-in puede estar `PENDING`, `A
 
 ---
 
-#### Check-in Preferences: `/api/v1/check-in-preferences`
+**Check-in Preferences: `/api/v1/check-in-preferences`**
 
 Preferencias del check-in diario. Solo el adulto mayor propietario puede consultarlas y modificarlas.
 
@@ -8785,7 +8786,7 @@ Preferencias del check-in diario. Solo el adulto mayor propietario puede consult
 
 ---
 
-#### Alerts: `/api/v1/alerts`
+**Alerts: `/api/v1/alerts`**
 
 Vista unificada de las alertas de un adulto mayor, de ambos tipos (`EMERGENCY` e `INACTIVITY`).
 
@@ -8815,7 +8816,7 @@ Vista unificada de las alertas de un adulto mayor, de ambos tipos (`EMERGENCY` e
 
 ---
 
-#### Emergency Alerts: `/api/v1/emergency-alerts`
+**Emergency Alerts: `/api/v1/emergency-alerts`**
 
 Botón de ayuda del adulto mayor y atención de la emergencia por parte de los familiares.
 
@@ -8852,7 +8853,7 @@ Botón de ayuda del adulto mayor y atención de la emergencia por parte de los f
 
 ---
 
-#### Inactivity Alerts: `/api/v1/inactivity-alerts`
+**Inactivity Alerts: `/api/v1/inactivity-alerts`**
 
 Atención de las alertas que se generan cuando el adulto mayor no responde un check-in (`checkInId` identifica el check-in perdido que originó la alerta).
 
@@ -8865,7 +8866,7 @@ El body y el response de `resolve` son los mismos del ejemplo de Emergency Alert
 
 ---
 
-#### Audio Messages: `/api/v1/care-circles/{careCircleId}/audio-messages`
+**Audio Messages: `/api/v1/care-circles/{careCircleId}/audio-messages`**
 
 Mensajes de voz que el adulto mayor graba para sus familiares. Un audio nace como borrador (`DRAFT`) y pasa a `SHARED` al compartirse. Formato AAC (`audio/mp4`), máximo 10 MB y entre 1 y 180 segundos.
 
@@ -8905,7 +8906,7 @@ curl -X POST "https://serenia-platform-api.azurewebsites.net/api/v1/care-circles
 
 ---
 
-#### Photo Messages: `/api/v1/care-circles/{careCircleId}/photo-messages`
+**Photo Messages: `/api/v1/care-circles/{careCircleId}/photo-messages`**
 
 Fotos que los familiares comparten con el adulto mayor. Siguen el mismo ciclo borrador → compartida que los audios. Formatos JPEG o PNG, máximo 10 MB.
 
@@ -8935,7 +8936,7 @@ Fotos que los familiares comparten con el adulto mayor. Siguen el mismo ciclo bo
 
 ---
 
-#### Social Reminders: `/api/v1/social-reminders`
+**Social Reminders: `/api/v1/social-reminders`**
 
 Recordatorios para que el adulto mayor se contacte con sus seres queridos. Estados: `SCHEDULED`, `PRESENTED`, `POSTPONED`, `COMPLETED`, `CANCELED` y `MISSED`.
 
@@ -8973,7 +8974,7 @@ Recordatorios para que el adulto mayor se contacte con sus seres queridos. Estad
 
 ---
 
-#### Small Wins: `/api/v1/small-wins`
+**Small Wins: `/api/v1/small-wins`**
 
 Pequeños logros: buenos días o actividades positivas que el adulto mayor reporta al responder un check-in.
 
@@ -8997,7 +8998,7 @@ Pequeños logros: buenos días o actividades positivas que el adulto mayor repor
 
 ---
 
-#### Wellbeing Suggestions: `/api/v1/wellbeing-suggestions`
+**Wellbeing Suggestions: `/api/v1/wellbeing-suggestions`**
 
 Sugerencias de acción dirigidas a los familiares cuando se detecta un patrón de malestar en el adulto mayor.
 
@@ -9021,7 +9022,7 @@ Sugerencias de acción dirigidas a los familiares cuando se detecta un patrón d
 
 ---
 
-### Evidencia de interacción con la documentación
+**Evidencia de interacción con la documentación**
 
 Las siguientes capturas muestran la interacción con la documentación OpenAPI desplegada en Azure, accesible en `https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html`, utilizando datos de muestra (usuario *Rosa Quispe Mamani*, adulto mayor, y su hija como familiar vinculada). Las peticiones se ejecutaron directamente desde Swagger UI con la opción *Try it out*.
 
@@ -9095,7 +9096,7 @@ Las siguientes capturas muestran la interacción con la documentación OpenAPI d
 </p>
 <p align="center"><em>Imagen 120. Respuesta de error 409 de POST /api/v1/users.</em></p>
 
-### Repositorio y commits relacionados con la documentación
+**Repositorio y commits relacionados con la documentación**
 
 - **Repositorio de Web Services:** `upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform`
 - **Rama:** `develop`
@@ -9123,7 +9124,7 @@ Las actividades realizadas comprendieron la creación de cuentas y recursos en l
 
 ---
 
-### 1. Landing Page: Netlify
+**1. Landing Page: Netlify**
 
 Para el despliegue de la Landing Page se utilizó Netlify como plataforma de hosting, aprovechando su integración nativa con GitHub para automatizar el despliegue continuo. La Landing Page es un sitio estático (HTML) alojado en el repositorio `serenia-website`. La configuración establecida permite que cada cambio integrado a la rama `main` dispare automáticamente un nuevo build y publicación en producción, sin intervención manual del equipo.
 
@@ -9165,7 +9166,7 @@ Se comprobó que todas las secciones de la Landing Page de Serenia se visualizar
 
 ---
 
-### 2. Web Services (Serenia Platform): Microsoft Azure
+**2. Web Services (Serenia Platform): Microsoft Azure**
 
 El backend de Serenia es una aplicación Spring Boot (Java) que persiste su información en MySQL y almacena los audios y fotos que comparten los usuarios en un contenedor privado de Azure Blob Storage. Para su despliegue se empaquetó la aplicación como una imagen Docker, que se publicó en Azure Container Registry y se ejecuta en Azure App Service para contenedores, usando la configuración del perfil de producción del proyecto, que lee todos sus parámetros desde variables de entorno. Todos los recursos se crearon en la región **Mexico Central**, bajo la suscripción *Azure for Students*.
 
@@ -9243,7 +9244,7 @@ Se verificó que el servicio respondiera y que la documentación OpenAPI estuvie
 
 ---
 
-### 3. Aplicaciones móviles
+**3. Aplicaciones móviles**
 
 Los repositorios de las aplicaciones móviles del proyecto, `serenia-mobile-android`, se encuentran en la misma organización de GitHub y se ha desarrollado en Android Studio.
 
