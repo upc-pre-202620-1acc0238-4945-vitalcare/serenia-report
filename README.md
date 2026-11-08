@@ -9294,6 +9294,20 @@ Los 5 integrantes del equipo participaron en la implementación de la plataforma
 
 ### 4.2.2. Sprint 2
 #### 4.2.2.1. Sprint Planning 2
+| **Sprint 2** | Sprint 2 |
+|---|---|
+| **Sprint Planning Background** | 
+| Date | 2026-11-07 |
+| Time | 11:00 AM |
+| Location | Universidad Peruana de Ciencias Aplicadas - Pabellon L |
+| Prepared By | Gallardo Morales, Carla Alejandra |
+| Attendees (to planning meeting) | Contreras Torres, Arturo Valentino / Gallardo Morales, Carla Alejandra /Garcia Paredes, Victor Manuel / Salinas Guzman, Brianna Cristina / Sandoval Aiquipa, Kelber Yamir |
+| Sprint 2 Review summary | En el Sprint 1 se completaron las 17 historias comprometidas (64 story points), y todas las tareas del Sprint Backlog 1 quedaron en estado Done. Se publicó la Landing Page en Netlify (US23, versión v1.0.0). También se construyó cerca del 70 % del backend Serenia Platform con Spring Boot y DDD, organizado en seis bounded contexts, y se desplegó en Azure App Service como contenedor Docker. La API quedó documentada en Swagger UI con 56 endpoints agrupados en 17 recursos. Quedaron implementados IAM (TS01, TS02), Care Circle (TS03), Daily Check-in (TS04) y la lógica de alertas de emergencia (NF02). En paralelo, la aplicación móvil avanzó con sus pantallas organizadas por funcionalidad. |
+| Sprint 2 Restrospective summary | Funcionó bien: GitFlow con ramas feature/ y Pull Requests revisados. Separar el código por bounded context permitió que los 5 integrantes trabajaran en paralelo sin conflictos, y el despliegue con Docker se resolvió pronto. Por mejorar: no se integraron pruebas automatizadas, ya que la validación fue solo manual. La mayoría de los commits se concentró en los últimos días del sprint (7 y 8 de octubre). Además, algunos encabezados y secciones del informe tuvieron que corregirse después. Acuerdos para el Sprint 2: agregar pruebas unitarias e de integración desde el inicio, repartir los commits a lo largo de todo el sprint y revisar el formato del informe antes del merge a develop. |
+| **Sprint Goal & User Stories** | 
+| Sprint 2 Goal |  Nuestro objetivo es ampliar el acompañamiento a distancia de Serenia con alertas por inactividad del check-in, sugerencias de acción ante patrones de malestar, la asignación y consulta de turnos de atención entre familiares, el historial de check-ins y un modo simplificado de interfaz para el adulto mayor. Creemos que esto da a los familiares mayor tranquilidad y capacidad de reacción, y que permite al adulto mayor usar la aplicación sin experiencia tecnológica previa. Esto se confirmará cuando el familiar reciba una alerta al no registrarse el check-in del día, consulte el historial y el turno vigente desde el panel de estado, y el adulto mayor complete su check-in en modo simplificado sin ayuda.|
+| Sprint 2 Velocity | 80 |
+| Sum of Story Points | 79 |
 #### 4.2.2.2. Aspect Leaders and Collaborators
 #### 4.2.2.3. Sprint Backlog 2
 #### 4.2.2.4. Development Evidence for Sprint Review
