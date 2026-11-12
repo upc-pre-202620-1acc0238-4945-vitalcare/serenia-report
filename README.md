@@ -9641,7 +9641,7 @@ Al no responderse el check-in del día dentro del plazo, se genera una alerta `I
 <p align="center">
   <img src="./assets/img/sprint-2/services-documentation/post-inactivity-acknowledge-response.png" alt="Respuesta 200 de POST /api/v1/inactivity-alerts/{alertId}/acknowledge" width="900">
 </p>
-<p align="center"><em>Imagen XXX. Respuesta 200 de POST /api/v1/inactivity-alerts/{alertId}/acknowledge.</em></p>
+<p align="center"><em>Imagen XX. Respuesta 200 de POST /api/v1/inactivity-alerts/{alertId}/acknowledge.</em></p>
 
 Sugerencias de bienestar <br>
 
