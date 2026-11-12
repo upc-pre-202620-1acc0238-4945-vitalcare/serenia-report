@@ -9301,8 +9301,8 @@ Los 5 integrantes del equipo participaron en la implementación de la plataforma
 | Location | Universidad Peruana de Ciencias Aplicadas - Pabellon L |
 | Prepared By | Gallardo Morales, Carla Alejandra |
 | Attendees (to planning meeting) | Contreras Torres, Arturo Valentino / Gallardo Morales, Carla Alejandra /Garcia Paredes, Victor Manuel / Salinas Guzman, Brianna Cristina / Sandoval Aiquipa, Kelber Yamir |
-| Sprint 2 Review summary | En el Sprint 1 se completaron las 17 historias comprometidas (64 story points), y todas las tareas del Sprint Backlog 1 quedaron en estado Done. Se publicó la Landing Page en Netlify (US23, versión v1.0.0). También se construyó cerca del 70 % del backend Serenia Platform con Spring Boot y DDD, organizado en seis bounded contexts, y se desplegó en Azure App Service como contenedor Docker. La API quedó documentada en Swagger UI con 56 endpoints agrupados en 17 recursos. Quedaron implementados IAM (TS01, TS02), Care Circle (TS03), Daily Check-in (TS04) y la lógica de alertas de emergencia (NF02). En paralelo, la aplicación móvil avanzó con sus pantallas organizadas por funcionalidad. |
-| Sprint 2 Restrospective summary | Funcionó bien: GitFlow con ramas feature/ y Pull Requests revisados. Separar el código por bounded context permitió que los 5 integrantes trabajaran en paralelo sin conflictos, y el despliegue con Docker se resolvió pronto. Por mejorar: no se integraron pruebas automatizadas, ya que la validación fue solo manual. La mayoría de los commits se concentró en los últimos días del sprint (7 y 8 de octubre). Además, algunos encabezados y secciones del informe tuvieron que corregirse después. Acuerdos para el Sprint 2: agregar pruebas unitarias e de integración desde el inicio, repartir los commits a lo largo de todo el sprint y revisar el formato del informe antes del merge a develop. |
+| Sprint 1 Review summary | En el Sprint 1 se completaron las 17 historias comprometidas (64 story points), y todas las tareas del Sprint Backlog 1 quedaron en estado Done. Se publicó la Landing Page en Netlify (US23, versión v1.0.0). También se construyó cerca del 70 % del backend Serenia Platform con Spring Boot y DDD, organizado en seis bounded contexts, y se desplegó en Azure App Service como contenedor Docker. La API quedó documentada en Swagger UI con 56 endpoints agrupados en 17 recursos. Quedaron implementados IAM (TS01, TS02), Care Circle (TS03), Daily Check-in (TS04) y la lógica de alertas de emergencia (NF02). En paralelo, la aplicación móvil avanzó con sus pantallas organizadas por funcionalidad. |
+| Sprint 1 Restrospective summary | Funcionó bien: GitFlow con ramas feature/ y Pull Requests revisados. Separar el código por bounded context permitió que los 5 integrantes trabajaran en paralelo sin conflictos, y el despliegue con Docker se resolvió pronto. Por mejorar: no se integraron pruebas automatizadas, ya que la validación fue solo manual. La mayoría de los commits se concentró en los últimos días del sprint (7 y 8 de octubre). Además, algunos encabezados y secciones del informe tuvieron que corregirse después. Acuerdos para el Sprint 2: agregar pruebas unitarias e de integración desde el inicio, repartir los commits a lo largo de todo el sprint y revisar el formato del informe antes del merge a develop. |
 | **Sprint Goal & User Stories** | 
 | Sprint 2 Goal |  Nuestro objetivo es ampliar el acompañamiento a distancia de Serenia con alertas por inactividad del check-in, sugerencias de acción ante patrones de malestar, la asignación y consulta de turnos de atención entre familiares, el historial de check-ins y un modo simplificado de interfaz para el adulto mayor. Creemos que esto da a los familiares mayor tranquilidad y capacidad de reacción, y que permite al adulto mayor usar la aplicación sin experiencia tecnológica previa. Esto se confirmará cuando el familiar reciba una alerta al no registrarse el check-in del día, consulte el historial y el turno vigente desde el panel de estado, y el adulto mayor complete su check-in en modo simplificado sin ayuda.|
 | Sprint 2 Velocity | 80 |
@@ -9314,7 +9314,7 @@ Los 5 integrantes del equipo participaron en la implementación de la plataforma
 #### 4.2.2.6. Execution Evidence for Sprint Review
 #### 4.2.2.7. Services Documentation Evidence for Sprint Review
 
-Durante el Sprint 2 se actualizó la documentación de los Web Services de **Serenia Platform** con OpenAPI/Swagger, integrada directamente en el backend Spring Boot mediante `springdoc-openapi-starter-webmvc-ui`. La documentación cubre los seis bounded contexts de la plataforma: IAM, Care Circle, Daily Check-in, Alerts and Safety, Social Companionship y Wellbeing Monitoring. En total quedaron documentados **57 endpoints agrupados en 17 recursos** (uno más que en el Sprint 1, por el nuevo endpoint para obtener la foto de perfil). Además, se documentaron los endpoints que dan soporte a las historias comprometidas en el Sprint 2: la alerta por inactividad del check-in (US16), la sugerencia de acción por patrón de malestar (US18), la asignación y consulta de turnos de atención (US20, US21), el historial de check-ins (US17) y el modo simplificado de interfaz (US08).
+Durante el Sprint 2 se actualizó la documentación de los Web Services de **Serenia Platform** con OpenAPI/Swagger, integrada directamente en el backend Spring Boot. La documentación cubre los seis bounded contexts de la plataforma: IAM, Care Circle, Daily Check-in, Alerts and Safety, Social Companionship y Wellbeing Monitoring. En total quedaron documentados **57 endpoints agrupados en 17 recursos** (uno más que en el Sprint 1, por el nuevo endpoint para obtener la foto de perfil). Además, se documentaron los endpoints que dan soporte a las historias comprometidas en el Sprint 2: la alerta por inactividad del check-in (US16), la sugerencia de acción por patrón de malestar (US18), la asignación y consulta de turnos de atención (US20, US21), el historial de check-ins (US17) y el modo simplificado de interfaz (US08).
 
 **URL Swagger desplegado:** [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html)
 
@@ -9326,7 +9326,7 @@ Durante el Sprint 2 se actualizó la documentación de los Web Services de **Ser
 
 ---
 
-##### Cambios en la documentación respecto al Sprint 1
+**Cambios en la documentación respecto al Sprint 1**
 
 - **Guía de uso dentro de Swagger UI:** la descripción de la API (`OpenApiConfiguration`) ahora incluye la lista de bounded contexts con sus recursos, los pasos para probarla (registrar usuario, iniciar sesión y usar el botón **Authorize**), el formato de los errores y el idioma de los mensajes.
 - **Enlace a la documentación externa:** la sección *externalDocs* apunta al repositorio y al README del backend (equipo VitalCare).
@@ -9337,7 +9337,7 @@ Durante el Sprint 2 se actualizó la documentación de los Web Services de **Ser
 
 ---
 
-##### Endpoints Documentados
+***Endpoints Documentados***
 
 | Bounded Context | Verbo HTTP | Endpoint | Descripción |
 |---|---|---|---|
@@ -9401,7 +9401,7 @@ Durante el Sprint 2 se actualizó la documentación de los Web Services de **Ser
 
 ---
 
-##### Relación entre las historias del Sprint 2 y los endpoints
+***Relación entre las historias del Sprint 2 y los endpoints***
 
 | User Story / Technical Story | Título | Endpoints que la soportan |
 |---|---|---|
@@ -9420,11 +9420,12 @@ Durante el Sprint 2 se actualizó la documentación de los Web Services de **Ser
 
 ---
 
-##### Detalle de Endpoints Principales
+***Detalle de Endpoints Principales***
 
 Los parámetros marcados con `*` son obligatorios. Salvo que se indique lo contrario, todas las acciones requieren la cabecera `Authorization: Bearer <token>`.
 
-##### PUT `/api/v1/users/{userId}/photo`
+***PUT `/api/v1/users/{userId}/photo`***
+
 **Parámetros:** Path `userId`*, Body `multipart/form-data` con el campo `file`* (imagen JPEG o PNG, máx. 10 MB)
 ```bash
 curl -X PUT "https://serenia-platform-api.azurewebsites.net/api/v1/users/3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b/photo" \
@@ -9448,11 +9449,11 @@ curl -X PUT "https://serenia-platform-api.azurewebsites.net/api/v1/users/3f2b8c9
 ```
 **Otros responses:** `400` falta el archivo · `403` no es el dueño de la cuenta · `404` usuario no encontrado · `413` la imagen supera el tamaño máximo · `415` el archivo no es JPEG ni PNG.
 
-##### GET `/api/v1/users/{userId}/photo`
+***GET `/api/v1/users/{userId}/photo`***
 **Parámetros:** Path `userId`*
 **Response 200:** devuelve el archivo de imagen (`image/jpeg` o `image/png`). **Otros responses:** `401` sesión ausente o inválida · `404` el usuario no existe o no tiene foto subida.
 
-##### GET `/api/v1/check-ins?olderAdultId={olderAdultId}&from={yyyy-MM-dd}&to={yyyy-MM-dd}`
+***GET `/api/v1/check-ins?olderAdultId={olderAdultId}&from={yyyy-MM-dd}&to={yyyy-MM-dd}`***
 **Parámetros:** Query `olderAdultId`*, `from`*, `to`* (ambos inclusive)
 **Response 200:** lista de check-ins ordenada por fecha. Un check-in puede estar `PENDING`, `ANSWERED`, `MISSED` o `SKIPPED`.
 ```json
@@ -9527,7 +9528,7 @@ curl -X PUT "https://serenia-platform-api.azurewebsites.net/api/v1/users/3f2b8c9
 ]
 ```
 
-##### POST `/api/v1/inactivity-alerts/{alertId}/acknowledge`
+***POST `/api/v1/inactivity-alerts/{alertId}/acknowledge`***
 **Parámetros:** Path `alertId`*
 **Response 200:** devuelve la alerta con `status: "ACKNOWLEDGED"`, `acknowledgedBy` (familiar que la atiende) y `acknowledgedAt`. **Otros responses:** `403` no es familiar activo · `404` alerta no encontrada · `409` la alerta ya fue reconocida.
 
@@ -9538,7 +9539,7 @@ curl -X PUT "https://serenia-platform-api.azurewebsites.net/api/v1/users/3f2b8c9
 ```
 **Response 200:** devuelve la alerta con `status: "RESOLVED"`, `resolvedBy`, `resolvedAt` y la `resolutionNote`. **Otros responses:** `400` nota de más de 300 caracteres · `409` la alerta no fue reconocida o ya está resuelta.
 
-##### GET `/api/v1/wellbeing-suggestions?olderAdultId={olderAdultId}`
+***GET `/api/v1/wellbeing-suggestions?olderAdultId={olderAdultId}`***
 **Parámetros:** Query `olderAdultId`*
 **Response 200:** sugerencias activas generadas al detectar un patrón de malestar en los check-ins del adulto mayor.
 ```json
@@ -9555,7 +9556,7 @@ curl -X PUT "https://serenia-platform-api.azurewebsites.net/api/v1/users/3f2b8c9
 ```
 **Otros responses:** `403` no es un familiar con vínculo activo.
 
-##### POST `/api/v1/care-circles/{careCircleId}/care-shifts`
+***POST `/api/v1/care-circles/{careCircleId}/care-shifts`***
 **Parámetros:** Path `careCircleId`*, Body JSON
 ```json
 { "shiftDate": "2026-11-14" }
@@ -9571,7 +9572,7 @@ curl -X PUT "https://serenia-platform-api.azurewebsites.net/api/v1/users/3f2b8c9
 ```
 **Otros responses:** `403` no es familiar activo · `404` círculo no encontrado · `409` la fecha ya tiene un turno asignado · `422` la fecha es anterior al día actual del adulto mayor.
 
-##### GET `/api/v1/care-circles/{careCircleId}/care-shifts?from={yyyy-MM-dd}&to={yyyy-MM-dd}`
+***GET `/api/v1/care-circles/{careCircleId}/care-shifts?from={yyyy-MM-dd}&to={yyyy-MM-dd}`***
 **Parámetros:** Path `careCircleId`*, Query `from`*, `to`* (ambos inclusive)
 **Response 200:** lista de turnos del rango. Para consultar el turno vigente (US21), se envía la fecha de hoy en `from` y `to`.
 ```json
@@ -9585,7 +9586,7 @@ curl -X PUT "https://serenia-platform-api.azurewebsites.net/api/v1/users/3f2b8c9
 ]
 ```
 
-##### Respuesta de error por parámetro faltante (nuevo en Sprint 2)
+***Respuesta de error por parámetro faltante (nuevo en Sprint 2)***
 Al llamar `GET /api/v1/check-ins?olderAdultId=3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b` sin `from` ni `to`, la API responde `400`:
 ```json
 {
