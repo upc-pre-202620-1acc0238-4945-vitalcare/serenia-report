@@ -9703,6 +9703,32 @@ Al consultar el historial sin enviar `from` ni `to`, la API responde `400` con `
 
 #### 4.2.2.8. Software Deployment Evidence for Sprint Review
 #### 4.2.2.9. Team Collaboration Insights during Sprint
+Durante el Sprint 2 el equipo mantuvo el flujo de trabajo colaborativo aplicando la estrategia de control de versiones GitFlow. El desarrollo de la aplicación móvil Android y del backend se trabajó en ramas independientes (`feature/*` y `fix/*`) creadas desde `develop`, y los cambios se integraron mediante Pull Requests. Esto permitió revisar cada contribución antes de integrarla y mantener la trazabilidad del trabajo de cada integrante.
+A continuación se presentan los analíticos de colaboración extraídos de GitHub Insights para ambos repositorios durante el período del Sprint 2 (del 11 de octubre al 11 de noviembre de 2026).
+
+**Resumen de actividad: Repositorio serenia-mobile-android (aplicación móvil)**
+
+Top Committers: Repositorio serenia-mobile-android
+En el repositorio de la aplicación móvil los integrantes registraron las siguientes contribuciones durante el Sprint 2: Arturouu con 131 commits, vicmacode con 12 commits y brianna-salinas con 1 commit. Arturouu implementó la estructura base de la aplicación, el design system, la capa de red y la conexión con el backend de los bounded contexts IAM, Daily Check-in, Care Circle, Alerts and Safety y Social Companionship. vicmacode se encargó de las correcciones de interfaz y de la adaptación de las pantallas al tamaño de letra grande, y brianna-salinas implementó el modo de alto contraste.
+
+![insight](./assets/img/insight-sprint2/insights1.png)
+
+Pull Requests mergeados: Repositorio serenia-mobile-android
+Se mergearon 15 Pull Requests hacia `develop` (del #13 al #28), cada uno correspondiente a una funcionalidad de la aplicación: `app-branding`, `base-structure`, `bounded-contexts`, `core-network`, `design-system`, `iam`, `daily-check-in`, `account`, `alerts-and-safety`, `care-circle`, `social-companionship`, `profile-photo`, `README`, `ui-fixes` y `large-font-fixes`.
+
+![insight](./assets/img/insight-sprint2/insights3.png)
+
+**Resumen de actividad: Repositorio serenia-platform (backend)**
+
+Top Committers: Repositorio serenia-platform
+En el backend se registraron 10 commits durante el Sprint 2: Arturouu con 5 commits y vicmacode con 5 commits. Arturouu implementó la subida y consulta de la foto de perfil, trasladó el almacenamiento de archivos al shared kernel y agregó el README del proyecto. vicmacode actualizó la documentación OpenAPI y corrigió los hallazgos del backend: la zona horaria UTC, las preferencias de check-in que no se podían convertir y la respuesta `400` ante parámetros faltantes o inválidos.
+
+![insight](./assets/img/insight-sprint2/insights2.png)
+
+Pull Requests mergeados: Repositorio serenia-platform
+Se mergearon 4 Pull Requests hacia `develop`: `feature/README` (#11), `feature/profile-photo` (#12), `feature/api-documentation` (#13) y `fix/backend-findings` (#14).
+
+![insight](./assets/img/insight-sprint2/insights4.png)
 
 ## 4.3. Validation Interviews
 
