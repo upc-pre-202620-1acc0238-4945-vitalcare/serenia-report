@@ -9778,21 +9778,21 @@ Esta segunda entrega suma al análisis y al diseño de la primera el diseño de 
 
 <br>
 
-<div align="center">
-
-**About The Product**
-
-![Video About The Product](brandradar-report/assets/ux-design/desktop-prototyping.png)
-
-[Ver video en Microsoft Stream]()
-
-<br>
-
-</div>
 
 ## Video About The Team
 
 <br>
+
+<div align="center">
+
+**About The Team**
+
+![Video About The Team](brandradar-report/assets/ux-design/desktop-prototyping.png)
+
+[Ver video en Microsoft Stream]()
+
+<br>
+</div>
 
 
 # Glosario
