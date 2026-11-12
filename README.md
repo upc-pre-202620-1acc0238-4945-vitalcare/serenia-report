@@ -9772,8 +9772,28 @@ Esta segunda entrega suma al análisis y al diseño de la primera el diseño de 
 <div style="page-break-after: always;"></div>
 
 ## Video App Validation
-## Video About the product
-## Video About the team
+
+
+## Video About The Product
+
+<br>
+
+<div align="center">
+
+**About The Product**
+
+![Video About The Product](brandradar-report/assets/ux-design/desktop-prototyping.png)
+
+[Ver video en Microsoft Stream]()
+
+<br>
+
+</div>
+
+## Video About The Team
+
+<br>
+
 
 # Glosario
 
@@ -9803,6 +9823,7 @@ Esta segunda entrega suma al análisis y al diseño de la primera el diseño de 
 <br>
 
 <div style="page-break-after: always;"></div>
+
 
 # Bibliografía
 
