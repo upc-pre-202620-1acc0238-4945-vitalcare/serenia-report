@@ -9301,8 +9301,8 @@ Los 5 integrantes del equipo participaron en la implementación de la plataforma
 | Location | Universidad Peruana de Ciencias Aplicadas - Pabellon L |
 | Prepared By | Gallardo Morales, Carla Alejandra |
 | Attendees (to planning meeting) | Contreras Torres, Arturo Valentino / Gallardo Morales, Carla Alejandra /Garcia Paredes, Victor Manuel / Salinas Guzman, Brianna Cristina / Sandoval Aiquipa, Kelber Yamir |
-| Sprint 2 Review summary | En el Sprint 1 se completaron las 17 historias comprometidas (64 story points), y todas las tareas del Sprint Backlog 1 quedaron en estado Done. Se publicó la Landing Page en Netlify (US23, versión v1.0.0). También se construyó cerca del 70 % del backend Serenia Platform con Spring Boot y DDD, organizado en seis bounded contexts, y se desplegó en Azure App Service como contenedor Docker. La API quedó documentada en Swagger UI con 56 endpoints agrupados en 17 recursos. Quedaron implementados IAM (TS01, TS02), Care Circle (TS03), Daily Check-in (TS04) y la lógica de alertas de emergencia (NF02). En paralelo, la aplicación móvil avanzó con sus pantallas organizadas por funcionalidad. |
-| Sprint 2 Restrospective summary | Funcionó bien: GitFlow con ramas feature/ y Pull Requests revisados. Separar el código por bounded context permitió que los 5 integrantes trabajaran en paralelo sin conflictos, y el despliegue con Docker se resolvió pronto. Por mejorar: no se integraron pruebas automatizadas, ya que la validación fue solo manual. La mayoría de los commits se concentró en los últimos días del sprint (7 y 8 de octubre). Además, algunos encabezados y secciones del informe tuvieron que corregirse después. Acuerdos para el Sprint 2: agregar pruebas unitarias e de integración desde el inicio, repartir los commits a lo largo de todo el sprint y revisar el formato del informe antes del merge a develop. |
+| Sprint 1 Review summary | En el Sprint 1 se completaron las 17 historias comprometidas (64 story points), y todas las tareas del Sprint Backlog 1 quedaron en estado Done. Se publicó la Landing Page en Netlify (US23, versión v1.0.0). También se construyó cerca del 70 % del backend Serenia Platform con Spring Boot y DDD, organizado en seis bounded contexts, y se desplegó en Azure App Service como contenedor Docker. La API quedó documentada en Swagger UI con 56 endpoints agrupados en 17 recursos. Quedaron implementados IAM (TS01, TS02), Care Circle (TS03), Daily Check-in (TS04) y la lógica de alertas de emergencia (NF02). En paralelo, la aplicación móvil avanzó con sus pantallas organizadas por funcionalidad. |
+| Sprint 1 Restrospective summary | Funcionó bien: GitFlow con ramas feature/ y Pull Requests revisados. Separar el código por bounded context permitió que los 5 integrantes trabajaran en paralelo sin conflictos, y el despliegue con Docker se resolvió pronto. Por mejorar: no se integraron pruebas automatizadas, ya que la validación fue solo manual. La mayoría de los commits se concentró en los últimos días del sprint (7 y 8 de octubre). Además, algunos encabezados y secciones del informe tuvieron que corregirse después. Acuerdos para el Sprint 2: agregar pruebas unitarias e de integración desde el inicio, repartir los commits a lo largo de todo el sprint y revisar el formato del informe antes del merge a develop. |
 | **Sprint Goal & User Stories** | 
 | Sprint 2 Goal |  Nuestro objetivo es ampliar el acompañamiento a distancia de Serenia con alertas por inactividad del check-in, sugerencias de acción ante patrones de malestar, la asignación y consulta de turnos de atención entre familiares, el historial de check-ins y un modo simplificado de interfaz para el adulto mayor. Creemos que esto da a los familiares mayor tranquilidad y capacidad de reacción, y que permite al adulto mayor usar la aplicación sin experiencia tecnológica previa. Esto se confirmará cuando el familiar reciba una alerta al no registrarse el check-in del día, consulte el historial y el turno vigente desde el panel de estado, y el adulto mayor complete su check-in en modo simplificado sin ayuda.|
 | Sprint 2 Velocity | 80 |
@@ -9313,6 +9313,394 @@ Los 5 integrantes del equipo participaron en la implementación de la plataforma
 #### 4.2.2.5. Testing Suite Evidence for Sprint Review
 #### 4.2.2.6. Execution Evidence for Sprint Review
 #### 4.2.2.7. Services Documentation Evidence for Sprint Review
+
+Durante el Sprint 2 se actualizó la documentación de los Web Services de **Serenia Platform** con OpenAPI/Swagger, integrada directamente en el backend Spring Boot. La documentación cubre los seis bounded contexts de la plataforma: IAM, Care Circle, Daily Check-in, Alerts and Safety, Social Companionship y Wellbeing Monitoring. En total quedaron documentados **57 endpoints agrupados en 17 recursos** (uno más que en el Sprint 1, por el nuevo endpoint para obtener la foto de perfil). Además, se documentaron los endpoints que dan soporte a las historias comprometidas en el Sprint 2: la alerta por inactividad del check-in (US16), la sugerencia de acción por patrón de malestar (US18), la asignación y consulta de turnos de atención (US20, US21), el historial de check-ins (US17) y el modo simplificado de interfaz (US08).
+
+**URL Swagger desplegado:** [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html)
+
+**URL especificación OpenAPI (JSON):** `https://serenia-platform-api.azurewebsites.net/v3/api-docs`
+
+**URL repositorio backend:** [https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform)
+
+> Nota: La documentación OpenAPI se elaboró junto con la implementación del código. Las anotaciones `@Tag`, `@Operation`, `@ApiResponses` y `@Schema` se incluyeron en cada controlador durante su desarrollo. En este sprint se agregaron, además, commits exclusivos de documentación para describir la API en la configuración de OpenAPI.
+
+---
+
+**Cambios en la documentación respecto al Sprint 1**
+
+- **Guía de uso dentro de Swagger UI:** la descripción de la API (`OpenApiConfiguration`) ahora incluye la lista de bounded contexts con sus recursos, los pasos para probarla (registrar usuario, iniciar sesión y usar el botón **Authorize**), el formato de los errores y el idioma de los mensajes.
+- **Enlace a la documentación externa:** la sección *externalDocs* apunta al repositorio y al README del backend (equipo VitalCare).
+- **Esquema de seguridad `bearerAuth`:** se aclara que el JWT se obtiene con `POST /api/v1/sessions` y que solo se pega el token, ya que Swagger UI agrega el prefijo `Bearer`.
+- **Foto de perfil:** `PUT /api/v1/users/{userId}/photo` dejó de recibir una URL externa (`photoUrl`) y ahora recibe la imagen como `multipart/form-data` (JPEG o PNG, máx. 10 MB). Se agregó `GET /api/v1/users/{userId}/photo` para descargar la imagen subida.
+- **Errores de parámetros:** cuando falta un *query parameter* obligatorio o tiene un valor inválido (por ejemplo, un UUID o una fecha mal escrita), la API responde `400` con `code: "VALIDATION_ERROR"` en lugar de un error genérico.
+- **Idioma:** los mensajes de error se traducen según la cabecera `Accept-Language` (`en` por defecto y `es`). Todos los instantes se devuelven en UTC.
+
+---
+
+***Endpoints Documentados***
+
+| Bounded Context | Verbo HTTP | Endpoint | Descripción |
+|---|---|---|---|
+| IAM | POST | `/api/v1/users` | Registrar adulto mayor o familiar lejano |
+| IAM | GET | `/api/v1/users/{userId}` | Obtener usuario por ID |
+| IAM | PUT | `/api/v1/users/{userId}/profile` | Actualizar datos del perfil |
+| IAM | PUT | `/api/v1/users/{userId}/photo` | Subir foto de perfil (multipart) |
+| IAM | GET | `/api/v1/users/{userId}/photo` | Obtener foto de perfil *(nuevo en Sprint 2)* |
+| IAM | PUT | `/api/v1/users/{userId}/password` | Cambiar contraseña |
+| IAM | POST | `/api/v1/sessions` | Iniciar sesión |
+| IAM | DELETE | `/api/v1/sessions/{sessionId}` | Cerrar sesión |
+| Care Circle | GET | `/api/v1/care-circles/{careCircleId}` | Obtener círculo de cuidado por ID |
+| Care Circle | GET | `/api/v1/care-circles?olderAdultId={olderAdultId}` | Obtener círculo de cuidado por adulto mayor |
+| Care Circle | POST | `/api/v1/care-circles/{careCircleId}/invitation-codes` | Generar código de invitación |
+| Care Circle | GET | `/api/v1/care-circles/{careCircleId}/invitation-codes` | Obtener códigos de invitación pendientes |
+| Care Circle | POST | `/api/v1/family-links` | Canjear código de invitación |
+| Care Circle | GET | `/api/v1/family-links?relativeId={relativeId}` | Obtener vínculos de un familiar |
+| Care Circle | GET | `/api/v1/care-circles/{careCircleId}/family-links` | Obtener vínculos de un círculo |
+| Care Circle | DELETE | `/api/v1/care-circles/{careCircleId}/family-links/{familyLinkId}` | Revocar vínculo familiar |
+| Care Circle | POST | `/api/v1/care-circles/{careCircleId}/care-shifts` | Asignar turno de atención |
+| Care Circle | GET | `/api/v1/care-circles/{careCircleId}/care-shifts?from=&to=` | Consultar turnos de atención |
+| Care Circle | PUT | `/api/v1/care-circles/{careCircleId}/care-shifts/{careShiftId}` | Reasignar turno de atención |
+| Care Circle | POST | `/api/v1/care-circles/{careCircleId}/shared-notes` | Crear nota compartida |
+| Care Circle | GET | `/api/v1/care-circles/{careCircleId}/shared-notes` | Obtener notas compartidas |
+| Care Circle | PUT | `/api/v1/care-circles/{careCircleId}/shared-notes/{sharedNoteId}` | Editar nota compartida |
+| Daily Check-in | GET | `/api/v1/check-ins/today?olderAdultId={olderAdultId}` | Obtener check-in de hoy |
+| Daily Check-in | GET | `/api/v1/check-ins?olderAdultId=&from=&to=` | Obtener historial de check-ins |
+| Daily Check-in | POST | `/api/v1/check-ins/{checkInId}/answer` | Responder check-in |
+| Daily Check-in | GET | `/api/v1/check-in-preferences?olderAdultId={olderAdultId}` | Obtener preferencias del check-in |
+| Daily Check-in | PUT | `/api/v1/check-in-preferences/{preferencesId}/reminder-time` | Cambiar hora del check-in |
+| Daily Check-in | POST | `/api/v1/check-in-preferences/{preferencesId}/daily-pause` | Pausar las preguntas de hoy |
+| Daily Check-in | DELETE | `/api/v1/check-in-preferences/{preferencesId}/daily-pause` | Reanudar las preguntas de hoy |
+| Daily Check-in | PUT | `/api/v1/check-in-preferences/{preferencesId}/simplified-mode` | Activar o desactivar el modo simplificado |
+| Alerts and Safety | GET | `/api/v1/alerts?olderAdultId={olderAdultId}` | Obtener alertas de un adulto mayor |
+| Alerts and Safety | GET | `/api/v1/alerts/{alertId}` | Obtener detalle de una alerta |
+| Alerts and Safety | POST | `/api/v1/emergency-alerts` | Pulsar el botón de ayuda |
+| Alerts and Safety | POST | `/api/v1/emergency-alerts/{alertId}/acknowledge` | Reconocer emergencia |
+| Alerts and Safety | POST | `/api/v1/emergency-alerts/{alertId}/resolve` | Resolver emergencia |
+| Alerts and Safety | POST | `/api/v1/inactivity-alerts/{alertId}/acknowledge` | Reconocer alerta de inactividad |
+| Alerts and Safety | POST | `/api/v1/inactivity-alerts/{alertId}/resolve` | Resolver alerta de inactividad |
+| Social Companionship | POST | `/api/v1/care-circles/{careCircleId}/audio-messages` | Grabar audio (borrador) |
+| Social Companionship | POST | `/api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/share` | Compartir audio |
+| Social Companionship | DELETE | `/api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}` | Descartar audio |
+| Social Companionship | GET | `/api/v1/care-circles/{careCircleId}/audio-messages` | Obtener audios compartidos |
+| Social Companionship | GET | `/api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/media` | Obtener archivo de audio |
+| Social Companionship | POST | `/api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/play` | Registrar reproducción del audio |
+| Social Companionship | POST | `/api/v1/care-circles/{careCircleId}/photo-messages` | Subir foto (borrador) |
+| Social Companionship | POST | `/api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/share` | Compartir foto |
+| Social Companionship | DELETE | `/api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}` | Descartar foto |
+| Social Companionship | GET | `/api/v1/care-circles/{careCircleId}/photo-messages` | Obtener fotos compartidas |
+| Social Companionship | GET | `/api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/media` | Obtener archivo de imagen |
+| Social Companionship | POST | `/api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/view` | Registrar visualización de la foto |
+| Social Companionship | POST | `/api/v1/social-reminders` | Programar recordatorio |
+| Social Companionship | GET | `/api/v1/social-reminders?olderAdultId={olderAdultId}` | Obtener recordatorios activos |
+| Social Companionship | POST | `/api/v1/social-reminders/{socialReminderId}/postpone` | Posponer recordatorio |
+| Social Companionship | POST | `/api/v1/social-reminders/{socialReminderId}/complete` | Completar recordatorio |
+| Social Companionship | POST | `/api/v1/social-reminders/{socialReminderId}/cancel` | Cancelar recordatorio |
+| Wellbeing Monitoring | GET | `/api/v1/small-wins?olderAdultId=&from=&to=` | Obtener pequeños logros |
+| Wellbeing Monitoring | GET | `/api/v1/wellbeing-suggestions?olderAdultId={olderAdultId}` | Obtener sugerencias de bienestar activas |
+| Wellbeing Monitoring | POST | `/api/v1/wellbeing-suggestions/{suggestionId}/dismiss?olderAdultId={olderAdultId}` | Descartar sugerencia de bienestar |
+
+---
+
+***Relación entre las historias del Sprint 2 y los endpoints***
+
+| User Story / Technical Story | Título | Endpoints que la soportan |
+|---|---|---|
+| US16 / TS10 | Alerta por inactividad del check-in | `GET /api/v1/alerts`, `POST /api/v1/inactivity-alerts/{alertId}/acknowledge`, `POST /api/v1/inactivity-alerts/{alertId}/resolve` |
+| US18 / TS13 | Sugerencia de acción por patrón de malestar | `GET /api/v1/wellbeing-suggestions`, `GET /api/v1/small-wins` |
+| US20 / TS11 | Asignación de turnos de atención | `POST /api/v1/care-circles/{careCircleId}/care-shifts` |
+| US21 | Consulta del turno de atención vigente | `GET /api/v1/care-circles/{careCircleId}/care-shifts?from=&to=` |
+| US17 / TS09 | Historial de check-ins del adulto mayor | `GET /api/v1/check-ins?olderAdultId=&from=&to=`, `GET /api/v1/check-ins/today` |
+| US08 / NF04 | Modo simplificado de interfaz | `GET /api/v1/check-in-preferences`, `PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode` |
+| US03, US05, US07 | Respuesta, horario y pausa del check-in | `POST /api/v1/check-ins/{checkInId}/answer`, `PUT .../reminder-time`, `POST`/`DELETE .../daily-pause` |
+| TS06 | Gestión de mensajes de audio | `/api/v1/care-circles/{careCircleId}/audio-messages` (6 acciones) |
+| TS07 | Gestión de recordatorios de contacto social | `/api/v1/social-reminders` (5 acciones) |
+| TS08 | Gestión de alertas de emergencia | `/api/v1/emergency-alerts` (3 acciones) |
+| TS12 | Gestión de notas compartidas | `/api/v1/care-circles/{careCircleId}/shared-notes` (3 acciones) |
+| NF03 | Control de acceso a los datos de bienestar | Todos los endpoints protegidos con `bearerAuth`; responden `403` si el usuario no es el adulto mayor ni un familiar con vínculo activo |
+
+---
+
+***Detalle de Endpoints Principales***
+
+Los parámetros marcados con `*` son obligatorios. Salvo que se indique lo contrario, todas las acciones requieren la cabecera `Authorization: Bearer <token>`.
+
+***PUT `/api/v1/users/{userId}/photo`***
+
+**Parámetros:** Path `userId`*, Body `multipart/form-data` con el campo `file`* (imagen JPEG o PNG, máx. 10 MB)
+```bash
+curl -X PUT "https://serenia-platform-api.azurewebsites.net/api/v1/users/3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b/photo" \
+  -H "Authorization: Bearer <token>" \
+  -F "file=@rosa.jpg;type=image/jpeg"
+```
+**Response 200:** devuelve el `UserResponse` con `photoUrl` apuntando al endpoint protegido que sirve la imagen.
+```json
+{
+  "id": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "email": "rosa.quispe@example.com",
+  "role": "OLDER_ADULT",
+  "fullName": "Rosa Quispe Mamani",
+  "phoneNumber": "+51987654321",
+  "birthDate": "1948-05-12",
+  "photoUrl": "/api/v1/users/3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b/photo?v=1762430400000",
+  "locale": "es-PE",
+  "timeZone": "America/Lima",
+  "status": "ACTIVE"
+}
+```
+**Otros responses:** `400` falta el archivo · `403` no es el dueño de la cuenta · `404` usuario no encontrado · `413` la imagen supera el tamaño máximo · `415` el archivo no es JPEG ni PNG.
+
+***GET `/api/v1/users/{userId}/photo`***
+**Parámetros:** Path `userId`*
+**Response 200:** devuelve el archivo de imagen (`image/jpeg` o `image/png`). **Otros responses:** `401` sesión ausente o inválida · `404` el usuario no existe o no tiene foto subida.
+
+***GET `/api/v1/check-ins?olderAdultId={olderAdultId}&from={yyyy-MM-dd}&to={yyyy-MM-dd}`***
+**Parámetros:** Query `olderAdultId`*, `from`*, `to`* (ambos inclusive)
+**Response 200:** lista de check-ins ordenada por fecha. Un check-in puede estar `PENDING`, `ANSWERED`, `MISSED` o `SKIPPED`.
+```json
+[
+  {
+    "id": "1c2d3e4f-5a6b-4c7d-8e9f-0a1b2c3d4e5f",
+    "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+    "checkDate": "2026-11-09",
+    "questionText": "¿Cómo se siente hoy?",
+    "scheduledFor": "2026-11-09T15:00:00Z",
+    "deadlineAt": "2026-11-09T18:00:00Z",
+    "status": "ANSWERED",
+    "paused": false,
+    "mood": "GOOD",
+    "positiveActivity": "Caminé en el parque",
+    "answeredAt": "2026-11-09T15:20:00Z"
+  },
+  {
+    "id": "8a9b0c1d-2e3f-4a5b-9c6d-7e8f9a0b1c2d",
+    "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+    "checkDate": "2026-11-10",
+    "questionText": "¿Qué fue lo mejor de su día?",
+    "scheduledFor": "2026-11-10T15:00:00Z",
+    "deadlineAt": "2026-11-10T18:00:00Z",
+    "status": "MISSED",
+    "paused": false,
+    "mood": null,
+    "positiveActivity": null,
+    "answeredAt": null
+  }
+]
+```
+**Otros responses:** `400` rango de fechas inválido o parámetro faltante · `403` no es el adulto mayor ni un familiar con vínculo activo.
+
+##### PUT `/api/v1/check-in-preferences/{preferencesId}/simplified-mode`
+**Parámetros:** Path `preferencesId`*, Body JSON
+```json
+{ "enabled": true }
+```
+**Response 200:**
+```json
+{
+  "id": "7a8b9c0d-1e2f-4a3b-8c4d-5e6f7a8b9c0d",
+  "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "reminderTime": "09:30:00",
+  "timeLimitMinutes": 180,
+  "simplifiedMode": true,
+  "pausedToday": false
+}
+```
+**Otros responses:** `400` falta `enabled` · `403` solo el adulto mayor dueño de las preferencias puede modificarlas.
+
+##### GET `/api/v1/alerts?olderAdultId={olderAdultId}`
+**Parámetros:** Query `olderAdultId`*
+**Response 200:** lista de alertas de ambos tipos, de la más reciente a la más antigua. Cuando el adulto mayor no responde su check-in dentro del plazo, el check-in pasa a `MISSED` y se genera automáticamente una alerta de tipo `INACTIVITY` que se notifica a los familiares vinculados; `checkInId` identifica el check-in perdido.
+```json
+[
+  {
+    "id": "5f6a7b8c-9d0e-4f1a-8b2c-3d4e5f6a7b8c",
+    "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+    "type": "INACTIVITY",
+    "status": "DISPATCHED",
+    "checkInId": "8a9b0c1d-2e3f-4a5b-9c6d-7e8f9a0b1c2d",
+    "triggeredAt": "2026-11-10T18:00:00Z",
+    "deliveryConfirmed": true,
+    "acknowledgedBy": null,
+    "acknowledgedAt": null,
+    "resolvedBy": null,
+    "resolvedAt": null,
+    "resolutionNote": null
+  }
+]
+```
+
+***POST `/api/v1/inactivity-alerts/{alertId}/acknowledge`***
+**Parámetros:** Path `alertId`*
+**Response 200:** devuelve la alerta con `status: "ACKNOWLEDGED"`, `acknowledgedBy` (familiar que la atiende) y `acknowledgedAt`. **Otros responses:** `403` no es familiar activo · `404` alerta no encontrada · `409` la alerta ya fue reconocida.
+
+##### POST `/api/v1/inactivity-alerts/{alertId}/resolve`
+**Parámetros:** Path `alertId`*, Body JSON (opcional)
+```json
+{ "resolutionNote": "La llamé, se le olvidó responder. Está bien." }
+```
+**Response 200:** devuelve la alerta con `status: "RESOLVED"`, `resolvedBy`, `resolvedAt` y la `resolutionNote`. **Otros responses:** `400` nota de más de 300 caracteres · `409` la alerta no fue reconocida o ya está resuelta.
+
+***GET `/api/v1/wellbeing-suggestions?olderAdultId={olderAdultId}`***
+**Parámetros:** Query `olderAdultId`*
+**Response 200:** sugerencias activas generadas al detectar un patrón de malestar en los check-ins del adulto mayor.
+```json
+[
+  {
+    "id": "2b3c4d5e-6f7a-4b8c-9d0e-1f2a3b4c5d6e",
+    "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+    "patternId": "4d5e6f7a-8b9c-4d0e-8f1a-2b3c4d5e6f7a",
+    "message": "Lleva 3 días seguidos con el ánimo bajo. Puede ser un buen momento para llamarle o visitarle.",
+    "status": "ACTIVE",
+    "issuedAt": "2026-11-10T15:30:00Z"
+  }
+]
+```
+**Otros responses:** `403` no es un familiar con vínculo activo.
+
+***POST `/api/v1/care-circles/{careCircleId}/care-shifts`***
+**Parámetros:** Path `careCircleId`*, Body JSON
+```json
+{ "shiftDate": "2026-11-14" }
+```
+**Response 201:** el turno queda asignado al familiar autenticado.
+```json
+{
+  "id": "e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7a8b",
+  "careCircleId": "6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f",
+  "relativeId": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+  "shiftDate": "2026-11-14"
+}
+```
+**Otros responses:** `403` no es familiar activo · `404` círculo no encontrado · `409` la fecha ya tiene un turno asignado · `422` la fecha es anterior al día actual del adulto mayor.
+
+***GET `/api/v1/care-circles/{careCircleId}/care-shifts?from={yyyy-MM-dd}&to={yyyy-MM-dd}`***
+**Parámetros:** Path `careCircleId`*, Query `from`*, `to`* (ambos inclusive)
+**Response 200:** lista de turnos del rango. Para consultar el turno vigente (US21), se envía la fecha de hoy en `from` y `to`.
+```json
+[
+  {
+    "id": "e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7a8b",
+    "careCircleId": "6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f",
+    "relativeId": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+    "shiftDate": "2026-11-14"
+  }
+]
+```
+
+***Respuesta de error por parámetro faltante (nuevo en Sprint 2)***
+Al llamar `GET /api/v1/check-ins?olderAdultId=3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b` sin `from` ni `to`, la API responde `400`:
+```json
+{
+  "code": "VALIDATION_ERROR",
+  "message": "Validation failed: request-parameters",
+  "details": "Falta un parámetro obligatorio de la petición"
+}
+```
+
+---
+
+###### Imágenes de interacción utilizando datos de prueba
+
+Las siguientes capturas muestran la interacción con la documentación OpenAPI desplegada en Azure, usando datos de prueba (la adulta mayor *Rosa Quispe Mamani* y su hija como familiar vinculada). Las peticiones se ejecutaron desde Swagger UI con la opción *Try it out*, después de autorizarse con el token Bearer.
+
+Guía de uso de la API en Swagger UI <br>
+
+En la cabecera de Swagger UI se observa la nueva descripción de la API: la lista de bounded contexts, los pasos para probarla y el enlace al repositorio del backend.
+
+<p align="center">
+  <img src="./assets/img/sprint-2/services-documentation/swagger-overview.png" alt="Swagger UI de Serenia Platform con la guía de uso de la API" width="900">
+</p>
+<p align="center"><em>Imagen XXX. Swagger UI de Serenia Platform con la guía de uso de la API.</em></p>
+
+Subida de la foto de perfil <br>
+
+El adulto mayor sube su foto de perfil con `PUT /api/v1/users/{userId}/photo` como `multipart/form-data`. La API responde `200` y el campo `photoUrl` apunta al endpoint `GET /api/v1/users/{userId}/photo`, que devuelve la imagen subida.
+
+<p align="center">
+  <img src="./assets/img/sprint-2/services-documentation/put-user-photo-response.png" alt="Respuesta 200 de PUT /api/v1/users/{userId}/photo" width="900">
+</p>
+<p align="center"><em>Imagen XXX. Respuesta 200 de PUT /api/v1/users/{userId}/photo.</em></p>
+
+Historial de check-ins <br>
+
+El familiar consulta el historial de check-ins de Rosa con `GET /api/v1/check-ins` enviando el rango de fechas. La respuesta incluye los días respondidos (`ANSWERED`) con su estado de ánimo y los días sin respuesta (`MISSED`).
+
+<p align="center">
+  <img src="./assets/img/sprint-2/services-documentation/get-check-ins-history-response.png" alt="Respuesta 200 de GET /api/v1/check-ins" width="900">
+</p>
+<p align="center"><em>Imagen XXX. Respuesta 200 de GET /api/v1/check-ins (historial).</em></p>
+
+Alerta por inactividad del check-in <br>
+
+Al no responderse el check-in del día dentro del plazo, se genera una alerta `INACTIVITY`. El familiar la consulta con `GET /api/v1/alerts` y la reconoce con `POST /api/v1/inactivity-alerts/{alertId}/acknowledge`.
+
+<p align="center">
+  <img src="./assets/img/sprint-2/services-documentation/get-alerts-inactivity-response.png" alt="Respuesta 200 de GET /api/v1/alerts con una alerta de inactividad" width="900">
+</p>
+<p align="center"><em>Imagen XXX. Respuesta 200 de GET /api/v1/alerts con una alerta de inactividad.</em></p>
+
+<p align="center">
+  <img src="./assets/img/sprint-2/services-documentation/post-inactivity-acknowledge-response.png" alt="Respuesta 200 de POST /api/v1/inactivity-alerts/{alertId}/acknowledge" width="900">
+</p>
+<p align="center"><em>Imagen XX. Respuesta 200 de POST /api/v1/inactivity-alerts/{alertId}/acknowledge.</em></p>
+
+Sugerencias de bienestar <br>
+
+El familiar consulta las sugerencias activas con `GET /api/v1/wellbeing-suggestions`. La sugerencia se genera cuando se detecta un patrón de ánimo bajo en los check-ins del adulto mayor.
+
+<p align="center">
+  <img src="./assets/img/sprint-2/services-documentation/get-wellbeing-suggestions-response.png" alt="Respuesta 200 de GET /api/v1/wellbeing-suggestions" width="900">
+</p>
+<p align="center"><em>Imagen XXX. Respuesta 200 de GET /api/v1/wellbeing-suggestions.</em></p>
+
+Asignación y consulta de turnos de atención <br>
+
+La hija se asigna un turno con `POST /api/v1/care-circles/{careCircleId}/care-shifts` (respuesta `201`) y luego consulta el turno vigente con `GET` enviando la fecha de hoy en `from` y `to`.
+
+<p align="center">
+  <img src="./assets/img/sprint-2/services-documentation/post-care-shifts-response.png" alt="Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/care-shifts" width="900">
+</p>
+<p align="center"><em>Imagen XXX. Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/care-shifts.</em></p>
+
+<p align="center">
+  <img src="./assets/img/sprint-2/services-documentation/get-care-shifts-response.png" alt="Respuesta 200 de GET /api/v1/care-circles/{careCircleId}/care-shifts" width="900">
+</p>
+<p align="center"><em>Imagen XXX. Respuesta 200 de GET /api/v1/care-circles/{careCircleId}/care-shifts.</em></p>
+
+Modo simplificado de interfaz <br>
+
+Rosa activa el modo simplificado con `PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode`. La respuesta devuelve sus preferencias con `simplifiedMode: true`.
+
+<p align="center">
+  <img src="./assets/img/sprint-2/services-documentation/put-simplified-mode-response.png" alt="Respuesta 200 de PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode" width="900">
+</p>
+<p align="center"><em>Imagen XXX. Respuesta 200 de PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode.</em></p>
+
+Respuesta de error por parámetro faltante <br>
+
+Al consultar el historial sin enviar `from` ni `to`, la API responde `400` con `code: "VALIDATION_ERROR"` y el detalle traducido según `Accept-Language`.
+
+<p align="center">
+  <img src="./assets/img/sprint-2/services-documentation/error-400-missing-parameter.png" alt="Respuesta de error 400 por parámetro faltante" width="900">
+</p>
+<p align="center"><em>Imagen XXX. Respuesta de error 400 por parámetro faltante.</em></p>
+
+---
+
+##### Repositorio y commits relacionados con la documentación
+
+- **Repositorio de Web Services:** `upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform`
+- **Rama:** `develop`
+
+| Commit ID | Fecha | Autor | Descripción |
+|---|---|---|---|
+| `b289a5c` | 2026-11-04 | Arturouu | Se agrega el README del proyecto backend |
+| `7f002e1` | 2026-11-06 | Arturouu | Se guarda la foto de perfil subida en el almacenamiento de archivos |
+| `fecbd65` | 2026-11-06 | Arturouu | Se agregan y documentan los endpoints para subir y obtener la foto de perfil |
+| `24b67b1` | 2026-11-06 | Arturouu | Se elimina la URL externa de la foto de perfil |
+| `8c127bf` | 2026-11-11 | vicmacode | Se describe la API (bounded contexts, guía de uso, errores e idioma) en la configuración de OpenAPI |
+| `0391681` | 2026-11-11 | vicmacode | Se deja un único enlace al repositorio en la documentación OpenAPI |
+| `479b3ad` | 2026-11-11 | vicmacode | Respuesta `400` cuando falta un parámetro de la petición o tiene un valor inválido |
+
 #### 4.2.2.8. Software Deployment Evidence for Sprint Review
 #### 4.2.2.9. Team Collaboration Insights during Sprint
 
