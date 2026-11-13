@@ -10139,9 +10139,9 @@ Requerir una interacción intencional para confirmar la emergencia. En lugar de 
 
 <div style="page-break-after: always;"></div>
 
-# Conclusiones
+<br>
 
-## Conclusiones y Recomendaciones
+# Conclusiones y Recomendaciones
 
 Esta segunda entrega suma al análisis y al diseño de la primera el diseño de la interfaz (Capítulo III) y la implementación y validación del Sprint 1 (Capítulo IV). Las conclusiones contrastan lo planteado en el proceso de Lean UX (sección 1.2.2) con lo encontrado en las entrevistas de descubrimiento (sección 2.2) y de validación (sección 4.3), y las recomendaciones señalan lo que sigue para las próximas entregas.
 
