@@ -8156,7 +8156,7 @@ La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario
 
 ### 4.1.4. Software Deployment Configuration
 
-Esta sección explica cómo publicar cada producto de Serenia a partir de su repositorio de código, con los pasos suficientes para que otro integrante del equipo pueda repetir el despliegue. La evidencia de lo ejecutado en cada sprint, con sus capturas, se presenta en la sección 4.2.1.8 (Software Deployment Evidence for Sprint Review). Los tres productos de la solución se publican en plataformas distintas, como muestra el Deployment Diagram de la sección 2.5.3.3, que se repite en la Imagen 113.
+Esta sección explica cómo publicar cada producto de Serenia a partir de su repositorio de código, con los pasos suficientes para que otro integrante del equipo pueda repetir el despliegue. La evidencia de lo ejecutado en cada sprint, con sus capturas, se presenta en las secciones 4.2.1.8 y 4.2.2.8 (Software Deployment Evidence for Sprint Review). Los tres productos de la solución se publican en plataformas distintas, como muestra el Deployment Diagram de la sección 2.5.3.3, que se repite en la Imagen 113.
 
 <br>
 
@@ -8172,8 +8172,8 @@ Esta sección explica cómo publicar cada producto de Serenia a partir de su rep
 | Producto | Repositorio | Plataforma de despliegue | Qué se publica | Estado |
 | --- | --- | --- | --- | --- |
 | Landing page web | `serenia-website` | Netlify, conectado al repositorio de GitHub | La carpeta `dist`, generada con `npm run build` | Publicada en https://sereniawebsite.netlify.app/ |
-| Web Services | `serenia-platform` | Microsoft Azure (Azure Web App Service para la API y MySQL Flexible Server para la base de datos) | Una imagen Docker de la API, que empaqueta el JAR ejecutable de Spring Boot | Desplegada en https://serenia-platform-api.azurewebsites.net |
-| Aplicación móvil | `serenia-mobile-android` | Firebase App Distribution | El instalable (APK) de la aplicación Android, generado con Gradle | Proyecto Android disponible en el repositorio, con las funcionalidades Home, Check-in, Alerts and Safety, Social Companionship, Identity and Access y Care Circle |
+| Web Services | `serenia-platform` | Microsoft Azure (Azure Web App Service para la API y MySQL Flexible Server para la base de datos) | Una imagen Docker de la API, que empaqueta el JAR ejecutable de Spring Boot | Desplegada en https://serenia-platform.azurewebsites.net |
+| Aplicación móvil | `serenia-mobile-android` | Firebase App Distribution | El instalable (APK) de la aplicación Android, generado con Gradle | Distribuida al grupo de testers del proyecto en Firebase App Distribution; es la aplicación del adulto mayor, con las funcionalidades Home, Daily Check-in, Alerts and Safety, Social Companionship, Identity and Access, Care Circle y Account |
 
 Todos los repositorios pertenecen a la organización del equipo en GitHub (https://github.com/upc-pre-202620-1acc0238-4945-vitalcare). El código que se publica proviene de la rama `main`, que recibe los cambios desde `develop` mediante Pull Requests en cada entrega, según el flujo GitFlow adoptado por el equipo.
 
@@ -8287,8 +8287,8 @@ La única prueba del proyecto, `SereniaPlatformApplicationTests`, levanta la apl
 | Comprobación | Resultado |
 | --- | --- |
 | Construir el proyecto con Java 26 (8 de octubre de 2026) | Se compilan los 557 archivos fuente sin errores |
-| Abrir https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html (9 de octubre de 2026) | Responde 200 y muestra la documentación interactiva de la API, generada por springdoc |
-| Consultar `/v3/api-docs` en el servicio | Devuelve la definición OpenAPI con 56 operaciones en 17 grupos, que parten de `/api/v1` |
+| Abrir https://serenia-platform.azurewebsites.net/swagger-ui/index.html (13 de noviembre de 2026) | Responde 200 y muestra la documentación interactiva de la API, generada por springdoc |
+| Consultar `/v3/api-docs` en el servicio | Devuelve la definición OpenAPI con 57 operaciones en 17 grupos, que parten de `/api/v1` |
 | Consultar un endpoint protegido sin token, por ejemplo `/api/v1/alerts` | Responde 401 Unauthorized, lo que confirma que la API exige el token JWT |
 
 <br>
@@ -8300,10 +8300,22 @@ El Deployment Diagram establece que la aplicación móvil se distribuye mediante
 | Aspecto | Detalle |
 | --- | --- |
 | Repositorio | `serenia-mobile-android`, con las ramas `main` y `develop` y una rama `feature/<funcionalidad>` por cada funcionalidad |
-| Identificador de la aplicación | `com.vitalcare.serenia`, versión 1.0 (`versionCode` 1) |
+| Identificador de la aplicación | `com.vitalcare.serenia`, versión 1.0; el código de versión (`versionCode`) lo asigna el pipeline como 100 más el número de ejecución |
 | Versiones de construcción | Android Gradle Plugin 9.4.1, Kotlin 2.4.20, `minSdk` 24 y `targetSdk` 37 |
-| Construcción | Abrir el proyecto en Android Studio y ejecutarlo en un emulador o en un dispositivo; desde la línea de comandos, `./gradlew assembleDebug` genera el APK de depuración en `app/build/outputs/apk/debug`; la compilación terminó sin errores el 10 de octubre de 2026 |
-| Distribución | Firebase App Distribution, según el Deployment Diagram: se sube cada versión al proyecto de Firebase y se invita a los testers para instalarla |
+| Construcción | Abrir el proyecto en Android Studio y ejecutarlo en un emulador o en un dispositivo; desde la línea de comandos, `./gradlew assembleDebug` genera el APK de depuración en `app/build/outputs/apk/debug`; GitHub Actions compila el APK en cada Pull Request hacia `develop` o `main` |
+| Distribución | Firebase App Distribution, según el Deployment Diagram: el grupo `testers` recibe cada versión por correo y la instala desde la invitación |
+
+Firebase App Distribution no es una tienda de aplicaciones: reparte el APK únicamente a los testers invitados, que instalan cada versión de forma manual y sin actualización forzada. El procedimiento para repetir la distribución es el siguiente.
+
+| Paso | Acción |
+| --- | --- |
+| 1 | Crear en la consola de Firebase el proyecto `serenia-mobile-android`, con el plan gratuito Spark |
+| 2 | Registrar la aplicación Android con el nombre de paquete `com.vitalcare.serenia` y el alias Serenia |
+| 3 | En App Distribution, crear el grupo de verificadores `testers` y agregar el correo de cada tester |
+| 4 | Subir manualmente el primer APK de depuración (`app-debug.apk`) desde la consola, con una nota de versión, y distribuirlo al grupo |
+| 5 | Para las versiones siguientes se usa el workflow `.github/workflows/android.yml`: en cada push a `main`, GitHub Actions compila el APK, lo firma con una clave de depuración compartida y lo envía al grupo `testers`. La rama `develop` solo integra y no publica |
+| 6 | Guardar los datos de acceso como secrets del repositorio: `FIREBASE_APP_ID`, `FIREBASE_SERVICE_ACCOUNT` (cuenta de servicio con el rol de administrador de App Distribution) y `DEBUG_KEYSTORE_BASE64` (clave de depuración en Base64). Ninguno se sube al código |
+| 7 | Cada tester recibe un correo con la invitación y la nota de la versión, e instala la versión más reciente. Con la misma clave de firma, una versión nueva se instala sobre la anterior sin desinstalarla |
 
 <br>
 
@@ -8400,7 +8412,7 @@ En este Sprint se logró un avance significativo en la estructuración e impleme
 
 Por un lado, el backend fue desplegado exitosamente en Microsoft Azure, y su documentación generada automáticamente puede visualizarse y probarse a través de Swagger UI, donde se exponen los endpoints funcionales desarrollados durante el sprint (ver Imagen 115).
 
-**Enlace de la API REST (Swagger UI):** [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/]
+**Enlace de la API REST (Swagger UI):** [https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/]
 
 Por otro lado, se completó la maquetación de la Landing Page pública, la cual ya se encuentra en un entorno de producción accesible para los usuarios finales, comunicando la propuesta de valor y los planes de Serenia (ver Imagen 116).
 
@@ -8430,12 +8442,12 @@ Como parte de este avance, se documentaron con OpenAPI **56 endpoints agrupados 
 
 | Recurso | URL |
 |---|---|
-| Swagger UI | [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html) |
-| Especificación OpenAPI (JSON) | `https://serenia-platform-api.azurewebsites.net/v3/api-docs` |
+| Swagger UI | [https://serenia-platform.azurewebsites.net/swagger-ui/index.html](https://serenia-platform.azurewebsites.net/swagger-ui/index.html) |
+| Especificación OpenAPI (JSON) | `https://serenia-platform.azurewebsites.net/v3/api-docs` |
 
 **Convenciones generales de la API**
 
-- **URL base:** `https://serenia-platform-api.azurewebsites.net/api/v1`.
+- **URL base:** `https://serenia-platform.azurewebsites.net/api/v1`.
 - **Formato:** todas las peticiones y respuestas usan `application/json`, salvo la subida de audios y fotos (`multipart/form-data`) y la descarga de archivos multimedia (`/media`).
 - **Autenticación:** la API es *stateless* y usa JWT. Solo `POST /api/v1/users` (registro) y `POST /api/v1/sessions` (inicio de sesión) son públicos; el resto de endpoints exige la cabecera `Authorization: Bearer <token>`, con el token obtenido al iniciar sesión (válido por 7 días). La documentación declara el esquema de seguridad `bearerAuth` (HTTP, bearer, JWT), lo que habilita el botón **Authorize** de Swagger UI.
 - **Identificadores y fechas:** los identificadores son UUID. Los instantes se almacenan y devuelven en UTC (ISO-8601, p. ej. `2026-10-07T15:00:00Z`); las fechas y horas locales (`shiftDate`, `checkDate`, `remindAt`, `reminderTime`) se interpretan en la zona horaria del adulto mayor.
@@ -8465,23 +8477,23 @@ Los enlaces de la columna *Documentación* apuntan a la sección (tag) correspon
 
 | Bounded context | Endpoint | Acciones implementadas | Documentación (Swagger UI) |
 |---|---|---|---|
-| IAM | `/api/v1/users` | `POST` registrar usuario · `GET` obtener por id · `PUT` actualizar perfil · `PUT` actualizar foto · `PUT` cambiar contraseña | [Users](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Users) |
-| IAM | `/api/v1/sessions` | `POST` iniciar sesión · `DELETE` cerrar sesión | [Sessions](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Sessions) |
-| Care Circle | `/api/v1/care-circles` | `GET` por id · `GET` por adulto mayor | [Care Circles](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Care%20Circles) |
-| Care Circle | `/api/v1/care-circles/{careCircleId}/invitation-codes` | `POST` generar código · `GET` códigos pendientes | [Invitation Codes](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Invitation%20Codes) |
-| Care Circle | `/api/v1/family-links` y `/api/v1/care-circles/{careCircleId}/family-links` | `POST` canjear código · `GET` vínculos de un familiar · `GET` vínculos de un círculo · `DELETE` revocar vínculo | [Family Links](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Family%20Links) |
-| Care Circle | `/api/v1/care-circles/{careCircleId}/care-shifts` | `POST` asignar turno · `GET` consultar turnos · `PUT` reasignar turno | [Care Shifts](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Care%20Shifts) |
-| Care Circle | `/api/v1/care-circles/{careCircleId}/shared-notes` | `POST` crear nota · `GET` listar notas · `PUT` editar nota | [Shared Notes](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Shared%20Notes) |
-| Daily Check-in | `/api/v1/check-ins` | `GET` check-in de hoy · `GET` historial · `POST` responder check-in | [Check-ins](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Check-ins) |
-| Daily Check-in | `/api/v1/check-in-preferences` | `GET` preferencias · `PUT` hora del check-in · `POST` pausar hoy · `DELETE` reanudar hoy · `PUT` modo simplificado | [Check-in Preferences](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Check-in%20Preferences) |
-| Alerts and Safety | `/api/v1/alerts` | `GET` alertas de un adulto mayor · `GET` detalle de alerta | [Alerts](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Alerts) |
-| Alerts and Safety | `/api/v1/emergency-alerts` | `POST` botón de ayuda · `POST` reconocer · `POST` resolver | [Emergency Alerts](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Emergency%20Alerts) |
-| Alerts and Safety | `/api/v1/inactivity-alerts` | `POST` reconocer · `POST` resolver | [Inactivity Alerts](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Inactivity%20Alerts) |
-| Social Companionship | `/api/v1/care-circles/{careCircleId}/audio-messages` | `POST` grabar · `POST` compartir · `DELETE` descartar · `GET` listar · `GET` archivo · `POST` reproducir | [Audio Messages](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Audio%20Messages) |
-| Social Companionship | `/api/v1/care-circles/{careCircleId}/photo-messages` | `POST` subir · `POST` compartir · `DELETE` descartar · `GET` listar · `GET` archivo · `POST` marcar como vista | [Photo Messages](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Photo%20Messages) |
-| Social Companionship | `/api/v1/social-reminders` | `POST` programar · `GET` activos · `POST` posponer · `POST` completar · `POST` cancelar | [Social Reminders](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Social%20Reminders) |
-| Wellbeing Monitoring | `/api/v1/small-wins` | `GET` pequeños logros por rango de fechas | [Small Wins](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Small%20Wins) |
-| Wellbeing Monitoring | `/api/v1/wellbeing-suggestions` | `GET` sugerencias activas · `POST` descartar sugerencia | [Wellbeing Suggestions](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Wellbeing%20Suggestions) |
+| IAM | `/api/v1/users` | `POST` registrar usuario · `GET` obtener por id · `PUT` actualizar perfil · `PUT` actualizar foto · `PUT` cambiar contraseña | [Users](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Users) |
+| IAM | `/api/v1/sessions` | `POST` iniciar sesión · `DELETE` cerrar sesión | [Sessions](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Sessions) |
+| Care Circle | `/api/v1/care-circles` | `GET` por id · `GET` por adulto mayor | [Care Circles](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Care%20Circles) |
+| Care Circle | `/api/v1/care-circles/{careCircleId}/invitation-codes` | `POST` generar código · `GET` códigos pendientes | [Invitation Codes](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Invitation%20Codes) |
+| Care Circle | `/api/v1/family-links` y `/api/v1/care-circles/{careCircleId}/family-links` | `POST` canjear código · `GET` vínculos de un familiar · `GET` vínculos de un círculo · `DELETE` revocar vínculo | [Family Links](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Family%20Links) |
+| Care Circle | `/api/v1/care-circles/{careCircleId}/care-shifts` | `POST` asignar turno · `GET` consultar turnos · `PUT` reasignar turno | [Care Shifts](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Care%20Shifts) |
+| Care Circle | `/api/v1/care-circles/{careCircleId}/shared-notes` | `POST` crear nota · `GET` listar notas · `PUT` editar nota | [Shared Notes](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Shared%20Notes) |
+| Daily Check-in | `/api/v1/check-ins` | `GET` check-in de hoy · `GET` historial · `POST` responder check-in | [Check-ins](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Check-ins) |
+| Daily Check-in | `/api/v1/check-in-preferences` | `GET` preferencias · `PUT` hora del check-in · `POST` pausar hoy · `DELETE` reanudar hoy · `PUT` modo simplificado | [Check-in Preferences](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Check-in%20Preferences) |
+| Alerts and Safety | `/api/v1/alerts` | `GET` alertas de un adulto mayor · `GET` detalle de alerta | [Alerts](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Alerts) |
+| Alerts and Safety | `/api/v1/emergency-alerts` | `POST` botón de ayuda · `POST` reconocer · `POST` resolver | [Emergency Alerts](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Emergency%20Alerts) |
+| Alerts and Safety | `/api/v1/inactivity-alerts` | `POST` reconocer · `POST` resolver | [Inactivity Alerts](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Inactivity%20Alerts) |
+| Social Companionship | `/api/v1/care-circles/{careCircleId}/audio-messages` | `POST` grabar · `POST` compartir · `DELETE` descartar · `GET` listar · `GET` archivo · `POST` reproducir | [Audio Messages](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Audio%20Messages) |
+| Social Companionship | `/api/v1/care-circles/{careCircleId}/photo-messages` | `POST` subir · `POST` compartir · `DELETE` descartar · `GET` listar · `GET` archivo · `POST` marcar como vista | [Photo Messages](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Photo%20Messages) |
+| Social Companionship | `/api/v1/social-reminders` | `POST` programar · `GET` activos · `POST` posponer · `POST` completar · `POST` cancelar | [Social Reminders](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Social%20Reminders) |
+| Wellbeing Monitoring | `/api/v1/small-wins` | `GET` pequeños logros por rango de fechas | [Small Wins](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Small%20Wins) |
+| Wellbeing Monitoring | `/api/v1/wellbeing-suggestions` | `GET` sugerencias activas · `POST` descartar sugerencia | [Wellbeing Suggestions](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Wellbeing%20Suggestions) |
 
 **Detalle de acciones por endpoint**
 
@@ -8881,7 +8893,7 @@ Mensajes de voz que el adulto mayor graba para sus familiares. Un audio nace com
 **Ejemplo: grabar audio** (`POST`, formulario multipart)
 
 ```bash
-curl -X POST "https://serenia-platform-api.azurewebsites.net/api/v1/care-circles/6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f/audio-messages" \
+curl -X POST "https://serenia-platform.azurewebsites.net/api/v1/care-circles/6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f/audio-messages" \
   -H "Authorization: Bearer <token>" \
   -F "file=@saludo.m4a;type=audio/mp4" \
   -F "durationSeconds=42"
@@ -9023,9 +9035,9 @@ Sugerencias de acción dirigidas a los familiares cuando se detecta un patrón d
 
 **Evidencia de interacción con la documentación**
 
-Las siguientes capturas muestran la interacción con la documentación OpenAPI desplegada en Azure, accesible en `https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html`, utilizando datos de muestra (usuario *Rosa Quispe Mamani*, adulto mayor, y su hija como familiar vinculada). Las peticiones se ejecutaron directamente desde Swagger UI con la opción *Try it out*.
+Las siguientes capturas muestran la interacción con la documentación OpenAPI desplegada en Azure, accesible en `https://serenia-platform.azurewebsites.net/swagger-ui/index.html`, utilizando datos de muestra (usuario *Rosa Quispe Mamani*, adulto mayor, y su hija como familiar vinculada). Las peticiones se ejecutaron directamente desde Swagger UI con la opción *Try it out*.
 
-**Swagger UI en el entorno desplegado.** Se observa en la barra del navegador la URL del servicio en Azure (`serenia-platform-api.azurewebsites.net/swagger-ui/index.html`), la información de la API (*Serenia Platform*, versión `0.0.1-SNAPSHOT`, especificación OAS 3.1), el servidor `Current environment`, el botón **Authorize** para el token Bearer y la sección *Users* con sus endpoints (`PUT` perfil, foto y contraseña, `POST` registro y `GET` por id).
+**Swagger UI en el entorno desplegado.** Se observa en la barra del navegador la URL del servicio en Azure (`serenia-platform.azurewebsites.net/swagger-ui/index.html`), la información de la API (*Serenia Platform*, versión `0.0.1-SNAPSHOT`, especificación OAS 3.1), el servidor `Current environment`, el botón **Authorize** para el token Bearer y la sección *Users* con sus endpoints (`PUT` perfil, foto y contraseña, `POST` registro y `GET` por id).
 
 <p align="center">
   <img src="./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-swagger.png" alt="Swagger UI de Serenia Platform en el entorno desplegado" width="900">
@@ -9039,7 +9051,7 @@ Las siguientes capturas muestran la interacción con la documentación OpenAPI d
 </p>
 <p align="center"><em>Imagen 118. Documentación de POST /api/v1/users.</em></p>
 
-**Respuesta `201 Created` al registrar un usuario.** Se ejecuta la petición con *Try it out* contra `https://serenia-platform-api.azurewebsites.net/api/v1/users`, con los datos de muestra de *Rosa Quispe Mamani* (`rosa.quispe.demo@example.com`, rol `OLDER_ADULT`). El servidor devuelve la cuenta creada con `status: "ACTIVE"` y `photoUrl: null`, sin incluir la contraseña.
+**Respuesta `201 Created` al registrar un usuario.** Se ejecuta la petición con *Try it out* contra `https://serenia-platform.azurewebsites.net/api/v1/users`, con los datos de muestra de *Rosa Quispe Mamani* (`rosa.quispe.demo@example.com`, rol `OLDER_ADULT`). El servidor devuelve la cuenta creada con `status: "ACTIVE"` y `photoUrl: null`, sin incluir la contraseña.
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/post-users-response.png" alt="Respuesta 201 de POST /api/v1/users" width="900">
@@ -9118,7 +9130,7 @@ Las actividades realizadas comprendieron la creación de cuentas y recursos en l
 | Producto digital | Plataforma | Estado | URL |
 |---|---|---|---|
 | Landing Page | Netlify (despliegue continuo desde GitHub) | Desplegada | [https://sereniawebsite.netlify.app](https://sereniawebsite.netlify.app/) |
-| Web Services (Serenia Platform) | Azure App Service (contenedor Docker) | Desplegados | [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html) |
+| Web Services (Serenia Platform) | Azure App Service (contenedor Docker) | Desplegados | [https://serenia-platform.azurewebsites.net/swagger-ui/index.html](https://serenia-platform.azurewebsites.net/swagger-ui/index.html) |
 
 
 ---
@@ -9209,7 +9221,7 @@ Se construyó la imagen Docker del backend a partir del repositorio `serenia-pla
 
 **2.6. Creación y configuración del Azure App Service**
 
-Se creó la aplicación web `serenia-platform-api` sobre Linux, con el plan `serenia-plan` (B1) y modelo de publicación **Contenedor**, tomando como origen la imagen `sereniaplatformacr.azurecr.io/serenia-platform:tb1`. El servicio se encuentra en estado **En ejecución** y su estado en tiempo de ejecución es **Correcto**. El dominio predeterminado asignado es `serenia-platform-api.azurewebsites.net`.
+Se creó la aplicación web `serenia-platform-api` sobre Linux, con el plan `serenia-plan` (B1) y modelo de publicación **Contenedor**, tomando como origen la imagen `sereniaplatformacr.azurecr.io/serenia-platform:tb1`. El servicio se encuentra en estado **En ejecución** y su estado en tiempo de ejecución es **Correcto**. El dominio predeterminado asignado es `serenia-platform.azurewebsites.net`.
 
 ![Azure App Service serenia-platform-api en ejecución](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-app-service.png)
 
@@ -9235,9 +9247,9 @@ Se verificó que el servicio respondiera y que la documentación OpenAPI estuvie
 
 | Recurso | URL |
 |---|---|
-| Swagger UI | [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html) |
-| Especificación OpenAPI | `https://serenia-platform-api.azurewebsites.net/v3/api-docs` |
-| URL base de la API | `https://serenia-platform-api.azurewebsites.net/api/v1` |
+| Swagger UI | [https://serenia-platform.azurewebsites.net/swagger-ui/index.html](https://serenia-platform.azurewebsites.net/swagger-ui/index.html) |
+| Especificación OpenAPI | `https://serenia-platform.azurewebsites.net/v3/api-docs` |
+| URL base de la API | `https://serenia-platform.azurewebsites.net/api/v1` |
 
 ![Swagger UI de Serenia Platform en el entorno desplegado](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-swagger.png)
 
@@ -9256,7 +9268,7 @@ Los repositorios de las aplicaciones móviles del proyecto, `serenia-mobile-andr
 | Producto | Repositorio | URL |
 |---|---|---|
 | Landing Page | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-website` | https://sereniawebsite.netlify.app |
-| Web Services | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform` | https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html |
+| Web Services | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform` | https://serenia-platform.azurewebsites.net/swagger-ui/index.html |
 
 #### 4.2.1.9. Team Collaboration Insights during Sprint
 Durante el Sprint 1 el equipo mantuvo un flujo de trabajo colaborativo y organizado aplicando la estrategia de control de versiones GitFlow. Todo el desarrollo tanto de la documentación del informe,Landing Page y backend se trabajó en ramas independientes (feature branches), integrando los cambios exclusivamente
@@ -9316,9 +9328,9 @@ Los 5 integrantes del equipo participaron en la implementación de la plataforma
 
 Durante el Sprint 2 se actualizó la documentación de los Web Services de **Serenia Platform** con OpenAPI/Swagger, integrada directamente en el backend Spring Boot. La documentación cubre los seis bounded contexts de la plataforma: IAM, Care Circle, Daily Check-in, Alerts and Safety, Social Companionship y Wellbeing Monitoring. En total quedaron documentados **57 endpoints agrupados en 17 recursos** (uno más que en el Sprint 1, por el nuevo endpoint para obtener la foto de perfil). Además, se documentaron los endpoints que dan soporte a las historias comprometidas en el Sprint 2: la alerta por inactividad del check-in (US16), la sugerencia de acción por patrón de malestar (US18), la asignación y consulta de turnos de atención (US20, US21), el historial de check-ins (US17) y el modo simplificado de interfaz (US08).
 
-**URL Swagger desplegado:** [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html)
+**URL Swagger desplegado:** [https://serenia-platform.azurewebsites.net/swagger-ui/index.html](https://serenia-platform.azurewebsites.net/swagger-ui/index.html)
 
-**URL especificación OpenAPI (JSON):** `https://serenia-platform-api.azurewebsites.net/v3/api-docs`
+**URL especificación OpenAPI (JSON):** `https://serenia-platform.azurewebsites.net/v3/api-docs`
 
 **URL repositorio backend:** [https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform)
 
@@ -9428,7 +9440,7 @@ Los parámetros marcados con `*` son obligatorios. Salvo que se indique lo contr
 
 **Parámetros:** Path `userId`*, Body `multipart/form-data` con el campo `file`* (imagen JPEG o PNG, máx. 10 MB)
 ```bash
-curl -X PUT "https://serenia-platform-api.azurewebsites.net/api/v1/users/3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b/photo" \
+curl -X PUT "https://serenia-platform.azurewebsites.net/api/v1/users/3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b/photo" \
   -H "Authorization: Bearer <token>" \
   -F "file=@rosa.jpg;type=image/jpeg"
 ```
@@ -9702,6 +9714,93 @@ Al consultar el historial sin enviar `from` ni `to`, la API responde `400` con `
 | `479b3ad` | 2026-11-11 | vicmacode | Respuesta `400` cuando falta un parámetro de la petición o tiene un valor inválido |
 
 #### 4.2.2.8. Software Deployment Evidence for Sprint Review
+
+Durante el Sprint 2 se publicaron dos de los tres productos de la solución: el backend, que se desplegó en Microsoft Azure con una nueva dirección, y la aplicación Android, que se distribuye a los testers con Firebase App Distribution. La landing page continúa publicada en Netlify, según la sección 4.2.1.8. El procedimiento de cada despliegue se explica en la sección 4.1.4.
+
+<br>
+
+**1. Web Services: despliegue en Azure**
+
+El backend `serenia-platform` quedó publicado en https://serenia-platform.azurewebsites.net, con la documentación interactiva de la API disponible en Swagger UI. La tabla resume las comprobaciones hechas sobre el servicio desplegado.
+
+| Comprobación | Resultado |
+| --- | --- |
+| Abrir https://serenia-platform.azurewebsites.net/swagger-ui/index.html (13 de noviembre de 2026) | Responde 200 y muestra la documentación interactiva de la API |
+| Consultar `/v3/api-docs` en el servicio | Devuelve la definición OpenAPI con 57 operaciones en 17 grupos, que parten de `/api/v1` |
+| Consultar un endpoint protegido sin token, por ejemplo `/api/v1/alerts` | Responde 401 Unauthorized, lo que confirma que la API exige el token JWT |
+| Registrar una cuenta desde la aplicación Android contra el servicio | Se crea un usuario con el rol `OLDER_ADULT` y su contraseña queda almacenada cifrada (hash) |
+
+<br>
+
+**2. Aplicación móvil: distribución con Firebase App Distribution**
+
+La aplicación Android se registró en un proyecto de Firebase y se distribuye al grupo de testers del proyecto. Las capturas muestran el proyecto, el registro de la aplicación con su paquete, el grupo de verificadores y la primera versión subida.
+
+<br>
+
+<div align="center">
+  <img src="assets/img/sprint-2/despliegue-android/01-firebase-proyecto.png" alt="Panel del proyecto de Firebase serenia-mobile-android, con el plan Spark." width="700"/>
+  <br/><i>Imagen 127. Panel del proyecto de Firebase serenia-mobile-android, con el plan Spark.</i>
+</div>
+
+<br>
+
+<div align="center">
+  <img src="assets/img/sprint-2/despliegue-android/02-firebase-registro-app.png" alt="Registro de la aplicación Android con el paquete com.vitalcare.serenia en Firebase." width="700"/>
+  <br/><i>Imagen 128. Registro de la aplicación Android con el paquete com.vitalcare.serenia en Firebase.</i>
+</div>
+
+<br>
+
+<div align="center">
+  <img src="assets/img/sprint-2/despliegue-android/03-firebase-configuracion-app.png" alt="Configuración de la aplicación Serenia registrada en el proyecto de Firebase." width="700"/>
+  <br/><i>Imagen 129. Configuración de la aplicación Serenia registrada en el proyecto de Firebase.</i>
+</div>
+
+<br>
+
+<div align="center">
+  <img src="assets/img/sprint-2/despliegue-android/04-app-distribution-testers.png" alt="Grupo de verificadores testers en Firebase App Distribution." width="700"/>
+  <br/><i>Imagen 130. Grupo de verificadores testers en Firebase App Distribution.</i>
+</div>
+
+<br>
+
+<div align="center">
+  <img src="assets/img/sprint-2/despliegue-android/05-app-distribution-version.png" alt="Versión 1.0 (1) subida a Firebase App Distribution con su nota de versión." width="700"/>
+  <br/><i>Imagen 131. Versión 1.0 (1) subida a Firebase App Distribution con su nota de versión.</i>
+</div>
+
+<br>
+
+<div align="center">
+  <img src="assets/img/sprint-2/despliegue-android/06-app-distribution-distribucion.png" alt="Distribución de la versión 1.0 (1) al grupo de verificadores testers." width="700"/>
+  <br/><i>Imagen 132. Distribución de la versión 1.0 (1) al grupo de verificadores testers.</i>
+</div>
+
+<br>
+
+El primer APK se subió de forma manual el 12 de noviembre de 2026, a las 8:03 p. m., como versión 1.0 (1) con la nota "Primera versión para validación", y se distribuyó al grupo `testers`. Desde entonces el repositorio `serenia-mobile-android` publica por sí mismo: al integrar los cambios de `develop` en `main` (Pull Request 36), el workflow de GitHub Actions compiló el APK, lo firmó con la clave de depuración compartida y lo subió como versión 1.0 (110), con la nota "Build 10 from main". El código de versión se calcula como 100 más el número de ejecución, de modo que cada subida es más reciente que la anterior.
+
+| Aspecto | Detalle |
+| --- | --- |
+| Proyecto de Firebase | `serenia-mobile-android`, plan Spark |
+| Aplicación registrada | `com.vitalcare.serenia` (alias Serenia) |
+| Grupo de testers | `testers` |
+| Primera versión | 1.0 (1), subida manualmente el 12 de noviembre de 2026 |
+| Versión publicada por el pipeline | 1.0 (110), generada al integrar `develop` en `main` |
+| Backend usado por la aplicación | https://serenia-platform.azurewebsites.net/api/v1/ (dirección por defecto de `API_BASE_URL`) |
+
+<br>
+
+**Resumen de enlaces de despliegue**
+
+| Producto | Repositorio | URL |
+| --- | --- | --- |
+| Landing Page | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-website` | https://sereniawebsite.netlify.app |
+| Web Services | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform` | https://serenia-platform.azurewebsites.net/swagger-ui/index.html |
+| Aplicación móvil | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android` | Firebase App Distribution, con acceso para los testers invitados |
+
 #### 4.2.2.9. Team Collaboration Insights during Sprint
 Durante el Sprint 2 el equipo mantuvo el flujo de trabajo colaborativo aplicando la estrategia de control de versiones GitFlow. El desarrollo de la aplicación móvil Android y del backend se trabajó en ramas independientes (`feature/*` y `fix/*`) creadas desde `develop`, y los cambios se integraron mediante Pull Requests. Esto permitió revisar cada contribución antes de integrarla y mantener la trazabilidad del trabajo de cada integrante.
 A continuación se presentan los analíticos de colaboración extraídos de GitHub Insights para ambos repositorios durante el período del Sprint 2 (del 11 de octubre al 11 de noviembre de 2026).
@@ -9803,7 +9902,7 @@ Los User Flows propuestos corresponden a las funcionalidades core de la aplicaci
 
 <img src="assets/img/interviews/validacion-segmento1-yrma.png" alt="Screenshot entrevista de validación Yrma Huamán" width="700"/>
 
-<p align="center"><i>Imagen 127. Captura de la entrevista de validación con Yrma Huamán Jiménez.</i></p>
+<p align="center"><i>Imagen 133. Captura de la entrevista de validación con Yrma Huamán Jiménez.</i></p>
 
 <br>
 
@@ -9836,7 +9935,7 @@ Lo más fácil fue identificar los botones por su color llamativo; lo más difí
 
 <img src="assets/img/interviews/entrevista-validacion-yolanda.png" alt="Screenshot entrevista de validación Yolanda Bardalez" width="700"/>
 
-<p align="center"><i>Imagen 128. Captura de la entrevista de validación con Yolanda Bardalez.</i></p>
+<p align="center"><i>Imagen 134. Captura de la entrevista de validación con Yolanda Bardalez.</i></p>
 
 <br>
 
@@ -9871,7 +9970,7 @@ Finalmente, tras revisar la sección de la cuenta y el flujo completo de la inte
 
 <img src="assets/img/interviews/validation-interview-arturo-eva.png" alt="Screenshot de entrevista de validación - Eva Martinez" width="700"/>
 
-<p align="center"><i>Imagen 129. Captura de la entrevista de validación con Eva Martínez.</i></p>
+<p align="center"><i>Imagen 135. Captura de la entrevista de validación con Eva Martínez.</i></p>
 
 <br>
 
@@ -9909,7 +10008,7 @@ Luego probó el prototipo de la aplicación móvil y valoró de forma positiva l
 
 <img src="assets/img/interviews/validacion-jose.png" alt="Screenshot validación José Cámara" width="700"/>
 
-<p align="center"><i>Imagen 130. Captura de la entrevista de validación con José Cámara.</i></p>
+<p align="center"><i>Imagen 136. Captura de la entrevista de validación con José Cámara.</i></p>
 
 <br>
 
@@ -9939,7 +10038,7 @@ Durante la sesión de validación, José interactuó con la Landing Page y los f
 
 <img src="assets/img/interviews/validacion-kevin.png" alt="Screenshot validación Kevin" width="700"/>
 
-<p align="center"><i>Imagen 131. Captura de la entrevista de validación con Kevin.</i></p>
+<p align="center"><i>Imagen 137. Captura de la entrevista de validación con Kevin.</i></p>
 
 <br>
 
@@ -9971,7 +10070,7 @@ Kevin evaluó el prototipo móvil y la Landing Page enfocándose en la usabilida
 
 <img src="assets/img/interviews/validacion-brianna.png" alt="Screenshot entrevista de validación Enrique Guzmán" width="700"/>
 
-<p align="center"><i>Imagen 132. Captura de la entrevista de validación con Enrique Guzmán.</i></p>
+<p align="center"><i>Imagen 138. Captura de la entrevista de validación con Enrique Guzmán.</i></p>
 
 <br>
 
