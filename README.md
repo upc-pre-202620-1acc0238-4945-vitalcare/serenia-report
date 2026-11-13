@@ -9781,6 +9781,8 @@ Esta segunda entrega suma al análisis y al diseño de la primera el diseño de 
 
 ## Video About The Team
 
+El video About The Team presenta al equipo detrás de Serenia y el trabajo que realizamos durante el curso. Muestra las actividades de cada integrante, la colaboración del equipo y el aporte de cada uno al proyecto, junto con sus testimonios personales. También refleja cómo el curso desarrolla el ABET EAC Student Outcome 7.
+
 <br>
 
 <div align="center">
