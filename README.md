@@ -9777,11 +9777,15 @@ Esta segunda entrega suma al análisis y al diseño de la primera el diseño de 
 
 ## Video About The Product
 
+
+El video About The Product presenta Serenia, la aplicación que acompaña a los adultos mayores que viven solos y mantiene a sus familias al tanto de cómo están. En poco más de tres minutos muestra el problema que buscamos resolver, el funcionamiento de la aplicación y el testimonio de una usuaria que participó en la validación.
+
 <br>
 
 <div align="center">
 
 **About The Product**
+
 
 ![Video About The Product](assets/img/about-the-product/abouttheproduct.png)
 
