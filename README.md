@@ -9740,42 +9740,42 @@ La aplicación Android se registró en un proyecto de Firebase y se distribuye a
 
 <div align="center">
   <img src="assets/img/sprint-2/despliegue-android/01-firebase-proyecto.png" alt="Panel del proyecto de Firebase serenia-mobile-android, con el plan Spark." width="700"/>
-  <br/><i>Imagen 127. Panel del proyecto de Firebase serenia-mobile-android, con el plan Spark.</i>
+  <br/><i>Imagen 137. Panel del proyecto de Firebase serenia-mobile-android, con el plan Spark.</i>
 </div>
 
 <br>
 
 <div align="center">
   <img src="assets/img/sprint-2/despliegue-android/02-firebase-registro-app.png" alt="Registro de la aplicación Android con el paquete com.vitalcare.serenia en Firebase." width="700"/>
-  <br/><i>Imagen 128. Registro de la aplicación Android con el paquete com.vitalcare.serenia en Firebase.</i>
+  <br/><i>Imagen 138. Registro de la aplicación Android con el paquete com.vitalcare.serenia en Firebase.</i>
 </div>
 
 <br>
 
 <div align="center">
   <img src="assets/img/sprint-2/despliegue-android/03-firebase-configuracion-app.png" alt="Configuración de la aplicación Serenia registrada en el proyecto de Firebase." width="700"/>
-  <br/><i>Imagen 129. Configuración de la aplicación Serenia registrada en el proyecto de Firebase.</i>
+  <br/><i>Imagen 139. Configuración de la aplicación Serenia registrada en el proyecto de Firebase.</i>
 </div>
 
 <br>
 
 <div align="center">
   <img src="assets/img/sprint-2/despliegue-android/04-app-distribution-testers.png" alt="Grupo de verificadores testers en Firebase App Distribution." width="700"/>
-  <br/><i>Imagen 130. Grupo de verificadores testers en Firebase App Distribution.</i>
+  <br/><i>Imagen 140. Grupo de verificadores testers en Firebase App Distribution.</i>
 </div>
 
 <br>
 
 <div align="center">
   <img src="assets/img/sprint-2/despliegue-android/05-app-distribution-version.png" alt="Versión 1.0 (1) subida a Firebase App Distribution con su nota de versión." width="700"/>
-  <br/><i>Imagen 131. Versión 1.0 (1) subida a Firebase App Distribution con su nota de versión.</i>
+  <br/><i>Imagen 141. Versión 1.0 (1) subida a Firebase App Distribution con su nota de versión.</i>
 </div>
 
 <br>
 
 <div align="center">
   <img src="assets/img/sprint-2/despliegue-android/06-app-distribution-distribucion.png" alt="Distribución de la versión 1.0 (1) al grupo de verificadores testers." width="700"/>
-  <br/><i>Imagen 132. Distribución de la versión 1.0 (1) al grupo de verificadores testers.</i>
+  <br/><i>Imagen 142. Distribución de la versión 1.0 (1) al grupo de verificadores testers.</i>
 </div>
 
 <br>
@@ -9810,24 +9810,44 @@ A continuación se presentan los analíticos de colaboración extraídos de GitH
 Top Committers: Repositorio serenia-mobile-android
 En el repositorio de la aplicación móvil los integrantes registraron las siguientes contribuciones durante el Sprint 2: Arturouu con 131 commits, vicmacode con 12 commits y brianna-salinas con 1 commit. Arturouu implementó la estructura base de la aplicación, el design system, la capa de red y la conexión con el backend de los bounded contexts IAM, Daily Check-in, Care Circle, Alerts and Safety y Social Companionship. vicmacode se encargó de las correcciones de interfaz y de la adaptación de las pantallas al tamaño de letra grande, y brianna-salinas implementó el modo de alto contraste.
 
+<div align="center">
+
 ![insight](./assets/img/insight-sprint2/insights1.png)
+  <br/><i>Imagen 143. Top committers del repositorio de la aplicación android.</i>
+
+</div>
 
 Pull Requests mergeados: Repositorio serenia-mobile-android
 Se mergearon 15 Pull Requests hacia `develop` (del #13 al #28), cada uno correspondiente a una funcionalidad de la aplicación: `app-branding`, `base-structure`, `bounded-contexts`, `core-network`, `design-system`, `iam`, `daily-check-in`, `account`, `alerts-and-safety`, `care-circle`, `social-companionship`, `profile-photo`, `README`, `ui-fixes` y `large-font-fixes`.
 
+<div align="center">
+
 ![insight](./assets/img/insight-sprint2/insights3.png)
+  <br/><i>Imagen 144. Pull request del repositorio de la aplicación android mergeados a develop.</i>
+
+</div>
 
 **Resumen de actividad: Repositorio serenia-platform (backend)**
 
 Top Committers: Repositorio serenia-platform
 En el backend se registraron 10 commits durante el Sprint 2: Arturouu con 5 commits y vicmacode con 5 commits. Arturouu implementó la subida y consulta de la foto de perfil, trasladó el almacenamiento de archivos al shared kernel y agregó el README del proyecto. vicmacode actualizó la documentación OpenAPI y corrigió los hallazgos del backend: la zona horaria UTC, las preferencias de check-in que no se podían convertir y la respuesta `400` ante parámetros faltantes o inválidos.
 
+<div align="center">
+
 ![insight](./assets/img/insight-sprint2/insights2.png)
+  <br/><i>Imagen 145. Top committers del repositorio de la plataforma</i>
+
+</div>
 
 Pull Requests mergeados: Repositorio serenia-platform
 Se mergearon 4 Pull Requests hacia `develop`: `feature/README` (#11), `feature/profile-photo` (#12), `feature/api-documentation` (#13) y `fix/backend-findings` (#14).
 
+<div align="center">
+
 ![insight](./assets/img/insight-sprint2/insights4.png)
+  <br/><i>Imagen 146. Pull request del repositorio de la plataforma mergeados a develop.</i>
+
+</div>
 
 ## 4.3. Validation Interviews
 
