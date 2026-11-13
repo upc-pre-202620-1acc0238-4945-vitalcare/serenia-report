@@ -9607,82 +9607,82 @@ Guía de uso de la API en Swagger UI <br>
 En la cabecera de Swagger UI se observa la nueva descripción de la API: la lista de bounded contexts, los pasos para probarla y el enlace al repositorio del backend.
 
 <p align="center">
-  <img src="./assets/img/sprint-2/services-documentation/swagger-overview.png" alt="Swagger UI de Serenia Platform con la guía de uso de la API" width="900">
+  <img src="./assets/img/sprint-2/swagger1.png" alt="Swagger UI de Serenia Platform con la guía de uso de la API" width="900">
 </p>
-<p align="center"><em>Imagen XXX. Swagger UI de Serenia Platform con la guía de uso de la API.</em></p>
+<p align="center"><em>Imagen 127. Swagger UI de Serenia Platform con la guía de uso de la API.</em></p>
 
 Subida de la foto de perfil <br>
 
 El adulto mayor sube su foto de perfil con `PUT /api/v1/users/{userId}/photo` como `multipart/form-data`. La API responde `200` y el campo `photoUrl` apunta al endpoint `GET /api/v1/users/{userId}/photo`, que devuelve la imagen subida.
 
 <p align="center">
-  <img src="./assets/img/sprint-2/services-documentation/put-user-photo-response.png" alt="Respuesta 200 de PUT /api/v1/users/{userId}/photo" width="900">
+  <img src="./assets/img/sprint-2/swagger2.png" alt="Respuesta 200 de PUT /api/v1/users/{userId}/photo" width="900">
 </p>
-<p align="center"><em>Imagen XXX. Respuesta 200 de PUT /api/v1/users/{userId}/photo.</em></p>
+<p align="center"><em>Imagen 128. Respuesta 200 de PUT /api/v1/users/{userId}/photo.</em></p>
 
 Historial de check-ins <br>
 
 El familiar consulta el historial de check-ins de Rosa con `GET /api/v1/check-ins` enviando el rango de fechas. La respuesta incluye los días respondidos (`ANSWERED`) con su estado de ánimo y los días sin respuesta (`MISSED`).
 
 <p align="center">
-  <img src="./assets/img/sprint-2/services-documentation/get-check-ins-history-response.png" alt="Respuesta 200 de GET /api/v1/check-ins" width="900">
+  <img src="./assets/img/sprint-2/swagger3.png" alt="Respuesta 200 de GET /api/v1/check-ins" width="900">
 </p>
-<p align="center"><em>Imagen XXX. Respuesta 200 de GET /api/v1/check-ins (historial).</em></p>
+<p align="center"><em>Imagen 129. Respuesta 200 de GET /api/v1/check-ins (historial).</em></p>
 
 Alerta por inactividad del check-in <br>
 
 Al no responderse el check-in del día dentro del plazo, se genera una alerta `INACTIVITY`. El familiar la consulta con `GET /api/v1/alerts` y la reconoce con `POST /api/v1/inactivity-alerts/{alertId}/acknowledge`.
 
 <p align="center">
-  <img src="./assets/img/sprint-2/services-documentation/get-alerts-inactivity-response.png" alt="Respuesta 200 de GET /api/v1/alerts con una alerta de inactividad" width="900">
+  <img src="./assets/img/sprint-2/swagger4.png" alt="Respuesta 200 de GET /api/v1/alerts con una alerta de inactividad" width="900">
 </p>
-<p align="center"><em>Imagen XXX. Respuesta 200 de GET /api/v1/alerts con una alerta de inactividad.</em></p>
+<p align="center"><em>Imagen 130. Respuesta 200 de GET /api/v1/alerts con una alerta de inactividad.</em></p>
 
 <p align="center">
-  <img src="./assets/img/sprint-2/services-documentation/post-inactivity-acknowledge-response.png" alt="Respuesta 200 de POST /api/v1/inactivity-alerts/{alertId}/acknowledge" width="900">
+  <img src="./assets/img/sprint-2/swagger5.png" alt="Respuesta 200 de POST /api/v1/inactivity-alerts/{alertId}/acknowledge" width="900">
 </p>
-<p align="center"><em>Imagen XX. Respuesta 200 de POST /api/v1/inactivity-alerts/{alertId}/acknowledge.</em></p>
+<p align="center"><em>Imagen 131. Respuesta 200 de POST /api/v1/inactivity-alerts/{alertId}/acknowledge.</em></p>
 
 Sugerencias de bienestar <br>
 
 El familiar consulta las sugerencias activas con `GET /api/v1/wellbeing-suggestions`. La sugerencia se genera cuando se detecta un patrón de ánimo bajo en los check-ins del adulto mayor.
 
 <p align="center">
-  <img src="./assets/img/sprint-2/services-documentation/get-wellbeing-suggestions-response.png" alt="Respuesta 200 de GET /api/v1/wellbeing-suggestions" width="900">
+  <img src="./assets/img/sprint-2/swagger6.png" alt="Respuesta 200 de GET /api/v1/wellbeing-suggestions" width="900">
 </p>
-<p align="center"><em>Imagen XXX. Respuesta 200 de GET /api/v1/wellbeing-suggestions.</em></p>
+<p align="center"><em>Imagen 132. Respuesta 200 de GET /api/v1/wellbeing-suggestions.</em></p>
 
 Asignación y consulta de turnos de atención <br>
 
 La hija se asigna un turno con `POST /api/v1/care-circles/{careCircleId}/care-shifts` (respuesta `201`) y luego consulta el turno vigente con `GET` enviando la fecha de hoy en `from` y `to`.
 
 <p align="center">
-  <img src="./assets/img/sprint-2/services-documentation/post-care-shifts-response.png" alt="Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/care-shifts" width="900">
+  <img src="./assets/img/sprint-2/swagger8.png" alt="Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/care-shifts" width="900">
 </p>
-<p align="center"><em>Imagen XXX. Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/care-shifts.</em></p>
+<p align="center"><em>Imagen 133. Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/care-shifts.</em></p>
 
 <p align="center">
-  <img src="./assets/img/sprint-2/services-documentation/get-care-shifts-response.png" alt="Respuesta 200 de GET /api/v1/care-circles/{careCircleId}/care-shifts" width="900">
+  <img src="./assets/img/sprint-2/swagger9.png" alt="Respuesta 200 de GET /api/v1/care-circles/{careCircleId}/care-shifts" width="900">
 </p>
-<p align="center"><em>Imagen XXX. Respuesta 200 de GET /api/v1/care-circles/{careCircleId}/care-shifts.</em></p>
+<p align="center"><em>Imagen 134. Respuesta 200 de GET /api/v1/care-circles/{careCircleId}/care-shifts.</em></p>
 
 Modo simplificado de interfaz <br>
 
 Rosa activa el modo simplificado con `PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode`. La respuesta devuelve sus preferencias con `simplifiedMode: true`.
 
 <p align="center">
-  <img src="./assets/img/sprint-2/services-documentation/put-simplified-mode-response.png" alt="Respuesta 200 de PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode" width="900">
+  <img src="./assets/img/sprint-2/swagger10.png" alt="Respuesta 200 de PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode" width="900">
 </p>
-<p align="center"><em>Imagen XXX. Respuesta 200 de PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode.</em></p>
+<p align="center"><em>Imagen 135. Respuesta 200 de PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode.</em></p>
 
 Respuesta de error por parámetro faltante <br>
 
 Al consultar el historial sin enviar `from` ni `to`, la API responde `400` con `code: "VALIDATION_ERROR"` y el detalle traducido según `Accept-Language`.
 
 <p align="center">
-  <img src="./assets/img/sprint-2/services-documentation/error-400-missing-parameter.png" alt="Respuesta de error 400 por parámetro faltante" width="900">
+  <img src="./assets/img/sprint-2/swagger11.png" alt="Respuesta de error 400 por parámetro faltante" width="900">
 </p>
-<p align="center"><em>Imagen XXX. Respuesta de error 400 por parámetro faltante.</em></p>
+<p align="center"><em>Imagen 136. Respuesta de error 400 por parámetro faltante.</em></p>
 
 ---
 
