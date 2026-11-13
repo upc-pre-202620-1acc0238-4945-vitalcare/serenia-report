@@ -8062,7 +8062,7 @@ Esta sección define cómo se nombran los elementos y cómo se escribe el códig
 
 **Nomenclatura por capa (Web Services)**
 
-Los nombres de las clases siguen los que el equipo definió para cada bounded context en la sección 2.6, de modo que el código y el diseño usen el mismo lenguaje ubicuo. La tabla resume el patrón que cumple el backend, con ejemplos reales de los contextos Alerts and Safety y Care Circle. El patrón se midió sobre los 557 archivos Java de `serenia-platform` al 8 de octubre de 2026, y cada categoría se cumple sin excepciones: por ejemplo, los 55 commands terminan en `Command` y los 26 servicios de aplicación terminan en `Impl`.
+Los nombres de las clases siguen los que el equipo definió para cada bounded context en la sección 2.6, de modo que el código y el diseño usen el mismo lenguaje ubicuo. La tabla resume el patrón que cumple el backend, con ejemplos reales de los contextos Alerts and Safety y Care Circle. El patrón se midió sobre los 558 archivos Java de `serenia-platform` al 13 de noviembre de 2026, y cada categoría se cumple sin excepciones: por ejemplo, los 55 commands terminan en `Command` y los 26 servicios de aplicación terminan en `Impl`.
 
 <br>
 
@@ -8091,10 +8091,10 @@ Los nombres de las clases siguen los que el equipo definió para cada bounded co
 
 | Aspecto | Convención aplicada |
 | --- | --- |
-| Sangría | 4 espacios y ninguna tabulación (ninguno de los 557 archivos usa tabulaciones) |
-| Importaciones | Explícitas, sin comodines (solo 1 excepción en los 557 archivos) |
-| Documentación | Javadoc en inglés en las clases (525 de 557 archivos), con enlaces `{@link}` y párrafos `<p>` para explicar las reglas de negocio |
-| Objetos inmutables | `record` para commands, queries, eventos, value objects y resources (231 en total) |
+| Sangría | 4 espacios y ninguna tabulación (ninguno de los 558 archivos usa tabulaciones) |
+| Importaciones | Explícitas, sin comodines (solo 1 excepción en los 558 archivos) |
+| Documentación | Javadoc en inglés en las clases (526 de 558 archivos), con enlaces `{@link}` y párrafos `<p>` para explicar las reglas de negocio |
+| Objetos inmutables | `record` para commands, queries, eventos, value objects y resources (232 en total) |
 | Persistencia | Entidades JPA con Lombok (`@Getter`, `@Setter` y `@NoArgsConstructor`) y tipos de columna explícitos, como `BINARY(16)` para los identificadores y `DATETIME(6)` para las fechas |
 | Resultados | Los servicios de aplicación devuelven `Result<T, ApplicationError>` (por ejemplo, `Result<EmergencyAlert, ApplicationError>`) en lugar de lanzar excepciones hacia la capa REST |
 | Valores ausentes | `Optional` en las consultas, en lugar de `null` |
@@ -8125,19 +8125,19 @@ El sitio se construye con Vite, sin biblioteca de interfaz, por lo que sus conve
 
 **Nomenclatura y estilo de la aplicación móvil (Kotlin)**
 
-La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario de la landing y del backend: Home, Check-in, Alerts and Safety, Social Companionship, Identity and Access y Care Circle. Las convenciones de la tabla se midieron sobre los 95 archivos Kotlin de `serenia-mobile-android` al 10 de octubre de 2026, y se cumplen en todos los casos que alcanza cada regla: por ejemplo, los 10 ViewModels llevan `@HiltViewModel` y los 10 estados de pantalla son `data class`.
+La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario de la landing y del backend: Home, Daily Check-in, Alerts and Safety, Social Companionship, Identity and Access, Care Circle y Account. Las convenciones de la tabla se midieron sobre los 231 archivos Kotlin de código fuente de `serenia-mobile-android` al 13 de noviembre de 2026, y se cumplen en todos los casos que alcanza cada regla: por ejemplo, los 17 ViewModels llevan `@HiltViewModel` y los 15 estados de pantalla son `data class`.
 
 <br>
 
 | Elemento | Regla | Ejemplo |
 | --- | --- | --- |
-| Paquetes | Base `com.vitalcare.serenia`, con una carpeta por funcionalidad que separa `domain` y `presentation`, más `core/designsystem` y `navigation` | `features/checkin/presentation/thanks` |
-| Pantalla | Función `@Composable` en PascalCase con sufijo `Screen`, en un archivo propio; lee el ViewModel y delega el dibujo en un `...Content` sin estado, y los componentes propios van en una carpeta `components` | `HomeScreen`, `FamilyScreen` |
-| Estado de la pantalla | `data class` con sufijo `UiState` y valores por defecto; los eventos de una sola vez, como los mensajes, se modelan con un `sealed interface` de sufijo `Event` enviado por un `Channel` | `HomeUiState`, `FamilyUiState` |
-| ViewModel | Sufijo `ViewModel`, anotado con `@HiltViewModel` y con constructor `@Inject`; expone el estado como `StateFlow` de solo lectura mediante `asStateFlow()` | `HomeViewModel` |
-| Navegación | Un grafo por funcionalidad con sufijo `NavGraph` (6 grafos), rutas tipadas con `@Serializable` (19 rutas) y registro de cada grafo en `AppNavHost` | `CheckInNavGraph`, `AlertsAndSafetyNavGraph` |
-| Dominio | Tipos propios de la funcionalidad; las constantes de un `enum` van en MAYÚSCULAS con guion bajo | `Mood.NOT_GOOD` |
-| Sistema de diseño | Componentes reutilizables y tema de Material 3 en `core/designsystem`, dividido en `components`, `icon` y `theme` | `SereniaButtons`, `Theme` |
+| Paquetes | Base `com.vitalcare.serenia`, con una carpeta por funcionalidad que separa las capas `domain`, `application`, `infrastructure` y `presentation`, más `core` (apariencia, red, sesión y sistema de diseño) y `main` | `features/dailycheckin/presentation` |
+| Pantalla | Función `@Composable` en PascalCase con sufijo `Screen`, en un archivo propio; lee el ViewModel y delega el dibujo en un `...Content` sin estado | `HomeScreen`, `FamilyScreen` |
+| Estado de la pantalla | `data class` con sufijo `UiState` y valores por defecto | `HomeUiState`, `FamilyUiState` |
+| ViewModel | Sufijo `ViewModel`, anotado con `@HiltViewModel` y con constructor `@Inject`; expone el estado como `StateFlow` de solo lectura, con `asStateFlow()` o `stateIn` | `HomeViewModel` |
+| Navegación | Un grafo por funcionalidad con sufijo `NavGraph` (8 grafos), rutas tipadas con `@Serializable` (23 rutas) y registro de cada grafo en el `NavHost` de `MainScreen` | `CheckInNavGraph`, `AlertsAndSafetyNavGraph` |
+| Dominio | Tipos propios de la funcionalidad; las constantes de un `enum` van en MAYÚSCULAS con guion bajo | `MoodLevel.VERY_LOW` |
+| Sistema de diseño | Componentes reutilizables y tema de Material 3 en `core/designsystems`, dividido en `components` y `theme`, con los íconos en `Icons.kt` | `SereniaButtons`, `Theme` |
 
 <br>
 
@@ -8145,8 +8145,8 @@ La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario
 
 | Aspecto | Convención aplicada |
 | --- | --- |
-| Sangría | 4 espacios y ninguna tabulación (ninguno de los 95 archivos usa tabulaciones) |
-| Interfaz de usuario | Jetpack Compose con Material 3 (42 archivos); 118 funciones `@Composable` en 46 archivos y 46 vistas previas con `@Preview` |
+| Sangría | 4 espacios y ninguna tabulación (ninguno de los 231 archivos usa tabulaciones) |
+| Interfaz de usuario | Jetpack Compose con Material 3 (51 archivos); 189 funciones `@Composable` en 54 archivos y 54 vistas previas con `@Preview` |
 | Estado | Un `MutableStateFlow` privado dentro del ViewModel y actualizaciones con `update` y `copy` sobre el estado inmutable |
 | Inyección de dependencias | Hilt, con `hilt-navigation-compose` para obtener los ViewModels en las pantallas |
 | Comentarios | En inglés y de una línea, para explicar decisiones puntuales de diseño |
