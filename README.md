@@ -9783,9 +9783,9 @@ Esta segunda entrega suma al análisis y al diseño de la primera el diseño de 
 
 **About The Product**
 
-![Video About The Product](brandradar-report/assets/ux-design/desktop-prototyping.png)
+![Video About The Product](assets/img/about-the-product/abouttheproduct.png)
 
-[Ver video en Microsoft Stream]()
+[Ver video en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410239_upc_edu_pe/IQBLJlI41_q3R6QeAQVK0hzrAdNeL5r_pPn91m704I-48F4?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=QX9xRb)
 
 <br>
 
