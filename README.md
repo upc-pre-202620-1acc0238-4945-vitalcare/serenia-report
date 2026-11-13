@@ -10187,6 +10187,7 @@ Esta segunda entrega suma al análisis y al diseño de la primera el diseño de 
 
 ## Video App Validation
 
+
 <br>
 
 ## Video About The Product
@@ -10198,6 +10199,7 @@ El video About The Product presenta Serenia, la aplicación que acompaña a los 
 
 <div align="center">
 
+
 **About The Product**
 
 
@@ -10205,11 +10207,26 @@ El video About The Product presenta Serenia, la aplicación que acompaña a los 
 
 [Ver video en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410239_upc_edu_pe/IQBLJlI41_q3R6QeAQVK0hzrAdNeL5r_pPn91m704I-48F4?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=QX9xRb)
 
-<br>
-
 </div>
 
+<br>
+
 ## Video About The Team
+
+El video About The Team presenta al equipo detrás de Serenia y el trabajo que realizamos durante el curso. Muestra las actividades de cada integrante, la colaboración del equipo y el aporte de cada uno al proyecto, junto con sus testimonios personales. También refleja cómo el curso desarrolla el ABET EAC Student Outcome 7.
+
+
+<br>
+
+<div align="center">
+
+**About The Team**
+
+![Video About The Team](brandradar-report/assets/ux-design/desktop-prototyping.png)
+
+[Ver video en Microsoft Stream]()
+
+</div>
 
 <br>
 
@@ -10242,6 +10259,7 @@ El video About The Product presenta Serenia, la aplicación que acompaña a los 
 <br>
 
 <div style="page-break-after: always;"></div>
+
 
 # Bibliografía
 
