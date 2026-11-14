@@ -27,7 +27,7 @@
 </table>
 <br>
 <p align="center"><strong>Período 202620</strong></p>
-<p align="center"><strong>Octubre 2026</strong></p>
+<p align="center"><strong>Noviembre 2026</strong></p>
 
 <br>
 
@@ -85,7 +85,34 @@
       Capítulo III: Solution UI/UX Design <br>
       Capítulo IV: Product Implementation & Validation (Sprint 1) <br>
     </td>
-  </tr>
+    </tr>
+      <tr>
+      <td><b>Tercera Entrega (AV2)</b></td>
+      <td>13/11/2026</td>
+      <td>
+        Contreras Torres, Arturo Valentino <br>
+        <p></p>
+        Gallardo Morales, Carla Alejandra <br>
+        <p></p>
+        García Paredes, Victor Manuel <br>
+        <p></p>
+        Salinas Guzman, Brianna Cristina <br>
+        <p></p>
+        Sandoval Aiquipa, Kelber Yamir <br>
+      </td>
+      <td>
+        Corrección del reporte <br>
+        Mejora de artefactos <br>
+        Nueva versión desplegada de Landing Page <br>
+        Nueva versión desplegada de Web Services <br>
+        Nueva versión de Android Application <br>
+        Primera versión de Flutter Application <br>
+        Primera versión del video con la validación de la aplicación <br>
+        Primera versión del video About-the-Product <br>
+        Primera versión del video About-the-Team <br>
+        Capítulo IV: Product Implementation & Validation (Sprint 2) <br>
+      </td>
+    </tr>
   </table>
 
 <br>
@@ -100,7 +127,9 @@ URL del repositorio (Report): https://github.com/upc-pre-202620-1acc0238-4945-vi
 
 URL del repositorio (Platform): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform
 
-URL del repositorio (App Native): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android
+URL del repositorio (Mobile Android): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android
+
+URL del repositorio (Mobile Flutter): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-flutter
 
 URL del repositorio (Website): https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website
 
@@ -167,6 +196,54 @@ La Imagen 5 muestra el resumen de actividad (Pulse) del repositorio entre el 10 
     <br/><i>Imagen 5. Insights de la Segunda Entrega (TB1)</i>
 </p>
 
+**Tercera Entrega (AV2)**
+
+Para esta entrega el equipo mantuvo el mismo flujo de trabajo: ramas independientes creadas desde `develop`, Pull Requests para integrar cada cambio y commits con Conventional Commits. A continuación se presenta, por cada repositorio, el resumen de actividad (Pulse) del periodo de la tercera entrega, con los Pull Requests integrados, los commits y el gráfico de Top committers.
+
+**serenia-report:**
+
+Para el informe del proyecto el equipo siguió trabajando directamente sobre el repositorio `serenia-report`, con ramas `feature/` y `fix/` creadas desde `develop` e integradas mediante Pull Requests, y con commits que siguen la convención de Conventional Commits y un alcance entre paréntesis que indica la sección del informe, por ejemplo `docs(app-validation)`, `docs(mockups)` o `docs(student-outcome)`. En esta entrega se agregaron la validación de la aplicación Android, la evidencia del despliegue del Sprint 2, los mock-ups del adulto mayor y del familiar, las conclusiones y los videos.
+
+<p align="center">
+  <img src="assets/img/project-report-collaboration-insights/insights-av2-report.png" alt="AV2 Insights" width="900"/>
+    <br/><i>Imagen 6. Insights de la Tercera Entrega (AV2): repositorio serenia-report</i>
+</p>
+
+**serenia-website:**
+
+Para la Landing Page el equipo trabajó sobre el repositorio `serenia-website`. En esta entrega se agregó la sección de videos, con las tarjetas de los videos About The Product y About The Team y su enlace en la navegación, además de ajustes de estilo y la corrección del equivalente en dólares del plan anual.
+
+<p align="center">
+  <img src="assets/img/project-report-collaboration-insights/insights-av2-website.png" alt="AV2 Insights" width="900"/>
+    <br/><i>Imagen 7. Insights de la Tercera Entrega (AV2): repositorio serenia-website</i>
+</p>
+
+**serenia-platform:**
+
+Para el backend el equipo trabajó sobre el repositorio `serenia-platform`. En esta entrega se actualizó la documentación OpenAPI, se incorporó la subida y consulta de la foto de perfil y se corrigieron hallazgos como la zona horaria UTC, las preferencias de check-in que no se podían convertir y la respuesta `400` ante parámetros faltantes o inválidos. El servicio se desplegó de nuevo en Azure con su documentación Swagger.
+
+<p align="center">
+  <img src="assets/img/project-report-collaboration-insights/insights-av2-platform.png" alt="AV2 Insights" width="900"/>
+    <br/><i>Imagen 8. Insights de la Tercera Entrega (AV2): repositorio serenia-platform</i>
+</p>
+
+**serenia-mobile-android:**
+
+Para la aplicación del adulto mayor el equipo trabajó sobre el repositorio `serenia-mobile-android`, con una rama `feature/` por funcionalidad, como `design-system`, `iam`, `daily-check-in`, `alerts-and-safety`, `care-circle`, `social-companionship` y `profile-photo`, integradas mediante Pull Requests a `develop`. Al integrar cambios a la rama principal, un flujo automático de GitHub Actions genera el APK y lo distribuye a los testers por Firebase App Distribution.
+
+<p align="center">
+  <img src="assets/img/project-report-collaboration-insights/insights-av2-android.png" alt="AV2 Insights" width="900"/>
+    <br/><i>Imagen 9. Insights de la Tercera Entrega (AV2): repositorio serenia-mobile-android</i>
+</p>
+
+**serenia-mobile-flutter:**
+
+Para la aplicación del familiar el equipo trabajó sobre el repositorio `serenia-mobile-flutter`, creado en esta entrega. El código se organiza por contexto delimitado (iam, carecircle, account, alertsandsafety y socialcompanionship), con una rama `feature/` por funcionalidad integrada mediante Pull Requests a `develop`.
+
+<p align="center">
+  <img src="assets/img/project-report-collaboration-insights/insights-av2-flutter.png" alt="AV2 Insights" width="900"/>
+    <br/><i>Imagen 10. Insights de la Tercera Entrega (AV2): repositorio serenia-mobile-flutter</i>
+</p>
 
 <div style="page-break-after: always;"></div>
 
@@ -276,7 +353,7 @@ La Imagen 5 muestra el resumen de actividad (Pulse) del repositorio entre el 10 
       - [2.6.6.6. Bounded Context Software Architecture Code Level Diagrams](#2666-bounded-context-software-architecture-code-level-diagrams)
         - [2.6.6.6.1. Bounded Context Domain Layer Class Diagrams](#26661-bounded-context-domain-layer-class-diagrams)
         - [2.6.6.6.2. Bounded Context Database Design Diagram](#26662-bounded-context-database-design-diagram)
-        - [Capítulo III: Solution UI/UX Design](#capítulo-iii-solution-uiux-design)
+- [Capítulo III: Solution UI/UX Design](#capítulo-iii-solution-uiux-design)
   - [3.1. Product design](#31-product-design)
     - [3.1.1. Style Guidelines](#311-style-guidelines)
       - [3.1.1.1. General Style Guidelines](#3111-general-style-guidelines)
@@ -313,12 +390,25 @@ La Imagen 5 muestra el resumen de actividad (Pulse) del repositorio entre el 10 
       - [4.2.1.7. Services Documentation Evidence for Sprint Review](#4217-services-documentation-evidence-for-sprint-review)
       - [4.2.1.8. Software Deployment Evidence for Sprint Review](#4218-software-deployment-evidence-for-sprint-review)
       - [4.2.1.9. Team Collaboration Insights during Sprint](#4219-team-collaboration-insights-during-sprint)
+    - [4.2.2. Sprint 2](#422-sprint-2)
+      - [4.2.2.1. Sprint Planning 2](#4221-sprint-planning-2)
+      - [4.2.2.2. Aspect Leaders and Collaborators](#4222-aspect-leaders-and-collaborators)
+      - [4.2.2.3. Sprint Backlog 2](#4223-sprint-backlog-2)
+      - [4.2.2.4. Development Evidence for Sprint Review](#4224-development-evidence-for-sprint-review)
+      - [4.2.2.5. Testing Suite Evidence for Sprint Review](#4225-testing-suite-evidence-for-sprint-review)
+      - [4.2.2.6. Execution Evidence for Sprint Review](#4226-execution-evidence-for-sprint-review)
+      - [4.2.2.7. Services Documentation Evidence for Sprint Review](#4227-services-documentation-evidence-for-sprint-review)
+      - [4.2.2.8. Software Deployment Evidence for Sprint Review](#4228-software-deployment-evidence-for-sprint-review)
+      - [4.2.2.9. Team Collaboration Insights during Sprint](#4229-team-collaboration-insights-during-sprint)
   - [4.3. Validation Interviews](#43-validation-interviews)
     - [4.3.1. Diseño de Entrevistas](#431-diseño-de-entrevistas)
     - [4.3.2. Registro de Entrevistas](#432-registro-de-entrevistas)
     - [4.3.3. Evaluaciones según heurísticas](#433-evaluaciones-según-heurísticas)
 - [Conclusiones](#conclusiones)
   - [Conclusiones y Recomendaciones](#conclusiones-y-recomendaciones)
+  - [Video App Validation](#video-app-validation)
+  - [Video About The Product](#video-about-the-product)
+  - [Video About The Team](#video-about-the-team)
 - [Glosario](#glosario)
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
@@ -353,12 +443,18 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Apliqué Kotlin y Jetpack Compose en el desarrollo de la aplicación Android y corregí los Bounded Context Canvases, los Domain Message Flows y el diseño táctico con lo aprendido durante la implementación. Además, definí las Style Guidelines y diseñé las entrevistas de validación.
             <br><br>
+            <u>AV2</u><br>
+            Aprendí Flutter y Dart y los contrasté con Jetpack Compose: agilizan el desarrollo multiplataforma con un solo código, aunque dependen de plugins para acceder a funciones nativas. Además, desplegué el backend de la solución y actualicé los mock-ups de la aplicación.
+            <br><br>
             <b>Gallardo Morales, Carla Alejandra</b><br>
             <u>AV1</u><br>
             Aprendí y apliqué técnicas de UX Research (User Personas y User Journey Mapping) a partir del análisis de entrevistas, e incorporé prácticas ágiles al estructurar el Product Backlog priorizado.
             <br><br>
             <u>TB1</u><br>
             Apliqué GitFlow y Conventional Commits en la gestión del código fuente y construí el prototipo de la aplicación móvil, además de participar en la planificación del Sprint 1 bajo el marco Scrum.
+            <br><br>
+            <u>AV2</u><br>
+            Asimilé Flutter partiendo de lo aprendido en Android: sus widgets facilitan componer pantallas, aunque el anidamiento excesivo complica la lectura del código. Además, participé en el desarrollo del sitio web y planifiqué el Sprint 2 incorporando las lecciones del primer sprint.
             <br><br>
             <b>García Paredes, Victor Manuel</b><br>
             <u>AV1</u><br>
@@ -367,12 +463,18 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Investigué y definí las convenciones de código del proyecto y configuré el despliegue del software, además de modelar la navegación de la aplicación mediante Wireflow y User Flow Diagrams.
             <br><br>
+            <u>AV2</u><br>
+            Aprendí a distribuir la aplicación Android con Firebase App Distribution, que agiliza la entrega a usuarios de prueba aunque genera dependencia del servicio, y desplegué el backend en Azure. Validé la aplicación con una adulta mayor para obtener evidencia de su uso real y apliqué Flutter y Dart en la aplicación del familiar, donde desarrollé la sección de Alertas: la lista y el detalle de las alertas, el aviso de alertas pendientes en la barra de navegación y la acción de llamar al adulto mayor.
+            <br><br>
             <b>Salinas Guzman, Brianna Cristina</b><br>
             <u>AV1</u><br>
             Incorporé el modelo C4 para documentar la arquitectura por niveles de abstracción, y apliqué técnicas de investigación en el análisis competitivo y en la problemática sustentada con fuentes.
             <br><br>
             <u>TB1</u><br>
             Apliqué principios de arquitectura de información, como los sistemas de búsqueda y navegación, al elaborar los wireframes y mock-ups del landing page y de la aplicación móvil, que luego llevamos a código.
+            <br><br>
+            <u>AV2</u><br>
+            Aprendí Flutter comparándolo con el desarrollo nativo en Android, identificando lo que se gana en reutilización de código y los ajustes que exige cada plataforma. Además, en el video del producto apliqué técnicas de comunicación para explicar su propuesta de valor a usuarios no técnicos.
             <br><br>
             <b>Sandoval Aiquipa, Kelber Yamir</b><br>
             <u>AV1</u><br>
@@ -381,12 +483,17 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Apliqué Scrum en la planificación del Sprint 1 y aprendí a documentar los servicios desarrollados y a evidenciar su despliegue, mientras participaba en el desarrollo de la plataforma y la aplicación Android.
             <br><br>
+            <u>AV2</u><br>
+            Apliqué técnicas de validación con usuarios que revelaron problemas de uso no visibles durante el desarrollo, y aprendí Flutter mientras participaba en el desarrollo del sitio web. Además, planifiqué el Sprint 2 junto al equipo con base en los resultados del primero.
+            <br><br>
         </td>
         <td>
             <u>AV1</u><br>
             El equipo incorporó marcos que no conocía previamente (Lean UX, Needfinding, Domain-Driven Design, EventStorming y el modelo C4); cada integrante estudió por su cuenta la técnica asignada y la explicó al resto, convirtiendo el aprendizaje individual en conocimiento compartido. Además, sustentamos las decisiones del proyecto con técnicas de investigación como entrevistas y análisis competitivo, en lugar de basarnos en supuestos. <br><br>
             <u>TB1</u><br>
-            En este entregable el equipo pasó de la documentación a la implementación: aprendimos Kotlin y Jetpack Compose para la aplicación Android, desarrollamos la plataforma y el sitio web, y adoptamos prácticas de ingeniería como GitFlow, guías de estilo, configuración de despliegue y Scrum. Las entrevistas de validación y la implementación nos permitieron corregir los artefactos de diseño del AV1 con base en lo aprendido.
+            En este entregable el equipo pasó de la documentación a la implementación: aprendimos Kotlin y Jetpack Compose para la aplicación Android, desarrollamos la plataforma y el sitio web, y adoptamos prácticas de ingeniería como GitFlow, guías de estilo, configuración de despliegue y Scrum. Las entrevistas de validación y la implementación nos permitieron corregir los artefactos de diseño del AV1 con base en lo aprendido. <br><br>
+            <u>AV2</u><br>
+            En este entregable el equipo adoptó Flutter y lo comparó con el desarrollo nativo en Android, lo que nos permitió reconocer cuándo conviene cada enfoque. Además, aprendimos a desplegar el backend y a distribuir la aplicación con Firebase, y validamos el producto con usuarios reales, combinando el conocimiento técnico con métodos de investigación y con la comunicación del producto mediante videos.
         </td>
     </tr>
       <tr>
@@ -399,12 +506,18 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Implementar el backend confirmó mi interés en la arquitectura de software; como avance de mi plan, corregí los artefactos de DDD con lo aprendido, y lo siguiente es incorporar pruebas automatizadas a mi formación.
             <br><br>
+            <u>AV2</u><br>
+            Desplegar el backend me enseñó que la arquitectura también debe contemplar cómo opera la solución en producción; como siguiente paso de mi plan, aplicaré Clean Architecture en la app Flutter y aprenderé a contenerizar servicios.
+            <br><br>
             <b>Gallardo Morales, Carla Alejandra</b><br>
             <u>AV1</u><br>
             Reconozco que necesito fortalecer la investigación de usuarios y la gestión de producto; mi plan es seguir formándome en UX Research y validar mis supuestos con usuarios reales en cada entregable.
             <br><br>
             <u>TB1</u><br>
             Gestionar el repositorio y planificar el sprint me mostró que la gestión de producto también exige disciplina técnica; amplío mi plan para formarme en Scrum y control de versiones, además de UX Research.
+            <br><br>
+            <u>AV2</u><br>
+            Conducir el Sprint 2 me acercó al rol de gestión de producto; mi siguiente paso es aprender métricas ágiles, como la velocidad del equipo, para planificar los próximos sprints con más precisión.
             <br><br>
             <b>García Paredes, Victor Manuel</b><br>
             <u>AV1</u><br>
@@ -413,12 +526,18 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Configurar el despliegue me hizo ver la importancia de la operación del software; sumo a mi plan aprender integración y despliegue continuo para automatizar este proceso en los siguientes sprints.
             <br><br>
+            <u>AV2</u><br>
+            Distribuir la app con Firebase fue un avance concreto en mi formación en operación de software; lo siguiente en mi plan es automatizar la compilación y la distribución de la aplicación con integración continua.
+            <br><br>
             <b>Salinas Guzman, Brianna Cristina</b><br>
             <u>AV1</u><br>
             Identifico la arquitectura de software y la infraestructura en la nube como mi área de crecimiento; mi plan es formarme en servicios cloud y documentación arquitectónica.
             <br><br>
             <u>TB1</u><br>
             Pasar de los mock-ups al desarrollo me mostró la brecha entre diseño e implementación; sumo a mi plan reforzar el desarrollo de interfaces, sin dejar mi formación en arquitectura y cloud.
+            <br><br>
+            <u>AV2</u><br>
+            Trabajar con dos tecnologías móviles en paralelo reforzó mi interés en diseñar soluciones multiplataforma; mi siguiente paso es aprender arquitecturas para aplicarlo en Flutter.
             <br><br>
             <b>Sandoval Aiquipa, Kelber Yamir</b><br>
             <u>AV1</u><br>
@@ -427,12 +546,17 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             Documentar los servicios y evidenciar su despliegue me hizo notar que debo fortalecer mis bases de backend; mi plan es estudiar el diseño y documentación de APIs REST y aplicarlo en los siguientes sprints.
             <br><br>
+            <u>AV2</u><br>
+            Validar la app con usuarios me mostró el valor de tomar decisiones con evidencia de uso real; por eso, incorporo a mi plan de formación en backend el aprendizaje de pruebas de usabilidad para aplicarlas.
+            <br><br>
         </td>
         <td>
             <u>AV1</u><br>
             El entregable evidenció que lo visto en clase no basta para sostener un proyecto real: cada técnica exigió estudio adicional del responsable y aprendizaje entre pares. A partir de ello, cada integrante identificó un área concreta de crecimiento profesional y un plan de formación alineado a ella, asumiendo el aprendizaje permanente como una condición del ejercicio profesional y no como una etapa que termina con el curso. <br><br>
             <u>TB1</u><br>
-            El paso al desarrollo reveló necesidades que no eran visibles en el AV1, como dominar un nuevo lenguaje y las prácticas de despliegue. Cada integrante ajustó su plan de crecimiento según lo que este entregable le exigió, y como equipo reconocemos que la tecnología del curso cambiará en cada etapa, por lo que seguir aprendiendo de forma continua será indispensable para los siguientes entregables.
+            El paso al desarrollo reveló necesidades que no eran visibles en el AV1, como dominar un nuevo lenguaje y las prácticas de despliegue. Cada integrante ajustó su plan de crecimiento según lo que este entregable le exigió, y como equipo reconocemos que la tecnología del curso cambiará en cada etapa, por lo que seguir aprendiendo de forma continua será indispensable para los siguientes entregables. <br><br>
+            <u>AV2</u><br>
+            El paso de Kotlin a Flutter confirmó que cada etapa del proyecto exige dominar una tecnología nueva en poco tiempo, y que lo aprendido en una etapa sirve de base para la siguiente. Cada integrante avanzó un paso concreto en su plan de crecimiento y definió el siguiente, sosteniendo el aprendizaje permanente como una práctica continua del equipo.
         </td>
     </tr>
 </table>
@@ -651,13 +775,13 @@ Es un problema de naturaleza diaria y recurrente, no puntual: la incertidumbre y
 
 ### Why (¿Por qué?)
 
-Según la Agencia Andina (2025), citando datos del Instituto Nacional de Estadística e Informática (INEI), en Lima Metropolitana el 25,3% de los hogares jefaturados por adultos mayores (60 años a más) son unipersonales (es decir, compuestos únicamente por la persona mayor), cifra que aumentó 2,3 puntos porcentuales respecto al mismo periodo del año anterior (Andina, 2025). Esta tendencia se ha mantenido creciente: según cifras más recientes del INEI correspondientes al tercer trimestre de 2025, reportadas por Infobae (2025), a nivel nacional el 26,9% de los hogares con jefatura de una persona adulta mayor ya son unipersonales, frente al 24,5% registrado dos años antes (Infobae, 2025). Esta creciente proporción de adultos mayores que viven solos explica por qué los familiares terminan llamando todos los días por ansiedad (no porque haya pasado algo puntual) y por qué el adulto mayor evita reportar molestias por no sentirse una carga. No existe hoy un canal intermedio entre "no comunicarse" y "llamar todos los días" que permita transmitir bienestar de forma ligera, sin fricción y sin depender de una llamada telefónica. La literatura reciente coincide con este diagnóstico: quienes viven solos tienen menos acceso inmediato a cuidadores informales y pueden depender más del apoyo tecnológico para mantener su seguridad, su independencia y su conexión social (Xu et al., 2026). La Imagen 6 muestra la distribución de estos hogares según su área de residencia y el sexo de la persona que los encabeza.
+Según la Agencia Andina (2025), citando datos del Instituto Nacional de Estadística e Informática (INEI), en Lima Metropolitana el 25,3% de los hogares jefaturados por adultos mayores (60 años a más) son unipersonales (es decir, compuestos únicamente por la persona mayor), cifra que aumentó 2,3 puntos porcentuales respecto al mismo periodo del año anterior (Andina, 2025). Esta tendencia se ha mantenido creciente: según cifras más recientes del INEI correspondientes al tercer trimestre de 2025, reportadas por Infobae (2025), a nivel nacional el 26,9% de los hogares con jefatura de una persona adulta mayor ya son unipersonales, frente al 24,5% registrado dos años antes (Infobae, 2025). Esta creciente proporción de adultos mayores que viven solos explica por qué los familiares terminan llamando todos los días por ansiedad (no porque haya pasado algo puntual) y por qué el adulto mayor evita reportar molestias por no sentirse una carga. No existe hoy un canal intermedio entre "no comunicarse" y "llamar todos los días" que permita transmitir bienestar de forma ligera, sin fricción y sin depender de una llamada telefónica. La literatura reciente coincide con este diagnóstico: quienes viven solos tienen menos acceso inmediato a cuidadores informales y pueden depender más del apoyo tecnológico para mantener su seguridad, su independencia y su conexión social (Xu et al., 2026). La Imagen 11 muestra la distribución de estos hogares según su área de residencia y el sexo de la persona que los encabeza.
 
 <br>
 <p align="center">
   <img src="assets/img/estadisticas/hogares-unipersonales-adulto-mayor.png" alt="Evolución del porcentaje de hogares unipersonales jefaturados por adultos mayores en el Perú, según INEI (2023-2025)" width="500">
 </p>
-<p align="center"><i>Imagen 6. Hogares jefaturados por adultos mayores, según área de residencia y sexo. Tomado de <em>Informe Técnico: Situación de la Población Adulta Mayor</em>, por Instituto Nacional de Estadística e Informática [INEI], 2025, p. 3 (https://m.inei.gob.pe/media/MenuRecursivo/boletines/informe-tecnico_adultomayor.pdf).</i></p>
+<p align="center"><i>Imagen 11. Hogares jefaturados por adultos mayores, según área de residencia y sexo. Tomado de <em>Informe Técnico: Situación de la Población Adulta Mayor</em>, por Instituto Nacional de Estadística e Informática [INEI], 2025, p. 3 (https://m.inei.gob.pe/media/MenuRecursivo/boletines/informe-tecnico_adultomayor.pdf).</i></p>
 
 ### How (¿Cómo?)
 
@@ -725,11 +849,11 @@ La evidencia reciente respalda la dirección de estas hipótesis, aunque no las 
 
 #### 1.2.2.4. Lean UX Canvas
 
-El Lean UX Canvas consolida el Business Problem, los Business Outcomes, los Users, los User Outcomes & Benefits, las Solutions y las Hypotheses desarrolladas en las subsecciones anteriores, junto con la identificación de la asunción de mayor riesgo (Segmento 1 adoptando el check-in diario como hábito) y el experimento de menor esfuerzo para validarla. La Imagen 7 presenta el canvas completo.
+El Lean UX Canvas consolida el Business Problem, los Business Outcomes, los Users, los User Outcomes & Benefits, las Solutions y las Hypotheses desarrolladas en las subsecciones anteriores, junto con la identificación de la asunción de mayor riesgo (Segmento 1 adoptando el check-in diario como hábito) y el experimento de menor esfuerzo para validarla. La Imagen 12 presenta el canvas completo.
 
 <p align="center">
   <img src="assets/img/diagrams/lean-ux-canvas.png" alt="Lean UX Canvas de Serenia" width="900"/>
-    <br/><i>Imagen 7. Lean UX Canvas.</i>
+    <br/><i>Imagen 12. Lean UX Canvas.</i>
 </p>
 
 URL del archivo en Figma: https://www.figma.com/design/MtWwz8GxmrY0eR7eyc2UC0/Lean-UX-Canvas--Serenia-?node-id=0-1
@@ -985,7 +1109,7 @@ Para cada segmento se registraron entre 3 y 5 entrevistas. Todas las entrevistas
 
 <img src="assets/img/interviews/segmento1-entrevista1-yrma.png" alt="Screenshot entrevista Yrma Huamán" width="700"/>
 
-<p align="center"><i>Imagen 8. Captura de la entrevista de descubrimiento con Yrma Huamán Jiménez.</i></p>
+<p align="center"><i>Imagen 13. Captura de la entrevista de descubrimiento con Yrma Huamán Jiménez.</i></p>
 
 <br>
 
@@ -1012,7 +1136,7 @@ Yrma vive sola hace 6 años en Tarapoto, desde que sus dos hijas (abogada y admi
 
 <img src="assets/img/interviews/interview-photo-yolanda.jpg" alt="Screenshot entrevista yolanda bardalez" width="700"/>
 
-<p align="center"><i>Imagen 9. Captura de la entrevista de descubrimiento con Yolanda Bardalez.</i></p>
+<p align="center"><i>Imagen 14. Captura de la entrevista de descubrimiento con Yolanda Bardalez.</i></p>
 
 <br>
 
@@ -1043,7 +1167,7 @@ Además, menciona que en muchas ocasiones prefiere no comunicar ciertos problema
 
 <img src="assets/img/interviews/entrevista-eva-martinez.png" alt="Screenshot entrevista Eva Martinez" width="700"/>
 
-<p align="center"><i>Imagen 10. Captura de la entrevista de descubrimiento con Eva Martínez.</i></p>
+<p align="center"><i>Imagen 15. Captura de la entrevista de descubrimiento con Eva Martínez.</i></p>
 
 <br>
 
@@ -1073,7 +1197,7 @@ Eva Martínez Torres tiene 67 años y reside en el distrito de Chanchamayo, prov
 
 <img src="assets/img/interviews/interview-relative-photo.jpg" alt="Screenshot entrevista Maria Morales" width="700"/>
 
-<p align="center"><i>Imagen 11. Captura de la entrevista de descubrimiento con Isabel Morales.</i></p>
+<p align="center"><i>Imagen 16. Captura de la entrevista de descubrimiento con Isabel Morales.</i></p>
 
 <br>
 
@@ -1103,7 +1227,7 @@ Isabel nos comentó que nunca ha utilizado una aplicación enfocada en salud o b
 
 <img src="assets/img/interviews/segmento2-entrevista2.png" alt="Screenshot entrevista Enrique Guzmán" width="700"/>
 
-<p align="center"><i>Imagen 12. Captura de la entrevista de descubrimiento con Enrique Guzmán.</i></p>
+<p align="center"><i>Imagen 17. Captura de la entrevista de descubrimiento con Enrique Guzmán.</i></p>
 
 <br>
 
@@ -1130,7 +1254,7 @@ Enrique Guzmán Miranda es un adulto mayor jubilado que actualmente continúa re
 
 <img src="assets/img/interviews/entrevista-jose.png" alt="Screenshot entrevista José Cámara" width="700"/>
 
-<p align="center"><i>Imagen 13. Captura de la entrevista de descubrimiento con José Cámara.</i></p>
+<p align="center"><i>Imagen 18. Captura de la entrevista de descubrimiento con José Cámara.</i></p>
 
 <br>
 
@@ -1158,7 +1282,7 @@ José es un joven soltero que reside con su padre y dos hermanos menores. Su rut
 
 <img src="assets/img/interviews/entrevista-kevin.png" alt="Screenshot entrevista Kevin" width="700"/>
 
-<p align="center"><i>Imagen 14. Captura de la entrevista de descubrimiento con Kevin.</i></p>
+<p align="center"><i>Imagen 19. Captura de la entrevista de descubrimiento con Kevin.</i></p>
 
 <br>
 
@@ -1280,20 +1404,20 @@ Finalmente, también aparece la necesidad de contar con una solución simple y a
 ## 2.3. Needfinding
 ### 2.3.1. User Personas
 
-En esta sección se presentan los user personas construidos a partir del análisis de las entrevistas de los adultos mayores y sus familiares a distancia. Estos artefactos sintetizan patrones de comportamiento, necesidades, motivaciones y frustraciones identificadas durante la investigación, permitiendo representar de manera clara a los segmentos clave de nuestro proyecto. La Imagen 15 presenta el user persona del primer segmento y la Imagen 16, el del segundo.
+En esta sección se presentan los user personas construidos a partir del análisis de las entrevistas de los adultos mayores y sus familiares a distancia. Estos artefactos sintetizan patrones de comportamiento, necesidades, motivaciones y frustraciones identificadas durante la investigación, permitiendo representar de manera clara a los segmentos clave de nuestro proyecto. La Imagen 20 presenta el user persona del primer segmento y la Imagen 21, el del segundo.
 
 ### Segmento 1 - Adultos mayores que viven solos
 
 <div align="center">
   <img src="assets/img/user-persona/jorge-lopez-seg1.png" alt="User persona - Adultos mayores que viven solos" width="700"/>
-  <br/><i>Imagen 15. User Persona - Primer Segmento.</i>
+  <br/><i>Imagen 20. User Persona - Primer Segmento.</i>
 </div>
 
 ### Segmento 2 - Familiares a distancia
 
 <div align="center">
   <img src="assets/img/user-persona/daniel-torres-seg2.png" alt="User persona- Familiares a distancia" width="700"/>
-  <br/><i>Imagen 16. User Persona - Segundo Segmento.</i>
+  <br/><i>Imagen 21. User Persona - Segundo Segmento.</i>
 </div>
 
 <br>
@@ -1342,14 +1466,14 @@ La principal diferencia radica en la naturaleza de su interacción; el adulto ma
 
 En esta sección se detallan los User Journey Maps en su versión "As-Is", uno por cada segmento de usuario definido. El objetivo de estos mapas es ilustrar el proceso de extremo a extremo que realizan actualmente los usuarios para intentar resolver su necesidad, evidenciando los puntos de dolor, las frustraciones y las ineficiencias que experimentan antes de la implementación de nuestra solución propuesta.
 
-A continuación, se presentan los diagramas que resumen la situación actual de los usuarios: la Imagen 17 corresponde al primer segmento y la Imagen 18, al segundo.
+A continuación, se presentan los diagramas que resumen la situación actual de los usuarios: la Imagen 22 corresponde al primer segmento y la Imagen 23, al segundo.
 
 ### Segmento 1 - Adultos mayores que viven solos
 
 <div align="center">
 
 ![journey mapping - Adultos mayores que viven solos](assets/img/user-journey-mapping/user-journey-seg1.png)
-  <br/><i>Imagen 17. User Journey Mapping - Primer Segmento.</i>
+  <br/><i>Imagen 22. User Journey Mapping - Primer Segmento.</i>
 
 </div>
 
@@ -1359,7 +1483,7 @@ A continuación, se presentan los diagramas que resumen la situación actual de 
 <div align="center">
 
 ![journey mapping - Familiares a distancia](assets/img/user-journey-mapping/user-journey-seg2.png)
-  <br/><i>Imagen 18. User Journey Mapping - Segundo Segmento.</i>
+  <br/><i>Imagen 23. User Journey Mapping - Segundo Segmento.</i>
 
 </div>
 
@@ -1369,14 +1493,14 @@ A continuación, se presentan los diagramas que resumen la situación actual de 
 
 En esta sección, el equipo resume el proceso de elaboración de los *Empathy Maps* realizados en UXPressia para cada uno de nuestros *User Personas*. Durante sesiones colaborativas, nos centramos en empatizar profundamente con nuestros dos actores principales: el adulto mayor que vive solo y su familiar a distancia. Para lograrlo, respondimos preguntas clave sobre su entorno, sus preocupaciones (Pains) y aquello que aliviaría sus frustraciones y los convencería de que nuestra aplicación es la alternativa correcta para mantener su vínculo (Gains).
 
-A continuación, se presentan las capturas de los mapas resultantes elaborados en la herramienta indicada: la Imagen 19 corresponde al primer segmento y la Imagen 20, al segundo.
+A continuación, se presentan las capturas de los mapas resultantes elaborados en la herramienta indicada: la Imagen 24 corresponde al primer segmento y la Imagen 25, al segundo.
 
 ### Segmento 1 - Adultos mayores que viven solos
 
 <div align="center">
 
 ![Empathy Map - Adultos mayores que viven solos](assets/img/empathy-maps/empathy-map-adulto-mayor.png)
-  <br/><i>Imagen 19. Empathy Map - Primer Segmento.</i>
+  <br/><i>Imagen 24. Empathy Map - Primer Segmento.</i>
 
 </div>
 
@@ -1386,7 +1510,7 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 <div align="center">
 
 ![Empathy Map - Familiares a distancia](assets/img/empathy-maps/empathy-map-familiar.png)
-  <br/><i>Imagen 20. Empathy Map - Segundo Segmento.</i>
+  <br/><i>Imagen 25. Empathy Map - Segundo Segmento.</i>
 
 </div>
 
@@ -1395,7 +1519,7 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 
 ### 2.3.5. Big Picture EventStorming
 
-El equipo realizó una sesión colaborativa de *Big Picture EventStorming* en Miro, con el objetivo de explorar de forma visual el dominio completo de Serenia: desde la vinculación entre el adulto mayor y su familiar, pasando por el check-in diario y su interpretación, hasta el manejo de emergencias y la compañía social. Se identificaron 45 eventos de dominio, redactados en pasado y en inglés siguiendo la convención de nomenclatura adoptada por el equipo, y se ordenaron cronológicamente para cada uno de los procesos identificados. La Imagen 21 muestra el tablero resultante de la sesión.
+El equipo realizó una sesión colaborativa de *Big Picture EventStorming* en Miro, con el objetivo de explorar de forma visual el dominio completo de Serenia: desde la vinculación entre el adulto mayor y su familiar, pasando por el check-in diario y su interpretación, hasta el manejo de emergencias y la compañía social. Se identificaron 45 eventos de dominio, redactados en pasado y en inglés siguiendo la convención de nomenclatura adoptada por el equipo, y se ordenaron cronológicamente para cada uno de los procesos identificados. La Imagen 26 muestra el tablero resultante de la sesión.
 
 <br>
 
@@ -1405,7 +1529,7 @@ URL del tablero en Miro: [https://miro.com/app/board/uXjVHmgj4G8=/](https://miro
 <div align="center">
 
 ![Big Picture EventStorming - Serenia](assets/img/big-picture-eventstorming/big-picture-eventstorming.png)
-  <br/><i>Imagen 21. Big Picture EventStorming del dominio de Serenia.</i>
+  <br/><i>Imagen 26. Big Picture EventStorming del dominio de Serenia.</i>
 
 </div>
 
@@ -3615,7 +3739,7 @@ Como equipo de desarrollo (Android, Flutter y backend), quiero investigar y prot
 
 ### 2.4.2. Impact Mapping
 
-En esta sección se presenta el Impact Mapping de Serenia, una herramienta visual que nos permite alinear las funcionalidades del producto con los objetivos estratégicos del negocio y las necesidades de nuestros usuarios. Este mapa asegura que cada User Story desarrollada contribuya directamente a generar un cambio de comportamiento positivo (Impact) en nuestros segmentos (Actors) para alcanzar una meta medible (Business Goal). La Imagen 22, al final de esta sección, muestra el mapa completo.
+En esta sección se presenta el Impact Mapping de Serenia, una herramienta visual que nos permite alinear las funcionalidades del producto con los objetivos estratégicos del negocio y las necesidades de nuestros usuarios. Este mapa asegura que cada User Story desarrollada contribuya directamente a generar un cambio de comportamiento positivo (Impact) en nuestros segmentos (Actors) para alcanzar una meta medible (Business Goal). La Imagen 27, al final de esta sección, muestra el mapa completo.
 
 **Business Goal (Meta de Negocio SMART):**
 Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzamiento en Lima Metropolitana, logrando una tasa de retención del 70% mediante el uso continuo del check-in diario.
@@ -3646,7 +3770,7 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 <div align="center">
 
 ![Impact Mapping de Serenia](assets/img/diagrams/impact-mapping.png)
-  <br/><i>Imagen 22. Diagrama de Impact Mapping.</i>
+  <br/><i>Imagen 27. Diagrama de Impact Mapping.</i>
 
 </div>
 
@@ -3654,7 +3778,7 @@ Alcanzar 1,000 usuarios activos mensuales en los primeros 6 meses tras el lanzam
 
 ### 2.4.3. Product Backlog
 
-La siguiente tabla ordena las 46 historias del Product Backlog y asigna cada una a un sprint. La Imagen 23 muestra el mismo backlog en Trello, donde el equipo lo gestiona.
+La siguiente tabla ordena las 46 historias del Product Backlog y asigna cada una a un sprint. La Imagen 28 muestra el mismo backlog en Trello, donde el equipo lo gestiona.
 
 | Orden | User Story Id | Título | Story Points (1 / 2 / 3 / 5 / 8) | Sprint |
 |---:|---|---|---:|---|
@@ -3725,7 +3849,7 @@ La siguiente tabla ordena las 46 historias del Product Backlog y asigna cada una
 <div align="center">
 
 ![product backlog](assets/img/product-backlog/product-backlog.png)
-  <br/><i>Imagen 23. Captura de Product Backlog en Trello.</i>
+  <br/><i>Imagen 28. Captura de Product Backlog en Trello.</i>
 
 </div>
 <br>
@@ -3745,102 +3869,102 @@ URL del tablero en Miro: [https://miro.com/app/board/uXjVHlaGmGg=/?share_link_id
 
 <br>
 
-**Paso 1. Unstructured Exploration.** El punto de partida fueron los eventos de dominio de Serenia, levantados a partir del Big Picture EventStorming (sección 2.3.5), redactados en pasado y sin ningún orden, tal como surgen en una lluvia de ideas. La Imagen 24 muestra ese estado inicial: en este paso no se busca todavía una estructura, solo poner sobre el muro todo lo que ocurre en el dominio.
+**Paso 1. Unstructured Exploration.** El punto de partida fueron los eventos de dominio de Serenia, levantados a partir del Big Picture EventStorming (sección 2.3.5), redactados en pasado y sin ningún orden, tal como surgen en una lluvia de ideas. La Imagen 29 muestra ese estado inicial: en este paso no se busca todavía una estructura, solo poner sobre el muro todo lo que ocurre en el dominio.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-01-unstructured-exploration.png" alt="Paso 1 - Unstructured Exploration" width="700"/>
-  <br/><i>Imagen 24. Paso 1 del EventStorming: Unstructured Exploration.</i>
+  <br/><i>Imagen 29. Paso 1 del EventStorming: Unstructured Exploration.</i>
 </div>
 
 <br>
 
-**Paso 2. Timelines.** Los eventos se ordenaron en el tiempo y se agruparon por proceso: alta y acceso del usuario, círculo de cuidado y vínculo familiar, check-in diario, interpretación de bienestar, alertas y seguridad, y acompañamiento social. Las flechas de la Imagen 25 indican la secuencia entre eventos y las bifurcaciones, como el código de invitación que puede ser canjeado o rechazado.
+**Paso 2. Timelines.** Los eventos se ordenaron en el tiempo y se agruparon por proceso: alta y acceso del usuario, círculo de cuidado y vínculo familiar, check-in diario, interpretación de bienestar, alertas y seguridad, y acompañamiento social. Las flechas de la Imagen 30 indican la secuencia entre eventos y las bifurcaciones, como el código de invitación que puede ser canjeado o rechazado.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-02-timelines.png" alt="Paso 2 - Timelines" width="700"/>
-  <br/><i>Imagen 25. Paso 2 del EventStorming: Timelines.</i>
+  <br/><i>Imagen 30. Paso 2 del EventStorming: Timelines.</i>
 </div>
 
 <br>
 
-**Paso 3. Pain Points.** Sobre la línea de tiempo se marcaron con stickies rosados las dudas que el dominio todavía no resuelve. El equipo no las inventó para este paso: se tomaron diez de las Open Questions de los Bounded Context Canvases (sección 2.5.1.3) y se ubicaron junto al evento al que afectan, como se ve en la Imagen 26. Entre ellas están la vigencia del código de invitación, quién puede revocar un vínculo familiar, cuántos días configuran un patrón de malestar, la duración de la ventana de inactividad y si la alerta llega a todos los familiares vinculados.
+**Paso 3. Pain Points.** Sobre la línea de tiempo se marcaron con stickies rosados las dudas que el dominio todavía no resuelve. El equipo no las inventó para este paso: se tomaron diez de las Open Questions de los Bounded Context Canvases (sección 2.5.1.3) y se ubicaron junto al evento al que afectan, como se ve en la Imagen 31. Entre ellas están la vigencia del código de invitación, quién puede revocar un vínculo familiar, cuántos días configuran un patrón de malestar, la duración de la ventana de inactividad y si la alerta llega a todos los familiares vinculados.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-03-pain-points.png" alt="Paso 3 - Pain Points" width="700"/>
-  <br/><i>Imagen 26. Paso 3 del EventStorming: Pain Points.</i>
+  <br/><i>Imagen 31. Paso 3 del EventStorming: Pain Points.</i>
 </div>
 
 <br>
 
-**Paso 4. Pivotal Points.** Las barras verticales de la Imagen 27 marcan los eventos que cambian la fase del negocio, es decir, aquellos a partir de los cuales el sistema pasa a operar de otra manera. Fueron seis: Older Adult Registered (el usuario existe), Family Link Established (ya hay a quién notificar), Check In Answered y Check In Missed (la bifurcación entre bienestar confirmado y ausencia de respuesta), Discomfort Pattern Detected (el malestar deja de ser puntual y pasa a ser sostenido) y Emergency Alert Raised (la situación deja de ser rutinaria).
+**Paso 4. Pivotal Points.** Las barras verticales de la Imagen 32 marcan los eventos que cambian la fase del negocio, es decir, aquellos a partir de los cuales el sistema pasa a operar de otra manera. Fueron seis: Older Adult Registered (el usuario existe), Family Link Established (ya hay a quién notificar), Check In Answered y Check In Missed (la bifurcación entre bienestar confirmado y ausencia de respuesta), Discomfort Pattern Detected (el malestar deja de ser puntual y pasa a ser sostenido) y Emergency Alert Raised (la situación deja de ser rutinaria).
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-04-pivotal-points.png" alt="Paso 4 - Pivotal Points" width="700"/>
-  <br/><i>Imagen 27. Paso 4 del EventStorming: Pivotal Points.</i>
+  <br/><i>Imagen 32. Paso 4 del EventStorming: Pivotal Points.</i>
 </div>
 
 <br>
 
-**Paso 5. Commands.** Para cada evento se identificó el comando que lo provoca, redactado en imperativo (por ejemplo, Register Older Adult o Trigger Emergency Alert), y el actor que lo ejecuta: Older Adult, Distant Relative o el propio sistema, como ocurre con Prompt Check In. La Imagen 28 muestra los 45 comandos, en azul, con sus actores en amarillo claro. Desde este paso se retiran las flechas de la línea de tiempo para no saturar el muro.
+**Paso 5. Commands.** Para cada evento se identificó el comando que lo provoca, redactado en imperativo (por ejemplo, Register Older Adult o Trigger Emergency Alert), y el actor que lo ejecuta: Older Adult, Distant Relative o el propio sistema, como ocurre con Prompt Check In. La Imagen 33 muestra los 45 comandos, en azul, con sus actores en amarillo claro. Desde este paso se retiran las flechas de la línea de tiempo para no saturar el muro.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-05-commands.png" alt="Paso 5 - Commands" width="700"/>
-  <br/><i>Imagen 28. Paso 5 del EventStorming: Commands.</i>
+  <br/><i>Imagen 33. Paso 5 del EventStorming: Commands.</i>
 </div>
 
 <br>
 
-**Paso 6. Policies.** Las policies, en violeta, son reglas de la forma "cuando ocurre X, entonces se ejecuta Y": reaccionan a un evento y disparan un comando. El equipo identificó diez. Por ejemplo, si el check-in no fue respondido y no hay una pausa activa, se evalúa la inactividad; si se detecta un patrón de malestar, se emite una sugerencia de bienestar; y si se levanta una alerta de emergencia y hay familiares vinculados, se despacha la alerta. La Imagen 29 conecta con una flecha tres de estas policies con el comando que activan (Create Care Circle, Evaluate Wellbeing Pattern y Evaluate Inactivity). Las tres cruzan de un contexto a otro, lo que anticipa las relaciones que luego se formalizan en el Context Map (sección 2.5.2).
+**Paso 6. Policies.** Las policies, en violeta, son reglas de la forma "cuando ocurre X, entonces se ejecuta Y": reaccionan a un evento y disparan un comando. El equipo identificó diez. Por ejemplo, si el check-in no fue respondido y no hay una pausa activa, se evalúa la inactividad; si se detecta un patrón de malestar, se emite una sugerencia de bienestar; y si se levanta una alerta de emergencia y hay familiares vinculados, se despacha la alerta. La Imagen 34 conecta con una flecha tres de estas policies con el comando que activan (Create Care Circle, Evaluate Wellbeing Pattern y Evaluate Inactivity). Las tres cruzan de un contexto a otro, lo que anticipa las relaciones que luego se formalizan en el Context Map (sección 2.5.2).
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-06-policies.png" alt="Paso 6 - Policies" width="700"/>
-  <br/><i>Imagen 29. Paso 6 del EventStorming: Policies.</i>
+  <br/><i>Imagen 34. Paso 6 del EventStorming: Policies.</i>
 </div>
 
 <br>
 
-**Paso 7. Read Models.** Los read models, en verde claro, representan la información o la vista que el actor necesita tener delante para decidir y ejecutar un comando. Se identificaron 24, entre ellos Registration Form View, Daily Check-in View, Family Members View, Help Button View y Alerts View, que se observan en la Imagen 30 ubicados junto al comando que alimentan.
+**Paso 7. Read Models.** Los read models, en verde claro, representan la información o la vista que el actor necesita tener delante para decidir y ejecutar un comando. Se identificaron 24, entre ellos Registration Form View, Daily Check-in View, Family Members View, Help Button View y Alerts View, que se observan en la Imagen 35 ubicados junto al comando que alimentan.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-07-read-models.png" alt="Paso 7 - Read Models" width="700"/>
-  <br/><i>Imagen 30. Paso 7 del EventStorming: Read Models.</i>
+  <br/><i>Imagen 35. Paso 7 del EventStorming: Read Models.</i>
 </div>
 
 <br>
 
-**Paso 8. External Systems.** Los sistemas externos, en rojo, son servicios que están fuera del dominio y con los que este necesita interactuar. El único identificado hasta ahora es el Push Notification Provider, que entrega la notificación push al dispositivo del familiar cuando se despacha una alerta, por lo que la Imagen 31 lo ubica junto al evento Emergency Alert Dispatched. Es el mismo proveedor que el Context Map aísla mediante una Anti-Corruption Layer (sección 2.5.2).
+**Paso 8. External Systems.** Los sistemas externos, en rojo, son servicios que están fuera del dominio y con los que este necesita interactuar. El único identificado hasta ahora es el Push Notification Provider, que entrega la notificación push al dispositivo del familiar cuando se despacha una alerta, por lo que la Imagen 36 lo ubica junto al evento Emergency Alert Dispatched. Es el mismo proveedor que el Context Map aísla mediante una Anti-Corruption Layer (sección 2.5.2).
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-08-external-systems.png" alt="Paso 8 - External Systems" width="700"/>
-  <br/><i>Imagen 31. Paso 8 del EventStorming: External Systems.</i>
+  <br/><i>Imagen 36. Paso 8 del EventStorming: External Systems.</i>
 </div>
 
 <br>
 
-**Paso 9. Aggregates.** Los aggregates, en amarillo intenso, agrupan los comandos y eventos que modifican un mismo concepto del dominio y protegen sus reglas de consistencia. Aparecen doce en la Imagen 32: User, Care Circle, Care Shift, Shared Note, Check In, Check In Preferences, Wellbeing Insight, Emergency Alert, Inactivity Alert, Audio Message, Photo Message y Social Reminder.
+**Paso 9. Aggregates.** Los aggregates, en amarillo intenso, agrupan los comandos y eventos que modifican un mismo concepto del dominio y protegen sus reglas de consistencia. Aparecen doce en la Imagen 37: User, Care Circle, Care Shift, Shared Note, Check In, Check In Preferences, Wellbeing Insight, Emergency Alert, Inactivity Alert, Audio Message, Photo Message y Social Reminder.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-09-aggregates.png" alt="Paso 9 - Aggregates" width="700"/>
-  <br/><i>Imagen 32. Paso 9 del EventStorming: Aggregates.</i>
+  <br/><i>Imagen 37. Paso 9 del EventStorming: Aggregates.</i>
 </div>
 
 <br>
 
-**Paso 10. Bounded Contexts.** Finalmente, los aggregates, comandos y eventos que comparten lenguaje y reglas se encerraron en elipses, como muestra la Imagen 33. El resultado son seis bounded contexts: Identity & Access, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts & Safety y Social Companionship. Las flechas de las policies que cruzan de una elipse a otra indican dónde los contextos deben colaborar. La sección siguiente explica cada uno de ellos y el criterio con el que se clasificó según su aporte de valor.
+**Paso 10. Bounded Contexts.** Finalmente, los aggregates, comandos y eventos que comparten lenguaje y reglas se encerraron en elipses, como muestra la Imagen 38. El resultado son seis bounded contexts: Identity & Access, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts & Safety y Social Companionship. Las flechas de las policies que cruzan de una elipse a otra indican dónde los contextos deben colaborar. La sección siguiente explica cada uno de ellos y el criterio con el que se clasificó según su aporte de valor.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/paso-10-bounded-contexts.png" alt="Paso 10 - Bounded Contexts" width="700"/>
-  <br/><i>Imagen 33. Paso 10 del EventStorming: Bounded Contexts.</i>
+  <br/><i>Imagen 38. Paso 10 del EventStorming: Bounded Contexts.</i>
 </div>
 
 <br>
@@ -3868,69 +3992,69 @@ El resultado de la sesión fueron seis bounded contexts candidatos, clasificados
 
 
 ### Daily Check-in - Core <br>
-Es el mecanismo primario por el cual Serenia genera valor diferencial: convierte una interacción emocional cotidiana en una señal estructurada, sin que el adulto mayor sienta que está siendo monitoreado clínicamente. Sin este contexto no existe el dato que el resto del sistema necesita para funcionar. La Imagen 34 muestra los eventos, comandos y aggregates que lo componen.
+Es el mecanismo primario por el cual Serenia genera valor diferencial: convierte una interacción emocional cotidiana en una señal estructurada, sin que el adulto mayor sienta que está siendo monitoreado clínicamente. Sin este contexto no existe el dato que el resto del sistema necesita para funcionar. La Imagen 39 muestra los eventos, comandos y aggregates que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/daily-check-in.png" alt="Daily Check-in - Bounded Context" width="700"/>
-  <br/><i>Imagen 34. Daily Check-in - Bounded Context Core identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 39. Daily Check-in - Bounded Context Core identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 ### Wellbeing Monitoring - Core <br>
-Es el contexto que interpreta las señales del check-in y las convierte en información para la familia a distancia. Concentra la lógica del negocio más distintiva de Serenia: distinguir un mal día puntual de un patrón de deterioro sostenido, evitando tanto la falsa alarma como la negligencia. La Imagen 35 muestra los elementos que lo componen.
+Es el contexto que interpreta las señales del check-in y las convierte en información para la familia a distancia. Concentra la lógica del negocio más distintiva de Serenia: distinguir un mal día puntual de un patrón de deterioro sostenido, evitando tanto la falsa alarma como la negligencia. La Imagen 40 muestra los elementos que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/wellbeing-monitoring.png" alt="Wellbeing Monitoring - Bounded Context" width="700"/>
-  <br/><i>Imagen 35. Wellbeing Monitoring - Bounded Context Core identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 40. Wellbeing Monitoring - Bounded Context Core identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 ### Alerts & Safety - Core <br>
-Es la garantía de tranquilidad que sostiene la decisión de compra del familiar a distancia. Sin una respuesta confiable ante inactividad o emergencia, el resto de la propuesta de valor pierde sustento, porque el familiar seguiría necesitando de llamar por su cuenta ante cualquier duda. La Imagen 36 muestra los elementos que lo componen.
+Es la garantía de tranquilidad que sostiene la decisión de compra del familiar a distancia. Sin una respuesta confiable ante inactividad o emergencia, el resto de la propuesta de valor pierde sustento, porque el familiar seguiría necesitando de llamar por su cuenta ante cualquier duda. La Imagen 41 muestra los elementos que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/alerts-and-safety.png" alt="Alerts & Safety - Bounded Context" width="700"/>
-  <br/><i>Imagen 36. Alerts & Safety - Bounded Context Core identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 41. Alerts & Safety - Bounded Context Core identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 ### Care Circle - Supporting <br>
-No genera valor por sí solo, pero es indispensable para que el core opere: sin un vínculo familiar establecido no hay a quién notificar ni con quién compartir el estado del adulto mayor. Se mantiene separado del core porque administra estructura de relación (vínculos, turnos, notas compartidas), no interpretación de bienestar. La Imagen 37 muestra los elementos que lo componen.
+No genera valor por sí solo, pero es indispensable para que el core opere: sin un vínculo familiar establecido no hay a quién notificar ni con quién compartir el estado del adulto mayor. Se mantiene separado del core porque administra estructura de relación (vínculos, turnos, notas compartidas), no interpretación de bienestar. La Imagen 42 muestra los elementos que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/care-circle.png" alt="Care Circle - Bounded Context" width="700"/>
-  <br/><i>Imagen 37. Care Circle - Bounded Context Supporting identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 42. Care Circle - Bounded Context Supporting identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 ### Social Companionship - Supporting <br>
-Complementa la experiencia de acompañamiento con mensajería de audio, fotos y recordatorios sociales, pero ninguno de sus eventos produce una señal que el sistema evalúe ni deriva en alerta. Aporta valor percibido, no valor operativo. La Imagen 38 muestra los elementos que lo componen.
+Complementa la experiencia de acompañamiento con mensajería de audio, fotos y recordatorios sociales, pero ninguno de sus eventos produce una señal que el sistema evalúe ni deriva en alerta. Aporta valor percibido, no valor operativo. La Imagen 43 muestra los elementos que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/social-companionship.png" alt="Social Companionship - Bounded Context" width="700"/>
-  <br/><i>Imagen 38. Social Companionship - Bounded Context Supporting identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 43. Social Companionship - Bounded Context Supporting identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 ### Identity & Access - Generic <br>
-Resuelve un problema estándar (registro, autenticación, gestión de sesión) con reglas de negocio genéricas que no cambian por ser Serenia. Es indispensable para que exista cualquier otro contexto, pero no distingue a Serenia de ninguna otra aplicación. La Imagen 39 muestra los elementos que lo componen.
+Resuelve un problema estándar (registro, autenticación, gestión de sesión) con reglas de negocio genéricas que no cambian por ser Serenia. Es indispensable para que exista cualquier otro contexto, pero no distingue a Serenia de ninguna otra aplicación. La Imagen 44 muestra los elementos que lo componen.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/identity-and-access-context.png" alt="IAM - Bounded Context" width="700"/>
-  <br/><i>Imagen 39. Identity & Access - Bounded Context Generic identificado en el Candidate Context Discovery.</i>
+  <br/><i>Imagen 44. Identity & Access - Bounded Context Generic identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
 Al finalizar, el equipo aplicó una verificación del lenguaje ubicuo sobre cada frontera, comprobando que ningún término tuviera dos significados dentro de un mismo contexto. Esta revisión confirmó, por ejemplo, la separación entre Daily Check-in y Wellbeing Monitoring. Otra discusión del equipo fue la frontera entre Daily Check-in y Social Companionship, por compartir ambos la dimensión emocional de la interacción; se resolvió mantenerlas separadas sobre la base de que únicamente el check-in produce una señal que el sistema evalúa, mientras que el acompañamiento social no está sujeto a ninguna evaluación.
 
 ## EventStorming Serenia
 
-La Imagen 40 reúne los seis bounded contexts en un solo tablero y muestra cómo se relacionan entre sí.
+La Imagen 45 reúne los seis bounded contexts en un solo tablero y muestra cómo se relacionan entre sí.
 
 <br>
 <div align="center">
   <img src="assets/img/event-storming/event-storming-serenia.png" alt="EventStorming - Serenia" width="700"/>
-  <br/><i>Imagen 40. Candidate Context Discovery completo del dominio de Serenia.</i>
+  <br/><i>Imagen 45. Candidate Context Discovery completo del dominio de Serenia.</i>
 </div>
 
 <br>
@@ -3947,12 +4071,12 @@ La selección de escenarios no buscó cobertura funcional completa, sino aquello
 
 **Escenario 1: Registro y vinculación familiar**
  
-Este escenario resuelve el caso en que un adulto mayor se registra en Serenia y habilita a un familiar a distancia para acceder a su estado. Es el escenario que da origen a toda relación posterior en el sistema: sin un vínculo familiar establecido, ningún otro flujo puede ejecutarse. La Imagen 41 presenta el diagrama de este escenario.
+Este escenario resuelve el caso en que un adulto mayor se registra en Serenia y habilita a un familiar a distancia para acceder a su estado. Es el escenario que da origen a toda relación posterior en el sistema: sin un vínculo familiar establecido, ningún otro flujo puede ejecutarse. La Imagen 46 presenta el diagrama de este escenario.
  
 <br>
 <div align="center">
   <img src="assets/img/domain-message-flows-modeling/domain-story-1.png" alt="Escenario 1" width="900"/>
-  <br/><i>Imagen 41. Domain Message Flow 1 - Registro y vinculación familiar.</i>
+  <br/><i>Imagen 46. Domain Message Flow 1 - Registro y vinculación familiar.</i>
 </div>
 <br>
 El adulto mayor crea su cuenta en Identity & Access (1), que publica el evento de adulto mayor registrado para que Care Circle cree su círculo de cuidado (2). El adulto mayor solicita a Care Circle un código de invitación (3) y lo comparte con el familiar a distancia por un medio ajeno al sistema (4). El familiar crea su propia cuenta en Identity & Access (5) y canjea el código en Care Circle (6), que consulta a Identity & Access el rol del solicitante para confirmar que se trata de un familiar a distancia (7). Por último, Care Circle establece el vínculo familiar (8).
@@ -3961,12 +4085,12 @@ El adulto mayor crea su cuenta en Identity & Access (1), que publica el evento d
 
 **Escenario 2: Check-in diario y consulta del estado**
  
-Este escenario representa la operación cotidiana de Serenia y el caso de uso que sostiene su propuesta de valor: el adulto mayor comunica su bienestar sin necesidad de una llamada, y el familiar a distancia lo verifica sin necesidad de interrumpirlo. La Imagen 42 presenta el diagrama de este escenario.
+Este escenario representa la operación cotidiana de Serenia y el caso de uso que sostiene su propuesta de valor: el adulto mayor comunica su bienestar sin necesidad de una llamada, y el familiar a distancia lo verifica sin necesidad de interrumpirlo. La Imagen 47 presenta el diagrama de este escenario.
  
 <br>
 <div align="center">
   <img src="assets/img/domain-message-flows-modeling/domain-story-2.png" alt="Escenario 2" width="900"/>
-  <br/><i>Imagen 42. Domain Message Flow 2 - Check-in diario y consulta del estado.</i>
+  <br/><i>Imagen 47. Domain Message Flow 2 - Check-in diario y consulta del estado.</i>
 </div>
 <br>
 Al llegar la hora configurada, el sistema solicita avisar el check-in del día (1) y Daily Check-in presenta la pregunta al adulto mayor (2), quien la responde con su estado de ánimo (3). Daily Check-in publica el check-in respondido (4) y Wellbeing Monitoring consulta los estados de ánimo de los días anteriores para evaluarlo (5). Más tarde, el familiar a distancia consulta el check-in del día en Daily Check-in (6), que verifica con Care Circle que el familiar esté vinculado al adulto mayor antes de responder (7).
@@ -3975,12 +4099,12 @@ Al llegar la hora configurada, el sistema solicita avisar el check-in del día (
 
 **Escenario 3: Detección de un patrón de malestar**
  
-Este escenario resuelve el caso en que el adulto mayor reporta malestar durante varios días consecutivos sin que ello constituya una emergencia. Es el flujo que distingue a Serenia de una aplicación de alertas reactivas, ya que actúa sobre una tendencia y no sobre un evento aislado. La Imagen 43 presenta el diagrama de este escenario.
+Este escenario resuelve el caso en que el adulto mayor reporta malestar durante varios días consecutivos sin que ello constituya una emergencia. Es el flujo que distingue a Serenia de una aplicación de alertas reactivas, ya que actúa sobre una tendencia y no sobre un evento aislado. La Imagen 48 presenta el diagrama de este escenario.
  
 <br>
 <div align="center">
   <img src="assets/img/domain-message-flows-modeling/domain-story-3.png" alt="Escenario 3" width="900"/>
-  <br/><i>Imagen 43. Domain Message Flow 3 - Detección de un patrón de malestar.</i>
+  <br/><i>Imagen 48. Domain Message Flow 3 - Detección de un patrón de malestar.</i>
 </div>
 <br>
 El adulto mayor responde su check-in con ánimo bajo por tercer día consecutivo (1). Daily Check-in publica el check-in respondido (2) y Wellbeing Monitoring consulta los estados de ánimo de los días anteriores (3); al confirmar la racha, detecta el patrón de malestar y emite una sugerencia de acción. El familiar a distancia consulta las sugerencias vigentes (4), Wellbeing Monitoring verifica su vínculo con Care Circle (5) y, una vez atendida la situación, el familiar descarta la sugerencia, que deja de mostrarse para todos los familiares (6).
@@ -3989,12 +4113,12 @@ El adulto mayor responde su check-in con ánimo bajo por tercer día consecutivo
 
 **Escenario 4: Check-in no respondido y alerta de inactividad**
  
-Este escenario resuelve el caso en que el adulto mayor no responde su check-in dentro del plazo. Es el flujo que da tranquilidad al familiar: no necesita verificar cada día si hubo respuesta, porque el sistema le avisa cuando no la hubo. La Imagen 44 presenta el diagrama de este escenario.
+Este escenario resuelve el caso en que el adulto mayor no responde su check-in dentro del plazo. Es el flujo que da tranquilidad al familiar: no necesita verificar cada día si hubo respuesta, porque el sistema le avisa cuando no la hubo. La Imagen 49 presenta el diagrama de este escenario.
  
 <br>
 <div align="center">
   <img src="assets/img/domain-message-flows-modeling/domain-story-4.png" alt="Escenario 4" width="900"/>
-  <br/><i>Imagen 44. Domain Message Flow 4 - Check-in no respondido y alerta de inactividad.</i>
+  <br/><i>Imagen 49. Domain Message Flow 4 - Check-in no respondido y alerta de inactividad.</i>
 </div>
 <br>
 Al vencer el plazo sin respuesta, el sistema solicita cerrar el check-in (1) y Daily Check-in publica el check-in no respondido (2). Alerts and Safety consulta a Care Circle los familiares vinculados al adulto mayor (3) y, al confirmar que tiene al menos uno, genera la alerta de inactividad, que queda visible en la sección de alertas de la aplicación del familiar (4). El familiar indica que está atendiendo la alerta (5) y, luego de comunicarse con el adulto mayor, la marca como resuelta (6).
@@ -4017,7 +4141,7 @@ Es el contexto que concentra la propuesta de valor de Serenia: una pregunta diar
 <div align="center">
 
 ![Bounded Context Canvas - Daily Check-in](assets/img/bounded-context-canvas/daily-check-in-canvas.png)
-  <br/><i>Imagen 45. Bounded Context Canvas de Daily Check-in.</i>
+  <br/><i>Imagen 50. Bounded Context Canvas de Daily Check-in.</i>
  
 </div>
 <br>
@@ -4029,7 +4153,7 @@ Convierte las respuestas diarias en información útil para el familiar: disting
 <div align="center">
 
 ![Bounded Context Canvas - Wellbeing Monitoring](assets/img/bounded-context-canvas/wellbeing-monitoring-canvas.png)
-  <br/><i>Imagen 46. Bounded Context Canvas de Wellbeing Monitoring.</i>
+  <br/><i>Imagen 51. Bounded Context Canvas de Wellbeing Monitoring.</i>
  
 </div>
 <br>
@@ -4041,7 +4165,7 @@ Garantiza que la familia se entere cuando el adulto mayor necesita ayuda, ya sea
 <div align="center">
 
 ![Bounded Context Canvas - Alerts and Safety](assets/img/bounded-context-canvas/alerts-and-safety-canvas.png)
-  <br/><i>Imagen 47. Bounded Context Canvas de Alerts and Safety.</i>
+  <br/><i>Imagen 52. Bounded Context Canvas de Alerts and Safety.</i>
  
 </div>
 <br>
@@ -4053,7 +4177,7 @@ Gestiona la red de apoyo de cada adulto mayor: la incorporación de familiares m
 <div align="center">
 
 ![Bounded Context Canvas - Care Circle](assets/img/bounded-context-canvas/care-circle-canvas.png)
-  <br/><i>Imagen 48. Bounded Context Canvas de Care Circle.</i>
+  <br/><i>Imagen 53. Bounded Context Canvas de Care Circle.</i>
  
 </div>
 <br>
@@ -4065,7 +4189,7 @@ Sostiene la relación afectiva entre el adulto mayor y su familia mediante audio
 <div align="center">
 
 ![Bounded Context Canvas - Social Companionship](assets/img/bounded-context-canvas/social-companionship-canvas.png)
-  <br/><i>Imagen 49. Bounded Context Canvas de Social Companionship.</i>
+  <br/><i>Imagen 54. Bounded Context Canvas de Social Companionship.</i>
  
 </div>
 <br>
@@ -4077,7 +4201,7 @@ Administra el registro, la autenticación, las sesiones y los perfiles de los us
 <div align="center">
 
 ![Bounded Context Canvas - Identity & Access](assets/img/bounded-context-canvas/identity-and-access-canvas.png)
-  <br/><i>Imagen 50. Bounded Context Canvas de Identity & Access.</i>
+  <br/><i>Imagen 55. Bounded Context Canvas de Identity & Access.</i>
  
 </div>
 <br>
@@ -4085,12 +4209,12 @@ Los seis canvases muestran que cada regla del dominio tiene un único contexto r
 
 ### 2.5.2. Context Mapping
 
-A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety, Social Companionship), el equipo elaboró un Context Map para visualizar y explicar las relaciones estructurales entre ellos. La primera versión, presentada en la entrega anterior, se actualizó después de detallar las capas de cada bounded context (sección 2.6), porque allí se precisó cómo se comunican realmente los contextos. La Imagen 51 muestra el Context Map resultante.
+A partir de los 6 bounded contexts identificados (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety, Social Companionship), el equipo elaboró un Context Map para visualizar y explicar las relaciones estructurales entre ellos. La primera versión, presentada en la entrega anterior, se actualizó después de detallar las capas de cada bounded context (sección 2.6), porque allí se precisó cómo se comunican realmente los contextos. La Imagen 56 muestra el Context Map resultante.
 
 <div align="center">
 
 ![Context Map - Serenia](assets/img/context-mapping/context-map.png)
-  <br/><i>Imagen 51. Context Mapping Diagram.</i>
+  <br/><i>Imagen 56. Context Mapping Diagram.</i>
 </div>
 
 **URL del tablero en Miro:** https://miro.com/app/board/uXjVHm8lGW8=/?share_link_id=454089766644
@@ -4140,13 +4264,13 @@ IAM no se relaciona con Alerts and Safety, porque esta solo necesita conocer a l
 
 #### 2.5.3.1. Software Architecture Context Level Diagrams
 
-En esta sección se presenta el *System Context Diagram*, primer nivel del C4 Model, elaborado en Structurizr. Este diagrama muestra al sistema Serenia como una única caja central, rodeada de los usuarios y de los sistemas externos con los que interactúa, sin entrar en detalles internos de la solución. La Imagen 52 presenta el diagrama.
+En esta sección se presenta el *System Context Diagram*, primer nivel del C4 Model, elaborado en Structurizr. Este diagrama muestra al sistema Serenia como una única caja central, rodeada de los usuarios y de los sistemas externos con los que interactúa, sin entrar en detalles internos de la solución. La Imagen 57 presenta el diagrama.
 
 <br>
 <div align="center">
 
 ![System Context Diagram - Serenia](assets/img/software-architecture/context-diagram.png)
-  <br/><i>Imagen 52. System Context Diagram de Serenia.</i>
+  <br/><i>Imagen 57. System Context Diagram de Serenia.</i>
 
 </div>
 
@@ -4158,27 +4282,27 @@ Como se observa en el diagrama, el sistema Serenia interactúa con dos tipos de 
 
 #### 2.5.3.2. Software Architecture Container Level Diagrams
 
-En esta sección se presenta el *Container Diagram*, segundo nivel del C4 Model, el cual descompone al sistema Serenia en los grandes bloques tecnológicos (aplicaciones, servicios y almacenes de datos) que lo conforman, indicando la tecnología empleada en cada uno y la forma en que se comunican entre sí. La Imagen 53 presenta el diagrama.
+En esta sección se presenta el *Container Diagram*, segundo nivel del C4 Model, el cual descompone al sistema Serenia en los grandes bloques tecnológicos (aplicaciones, servicios y almacenes de datos) que lo conforman, indicando la tecnología empleada en cada uno y la forma en que se comunican entre sí. La Imagen 58 presenta el diagrama.
 
 
 <br>
 <div align="center">
 
 ![Container Diagram - Serenia](assets/img/software-architecture/container-diagram.png)
-  <br/><i>Imagen 53. Container Diagram de Serenia.</i>
+  <br/><i>Imagen 58. Container Diagram de Serenia.</i>
 
 </div><br>
 
 El diagrama evidencia los principales contenedores de la solución: la **aplicación móvil** (consumida por el adulto mayor y el cuidador a distancia), la **landing page web** (donde se presenta el producto y sus planes a nuevos usuarios), la **API REST** desarrollada en **Spring Boot**, implementada como un **monolito modular**, organizado internamente en un módulo por cada bounded context identificado en el Big Picture EventStorming (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety y Social Companionship), la **base de datos MySQL** donde se persiste, en esquemas separados por bounded context, la información de cuentas, círculos familiares, check-ins y alertas, y el **servicio de notificaciones push** (proveedor aún por definir por el equipo), encargado de entregar en tiempo real las alertas de emergencia y los recordatorios sociales. Todos los contenedores de cliente (móvil y web) se comunican con la API REST mediante peticiones HTTPS/JSON. La composición interna de dicho monolito por módulos se detalla más adelante en los *Component Level Diagrams* de cada bounded context. Una revisión sistemática reciente identifica como motivos de adopción del monolito modular el despliegue simplificado, la mantenibilidad y la menor sobrecarga de orquestación, y advierte de la dificultad de definir correctamente los bounded contexts (Al-Qora'n & Al-Said Ahmad, 2025).
 
-Como evidencia complementaria de esta organización modular, se presenta a continuación, en la Imagen 54, el diagrama de componentes interno del contenedor API REST, elaborado también en Structurizr, que muestra los módulos correspondientes a cada bounded context y sus relaciones de dependencia:
+Como evidencia complementaria de esta organización modular, se presenta a continuación, en la Imagen 59, el diagrama de componentes interno del contenedor API REST, elaborado también en Structurizr, que muestra los módulos correspondientes a cada bounded context y sus relaciones de dependencia:
 
 <br>
 
 <div align="center">
 
 ![Component Diagram - API REST de Serenia](assets/img/software-architecture/api-component.png)
-  <br/><i>Imagen 54. Component Diagram del contenedor API REST, organizado por bounded context.</i>
+  <br/><i>Imagen 59. Component Diagram del contenedor API REST, organizado por bounded context.</i>
 
 </div>
 
@@ -4188,13 +4312,13 @@ Como se observa, el módulo **IAM** valida la identidad y los permisos que consu
 
 #### 2.5.3.3. Software Architecture Deployment Diagrams
 
-En esta sección se presenta el *Deployment Diagram*, el cual muestra la distribución física del sistema, destacando cómo los contenedores de software descritos en la sección anterior se despliegan sobre el hardware y los entornos correspondientes. Este diagrama visualiza los dispositivos, servidores, redes y demás nodos físicos que alojan el software, así como las relaciones y dependencias entre ellos. La Imagen 55 presenta el diagrama.
+En esta sección se presenta el *Deployment Diagram*, el cual muestra la distribución física del sistema, destacando cómo los contenedores de software descritos en la sección anterior se despliegan sobre el hardware y los entornos correspondientes. Este diagrama visualiza los dispositivos, servidores, redes y demás nodos físicos que alojan el software, así como las relaciones y dependencias entre ellos. La Imagen 60 presenta el diagrama.
 
 <br>
 <div align="center">
 
 ![Deployment Diagram - Serenia](assets/img/software-architecture/deployment-diagram.png)
-  <br/><i>Imagen 55. Deployment Diagram de Serenia.</i>
+  <br/><i>Imagen 60. Deployment Diagram de Serenia.</i>
 
 </div>
 <br>
@@ -4481,7 +4605,7 @@ Clases que resuelven el acceso a la base de datos MySQL y a los mecanismos técn
 
 #### 2.6.1.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Identity & Access, elaborado con la herramienta Structurizr (Imagen 56). El diagrama descompone el container Serenia RESTful API, construido con Java y Spring Boot, para mostrar los componentes que conforman el módulo de identidad, sus responsabilidades y su relación con los demás bounded contexts del monolito modular.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Identity & Access, elaborado con la herramienta Structurizr (Imagen 61). El diagrama descompone el container Serenia RESTful API, construido con Java y Spring Boot, para mostrar los componentes que conforman el módulo de identidad, sus responsabilidades y su relación con los demás bounded contexts del monolito modular.
 
 Las peticiones llegan desde la aplicación del adulto mayor, desarrollada en Kotlin con Jetpack Compose, y desde la aplicación del familiar, desarrollada en Flutter. Antes de alcanzar los controladores atraviesan `BearerAuthorizationRequestFilter`, que valida la firma del token con `JwtTokenServiceImpl` y comprueba con `SessionQueryServiceImpl` que la sesión siga vigente. Luego, `UsersController` atiende el registro, la consulta de cuentas y la gestión del perfil y la contraseña, mientras que `SessionsController` atiende el inicio y el cierre de sesión.
 
@@ -4492,7 +4616,7 @@ Los controladores delegan en los servicios de la capa Application. `UserCommandS
 <div align="center">
 
 ![Component Diagram - Identity and Access](assets/img/bounded-context/identity-and-access/identity-and-access-c4.png)
-  <br/><i>Imagen 56. Component Diagram del Bounded Context Identity and Access.</i>
+  <br/><i>Imagen 61. Component Diagram del Bounded Context Identity and Access.</i>
 
 </div>
 
@@ -4502,7 +4626,7 @@ En esta sección se presentan los diagramas de mayor nivel de detalle sobre la i
 
 ##### 2.6.1.6.1. Bounded Context Domain Layer Class Diagrams
 
-El diagrama de clases representa la capa Domain del bounded context Identity & Access (Imagen 57). En él se muestran las clases, interfaces y enumeraciones del dominio junto con sus atributos, métodos y el scope de cada miembro.
+El diagrama de clases representa la capa Domain del bounded context Identity & Access (Imagen 62). En él se muestran las clases, interfaces y enumeraciones del dominio junto con sus atributos, métodos y el scope de cada miembro.
 
 El modelo se compone de dos aggregate roots, `User` y `Session`, que extienden la clase base `AggregateRoot` del shared kernel. Sus atributos son privados y solo se modifican a través de sus métodos públicos, lo que garantiza que ninguna regla de identidad pueda vulnerarse desde fuera del aggregate. Ambos se relacionan por identidad y no por referencia: `Session` conserva el `UserId` de su dueño, con multiplicidad 0..* sesiones por cuenta. Esta separación evita que cada modificación de la cuenta cargue el historial completo de accesos. Las sesiones se crean mediante la factory `open`, se cierran por decisión del usuario con `close` y se revocan por seguridad con `revoke`.
 
@@ -4513,7 +4637,7 @@ El diagrama incluye además los Commands y Queries que expresan las intenciones 
 <div align="center">
 
 ![Domain Layer Class Diagram - Identity and Access](assets/img/bounded-context/identity-and-access/identity-and-access-domain-layer.png)
-  <br/><i>Imagen 57. Domain Layer Class Diagram del Bounded Context Identity and Access.</i>
+  <br/><i>Imagen 62. Domain Layer Class Diagram del Bounded Context Identity and Access.</i>
 
 </div>
 
@@ -4521,7 +4645,7 @@ El diagrama incluye además los Commands y Queries que expresan las intenciones 
 
 ##### 2.6.1.6.2. Bounded Context Database Design Diagram
 
-El diagrama de base de datos (Imagen 58) presenta los objetos que permiten la persistencia del bounded context Identity & Access sobre el motor MySQL 8.0. El contexto se materializa en dos tablas, `users` y `sessions`, que corresponden respectivamente a los aggregates `User` y `Session`. Los identificadores se almacenan como `BINARY(16)`, la representación compacta de un UUID, y los instantes como `DATETIME(6)` en UTC, de modo que el modelo no depende de la zona horaria del servidor.
+El diagrama de base de datos (Imagen 63) presenta los objetos que permiten la persistencia del bounded context Identity & Access sobre el motor MySQL 8.0. El contexto se materializa en dos tablas, `users` y `sessions`, que corresponden respectivamente a los aggregates `User` y `Session`. Los identificadores se almacenan como `BINARY(16)`, la representación compacta de un UUID, y los instantes como `DATETIME(6)` en UTC, de modo que el modelo no depende de la zona horaria del servidor.
 
 **Tabla `users`**
 
@@ -4566,7 +4690,7 @@ La tabla `users` también es referenciada por las tablas de los demás bounded c
 <div align="center">
 
 ![Database Design Diagram - Identity and Access](assets/img/bounded-context/identity-and-access/identity-and-access-db-diagram.png)
-  <br/><i>Imagen 58. Database Design Diagram del Bounded Context Identity and Access.</i>
+  <br/><i>Imagen 63. Database Design Diagram del Bounded Context Identity and Access.</i>
 
 </div>
 
@@ -4906,14 +5030,14 @@ Clases que resuelven el acceso a la base de datos MySQL y la generación de cód
 
 #### 2.6.2.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Care Circle, elaborado en Structurizr (Imagen 59). El diagrama detalla la arquitectura interna del módulo dentro del container API REST, organizada en las cuatro capas del diseño táctico: los *Controllers* (`CareCirclesController`, `InvitationCodesController`, `FamilyLinksController`, `CareShiftsController` y `SharedNotesController`) como puntos de entrada REST, junto con el scheduler `InvitationCodeExpirationScheduler`; los *Resources* y *Assemblers* para la transformación de datos; los servicios de aplicación de comando y de consulta (`CareCircleCommandService`, `CareCircleQueryService`, `CareShiftCommandService`, `CareShiftQueryService`, `SharedNoteCommandService` y `SharedNoteQueryService`); y el acceso a datos mediante los tres repositorios definidos en el dominio (`CareCircleRepository`, `CareShiftRepository` y `SharedNoteRepository`), implementados en Infrastructure sobre MySQL.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Care Circle, elaborado en Structurizr (Imagen 64). El diagrama detalla la arquitectura interna del módulo dentro del container API REST, organizada en las cuatro capas del diseño táctico: los *Controllers* (`CareCirclesController`, `InvitationCodesController`, `FamilyLinksController`, `CareShiftsController` y `SharedNotesController`) como puntos de entrada REST, junto con el scheduler `InvitationCodeExpirationScheduler`; los *Resources* y *Assemblers* para la transformación de datos; los servicios de aplicación de comando y de consulta (`CareCircleCommandService`, `CareCircleQueryService`, `CareShiftCommandService`, `CareShiftQueryService`, `SharedNoteCommandService` y `SharedNoteQueryService`); y el acceso a datos mediante los tres repositorios definidos en el dominio (`CareCircleRepository`, `CareShiftRepository` y `SharedNoteRepository`), implementados en Infrastructure sobre MySQL.
 
 En el centro del diagrama se ubican los aggregates `CareCircle`, `CareShift` y `SharedNote`, junto con los Commands, Queries y Domain Events del contexto. La capa Application incluye además los event handlers `OlderAdultRegisteredEventHandler`, que crea el círculo cuando Identity & Access registra a un adulto mayor, e `InvitationCodeRedeemedEventHandler`, que establece el vínculo familiar tras el canje de un código. El contexto consulta a Identity & Access mediante `ExternalIamService` y expone la fachada `CareCircleContextFacade`, que los demás módulos del monolito usan para verificar vínculos y obtener los familiares activos. Las flechas evidencian que las dependencias apuntan siempre hacia el dominio y que ningún componente de Interface accede directamente a la base de datos.
 
 <div align="center">
 
 ![Component Diagram - Care Circle](assets/img/bounded-context/care-circle/carecircle_components.png)
-  <br/><i>Imagen 59. Component Diagram del Bounded Context Care Circle.</i>
+  <br/><i>Imagen 64. Component Diagram del Bounded Context Care Circle.</i>
 
 </div>
 
@@ -4923,14 +5047,14 @@ En el centro del diagrama se ubican los aggregates `CareCircle`, `CareShift` y `
 
 ##### 2.6.2.6.1. Bounded Context Domain Layer Class Diagrams
 
-El siguiente diagrama de clases UML (Imagen 60) representa el bounded context Care Circle organizado en sus cuatro capas: Interface, Application, Domain e Infrastructure. Acatando el EventStorming, en la capa de dominio se visualizan los tres Aggregate Roots principales: `CareCircle`, `CareShift` y `SharedNote`. El aggregate `CareCircle` contiene las entidades `InvitationCode` y `FamilyLink`, mientras que `CareShift` y `SharedNote` son independientes y referencian al círculo por su identificador. Junto a ellos se agrupan los value objects, las enumeraciones, los commands, las queries y los eventos de dominio.
+El siguiente diagrama de clases UML (Imagen 65) representa el bounded context Care Circle organizado en sus cuatro capas: Interface, Application, Domain e Infrastructure. Acatando el EventStorming, en la capa de dominio se visualizan los tres Aggregate Roots principales: `CareCircle`, `CareShift` y `SharedNote`. El aggregate `CareCircle` contiene las entidades `InvitationCode` y `FamilyLink`, mientras que `CareShift` y `SharedNote` son independientes y referencian al círculo por su identificador. Junto a ellos se agrupan los value objects, las enumeraciones, los commands, las queries y los eventos de dominio.
 
 El dominio declara además las interfaces de los servicios de aplicación (`CareCircleCommandService`, `CareShiftCommandService`, `SharedNoteCommandService` y sus servicios de consulta) y de los repositorios (`CareCircleRepository`, `CareShiftRepository` y `SharedNoteRepository`). Estas interfaces orquestan la lógica y son implementadas por las capas externas: la capa Application aporta los servicios `Impl`, los event handlers y la implementación de la fachada `CareCircleContextFacade`, y la capa Infrastructure aporta los repositorios, los mappers, las entidades JPA y el generador de códigos de invitación. Por su parte, la capa Interface expone los controladores REST y el scheduler de expiración de códigos. Las dependencias apuntan siempre hacia el dominio, sin que ninguna capa superior acceda directamente a la persistencia.
 
 <div align="center">
 
 ![Class Diagram - Care Circle](assets/img/bounded-context/care-circle/diagram-class-care-circle.svg)
-  <br/><i>Imagen 60. Domain Layer Class Diagram del Bounded Context Care Circle.</i>
+  <br/><i>Imagen 65. Domain Layer Class Diagram del Bounded Context Care Circle.</i>
 
 </div>
 
@@ -5014,7 +5138,7 @@ La tabla `care_circles` es el eje del contexto: `invitation_codes`, `family_link
 <div align="center">
 
 ![Database Design Diagram -Care Circle](assets/img/bounded-context/care-circle/database-care-circle.png)
-  <br/><i>Imagen 61. Database Design Diagram del Bounded Context Care Circle.</i>
+  <br/><i>Imagen 66. Database Design Diagram del Bounded Context Care Circle.</i>
 </div>
 
 ### 2.6.3. Bounded Context: Daily Check-in
@@ -5319,12 +5443,12 @@ Clases que resuelven el acceso a la base de datos MySQL, implementando las abstr
 
 #### 2.6.3.5. Bounded Context Software Architecture Component Level Diagrams
 
-Este diagrama C4 (Imagen 62) muestra al Adulto Mayor interactuando con los *Controllers* (`CheckInsController`, `PreferencesController`), quienes delegan en los *Services* y *Repositories* definidos por la arquitectura limpia. Se destacan las conexiones con la Base de Datos.
+Este diagrama C4 (Imagen 67) muestra al Adulto Mayor interactuando con los *Controllers* (`CheckInsController`, `PreferencesController`), quienes delegan en los *Services* y *Repositories* definidos por la arquitectura limpia. Se destacan las conexiones con la Base de Datos.
 
 <div align="center">
 
 ![Component Diagram - Daily Check-in](assets/img/bounded-context/daily-check-in/daily-check-in-component-diagram.png)
-  <br/><i>Imagen 62. Component Diagram del Bounded Context Daily Check-in.</i>
+  <br/><i>Imagen 67. Component Diagram del Bounded Context Daily Check-in.</i>
 
 </div>
 
@@ -5334,12 +5458,12 @@ Este diagrama C4 (Imagen 62) muestra al Adulto Mayor interactuando con los *Cont
 
 ##### 2.6.3.6.1. Bounded Context Domain Layer Class Diagrams
 
-El diagrama UML (Imagen 63) consolida los requisitos tácticos obtenidos del EventStorming. Presenta a `CheckIn` y `CheckInPreferences` como los dos Aggregate Roots, acompañados de sus respectivas interfaces de persistencia y comandos de usuario/sistema.
+El diagrama UML (Imagen 68) consolida los requisitos tácticos obtenidos del EventStorming. Presenta a `CheckIn` y `CheckInPreferences` como los dos Aggregate Roots, acompañados de sus respectivas interfaces de persistencia y comandos de usuario/sistema.
 
 <div align="center">
 
 ![Class Diagram - Daily Check-in](assets/img/bounded-context/daily-check-in/daily-check-in-class-diagram.png)
-  <br/><i>Imagen 63. Domain Layer Class Diagram del Bounded Context Daily Check-in.</i>
+  <br/><i>Imagen 68. Domain Layer Class Diagram del Bounded Context Daily Check-in.</i>
 
 </div>
 
@@ -5347,7 +5471,7 @@ El diagrama UML (Imagen 63) consolida los requisitos tácticos obtenidos del Eve
 
 ##### 2.6.3.6.2. Bounded Context Database Design Diagram
 
-El diseño de base de datos transaccional para Daily Check-in (Imagen 64) incluye las siguientes tablas referenciando al contexto de Identidad:
+El diseño de base de datos transaccional para Daily Check-in (Imagen 69) incluye las siguientes tablas referenciando al contexto de Identidad:
 - **check_in_questions:** Catálogo base de preguntas rotativas.
 - **check_in_schedules:** Horario de recordatorio y flag de modo simplificado por usuario.
 - **check_ins:** Tabla que materializa el agregado `CheckIn`, registrando la pregunta, el estado (`PENDING`, `ANSWERED`, `MISSED`) y el nivel de ánimo.
@@ -5356,7 +5480,7 @@ El diseño de base de datos transaccional para Daily Check-in (Imagen 64) incluy
 <div align="center">
 
 ![Database Diagram - Daily Check-in](assets/img/bounded-context/daily-check-in/daily-check-in-db-diagram.png)
-  <br/><i>Imagen 64. Database Design Diagram del Bounded Context Daily Check-in.</i>
+  <br/><i>Imagen 69. Database Design Diagram del Bounded Context Daily Check-in.</i>
 
 </div>
 
@@ -5589,13 +5713,13 @@ Clases que resuelven el acceso a la base de datos MySQL, implementando las abstr
 
 #### 2.6.4.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Wellbeing Monitoring, elaborado con la herramienta Structurizr (Imagen 65). El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: los cuatro *Controllers* (`WellbeingEntriesController`, `WellbeingPatternsController`, `SmallWinsController`, `StatusSummariesController`) como puntos de entrada de las peticiones REST; los *Resources* (`WellbeingEntryResource`, `WellbeingPatternResource`, `SmallWinResource`, `RecordSmallWinResource`, `StatusSummaryResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y los cuatro aggregates del dominio (`WellbeingEntry`, `WellbeingPattern`, `SmallWin`, `StatusSummary`); los *Commands* (`RecordWellbeingEntryCommand`, `DetectWellbeingPatternCommand`, `RecordSmallWinCommand`, `GenerateStatusSummaryCommand`) y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `WellbeingCommandService` y `WellbeingQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IWellbeingCommandService` e `IWellbeingQueryService`; y finalmente los cuatro repositorios (`IWellbeingEntryRepository`, `IWellbeingPatternRepository`, `ISmallWinRepository`, `IStatusSummaryRepository`), cada uno implementado por su respectiva clase de Infrastructure, que gestionan la persistencia de cada aggregate. Se incluye además `CheckInAnsweredConsumer`, componente que escucha el evento `CheckInAnswered` publicado por el bounded context Daily Check-in para desencadenar el registro de una nueva entrada de bienestar, la detección de patrones y la generación del resumen diario.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Wellbeing Monitoring, elaborado con la herramienta Structurizr (Imagen 70). El diagrama muestra la descomposición interna del bounded context en sus clases principales, agrupadas según su rol dentro de la arquitectura: los cuatro *Controllers* (`WellbeingEntriesController`, `WellbeingPatternsController`, `SmallWinsController`, `StatusSummariesController`) como puntos de entrada de las peticiones REST; los *Resources* (`WellbeingEntryResource`, `WellbeingPatternResource`, `SmallWinResource`, `RecordSmallWinResource`, `StatusSummaryResource`) que estructuran los datos expuestos por la API; los *Assemblers*, encargados de transformar entre resources, commands y los cuatro aggregates del dominio (`WellbeingEntry`, `WellbeingPattern`, `SmallWin`, `StatusSummary`); los *Commands* (`RecordWellbeingEntryCommand`, `DetectWellbeingPatternCommand`, `RecordSmallWinCommand`, `GenerateStatusSummaryCommand`) y *Queries* que representan las intenciones de escritura y lectura del bounded context; los servicios `WellbeingCommandService` y `WellbeingQueryService`, que implementan dichas operaciones e implementan a su vez las interfaces `IWellbeingCommandService` e `IWellbeingQueryService`; y finalmente los cuatro repositorios (`IWellbeingEntryRepository`, `IWellbeingPatternRepository`, `ISmallWinRepository`, `IStatusSummaryRepository`), cada uno implementado por su respectiva clase de Infrastructure, que gestionan la persistencia de cada aggregate. Se incluye además `CheckInAnsweredConsumer`, componente que escucha el evento `CheckInAnswered` publicado por el bounded context Daily Check-in para desencadenar el registro de una nueva entrada de bienestar, la detección de patrones y la generación del resumen diario.
 
 <br>
 <div align="center">
 
 ![Component Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/components-diagram.png)
-  <br/><i>Imagen 65. Component Diagram del Bounded Context Wellbeing Monitoring.</i>
+  <br/><i>Imagen 70. Component Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
 
@@ -5605,13 +5729,13 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 
 ##### 2.6.4.6.1. Bounded Context Domain Layer Class Diagrams
 
-Diagrama de clases de la capa Domain: en la Imagen 66 se muestran las clases del dominio Wellbeing Monitoring, compuesto por cuatro aggregate roots independientes (`WellbeingEntry`, `WellbeingPattern`, `SmallWin`, `StatusSummary`, alineados 1 a 1 con las tablas del diseño de base de datos oficial), los Commands y Queries asociados a cada uno, y las interfaces `IWellbeingCommandService`, `IWellbeingQueryService` e `IWellbeingEntryRepository`/`IWellbeingPatternRepository`/`ISmallWinRepository`/`IStatusSummaryRepository` con sus respectivas implementaciones. El diagrama fue elaborado en PlantUML.
+Diagrama de clases de la capa Domain: en la Imagen 71 se muestran las clases del dominio Wellbeing Monitoring, compuesto por cuatro aggregate roots independientes (`WellbeingEntry`, `WellbeingPattern`, `SmallWin`, `StatusSummary`, alineados 1 a 1 con las tablas del diseño de base de datos oficial), los Commands y Queries asociados a cada uno, y las interfaces `IWellbeingCommandService`, `IWellbeingQueryService` e `IWellbeingEntryRepository`/`IWellbeingPatternRepository`/`ISmallWinRepository`/`IStatusSummaryRepository` con sus respectivas implementaciones. El diagrama fue elaborado en PlantUML.
 
 <br>
 <div align="center">
 
 ![Class Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/class-diagram.png)
-  <br/><i>Imagen 66. Class Diagram del Bounded Context Wellbeing Monitoring.</i>
+  <br/><i>Imagen 71. Class Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
 
@@ -5619,7 +5743,7 @@ Diagrama de clases de la capa Domain: en la Imagen 66 se muestran las clases del
 
 ##### 2.6.4.6.2. Bounded Context Database Design Diagram
 
-Diagrama de base de datos: en la Imagen 67 se muestra el diseño de las tablas correspondientes al Bounded Context Wellbeing Monitoring, compuesto por `wellbeing_entries` (registro de estado de ánimo asociado a cada check-in), `status_summaries` (resumen diario del estado del adulto mayor), `small_wins` (historial de pequeños logros registrados) y `wellbeing_patterns` (patrones de malestar sostenido o mejora detectados en el historial de check-ins), relacionadas mediante llaves foráneas hacia `users` (Identity & Access) y `check_ins` (Daily Check-in). Los nombres de las columnas siguen la convención de nomenclatura del equipo, prefijando cada campo con el código de 3 letras de su tabla (`wbe`, `sts`, `smw`, `wbp`).
+Diagrama de base de datos: en la Imagen 72 se muestra el diseño de las tablas correspondientes al Bounded Context Wellbeing Monitoring, compuesto por `wellbeing_entries` (registro de estado de ánimo asociado a cada check-in), `status_summaries` (resumen diario del estado del adulto mayor), `small_wins` (historial de pequeños logros registrados) y `wellbeing_patterns` (patrones de malestar sostenido o mejora detectados en el historial de check-ins), relacionadas mediante llaves foráneas hacia `users` (Identity & Access) y `check_ins` (Daily Check-in). Los nombres de las columnas siguen la convención de nomenclatura del equipo, prefijando cada campo con el código de 3 letras de su tabla (`wbe`, `sts`, `smw`, `wbp`).
 
 **Tabla `wellbeing_entries`:**
 
@@ -5670,7 +5794,7 @@ Diagrama de base de datos: en la Imagen 67 se muestra el diseño de las tablas c
 <div align="center">
 
 ![Database Design Diagram - Wellbeing Monitoring](assets/img/bounded-context/wellbeing-monitoring/db-diagram.png)
-  <br/><i>Imagen 67. Database Design Diagram del Bounded Context Wellbeing Monitoring.</i>
+  <br/><i>Imagen 72. Database Design Diagram del Bounded Context Wellbeing Monitoring.</i>
 
 </div>
 
@@ -5981,14 +6105,14 @@ Clases que resuelven el acceso a la base de datos MySQL y al almacenamiento de a
 
 #### 2.6.5.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Social Companionship, elaborado en Structurizr (Imagen 68). El diagrama detalla la arquitectura interna del módulo dentro del container API REST, organizada en las cuatro capas del diseño táctico: los *Controllers* (`AudioMessagesController`, `PhotoMessagesController` y `SocialRemindersController`) como puntos de entrada REST; los *Resources* y *Assemblers* para la transformación de datos; los servicios de aplicación de comando y de consulta, uno por cada aggregate; y el acceso a datos mediante los tres repositorios definidos en el dominio (`AudioMessageRepository`, `PhotoMessageRepository` y `SocialReminderRepository`), implementados en Infrastructure.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Social Companionship, elaborado en Structurizr (Imagen 73). El diagrama detalla la arquitectura interna del módulo dentro del container API REST, organizada en las cuatro capas del diseño táctico: los *Controllers* (`AudioMessagesController`, `PhotoMessagesController` y `SocialRemindersController`) como puntos de entrada REST; los *Resources* y *Assemblers* para la transformación de datos; los servicios de aplicación de comando y de consulta, uno por cada aggregate; y el acceso a datos mediante los tres repositorios definidos en el dominio (`AudioMessageRepository`, `PhotoMessageRepository` y `SocialReminderRepository`), implementados en Infrastructure.
 
 En el centro del diagrama se ubican los aggregates `AudioMessage`, `PhotoMessage` y `SocialReminder`, junto con los Commands, Queries y Domain Events del contexto. Los servicios de aplicación se apoyan en abstracciones salientes: `MediaStorageService`, implementado sobre Azure Blob Storage para guardar los archivos de audio e imagen; `ExternalCareCircleService`, que consulta a Care Circle los destinatarios y los permisos de acceso; y `ExternalIamService`, que consulta a Identity & Access la zona horaria del adulto mayor. El scheduler `SocialReminderScheduler` presenta los recordatorios cuya hora llegó y cierra como no completados los vencidos, y `DomainEventPublisherAdapter` publica los eventos de dominio dentro del monolito modular. Las flechas evidencian que las dependencias apuntan siempre hacia el dominio y que ningún componente de Interface accede directamente a la base de datos.
 
 <div align="center">
 
 ![DComponent Level- Social Companionship](assets/img/bounded-context/social-companionship/socialcompanionship_components.png)
-  <br/><i>Imagen 68. Component Level Diagram del Bounded Context Social Companionship.</i>
+  <br/><i>Imagen 73. Component Level Diagram del Bounded Context Social Companionship.</i>
 
 </div>
 <br>
@@ -6001,14 +6125,14 @@ En esta sección se presentan los diagramas de mayor nivel de detalle sobre la i
 
 ##### 2.6.5.6.1. Bounded Context Domain Layer Class Diagrams
 
-El siguiente diagrama de clases UML (Imagen 69) representa el bounded context Social Companionship organizado en sus cuatro capas: Interface, Application, Domain e Infrastructure. Acatando el EventStorming, en la capa de dominio se visualizan los tres Aggregate Roots principales: `AudioMessage`, `PhotoMessage` y `SocialReminder`. Los dos primeros contienen la entidad `MessageReceipt`, que registra la recepción de cada mensaje por su destinatario, mientras que `SocialReminder` controla el ciclo de vida del recordatorio. Junto a ellos se agrupan los value objects, las enumeraciones, los commands, las queries y los eventos de dominio.
+El siguiente diagrama de clases UML (Imagen 74) representa el bounded context Social Companionship organizado en sus cuatro capas: Interface, Application, Domain e Infrastructure. Acatando el EventStorming, en la capa de dominio se visualizan los tres Aggregate Roots principales: `AudioMessage`, `PhotoMessage` y `SocialReminder`. Los dos primeros contienen la entidad `MessageReceipt`, que registra la recepción de cada mensaje por su destinatario, mientras que `SocialReminder` controla el ciclo de vida del recordatorio. Junto a ellos se agrupan los value objects, las enumeraciones, los commands, las queries y los eventos de dominio.
 
 El dominio declara además las interfaces de los servicios de aplicación (`AudioMessageCommandService`, `PhotoMessageCommandService`, `SocialReminderCommandService` y sus servicios de consulta) y de los repositorios (`AudioMessageRepository`, `PhotoMessageRepository` y `SocialReminderRepository`). Estas interfaces orquestan la lógica y son implementadas por las capas externas: la capa Application aporta los servicios `Impl` y los servicios salientes `MediaStorageService`, `ExternalCareCircleService` y `ExternalIamService`, y la capa Infrastructure aporta los repositorios, los mappers, las entidades JPA y `AzureBlobMediaStorageService` para el almacenamiento de archivos. Por su parte, la capa Interface expone los controladores REST y el scheduler `SocialReminderScheduler`.
 
 <div align="center">
 
 ![Class Diagram - Social Companionship](assets/img/bounded-context/social-companionship/class-diagram-social.svg)
-<br/><i>Imagen 69. Bounded Context Domain Layer Class Diagram</i>
+<br/><i>Imagen 74. Bounded Context Domain Layer Class Diagram</i>
 
 </div>
 <br>
@@ -6065,7 +6189,7 @@ La tabla `companion_messages` referencia a `care_circles`, que pertenece al boun
 <div align="center">
 
 ![Database Diagram - Social companionship](assets/img/bounded-context/social-companionship/database.png)
-  <br/><i>Imagen 70. Database Design Diagram del Bounded Context Social Companionship.</i>
+  <br/><i>Imagen 75. Database Design Diagram del Bounded Context Social Companionship.</i>
 
 </div>
 
@@ -6321,14 +6445,14 @@ Clases que resuelven el acceso a la base de datos MySQL, implementando las abstr
 
 #### 2.6.6.5. Bounded Context Software Architecture Component Level Diagrams
 
-En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Alerts and Safety, elaborado con la herramienta Structurizr (Imagen 71). El diagrama muestra la descomposición interna del bounded context en sus componentes, agrupados según su rol dentro de la arquitectura: los *Controllers* `EmergencyAlertsController`, `InactivityAlertsController` y `AlertsController` como puntos de entrada de las peticiones REST; los *Resources* `AlertResource` y `ResolveAlertResource`, que estructuran los datos expuestos por la API; los *Assemblers*, que transforman entre resources, commands y los aggregates `EmergencyAlert` e `InactivityAlert`; los servicios de aplicación `EmergencyAlertCommandServiceImpl` e `InactivityAlertCommandServiceImpl`, que atienden las operaciones de escritura, y `AlertQueryServiceImpl`, que atiende la lectura del historial y del detalle de las alertas; y los repositorios `EmergencyAlertRepositoryImpl` e `InactivityAlertRepositoryImpl`, que se apoyan en `AlertJpaRepository` y en los *Persistence Mappers* para persistir ambos aggregates en MySQL. Se incluyen además cuatro *Event Handlers* que encadenan el flujo de las alertas: `CheckInMissedEventHandler`, que escucha el evento `CheckInMissed` publicado por Daily Check-in para iniciar la evaluación de inactividad; `InactivityDetectedEventHandler`, que genera la alerta de inactividad; `EmergencyAlertRaisedEventHandler`, que despacha la emergencia a los familiares; y `EmergencyAlertDispatchedEventHandler`, que confirma su entrega. Finalmente, `ExternalCareCircleService` actúa como capa anticorrupción: consulta a Care Circle, a través de `CareCircleContextFacade`, los familiares con vínculo activo, sin que Alerts and Safety dependa del modelo interno de ese contexto.
+En esta sección se presenta el Component Diagram de C4 Model correspondiente al bounded context Alerts and Safety, elaborado con la herramienta Structurizr (Imagen 76). El diagrama muestra la descomposición interna del bounded context en sus componentes, agrupados según su rol dentro de la arquitectura: los *Controllers* `EmergencyAlertsController`, `InactivityAlertsController` y `AlertsController` como puntos de entrada de las peticiones REST; los *Resources* `AlertResource` y `ResolveAlertResource`, que estructuran los datos expuestos por la API; los *Assemblers*, que transforman entre resources, commands y los aggregates `EmergencyAlert` e `InactivityAlert`; los servicios de aplicación `EmergencyAlertCommandServiceImpl` e `InactivityAlertCommandServiceImpl`, que atienden las operaciones de escritura, y `AlertQueryServiceImpl`, que atiende la lectura del historial y del detalle de las alertas; y los repositorios `EmergencyAlertRepositoryImpl` e `InactivityAlertRepositoryImpl`, que se apoyan en `AlertJpaRepository` y en los *Persistence Mappers* para persistir ambos aggregates en MySQL. Se incluyen además cuatro *Event Handlers* que encadenan el flujo de las alertas: `CheckInMissedEventHandler`, que escucha el evento `CheckInMissed` publicado por Daily Check-in para iniciar la evaluación de inactividad; `InactivityDetectedEventHandler`, que genera la alerta de inactividad; `EmergencyAlertRaisedEventHandler`, que despacha la emergencia a los familiares; y `EmergencyAlertDispatchedEventHandler`, que confirma su entrega. Finalmente, `ExternalCareCircleService` actúa como capa anticorrupción: consulta a Care Circle, a través de `CareCircleContextFacade`, los familiares con vínculo activo, sin que Alerts and Safety dependa del modelo interno de ese contexto.
 
 <br>
 
 <div align="center">
 
 ![Component Diagram - Alerts and Safety](assets/img/bounded-context/alerts-safety/alerts-safety-diagram.png)
-  <br/><i>Imagen 71. Component Diagram del Bounded Context Alerts and Safety.</i>
+  <br/><i>Imagen 76. Component Diagram del Bounded Context Alerts and Safety.</i>
 
 </div>
 
@@ -6340,13 +6464,13 @@ En esta sección se presenta el Component Diagram de C4 Model correspondiente al
 
 ##### 2.6.6.6.1. Bounded Context Domain Layer Class Diagrams
 
-Diagrama de clases de la capa Domain: en la Imagen 72 se muestran las clases del dominio Alerts and Safety. Los aggregate roots son `EmergencyAlert` e `InactivityAlert`, que comparten la clase base `Alert`. Ambos registran la atención de los familiares mediante la entity `AlertAttention`, y `EmergencyAlert` contiene además la entity `AlertNotification`, que representa el aviso dirigido a cada familiar vinculado. Las enumeraciones `AlertType`, `AlertStatus`, `DeliveryStatus` y `AttentionAction` expresan el tipo y el estado de cada alerta. También se muestran las interfaces de dominio: `EmergencyAlertRepository` e `InactivityAlertRepository` para la persistencia, `EmergencyAlertCommandService` e `InactivityAlertCommandService` para las operaciones de escritura, con los Commands que reciben, y `AlertQueryService` para la lectura del historial y del detalle de las alertas de ambos tipos.
+Diagrama de clases de la capa Domain: en la Imagen 77 se muestran las clases del dominio Alerts and Safety. Los aggregate roots son `EmergencyAlert` e `InactivityAlert`, que comparten la clase base `Alert`. Ambos registran la atención de los familiares mediante la entity `AlertAttention`, y `EmergencyAlert` contiene además la entity `AlertNotification`, que representa el aviso dirigido a cada familiar vinculado. Las enumeraciones `AlertType`, `AlertStatus`, `DeliveryStatus` y `AttentionAction` expresan el tipo y el estado de cada alerta. También se muestran las interfaces de dominio: `EmergencyAlertRepository` e `InactivityAlertRepository` para la persistencia, `EmergencyAlertCommandService` e `InactivityAlertCommandService` para las operaciones de escritura, con los Commands que reciben, y `AlertQueryService` para la lectura del historial y del detalle de las alertas de ambos tipos.
 
 <br>
 <div align="center">
 
 ![Domain Layer Class Diagram - Alerts and Safety](assets/img/bounded-context/alerts-safety/alerts-safety-class-diagram.png)
-  <br/><i>Imagen 72. Domain Layer Class Diagram del Bounded Context Alerts and Safety.</i>
+  <br/><i>Imagen 77. Domain Layer Class Diagram del Bounded Context Alerts and Safety.</i>
 
 </div>
 
@@ -6354,7 +6478,7 @@ Diagrama de clases de la capa Domain: en la Imagen 72 se muestran las clases del
 
 ##### 2.6.6.6.2. Bounded Context Database Design Diagram
 
-El diagrama de base de datos (Imagen 73) presenta las tablas que permiten la persistencia del bounded context **Alerts and Safety** sobre el motor MySQL 8, a partir del esquema consolidado por el equipo. Los identificadores son UUID almacenados como `BINARY(16)` y las fechas se guardan en UTC con `DATETIME(6)`. El contexto se materializa en tres tablas: `alerts`, que guarda las alertas de ambos aggregates (`EmergencyAlert` e `InactivityAlert`) diferenciadas por la columna `type`; `alert_notifications`, que registra el aviso de una emergencia a cada familiar vinculado; y `alert_attentions`, que registra el reconocimiento y la resolución que realizan los familiares. Las claves foráneas hacia `users` (Identity & Access) y `check_ins` (Daily Check-in) apuntan a tablas de otros bounded contexts.
+El diagrama de base de datos (Imagen 78) presenta las tablas que permiten la persistencia del bounded context **Alerts and Safety** sobre el motor MySQL 8, a partir del esquema consolidado por el equipo. Los identificadores son UUID almacenados como `BINARY(16)` y las fechas se guardan en UTC con `DATETIME(6)`. El contexto se materializa en tres tablas: `alerts`, que guarda las alertas de ambos aggregates (`EmergencyAlert` e `InactivityAlert`) diferenciadas por la columna `type`; `alert_notifications`, que registra el aviso de una emergencia a cada familiar vinculado; y `alert_attentions`, que registra el reconocimiento y la resolución que realizan los familiares. Las claves foráneas hacia `users` (Identity & Access) y `check_ins` (Daily Check-in) apuntan a tablas de otros bounded contexts.
 
 **Tabla alerts**
 
@@ -6410,7 +6534,7 @@ Esta tabla deja constancia de qué familiar reconoció una alerta y cuál la res
 <div align="center">
 
 ![Database Design Diagram - Alerts and Safety](assets/img/bounded-context/alerts-safety/alerts-safety-database-diagram.png)
-  <br/><i>Imagen 73. Database Design Diagram del Bounded Context Alerts and Safety.</i>
+  <br/><i>Imagen 78. Database Design Diagram del Bounded Context Alerts and Safety.</i>
 
 </div>
 <br>
@@ -6433,7 +6557,7 @@ Serenia cuenta con una guía de estilo visual que define su marca, tipografía, 
 <br>
 <div align="center">
   <img src="assets/img/style-guidelines/general-style-guidelines-image.png" alt="General Style Guidelines - Image" width="700"/>
-  <br/><i>Imagen 74. Portada de la guía "General Style Guidelines".</i>
+  <br/><i>Imagen 79. Portada de la guía "General Style Guidelines".</i>
 </div>
 <br>
 
@@ -6446,14 +6570,14 @@ El isotipo aplica la ley de cierre de la Gestalt: las hojas rodean dos circulos 
 <br>
 <div align="center">
   <img src="assets/img/style-guidelines/variantes-logo.png" alt="Variantes del Logo - Image" width="700"/>
-  <br/><i>Imagen 75. Variantes del logo de Serenia.</i>
+  <br/><i>Imagen 80. Variantes del logo de Serenia.</i>
 </div>
 <br>
 
 <br>
 <div align="center">
   <img src="assets/img/style-guidelines/justificacion-isotipo-paleta.png" alt="Justificación del isotipo y la paleta - Image" width="700"/>
-  <br/><i>Imagen 76. Justificación del isotipo y la paleta.</i>
+  <br/><i>Imagen 81. Justificación del isotipo y la paleta.</i>
 </div>
 <br>
 
@@ -6466,14 +6590,14 @@ Definimos dos escalas dentro de un mismo sistema. La del familiar y la web usa u
 <br>
 <div align="center">
   <img src="assets/img/style-guidelines/familias-tipograficas.png" alt="Familias Tipográficas - Image" width="700"/>
-  <br/><i>Imagen 77. Familias tipográficas de Serenia.</i>
+  <br/><i>Imagen 82. Familias tipográficas de Serenia.</i>
 </div>
 <br>
 
 <br>
 <div align="center">
   <img src="assets/img/style-guidelines/escala-tipografica.png" alt="Escala Tipográfica - Image" width="700"/>
-  <br/><i>Imagen 78. Escala tipográfica para la app del familiar y la app del adulto mayor.</i>
+  <br/><i>Imagen 83. Escala tipográfica para la app del familiar y la app del adulto mayor.</i>
 </div>
 <br>
 
@@ -6488,21 +6612,21 @@ En accesibilidad, el texto principal (neutro-800 sobre crema) alcanza un contras
 <br>
 <div align="center">
   <img src="assets/img/style-guidelines/escalas-tonales.png" alt="Escalas Tonales - Image" width="700"/>
-  <br/><i>Imagen 79. Escalas tonales de la paleta de Serenia.</i>
+  <br/><i>Imagen 84. Escalas tonales de la paleta de Serenia.</i>
 </div>
 <br>
 
 <br>
 <div align="center">
   <img src="assets/img/style-guidelines/colores-semanticos.png" alt="Colores Semánticos - Image" width="700"/>
-  <br/><i>Imagen 80. Colores semánticos.</i>
+  <br/><i>Imagen 85. Colores semánticos.</i>
 </div>
 <br>
 
 <br>
 <div align="center">
   <img src="assets/img/style-guidelines/combinaciones-contraste.png" alt="Combinaciones de contraste - Image" width="700"/>
-  <br/><i>Imagen 81. Combinaciones de contraste según WCAG 2.2.</i>
+  <br/><i>Imagen 86. Combinaciones de contraste según WCAG 2.2.</i>
 </div>
 <br>
 
@@ -6515,7 +6639,7 @@ Las áreas táctiles se dimensionaron según la ley de Fitts: 48 dp en la app de
 <br>
 <div align="center">
   <img src="assets/img/style-guidelines/espaciado-radios-areas.png" alt="Espacio, Radios, Areas - Image" width="700"/>
-  <br/><i>Imagen 82. Espaciado, radios de borde y áreas táctiles.</i>
+  <br/><i>Imagen 87. Espaciado, radios de borde y áreas táctiles.</i>
 </div>
 <br>
 
@@ -6532,14 +6656,14 @@ Usamos un español peruano cercano, con tuteo afectuoso hacia el adulto mayor y 
 <br>
 <div align="center">
   <img src="assets/img/style-guidelines/dimensiones-tonos.png" alt="Dimensiones de tono - Image" width="700"/>
-  <br/><i>Imagen 83. Posición de Serenia en las dimensiones de tono.</i>
+  <br/><i>Imagen 88. Posición de Serenia en las dimensiones de tono.</i>
 </div>
 <br>
 
 <br>
 <div align="center">
   <img src="assets/img/style-guidelines/microcopy.png" alt="Microcopy - Image" width="700"/>
-  <br/><i>Imagen 84. Ejemplos de microcopy.</i>
+  <br/><i>Imagen 89. Ejemplos de microcopy.</i>
 </div>
 <br>
 
@@ -6555,7 +6679,7 @@ Las decisiones anteriores se sustentan en los siguientes principios:
 <br>
 <div align="center">
   <img src="assets/img/style-guidelines/decisiones-diseño.png" alt="Decisiones Diseño - Image" width="700"/>
-  <br/><i>Imagen 85. Referencias adoptadas y adaptaciones realizadas.</i>
+  <br/><i>Imagen 90. Referencias adoptadas y adaptaciones realizadas.</i>
 </div>
 <br>
 
@@ -6728,7 +6852,6 @@ navigation bar adulto mayor:
 navigation bar familiar:
 
 ![Navigation bar - Familiar](assets/img/labeling-system/navbar-mobile2.png)
-<!-- 📷 IMAGEN 13 -->
 
 **Elementos de validación**
 
@@ -6849,7 +6972,7 @@ La navegación se mantiene lo más simple posible, ya que cada opción adicional
 <div align="center">
 
 <img src="assets/img/navigation-systems/nav-adultomayor.png" alt="Barra de navegación - Aplicación móvil del adulto mayor" width="350">
-  <br/><i>Imagen 86. Barra de navegación inferior de la aplicación móvil del adulto mayor.</i>
+  <br/><i>Imagen 91. Barra de navegación inferior de la aplicación móvil del adulto mayor.</i>
 
 </div>
 
@@ -6882,7 +7005,7 @@ Esta aplicación concentra más contenido, por lo que emplea una barra de navega
 <div align="center">
 
 <img src="assets/img/navigation-systems/nav-familiar.png" alt="Barra de navegación - Aplicación móvil del familiar a distancia" width="350">
-  <br/><i>Imagen 87. Barra de navegación inferior de la aplicación móvil del familiar a distancia.</i>
+  <br/><i>Imagen 92. Barra de navegación inferior de la aplicación móvil del familiar a distancia.</i>
 
 </div>
 
@@ -6934,7 +7057,7 @@ La landing page tiene un propósito de conversión: que el visitante comprenda l
 <div align="center">
 
 ![Barra de navegación - Landing page](assets/img/navigation-systems/nav-landingpage.png)
-  <br/><i>Imagen 88. Barra de navegación superior de la landing page.</i>
+  <br/><i>Imagen 93. Barra de navegación superior de la landing page.</i>
 
 </div>
 
@@ -6991,7 +7114,7 @@ En la versión de escritorio, las secciones de Cómo funciona, Funciones y Plane
 
 ![Landing Page Wireframe Desktop](assets/img/ux-design/landing-page/web-wireframe.png)
 
-<br/><i>Imagen 89. Wireframe de la landing page en versión de escritorio.</i>
+<br/><i>Imagen 94. Wireframe de la landing page en versión de escritorio.</i>
 
 <br>
 
@@ -7001,7 +7124,7 @@ En la versión de escritorio, las secciones de Cómo funciona, Funciones y Plane
 
 ![Landing Page Wireframe Mobile](assets/img/ux-design/landing-page/mobile-wireframe.png)
 
-<br/><i>Imagen 90. Wireframe de la landing page en versión móvil.</i>
+<br/><i>Imagen 95. Wireframe de la landing page en versión móvil.</i>
 
 </div>
 
@@ -7036,7 +7159,7 @@ La landing page publicada puede consultarse en [sereniawebsite.netlify.app](http
 
 ![Landing Page Mock-up Desktop](assets/img/ux-design/landing-page/web-mockup.png)
 
-<br/><i>Imagen 91. Mock-up de la landing page en versión de escritorio.</i>
+<br/><i>Imagen 96. Mock-up de la landing page en versión de escritorio.</i>
 
 <br>
 
@@ -7046,7 +7169,7 @@ La landing page publicada puede consultarse en [sereniawebsite.netlify.app](http
 
 ![Landing Page Mock-up Mobile](assets/img/ux-design/landing-page/mobile-mockup.png)
 
-<br/><i>Imagen 92. Mock-up de la landing page en versión móvil.</i>
+<br/><i>Imagen 97. Mock-up de la landing page en versión móvil.</i>
 
 </div>
 
@@ -7363,12 +7486,12 @@ Antes de dibujarlos se definieron los pasos típicos de cada objetivo como una s
 
 **Wireflow 1. Registro y vinculación con la familia (Segmento 1)**
 
-**User goal:** como adulto mayor que vive solo (user persona del primer segmento, sección 2.3.1), quiero registrarme y crear mi círculo familiar para obtener el código de invitación que compartiré con mis familiares (historias US01, US05 y US40). El flujo se muestra en la Imagen 93.
+**User goal:** como adulto mayor que vive solo (user persona del primer segmento, sección 2.3.1), quiero registrarme y crear mi círculo familiar para obtener el código de invitación que compartiré con mis familiares (historias US01, US05 y US40). El flujo se muestra en la Imagen 98.
 
 <div align="center">
 
 ![Wireflow 1 - Registro y vinculación con la familia](assets/img/ux-design/mobile-app/flows/wireflow-1-registro-adulto.png)
-  <br/><i>Imagen 93. Wireflow 1. Registro y vinculación con la familia (Segmento 1).</i>
+  <br/><i>Imagen 98. Wireflow 1. Registro y vinculación con la familia (Segmento 1).</i>
 </div>
 
 El flujo comienza en la pantalla de bienvenida: el adulto mayor toca "Empezar" y, en "¿Quién eres?", elige "Soy adulto mayor". Luego crea su cuenta con su nombre, su correo o celular y una contraseña. La decisión del flujo es si los datos de la cuenta son válidos. Después elige la hora a la que quiere recibir la pregunta del día, crea su círculo familiar y obtiene su código de invitación, que podrá copiar y compartir.
@@ -7378,12 +7501,12 @@ El flujo comienza en la pantalla de bienvenida: el adulto mayor toca "Empezar" y
 
 **Wireflow 2. Check-in diario (Segmento 1)**
 
-**User goal:** como adulto mayor que vive solo, quiero contar en un toque cómo amaneció, o dejar pasar el día sin responder si no lo deseo (historias US03 y US07). El flujo se muestra en la Imagen 94.
+**User goal:** como adulto mayor que vive solo, quiero contar en un toque cómo amaneció, o dejar pasar el día sin responder si no lo deseo (historias US03 y US07). El flujo se muestra en la Imagen 99.
 
 <div align="center">
 
 ![Wireflow 2 - Check-in diario](assets/img/ux-design/mobile-app/flows/wireflow-2-checkin.png)
-  <br/><i>Imagen 94. Wireflow 2. Check-in diario (Segmento 1).</i>
+  <br/><i>Imagen 99. Wireflow 2. Check-in diario (Segmento 1).</i>
 </div>
 
 El flujo comienza en la pantalla de inicio de la aplicación del adulto mayor, donde una notificación del horario configurado le pregunta "¿Cómo amaneciste hoy?" y le ofrece tres opciones: "Muy bien", "Más o menos" y "No tan bien". El único punto de decisión es si el usuario responde ese día.
@@ -7393,12 +7516,12 @@ El flujo comienza en la pantalla de inicio de la aplicación del adulto mayor, d
 
 **Wireflow 3. Pedir ayuda (Segmento 1)**
 
-**User goal:** como adulto mayor que vive solo, quiero pedir ayuda de inmediato y que mi familia lo sepa, sin tener que buscar a quién llamar (historias US13 y US14). El flujo cruza las dos aplicaciones: empieza en la del adulto mayor y termina en la del familiar a distancia (Imagen 95).
+**User goal:** como adulto mayor que vive solo, quiero pedir ayuda de inmediato y que mi familia lo sepa, sin tener que buscar a quién llamar (historias US13 y US14). El flujo cruza las dos aplicaciones: empieza en la del adulto mayor y termina en la del familiar a distancia (Imagen 100).
 
 <div align="center">
 
 ![Wireflow 3 - Pedir ayuda](assets/img/ux-design/mobile-app/flows/wireflow-3-ayuda.png)
-  <br/><i>Imagen 95. Wireflow 3. Pedir ayuda (Segmento 1).</i>
+  <br/><i>Imagen 100. Wireflow 3. Pedir ayuda (Segmento 1).</i>
 </div>
 
 El botón "Ayuda" está disponible en la pantalla de inicio del adulto mayor. Al tocarlo, la aplicación muestra una pantalla de confirmación ("Ya avisamos a tu familia") y el sistema despacha la alerta. La decisión del flujo es si el círculo del adulto mayor tiene familiares vinculados.
@@ -7410,12 +7533,12 @@ El botón "Ayuda" está disponible en la pantalla de inicio del adulto mayor. Al
 
 **Wireflow 4. Registro y vinculación con el adulto mayor (Segmento 2)**
 
-**User goal:** como familiar a distancia (user persona del segundo segmento, sección 2.3.1), quiero vincular mi cuenta con la de mi adulto mayor mediante un código de invitación, para ver cómo amaneció (historias US02 y US40). El flujo se muestra en la Imagen 96.
+**User goal:** como familiar a distancia (user persona del segundo segmento, sección 2.3.1), quiero vincular mi cuenta con la de mi adulto mayor mediante un código de invitación, para ver cómo amaneció (historias US02 y US40). El flujo se muestra en la Imagen 101.
 
 <div align="center">
 
 ![Wireflow 4 - Registro y vinculación con el adulto mayor](assets/img/ux-design/mobile-app/flows/wireflow-4-registro-familiar.png)
-  <br/><i>Imagen 96. Wireflow 4. Registro y vinculación con el adulto mayor (Segmento 2).</i>
+  <br/><i>Imagen 101. Wireflow 4. Registro y vinculación con el adulto mayor (Segmento 2).</i>
 </div>
 
 El familiar abre Serenia, toca "Empezar", elige "Soy familiar" y crea su cuenta con su nombre, su correo o celular y una contraseña. Luego escribe en el teclado numérico el código de cuatro números que el adulto mayor generó en su propia aplicación y toca "Vincularme". La decisión del flujo es si el código es válido y vigente.
@@ -7425,12 +7548,12 @@ El familiar abre Serenia, toca "Empezar", elige "Soy familiar" y crea su cuenta 
 
 **Wireflow 5. Seguimiento del bienestar (Segmento 2)**
 
-**User goal:** como familiar a distancia (user persona del segundo segmento, sección 2.3.1), quiero saber cómo está mi adulto mayor día a día, sin tener que llamarlo (historias US15, US17, US18 y US19). El flujo se muestra en la Imagen 97.
+**User goal:** como familiar a distancia (user persona del segundo segmento, sección 2.3.1), quiero saber cómo está mi adulto mayor día a día, sin tener que llamarlo (historias US15, US17, US18 y US19). El flujo se muestra en la Imagen 102.
 
 <div align="center">
 
 ![Wireflow 5 - Seguimiento del bienestar](assets/img/ux-design/mobile-app/flows/wireflow-5-seguimiento-bienestar.png)
-  <br/><i>Imagen 97. Wireflow 5. Seguimiento del bienestar (Segmento 2).</i>
+  <br/><i>Imagen 102. Wireflow 5. Seguimiento del bienestar (Segmento 2).</i>
 </div>
 
 El flujo comienza en la pantalla de inicio de la aplicación del familiar, donde ve el estado del check-in de hoy. Al desplazarse por el inicio encuentra las "Pequeñas victorias" de la semana y, cuando el adulto mayor lleva varios días seguidos con poco ánimo, la sugerencia de bienestar. Luego entra a Historial, donde revisa los registros anteriores. La decisión del flujo es si abre el detalle de un día.
@@ -7440,12 +7563,12 @@ El flujo comienza en la pantalla de inicio de la aplicación del familiar, donde
 
 **Wireflow 6. Atender una alerta (Segmento 2)**
 
-**User goal:** como familiar a distancia, quiero atender las alertas de mi adulto mayor y saber cuáles siguen pendientes (historias US14, US38 y US39). El flujo se muestra en la Imagen 98.
+**User goal:** como familiar a distancia, quiero atender las alertas de mi adulto mayor y saber cuáles siguen pendientes (historias US14, US38 y US39). El flujo se muestra en la Imagen 103.
 
 <div align="center">
 
 ![Wireflow 6 - Atender una alerta](assets/img/ux-design/mobile-app/flows/wireflow-6-atender-alerta.png)
-  <br/><i>Imagen 98. Wireflow 6. Atender una alerta (Segmento 2).</i>
+  <br/><i>Imagen 103. Wireflow 6. Atender una alerta (Segmento 2).</i>
 </div>
 
 El flujo comienza en el inicio del familiar, donde el ícono de Alertas muestra una insignia con las alertas pendientes. Al tocarlo, el familiar entra a Alertas y ve la lista con los dos tipos de alerta ("Emergencia" e "Inactividad"), cada una con su estado de atención ("Pendiente" o "Resuelta"). La decisión del flujo es si atiende una alerta pendiente.
@@ -7455,13 +7578,13 @@ El flujo comienza en el inicio del familiar, donde el ícono de Alertas muestra 
 
 #### 3.1.4.3. Mobile Applications Mock-ups
 
-Los mock-ups de Serenia traducen los requisitos funcionales del proyecto en pantallas de alta fidelidad. Su objetivo es validar con el equipo la jerarquía visual, la navegación y los estados de cada pantalla antes del desarrollo.
+Los mock-ups de Serenia traducen los requisitos funcionales del proyecto en pantallas de alta fidelidad. Su objetivo es validar con el equipo la jerarquía visual, la navegación y los estados de cada pantalla antes del desarrollo. El flujo del adulto mayor se presenta con capturas de la aplicación Android y el del familiar con los mock-ups de diseño.
 
 <br>
 
 ### Lineamientos de diseño
 
-Se usó la identidad visual de Serenia, con una paleta cálida basada en verde azulado, fondos crema y acentos suaves. Los títulos van en Young Serif, el texto en Nunito y los datos puntuales en DM Mono, con íconos Phosphor. Ambas aplicaciones comparten el mismo menú inferior flotante en verde oscuro, donde la pestaña activa se resalta en blanco. La interfaz del adulto mayor prioriza textos grandes, botones amplios y una acción principal por pantalla. La del familiar prioriza un resumen rápido del estado de su ser querido, con el detalle a un toque.
+Se usó la identidad visual de Serenia, con una paleta cálida basada en verde azulado, fondos crema y acentos suaves. En la aplicación implementada todo el texto usa la familia tipográfica Nunito, con tamaños grandes para facilitar la lectura. Cada aplicación incluye un menú inferior con sus secciones, donde la sección activa se resalta. La interfaz del adulto mayor prioriza textos grandes, botones amplios y una acción principal por pantalla. La del familiar prioriza un resumen rápido del estado de su ser querido, con el detalle a un toque.
 
 
 ### Decisiones de producto reflejadas
@@ -7472,277 +7595,301 @@ El acceso es solo con correo y contraseña. La vinculación se hace con un códi
 
 ## Flujo del adulto mayor
 
-El recorrido del adulto mayor comienza con la bienvenida, el ingreso a la cuenta y la creación de la cuenta. Luego accede a su aplicación, organizada en cuatro secciones: Inicio, Recordar, Familia y Cuenta. Desde el inicio responde su check-in diario con un toque, puede omitirlo si prefiere no responder, y dispone del botón "Ayuda" para avisar a su familia en una emergencia. En las demás secciones gestiona sus recordatorios, comparte fotos y audios con su familia, consulta su círculo y su código de invitación, y administra su cuenta.
+El recorrido del adulto mayor comienza con la bienvenida, el ingreso a la cuenta y la creación de la cuenta. Luego accede a su aplicación, organizada en cuatro secciones: Inicio, Recordar, Familia y Cuenta. Desde el inicio responde su check-in diario con un toque, puede omitirlo si prefiere no responder, y dispone del botón "Pedir ayuda", que debe mantener presionado hasta completar una cuenta regresiva para avisar a su familia en una emergencia; si lo suelta antes, no se envía nada. En las demás secciones gestiona sus recordatorios, comparte fotos y audios con su familia, consulta su círculo y su código de invitación, y administra su cuenta.
 
 <br>
 
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/bienvenida.png)
-
-</div>
+El flujo se presenta con capturas de la aplicación Android, tomadas con datos de prueba, agrupadas por sección.
 
 <br>
 
-<div align="center">
+**Registro e ingreso**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/2.png)
+La persona llega a la bienvenida y puede iniciar sesión o crear su cuenta. Si crea una cuenta elige su rol y la completa en tres pasos: sus datos básicos, la hora a la que quiere recibir su pregunta del día y el código de invitación que compartirá con su familia. Cada formulario muestra el error junto al campo que debe corregirse.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/01-registro-bienvenida.png" width="170" alt="Bienvenida"><br><sub>Bienvenida</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/02-registro-ingreso.png" width="170" alt="Iniciar sesión"><br><sub>Iniciar sesión</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/03-registro-ingreso-error.png" width="170" alt="Error al iniciar sesión"><br><sub>Error al iniciar sesión</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/04-registro-rol.png" width="170" alt="Elección de rol"><br><sub>Elección de rol</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/05-registro-crear-cuenta.png" width="170" alt="Crear cuenta, paso 1 de 3"><br><sub>Crear cuenta, paso 1 de 3</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/06-registro-crear-cuenta-error.png" width="170" alt="Errores al crear la cuenta"><br><sub>Errores al crear la cuenta</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/07-registro-hora-pregunta.png" width="170" alt="Hora de la pregunta, paso 2 de 3"><br><sub>Hora de la pregunta, paso 2 de 3</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/08-registro-codigo-invitacion.png" width="170" alt="Código de invitación, paso 3 de 3"><br><sub>Código de invitación, paso 3 de 3</sub></td>
+</tr>
+</table>
 
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/3.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/4.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/5.png)
-
-</div>
+<p align="center"><i>Imagen 104. Pantallas de registro e ingreso de la aplicación del adulto mayor.</i></p>
 
 <br>
 
-<div align="center">
+**Inicio y check-in diario**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/6.png)
+El inicio saluda por su nombre y le pregunta cómo amaneció con tres opciones de un toque. Al responder, la aplicación lo agradece y la familia queda informada. Si prefiere no responder, activa la pausa del día. El modo simplificado reduce el menú a Inicio y Cuenta para mostrar solo lo esencial.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/09-inicio-checkin.png" width="220" alt="Check-in del día"><br><sub>Check-in del día</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/10-inicio-respondido.png" width="220" alt="Respuesta registrada"><br><sub>Respuesta registrada</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/11-inicio-pausa.png" width="220" alt="Pausa del día"><br><sub>Pausa del día</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/12-inicio-simplificado-pendiente.png" width="220" alt="Modo simplificado, pregunta pendiente"><br><sub>Modo simplificado, pregunta pendiente</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/13-inicio-simplificado.png" width="220" alt="Modo simplificado, respuesta registrada"><br><sub>Modo simplificado, respuesta registrada</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/14-inicio-simplificado-pausa.png" width="220" alt="Modo simplificado, pausa del día"><br><sub>Modo simplificado, pausa del día</sub></td>
+</tr>
+</table>
 
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/7.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/8.png)
-
-</div>
+<p align="center"><i>Imagen 105. Pantallas de inicio y check-in diario de la aplicación del adulto mayor.</i></p>
 
 <br>
 
-<div align="center">
+**Pedir ayuda**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/9.png)
+El botón "Pedir ayuda" está siempre a la vista en el inicio. Debe mantenerse presionado durante una cuenta regresiva: si se suelta antes, no se envía nada, lo que evita avisos por error. Al completarla, la aplicación confirma que avisa a la familia.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/15-ayuda-toque.png" width="220" alt="Aviso para mantener presionado"><br><sub>Aviso para mantener presionado</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/16-ayuda-avisando.png" width="220" alt="Avisando a la familia"><br><sub>Avisando a la familia</sub></td>
+</tr>
+</table>
 
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/10.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/11.png)
-
-</div>
+<p align="center"><i>Imagen 106. Pantallas del botón de ayuda de la aplicación del adulto mayor.</i></p>
 
 <br>
 
-<div align="center">
+**Recordar**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/12.png)
+En Recordar gestiona sus recordatorios. Puede crear uno nuevo con su texto, día y hora, marcarlo como hecho o posponerlo con "Más tarde", y dejar de recibirlo con "Ya no lo necesito", acción que pide confirmación. Un recordatorio marcado como hecho puede deshacerse desde el mensaje de confirmación.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/17-recordar-lista.png" width="170" alt="Lista de recordatorios"><br><sub>Lista de recordatorios</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/18-recordar-vacio.png" width="170" alt="Sin recordatorios"><br><sub>Sin recordatorios</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/19-recordar-nuevo.png" width="170" alt="Nuevo recordatorio"><br><sub>Nuevo recordatorio</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/20-recordar-nuevo-error.png" width="170" alt="Errores de validación"><br><sub>Errores de validación</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/21-recordar-nuevo-dia.png" width="170" alt="Elegir el día"><br><sub>Elegir el día</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/22-recordar-nuevo-hora.png" width="170" alt="Elegir la hora"><br><sub>Elegir la hora</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/23-recordar-hecho.png" width="170" alt="Recordatorio hecho"><br><sub>Recordatorio hecho</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/24-recordar-cancelar.png" width="170" alt="Confirmar que ya no lo necesita"><br><sub>Confirmar que ya no lo necesita</sub></td>
+</tr>
+</table>
 
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/13.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/14.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/15.png)
-
-</div>
+<p align="center"><i>Imagen 107. Pantallas de recordatorios de la aplicación del adulto mayor.</i></p>
 
 <br>
 
-<div align="center">
+**Familia**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/16.png)
+En Familia ve a las personas que lo acompañan y su código de invitación, que puede compartir o renovar. Desde allí puede quitar a un familiar del círculo, ver las fotos que le envían y grabar un audio con su voz: lo escucha antes de enviarlo y puede grabarlo de nuevo o cancelarlo.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/25-familia-inicio.png" width="220" alt="Inicio de Familia"><br><sub>Inicio de Familia</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/26-familia-circulo.png" width="220" alt="Mi círculo"><br><sub>Mi círculo</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/27-familia-circulo-quitar.png" width="220" alt="Quitar a un familiar"><br><sub>Quitar a un familiar</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/28-familia-fotos.png" width="220" alt="Fotos de la familia"><br><sub>Fotos de la familia</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/29-familia-fotos-vacio.png" width="220" alt="Sin fotos"><br><sub>Sin fotos</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/30-familia-foto-abierta.png" width="220" alt="Foto abierta"><br><sub>Foto abierta</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/31-familia-audio-listo.png" width="220" alt="Grabar un audio"><br><sub>Grabar un audio</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/32-familia-audio-grabando.png" width="220" alt="Grabando"><br><sub>Grabando</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/33-familia-audio-revisar.png" width="220" alt="Escuchar antes de enviar"><br><sub>Escuchar antes de enviar</sub></td>
+</tr>
+</table>
+
+<p align="center"><i>Imagen 108. Pantallas de la sección Familia de la aplicación del adulto mayor.</i></p>
 
 <br>
 
-<div align="center">
+**Cuenta**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/17.png)
+En Cuenta cambia la hora de su pregunta del día, activa el modo simplificado o el alto contraste, edita sus datos y su foto, cambia su contraseña y cierra sesión. La hora debe estar entre las 6:00 a. m. y las 8:00 p. m., y cerrar sesión pide confirmación.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/34-cuenta-inicio.png" width="170" alt="Mi cuenta"><br><sub>Mi cuenta</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/35-cuenta-hora-error.png" width="170" alt="Error en la hora"><br><sub>Error en la hora</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/36-cuenta-cerrar-sesion.png" width="170" alt="Cerrar sesión"><br><sub>Cerrar sesión</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/37-cuenta-mis-datos.png" width="170" alt="Mis datos"><br><sub>Mis datos</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/38-cuenta-mis-datos-error.png" width="170" alt="Errores en mis datos"><br><sub>Errores en mis datos</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/39-cuenta-clave.png" width="170" alt="Cambiar contraseña"><br><sub>Cambiar contraseña</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/40-cuenta-clave-error.png" width="170" alt="Error en la contraseña actual"><br><sub>Error en la contraseña actual</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/41-cuenta-clave-ok.png" width="170" alt="Contraseña cambiada"><br><sub>Contraseña cambiada</sub></td>
+</tr>
+</table>
+
+<p align="center"><i>Imagen 109. Pantallas de la sección Cuenta de la aplicación del adulto mayor.</i></p>
 
 <br>
 
 ## Flujo del familiar
 
-El recorrido del familiar comienza con la misma bienvenida, ingreso y creación de cuenta. Luego accede a su aplicación, organizada en cinco secciones: Inicio, Historial, Alertas, Círculo y Mensajes. En el inicio ve cómo amaneció su adulto mayor y accede al detalle de su check-in. En Historial revisa los registros anteriores y en Alertas atiende las emergencias y las inactividades. En Círculo gestiona a los familiares vinculados, los turnos de atención y las notas compartidas, y en Mensajes reproduce los audios y envía fotos.
+El recorrido del familiar comienza con la bienvenida, el ingreso o la creación de la cuenta y la vinculación con el adulto mayor mediante su código de invitación. Luego accede a su aplicación, organizada en cinco secciones: Inicio, Alertas, Círculo, Mensajes y Cuenta. En Inicio ve cómo amaneció su adulto mayor, el turno de atención del día y las pequeñas victorias de la semana, y desde allí abre el Historial. En Alertas atiende las emergencias y las inactividades. En Círculo gestiona a los familiares vinculados, los turnos de atención y las notas compartidas. En Mensajes escucha los audios y envía fotos, y en Cuenta edita sus datos, cambia su contraseña y cierra sesión.
 
 <br>
 
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/bienvenida.png)
-
-</div>
+El flujo se presenta con las pantallas de alta fidelidad de la aplicación del familiar, con datos de ejemplo, agrupadas por sección.
 
 <br>
 
-<div align="center">
+**Registro y vinculación**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/2.png)
+El familiar llega a la bienvenida y puede iniciar sesión o crear su cuenta. Al crearla elige su rol y la completa en tres pasos: sus datos básicos, el código de invitación de ocho letras y números que le comparte su adulto mayor, y el parentesco con él o ella. Los errores se muestran en el mismo formulario, y si el código no es válido o ya se usó, la pantalla lo explica y sugiere pedir uno nuevo. Al terminar, una pantalla confirma que ambos quedaron conectados.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAuthBienvenida.png" width="170" alt="Bienvenida"><br><sub>Bienvenida</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAuthRol.png" width="170" alt="Elección de rol"><br><sub>Elección de rol</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAuthLogin.png" width="170" alt="Iniciar sesión"><br><sub>Iniciar sesión</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAuthLoginError.png" width="170" alt="Error al iniciar sesión"><br><sub>Error al iniciar sesión</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamRegistro.png" width="170" alt="Crear cuenta, paso 1 de 3"><br><sub>Crear cuenta, paso 1 de 3</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamRegistroError.png" width="170" alt="Errores al crear la cuenta"><br><sub>Errores al crear la cuenta</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCodigo.png" width="170" alt="Código de invitación, paso 2 de 3"><br><sub>Código de invitación, paso 2 de 3</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCodigoError.png" width="170" alt="Código no válido"><br><sub>Código no válido</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamParentesco.png" width="170" alt="Parentesco, paso 3 de 3"><br><sub>Parentesco, paso 3 de 3</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamConectados.png" width="170" alt="Cuentas conectadas"><br><sub>Cuentas conectadas</sub></td>
+</tr>
+</table>
 
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/3.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/18.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/19.png)
-
-</div>
+<p align="center"><i>Imagen 110. Pantallas de registro, ingreso y vinculación de la aplicación del familiar.</i></p>
 
 <br>
 
-<div align="center">
+**Inicio y seguimiento diario**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/20.png)
+En Inicio el familiar ve cómo amaneció su adulto mayor: la respuesta del check-in del día, el turno de atención de hoy y las pequeñas victorias de la semana. Si todavía no responde, la tarjeta indica a qué hora se le avisará. Cuando el ánimo es bajo varios días seguidos, aparece una sugerencia con la opción de llamar. Si el adulto mayor prefirió no responder, se muestra la pausa sin generar alerta. Si pide ayuda o pasa una hora sin responder, el inicio destaca una tarjeta con las opciones de llamar o encargarse.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamInicio.png" width="220" alt="Check-in respondido"><br><sub>Check-in respondido</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamInicioPendiente.png" width="220" alt="Aún no responde"><br><sub>Aún no responde</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamInicioSugerencia.png" width="220" alt="Sugerencia por ánimo bajo"><br><sub>Sugerencia por ánimo bajo</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamInicioPausa.png" width="220" alt="Pausa del día"><br><sub>Pausa del día</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamInicioEmergencia.png" width="220" alt="Pidió ayuda"><br><sub>Pidió ayuda</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamInicioInactividad.png" width="220" alt="Sin responder"><br><sub>Sin responder</sub></td>
+</tr>
+</table>
 
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/21.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/22.png)
-
-</div>
+<p align="center"><i>Imagen 111. Pantallas de inicio y seguimiento diario de la aplicación del familiar.</i></p>
 
 <br>
 
-<div align="center">
+**Historial**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/23.png)
+Desde "Ver historial" el familiar revisa los registros de la semana actual y de la pasada, con el estado de ánimo y la hora de cada respuesta, incluidos los días en que prefirió no responder o no respondió. Al abrir un día ve cómo amaneció, sus recordatorios y si los cumplió, y la semana completa. Si todavía no hay registros, la pantalla lo explica.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamHistorial.png" width="220" alt="Historial semanal"><br><sub>Historial semanal</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamHistorialDetalle.png" width="220" alt="Detalle de un día"><br><sub>Detalle de un día</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamHistorialVacio.png" width="220" alt="Sin registros"><br><sub>Sin registros</sub></td>
+</tr>
+</table>
 
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/24.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/25.png)
-
-</div>
+<p align="center"><i>Imagen 112. Pantallas del historial de la aplicación del familiar.</i></p>
 
 <br>
 
-<div align="center">
+**Alertas**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/26.png)
+En Alertas el familiar ve las alertas pendientes y las anteriores, cada una con su tipo, su estado y quién la resolvió. Al abrir una alerta ve qué pasó y a quiénes se avisó, y puede llamar al adulto mayor o encargarse de atenderla, de modo que los demás familiares sepan que alguien ya lo está haciendo. Cuando se confirma que el adulto mayor está bien, la alerta se marca como resuelta y la aplicación permite deshacerlo. Si no hay alertas, la pantalla lo indica.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAlertas.png" width="220" alt="Alertas pendientes y anteriores"><br><sub>Alertas pendientes y anteriores</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAlertasVacio.png" width="220" alt="Sin alertas"><br><sub>Sin alertas</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAlertaDetalle.png" width="220" alt="Detalle de la alerta"><br><sub>Detalle de la alerta</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAlertaAtendiendo.png" width="220" alt="Alerta en atención"><br><sub>Alerta en atención</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAlertasResuelta.png" width="220" alt="Alerta resuelta"><br><sub>Alerta resuelta</sub></td>
+</tr>
+</table>
 
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/27.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/28.png)
-
-</div>
+<p align="center"><i>Imagen 113. Pantallas de alertas de la aplicación del familiar.</i></p>
 
 <br>
 
-<div align="center">
+**Círculo, turnos y notas**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/29.png)
+En Círculo el familiar ve a quienes acompañan al adulto mayor y accede a los turnos de atención y a las notas compartidas. También puede quitar su vínculo: la aplicación pide confirmación y explica que dejará de ver cómo está y de recibir sus alertas, y que sus turnos futuros quedarán libres. En Turnos de atención ve la semana y quién da seguimiento cada día; puede anotarse en un día libre, pasarle su turno a otro familiar o elegir otro día cuando el día ya está cubierto. Las notas compartidas reúnen lo que todos en el círculo deben saber, y cada persona puede agregar una nota o editar las suyas.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCirculo.png" width="170" alt="Círculo familiar"><br><sub>Círculo familiar</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCirculoQuitar.png" width="170" alt="Quitar el vínculo"><br><sub>Quitar el vínculo</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamTurnos.png" width="170" alt="Turnos de atención"><br><sub>Turnos de atención</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoLibre.png" width="170" alt="Día sin asignar"><br><sub>Día sin asignar</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoOcupado.png" width="170" alt="Día ya cubierto"><br><sub>Día ya cubierto</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoReasignar.png" width="170" alt="Pasar el turno"><br><sub>Pasar el turno</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamNotas.png" width="170" alt="Notas compartidas"><br><sub>Notas compartidas</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamNotaEditar.png" width="170" alt="Editar una nota"><br><sub>Editar una nota</sub></td>
+</tr>
+</table>
+
+<p align="center"><i>Imagen 114. Pantallas del círculo, los turnos de atención y las notas compartidas de la aplicación del familiar.</i></p>
 
 <br>
 
-<div align="center">
+**Mensajes**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/30.png)
+En Mensajes el familiar escucha los audios que el adulto mayor graba para la familia, con la hora y la duración de cada uno, y ve las fotos que se comparten. Un audio nuevo se marca como tal y se reproduce desde la lista. Si el adulto mayor aún no envió audios, la pantalla lo explica. Para enviar una foto, el familiar la elige de su galería, la revisa y confirma el envío; el adulto mayor la verá en su aplicación, en Familia, con el nombre de quien la envió.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamMensajes.png" width="220" alt="Audios y fotos"><br><sub>Audios y fotos</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamMensajesSinAudios.png" width="220" alt="Sin audios"><br><sub>Sin audios</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAudioEscuchando.png" width="220" alt="Reproducción de un audio"><br><sub>Reproducción de un audio</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamFotoRevisar.png" width="220" alt="Revisar la foto"><br><sub>Revisar la foto</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamFotoEnviada.png" width="220" alt="Foto enviada"><br><sub>Foto enviada</sub></td>
+</tr>
+</table>
+
+<p align="center"><i>Imagen 115. Pantallas de mensajes de la aplicación del familiar.</i></p>
+
+<br>
+
+**Cuenta**
+
+En Cuenta el familiar edita sus datos y su foto, ve a quién acompaña, cambia su contraseña y cierra sesión. Los formularios señalan los errores junto a cada campo, por ejemplo un correo incompleto o una contraseña actual incorrecta, y al cambiar la contraseña se cierra la sesión en otros celulares. Cerrar sesión pide confirmación y advierte que, mientras no vuelva a entrar, no recibirá las alertas en ese celular.
+
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCuenta.png" width="170" alt="Mi cuenta"><br><sub>Mi cuenta</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamMisDatos.png" width="170" alt="Mis datos"><br><sub>Mis datos</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamMisDatosError.png" width="170" alt="Errores en mis datos"><br><sub>Errores en mis datos</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamClave.png" width="170" alt="Cambiar contraseña"><br><sub>Cambiar contraseña</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamClaveError.png" width="170" alt="Contraseña actual incorrecta"><br><sub>Contraseña actual incorrecta</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCuentaClaveOk.png" width="170" alt="Contraseña cambiada"><br><sub>Contraseña cambiada</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCuentaSalir.png" width="170" alt="Cerrar sesión"><br><sub>Cerrar sesión</sub></td>
+</tr>
+</table>
+
+<p align="center"><i>Imagen 116. Pantallas de cuenta de la aplicación del familiar.</i></p>
 
 <br>
 
@@ -7756,36 +7903,36 @@ Un user flow muestra la ruta que sigue el usuario para lograr su objetivo, con l
 
 **User Flow 1. Registro y vinculación con la familia (Segmento 1)**
 
-**User goal:** registrarse y crear su círculo familiar para obtener el código de invitación que compartirá con sus familiares. Esta ruta cumple las historias US01 (registro de cuenta de usuario), US05 (configuración del horario del check-in) y US40 (generación de código de invitación) y se muestra en la Imagen 99.
+**User goal:** registrarse y crear su círculo familiar para obtener el código de invitación que compartirá con sus familiares. Esta ruta cumple las historias US01 (registro de cuenta de usuario), US05 (configuración del horario del check-in) y US40 (generación de código de invitación) y se muestra en la Imagen 117.
 
 <div align="center">
 
 ![User Flow 1 - Registro y vinculación con la familia](assets/img/ux-design/mobile-app/flows/user-flow-1-registro-adulto.png)
-  <br/><i>Imagen 99. User Flow 1. Registro y vinculación con la familia (Segmento 1).</i>
+  <br/><i>Imagen 117. User Flow 1. Registro y vinculación con la familia (Segmento 1).</i>
 </div>
 
 **Condiciones del flujo:** el adulto mayor crea su cuenta con los datos básicos que la aplicación pide; si algún dato no es válido, la pantalla indica el error y no avanza hasta que se corrige. Con la cuenta creada, elige la hora del día en que quiere recibir su pregunta (puede cambiarla después desde Cuenta), y la aplicación crea su círculo familiar, que desde ese momento tiene un único adulto mayor. El código de cuatro números que recibe se usa una sola vez, y es el adulto mayor quien decide con quién lo comparte; sin círculo y sin código, ninguna otra función de la aplicación tiene destinatario.
 
 **User Flow 2. Check-in diario (Segmento 1)**
 
-**User goal:** contar en un toque cómo amaneció, o dejar pasar el día sin responder si no lo desea. Esta ruta cumple las historias US03 (registro de respuesta del check-in) y US07 (pausa diaria de preguntas) y se muestra en la Imagen 100.
+**User goal:** contar en un toque cómo amaneció, o dejar pasar el día sin responder si no lo desea. Esta ruta cumple las historias US03 (registro de respuesta del check-in) y US07 (pausa diaria de preguntas) y se muestra en la Imagen 118.
 
 <div align="center">
 
 ![User Flow 2 - Check-in diario](assets/img/ux-design/mobile-app/flows/user-flow-2-checkin.png)
-  <br/><i>Imagen 100. User Flow 2. Check-in diario (Segmento 1).</i>
+  <br/><i>Imagen 118. User Flow 2. Check-in diario (Segmento 1).</i>
 </div>
 
 **Condiciones del flujo:** el check-in llega a la hora que el adulto mayor configuró, y el usuario decide si responde ese día. Si responde, la aplicación registra su estado de ánimo y lo agradece; si prefiere no hacerlo, activa la pausa del día, con lo que el sistema omite el check-in e informa a los familiares vinculados que hoy optó por no participar. En ninguno de los dos casos se genera una alerta. Si el adulto mayor no hace ninguna de las dos cosas y el plazo vence, se activa la evaluación de inactividad del bounded context Alerts and Safety (sección 2.6.6), que corresponde a otro flujo.
 
 **User Flow 3. Pedir ayuda (Segmento 1)**
 
-**User goal:** pedir ayuda de inmediato y que la familia lo sepa sin buscar a quién llamar. Esta ruta cumple las historias US13 (activación del botón de auxilio) y US14 (alerta inmediata al familiar) y se muestra en la Imagen 101.
+**User goal:** pedir ayuda de inmediato y que la familia lo sepa sin buscar a quién llamar. Esta ruta cumple las historias US13 (activación del botón de auxilio) y US14 (alerta inmediata al familiar) y se muestra en la Imagen 119.
 
 <div align="center">
 
 ![User Flow 3 - Pedir ayuda](assets/img/ux-design/mobile-app/flows/user-flow-3-ayuda.png)
-  <br/><i>Imagen 101. User Flow 3. Pedir ayuda (Segmento 1).</i>
+  <br/><i>Imagen 119. User Flow 3. Pedir ayuda (Segmento 1).</i>
 </div>
 
 **Condiciones del flujo:** el botón "Ayuda" está siempre a la vista en la pantalla de inicio del adulto mayor, de modo que puede activarlo sin tener que buscarlo. Al activarlo, el sistema registra la emergencia y confirma al usuario que avisó a su familia. Si el círculo tiene familiares vinculados, todos reciben la alerta al mismo tiempo y la ven en la sección Alertas de su aplicación con las etiquetas "Emergencia" y "Pendiente". Si no hay familiares vinculados, la emergencia queda registrada con un despacho fallido y nadie es notificado.
@@ -7794,36 +7941,36 @@ Un user flow muestra la ruta que sigue el usuario para lograr su objetivo, con l
 
 **User Flow 4. Registro y vinculación con el adulto mayor (Segmento 2)**
 
-**User goal:** vincular su cuenta con la de su adulto mayor mediante un código de invitación, para ver cómo amaneció. Esta ruta cumple las historias US02 (vinculación familiar por código de invitación) y US40 (generación de código de invitación) y se muestra en la Imagen 102.
+**User goal:** vincular su cuenta con la de su adulto mayor mediante un código de invitación, para ver cómo amaneció. Esta ruta cumple las historias US02 (vinculación familiar por código de invitación) y US40 (generación de código de invitación) y se muestra en la Imagen 120.
 
 <div align="center">
 
 ![User Flow 4 - Registro y vinculación con el adulto mayor](assets/img/ux-design/mobile-app/flows/user-flow-4-registro-familiar.png)
-  <br/><i>Imagen 102. User Flow 4. Registro y vinculación con el adulto mayor (Segmento 2).</i>
+  <br/><i>Imagen 120. User Flow 4. Registro y vinculación con el adulto mayor (Segmento 2).</i>
 </div>
 
 **Condiciones del flujo:** el adulto mayor genera previamente su código de invitación desde su aplicación; el código es de cuatro números y se usa una sola vez, por lo que él decide quién se vincula. El familiar crea su cuenta y escribe el código. Si es válido y vigente, el sistema registra el vínculo y habilita el acceso al panel de estado del adulto mayor. Si es inválido o ya venció, no se crea el vínculo y el familiar puede ingresar otro código.
 
 **User Flow 5. Seguimiento del bienestar (Segmento 2)**
 
-**User goal:** saber cómo está su adulto mayor día a día, sin tener que llamarlo. Esta ruta cumple las historias US15 (consulta del panel de estado diario), US17 (historial de check-ins), US18 (sugerencia de acción por patrón de malestar) y US19 (registro de pequeñas victorias) y se muestra en la Imagen 103.
+**User goal:** saber cómo está su adulto mayor día a día, sin tener que llamarlo. Esta ruta cumple las historias US15 (consulta del panel de estado diario), US17 (historial de check-ins), US18 (sugerencia de acción por patrón de malestar) y US19 (registro de pequeñas victorias) y se muestra en la Imagen 121.
 
 <div align="center">
 
 ![User Flow 5 - Seguimiento del bienestar](assets/img/ux-design/mobile-app/flows/user-flow-5-seguimiento-bienestar.png)
-  <br/><i>Imagen 103. User Flow 5. Seguimiento del bienestar (Segmento 2).</i>
+  <br/><i>Imagen 121. User Flow 5. Seguimiento del bienestar (Segmento 2).</i>
 </div>
 
 **Condiciones del flujo:** el inicio del familiar muestra el check-in de hoy: si el adulto mayor respondió, aparece su estado de ánimo; si todavía no responde, aparece "Aún no responde" hasta que venza el plazo. Al desplazarse, el familiar ve las "Pequeñas victorias" de la semana y, si el adulto mayor completó tres días consecutivos de malestar, la sugerencia de bienestar, que puede descartar (historia US37). En Historial ve los registros ordenados del más reciente al más antiguo y puede filtrarlos por estado; al elegir un día se abre el detalle del check-in, con la respuesta y la pregunta de esa fecha.
 
 **User Flow 6. Atender una alerta (Segmento 2)**
 
-**User goal:** atender las alertas de su adulto mayor y saber cuáles siguen pendientes. Esta ruta cumple las historias US14 (alerta inmediata al familiar), US38 (reconocimiento de alertas) y US39 (resolución de alertas) y se muestra en la Imagen 104.
+**User goal:** atender las alertas de su adulto mayor y saber cuáles siguen pendientes. Esta ruta cumple las historias US14 (alerta inmediata al familiar), US38 (reconocimiento de alertas) y US39 (resolución de alertas) y se muestra en la Imagen 122.
 
 <div align="center">
 
 ![User Flow 6 - Atender una alerta](assets/img/ux-design/mobile-app/flows/user-flow-6-atender-alerta.png)
-  <br/><i>Imagen 104. User Flow 6. Atender una alerta (Segmento 2).</i>
+  <br/><i>Imagen 122. User Flow 6. Atender una alerta (Segmento 2).</i>
 </div>
 
 **Condiciones del flujo:** la insignia del ícono de Alertas indica cuántas alertas siguen pendientes. En la lista, cada alerta muestra su tipo ("Emergencia" o "Inactividad") y su estado ("Pendiente" o "Resuelta"). Cada alerta admite un único reconocimiento y una única resolución: si dos familiares actúan al mismo tiempo, solo se aplica la primera acción, y así todos saben que alguien ya está atendiendo. Al resolverse, la alerta pasa a "Resuelta" y, si quien la resolvió lo desea, deja una nota que describe cómo se resolvió.
@@ -7849,7 +7996,7 @@ Las decisiones de interacción más importantes son el check-in de un toque, la 
 <div align="center">
 
 ![prototipo](assets/img/insights/video-proto-adulto.png)
-  <br/><i>Imagen 105. Prototipo del adulto mayor.</i>
+  <br/><i>Imagen 123. Prototipo del adulto mayor.</i>
 </div>
 
 **Video de la app del adulto mayor:** [Prototipo del adulto mayor](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQAFCb9JvRsCRZOACF3hmsxcAVYs0CxhCY7lhd7hUdkSD4A?e=HnP1Gb&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
@@ -7864,7 +8011,7 @@ Las decisiones de interacción responden a la necesidad de enterarse rápido y c
 <div align="center">
 
 ![prototipo](assets/img/insights/video-proto-familia.png)
-  <br/><i>Imagen 106. Prototipo del familiar a distancia.</i>
+  <br/><i>Imagen 124. Prototipo del familiar a distancia.</i>
 </div>
 
 **Video de la app del familiar:** [Prototipo del familiar a distancia](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQBY8hFWqFp4T5gpWxH0pwxXAYg_Z92yIvNsQhUq_43SeX0?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=szvj5b)
@@ -7996,7 +8143,7 @@ Esta sección define cómo se nombran los elementos y cómo se escribe el códig
 
 **Nomenclatura por capa (Web Services)**
 
-Los nombres de las clases siguen los que el equipo definió para cada bounded context en la sección 2.6, de modo que el código y el diseño usen el mismo lenguaje ubicuo. La tabla resume el patrón que cumple el backend, con ejemplos reales de los contextos Alerts and Safety y Care Circle. El patrón se midió sobre los 557 archivos Java de `serenia-platform` al 8 de octubre de 2026, y cada categoría se cumple sin excepciones: por ejemplo, los 55 commands terminan en `Command` y los 26 servicios de aplicación terminan en `Impl`.
+Los nombres de las clases siguen los que el equipo definió para cada bounded context en la sección 2.6, de modo que el código y el diseño usen el mismo lenguaje ubicuo. La tabla resume el patrón que cumple el backend, con ejemplos reales de los contextos Alerts and Safety y Care Circle. El patrón se midió sobre los 558 archivos Java de `serenia-platform` al 13 de noviembre de 2026, y cada categoría se cumple sin excepciones: por ejemplo, los 55 commands terminan en `Command` y los 26 servicios de aplicación terminan en `Impl`.
 
 <br>
 
@@ -8025,10 +8172,10 @@ Los nombres de las clases siguen los que el equipo definió para cada bounded co
 
 | Aspecto | Convención aplicada |
 | --- | --- |
-| Sangría | 4 espacios y ninguna tabulación (ninguno de los 557 archivos usa tabulaciones) |
-| Importaciones | Explícitas, sin comodines (solo 1 excepción en los 557 archivos) |
-| Documentación | Javadoc en inglés en las clases (525 de 557 archivos), con enlaces `{@link}` y párrafos `<p>` para explicar las reglas de negocio |
-| Objetos inmutables | `record` para commands, queries, eventos, value objects y resources (231 en total) |
+| Sangría | 4 espacios y ninguna tabulación (ninguno de los 558 archivos usa tabulaciones) |
+| Importaciones | Explícitas, sin comodines (solo 1 excepción en los 558 archivos) |
+| Documentación | Javadoc en inglés en las clases (526 de 558 archivos), con enlaces `{@link}` y párrafos `<p>` para explicar las reglas de negocio |
+| Objetos inmutables | `record` para commands, queries, eventos, value objects y resources (232 en total) |
 | Persistencia | Entidades JPA con Lombok (`@Getter`, `@Setter` y `@NoArgsConstructor`) y tipos de columna explícitos, como `BINARY(16)` para los identificadores y `DATETIME(6)` para las fechas |
 | Resultados | Los servicios de aplicación devuelven `Result<T, ApplicationError>` (por ejemplo, `Result<EmergencyAlert, ApplicationError>`) en lugar de lanzar excepciones hacia la capa REST |
 | Valores ausentes | `Optional` en las consultas, en lugar de `null` |
@@ -8059,19 +8206,19 @@ El sitio se construye con Vite, sin biblioteca de interfaz, por lo que sus conve
 
 **Nomenclatura y estilo de la aplicación móvil (Kotlin)**
 
-La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario de la landing y del backend: Home, Check-in, Alerts and Safety, Social Companionship, Identity and Access y Care Circle. Las convenciones de la tabla se midieron sobre los 95 archivos Kotlin de `serenia-mobile-android` al 10 de octubre de 2026, y se cumplen en todos los casos que alcanza cada regla: por ejemplo, los 10 ViewModels llevan `@HiltViewModel` y los 10 estados de pantalla son `data class`.
+La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario de la landing y del backend: Home, Daily Check-in, Alerts and Safety, Social Companionship, Identity and Access, Care Circle y Account. Las convenciones de la tabla se midieron sobre los 231 archivos Kotlin de código fuente de `serenia-mobile-android` al 13 de noviembre de 2026, y se cumplen en todos los casos que alcanza cada regla: por ejemplo, los 17 ViewModels llevan `@HiltViewModel` y los 15 estados de pantalla son `data class`.
 
 <br>
 
 | Elemento | Regla | Ejemplo |
 | --- | --- | --- |
-| Paquetes | Base `com.vitalcare.serenia`, con una carpeta por funcionalidad que separa `domain` y `presentation`, más `core/designsystem` y `navigation` | `features/checkin/presentation/thanks` |
-| Pantalla | Función `@Composable` en PascalCase con sufijo `Screen`, en un archivo propio; lee el ViewModel y delega el dibujo en un `...Content` sin estado, y los componentes propios van en una carpeta `components` | `HomeScreen`, `FamilyScreen` |
-| Estado de la pantalla | `data class` con sufijo `UiState` y valores por defecto; los eventos de una sola vez, como los mensajes, se modelan con un `sealed interface` de sufijo `Event` enviado por un `Channel` | `HomeUiState`, `FamilyUiState` |
-| ViewModel | Sufijo `ViewModel`, anotado con `@HiltViewModel` y con constructor `@Inject`; expone el estado como `StateFlow` de solo lectura mediante `asStateFlow()` | `HomeViewModel` |
-| Navegación | Un grafo por funcionalidad con sufijo `NavGraph` (6 grafos), rutas tipadas con `@Serializable` (19 rutas) y registro de cada grafo en `AppNavHost` | `CheckInNavGraph`, `AlertsAndSafetyNavGraph` |
-| Dominio | Tipos propios de la funcionalidad; las constantes de un `enum` van en MAYÚSCULAS con guion bajo | `Mood.NOT_GOOD` |
-| Sistema de diseño | Componentes reutilizables y tema de Material 3 en `core/designsystem`, dividido en `components`, `icon` y `theme` | `SereniaButtons`, `Theme` |
+| Paquetes | Base `com.vitalcare.serenia`, con una carpeta por funcionalidad que separa las capas `domain`, `application`, `infrastructure` y `presentation`, más `core` (apariencia, red, sesión y sistema de diseño) y `main` | `features/dailycheckin/presentation` |
+| Pantalla | Función `@Composable` en PascalCase con sufijo `Screen`, en un archivo propio; lee el ViewModel y delega el dibujo en un `...Content` sin estado | `HomeScreen`, `FamilyScreen` |
+| Estado de la pantalla | `data class` con sufijo `UiState` y valores por defecto | `HomeUiState`, `FamilyUiState` |
+| ViewModel | Sufijo `ViewModel`, anotado con `@HiltViewModel` y con constructor `@Inject`; expone el estado como `StateFlow` de solo lectura, con `asStateFlow()` o `stateIn` | `HomeViewModel` |
+| Navegación | Un grafo por funcionalidad con sufijo `NavGraph` (8 grafos), rutas tipadas con `@Serializable` (23 rutas) y registro de cada grafo en el `NavHost` de `MainScreen` | `CheckInNavGraph`, `AlertsAndSafetyNavGraph` |
+| Dominio | Tipos propios de la funcionalidad; las constantes de un `enum` van en MAYÚSCULAS con guion bajo | `MoodLevel.VERY_LOW` |
+| Sistema de diseño | Componentes reutilizables y tema de Material 3 en `core/designsystems`, dividido en `components` y `theme`, con los íconos en `Icons.kt` | `SereniaButtons`, `Theme` |
 
 <br>
 
@@ -8079,8 +8226,8 @@ La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario
 
 | Aspecto | Convención aplicada |
 | --- | --- |
-| Sangría | 4 espacios y ninguna tabulación (ninguno de los 95 archivos usa tabulaciones) |
-| Interfaz de usuario | Jetpack Compose con Material 3 (42 archivos); 118 funciones `@Composable` en 46 archivos y 46 vistas previas con `@Preview` |
+| Sangría | 4 espacios y ninguna tabulación (ninguno de los 231 archivos usa tabulaciones) |
+| Interfaz de usuario | Jetpack Compose con Material 3 (51 archivos); 189 funciones `@Composable` en 54 archivos y 54 vistas previas con `@Preview` |
 | Estado | Un `MutableStateFlow` privado dentro del ViewModel y actualizaciones con `update` y `copy` sobre el estado inmutable |
 | Inyección de dependencias | Hilt, con `hilt-navigation-compose` para obtener los ViewModels en las pantallas |
 | Comentarios | En inglés y de una línea, para explicar decisiones puntuales de diseño |
@@ -8090,13 +8237,13 @@ La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario
 
 ### 4.1.4. Software Deployment Configuration
 
-Esta sección explica cómo publicar cada producto de Serenia a partir de su repositorio de código, con los pasos suficientes para que otro integrante del equipo pueda repetir el despliegue. La evidencia de lo ejecutado en cada sprint, con sus capturas, se presenta en la sección 4.2.1.8 (Software Deployment Evidence for Sprint Review). Los tres productos de la solución se publican en plataformas distintas, como muestra el Deployment Diagram de la sección 2.5.3.3, que se repite en la Imagen 107.
+Esta sección explica cómo publicar cada producto de Serenia a partir de su repositorio de código, con los pasos suficientes para que otro integrante del equipo pueda repetir el despliegue. La evidencia de lo ejecutado en cada sprint, con sus capturas, se presenta en las secciones 4.2.1.8 y 4.2.2.8 (Software Deployment Evidence for Sprint Review). Los tres productos de la solución se publican en plataformas distintas, como muestra el Deployment Diagram de la sección 2.5.3.3, que se repite en la Imagen 125.
 
 <br>
 
 <div align="center">
   <img src="assets/img/software-architecture/deployment-diagram.png" alt="Deployment Diagram - Serenia" width="700"/>
-  <br/><i>Imagen 107. Deployment Diagram de Serenia.</i>
+  <br/><i>Imagen 125. Deployment Diagram de Serenia.</i>
 </div>
 
 <br>
@@ -8106,8 +8253,8 @@ Esta sección explica cómo publicar cada producto de Serenia a partir de su rep
 | Producto | Repositorio | Plataforma de despliegue | Qué se publica | Estado |
 | --- | --- | --- | --- | --- |
 | Landing page web | `serenia-website` | Netlify, conectado al repositorio de GitHub | La carpeta `dist`, generada con `npm run build` | Publicada en https://sereniawebsite.netlify.app/ |
-| Web Services | `serenia-platform` | Microsoft Azure (Azure Web App Service para la API y MySQL Flexible Server para la base de datos) | Una imagen Docker de la API, que empaqueta el JAR ejecutable de Spring Boot | Desplegada en https://serenia-platform-api.azurewebsites.net |
-| Aplicación móvil | `serenia-mobile-android` | Firebase App Distribution | El instalable (APK) de la aplicación Android, generado con Gradle | Proyecto Android disponible en el repositorio, con las funcionalidades Home, Check-in, Alerts and Safety, Social Companionship, Identity and Access y Care Circle |
+| Web Services | `serenia-platform` | Microsoft Azure (Azure Web App Service para la API y MySQL Flexible Server para la base de datos) | Una imagen Docker de la API, que empaqueta el JAR ejecutable de Spring Boot | Desplegada en https://serenia-platform.azurewebsites.net |
+| Aplicación móvil | `serenia-mobile-android` | Firebase App Distribution | El instalable (APK) de la aplicación Android, generado con Gradle | Distribuida al grupo de testers del proyecto en Firebase App Distribution; es la aplicación del adulto mayor, con las funcionalidades Home, Daily Check-in, Alerts and Safety, Social Companionship, Identity and Access, Care Circle y Account |
 
 Todos los repositorios pertenecen a la organización del equipo en GitHub (https://github.com/upc-pre-202620-1acc0238-4945-vitalcare). El código que se publica proviene de la rama `main`, que recibe los cambios desde `develop` mediante Pull Requests en cada entrega, según el flujo GitFlow adoptado por el equipo.
 
@@ -8221,8 +8368,8 @@ La única prueba del proyecto, `SereniaPlatformApplicationTests`, levanta la apl
 | Comprobación | Resultado |
 | --- | --- |
 | Construir el proyecto con Java 26 (8 de octubre de 2026) | Se compilan los 557 archivos fuente sin errores |
-| Abrir https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html (9 de octubre de 2026) | Responde 200 y muestra la documentación interactiva de la API, generada por springdoc |
-| Consultar `/v3/api-docs` en el servicio | Devuelve la definición OpenAPI con 56 operaciones en 17 grupos, que parten de `/api/v1` |
+| Abrir https://serenia-platform.azurewebsites.net/swagger-ui/index.html (13 de noviembre de 2026) | Responde 200 y muestra la documentación interactiva de la API, generada por springdoc |
+| Consultar `/v3/api-docs` en el servicio | Devuelve la definición OpenAPI con 57 operaciones en 17 grupos, que parten de `/api/v1` |
 | Consultar un endpoint protegido sin token, por ejemplo `/api/v1/alerts` | Responde 401 Unauthorized, lo que confirma que la API exige el token JWT |
 
 <br>
@@ -8234,10 +8381,22 @@ El Deployment Diagram establece que la aplicación móvil se distribuye mediante
 | Aspecto | Detalle |
 | --- | --- |
 | Repositorio | `serenia-mobile-android`, con las ramas `main` y `develop` y una rama `feature/<funcionalidad>` por cada funcionalidad |
-| Identificador de la aplicación | `com.vitalcare.serenia`, versión 1.0 (`versionCode` 1) |
+| Identificador de la aplicación | `com.vitalcare.serenia`, versión 1.0; el código de versión (`versionCode`) lo asigna el pipeline como 100 más el número de ejecución |
 | Versiones de construcción | Android Gradle Plugin 9.4.1, Kotlin 2.4.20, `minSdk` 24 y `targetSdk` 37 |
-| Construcción | Abrir el proyecto en Android Studio y ejecutarlo en un emulador o en un dispositivo; desde la línea de comandos, `./gradlew assembleDebug` genera el APK de depuración en `app/build/outputs/apk/debug`; la compilación terminó sin errores el 10 de octubre de 2026 |
-| Distribución | Firebase App Distribution, según el Deployment Diagram: se sube cada versión al proyecto de Firebase y se invita a los testers para instalarla |
+| Construcción | Abrir el proyecto en Android Studio y ejecutarlo en un emulador o en un dispositivo; desde la línea de comandos, `./gradlew assembleDebug` genera el APK de depuración en `app/build/outputs/apk/debug`; GitHub Actions compila el APK en cada Pull Request hacia `develop` o `main` |
+| Distribución | Firebase App Distribution, según el Deployment Diagram: el grupo `testers` recibe cada versión por correo y la instala desde la invitación |
+
+Firebase App Distribution no es una tienda de aplicaciones: reparte el APK únicamente a los testers invitados, que instalan cada versión de forma manual y sin actualización forzada. El procedimiento para repetir la distribución es el siguiente.
+
+| Paso | Acción |
+| --- | --- |
+| 1 | Crear en la consola de Firebase el proyecto `serenia-mobile-android`, con el plan gratuito Spark |
+| 2 | Registrar la aplicación Android con el nombre de paquete `com.vitalcare.serenia` y el alias Serenia |
+| 3 | En App Distribution, crear el grupo de verificadores `testers` y agregar el correo de cada tester |
+| 4 | Subir manualmente el primer APK de depuración (`app-debug.apk`) desde la consola, con una nota de versión, y distribuirlo al grupo |
+| 5 | Para las versiones siguientes se usa el workflow `.github/workflows/android.yml`: en cada push a `main`, GitHub Actions compila el APK, lo firma con una clave de depuración compartida y lo envía al grupo `testers`. La rama `develop` solo integra y no publica |
+| 6 | Guardar los datos de acceso como secrets del repositorio: `FIREBASE_APP_ID`, `FIREBASE_SERVICE_ACCOUNT` (cuenta de servicio con el rol de administrador de App Distribution) y `DEBUG_KEYSTORE_BASE64` (clave de depuración en Base64). Ninguno se sube al código |
+| 7 | Cada tester recibe un correo con la invitación y la nota de la versión, e instala la versión más reciente. Con la misma clave de firma, una versión nueva se instala sobre la anterior sin desinstalarla |
 
 <br>
 
@@ -8278,7 +8437,7 @@ El objetivo principal del Sprint 1 fue establecer la arquitectura base de la API
 <div align="center">
 
 ![Evidencia de Trello](assets/img/sprint-1/trello-board.png)
-  <br/><i>Imagen 108. Board de Trello correspondiente al Sprint 1.</i>
+  <br/><i>Imagen 126. Board de Trello correspondiente al Sprint 1.</i>
 
 </div>
 
@@ -8332,11 +8491,11 @@ A continuación, se presentan las tablas de control por repositorio, detallando 
 
 En este Sprint se logró un avance significativo en la estructuración e implementación de la solución, tanto a nivel de interfaces de usuario como de servicios backend. 
 
-Por un lado, el backend fue desplegado exitosamente en Microsoft Azure, y su documentación generada automáticamente puede visualizarse y probarse a través de Swagger UI, donde se exponen los endpoints funcionales desarrollados durante el sprint (ver Imagen 109).
+Por un lado, el backend fue desplegado exitosamente en Microsoft Azure, y su documentación generada automáticamente puede visualizarse y probarse a través de Swagger UI, donde se exponen los endpoints funcionales desarrollados durante el sprint (ver Imagen 127).
 
-**Enlace de la API REST (Swagger UI):** [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/]
+**Enlace de la API REST (Swagger UI):** [https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/]
 
-Por otro lado, se completó la maquetación de la Landing Page pública, la cual ya se encuentra en un entorno de producción accesible para los usuarios finales, comunicando la propuesta de valor y los planes de Serenia (ver Imagen 110).
+Por otro lado, se completó la maquetación de la Landing Page pública, la cual ya se encuentra en un entorno de producción accesible para los usuarios finales, comunicando la propuesta de valor y los planes de Serenia (ver Imagen 128).
 
 **Enlace de la Landing Page:** [https://sereniawebsite.netlify.app/]
 
@@ -8345,14 +8504,14 @@ Por otro lado, se completó la maquetación de la Landing Page pública, la cual
 <div align="center">
 
 ![Ejecución API Swagger](assets/img/sprint-1/api-execution.png)
-  <br/><i>Imagen 109. Ejecución del entorno de pruebas de la API REST documentada en Swagger UI.</i>
+  <br/><i>Imagen 127. Ejecución del entorno de pruebas de la API REST documentada en Swagger UI.</i>
 
 </div>
 
 <div align="center">
 
 ![Ejecución Landing Page](assets/img/sprint-1/landing-execution.png)
-  <br/><i>Imagen 110. Ejecución en producción de la Landing Page de Serenia.</i>
+  <br/><i>Imagen 128. Ejecución en producción de la Landing Page de Serenia.</i>
 
 </div>
 
@@ -8364,12 +8523,12 @@ Como parte de este avance, se documentaron con OpenAPI **56 endpoints agrupados 
 
 | Recurso | URL |
 |---|---|
-| Swagger UI | [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html) |
-| Especificación OpenAPI (JSON) | `https://serenia-platform-api.azurewebsites.net/v3/api-docs` |
+| Swagger UI | [https://serenia-platform.azurewebsites.net/swagger-ui/index.html](https://serenia-platform.azurewebsites.net/swagger-ui/index.html) |
+| Especificación OpenAPI (JSON) | `https://serenia-platform.azurewebsites.net/v3/api-docs` |
 
-### Convenciones generales de la API
+**Convenciones generales de la API**
 
-- **URL base:** `https://serenia-platform-api.azurewebsites.net/api/v1`.
+- **URL base:** `https://serenia-platform.azurewebsites.net/api/v1`.
 - **Formato:** todas las peticiones y respuestas usan `application/json`, salvo la subida de audios y fotos (`multipart/form-data`) y la descarga de archivos multimedia (`/media`).
 - **Autenticación:** la API es *stateless* y usa JWT. Solo `POST /api/v1/users` (registro) y `POST /api/v1/sessions` (inicio de sesión) son públicos; el resto de endpoints exige la cabecera `Authorization: Bearer <token>`, con el token obtenido al iniciar sesión (válido por 7 días). La documentación declara el esquema de seguridad `bearerAuth` (HTTP, bearer, JWT), lo que habilita el botón **Authorize** de Swagger UI.
 - **Identificadores y fechas:** los identificadores son UUID. Los instantes se almacenan y devuelven en UTC (ISO-8601, p. ej. `2026-10-07T15:00:00Z`); las fechas y horas locales (`shiftDate`, `checkDate`, `remindAt`, `reminderTime`) se interpretan en la zona horaria del adulto mayor.
@@ -8393,37 +8552,37 @@ Como parte de este avance, se documentaron con OpenAPI **56 endpoints agrupados 
 | `413` / `415` | Archivo demasiado grande (máx. 10 MB) / tipo de archivo no soportado |
 | `422` | Regla de negocio incumplida (`BUSINESS_RULE_VIOLATION`) |
 
-### Relación de endpoints documentados
+**Relación de endpoints documentados**
 
 Los enlaces de la columna *Documentación* apuntan a la sección (tag) correspondiente de Swagger UI en el entorno desplegado en Azure.
 
 | Bounded context | Endpoint | Acciones implementadas | Documentación (Swagger UI) |
 |---|---|---|---|
-| IAM | `/api/v1/users` | `POST` registrar usuario · `GET` obtener por id · `PUT` actualizar perfil · `PUT` actualizar foto · `PUT` cambiar contraseña | [Users](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Users) |
-| IAM | `/api/v1/sessions` | `POST` iniciar sesión · `DELETE` cerrar sesión | [Sessions](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Sessions) |
-| Care Circle | `/api/v1/care-circles` | `GET` por id · `GET` por adulto mayor | [Care Circles](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Care%20Circles) |
-| Care Circle | `/api/v1/care-circles/{careCircleId}/invitation-codes` | `POST` generar código · `GET` códigos pendientes | [Invitation Codes](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Invitation%20Codes) |
-| Care Circle | `/api/v1/family-links` y `/api/v1/care-circles/{careCircleId}/family-links` | `POST` canjear código · `GET` vínculos de un familiar · `GET` vínculos de un círculo · `DELETE` revocar vínculo | [Family Links](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Family%20Links) |
-| Care Circle | `/api/v1/care-circles/{careCircleId}/care-shifts` | `POST` asignar turno · `GET` consultar turnos · `PUT` reasignar turno | [Care Shifts](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Care%20Shifts) |
-| Care Circle | `/api/v1/care-circles/{careCircleId}/shared-notes` | `POST` crear nota · `GET` listar notas · `PUT` editar nota | [Shared Notes](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Shared%20Notes) |
-| Daily Check-in | `/api/v1/check-ins` | `GET` check-in de hoy · `GET` historial · `POST` responder check-in | [Check-ins](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Check-ins) |
-| Daily Check-in | `/api/v1/check-in-preferences` | `GET` preferencias · `PUT` hora del check-in · `POST` pausar hoy · `DELETE` reanudar hoy · `PUT` modo simplificado | [Check-in Preferences](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Check-in%20Preferences) |
-| Alerts and Safety | `/api/v1/alerts` | `GET` alertas de un adulto mayor · `GET` detalle de alerta | [Alerts](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Alerts) |
-| Alerts and Safety | `/api/v1/emergency-alerts` | `POST` botón de ayuda · `POST` reconocer · `POST` resolver | [Emergency Alerts](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Emergency%20Alerts) |
-| Alerts and Safety | `/api/v1/inactivity-alerts` | `POST` reconocer · `POST` resolver | [Inactivity Alerts](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Inactivity%20Alerts) |
-| Social Companionship | `/api/v1/care-circles/{careCircleId}/audio-messages` | `POST` grabar · `POST` compartir · `DELETE` descartar · `GET` listar · `GET` archivo · `POST` reproducir | [Audio Messages](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Audio%20Messages) |
-| Social Companionship | `/api/v1/care-circles/{careCircleId}/photo-messages` | `POST` subir · `POST` compartir · `DELETE` descartar · `GET` listar · `GET` archivo · `POST` marcar como vista | [Photo Messages](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Photo%20Messages) |
-| Social Companionship | `/api/v1/social-reminders` | `POST` programar · `GET` activos · `POST` posponer · `POST` completar · `POST` cancelar | [Social Reminders](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Social%20Reminders) |
-| Wellbeing Monitoring | `/api/v1/small-wins` | `GET` pequeños logros por rango de fechas | [Small Wins](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Small%20Wins) |
-| Wellbeing Monitoring | `/api/v1/wellbeing-suggestions` | `GET` sugerencias activas · `POST` descartar sugerencia | [Wellbeing Suggestions](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html#/Wellbeing%20Suggestions) |
+| IAM | `/api/v1/users` | `POST` registrar usuario · `GET` obtener por id · `PUT` actualizar perfil · `PUT` actualizar foto · `PUT` cambiar contraseña | [Users](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Users) |
+| IAM | `/api/v1/sessions` | `POST` iniciar sesión · `DELETE` cerrar sesión | [Sessions](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Sessions) |
+| Care Circle | `/api/v1/care-circles` | `GET` por id · `GET` por adulto mayor | [Care Circles](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Care%20Circles) |
+| Care Circle | `/api/v1/care-circles/{careCircleId}/invitation-codes` | `POST` generar código · `GET` códigos pendientes | [Invitation Codes](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Invitation%20Codes) |
+| Care Circle | `/api/v1/family-links` y `/api/v1/care-circles/{careCircleId}/family-links` | `POST` canjear código · `GET` vínculos de un familiar · `GET` vínculos de un círculo · `DELETE` revocar vínculo | [Family Links](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Family%20Links) |
+| Care Circle | `/api/v1/care-circles/{careCircleId}/care-shifts` | `POST` asignar turno · `GET` consultar turnos · `PUT` reasignar turno | [Care Shifts](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Care%20Shifts) |
+| Care Circle | `/api/v1/care-circles/{careCircleId}/shared-notes` | `POST` crear nota · `GET` listar notas · `PUT` editar nota | [Shared Notes](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Shared%20Notes) |
+| Daily Check-in | `/api/v1/check-ins` | `GET` check-in de hoy · `GET` historial · `POST` responder check-in | [Check-ins](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Check-ins) |
+| Daily Check-in | `/api/v1/check-in-preferences` | `GET` preferencias · `PUT` hora del check-in · `POST` pausar hoy · `DELETE` reanudar hoy · `PUT` modo simplificado | [Check-in Preferences](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Check-in%20Preferences) |
+| Alerts and Safety | `/api/v1/alerts` | `GET` alertas de un adulto mayor · `GET` detalle de alerta | [Alerts](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Alerts) |
+| Alerts and Safety | `/api/v1/emergency-alerts` | `POST` botón de ayuda · `POST` reconocer · `POST` resolver | [Emergency Alerts](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Emergency%20Alerts) |
+| Alerts and Safety | `/api/v1/inactivity-alerts` | `POST` reconocer · `POST` resolver | [Inactivity Alerts](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Inactivity%20Alerts) |
+| Social Companionship | `/api/v1/care-circles/{careCircleId}/audio-messages` | `POST` grabar · `POST` compartir · `DELETE` descartar · `GET` listar · `GET` archivo · `POST` reproducir | [Audio Messages](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Audio%20Messages) |
+| Social Companionship | `/api/v1/care-circles/{careCircleId}/photo-messages` | `POST` subir · `POST` compartir · `DELETE` descartar · `GET` listar · `GET` archivo · `POST` marcar como vista | [Photo Messages](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Photo%20Messages) |
+| Social Companionship | `/api/v1/social-reminders` | `POST` programar · `GET` activos · `POST` posponer · `POST` completar · `POST` cancelar | [Social Reminders](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Social%20Reminders) |
+| Wellbeing Monitoring | `/api/v1/small-wins` | `GET` pequeños logros por rango de fechas | [Small Wins](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Small%20Wins) |
+| Wellbeing Monitoring | `/api/v1/wellbeing-suggestions` | `GET` sugerencias activas · `POST` descartar sugerencia | [Wellbeing Suggestions](https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/Wellbeing%20Suggestions) |
 
-### Detalle de acciones por endpoint
+**Detalle de acciones por endpoint**
 
 En cada tabla, los parámetros marcados con `*` son obligatorios. Los *path parameters* y *query parameters* son de tipo UUID, salvo que se indique otro tipo. Salvo que se indique lo contrario, todas las acciones requieren `Authorization: Bearer <token>`.
 
 ---
 
-#### Users: `/api/v1/users`
+**Users: `/api/v1/users`**
 
 Registro de adultos mayores y familiares lejanos, y gestión del perfil. Las modificaciones solo proceden si `{userId}` corresponde al usuario autenticado.
 
@@ -8469,7 +8628,7 @@ Registro de adultos mayores y familiares lejanos, y gestión del perfil. Las mod
 
 ---
 
-#### Sessions: `/api/v1/sessions`
+**Sessions: `/api/v1/sessions`**
 
 Inicio y cierre de sesión. Al iniciar sesión se abre una sesión y se emite el token JWT que se usa en el resto de la API.
 
@@ -8509,7 +8668,7 @@ Inicio y cierre de sesión. Al iniciar sesión se abre una sesión y se emite el
 
 ---
 
-#### Care Circles: `/api/v1/care-circles`
+**Care Circles: `/api/v1/care-circles`**
 
 Círculo de cuidado de un adulto mayor. Pueden consultarlo su dueño y los familiares con vínculo activo.
 
@@ -8530,7 +8689,8 @@ Círculo de cuidado de un adulto mayor. Pueden consultarlo su dueño y los famil
 
 ---
 
-#### Invitation Codes: `/api/v1/care-circles/{careCircleId}/invitation-codes`
+
+**Invitation Codes: `/api/v1/care-circles/{careCircleId}/invitation-codes`**
 
 Códigos de invitación que el adulto mayor comparte con un familiar para que se una a su círculo. Cada código vence a las 48 horas.
 
@@ -8552,7 +8712,7 @@ Códigos de invitación que el adulto mayor comparte con un familiar para que se
 
 ---
 
-#### Family Links: `/api/v1/family-links` y `/api/v1/care-circles/{careCircleId}/family-links`
+**Family Links: `/api/v1/family-links` y `/api/v1/care-circles/{careCircleId}/family-links`**
 
 Vínculo de un familiar con un círculo de cuidado. El adulto mayor puede revocar cualquier vínculo de su círculo; un familiar, solo el suyo.
 
@@ -8587,7 +8747,7 @@ Vínculo de un familiar con un círculo de cuidado. El adulto mayor puede revoca
 
 ---
 
-#### Care Shifts: `/api/v1/care-circles/{careCircleId}/care-shifts`
+**Care Shifts: `/api/v1/care-circles/{careCircleId}/care-shifts`**
 
 Turnos diarios de cuidado que se reparten los familiares del círculo.
 
@@ -8616,7 +8776,7 @@ Turnos diarios de cuidado que se reparten los familiares del círculo.
 
 ---
 
-#### Shared Notes: `/api/v1/care-circles/{careCircleId}/shared-notes`
+**Shared Notes: `/api/v1/care-circles/{careCircleId}/shared-notes`**
 
 Notas visibles para todos los familiares del círculo; solo su autor puede editarlas.
 
@@ -8646,7 +8806,7 @@ Notas visibles para todos los familiares del círculo; solo su autor puede edita
 ```
 
 ---
-#### Check-ins: `/api/v1/check-ins`
+**Check-ins: `/api/v1/check-ins`**
 
 Pregunta diaria de ánimo al adulto mayor. Un check-in puede estar `PENDING`, `ANSWERED`, `MISSED` o `SKIPPED`.
 
@@ -8685,7 +8845,7 @@ Pregunta diaria de ánimo al adulto mayor. Un check-in puede estar `PENDING`, `A
 
 ---
 
-#### Check-in Preferences: `/api/v1/check-in-preferences`
+**Check-in Preferences: `/api/v1/check-in-preferences`**
 
 Preferencias del check-in diario. Solo el adulto mayor propietario puede consultarlas y modificarlas.
 
@@ -8718,7 +8878,7 @@ Preferencias del check-in diario. Solo el adulto mayor propietario puede consult
 
 ---
 
-#### Alerts: `/api/v1/alerts`
+**Alerts: `/api/v1/alerts`**
 
 Vista unificada de las alertas de un adulto mayor, de ambos tipos (`EMERGENCY` e `INACTIVITY`).
 
@@ -8748,7 +8908,7 @@ Vista unificada de las alertas de un adulto mayor, de ambos tipos (`EMERGENCY` e
 
 ---
 
-#### Emergency Alerts: `/api/v1/emergency-alerts`
+**Emergency Alerts: `/api/v1/emergency-alerts`**
 
 Botón de ayuda del adulto mayor y atención de la emergencia por parte de los familiares.
 
@@ -8785,7 +8945,7 @@ Botón de ayuda del adulto mayor y atención de la emergencia por parte de los f
 
 ---
 
-#### Inactivity Alerts: `/api/v1/inactivity-alerts`
+**Inactivity Alerts: `/api/v1/inactivity-alerts`**
 
 Atención de las alertas que se generan cuando el adulto mayor no responde un check-in (`checkInId` identifica el check-in perdido que originó la alerta).
 
@@ -8798,7 +8958,7 @@ El body y el response de `resolve` son los mismos del ejemplo de Emergency Alert
 
 ---
 
-#### Audio Messages: `/api/v1/care-circles/{careCircleId}/audio-messages`
+**Audio Messages: `/api/v1/care-circles/{careCircleId}/audio-messages`**
 
 Mensajes de voz que el adulto mayor graba para sus familiares. Un audio nace como borrador (`DRAFT`) y pasa a `SHARED` al compartirse. Formato AAC (`audio/mp4`), máximo 10 MB y entre 1 y 180 segundos.
 
@@ -8814,7 +8974,7 @@ Mensajes de voz que el adulto mayor graba para sus familiares. Un audio nace com
 **Ejemplo: grabar audio** (`POST`, formulario multipart)
 
 ```bash
-curl -X POST "https://serenia-platform-api.azurewebsites.net/api/v1/care-circles/6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f/audio-messages" \
+curl -X POST "https://serenia-platform.azurewebsites.net/api/v1/care-circles/6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f/audio-messages" \
   -H "Authorization: Bearer <token>" \
   -F "file=@saludo.m4a;type=audio/mp4" \
   -F "durationSeconds=42"
@@ -8838,7 +8998,7 @@ curl -X POST "https://serenia-platform-api.azurewebsites.net/api/v1/care-circles
 
 ---
 
-#### Photo Messages: `/api/v1/care-circles/{careCircleId}/photo-messages`
+**Photo Messages: `/api/v1/care-circles/{careCircleId}/photo-messages`**
 
 Fotos que los familiares comparten con el adulto mayor. Siguen el mismo ciclo borrador → compartida que los audios. Formatos JPEG o PNG, máximo 10 MB.
 
@@ -8868,7 +9028,7 @@ Fotos que los familiares comparten con el adulto mayor. Siguen el mismo ciclo bo
 
 ---
 
-#### Social Reminders: `/api/v1/social-reminders`
+**Social Reminders: `/api/v1/social-reminders`**
 
 Recordatorios para que el adulto mayor se contacte con sus seres queridos. Estados: `SCHEDULED`, `PRESENTED`, `POSTPONED`, `COMPLETED`, `CANCELED` y `MISSED`.
 
@@ -8906,7 +9066,7 @@ Recordatorios para que el adulto mayor se contacte con sus seres queridos. Estad
 
 ---
 
-#### Small Wins: `/api/v1/small-wins`
+**Small Wins: `/api/v1/small-wins`**
 
 Pequeños logros: buenos días o actividades positivas que el adulto mayor reporta al responder un check-in.
 
@@ -8930,7 +9090,7 @@ Pequeños logros: buenos días o actividades positivas que el adulto mayor repor
 
 ---
 
-#### Wellbeing Suggestions: `/api/v1/wellbeing-suggestions`
+**Wellbeing Suggestions: `/api/v1/wellbeing-suggestions`**
 
 Sugerencias de acción dirigidas a los familiares cuando se detecta un patrón de malestar en el adulto mayor.
 
@@ -8954,81 +9114,81 @@ Sugerencias de acción dirigidas a los familiares cuando se detecta un patrón d
 
 ---
 
-### Evidencia de interacción con la documentación
+**Evidencia de interacción con la documentación**
 
-Las siguientes capturas muestran la interacción con la documentación OpenAPI desplegada en Azure, accesible en `https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html`, utilizando datos de muestra (usuario *Rosa Quispe Mamani*, adulto mayor, y su hija como familiar vinculada). Las peticiones se ejecutaron directamente desde Swagger UI con la opción *Try it out*.
+Las siguientes capturas muestran la interacción con la documentación OpenAPI desplegada en Azure, accesible en `https://serenia-platform.azurewebsites.net/swagger-ui/index.html`, utilizando datos de muestra (usuario *Rosa Quispe Mamani*, adulto mayor, y su hija como familiar vinculada). Las peticiones se ejecutaron directamente desde Swagger UI con la opción *Try it out*.
 
-**Swagger UI en el entorno desplegado.** Se observa en la barra del navegador la URL del servicio en Azure (`serenia-platform-api.azurewebsites.net/swagger-ui/index.html`), la información de la API (*Serenia Platform*, versión `0.0.1-SNAPSHOT`, especificación OAS 3.1), el servidor `Current environment`, el botón **Authorize** para el token Bearer y la sección *Users* con sus endpoints (`PUT` perfil, foto y contraseña, `POST` registro y `GET` por id).
+**Swagger UI en el entorno desplegado.** Se observa en la barra del navegador la URL del servicio en Azure (`serenia-platform.azurewebsites.net/swagger-ui/index.html`), la información de la API (*Serenia Platform*, versión `0.0.1-SNAPSHOT`, especificación OAS 3.1), el servidor `Current environment`, el botón **Authorize** para el token Bearer y la sección *Users* con sus endpoints (`PUT` perfil, foto y contraseña, `POST` registro y `GET` por id).
 
 <p align="center">
   <img src="./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-swagger.png" alt="Swagger UI de Serenia Platform en el entorno desplegado" width="900">
 </p>
-<p align="center"><em>Imagen 111. Swagger UI de Serenia Platform en el entorno desplegado.</em></p>
+<p align="center"><em>Imagen 129. Swagger UI de Serenia Platform en el entorno desplegado.</em></p>
 
 **Registro de usuario (`POST /api/v1/users`).** Se despliega el endpoint con el ejemplo del *Request body* (`RegisterUserRequest`) y la tabla de respuestas documentadas: `201` (*User registered successfully*), `400` (*Invalid input data*) y `409` (*Email already registered*).
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/post-users-doc.png" alt="Documentación de POST /api/v1/users" width="900">
 </p>
-<p align="center"><em>Imagen 112. Documentación de POST /api/v1/users.</em></p>
+<p align="center"><em>Imagen 130. Documentación de POST /api/v1/users.</em></p>
 
-**Respuesta `201 Created` al registrar un usuario.** Se ejecuta la petición con *Try it out* contra `https://serenia-platform-api.azurewebsites.net/api/v1/users`, con los datos de muestra de *Rosa Quispe Mamani* (`rosa.quispe.demo@example.com`, rol `OLDER_ADULT`). El servidor devuelve la cuenta creada con `status: "ACTIVE"` y `photoUrl: null`, sin incluir la contraseña.
+**Respuesta `201 Created` al registrar un usuario.** Se ejecuta la petición con *Try it out* contra `https://serenia-platform.azurewebsites.net/api/v1/users`, con los datos de muestra de *Rosa Quispe Mamani* (`rosa.quispe.demo@example.com`, rol `OLDER_ADULT`). El servidor devuelve la cuenta creada con `status: "ACTIVE"` y `photoUrl: null`, sin incluir la contraseña.
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/post-users-response.png" alt="Respuesta 201 de POST /api/v1/users" width="900">
 </p>
-<p align="center"><em>Imagen 113. Respuesta 201 de POST /api/v1/users.</em></p>
+<p align="center"><em>Imagen 131. Respuesta 201 de POST /api/v1/users.</em></p>
 
 **Inicio de sesión (`POST /api/v1/sessions`).** La respuesta `201` incluye el `sessionId`, el `token` JWT, la fecha de vencimiento `expiresAt` (7 días después del inicio de sesión) y los datos del usuario autenticado.
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/post-sessions-response.png" alt="Respuesta 201 de POST /api/v1/sessions" width="900">
 </p>
-<p align="center"><em>Imagen 114. Respuesta 201 de POST /api/v1/sessions.</em></p>
+<p align="center"><em>Imagen 132. Respuesta 201 de POST /api/v1/sessions.</em></p>
 
 **Autorización con el token Bearer.** Se pega el token en el botón **Authorize** (esquema `bearerAuth`, *http, Bearer*). El diálogo confirma el estado *Authorized* y oculta el valor del token; a partir de ese momento Swagger UI envía la cabecera `Authorization: Bearer <token>` en cada petición.
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/swagger-authorize.png" alt="Diálogo Authorize de Swagger UI con el token Bearer aplicado" width="900">
 </p>
-<p align="center"><em>Imagen 115. Diálogo Authorize de Swagger UI con el token Bearer aplicado.</em></p>
+<p align="center"><em>Imagen 133. Diálogo Authorize de Swagger UI con el token Bearer aplicado.</em></p>
 
 **Generación de un código de invitación (`POST /api/v1/care-circles/{careCircleId}/invitation-codes`).** Con el token de Rosa y el identificador de su círculo de cuidado (`2e7a5bda-fc5c-4b40-8639-35f166d32b22`), la API responde `201` con el código `KQ6TEM76` en estado `PENDING` y su fecha de vencimiento `expiresAt`. La captura incluye el *Curl* equivalente con la cabecera `Authorization`.
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/post-invitation-codes-response.png" alt="Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/invitation-codes" width="900">
 </p>
-<p align="center"><em>Imagen 116. Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/invitation-codes.</em></p>
+<p align="center"><em>Imagen 134. Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/invitation-codes.</em></p>
 
 **Canje del código por un familiar (`POST /api/v1/family-links`).** Con el token de la hija (rol `DISTANT_RELATIVE`), se envía el código `KQ6TEM76` y la etiqueta de parentesco `hija`. La API responde `201` y establece el vínculo `ACTIVE` entre la familiar (`relativeId`) y el círculo de cuidado de Rosa (`careCircleId`).
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/post-family-links-response.png" alt="Respuesta 201 de POST /api/v1/family-links" width="900">
 </p>
-<p align="center"><em>Imagen 117. Respuesta 201 de POST /api/v1/family-links.</em></p>
+<p align="center"><em>Imagen 135. Respuesta 201 de POST /api/v1/family-links.</em></p>
 
 **Botón de ayuda (`POST /api/v1/emergency-alerts`).** Con el token de Rosa, la API registra la emergencia y responde `201` con la alerta de tipo `EMERGENCY` en estado `DISPATCHED` y `deliveryConfirmed: true`, lo que indica que la familia vinculada fue notificada. Los campos de reconocimiento y resolución permanecen en `null` hasta que un familiar atienda la alerta.
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/post-emergency-alerts-response.png" alt="Respuesta 201 de POST /api/v1/emergency-alerts" width="900">
 </p>
-<p align="center"><em>Imagen 118. Respuesta 201 de POST /api/v1/emergency-alerts.</em></p>
+<p align="center"><em>Imagen 136. Respuesta 201 de POST /api/v1/emergency-alerts.</em></p>
 
 **Respuesta de error de validación.** Al enviar un correo inválido (`no-es-un-correo`) y una contraseña de 3 caracteres, la API responde `400` con el objeto de error `{ code, message, details }`: `code` es `VALIDATION_ERROR` y `details` lista los campos incumplidos (*Field password: La contraseña debe tener entre 8 y 72 caracteres; Field email: Debe ser un correo electrónico válido*).
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/error-400-response.png" alt="Respuesta de error 400 de POST /api/v1/users" width="900">
 </p>
-<p align="center"><em>Imagen 119. Respuesta de error 400 de POST /api/v1/users.</em></p>
+<p align="center"><em>Imagen 137. Respuesta de error 400 de POST /api/v1/users.</em></p>
 
 **Respuesta de error de conflicto.** Al registrar un correo que ya existe, la API responde `409` con `code: "USER_CONFLICT"` y el detalle `user.email.already.registered`, tal como se documenta para este endpoint (*Email already registered*).
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/post-users-409.png" alt="Respuesta de error 409 de POST /api/v1/users" width="900">
 </p>
-<p align="center"><em>Imagen 120. Respuesta de error 409 de POST /api/v1/users.</em></p>
+<p align="center"><em>Imagen 138. Respuesta de error 409 de POST /api/v1/users.</em></p>
 
-### Repositorio y commits relacionados con la documentación
+**Repositorio y commits relacionados con la documentación**
 
 - **Repositorio de Web Services:** `upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform`
 - **Rama:** `develop`
@@ -9051,12 +9211,12 @@ Las actividades realizadas comprendieron la creación de cuentas y recursos en l
 | Producto digital | Plataforma | Estado | URL |
 |---|---|---|---|
 | Landing Page | Netlify (despliegue continuo desde GitHub) | Desplegada | [https://sereniawebsite.netlify.app](https://sereniawebsite.netlify.app/) |
-| Web Services (Serenia Platform) | Azure App Service (contenedor Docker) | Desplegados | [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html) |
+| Web Services (Serenia Platform) | Azure App Service (contenedor Docker) | Desplegados | [https://serenia-platform.azurewebsites.net/swagger-ui/index.html](https://serenia-platform.azurewebsites.net/swagger-ui/index.html) |
 
 
 ---
 
-### 1. Landing Page: Netlify
+**1. Landing Page: Netlify**
 
 Para el despliegue de la Landing Page se utilizó Netlify como plataforma de hosting, aprovechando su integración nativa con GitHub para automatizar el despliegue continuo. La Landing Page es un sitio estático (HTML) alojado en el repositorio `serenia-website`. La configuración establecida permite que cada cambio integrado a la rama `main` dispare automáticamente un nuevo build y publicación en producción, sin intervención manual del equipo.
 
@@ -9098,7 +9258,7 @@ Se comprobó que todas las secciones de la Landing Page de Serenia se visualizar
 
 ---
 
-### 2. Web Services (Serenia Platform): Microsoft Azure
+**2. Web Services (Serenia Platform): Microsoft Azure**
 
 El backend de Serenia es una aplicación Spring Boot (Java) que persiste su información en MySQL y almacena los audios y fotos que comparten los usuarios en un contenedor privado de Azure Blob Storage. Para su despliegue se empaquetó la aplicación como una imagen Docker, que se publicó en Azure Container Registry y se ejecuta en Azure App Service para contenedores, usando la configuración del perfil de producción del proyecto, que lee todos sus parámetros desde variables de entorno. Todos los recursos se crearon en la región **Mexico Central**, bajo la suscripción *Azure for Students*.
 
@@ -9114,7 +9274,7 @@ Se creó el grupo de recursos `serenia-rg`, que agrupa los cinco recursos de Ser
 | `sereniaplatformacr` | Container Registry | Almacena la imagen Docker |
 | `sereniaplatformsa` | Cuenta de almacenamiento | Archivos multimedia (audios y fotos) |
 
-![Grupo de recursos serenia-rg en Azure](./assets/img//sprint/capturas-azure-sprint1/serenia-deploy-img/azure-resource-group.png)
+![Grupo de recursos serenia-rg en Azure](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-resource-group.png)
 
 **2.2. Provisión de Azure Database for MySQL**
 
@@ -9142,7 +9302,7 @@ Se construyó la imagen Docker del backend a partir del repositorio `serenia-pla
 
 **2.6. Creación y configuración del Azure App Service**
 
-Se creó la aplicación web `serenia-platform-api` sobre Linux, con el plan `serenia-plan` (B1) y modelo de publicación **Contenedor**, tomando como origen la imagen `sereniaplatformacr.azurecr.io/serenia-platform:tb1`. El servicio se encuentra en estado **En ejecución** y su estado en tiempo de ejecución es **Correcto**. El dominio predeterminado asignado es `serenia-platform-api.azurewebsites.net`.
+Se creó la aplicación web `serenia-platform-api` sobre Linux, con el plan `serenia-plan` (B1) y modelo de publicación **Contenedor**, tomando como origen la imagen `sereniaplatformacr.azurecr.io/serenia-platform:tb1`. El servicio se encuentra en estado **En ejecución** y su estado en tiempo de ejecución es **Correcto**. El dominio predeterminado asignado es `serenia-platform.azurewebsites.net`.
 
 ![Azure App Service serenia-platform-api en ejecución](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-app-service.png)
 
@@ -9160,7 +9320,7 @@ Se configuraron en el App Service las variables de entorno que consume el backen
 | `MEDIA_STORAGE_PROVIDER` | Proveedor de almacenamiento de archivos (Azure Blob Storage) |
 | `DOCKER_REGISTRY_SERVER_URL`, `DOCKER_REGISTRY_SERVER_USERNAME`, `DOCKER_REGISTRY_SERVER_PASSWORD` | Credenciales con las que App Service descarga la imagen desde Container Registry |
 
-![Variables de entorno del App Service](./assets/img//sprint/capturas-azure-sprint1/serenia-deploy-img/azure-app-settings.png)
+![Variables de entorno del App Service](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-app-settings.png)
 
 **2.8. Verificación del despliegue**
 
@@ -9168,15 +9328,15 @@ Se verificó que el servicio respondiera y que la documentación OpenAPI estuvie
 
 | Recurso | URL |
 |---|---|
-| Swagger UI | [https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html](https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html) |
-| Especificación OpenAPI | `https://serenia-platform-api.azurewebsites.net/v3/api-docs` |
-| URL base de la API | `https://serenia-platform-api.azurewebsites.net/api/v1` |
+| Swagger UI | [https://serenia-platform.azurewebsites.net/swagger-ui/index.html](https://serenia-platform.azurewebsites.net/swagger-ui/index.html) |
+| Especificación OpenAPI | `https://serenia-platform.azurewebsites.net/v3/api-docs` |
+| URL base de la API | `https://serenia-platform.azurewebsites.net/api/v1` |
 
 ![Swagger UI de Serenia Platform en el entorno desplegado](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-swagger.png)
 
 ---
 
-### 3. Aplicaciones móviles
+**3. Aplicaciones móviles**
 
 Los repositorios de las aplicaciones móviles del proyecto, `serenia-mobile-android`, se encuentran en la misma organización de GitHub y se ha desarrollado en Android Studio.
 
@@ -9184,12 +9344,12 @@ Los repositorios de las aplicaciones móviles del proyecto, `serenia-mobile-andr
 
 ---
 
-### Resumen de enlaces de despliegue
+**Resumen de enlaces de despliegue**
 
 | Producto | Repositorio | URL |
 |---|---|---|
 | Landing Page | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-website` | https://sereniawebsite.netlify.app |
-| Web Services | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform` | https://serenia-platform-api.azurewebsites.net/swagger-ui/index.html |
+| Web Services | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform` | https://serenia-platform.azurewebsites.net/swagger-ui/index.html |
 
 #### 4.2.1.9. Team Collaboration Insights during Sprint
 Durante el Sprint 1 el equipo mantuvo un flujo de trabajo colaborativo y organizado aplicando la estrategia de control de versiones GitFlow. Todo el desarrollo tanto de la documentación del informe,Landing Page y backend se trabajó en ramas independientes (feature branches), integrando los cambios exclusivamente
@@ -9224,7 +9384,680 @@ Los 5 integrantes del equipo participaron en la implementación de la plataforma
 
 ![insight](./assets/img/insights/insights5.png)
 
+### 4.2.2. Sprint 2
+#### 4.2.2.1. Sprint Planning 2
+| **Sprint 2** | Sprint 2 |
+|---|---|
+| **Sprint Planning Background** | 
+| Date | 2026-11-07 |
+| Time | 11:00 AM |
+| Location | Universidad Peruana de Ciencias Aplicadas - Pabellon L |
+| Prepared By | Gallardo Morales, Carla Alejandra |
+| Attendees (to planning meeting) | Contreras Torres, Arturo Valentino / Gallardo Morales, Carla Alejandra /Garcia Paredes, Victor Manuel / Salinas Guzman, Brianna Cristina / Sandoval Aiquipa, Kelber Yamir |
+| Sprint 1 Review summary | En el Sprint 1 se completaron las 17 historias comprometidas (64 story points), y todas las tareas del Sprint Backlog 1 quedaron en estado Done. Se publicó la Landing Page en Netlify (US23, versión v1.0.0). También se construyó cerca del 70 % del backend Serenia Platform con Spring Boot y DDD, organizado en seis bounded contexts, y se desplegó en Azure App Service como contenedor Docker. La API quedó documentada en Swagger UI con 56 endpoints agrupados en 17 recursos. Quedaron implementados IAM (TS01, TS02), Care Circle (TS03), Daily Check-in (TS04) y la lógica de alertas de emergencia (NF02). En paralelo, la aplicación móvil avanzó con sus pantallas organizadas por funcionalidad. |
+| Sprint 1 Restrospective summary | Funcionó bien: GitFlow con ramas feature/ y Pull Requests revisados. Separar el código por bounded context permitió que los 5 integrantes trabajaran en paralelo sin conflictos, y el despliegue con Docker se resolvió pronto. Por mejorar: no se integraron pruebas automatizadas, ya que la validación fue solo manual. La mayoría de los commits se concentró en los últimos días del sprint (7 y 8 de octubre). Además, algunos encabezados y secciones del informe tuvieron que corregirse después. Acuerdos para el Sprint 2: agregar pruebas unitarias e de integración desde el inicio, repartir los commits a lo largo de todo el sprint y revisar el formato del informe antes del merge a develop. |
+| **Sprint Goal & User Stories** | 
+| Sprint 2 Goal |  Nuestro objetivo es ampliar el acompañamiento a distancia de Serenia con alertas por inactividad del check-in, sugerencias de acción ante patrones de malestar, la asignación y consulta de turnos de atención entre familiares, el historial de check-ins y un modo simplificado de interfaz para el adulto mayor. Creemos que esto da a los familiares mayor tranquilidad y capacidad de reacción, y que permite al adulto mayor usar la aplicación sin experiencia tecnológica previa. Esto se confirmará cuando el familiar reciba una alerta al no registrarse el check-in del día, consulte el historial y el turno vigente desde el panel de estado, y el adulto mayor complete su check-in en modo simplificado sin ayuda.|
+| Sprint 2 Velocity | 80 |
+| Sum of Story Points | 79 |
+#### 4.2.2.2. Aspect Leaders and Collaborators
 
+Durante el Sprint 2, el equipo distribuyó sus responsabilidades considerando la evolución del backend, el desarrollo de las aplicaciones móviles y las actividades de seguimiento y validación. Se mantuvo una organización colaborativa en la que cada integrante asumió responsabilidades específicas, permitiendo avanzar paralelamente en los diferentes componentes de Serenia.
+
+A continuación, se presenta la matriz Leadership-and-Collaboration (LACX), que identifica a los líderes (L) y colaboradores (C) de los principales aspectos desarrollados durante el sprint.
+
+| Team Member (Last Name, First Name) | GitHub Username | Backend & API Leader (L) / Collaborator (C) | Android Application Leader (L) / Collaborator (C) | Flutter Application Leader (L) / Collaborator (C) | Agile, Testing & Execution Leader (L) / Collaborator (C) | Cloud & Documentation Leader (L) / Collaborator (C) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Contreras Torres, Arturo Valentino | Arturouu | L | L | — | — | C |
+| Gallardo Morales, Carla Alejandra | Carlsss28 | C | — | — | C | L |
+| García Paredes, Victor Manuel | vicmacode | C | C | — | — | C |
+| Salinas Guzman, Brianna Cristina | brianna-salinas | — | C | — | — | — |
+| Sandoval Aiquipa, Kelber Yamir | Kyesei | — | — | L | L | — |
+
+*L: Leader (responsable principal). C: Collaborator (colaborador). —: sin responsabilidad individual registrada en esta distribución.*
+
+La distribución considera las contribuciones registradas en los repositorios, especialmente las actividades de desarrollo Android, correcciones del backend, mejoras de accesibilidad y documentación técnica. En particular, Kelber Sandoval estuvo a cargo del seguimiento del Sprint Backlog, la recopilación de evidencias de validación y ejecución, y el desarrollo de la vista de inicio de la aplicación Flutter.
+
+#### 4.2.2.3. Sprint Backlog 2
+
+El objetivo principal de este Sprint 2 fue ampliar las funcionalidades de Serenia para fortalecer el acompañamiento a distancia entre los adultos mayores y sus familiares. Se priorizaron funcionalidades relacionadas con las alertas por inactividad del check-in, sugerencias de bienestar, coordinación de turnos familiares, seguimiento del historial de check-ins y mejoras en la experiencia de uso de las aplicaciones.
+
+A continuación, se presenta el Board de Trello utilizado durante el Sprint 2, donde se gestionaron las historias de usuario y tareas técnicas priorizadas.
+
+**URL público del Board:** [Insertar URL público de Trello]
+
+<div align="center">
+
+![Evidencia de Trello](assets/img/sprint-2/trello-board.png)
+
+<br/><i>Imagen X. Board de Trello correspondiente al Sprint 2.</i>
+
+</div>
+
+El Sprint Backlog estuvo conformado por las siguientes historias de usuario y técnicas:
+
+| Sprint # | User Story Id | User Story Title | Work-Item / Task Id | Work-Item / Task Title | Description | Estimation (Story Points) | Assigned To | Status (Todo / InProcess / To-Review / Done) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Sprint 2 | US16 | Alerta por inactividad del check-in | — | — | Notificar a los familiares cuando el adulto mayor no registre su check-in dentro del plazo establecido. | 5 | Por confirmar | To Do |
+| Sprint 2 | US18 | Sugerencia de acción por patrón de malestar | — | — | Proporcionar sugerencias a los familiares cuando se detecten patrones de ánimo bajo. | 5 | Por confirmar | To Do |
+| Sprint 2 | US20 | Asignación de turnos de atención | — | — | Permitir que los familiares organicen y asignen turnos de atención. | 5 | Por confirmar | To Do |
+| Sprint 2 | NF03 | Control de acceso a los datos de bienestar | — | — | Restringir el acceso a la información de bienestar según los permisos del usuario. | 5 | Por confirmar | To Do |
+| Sprint 2 | TS06 | Gestión de mensajes de audio | — | — | Gestionar la creación, almacenamiento, publicación y consulta de mensajes de audio. | 5 | Por confirmar | To Do |
+| Sprint 2 | TS08 | Gestión de alertas de emergencia | — | — | Gestionar la generación, reconocimiento y resolución de alertas de emergencia. | 5 | Por confirmar | To Do |
+| Sprint 2 | TS09 | Gestión del panel de estado | — | — | Gestionar la información presentada en el panel de seguimiento del adulto mayor. | 5 | Por confirmar | To Do |
+| Sprint 2 | TS10 | Gestión de alertas de inactividad | — | — | Gestionar las alertas generadas por la falta de respuesta a los check-ins. | 5 | Por confirmar | To Do |
+| Sprint 2 | TS11 | Gestión de turnos de atención | — | — | Gestionar el registro, consulta y reasignación de turnos familiares. | 5 | Por confirmar | To Do |
+| Sprint 2 | TS13 | Gestión de indicadores de bienestar | — | — | Gestionar los indicadores utilizados para identificar patrones de bienestar. | 5 | Por confirmar | To Do |
+| Sprint 2 | US06 | Rotación de preguntas del check-in | — | — | Variar las preguntas presentadas al adulto mayor durante los check-ins diarios. | 3 | Por confirmar | To Do |
+| Sprint 2 | US08 | Modo simplificado de interfaz | — | — | Ofrecer una interfaz simplificada que facilite la interacción del adulto mayor. | 3 | Por confirmar | To Do |
+| Sprint 2 | US17 | Historial de check-ins del adulto mayor | — | — | Permitir consultar los registros históricos de los check-ins realizados. | 3 | Por confirmar | To Do |
+| Sprint 2 | NF04 | Usabilidad sin experiencia tecnológica previa | — | — | Facilitar la utilización de la solución por personas con poca experiencia tecnológica. | 3 | Por confirmar | To Do |
+| Sprint 2 | TS07 | Gestión de recordatorios de contacto social | — | — | Gestionar la programación y seguimiento de recordatorios de contacto social. | 3 | Por confirmar | To Do |
+| Sprint 2 | TS12 | Gestión de notas compartidas | — | — | Gestionar la creación, consulta y modificación de notas compartidas entre familiares. | 3 | Por confirmar | To Do |
+| Sprint 2 | US25 | Navegación y diseño responsive del sitio | — | — | Mejorar la navegación y adaptación de la página web a distintos tamaños de pantalla. | 3 | Por confirmar | To Do |
+| Sprint 2 | US03 | Registro de respuesta del check-in diario | — | — | Permitir registrar la respuesta y el estado de ánimo del adulto mayor. | 2 | Por confirmar | To Do |
+| Sprint 2 | US05 | Configuración del horario del check-in | — | — | Permitir configurar el horario de presentación del check-in diario. | 2 | Por confirmar | To Do |
+| Sprint 2 | US07 | Pausa diaria de preguntas | — | — | Permitir pausar temporalmente las preguntas del check-in durante el día. | 2 | Por confirmar | To Do |
+| Sprint 2 | US21 | Consulta del turno de atención vigente | — | — | Permitir consultar el turno de atención asignado a los familiares. | 2 | Por confirmar | To Do |
+
+**Total de historias comprometidas:** 21.
+
+**Total de Story Points:** 79.
+
+*Nota: El tablero compartido muestra una lista `To-do (sprint 2)` con 21 tarjetas. Los identificadores de tareas individuales, responsables y estados finales deben contrastarse con el detalle completo de Trello. Los guiones indican que no se dispone de esos datos en la captura proporcionada.*
+
+#### 4.2.2.4. Development Evidence for Sprint Review
+
+Durante el Sprint 2, el equipo continuó con la implementación de las funcionalidades de Serenia, trabajando de manera colaborativa en los diferentes repositorios de la solución. Se mantuvo el uso de ramas independientes por funcionalidad y Pull Requests para integrar los cambios desarrollados.
+
+En particular, se avanzó en la primera versión de la aplicación multiplataforma Flutter, incorporando su estructura base y funcionalidades relacionadas con la autenticación de familiares, vinculación con el adulto mayor, visualización de alertas y coordinación de turnos de atención.
+
+A continuación, se presentan algunos de los commits más representativos que evidencian los avances de implementación en el repositorio de la aplicación Flutter.
+
+**Repositorio:** `serenia-mobile-flutter`
+
+**URL del repositorio:** https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-flutter
+
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| serenia-mobile-flutter | feature/base-structure | 57298ab | feat(base-structure): set up dependencies on app start. | Configuración de las dependencias y componentes base para inicializar la aplicación. Autor: Arturouu. PR #1. | 12/11/2026 |
+| serenia-mobile-flutter | feature/iam | 2fe2fef | feat(iam): add sign in page that only lets relatives in. | Implementación de la pantalla de inicio de sesión para el acceso de familiares a distancia. Autor: Arturouu. PR #4. | 13/11/2026 |
+| serenia-mobile-flutter | feature/carecircle | 415b86c | feat(carecircle): add invitation code page to link with the older adult. | Implementación de la pantalla para ingresar el código de invitación y establecer el vínculo con el adulto mayor. Autor: Arturouu. PR #5. | 13/11/2026 |
+| serenia-mobile-flutter | feature/alerts | 5ed7395 | feat(alerts): add alerts list and detail pages. | Implementación de las vistas para consultar las alertas recibidas y visualizar su información detallada. Autor: vicmacode. PR #7. | 13/11/2026 |
+| serenia-mobile-flutter | feature/care-shifts | 33478c4 | feat(circle): add CareShiftsPage | Implementación de la pantalla para consultar y visualizar los turnos de atención familiares. Autor: Carlsss28. PR #12. | 13/11/2026 |
+
+#### 4.2.2.5. Testing Suite Evidence for Sprint Review
+
+Durante el Sprint 2, las actividades de validación se enfocaron en comprobar el comportamiento de los servicios REST y el cumplimiento de las funcionalidades implementadas. Para ello, se realizaron pruebas funcionales manuales mediante la documentación interactiva de Swagger UI, utilizando la opción *Try it out* para ejecutar solicitudes HTTP y verificar las respuestas obtenidas.
+
+Las pruebas permitieron validar operaciones relacionadas con el historial de check-ins, alertas por inactividad, sugerencias de bienestar, asignación y consulta de turnos de atención y configuración del modo simplificado.
+
+A continuación, se presentan las principales pruebas ejecutadas durante el sprint:
+
+| Funcionalidad | Endpoint | Tipo de solicitud | Respuesta obtenida |
+| :--- | :--- | :--- | :--- |
+| Historial de check-ins | `/api/v1/check-ins` | GET | 200 OK |
+| Consulta de alertas por inactividad | `/api/v1/alerts` | GET | 200 OK |
+| Reconocimiento de alerta de inactividad | `/api/v1/inactivity-alerts/{alertId}/acknowledge` | POST | 200 OK |
+| Consulta de sugerencias de bienestar | `/api/v1/wellbeing-suggestions` | GET | 200 OK |
+| Asignación de turno de atención | `/api/v1/care-circles/{careCircleId}/care-shifts` | POST | 201 Created |
+| Consulta de turnos de atención | `/api/v1/care-circles/{careCircleId}/care-shifts` | GET | 200 OK |
+| Activación del modo simplificado | `/api/v1/check-in-preferences/{preferencesId}/simplified-mode` | PUT | 200 OK |
+| Validación de parámetros obligatorios | `/api/v1/check-ins` | GET | 400 Bad Request |
+
+**Evidencias de ejecución de pruebas**
+
+**1. Consulta del historial de check-ins**
+
+Se verificó que el servicio permitiera consultar los registros históricos del adulto mayor, incluyendo los estados de los check-ins respondidos y aquellos que no fueron completados.
+
+**2. Consulta y reconocimiento de alertas por inactividad**
+
+Se verificó la obtención de alertas generadas por la falta de respuesta a los check-ins y el reconocimiento de estas por parte del familiar responsable.
+
+**3. Consulta de sugerencias de bienestar**
+
+Se comprobó que el servicio devolviera las sugerencias activas cuando se identifican patrones de malestar en los registros del adulto mayor.
+
+**4. Asignación y consulta de turnos de atención**
+
+Se verificó el registro de un turno de atención mediante una solicitud POST y la posterior consulta de los turnos mediante una solicitud GET.
+
+**5. Activación del modo simplificado**
+
+Se verificó que el servicio permitiera actualizar las preferencias del adulto mayor y activar el modo simplificado de la interfaz.
+
+**6. Validación de parámetros obligatorios**
+
+Finalmente, se comprobó el comportamiento del servicio ante solicitudes incompletas. Al consultar el historial sin proporcionar los parámetros obligatorios, la API devolvió un error `400 Bad Request`, acompañado del código `VALIDATION_ERROR`.
+
+Estas pruebas permitieron comprobar las respuestas de los servicios ante solicitudes válidas y solicitudes con datos incompletos, verificando el comportamiento esperado de la API durante el Sprint 2.
+
+#### 4.2.2.6. Execution Evidence for Sprint Review
+#### 4.2.2.7. Services Documentation Evidence for Sprint Review
+
+Durante el Sprint 2 se actualizó la documentación de los Web Services de **Serenia Platform** con OpenAPI/Swagger, integrada directamente en el backend Spring Boot. La documentación cubre los seis bounded contexts de la plataforma: IAM, Care Circle, Daily Check-in, Alerts and Safety, Social Companionship y Wellbeing Monitoring. En total quedaron documentados **57 endpoints agrupados en 17 recursos** (uno más que en el Sprint 1, por el nuevo endpoint para obtener la foto de perfil). Además, se documentaron los endpoints que dan soporte a las historias comprometidas en el Sprint 2: la alerta por inactividad del check-in (US16), la sugerencia de acción por patrón de malestar (US18), la asignación y consulta de turnos de atención (US20, US21), el historial de check-ins (US17) y el modo simplificado de interfaz (US08).
+
+**URL Swagger desplegado:** [https://serenia-platform.azurewebsites.net/swagger-ui/index.html](https://serenia-platform.azurewebsites.net/swagger-ui/index.html)
+
+**URL especificación OpenAPI (JSON):** `https://serenia-platform.azurewebsites.net/v3/api-docs`
+
+**URL repositorio backend:** [https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform)
+
+> Nota: La documentación OpenAPI se elaboró junto con la implementación del código. Las anotaciones `@Tag`, `@Operation`, `@ApiResponses` y `@Schema` se incluyeron en cada controlador durante su desarrollo. En este sprint se agregaron, además, commits exclusivos de documentación para describir la API en la configuración de OpenAPI.
+
+---
+
+**Cambios en la documentación respecto al Sprint 1**
+
+- **Guía de uso dentro de Swagger UI:** la descripción de la API (`OpenApiConfiguration`) ahora incluye la lista de bounded contexts con sus recursos, los pasos para probarla (registrar usuario, iniciar sesión y usar el botón **Authorize**), el formato de los errores y el idioma de los mensajes.
+- **Enlace a la documentación externa:** la sección *externalDocs* apunta al repositorio y al README del backend (equipo VitalCare).
+- **Esquema de seguridad `bearerAuth`:** se aclara que el JWT se obtiene con `POST /api/v1/sessions` y que solo se pega el token, ya que Swagger UI agrega el prefijo `Bearer`.
+- **Foto de perfil:** `PUT /api/v1/users/{userId}/photo` dejó de recibir una URL externa (`photoUrl`) y ahora recibe la imagen como `multipart/form-data` (JPEG o PNG, máx. 10 MB). Se agregó `GET /api/v1/users/{userId}/photo` para descargar la imagen subida.
+- **Errores de parámetros:** cuando falta un *query parameter* obligatorio o tiene un valor inválido (por ejemplo, un UUID o una fecha mal escrita), la API responde `400` con `code: "VALIDATION_ERROR"` en lugar de un error genérico.
+- **Idioma:** los mensajes de error se traducen según la cabecera `Accept-Language` (`en` por defecto y `es`). Todos los instantes se devuelven en UTC.
+
+---
+
+***Endpoints Documentados***
+
+| Bounded Context | Verbo HTTP | Endpoint | Descripción |
+|---|---|---|---|
+| IAM | POST | `/api/v1/users` | Registrar adulto mayor o familiar lejano |
+| IAM | GET | `/api/v1/users/{userId}` | Obtener usuario por ID |
+| IAM | PUT | `/api/v1/users/{userId}/profile` | Actualizar datos del perfil |
+| IAM | PUT | `/api/v1/users/{userId}/photo` | Subir foto de perfil (multipart) |
+| IAM | GET | `/api/v1/users/{userId}/photo` | Obtener foto de perfil *(nuevo en Sprint 2)* |
+| IAM | PUT | `/api/v1/users/{userId}/password` | Cambiar contraseña |
+| IAM | POST | `/api/v1/sessions` | Iniciar sesión |
+| IAM | DELETE | `/api/v1/sessions/{sessionId}` | Cerrar sesión |
+| Care Circle | GET | `/api/v1/care-circles/{careCircleId}` | Obtener círculo de cuidado por ID |
+| Care Circle | GET | `/api/v1/care-circles?olderAdultId={olderAdultId}` | Obtener círculo de cuidado por adulto mayor |
+| Care Circle | POST | `/api/v1/care-circles/{careCircleId}/invitation-codes` | Generar código de invitación |
+| Care Circle | GET | `/api/v1/care-circles/{careCircleId}/invitation-codes` | Obtener códigos de invitación pendientes |
+| Care Circle | POST | `/api/v1/family-links` | Canjear código de invitación |
+| Care Circle | GET | `/api/v1/family-links?relativeId={relativeId}` | Obtener vínculos de un familiar |
+| Care Circle | GET | `/api/v1/care-circles/{careCircleId}/family-links` | Obtener vínculos de un círculo |
+| Care Circle | DELETE | `/api/v1/care-circles/{careCircleId}/family-links/{familyLinkId}` | Revocar vínculo familiar |
+| Care Circle | POST | `/api/v1/care-circles/{careCircleId}/care-shifts` | Asignar turno de atención |
+| Care Circle | GET | `/api/v1/care-circles/{careCircleId}/care-shifts?from=&to=` | Consultar turnos de atención |
+| Care Circle | PUT | `/api/v1/care-circles/{careCircleId}/care-shifts/{careShiftId}` | Reasignar turno de atención |
+| Care Circle | POST | `/api/v1/care-circles/{careCircleId}/shared-notes` | Crear nota compartida |
+| Care Circle | GET | `/api/v1/care-circles/{careCircleId}/shared-notes` | Obtener notas compartidas |
+| Care Circle | PUT | `/api/v1/care-circles/{careCircleId}/shared-notes/{sharedNoteId}` | Editar nota compartida |
+| Daily Check-in | GET | `/api/v1/check-ins/today?olderAdultId={olderAdultId}` | Obtener check-in de hoy |
+| Daily Check-in | GET | `/api/v1/check-ins?olderAdultId=&from=&to=` | Obtener historial de check-ins |
+| Daily Check-in | POST | `/api/v1/check-ins/{checkInId}/answer` | Responder check-in |
+| Daily Check-in | GET | `/api/v1/check-in-preferences?olderAdultId={olderAdultId}` | Obtener preferencias del check-in |
+| Daily Check-in | PUT | `/api/v1/check-in-preferences/{preferencesId}/reminder-time` | Cambiar hora del check-in |
+| Daily Check-in | POST | `/api/v1/check-in-preferences/{preferencesId}/daily-pause` | Pausar las preguntas de hoy |
+| Daily Check-in | DELETE | `/api/v1/check-in-preferences/{preferencesId}/daily-pause` | Reanudar las preguntas de hoy |
+| Daily Check-in | PUT | `/api/v1/check-in-preferences/{preferencesId}/simplified-mode` | Activar o desactivar el modo simplificado |
+| Alerts and Safety | GET | `/api/v1/alerts?olderAdultId={olderAdultId}` | Obtener alertas de un adulto mayor |
+| Alerts and Safety | GET | `/api/v1/alerts/{alertId}` | Obtener detalle de una alerta |
+| Alerts and Safety | POST | `/api/v1/emergency-alerts` | Pulsar el botón de ayuda |
+| Alerts and Safety | POST | `/api/v1/emergency-alerts/{alertId}/acknowledge` | Reconocer emergencia |
+| Alerts and Safety | POST | `/api/v1/emergency-alerts/{alertId}/resolve` | Resolver emergencia |
+| Alerts and Safety | POST | `/api/v1/inactivity-alerts/{alertId}/acknowledge` | Reconocer alerta de inactividad |
+| Alerts and Safety | POST | `/api/v1/inactivity-alerts/{alertId}/resolve` | Resolver alerta de inactividad |
+| Social Companionship | POST | `/api/v1/care-circles/{careCircleId}/audio-messages` | Grabar audio (borrador) |
+| Social Companionship | POST | `/api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/share` | Compartir audio |
+| Social Companionship | DELETE | `/api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}` | Descartar audio |
+| Social Companionship | GET | `/api/v1/care-circles/{careCircleId}/audio-messages` | Obtener audios compartidos |
+| Social Companionship | GET | `/api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/media` | Obtener archivo de audio |
+| Social Companionship | POST | `/api/v1/care-circles/{careCircleId}/audio-messages/{audioMessageId}/play` | Registrar reproducción del audio |
+| Social Companionship | POST | `/api/v1/care-circles/{careCircleId}/photo-messages` | Subir foto (borrador) |
+| Social Companionship | POST | `/api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/share` | Compartir foto |
+| Social Companionship | DELETE | `/api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}` | Descartar foto |
+| Social Companionship | GET | `/api/v1/care-circles/{careCircleId}/photo-messages` | Obtener fotos compartidas |
+| Social Companionship | GET | `/api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/media` | Obtener archivo de imagen |
+| Social Companionship | POST | `/api/v1/care-circles/{careCircleId}/photo-messages/{photoMessageId}/view` | Registrar visualización de la foto |
+| Social Companionship | POST | `/api/v1/social-reminders` | Programar recordatorio |
+| Social Companionship | GET | `/api/v1/social-reminders?olderAdultId={olderAdultId}` | Obtener recordatorios activos |
+| Social Companionship | POST | `/api/v1/social-reminders/{socialReminderId}/postpone` | Posponer recordatorio |
+| Social Companionship | POST | `/api/v1/social-reminders/{socialReminderId}/complete` | Completar recordatorio |
+| Social Companionship | POST | `/api/v1/social-reminders/{socialReminderId}/cancel` | Cancelar recordatorio |
+| Wellbeing Monitoring | GET | `/api/v1/small-wins?olderAdultId=&from=&to=` | Obtener pequeños logros |
+| Wellbeing Monitoring | GET | `/api/v1/wellbeing-suggestions?olderAdultId={olderAdultId}` | Obtener sugerencias de bienestar activas |
+| Wellbeing Monitoring | POST | `/api/v1/wellbeing-suggestions/{suggestionId}/dismiss?olderAdultId={olderAdultId}` | Descartar sugerencia de bienestar |
+
+---
+
+***Relación entre las historias del Sprint 2 y los endpoints***
+
+| User Story / Technical Story | Título | Endpoints que la soportan |
+|---|---|---|
+| US16 / TS10 | Alerta por inactividad del check-in | `GET /api/v1/alerts`, `POST /api/v1/inactivity-alerts/{alertId}/acknowledge`, `POST /api/v1/inactivity-alerts/{alertId}/resolve` |
+| US18 / TS13 | Sugerencia de acción por patrón de malestar | `GET /api/v1/wellbeing-suggestions`, `GET /api/v1/small-wins` |
+| US20 / TS11 | Asignación de turnos de atención | `POST /api/v1/care-circles/{careCircleId}/care-shifts` |
+| US21 | Consulta del turno de atención vigente | `GET /api/v1/care-circles/{careCircleId}/care-shifts?from=&to=` |
+| US17 / TS09 | Historial de check-ins del adulto mayor | `GET /api/v1/check-ins?olderAdultId=&from=&to=`, `GET /api/v1/check-ins/today` |
+| US08 / NF04 | Modo simplificado de interfaz | `GET /api/v1/check-in-preferences`, `PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode` |
+| US03, US05, US07 | Respuesta, horario y pausa del check-in | `POST /api/v1/check-ins/{checkInId}/answer`, `PUT .../reminder-time`, `POST`/`DELETE .../daily-pause` |
+| TS06 | Gestión de mensajes de audio | `/api/v1/care-circles/{careCircleId}/audio-messages` (6 acciones) |
+| TS07 | Gestión de recordatorios de contacto social | `/api/v1/social-reminders` (5 acciones) |
+| TS08 | Gestión de alertas de emergencia | `/api/v1/emergency-alerts` (3 acciones) |
+| TS12 | Gestión de notas compartidas | `/api/v1/care-circles/{careCircleId}/shared-notes` (3 acciones) |
+| NF03 | Control de acceso a los datos de bienestar | Todos los endpoints protegidos con `bearerAuth`; responden `403` si el usuario no es el adulto mayor ni un familiar con vínculo activo |
+
+---
+
+***Detalle de Endpoints Principales***
+
+Los parámetros marcados con `*` son obligatorios. Salvo que se indique lo contrario, todas las acciones requieren la cabecera `Authorization: Bearer <token>`.
+
+***PUT `/api/v1/users/{userId}/photo`***
+
+**Parámetros:** Path `userId`*, Body `multipart/form-data` con el campo `file`* (imagen JPEG o PNG, máx. 10 MB)
+```bash
+curl -X PUT "https://serenia-platform.azurewebsites.net/api/v1/users/3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b/photo" \
+  -H "Authorization: Bearer <token>" \
+  -F "file=@rosa.jpg;type=image/jpeg"
+```
+**Response 200:** devuelve el `UserResponse` con `photoUrl` apuntando al endpoint protegido que sirve la imagen.
+```json
+{
+  "id": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "email": "rosa.quispe@example.com",
+  "role": "OLDER_ADULT",
+  "fullName": "Rosa Quispe Mamani",
+  "phoneNumber": "+51987654321",
+  "birthDate": "1948-05-12",
+  "photoUrl": "/api/v1/users/3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b/photo?v=1762430400000",
+  "locale": "es-PE",
+  "timeZone": "America/Lima",
+  "status": "ACTIVE"
+}
+```
+**Otros responses:** `400` falta el archivo · `403` no es el dueño de la cuenta · `404` usuario no encontrado · `413` la imagen supera el tamaño máximo · `415` el archivo no es JPEG ni PNG.
+
+***GET `/api/v1/users/{userId}/photo`***
+**Parámetros:** Path `userId`*
+**Response 200:** devuelve el archivo de imagen (`image/jpeg` o `image/png`). **Otros responses:** `401` sesión ausente o inválida · `404` el usuario no existe o no tiene foto subida.
+
+***GET `/api/v1/check-ins?olderAdultId={olderAdultId}&from={yyyy-MM-dd}&to={yyyy-MM-dd}`***
+**Parámetros:** Query `olderAdultId`*, `from`*, `to`* (ambos inclusive)
+**Response 200:** lista de check-ins ordenada por fecha. Un check-in puede estar `PENDING`, `ANSWERED`, `MISSED` o `SKIPPED`.
+```json
+[
+  {
+    "id": "1c2d3e4f-5a6b-4c7d-8e9f-0a1b2c3d4e5f",
+    "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+    "checkDate": "2026-11-09",
+    "questionText": "¿Cómo se siente hoy?",
+    "scheduledFor": "2026-11-09T15:00:00Z",
+    "deadlineAt": "2026-11-09T18:00:00Z",
+    "status": "ANSWERED",
+    "paused": false,
+    "mood": "GOOD",
+    "positiveActivity": "Caminé en el parque",
+    "answeredAt": "2026-11-09T15:20:00Z"
+  },
+  {
+    "id": "8a9b0c1d-2e3f-4a5b-9c6d-7e8f9a0b1c2d",
+    "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+    "checkDate": "2026-11-10",
+    "questionText": "¿Qué fue lo mejor de su día?",
+    "scheduledFor": "2026-11-10T15:00:00Z",
+    "deadlineAt": "2026-11-10T18:00:00Z",
+    "status": "MISSED",
+    "paused": false,
+    "mood": null,
+    "positiveActivity": null,
+    "answeredAt": null
+  }
+]
+```
+**Otros responses:** `400` rango de fechas inválido o parámetro faltante · `403` no es el adulto mayor ni un familiar con vínculo activo.
+
+##### PUT `/api/v1/check-in-preferences/{preferencesId}/simplified-mode`
+**Parámetros:** Path `preferencesId`*, Body JSON
+```json
+{ "enabled": true }
+```
+**Response 200:**
+```json
+{
+  "id": "7a8b9c0d-1e2f-4a3b-8c4d-5e6f7a8b9c0d",
+  "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+  "reminderTime": "09:30:00",
+  "timeLimitMinutes": 180,
+  "simplifiedMode": true,
+  "pausedToday": false
+}
+```
+**Otros responses:** `400` falta `enabled` · `403` solo el adulto mayor dueño de las preferencias puede modificarlas.
+
+##### GET `/api/v1/alerts?olderAdultId={olderAdultId}`
+**Parámetros:** Query `olderAdultId`*
+**Response 200:** lista de alertas de ambos tipos, de la más reciente a la más antigua. Cuando el adulto mayor no responde su check-in dentro del plazo, el check-in pasa a `MISSED` y se genera automáticamente una alerta de tipo `INACTIVITY` que se notifica a los familiares vinculados; `checkInId` identifica el check-in perdido.
+```json
+[
+  {
+    "id": "5f6a7b8c-9d0e-4f1a-8b2c-3d4e5f6a7b8c",
+    "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+    "type": "INACTIVITY",
+    "status": "DISPATCHED",
+    "checkInId": "8a9b0c1d-2e3f-4a5b-9c6d-7e8f9a0b1c2d",
+    "triggeredAt": "2026-11-10T18:00:00Z",
+    "deliveryConfirmed": true,
+    "acknowledgedBy": null,
+    "acknowledgedAt": null,
+    "resolvedBy": null,
+    "resolvedAt": null,
+    "resolutionNote": null
+  }
+]
+```
+
+***POST `/api/v1/inactivity-alerts/{alertId}/acknowledge`***
+**Parámetros:** Path `alertId`*
+**Response 200:** devuelve la alerta con `status: "ACKNOWLEDGED"`, `acknowledgedBy` (familiar que la atiende) y `acknowledgedAt`. **Otros responses:** `403` no es familiar activo · `404` alerta no encontrada · `409` la alerta ya fue reconocida.
+
+##### POST `/api/v1/inactivity-alerts/{alertId}/resolve`
+**Parámetros:** Path `alertId`*, Body JSON (opcional)
+```json
+{ "resolutionNote": "La llamé, se le olvidó responder. Está bien." }
+```
+**Response 200:** devuelve la alerta con `status: "RESOLVED"`, `resolvedBy`, `resolvedAt` y la `resolutionNote`. **Otros responses:** `400` nota de más de 300 caracteres · `409` la alerta no fue reconocida o ya está resuelta.
+
+***GET `/api/v1/wellbeing-suggestions?olderAdultId={olderAdultId}`***
+**Parámetros:** Query `olderAdultId`*
+**Response 200:** sugerencias activas generadas al detectar un patrón de malestar en los check-ins del adulto mayor.
+```json
+[
+  {
+    "id": "2b3c4d5e-6f7a-4b8c-9d0e-1f2a3b4c5d6e",
+    "olderAdultId": "3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b",
+    "patternId": "4d5e6f7a-8b9c-4d0e-8f1a-2b3c4d5e6f7a",
+    "message": "Lleva 3 días seguidos con el ánimo bajo. Puede ser un buen momento para llamarle o visitarle.",
+    "status": "ACTIVE",
+    "issuedAt": "2026-11-10T15:30:00Z"
+  }
+]
+```
+**Otros responses:** `403` no es un familiar con vínculo activo.
+
+***POST `/api/v1/care-circles/{careCircleId}/care-shifts`***
+**Parámetros:** Path `careCircleId`*, Body JSON
+```json
+{ "shiftDate": "2026-11-14" }
+```
+**Response 201:** el turno queda asignado al familiar autenticado.
+```json
+{
+  "id": "e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7a8b",
+  "careCircleId": "6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f",
+  "relativeId": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+  "shiftDate": "2026-11-14"
+}
+```
+**Otros responses:** `403` no es familiar activo · `404` círculo no encontrado · `409` la fecha ya tiene un turno asignado · `422` la fecha es anterior al día actual del adulto mayor.
+
+***GET `/api/v1/care-circles/{careCircleId}/care-shifts?from={yyyy-MM-dd}&to={yyyy-MM-dd}`***
+**Parámetros:** Path `careCircleId`*, Query `from`*, `to`* (ambos inclusive)
+**Response 200:** lista de turnos del rango. Para consultar el turno vigente (US21), se envía la fecha de hoy en `from` y `to`.
+```json
+[
+  {
+    "id": "e5f6a7b8-c9d0-4e1f-8a2b-3c4d5e6f7a8b",
+    "careCircleId": "6b1f0c2e-8d4a-4b7e-9f3c-1a2b3c4d5e6f",
+    "relativeId": "9d8c7b6a-5f4e-4d3c-8b2a-1f0e9d8c7b6a",
+    "shiftDate": "2026-11-14"
+  }
+]
+```
+
+***Respuesta de error por parámetro faltante (nuevo en Sprint 2)***
+Al llamar `GET /api/v1/check-ins?olderAdultId=3f2b8c9e-6a1d-4f0e-9b7a-2c5d8e1f4a6b` sin `from` ni `to`, la API responde `400`:
+```json
+{
+  "code": "VALIDATION_ERROR",
+  "message": "Validation failed: request-parameters",
+  "details": "Falta un parámetro obligatorio de la petición"
+}
+```
+
+---
+
+###### Imágenes de interacción utilizando datos de prueba
+
+Las siguientes capturas muestran la interacción con la documentación OpenAPI desplegada en Azure, usando datos de prueba (la adulta mayor *Rosa Quispe Mamani* y su hija como familiar vinculada). Las peticiones se ejecutaron desde Swagger UI con la opción *Try it out*, después de autorizarse con el token Bearer.
+
+Guía de uso de la API en Swagger UI <br>
+
+En la cabecera de Swagger UI se observa la nueva descripción de la API: la lista de bounded contexts, los pasos para probarla y el enlace al repositorio del backend.
+
+<p align="center">
+  <img src="./assets/img/sprint-2/swagger1.png" alt="Swagger UI de Serenia Platform con la guía de uso de la API" width="900">
+</p>
+<p align="center"><em>Imagen 139. Swagger UI de Serenia Platform con la guía de uso de la API.</em></p>
+
+Subida de la foto de perfil <br>
+
+El adulto mayor sube su foto de perfil con `PUT /api/v1/users/{userId}/photo` como `multipart/form-data`. La API responde `200` y el campo `photoUrl` apunta al endpoint `GET /api/v1/users/{userId}/photo`, que devuelve la imagen subida.
+
+<p align="center">
+  <img src="./assets/img/sprint-2/swagger2.png" alt="Respuesta 200 de PUT /api/v1/users/{userId}/photo" width="900">
+</p>
+<p align="center"><em>Imagen 140. Respuesta 200 de PUT /api/v1/users/{userId}/photo.</em></p>
+
+Historial de check-ins <br>
+
+El familiar consulta el historial de check-ins de Rosa con `GET /api/v1/check-ins` enviando el rango de fechas. La respuesta incluye los días respondidos (`ANSWERED`) con su estado de ánimo y los días sin respuesta (`MISSED`).
+
+<p align="center">
+  <img src="./assets/img/sprint-2/swagger3.png" alt="Respuesta 200 de GET /api/v1/check-ins" width="900">
+</p>
+<p align="center"><em>Imagen 141. Respuesta 200 de GET /api/v1/check-ins (historial).</em></p>
+
+Alerta por inactividad del check-in <br>
+
+Al no responderse el check-in del día dentro del plazo, se genera una alerta `INACTIVITY`. El familiar la consulta con `GET /api/v1/alerts` y la reconoce con `POST /api/v1/inactivity-alerts/{alertId}/acknowledge`.
+
+<p align="center">
+  <img src="./assets/img/sprint-2/swagger4.png" alt="Respuesta 200 de GET /api/v1/alerts con una alerta de inactividad" width="900">
+</p>
+<p align="center"><em>Imagen 142. Respuesta 200 de GET /api/v1/alerts con una alerta de inactividad.</em></p>
+
+<p align="center">
+  <img src="./assets/img/sprint-2/swagger5.png" alt="Respuesta 200 de POST /api/v1/inactivity-alerts/{alertId}/acknowledge" width="900">
+</p>
+<p align="center"><em>Imagen 143. Respuesta 200 de POST /api/v1/inactivity-alerts/{alertId}/acknowledge.</em></p>
+
+Sugerencias de bienestar <br>
+
+El familiar consulta las sugerencias activas con `GET /api/v1/wellbeing-suggestions`. La sugerencia se genera cuando se detecta un patrón de ánimo bajo en los check-ins del adulto mayor.
+
+<p align="center">
+  <img src="./assets/img/sprint-2/swagger6.png" alt="Respuesta 200 de GET /api/v1/wellbeing-suggestions" width="900">
+</p>
+<p align="center"><em>Imagen 144. Respuesta 200 de GET /api/v1/wellbeing-suggestions.</em></p>
+
+Asignación y consulta de turnos de atención <br>
+
+La hija se asigna un turno con `POST /api/v1/care-circles/{careCircleId}/care-shifts` (respuesta `201`) y luego consulta el turno vigente con `GET` enviando la fecha de hoy en `from` y `to`.
+
+<p align="center">
+  <img src="./assets/img/sprint-2/swagger8.png" alt="Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/care-shifts" width="900">
+</p>
+<p align="center"><em>Imagen 145. Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/care-shifts.</em></p>
+
+<p align="center">
+  <img src="./assets/img/sprint-2/swagger9.png" alt="Respuesta 200 de GET /api/v1/care-circles/{careCircleId}/care-shifts" width="900">
+</p>
+<p align="center"><em>Imagen 146. Respuesta 200 de GET /api/v1/care-circles/{careCircleId}/care-shifts.</em></p>
+
+Modo simplificado de interfaz <br>
+
+Rosa activa el modo simplificado con `PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode`. La respuesta devuelve sus preferencias con `simplifiedMode: true`.
+
+<p align="center">
+  <img src="./assets/img/sprint-2/swagger10.png" alt="Respuesta 200 de PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode" width="900">
+</p>
+<p align="center"><em>Imagen 147. Respuesta 200 de PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode.</em></p>
+
+Respuesta de error por parámetro faltante <br>
+
+Al consultar el historial sin enviar `from` ni `to`, la API responde `400` con `code: "VALIDATION_ERROR"` y el detalle traducido según `Accept-Language`.
+
+<p align="center">
+  <img src="./assets/img/sprint-2/swagger11.png" alt="Respuesta de error 400 por parámetro faltante" width="900">
+</p>
+<p align="center"><em>Imagen 148. Respuesta de error 400 por parámetro faltante.</em></p>
+
+---
+
+##### Repositorio y commits relacionados con la documentación
+
+- **Repositorio de Web Services:** `upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform`
+- **Rama:** `develop`
+
+| Commit ID | Fecha | Autor | Descripción |
+|---|---|---|---|
+| `b289a5c` | 2026-11-04 | Arturouu | Se agrega el README del proyecto backend |
+| `7f002e1` | 2026-11-06 | Arturouu | Se guarda la foto de perfil subida en el almacenamiento de archivos |
+| `fecbd65` | 2026-11-06 | Arturouu | Se agregan y documentan los endpoints para subir y obtener la foto de perfil |
+| `24b67b1` | 2026-11-06 | Arturouu | Se elimina la URL externa de la foto de perfil |
+| `8c127bf` | 2026-11-11 | vicmacode | Se describe la API (bounded contexts, guía de uso, errores e idioma) en la configuración de OpenAPI |
+| `0391681` | 2026-11-11 | vicmacode | Se deja un único enlace al repositorio en la documentación OpenAPI |
+| `479b3ad` | 2026-11-11 | vicmacode | Respuesta `400` cuando falta un parámetro de la petición o tiene un valor inválido |
+
+#### 4.2.2.8. Software Deployment Evidence for Sprint Review
+
+Durante el Sprint 2 se publicaron dos de los tres productos de la solución: el backend, que se desplegó en Microsoft Azure con una nueva dirección, y la aplicación Android, que se distribuye a los testers con Firebase App Distribution. La landing page continúa publicada en Netlify, según la sección 4.2.1.8. El procedimiento de cada despliegue se explica en la sección 4.1.4.
+
+<br>
+
+**1. Web Services: despliegue en Azure**
+
+El backend `serenia-platform` quedó publicado en https://serenia-platform.azurewebsites.net, con la documentación interactiva de la API disponible en Swagger UI. La tabla resume las comprobaciones hechas sobre el servicio desplegado.
+
+| Comprobación | Resultado |
+| --- | --- |
+| Abrir https://serenia-platform.azurewebsites.net/swagger-ui/index.html (13 de noviembre de 2026) | Responde 200 y muestra la documentación interactiva de la API |
+| Consultar `/v3/api-docs` en el servicio | Devuelve la definición OpenAPI con 57 operaciones en 17 grupos, que parten de `/api/v1` |
+| Consultar un endpoint protegido sin token, por ejemplo `/api/v1/alerts` | Responde 401 Unauthorized, lo que confirma que la API exige el token JWT |
+| Registrar una cuenta desde la aplicación Android contra el servicio | Se crea un usuario con el rol `OLDER_ADULT` y su contraseña queda almacenada cifrada (hash) |
+
+<br>
+
+**2. Aplicación móvil: distribución con Firebase App Distribution**
+
+La aplicación Android se registró en un proyecto de Firebase y se distribuye al grupo de testers del proyecto. Las capturas muestran el proyecto, el registro de la aplicación con su paquete, el grupo de verificadores y la primera versión subida.
+
+<br>
+
+<div align="center">
+  <img src="assets/img/sprint-2/despliegue-android/01-firebase-proyecto.png" alt="Panel del proyecto de Firebase serenia-mobile-android, con el plan Spark." width="700"/>
+  <br/><i>Imagen 149. Panel del proyecto de Firebase serenia-mobile-android, con el plan Spark.</i>
+</div>
+
+<br>
+
+<div align="center">
+  <img src="assets/img/sprint-2/despliegue-android/02-firebase-registro-app.png" alt="Registro de la aplicación Android con el paquete com.vitalcare.serenia en Firebase." width="700"/>
+  <br/><i>Imagen 150. Registro de la aplicación Android con el paquete com.vitalcare.serenia en Firebase.</i>
+</div>
+
+<br>
+
+<div align="center">
+  <img src="assets/img/sprint-2/despliegue-android/03-firebase-configuracion-app.png" alt="Configuración de la aplicación Serenia registrada en el proyecto de Firebase." width="700"/>
+  <br/><i>Imagen 151. Configuración de la aplicación Serenia registrada en el proyecto de Firebase.</i>
+</div>
+
+<br>
+
+<div align="center">
+  <img src="assets/img/sprint-2/despliegue-android/04-app-distribution-testers.png" alt="Grupo de verificadores testers en Firebase App Distribution." width="700"/>
+  <br/><i>Imagen 152. Grupo de verificadores testers en Firebase App Distribution.</i>
+</div>
+
+<br>
+
+<div align="center">
+  <img src="assets/img/sprint-2/despliegue-android/05-app-distribution-version.png" alt="Versión 1.0 (1) subida a Firebase App Distribution con su nota de versión." width="700"/>
+  <br/><i>Imagen 153. Versión 1.0 (1) subida a Firebase App Distribution con su nota de versión.</i>
+</div>
+
+<br>
+
+<div align="center">
+  <img src="assets/img/sprint-2/despliegue-android/06-app-distribution-distribucion.png" alt="Distribución de la versión 1.0 (1) al grupo de verificadores testers." width="700"/>
+  <br/><i>Imagen 154. Distribución de la versión 1.0 (1) al grupo de verificadores testers.</i>
+</div>
+
+<br>
+
+El primer APK se subió de forma manual el 12 de noviembre de 2026, a las 8:03 p. m., como versión 1.0 (1) con la nota "Primera versión para validación", y se distribuyó al grupo `testers`. Desde entonces el repositorio `serenia-mobile-android` publica por sí mismo: al integrar los cambios de `develop` en `main` (Pull Request 36), el workflow de GitHub Actions compiló el APK, lo firmó con la clave de depuración compartida y lo subió como versión 1.0 (110), con la nota "Build 10 from main". El código de versión se calcula como 100 más el número de ejecución, de modo que cada subida es más reciente que la anterior.
+
+| Aspecto | Detalle |
+| --- | --- |
+| Proyecto de Firebase | `serenia-mobile-android`, plan Spark |
+| Aplicación registrada | `com.vitalcare.serenia` (alias Serenia) |
+| Grupo de testers | `testers` |
+| Primera versión | 1.0 (1), subida manualmente el 12 de noviembre de 2026 |
+| Versión publicada por el pipeline | 1.0 (110), generada al integrar `develop` en `main` |
+| Backend usado por la aplicación | https://serenia-platform.azurewebsites.net/api/v1/ (dirección por defecto de `API_BASE_URL`) |
+
+<br>
+
+**Resumen de enlaces de despliegue**
+
+| Producto | Repositorio | URL |
+| --- | --- | --- |
+| Landing Page | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-website` | https://sereniawebsite.netlify.app |
+| Web Services | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform` | https://serenia-platform.azurewebsites.net/swagger-ui/index.html |
+| Aplicación móvil | `upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android` | Firebase App Distribution, con acceso para los testers invitados |
+
+#### 4.2.2.9. Team Collaboration Insights during Sprint
+Durante el Sprint 2 el equipo mantuvo el flujo de trabajo colaborativo aplicando la estrategia de control de versiones GitFlow. El desarrollo de la aplicación móvil Android y del backend se trabajó en ramas independientes (`feature/*` y `fix/*`) creadas desde `develop`, y los cambios se integraron mediante Pull Requests. Esto permitió revisar cada contribución antes de integrarla y mantener la trazabilidad del trabajo de cada integrante.
+A continuación se presentan los analíticos de colaboración extraídos de GitHub Insights para ambos repositorios durante el período del Sprint 2 (del 11 de octubre al 11 de noviembre de 2026).
+
+**Resumen de actividad: Repositorio serenia-mobile-android (aplicación móvil)**
+
+Top Committers: Repositorio serenia-mobile-android
+En el repositorio de la aplicación móvil los integrantes registraron las siguientes contribuciones durante el Sprint 2: Arturouu con 131 commits, vicmacode con 12 commits y brianna-salinas con 1 commit. Arturouu implementó la estructura base de la aplicación, el design system, la capa de red y la conexión con el backend de los bounded contexts IAM, Daily Check-in, Care Circle, Alerts and Safety y Social Companionship. vicmacode se encargó de las correcciones de interfaz y de la adaptación de las pantallas al tamaño de letra grande, y brianna-salinas implementó el modo de alto contraste.
+
+<div align="center">
+
+![insight](./assets/img/insight-sprint2/insights1.png)
+  <br/><i>Imagen 155. Top committers del repositorio de la aplicación android.</i>
+
+</div>
+
+Pull Requests mergeados: Repositorio serenia-mobile-android
+Se mergearon 15 Pull Requests hacia `develop` (del #13 al #28), cada uno correspondiente a una funcionalidad de la aplicación: `app-branding`, `base-structure`, `bounded-contexts`, `core-network`, `design-system`, `iam`, `daily-check-in`, `account`, `alerts-and-safety`, `care-circle`, `social-companionship`, `profile-photo`, `README`, `ui-fixes` y `large-font-fixes`.
+
+<div align="center">
+
+![insight](./assets/img/insight-sprint2/insights3.png)
+  <br/><i>Imagen 156. Pull request del repositorio de la aplicación android mergeados a develop.</i>
+
+</div>
+
+**Resumen de actividad: Repositorio serenia-platform (backend)**
+
+Top Committers: Repositorio serenia-platform
+En el backend se registraron 10 commits durante el Sprint 2: Arturouu con 5 commits y vicmacode con 5 commits. Arturouu implementó la subida y consulta de la foto de perfil, trasladó el almacenamiento de archivos al shared kernel y agregó el README del proyecto. vicmacode actualizó la documentación OpenAPI y corrigió los hallazgos del backend: la zona horaria UTC, las preferencias de check-in que no se podían convertir y la respuesta `400` ante parámetros faltantes o inválidos.
+
+<div align="center">
+
+![insight](./assets/img/insight-sprint2/insights2.png)
+  <br/><i>Imagen 157. Top committers del repositorio de la plataforma</i>
+
+</div>
+
+Pull Requests mergeados: Repositorio serenia-platform
+Se mergearon 4 Pull Requests hacia `develop`: `feature/README` (#11), `feature/profile-photo` (#12), `feature/api-documentation` (#13) y `fix/backend-findings` (#14).
+
+<div align="center">
+
+![insight](./assets/img/insight-sprint2/insights4.png)
+  <br/><i>Imagen 158. Pull request del repositorio de la plataforma mergeados a develop.</i>
+
+</div>
 
 ## 4.3. Validation Interviews
 
@@ -9299,7 +10132,7 @@ Los User Flows propuestos corresponden a las funcionalidades core de la aplicaci
 
 <img src="assets/img/interviews/validacion-segmento1-yrma.png" alt="Screenshot entrevista de validación Yrma Huamán" width="700"/>
 
-<p align="center"><i>Imagen 121. Captura de la entrevista de validación con Yrma Huamán Jiménez.</i></p>
+<p align="center"><i>Imagen 159. Captura de la entrevista de validación con Yrma Huamán Jiménez.</i></p>
 
 <br>
 
@@ -9332,7 +10165,7 @@ Lo más fácil fue identificar los botones por su color llamativo; lo más difí
 
 <img src="assets/img/interviews/entrevista-validacion-yolanda.png" alt="Screenshot entrevista de validación Yolanda Bardalez" width="700"/>
 
-<p align="center"><i>Imagen 122. Captura de la entrevista de validación con Yolanda Bardalez.</i></p>
+<p align="center"><i>Imagen 160. Captura de la entrevista de validación con Yolanda Bardalez.</i></p>
 
 <br>
 
@@ -9367,7 +10200,7 @@ Finalmente, tras revisar la sección de la cuenta y el flujo completo de la inte
 
 <img src="assets/img/interviews/validation-interview-arturo-eva.png" alt="Screenshot de entrevista de validación - Eva Martinez" width="700"/>
 
-<p align="center"><i>Imagen 123. Captura de la entrevista de validación con Eva Martínez.</i></p>
+<p align="center"><i>Imagen 161. Captura de la entrevista de validación con Eva Martínez.</i></p>
 
 <br>
 
@@ -9395,8 +10228,6 @@ Luego probó el prototipo de la aplicación móvil y valoró de forma positiva l
 <br>
 
 
-
-
 #### Segmento 2: Familiares a distancia
 
 <div align="center">
@@ -9405,7 +10236,7 @@ Luego probó el prototipo de la aplicación móvil y valoró de forma positiva l
 
 <img src="assets/img/interviews/validacion-jose.png" alt="Screenshot validación José Cámara" width="700"/>
 
-<p align="center"><i>Imagen 124. Captura de la entrevista de validación con José Cámara.</i></p>
+<p align="center"><i>Imagen 162. Captura de la entrevista de validación con José Cámara.</i></p>
 
 <br>
 
@@ -9435,7 +10266,7 @@ Durante la sesión de validación, José interactuó con la Landing Page y los f
 
 <img src="assets/img/interviews/validacion-kevin.png" alt="Screenshot validación Kevin" width="700"/>
 
-<p align="center"><i>Imagen 125. Captura de la entrevista de validación con Kevin.</i></p>
+<p align="center"><i>Imagen 163. Captura de la entrevista de validación con Kevin.</i></p>
 
 <br>
 
@@ -9467,7 +10298,7 @@ Kevin evaluó el prototipo móvil y la Landing Page enfocándose en la usabilida
 
 <img src="assets/img/interviews/validacion-brianna.png" alt="Screenshot entrevista de validación Enrique Guzmán" width="700"/>
 
-<p align="center"><i>Imagen 126. Captura de la entrevista de validación con Enrique Guzmán.</i></p>
+<p align="center"><i>Imagen 164. Captura de la entrevista de validación con Enrique Guzmán.</i></p>
 
 <br>
 
@@ -9483,7 +10314,7 @@ Kevin evaluó el prototipo móvil y la Landing Page enfocándose en la usabilida
 
 **Resumen:**
 
-La entrevista se realizó a Enrique Guzmán, procedente de Mollendo, Arequipa, quien evaluó la landing page y el prototipo de una aplicación diseñada para facilitar el seguimiento del bienestar de los adultos mayores y la comunicación con sus familiares a distancia. El entrevistado valoró positivamente sus funcionalidades, como el registro diario del estado de ánimo, el círculo familiar, los recordatorios, los mensajes de audio y el botón de ayuda para emergencias. Destacó que la aplicación es útil, intuitiva y fácil de manejar, y sugirió incorporar un video tutorial en la landing page para guiar a los nuevos usuarios en el uso de la plataforma. Asimismo, planteó considerar la comunicación con cuidadores o enfermeros, la accesibilidad para personas con dificultades auditivas o del habla y los costos de los planes. En conclusión, consideró que la aplicación está bien diseñada y representa una gran ayuda para las familias que desean mantenerse informadas y organizar el cuidado de sus adultos mayores.
+La entrevista se realizó a Enrique Guzmán, procedente de Mollendo, Arequipa, quien evaluó la landing page y el prototipo de una aplicación diseñada para facilitar el seguimiento del bienestar de los adultos mayores y la comunicación con sus familiares a distancia. El entrevistado valoró positivamente sus funcionalidades, como el registro diario del estado de ánimo, el círculo familiar, los recordatorios, los mensajes de audio y el botón de ayuda para emergencias. Destacó que la aplicación es útil, intuitiva y fácil de manejar, y sugirió incorporar un video tutorial en la landing page para guiar a los nuevos usuarios en el uso de la plataforma. Asimismo, planteó considerar la comunicación con cuidadores o enfermeros, la accesibilidad para personas con dificultades auditivas o del habla y los costos de los planes. En general, consideró que la aplicación está bien diseñada y representa una gran ayuda para las familias que desean mantenerse informadas y organizar el cuidado de sus adultos mayores.
 
 </div>
 
@@ -9554,7 +10385,7 @@ En la vista "Cuéntale cómo estuvo tu día" del adulto mayor, la instrucción i
 <div align="center">
 
 ![Evidencia Problema 1](assets/img/heuristics/problema-1-audio.png)
-  <br/><i>Captura: Pantalla de grabación de audio del adulto mayor.</i>
+  <br/><i>Imagen 165. Evidencia del problema 1: pantalla de grabación de audio del adulto mayor.</i>
 </div>
 
 **Recomendación:**
@@ -9572,7 +10403,7 @@ En la vista de "Alertas" de la aplicación del familiar, tanto la notificación 
 <div align="center">
 
 ![Evidencia Problema 2](assets/img/heuristics/problema-2-alertas.png)
-  <br/><i>Captura: Historial de alertas del familiar a distancia.</i>
+  <br/><i>Imagen 166. Evidencia del problema 2: historial de alertas del familiar a distancia.</i>
 </div>
 
 **Recomendación:**
@@ -9590,7 +10421,7 @@ Cuando el adulto mayor activa la función de "Pausa diaria" (no recibir pregunta
 <div align="center">
 
 ![Evidencia Problema 3](assets/img/heuristics/problema-3-pausa.png)
-  <br/><i>Captura: Panel de estado diario mostrando "Hoy prefirió no responder".</i>
+  <br/><i>Imagen 167. Evidencia del problema 3: panel de estado diario mostrando "Hoy prefirió no responder".</i>
 </div>
 
 **Recomendación:**
@@ -9608,7 +10439,7 @@ En la vista "Turnos de atención", los familiares coordinan qué día se hace ca
 <div align="center">
 
 ![Evidencia Problema 4](assets/img/heuristics/problema-4-turnos.png)
-  <br/><i>Captura: Pantalla de asignación de turnos de atención.</i>
+  <br/><i>Imagen 168. Evidencia del problema 4: pantalla de asignación de turnos de atención.</i>
 </div>
 
 **Recomendación:**
@@ -9626,7 +10457,7 @@ El botón de emergencia, por su naturaleza, debe ser de fácil acceso. Sin embar
 <div align="center">
 
 ![Evidencia Problema 5](assets/img/heuristics/problema-5-sos.png)
-  <br/><i>Captura: Pantalla principal / navegación del adulto mayor.</i>
+  <br/><i>Imagen 169. Evidencia del problema 5: pantalla principal y navegación del adulto mayor.</i>
 </div>
 
 **Recomendación:**
@@ -9635,51 +10466,128 @@ Requerir una interacción intencional para confirmar la emergencia. En lugar de 
 
 <div style="page-break-after: always;"></div>
 
-# Conclusiones
+<br>
 
-## Conclusiones y Recomendaciones
+# Conclusiones y Recomendaciones
 
-Esta segunda entrega suma al análisis y al diseño de la primera el diseño de la interfaz (Capítulo III) y la implementación y validación del Sprint 1 (Capítulo IV). Las conclusiones contrastan lo planteado en el proceso de Lean UX (sección 1.2.2) con lo encontrado en las entrevistas de descubrimiento (sección 2.2) y de validación (sección 4.3), y las recomendaciones señalan lo que sigue para las próximas entregas.
+Esta tercera entrega suma la implementación y el despliegue del Sprint 2 y la validación de la aplicación ya construida. Las conclusiones contrastan lo planteado en el Lean UX con lo logrado y lo encontrado con usuarios, y las recomendaciones señalan lo que sigue.
+
+<br>
 
 **Conclusiones**
 
-1. **El problema planteado se confirma, y se observa desde los dos lados.** El Problem Statement describe la ausencia de un canal ligero entre "no comunicarse" y "llamar todos los días". En las entrevistas, los 4 familiares a distancia se preocupan cuando no pueden verificar cómo está el adulto mayor, y los 3 adultos mayores evitan contar sus problemas para no preocupar a sus familiares. Ambos segmentos sufren el mismo vacío desde extremos opuestos, lo que respalda una solución de dos aplicaciones conectadas. La muestra es pequeña (7 entrevistas), por lo que estos resultados orientan el diseño pero no permiten generalizar.
+1. El problema planteado se sigue confirmando desde los dos lados. Los familiares a distancia se preocupan cuando no pueden saber cómo está el adulto mayor, y los adultos mayores evitan contar sus problemas para no preocupar a su familia. En la validación con la aplicación ya construida, Yrma dijo que se sentiría tranquila de que su familia vea cómo está, porque se preocuparía menos. La muestra es pequeña, así que estos resultados orientan el diseño pero no permiten generalizar.
 
-2. **Los assumptions de usuario se cumplen en su mayoría, con dos matices.** Los 3 adultos mayores cuentan con smartphone, tal como se asumió, pero los 3 reportan dificultades con funciones nuevas o con la lentitud de las aplicaciones. Esto exige mantener el check-in de un solo toque y el modo simplificado, y no dar por hecho que sabrán resolver cualquier interacción. Por otro lado, la desconfianza hacia soluciones de vigilancia se confirmó en el segmento de familiares (2 de 4 la expresaron de forma directa), mientras que en los adultos mayores el freno observado fue el temor a ser una carga, más que a ser vigilados.
+2. La aplicación Android ya funciona con el backend real y se distribuye sola. Dejó los datos de ejemplo y consume los servicios de cuenta, check-in, círculo familiar, alertas y mensajes. Cada vez que se integran cambios a la rama principal, un flujo automático genera el APK y lo envía a los testers por Firebase App Distribution.
 
-3. **Las entrevistas de validación respaldan la propuesta, con matices.** Con la landing y el prototipo (sección 4.3.2), las tres personas entrevistadas del Segmento 1 entendieron qué hace Serenia y consideraron fácil el recorrido; la excepción puntual fueron las palabras pequeñas, que a Yrma le costó leer, mientras que Eva valoró los colores, el tamaño de los botones y la tipografía. En el Segmento 2, José y Kevin valoraron la vinculación por código como un proceso rápido y menos invasivo que el rastreo por GPS, y el historial y las alertas como una forma de reducir la preocupación diaria. Son opiniones de pocas personas ante un prototipo, por lo que muestran comprensión y aceptación, pero no adopción sostenida.
+3. El backend quedó ampliado y comprobado en producción. Tiene 57 operaciones en 17 grupos REST, con documentación Swagger actualizada, y está desplegado en Azure. Se verificó que exige autenticación y que guarda las contraseñas cifradas.
 
-4. **Los Hypothesis Statements siguen sin validarse con uso real.** Las cuatro hipótesis (adopción diaria del check-in, "cuéntame algo", panel de estado con alertas selectivas y botón de auxilio) y sus criterios de éxito (alta tasa de check-ins, menos llamadas por ansiedad y uso recurrente del panel) requieren observar el uso del producto durante varios días. La asunción de mayor riesgo continúa siendo que el Segmento 1 adopte el check-in diario como hábito, tal como se señaló en el Lean UX Canvas. Una revisión reciente indica que el uso sostenido de aplicaciones móviles de salud depende sobre todo de motivos intrínsecos, como la autonomía, la competencia y la relación con otras personas (Baykoca et al., 2026), lo que refuerza la decisión de mantener el check-in simple.
+4. La accesibilidad para adultos mayores avanzó. Se agregaron el tamaño de letra grande, el alto contraste y el modo simplificado del check-in, que responden a las dificultades con funciones nuevas y con palabras pequeñas que mencionaron los entrevistados.
 
-5. **La evaluación heurística identificó cinco problemas de usabilidad.** La sección 4.3.3 registra uno de severidad 4, la activación accidental del botón de auxilio con un solo toque; tres de severidad 3, que son el envío de audio sin revisión ni cancelación, las alertas sin jerarquía visual de criticidad y la modificación de turnos sin prevención de errores; y uno de severidad 2, el mensaje ambiguo en el estado de pausa. Los cinco tienen una recomendación concreta.
+5. La validación con la aplicación fue positiva, aunque limitada. Yrma la consideró muy interesante, dijo que letras, tamaños e íconos están bien y que la recomendaría a su familia y a sus amigas. Pero solo observó la aplicación por videollamada, sin manejarla, así que muestra aceptación y no uso sostenido.
 
-6. **El modelado estratégico dio como resultado seis bounded contexts con fronteras justificadas.** El proceso de EventStorming en diez pasos (sección 2.5.1) permitió delimitar tres contextos Core (Daily Check-in, Wellbeing Monitoring y Alerts & Safety), dos Supporting (Care Circle y Social Companionship) y uno Generic (Identity & Access). Los tres Core coinciden con la propuesta de valor: capturar la señal diaria, interpretarla y alertar cuando corresponde. El Context Map (sección 2.5.2) formaliza sus relaciones mediante Customer/Supplier entre los contextos internos y Anti-Corruption Layer frente a los sistemas externos, el proveedor de notificaciones push y el almacenamiento de archivos; no se aplicaron Shared Kernel ni Conformist.
+6. La aplicación Flutter del familiar tiene su primera versión. Sigue la misma organización por contextos que el resto del proyecto, y adoptarla permitió al equipo comparar Flutter con Jetpack Compose y aprender cuándo conviene cada enfoque. Todavía faltan pantallas por terminar.
 
-7. **El backend está implementado y desplegado.** Se construyó en Spring Boot con Java 26 siguiendo Domain-Driven Design, con seis bounded contexts y las capas domain, application, infrastructure e interfaces en cada uno. Expone 56 operaciones en 17 grupos REST, documentadas con OpenAPI, y se ejecuta en Azure como imagen Docker sobre Azure App Service, con Azure Database for MySQL y un contenedor privado de Azure Blob Storage para los archivos multimedia (sección 4.1.4).
-
-8. **La landing y la aplicación Android ya existen.** La landing page está publicada en Netlify con despliegue continuo desde GitHub. La aplicación Android del adulto mayor, construida en Kotlin con Jetpack Compose, incluye las pantallas de Home, Check-in, Alerts and Safety, Social Companionship, Identity and Access y Care Circle, navegables y con datos de ejemplo (sección 4.1.3).
-
-9. **El diseño de la interfaz cubre ambos segmentos.** Se definieron seis wireflows y seis user flows, tres por segmento, y un sistema de etiquetas propio para cada rol: primera persona para el adulto mayor ("Mi cuenta", "Mi ayuda") y tercera persona para el familiar ("Círculo de Mamá Rosa").
+<br>
 
 **Recomendaciones**
 
-1. **Validar con uso real la asunción de mayor riesgo.** Con la aplicación conectada al backend, medir durante varios días la tasa de check-ins diarios de los adultos mayores y convertir los criterios de éxito del Problem Statement en métricas concretas.
+1. Validar con uso real el hábito del check-in diario. Medir durante varios días cuántos adultos mayores responden cada día, y que ellos mismos manejen la aplicación.
 
-2. **Corregir los problemas de la evaluación heurística por severidad.** Empezar por el botón de auxilio, que debe requerir una confirmación intencional, y seguir con el envío de audio, la jerarquía visual de las alertas, la modificación de turnos y el mensaje de pausa.
+2. Agregar pruebas automáticas a las reglas más críticas. Empezar por los códigos de invitación, los turnos y las alertas, y ejecutarlas en el mismo flujo que genera el APK.
 
-3. **Mejorar la legibilidad para adultos mayores.** Aumentar el tamaño de las palabras pequeñas señaladas en la entrevista de Yrma y ofrecer una opción de letra más grande, en línea con los requisitos de accesibilidad (NF01, NF04 y US08).
+3. Terminar y distribuir la aplicación Flutter del familiar. Completar Inicio, Historial y Mensajes, y distribuirla a los testers como la de Android.
 
-4. **Conectar la aplicación Android al backend y distribuirla.** Reemplazar los datos de ejemplo por los servicios de la API y distribuir cada versión mediante Firebase App Distribution; después construir la aplicación del familiar a distancia.
+4. Validar con adultos mayores el botón de auxilio y definir las notificaciones. La evaluación de usabilidad observó que el botón podía activarse por error, y la aplicación Android ya lo corrige al pedir que se mantenga presionado; falta comprobar con adultos mayores que ese gesto les resulte claro. Además, integrar Firebase Cloud Messaging y evaluar las videollamadas que pidió Yrma.
 
-5. **Agregar pruebas automáticas a las reglas de dominio más críticas.** Las prioritarias son el canje de códigos de invitación (un solo uso y un solo vínculo activo por familiar), la unicidad de turnos por fecha y las transiciones de estado de las alertas, junto con escenarios de aceptación asociados a las historias de usuario.
-
-6. **Resolver las preguntas abiertas de los Bounded Context Canvases antes de implementar el contexto que las contiene.** Las más importantes son la vigencia y la revocación de los vínculos, la duración de la ventana de inactividad y cuántos días forman un patrón de malestar.
-
-7. **Definir e integrar el proveedor de notificaciones push.** Firebase Cloud Messaging, estudiado en el spike SP01, es la opción planteada para las notificaciones de check-in, inactividad y emergencia.
-
-8. **Evaluar las funciones que pidieron las personas entrevistadas.** Yrma propuso poder hacer videollamadas con su familia; conviene analizarlo junto con el envío de fotos y audios del contexto Social Companionship.
+<br>
 
 <div style="page-break-after: always;"></div>
+
+## Video App Validation
+
+En esta sección se documenta la validación de la aplicación Android de Serenia con adultos mayores, es decir, con la aplicación ya construida y no con el prototipo de la sección 4.3.2. Cada sesión se grabó en un video independiente, y para cada una se presenta la captura, la ficha de la persona entrevistada, el enlace al video y un resumen de sus apreciaciones. La evidencia de la distribución de la aplicación a los testers se presenta en la sección 4.2.2.8.
+
+<br>
+
+<div align="center">
+
+**Entrevista 1: Yrma Huamán Jiménez**
+
+<img src="assets/img/interviews/validacion-app-yrma.png" alt="Screenshot de la validación de la aplicación Android con Yrma Huamán" width="700"/>
+
+<p align="center"><i>Imagen 170. Captura de la entrevista de validación de la aplicación Android con Yrma Huamán Jiménez.</i></p>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td>Yrma Huamán Jiménez</td></tr>
+  <tr><td><b>Edad</b></td><td>61 años</td></tr>
+  <tr><td><b>Distrito</b></td><td>Tarapoto, San Martín</td></tr>
+  <tr><td><b>Entrevistador</b></td><td>Victor Manuel García Paredes</td></tr>
+  <tr><td><b>Fecha</b></td><td>13/11/2026</td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>00:00</i></td></tr>
+  <tr><td><b>Duración</b></td><td>18 min 40 s</td></tr>
+  <tr><td><b>URL del video</b></td><td><a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202012001_upc_edu_pe/IQAD58Zl6XkYTrsH73qTai27AZgOBrQqlpHlBtTX8ehtn3I?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&amp;e=nTYCMB">Ver video en OneDrive</a></td></tr>
+</table>
+
+</div>
+
+**Resumen:**
+
+
+Esta fue la tercera sesión con Yrma y la primera con la aplicación Android ya construida, en lugar del prototipo. La sesión fue por videollamada: Victor ejecutó la aplicación, instalada desde el APK, en un emulador de Android de su computadora y compartió su pantalla, de modo que Yrma observó la aplicación y opinó, pero no la manejó ella misma. Por eso esta entrada recoge su comprensión y sus impresiones, y no una medición de tareas completadas por ella.
+
+Victor creó una cuenta de prueba como adulto mayor y le mostró las pantallas de la aplicación: el inicio con la pregunta del día, el botón "Pedir ayuda" que, mantenido presionado, avisa a la familia, los recordatorios, la pestaña Familia con la grabación y el envío de mensajes de voz, el círculo familiar con el código de invitación y las fotos que envían los familiares, y la pestaña Cuenta con la foto, los datos personales, la hora de la pregunta, el modo simplificado, el alto contraste y el cambio de contraseña. En los recordatorios creó con ella un evento de ejemplo, un festival de coros navideños el 16 de diciembre a las 8 de la mañana, y le mostró cómo marcarlo como hecho o descartarlo. Yrma lo comparó con "una agenda, pero virtual".
+
+Dijo que la aplicación le parece "muy interesante" y útil para comunicarse con sus familiares y, por la edad, para recordar fechas y actividades pendientes que a veces se olvidan por el trabajo y los quehaceres. Sobre el diseño señaló que las letras, el tamaño y los íconos están bien, que pudo visualizarlo todo y que no tuvo ninguna dificultad. Respondió que se sentiría tranquila de que su familia vea cómo está, porque su familia se preocuparía menos al saber de ella y ver sus fotos. Al preguntarle qué cambiaría, volvió a pedir la videollamada en directo, como ya lo había propuesto antes; también mencionó que podrían ampliarse las agendas y el registro de las actividades diarias, aunque enseguida dijo que no agregaría nada más. Sobre el ícono, comentó que ve un libro abierto con personas y que le gusta que sea verde porque ama la naturaleza.
+
+Recomendaría la aplicación a sus familiares y a amigas de su edad. Explicó que, como los hijos salen a otras provincias o a la capital por estudio o trabajo, las adultas mayores se sienten solas, y que una herramienta así les ayuda a relacionarse todos los días con su familia y a sentirse más cerca. Al cierre felicitó a Victor y le preguntó si seguirá diseñando aplicaciones similares.
+
+<br>
+
+## Video About The Product
+
+El video About The Product presenta Serenia, la aplicación que acompaña a los adultos mayores que viven solos y mantiene a sus familias al tanto de cómo están. En poco más de tres minutos muestra el problema que buscamos resolver, el funcionamiento de la aplicación y el testimonio de una usuaria que participó en la validación.
+
+<br>
+
+<div align="center">
+
+
+**About The Product**
+
+
+![Video About The Product](assets/img/about-the-product/abouttheproduct.png)
+
+[Ver video en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410239_upc_edu_pe/IQBLJlI41_q3R6QeAQVK0hzrAdNeL5r_pPn91m704I-48F4?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=QX9xRb)
+
+</div>
+
+<br>
+
+## Video About The Team
+
+El video About The Team presenta al equipo detrás de Serenia y el trabajo que realizamos durante el curso. Muestra las actividades de cada integrante, la colaboración del equipo y el aporte de cada uno al proyecto, junto con sus testimonios personales. También refleja cómo el curso desarrolla el ABET EAC Student Outcome 7.
+
+
+<br>
+
+<div align="center">
+
+**About The Team**
+
+![Video About The Team](assets/img/about-the-team/abouttheteam.png)
+
+[Ver video en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410239_upc_edu_pe/IQAn0BIMhvSkRL250UwWte4aAcyqSpS7y7ZUcXUX7iLixBA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=Wrjlwl)
+
+</div>
+
+<br>
+
+<div style="page-break-after: always;"></div>
+
 
 # Glosario
 
@@ -9709,6 +10617,7 @@ Esta segunda entrega suma al análisis y al diseño de la primera el diseño de 
 <br>
 
 <div style="page-break-after: always;"></div>
+
 
 # Bibliografía
 
@@ -9769,6 +10678,8 @@ URL del repositorio (Report):  [Repositorio Reporte](https://github.com/upc-pre-
 
 URL del repositorio (Platform): [Repositorio Platform](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-platform)
 
-URL del repositorio (App Native):  [Repositorio App Native](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android)
+URL del repositorio (Mobile Android): [Repositorio Mobile Android](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-android)
+
+URL del repositorio (Mobile Flutter): [Repositorio Mobile Flutter](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-flutter)
 
 URL del repositorio (Website):  [Repositorio Website](https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-website)
