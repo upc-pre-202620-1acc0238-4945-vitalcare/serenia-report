@@ -10606,6 +10606,54 @@ Recomendaría la aplicación a sus familiares y a amigas de su edad. Explicó qu
 
 <br>
 
+## Video App Validation 2
+
+En esta sección se documenta la validación de la aplicación Android de Serenia mediante una prueba de usabilidad realizada por Kelber Sandoval. A diferencia de las validaciones efectuadas sobre el prototipo, esta sesión se llevó a cabo utilizando la aplicación ya construida e instalada en un dispositivo móvil.
+
+Durante la prueba, un participante exploró la aplicación simulando el perfil de un adulto mayor. Se le propusieron diferentes actividades para observar la facilidad de uso, la comprensión de las opciones disponibles, la navegación entre pantallas y la accesibilidad de las funcionalidades principales.
+
+<br>
+
+<div align="center">
+
+**Entrevista de validación: Prueba de usabilidad realizada por Kelber Sandoval**
+
+<img src="assets/img/interviews/validacion-app-kelber.png" alt="Captura de la prueba de usabilidad de la aplicación Android Serenia realizada por Kelber Sandoval" width="700"/>
+
+<p align="center"><i>Imagen 166. Captura de la prueba de usabilidad de la aplicación Android Serenia realizada por Kelber Sandoval.</i></p>
+
+<br>
+
+| Campo | Detalle |
+|---|---|
+| **Participante** | Leonel Sandoval |
+| **Edad** | 18 |
+| **Distrito** | SAN JUAN DE LURIGANCHO |
+| **Entrevistador** | Kelber Sandoval |
+| **Fecha** | 13/11/2026 |
+| **Timing en el video** | 00:00 |
+| **Duración** | 11 min 27 s |
+| **URL del video** | [Ver video de validación en OneDrive/Drive](https://upcedupe-my.sharepoint.com/:f:/g/personal/u202418645_upc_edu_pe/IgCHeLh8k-9WRKC_Ps67E7bjAYT9orqiwcLW-afmipDx0IA?e=YyMdwq) |
+
+</div>
+
+**Resumen:**
+
+La sesión consistió en una prueba de usabilidad de la aplicación Android de Serenia. Para realizarla, Kelber presentó brevemente el propósito de la aplicación y explicó que el participante debía explorarla simulando ser un adulto mayor. A diferencia de una demostración guiada, se buscó que el participante identificara y utilizara las opciones disponibles por su cuenta, mientras Kelber observaba su interacción.
+
+En primer lugar, se realizó el inicio de sesión utilizando una cuenta de demostración con información previamente registrada. Después, se exploró la pantalla principal y la funcionalidad de check-in diario, cuyo propósito es permitir que el adulto mayor registre cómo se encuentra y comparta su estado de ánimo con sus familiares.
+
+Posteriormente, se revisó la sección Cuenta, donde se encuentran las preferencias de la aplicación. También se exploró el modo simplificado, diseñado para facilitar la interacción mediante botones de mayor tamaño y una navegación reducida.
+
+La prueba continuó con la sección Mi círculo familiar, donde se pueden visualizar los familiares vinculados a la cuenta. Asimismo, se exploraron las funcionalidades de acompañamiento social, entre ellas los recordatorios, los mensajes de audio y las fotografías familiares, que buscan mantener la comunicación y el vínculo entre el adulto mayor y sus familiares.
+
+Finalmente, se localizó la funcionalidad Pedir ayuda, que permite enviar una alerta a los familiares ante una situación de emergencia. Para cerrar la sesión, Kelber realizó preguntas sobre las funcionalidades que resultaron más sencillas de utilizar, las posibles dificultades durante la navegación y los cambios que el participante propondría para mejorar la aplicación.
+
+Esta prueba permitió recorrer las principales funcionalidades de Serenia desde la perspectiva de un usuario que simula el perfil de un adulto mayor, obteniendo observaciones sobre la navegación, la comprensión de las opciones y la accesibilidad de la interfaz.
+
+<br>
+
+
 ## Video About The Product
 
 El video About The Product presenta Serenia, la aplicación que acompaña a los adultos mayores que viven solos y mantiene a sus familias al tanto de cómo están. En poco más de tres minutos muestra el problema que buscamos resolver, el funcionamiento de la aplicación y el testimonio de una usuaria que participó en la validación.
