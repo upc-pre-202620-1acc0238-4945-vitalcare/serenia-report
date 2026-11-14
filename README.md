@@ -9467,6 +9467,25 @@ El Sprint Backlog estuvo conformado por las siguientes historias de usuario y t�
 *Nota: El tablero compartido muestra una lista `To-do (sprint 2)` con 21 tarjetas. Los identificadores de tareas individuales, responsables y estados finales deben contrastarse con el detalle completo de Trello. Los guiones indican que no se dispone de esos datos en la captura proporcionada.*
 
 #### 4.2.2.4. Development Evidence for Sprint Review
+
+Durante el Sprint 2, el equipo continuó con la implementación de las funcionalidades de Serenia, trabajando de manera colaborativa en los diferentes repositorios de la solución. Se mantuvo el uso de ramas independientes por funcionalidad y Pull Requests para integrar los cambios desarrollados.
+
+En particular, se avanzó en la primera versión de la aplicación multiplataforma Flutter, incorporando su estructura base y funcionalidades relacionadas con la autenticación de familiares, vinculación con el adulto mayor, visualización de alertas y coordinación de turnos de atención.
+
+A continuación, se presentan algunos de los commits más representativos que evidencian los avances de implementación en el repositorio de la aplicación Flutter.
+
+**Repositorio:** `serenia-mobile-flutter`
+
+**URL del repositorio:** https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-flutter
+
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| serenia-mobile-flutter | feature/base-structure | 57298ab | feat(base-structure): set up dependencies on app start. | Configuración de las dependencias y componentes base para inicializar la aplicación. Autor: Arturouu. PR #1. | 12/11/2026 |
+| serenia-mobile-flutter | feature/iam | 2fe2fef | feat(iam): add sign in page that only lets relatives in. | Implementación de la pantalla de inicio de sesión para el acceso de familiares a distancia. Autor: Arturouu. PR #4. | 13/11/2026 |
+| serenia-mobile-flutter | feature/carecircle | 415b86c | feat(carecircle): add invitation code page to link with the older adult. | Implementación de la pantalla para ingresar el código de invitación y establecer el vínculo con el adulto mayor. Autor: Arturouu. PR #5. | 13/11/2026 |
+| serenia-mobile-flutter | feature/alerts | 5ed7395 | feat(alerts): add alerts list and detail pages. | Implementación de las vistas para consultar las alertas recibidas y visualizar su información detallada. Autor: vicmacode. PR #7. | 13/11/2026 |
+| serenia-mobile-flutter | feature/care-shifts | 33478c4 | feat(circle): add CareShiftsPage | Implementación de la pantalla para consultar y visualizar los turnos de atención familiares. Autor: Carlsss28. PR #12. | 13/11/2026 |
+
 #### 4.2.2.5. Testing Suite Evidence for Sprint Review
 #### 4.2.2.6. Execution Evidence for Sprint Review
 #### 4.2.2.7. Services Documentation Evidence for Sprint Review
