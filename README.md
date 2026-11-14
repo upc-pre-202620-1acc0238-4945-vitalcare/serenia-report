@@ -399,6 +399,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             Apliqué Kotlin y Jetpack Compose en el desarrollo de la aplicación Android y corregí los Bounded Context Canvases, los Domain Message Flows y el diseño táctico con lo aprendido durante la implementación. Además, definí las Style Guidelines y diseñé las entrevistas de validación.
             <br><br>
             <u>AV2</u><br>
+            Aprendí Flutter y Dart y los contrasté con Jetpack Compose: agilizan el desarrollo multiplataforma con un solo código, aunque dependen de plugins para acceder a funciones nativas. Además, desplegué el backend de la solución y actualicé los mock-ups de la aplicación.
             <br><br>
             <b>Gallardo Morales, Carla Alejandra</b><br>
             <u>AV1</u><br>
@@ -408,6 +409,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             Apliqué GitFlow y Conventional Commits en la gestión del código fuente y construí el prototipo de la aplicación móvil, además de participar en la planificación del Sprint 1 bajo el marco Scrum.
             <br><br>
             <u>AV2</u><br>
+            Asimilé Flutter partiendo de lo aprendido en Android: sus widgets facilitan componer pantallas, aunque el anidamiento excesivo complica la lectura del código. Además, participé en el desarrollo del sitio web y planifiqué el Sprint 2 incorporando las lecciones del primer sprint.
             <br><br>
             <b>García Paredes, Victor Manuel</b><br>
             <u>AV1</u><br>
@@ -417,6 +419,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             Investigué y definí las convenciones de código del proyecto y configuré el despliegue del software, además de modelar la navegación de la aplicación mediante Wireflow y User Flow Diagrams.
             <br><br>
             <u>AV2</u><br>
+            Aprendí a distribuir la aplicación Android con Firebase, que agiliza la entrega a usuarios de prueba aunque genera dependencia del servicio. Además, validé la aplicación con usuarios para obtener evidencia de su uso real y apliqué Flutter en el desarrollo multiplataforma.
             <br><br>
             <b>Salinas Guzman, Brianna Cristina</b><br>
             <u>AV1</u><br>
@@ -426,6 +429,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             Apliqué principios de arquitectura de información, como los sistemas de búsqueda y navegación, al elaborar los wireframes y mock-ups del landing page y de la aplicación móvil, que luego llevamos a código.
             <br><br>
             <u>AV2</u><br>
+            Aprendí Flutter comparándolo con el desarrollo nativo en Android, identificando lo que se gana en reutilización de código y los ajustes que exige cada plataforma. Además, en el video del producto apliqué técnicas de comunicación para explicar su propuesta de valor a usuarios no técnicos.
             <br><br>
             <b>Sandoval Aiquipa, Kelber Yamir</b><br>
             <u>AV1</u><br>
@@ -435,6 +439,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             Apliqué Scrum en la planificación del Sprint 1 y aprendí a documentar los servicios desarrollados y a evidenciar su despliegue, mientras participaba en el desarrollo de la plataforma y la aplicación Android.
             <br><br>
             <u>AV2</u><br>
+            Apliqué técnicas de validación con usuarios que revelaron problemas de uso no visibles durante el desarrollo, y aprendí Flutter mientras participaba en el desarrollo del sitio web. Además, planifiqué el Sprint 2 junto al equipo con base en los resultados del primero.
             <br><br>
         </td>
         <td>
@@ -443,6 +448,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             En este entregable el equipo pasó de la documentación a la implementación: aprendimos Kotlin y Jetpack Compose para la aplicación Android, desarrollamos la plataforma y el sitio web, y adoptamos prácticas de ingeniería como GitFlow, guías de estilo, configuración de despliegue y Scrum. Las entrevistas de validación y la implementación nos permitieron corregir los artefactos de diseño del AV1 con base en lo aprendido. <br><br>
             <u>AV2</u><br>
+            En este entregable el equipo adoptó Flutter y lo comparó con el desarrollo nativo en Android, lo que nos permitió reconocer cuándo conviene cada enfoque. Además, aprendimos a desplegar el backend y a distribuir la aplicación con Firebase, y validamos el producto con usuarios reales, combinando el conocimiento técnico con métodos de investigación y con la comunicación del producto mediante videos.
         </td>
     </tr>
       <tr>
@@ -456,6 +462,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             Implementar el backend confirmó mi interés en la arquitectura de software; como avance de mi plan, corregí los artefactos de DDD con lo aprendido, y lo siguiente es incorporar pruebas automatizadas a mi formación.
             <br><br>
             <u>AV2</u><br>
+            Desplegar el backend me enseñó que la arquitectura también debe contemplar cómo opera la solución en producción; como siguiente paso de mi plan, aplicaré Clean Architecture en la app Flutter y aprenderé a contenerizar servicios.
             <br><br>
             <b>Gallardo Morales, Carla Alejandra</b><br>
             <u>AV1</u><br>
@@ -465,6 +472,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             Gestionar el repositorio y planificar el sprint me mostró que la gestión de producto también exige disciplina técnica; amplío mi plan para formarme en Scrum y control de versiones, además de UX Research.
             <br><br>
             <u>AV2</u><br>
+            Conducir el Sprint 2 me acercó al rol de gestión de producto; mi siguiente paso es aprender métricas ágiles, como la velocidad del equipo, para planificar los próximos sprints con más precisión.
             <br><br>
             <b>García Paredes, Victor Manuel</b><br>
             <u>AV1</u><br>
@@ -474,6 +482,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             Configurar el despliegue me hizo ver la importancia de la operación del software; sumo a mi plan aprender integración y despliegue continuo para automatizar este proceso en los siguientes sprints.
             <br><br>
             <u>AV2</u><br>
+            Distribuir la app con Firebase fue un avance concreto en mi formación en operación de software; lo siguiente en mi plan es automatizar la compilación y la distribución de la aplicación con integración continua.
             <br><br>
             <b>Salinas Guzman, Brianna Cristina</b><br>
             <u>AV1</u><br>
@@ -483,6 +492,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             Pasar de los mock-ups al desarrollo me mostró la brecha entre diseño e implementación; sumo a mi plan reforzar el desarrollo de interfaces, sin dejar mi formación en arquitectura y cloud.
             <br><br>
             <u>AV2</u><br>
+            Trabajar con dos tecnologías móviles en paralelo reforzó mi interés en diseñar soluciones multiplataforma; mi siguiente paso es aprender arquitecturas para aplicarlo en Flutter.
             <br><br>
             <b>Sandoval Aiquipa, Kelber Yamir</b><br>
             <u>AV1</u><br>
@@ -492,6 +502,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             Documentar los servicios y evidenciar su despliegue me hizo notar que debo fortalecer mis bases de backend; mi plan es estudiar el diseño y documentación de APIs REST y aplicarlo en los siguientes sprints.
             <br><br>
             <u>AV2</u><br>
+            Validar la app con usuarios me mostró el valor de tomar decisiones con evidencia de uso real; por eso, incorporo a mi plan de formación en backend el aprendizaje de pruebas de usabilidad para aplicarlas.
             <br><br>
         </td>
         <td>
@@ -500,6 +511,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             <u>TB1</u><br>
             El paso al desarrollo reveló necesidades que no eran visibles en el AV1, como dominar un nuevo lenguaje y las prácticas de despliegue. Cada integrante ajustó su plan de crecimiento según lo que este entregable le exigió, y como equipo reconocemos que la tecnología del curso cambiará en cada etapa, por lo que seguir aprendiendo de forma continua será indispensable para los siguientes entregables. <br><br>
             <u>AV2</u><br>
+            El paso de Kotlin a Flutter confirmó que cada etapa del proyecto exige dominar una tecnología nueva en poco tiempo, y que lo aprendido en una etapa sirve de base para la siguiente. Cada integrante avanzó un paso concreto en su plan de crecimiento y definió el siguiente, sosteniendo el aprendizaje permanente como una práctica continua del equipo.
         </td>
     </tr>
 </table>
