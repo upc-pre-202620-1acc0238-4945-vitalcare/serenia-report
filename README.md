@@ -88,7 +88,7 @@
     </tr>
       <tr>
       <td><b>Tercera Entrega (AV2)</b></td>
-      <td>X/11/2026</td>
+      <td>13/11/2026</td>
       <td>
         Contreras Torres, Arturo Valentino <br>
         <p></p>
