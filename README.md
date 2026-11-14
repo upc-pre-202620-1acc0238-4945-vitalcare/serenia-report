@@ -9413,10 +9413,186 @@ Los 5 integrantes del equipo participaron en la implementación de la plataforma
 | Sprint 2 Velocity | 80 |
 | Sum of Story Points | 79 |
 #### 4.2.2.2. Aspect Leaders and Collaborators
+
+Durante el Sprint 2, el equipo distribuyó sus responsabilidades considerando la evolución del backend, el desarrollo de las aplicaciones móviles y las actividades de seguimiento y validación. Se mantuvo una organización colaborativa en la que cada integrante asumió responsabilidades específicas, permitiendo avanzar paralelamente en los diferentes componentes de Serenia.
+
+A continuación, se presenta la matriz Leadership-and-Collaboration (LACX), que identifica a los líderes (L) y colaboradores (C) de los principales aspectos desarrollados durante el sprint.
+
+| Team Member (Last Name, First Name) | GitHub Username | Backend & API Leader (L) / Collaborator (C) | Android Application Leader (L) / Collaborator (C) | Flutter Application Leader (L) / Collaborator (C) | Agile, Testing & Execution Leader (L) / Collaborator (C) | Cloud & Documentation Leader (L) / Collaborator (C) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Contreras Torres, Arturo Valentino | Arturouu | L | L | — | — | C |
+| Gallardo Morales, Carla Alejandra | Carlsss28 | C | — | — | C | L |
+| García Paredes, Victor Manuel | vicmacode | C | C | — | — | C |
+| Salinas Guzman, Brianna Cristina | brianna-salinas | — | C | — | — | — |
+| Sandoval Aiquipa, Kelber Yamir | Kyesei | — | — | L | L | — |
+
+*L: Leader (responsable principal). C: Collaborator (colaborador). —: sin responsabilidad individual registrada en esta distribución.*
+
+La distribución considera las contribuciones registradas en los repositorios, especialmente las actividades de desarrollo Android, correcciones del backend, mejoras de accesibilidad y documentación técnica. En particular, Kelber Sandoval estuvo a cargo del seguimiento del Sprint Backlog, la recopilación de evidencias de validación y ejecución, y el desarrollo de la vista de inicio de la aplicación Flutter.
+
 #### 4.2.2.3. Sprint Backlog 2
+
+El objetivo principal de este Sprint 2 fue ampliar las funcionalidades de Serenia para fortalecer el acompañamiento a distancia entre los adultos mayores y sus familiares. Se priorizaron funcionalidades relacionadas con las alertas por inactividad del check-in, sugerencias de bienestar, coordinación de turnos familiares, seguimiento del historial de check-ins y mejoras en la experiencia de uso de las aplicaciones.
+
+A continuación, se presenta el Board de Trello utilizado durante el Sprint 2, donde se gestionaron las historias de usuario y tareas técnicas priorizadas.
+
+**URL público del Board:** [Insertar URL público de Trello]
+
+<div align="center">
+
+![Evidencia de Trello](assets/img/sprint-2/trello-board.png)
+
+<br/><i>Imagen X. Board de Trello correspondiente al Sprint 2.</i>
+
+</div>
+
+El Sprint Backlog estuvo conformado por las siguientes historias de usuario y técnicas:
+
+| Sprint # | User Story Id | User Story Title | Work-Item / Task Id | Work-Item / Task Title | Description | Estimation (Story Points) | Assigned To | Status (Todo / InProcess / To-Review / Done) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Sprint 2 | US16 | Alerta por inactividad del check-in | — | — | Notificar a los familiares cuando el adulto mayor no registre su check-in dentro del plazo establecido. | 5 | Por confirmar | To Do |
+| Sprint 2 | US18 | Sugerencia de acción por patrón de malestar | — | — | Proporcionar sugerencias a los familiares cuando se detecten patrones de ánimo bajo. | 5 | Por confirmar | To Do |
+| Sprint 2 | US20 | Asignación de turnos de atención | — | — | Permitir que los familiares organicen y asignen turnos de atención. | 5 | Por confirmar | To Do |
+| Sprint 2 | NF03 | Control de acceso a los datos de bienestar | — | — | Restringir el acceso a la información de bienestar según los permisos del usuario. | 5 | Por confirmar | To Do |
+| Sprint 2 | TS06 | Gestión de mensajes de audio | — | — | Gestionar la creación, almacenamiento, publicación y consulta de mensajes de audio. | 5 | Por confirmar | To Do |
+| Sprint 2 | TS08 | Gestión de alertas de emergencia | — | — | Gestionar la generación, reconocimiento y resolución de alertas de emergencia. | 5 | Por confirmar | To Do |
+| Sprint 2 | TS09 | Gestión del panel de estado | — | — | Gestionar la información presentada en el panel de seguimiento del adulto mayor. | 5 | Por confirmar | To Do |
+| Sprint 2 | TS10 | Gestión de alertas de inactividad | — | — | Gestionar las alertas generadas por la falta de respuesta a los check-ins. | 5 | Por confirmar | To Do |
+| Sprint 2 | TS11 | Gestión de turnos de atención | — | — | Gestionar el registro, consulta y reasignación de turnos familiares. | 5 | Por confirmar | To Do |
+| Sprint 2 | TS13 | Gestión de indicadores de bienestar | — | — | Gestionar los indicadores utilizados para identificar patrones de bienestar. | 5 | Por confirmar | To Do |
+| Sprint 2 | US06 | Rotación de preguntas del check-in | — | — | Variar las preguntas presentadas al adulto mayor durante los check-ins diarios. | 3 | Por confirmar | To Do |
+| Sprint 2 | US08 | Modo simplificado de interfaz | — | — | Ofrecer una interfaz simplificada que facilite la interacción del adulto mayor. | 3 | Por confirmar | To Do |
+| Sprint 2 | US17 | Historial de check-ins del adulto mayor | — | — | Permitir consultar los registros históricos de los check-ins realizados. | 3 | Por confirmar | To Do |
+| Sprint 2 | NF04 | Usabilidad sin experiencia tecnológica previa | — | — | Facilitar la utilización de la solución por personas con poca experiencia tecnológica. | 3 | Por confirmar | To Do |
+| Sprint 2 | TS07 | Gestión de recordatorios de contacto social | — | — | Gestionar la programación y seguimiento de recordatorios de contacto social. | 3 | Por confirmar | To Do |
+| Sprint 2 | TS12 | Gestión de notas compartidas | — | — | Gestionar la creación, consulta y modificación de notas compartidas entre familiares. | 3 | Por confirmar | To Do |
+| Sprint 2 | US25 | Navegación y diseño responsive del sitio | — | — | Mejorar la navegación y adaptación de la página web a distintos tamaños de pantalla. | 3 | Por confirmar | To Do |
+| Sprint 2 | US03 | Registro de respuesta del check-in diario | — | — | Permitir registrar la respuesta y el estado de ánimo del adulto mayor. | 2 | Por confirmar | To Do |
+| Sprint 2 | US05 | Configuración del horario del check-in | — | — | Permitir configurar el horario de presentación del check-in diario. | 2 | Por confirmar | To Do |
+| Sprint 2 | US07 | Pausa diaria de preguntas | — | — | Permitir pausar temporalmente las preguntas del check-in durante el día. | 2 | Por confirmar | To Do |
+| Sprint 2 | US21 | Consulta del turno de atención vigente | — | — | Permitir consultar el turno de atención asignado a los familiares. | 2 | Por confirmar | To Do |
+
+**Total de historias comprometidas:** 21.
+
+**Total de Story Points:** 79.
+
+*Nota: El tablero compartido muestra una lista `To-do (sprint 2)` con 21 tarjetas. Los identificadores de tareas individuales, responsables y estados finales deben contrastarse con el detalle completo de Trello. Los guiones indican que no se dispone de esos datos en la captura proporcionada.*
+
 #### 4.2.2.4. Development Evidence for Sprint Review
+
+Durante el Sprint 2, el equipo continuó con la implementación de las funcionalidades de Serenia, trabajando de manera colaborativa en los diferentes repositorios de la solución. Se mantuvo el uso de ramas independientes por funcionalidad y Pull Requests para integrar los cambios desarrollados.
+
+En particular, se avanzó en la primera versión de la aplicación multiplataforma Flutter, incorporando su estructura base y funcionalidades relacionadas con la autenticación de familiares, vinculación con el adulto mayor, visualización de alertas y coordinación de turnos de atención.
+
+A continuación, se presentan algunos de los commits más representativos que evidencian los avances de implementación en el repositorio de la aplicación Flutter.
+
+**Repositorio:** `serenia-mobile-flutter`
+
+**URL del repositorio:** https://github.com/upc-pre-202620-1acc0238-4945-vitalcare/serenia-mobile-flutter
+
+| Repository | Branch | Commit Id | Commit Message | Commit Message Body | Committed on (Date) |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| serenia-mobile-flutter | feature/base-structure | 57298ab | feat(base-structure): set up dependencies on app start. | Configuración de las dependencias y componentes base para inicializar la aplicación. Autor: Arturouu. PR #1. | 12/11/2026 |
+| serenia-mobile-flutter | feature/iam | 2fe2fef | feat(iam): add sign in page that only lets relatives in. | Implementación de la pantalla de inicio de sesión para el acceso de familiares a distancia. Autor: Arturouu. PR #4. | 13/11/2026 |
+| serenia-mobile-flutter | feature/carecircle | 415b86c | feat(carecircle): add invitation code page to link with the older adult. | Implementación de la pantalla para ingresar el código de invitación y establecer el vínculo con el adulto mayor. Autor: Arturouu. PR #5. | 13/11/2026 |
+| serenia-mobile-flutter | feature/alerts | 5ed7395 | feat(alerts): add alerts list and detail pages. | Implementación de las vistas para consultar las alertas recibidas y visualizar su información detallada. Autor: vicmacode. PR #7. | 13/11/2026 |
+| serenia-mobile-flutter | feature/care-shifts | 33478c4 | feat(circle): add CareShiftsPage | Implementación de la pantalla para consultar y visualizar los turnos de atención familiares. Autor: Carlsss28. PR #12. | 13/11/2026 |
+
 #### 4.2.2.5. Testing Suite Evidence for Sprint Review
+
+Durante el Sprint 2, las actividades de validación se enfocaron en comprobar el comportamiento de los servicios REST y el cumplimiento de las funcionalidades implementadas. Para ello, se realizaron pruebas funcionales manuales mediante la documentación interactiva de Swagger UI, utilizando la opción *Try it out* para ejecutar solicitudes HTTP y verificar las respuestas obtenidas.
+
+Las pruebas permitieron validar operaciones relacionadas con el historial de check-ins, alertas por inactividad, sugerencias de bienestar, asignación y consulta de turnos de atención y configuración del modo simplificado.
+
+A continuación, se presentan las principales pruebas ejecutadas durante el sprint:
+
+| Funcionalidad | Endpoint | Tipo de solicitud | Respuesta obtenida |
+| :--- | :--- | :--- | :--- |
+| Historial de check-ins | `/api/v1/check-ins` | GET | 200 OK |
+| Consulta de alertas por inactividad | `/api/v1/alerts` | GET | 200 OK |
+| Reconocimiento de alerta de inactividad | `/api/v1/inactivity-alerts/{alertId}/acknowledge` | POST | 200 OK |
+| Consulta de sugerencias de bienestar | `/api/v1/wellbeing-suggestions` | GET | 200 OK |
+| Asignación de turno de atención | `/api/v1/care-circles/{careCircleId}/care-shifts` | POST | 201 Created |
+| Consulta de turnos de atención | `/api/v1/care-circles/{careCircleId}/care-shifts` | GET | 200 OK |
+| Activación del modo simplificado | `/api/v1/check-in-preferences/{preferencesId}/simplified-mode` | PUT | 200 OK |
+| Validación de parámetros obligatorios | `/api/v1/check-ins` | GET | 400 Bad Request |
+
+**Evidencias de ejecución de pruebas**
+
+**1. Consulta del historial de check-ins**
+
+Se verificó que el servicio permitiera consultar los registros históricos del adulto mayor, incluyendo los estados de los check-ins respondidos y aquellos que no fueron completados.
+
+**2. Consulta y reconocimiento de alertas por inactividad**
+
+Se verificó la obtención de alertas generadas por la falta de respuesta a los check-ins y el reconocimiento de estas por parte del familiar responsable.
+
+**3. Consulta de sugerencias de bienestar**
+
+Se comprobó que el servicio devolviera las sugerencias activas cuando se identifican patrones de malestar en los registros del adulto mayor.
+
+**4. Asignación y consulta de turnos de atención**
+
+Se verificó el registro de un turno de atención mediante una solicitud POST y la posterior consulta de los turnos mediante una solicitud GET.
+
+**5. Activación del modo simplificado**
+
+Se verificó que el servicio permitiera actualizar las preferencias del adulto mayor y activar el modo simplificado de la interfaz.
+
+**6. Validación de parámetros obligatorios**
+
+Finalmente, se comprobó el comportamiento del servicio ante solicitudes incompletas. Al consultar el historial sin proporcionar los parámetros obligatorios, la API devolvió un error `400 Bad Request`, acompañado del código `VALIDATION_ERROR`.
+
+Estas pruebas permitieron comprobar las respuestas de los servicios ante solicitudes válidas y solicitudes con datos incompletos, verificando el comportamiento esperado de la API durante el Sprint 2.
+
 #### 4.2.2.6. Execution Evidence for Sprint Review
+
+Al cierre del Sprint 2, se obtuvieron avances en la implementación de las aplicaciones móviles de Serenia, incorporando nuevas funcionalidades y mejoras orientadas a facilitar la interacción entre los adultos mayores y sus familiares.
+
+La aplicación Android, dirigida a los adultos mayores, presenta la evolución de sus principales interfaces y funcionalidades. Por otro lado, se desarrolló la primera versión de la aplicación Flutter, orientada a los familiares que realizan el acompañamiento a distancia.
+
+A continuación, se presentan las evidencias de ejecución de las aplicaciones móviles.
+
+**1. Aplicación Android – Adulto mayor**
+
+Se presentan las principales vistas de la aplicación Android ejecutándose en el emulador o dispositivo de prueba.
+
+<div align="center">
+
+![Android Home](assets/img/sprint-2/android-home.png)
+
+<br/><i>Imagen X. Ejecución de la pantalla principal de la aplicación Android.</i>
+
+</div>
+
+<div align="center">
+
+![Android Check-in](assets/img/sprint-2/android-checkin.png)
+
+<br/><i>Imagen X. Ejecución de la interfaz del check-in diario.</i>
+
+</div>
+
+<div align="center">
+
+![Android Simplified Mode](assets/img/sprint-2/android-simplified-mode.png)
+
+<br/><i>Imagen X. Ejecución de la interfaz del modo simplificado.</i>
+
+</div>
+
+**2. Aplicación Flutter – Familiar a distancia**
+
+Durante este sprint se desarrolló la primera versión de la aplicación multiplataforma, cuya interfaz está orientada a facilitar el seguimiento y acompañamiento del adulto mayor por parte de sus familiares.
+
+<div align="center">
+
+![Flutter Home](assets/img/sprint-2/flutter-home.png)
+
+<br/><i>Imagen X. Ejecución de la pantalla de inicio de la aplicación Flutter.</i>
+
+</div>
+
 #### 4.2.2.7. Services Documentation Evidence for Sprint Review
 
 Durante el Sprint 2 se actualizó la documentación de los Web Services de **Serenia Platform** con OpenAPI/Swagger, integrada directamente en el backend Spring Boot. La documentación cubre los seis bounded contexts de la plataforma: IAM, Care Circle, Daily Check-in, Alerts and Safety, Social Companionship y Wellbeing Monitoring. En total quedaron documentados **57 endpoints agrupados en 17 recursos** (uno más que en el Sprint 1, por el nuevo endpoint para obtener la foto de perfil). Además, se documentaron los endpoints que dan soporte a las historias comprometidas en el Sprint 2: la alerta por inactividad del check-in (US16), la sugerencia de acción por patrón de malestar (US18), la asignación y consulta de turnos de atención (US20, US21), el historial de check-ins (US17) y el modo simplificado de interfaz (US08).
@@ -10268,7 +10444,7 @@ En la vista "Cuéntale cómo estuvo tu día" del adulto mayor, la instrucción i
 <div align="center">
 
 ![Evidencia Problema 1](assets/img/heuristics/problema-1-audio.png)
-  <br/><i>Captura: Pantalla de grabación de audio del adulto mayor.</i>
+  <br/><i>Imagen 165. Evidencia del problema 1: pantalla de grabación de audio del adulto mayor.</i>
 </div>
 
 **Recomendación:**
@@ -10286,7 +10462,7 @@ En la vista de "Alertas" de la aplicación del familiar, tanto la notificación 
 <div align="center">
 
 ![Evidencia Problema 2](assets/img/heuristics/problema-2-alertas.png)
-  <br/><i>Captura: Historial de alertas del familiar a distancia.</i>
+  <br/><i>Imagen 166. Evidencia del problema 2: historial de alertas del familiar a distancia.</i>
 </div>
 
 **Recomendación:**
@@ -10304,7 +10480,7 @@ Cuando el adulto mayor activa la función de "Pausa diaria" (no recibir pregunta
 <div align="center">
 
 ![Evidencia Problema 3](assets/img/heuristics/problema-3-pausa.png)
-  <br/><i>Captura: Panel de estado diario mostrando "Hoy prefirió no responder".</i>
+  <br/><i>Imagen 167. Evidencia del problema 3: panel de estado diario mostrando "Hoy prefirió no responder".</i>
 </div>
 
 **Recomendación:**
@@ -10322,7 +10498,7 @@ En la vista "Turnos de atención", los familiares coordinan qué día se hace ca
 <div align="center">
 
 ![Evidencia Problema 4](assets/img/heuristics/problema-4-turnos.png)
-  <br/><i>Captura: Pantalla de asignación de turnos de atención.</i>
+  <br/><i>Imagen 168. Evidencia del problema 4: pantalla de asignación de turnos de atención.</i>
 </div>
 
 **Recomendación:**
@@ -10340,7 +10516,7 @@ El botón de emergencia, por su naturaleza, debe ser de fácil acceso. Sin embar
 <div align="center">
 
 ![Evidencia Problema 5](assets/img/heuristics/problema-5-sos.png)
-  <br/><i>Captura: Pantalla principal / navegación del adulto mayor.</i>
+  <br/><i>Imagen 169. Evidencia del problema 5: pantalla principal y navegación del adulto mayor.</i>
 </div>
 
 **Recomendación:**
