@@ -198,52 +198,64 @@ La Imagen 5 muestra el resumen de actividad (Pulse) del repositorio entre el 10 
 
 **Tercera Entrega (AV2)**
 
-Para esta entrega el equipo mantuvo el mismo flujo de trabajo: ramas independientes creadas desde `develop`, Pull Requests para integrar cada cambio y commits con Conventional Commits. A continuación se presenta, por cada repositorio, el resumen de actividad (Pulse) del periodo de la tercera entrega, con los Pull Requests integrados, los commits y el gráfico de Top committers.
+Para esta entrega el equipo mantuvo el flujo de trabajo basado en GitFlow y Conventional Commits en los cinco repositorios del proyecto. Cada aporte se desarrolló en una rama `feature/` o `fix/` creada desde `develop` y se integró mediante Pull Requests; al cierre del Sprint 2 los cambios estables se llevaron a la rama principal y se publicaron como nuevas versiones. Además de los repositorios ya existentes, en esta entrega se creó el repositorio `serenia-mobile-flutter`, que contiene la primera versión de la aplicación desarrollada en Flutter.
 
 **serenia-report:**
 
-Para el informe del proyecto el equipo siguió trabajando directamente sobre el repositorio `serenia-report`, con ramas `feature/` y `fix/` creadas desde `develop` e integradas mediante Pull Requests, y con commits que siguen la convención de Conventional Commits y un alcance entre paréntesis que indica la sección del informe, por ejemplo `docs(app-validation)`, `docs(mockups)` o `docs(student-outcome)`. En esta entrega se agregaron la validación de la aplicación Android, la evidencia del despliegue del Sprint 2, los mock-ups del adulto mayor y del familiar, las conclusiones y los videos.
+Para el informe el equipo continuó trabajando en el repositorio `serenia-report`, con ramas como `feature/sprint-planning-2`, `feature/deployment-sprint-2`, `feature/student-outcome-av2`, `feature/app-validation-av2` y `fix/conclusions-av2`. Los commits siguieron la convención `docs:` con un alcance que identifica la sección modificada, por ejemplo `docs(mockups)`, `docs(app-validation)` o `docs(conclusiones)`, y `fix:` para correcciones como la numeración de imágenes o las rutas de archivos.
+
+La Imagen 6 muestra el resumen de actividad (Pulse) del repositorio entre el 11 de octubre y el 13 de noviembre de 2026: 19 Pull Requests integrados (del #153 al #172), con 63 commits realizados por los integrantes del equipo. El gráfico de Top committers evidencia los aportes de cada integrante al informe.
 
 <p align="center">
-  <img src="assets/img/project-report-collaboration-insights/insights-av2-report.png" alt="AV2 Insights" width="900"/>
-    <br/><i>Imagen 6. Insights de la Tercera Entrega (AV2): repositorio serenia-report</i>
+  <img src="assets/img/project-report-collaboration-insights/insights-av2-5.png" alt="AV2 Insights" width="900"/>
+    <br/><i>Imagen 6. Insights de la Tercera Entrega (AV2) - serenia-report</i>
 </p>
 
 **serenia-website:**
 
-Para la Landing Page el equipo trabajó sobre el repositorio `serenia-website`. En esta entrega se agregó la sección de videos, con las tarjetas de los videos About The Product y About The Team y su enlace en la navegación, además de ajustes de estilo y la corrección del equivalente en dólares del plan anual.
+Para la Landing Page el equipo trabajó sobre el repositorio `serenia-website`, incorporando la sección de videos del producto y del equipo en la rama `feature/landing-video-section`, integrada mediante el Pull Request #9. Los commits siguieron la convención `feat(landing)` para las nuevas funcionalidades, como el componente `VideoCard` y el enlace a la sección de videos en la barra de navegación, y `style(landing)` para los ajustes visuales y de espaciado en dispositivos móviles. También se corrigió el equivalente en dólares del plan anual.
+
+La Imagen 7 muestra el resumen de actividad (Pulse) del repositorio durante el periodo de la entrega: 1 Pull Request integrado, con 9 commits realizados por los integrantes del equipo.
 
 <p align="center">
-  <img src="assets/img/project-report-collaboration-insights/insights-av2-website.png" alt="AV2 Insights" width="900"/>
-    <br/><i>Imagen 7. Insights de la Tercera Entrega (AV2): repositorio serenia-website</i>
+  <img src="assets/img/project-report-collaboration-insights/insights-av2-3.png" alt="AV2 Insights" width="900"/>
+    <br/><i>Imagen 7. Insights de la Tercera Entrega (AV2) - serenia-website</i>
 </p>
 
 **serenia-platform:**
 
-Para el backend el equipo trabajó sobre el repositorio `serenia-platform`. En esta entrega se actualizó la documentación OpenAPI, se incorporó la subida y consulta de la foto de perfil y se corrigieron hallazgos como la zona horaria UTC, las preferencias de check-in que no se podían convertir y la respuesta `400` ante parámetros faltantes o inválidos. El servicio se desplegó de nuevo en Azure con su documentación Swagger.
+Para el backend el equipo continuó trabajando sobre el repositorio `serenia-platform`, integrando las ramas `feature/README`, `feature/profile-photo`, `feature/api-documentation` y `fix/backend-findings` a `develop` mediante Pull Requests. En este periodo se implementó la subida y consulta de la foto de perfil, se trasladó el almacenamiento de archivos al shared kernel, se actualizó la documentación OpenAPI y se corrigieron los hallazgos detectados en el backend, como la zona horaria UTC y la respuesta `400` ante parámetros inválidos. Al cierre del sprint se integró `develop` a la rama principal y se publicó la versión `v2.0.0`.
+
+La Imagen 8 muestra el resumen de actividad (Pulse) del repositorio durante el periodo de la entrega: 5 Pull Requests integrados (del #11 al #15), con 15 commits realizados por los integrantes del equipo, y 1 release publicada, `v2.0.0`.
 
 <p align="center">
-  <img src="assets/img/project-report-collaboration-insights/insights-av2-platform.png" alt="AV2 Insights" width="900"/>
-    <br/><i>Imagen 8. Insights de la Tercera Entrega (AV2): repositorio serenia-platform</i>
+  <img src="assets/img/project-report-collaboration-insights/insights-av2_2.png" alt="AV2 Insights" width="900"/>
+    <br/><i>Imagen 8. Insights de la Tercera Entrega (AV2) - serenia-platform</i>
 </p>
 
 **serenia-mobile-android:**
 
-Para la aplicación del adulto mayor el equipo trabajó sobre el repositorio `serenia-mobile-android`, con una rama `feature/` por funcionalidad, como `design-system`, `iam`, `daily-check-in`, `alerts-and-safety`, `care-circle`, `social-companionship` y `profile-photo`, integradas mediante Pull Requests a `develop`. Al integrar cambios a la rama principal, un flujo automático de GitHub Actions genera el APK y lo distribuye a los testers por Firebase App Distribution.
+Para la aplicación Android el equipo trabajó sobre el repositorio `serenia-mobile-android`, desarrollando cada funcionalidad en ramas `feature/` independientes, como `feature/design-system`, `feature/iam`, `feature/daily-check-in`, `feature/care-circle`, `feature/alerts-and-safety` y `feature/social-companionship`, que conectaron la aplicación con el backend de cada bounded context. También se agregaron ramas `chore/` para la actualización del Android Gradle Plugin y la configuración de integración continua (`chore/android-ci`), y la rama `feature/azure-backend-url` para apuntar la aplicación al backend desplegado en Azure. Al cierre del sprint se integró `develop` a `main` y se publicó la versión `v2.0.0`.
+
+La Imagen 9 muestra el resumen de actividad (Pulse) del repositorio durante el periodo de la entrega: 20 Pull Requests integrados (del #13 al #36), con 177 commits realizados por los integrantes del equipo, y 1 release publicada, `v2.0.0`.
 
 <p align="center">
-  <img src="assets/img/project-report-collaboration-insights/insights-av2-android.png" alt="AV2 Insights" width="900"/>
-    <br/><i>Imagen 9. Insights de la Tercera Entrega (AV2): repositorio serenia-mobile-android</i>
+  <img src="assets/img/project-report-collaboration-insights/insights-av2_1.png" alt="AV2 Insights" width="900"/>
+    <br/><i>Imagen 9. Insights de la Tercera Entrega (AV2) - serenia-mobile-android</i>
 </p>
 
 **serenia-mobile-flutter:**
 
-Para la aplicación del familiar el equipo trabajó sobre el repositorio `serenia-mobile-flutter`, creado en esta entrega. El código se organiza por contexto delimitado (iam, carecircle, account, alertsandsafety y socialcompanionship), con una rama `feature/` por funcionalidad integrada mediante Pull Requests a `develop`.
+Para la primera versión de la aplicación en Flutter el equipo creó el repositorio `serenia-mobile-flutter`, organizando el código por bounded context dentro de `lib/features` (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety, Social Companionship y Account), además de una carpeta `core` con el design system y los componentes compartidos. Cada funcionalidad se desarrolló en una rama independiente, como `feature/iam`, `feature/alerts`, `feature/care-shifts`, `feature/shared-notes` y `feature/revoke-family-link`, y se integró a `develop` mediante Pull Requests. Los commits siguieron la convención Conventional Commits con alcances como `feat(circle)`, `feat(alerts)` y `feat(design-system)`.
+
+La Imagen 10 muestra el resumen de actividad (Pulse) del repositorio durante el periodo de la entrega: 17 Pull Requests integrados (del #1 al #17), con 195 commits realizados por los integrantes del equipo.
 
 <p align="center">
-  <img src="assets/img/project-report-collaboration-insights/insights-av2-flutter.png" alt="AV2 Insights" width="900"/>
-    <br/><i>Imagen 10. Insights de la Tercera Entrega (AV2): repositorio serenia-mobile-flutter</i>
+  <img src="assets/img/project-report-collaboration-insights/insight-av2-4.png" alt="AV2 Insights" width="900"/>
+    <br/><i>Imagen 10. Insights de la Tercera Entrega (AV2) - serenia-mobile-flutter</i>
 </p>
+
+<br>
 
 <div style="page-break-after: always;"></div>
 
@@ -3986,7 +3998,7 @@ El proceso se desarrolló en tres momentos:
 
 **Separación de lo genérico y lo complementario.** Finalmente, el equipo aisló los eventos que no aportan diferenciación competitiva. Por un lado, los de identidad, autenticación y gestión de perfil, que son resolubles con mecanismos estándar y cuyas reglas no cambian con el negocio de Serenia. Por otro lado, los de mensajería de audio, imágenes y recordatorios sociales, que enriquecen la experiencia de acompañamiento pero no producen ninguna señal que el sistema evalúe ni disparan ningún flujo de alerta.
 
-El resultado de la sesión fueron seis bounded contexts candidatos, clasificados según su aporte de valor y presentados en las Imágenes 23 a 28:
+El resultado de la sesión fueron seis bounded contexts candidatos, clasificados según su aporte de valor y presentados en las Imágenes 39 a 44:
 
 <br>
 
@@ -10069,7 +10081,7 @@ En el repositorio de la aplicación móvil los integrantes registraron las sigui
 
 <div align="center">
 
-![insight](./assets/img/insight-sprint2/insights1.png)
+![insight](./assets/img/project-report-collaboration-insights/insights-av2_1.png)
   <br/><i>Imagen 155. Top committers del repositorio de la aplicación android.</i>
 
 </div>
@@ -10091,7 +10103,7 @@ En el backend se registraron 10 commits durante el Sprint 2: Arturouu con 5 comm
 
 <div align="center">
 
-![insight](./assets/img/insight-sprint2/insights2.png)
+![insight](./assets/img/project-report-collaboration-insights/insights-av2_2.png)
   <br/><i>Imagen 157. Top committers del repositorio de la plataforma</i>
 
 </div>
@@ -10563,7 +10575,7 @@ En esta sección se documenta la validación de la aplicación Android de Sereni
 
 <img src="assets/img/interviews/validacion-app-yrma.png" alt="Screenshot de la validación de la aplicación Android con Yrma Huamán" width="700"/>
 
-<p align="center"><i>Imagen 170. Captura de la entrevista de validación de la aplicación Android con Yrma Huamán Jiménez.</i></p>
+<p align="center"><i>Imagen 165. Captura de la entrevista de validación de la aplicación Android con Yrma Huamán Jiménez.</i></p>
 
 <br>
 
