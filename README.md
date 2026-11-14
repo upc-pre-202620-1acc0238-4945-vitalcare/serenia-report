@@ -7785,7 +7785,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar//FamInicioPausa.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamInicioPausa.png)
 
 </div>
 
@@ -7881,7 +7881,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar//FamNotas.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamNotas.png)
 
 </div>
 
@@ -9300,7 +9300,7 @@ Se creó el grupo de recursos `serenia-rg`, que agrupa los cinco recursos de Ser
 | `sereniaplatformacr` | Container Registry | Almacena la imagen Docker |
 | `sereniaplatformsa` | Cuenta de almacenamiento | Archivos multimedia (audios y fotos) |
 
-![Grupo de recursos serenia-rg en Azure](./assets/img//sprint/capturas-azure-sprint1/serenia-deploy-img/azure-resource-group.png)
+![Grupo de recursos serenia-rg en Azure](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-resource-group.png)
 
 **2.2. Provisión de Azure Database for MySQL**
 
@@ -9346,7 +9346,7 @@ Se configuraron en el App Service las variables de entorno que consume el backen
 | `MEDIA_STORAGE_PROVIDER` | Proveedor de almacenamiento de archivos (Azure Blob Storage) |
 | `DOCKER_REGISTRY_SERVER_URL`, `DOCKER_REGISTRY_SERVER_USERNAME`, `DOCKER_REGISTRY_SERVER_PASSWORD` | Credenciales con las que App Service descarga la imagen desde Container Registry |
 
-![Variables de entorno del App Service](./assets/img//sprint/capturas-azure-sprint1/serenia-deploy-img/azure-app-settings.png)
+![Variables de entorno del App Service](./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-app-settings.png)
 
 **2.8. Verificación del despliegue**
 
@@ -10482,6 +10482,8 @@ El video About The Team presenta al equipo detrás de Serenia y el trabajo que r
 </div>
 
 <br>
+
+<div style="page-break-after: always;"></div>
 
 
 # Glosario
