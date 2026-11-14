@@ -10378,11 +10378,12 @@ Esta tercera entrega suma la implementación y el despliegue del Sprint 2 y la v
 2. La aplicación Android ya funciona con el backend real y se distribuye sola. Dejó los datos de ejemplo y consume los servicios de cuenta, check-in, círculo familiar, alertas y mensajes. Cada vez que se integran cambios a la rama principal, un flujo automático genera el APK y lo envía a los testers por Firebase App Distribution.
 
 3. El backend quedó ampliado y comprobado en producción. Tiene 57 operaciones en 17 grupos REST, con documentación Swagger actualizada, y está desplegado en Azure. Se verificó que exige autenticación y que guarda las contraseñas cifradas.
-La accesibilidad para adultos mayores avanzó. Se agregaron el tamaño de letra grande, el alto contraste y el modo simplificado del check-in, que responden a las dificultades con funciones nuevas y con palabras pequeñas que mencionaron los entrevistados.
 
-4. La validación con la aplicación fue positiva, aunque limitada. Yrma la consideró muy interesante, dijo que letras, tamaños e íconos están bien y que la recomendaría a su familia y a sus amigas. Pero solo observó la aplicación por videollamada, sin manejarla, así que muestra aceptación y no uso sostenido.
+4. La accesibilidad para adultos mayores avanzó. Se agregaron el tamaño de letra grande, el alto contraste y el modo simplificado del check-in, que responden a las dificultades con funciones nuevas y con palabras pequeñas que mencionaron los entrevistados.
 
-5. La aplicación Flutter del familiar tiene su primera versión. Sigue la misma organización por contextos que el resto del proyecto, y adoptarla permitió al equipo comparar Flutter con Jetpack Compose y aprender cuándo conviene cada enfoque. Todavía faltan pantallas por terminar.
+5. La validación con la aplicación fue positiva, aunque limitada. Yrma la consideró muy interesante, dijo que letras, tamaños e íconos están bien y que la recomendaría a su familia y a sus amigas. Pero solo observó la aplicación por videollamada, sin manejarla, así que muestra aceptación y no uso sostenido.
+
+6. La aplicación Flutter del familiar tiene su primera versión. Sigue la misma organización por contextos que el resto del proyecto, y adoptarla permitió al equipo comparar Flutter con Jetpack Compose y aprender cuándo conviene cada enfoque. Todavía faltan pantallas por terminar.
 
 <br>
 
@@ -10394,7 +10395,7 @@ La accesibilidad para adultos mayores avanzó. Se agregaron el tamaño de letra 
 
 3. Terminar y distribuir la aplicación Flutter del familiar. Completar Inicio, Historial y Mensajes, y distribuirla a los testers como la de Android.
 
-4. Corregir lo pendiente de la evaluación de usabilidad y definir las notificaciones. Confirmar que el botón de auxilio pide una confirmación clara, integrar Firebase Cloud Messaging y evaluar las videollamadas que pidió Yrma.
+4. Validar con adultos mayores el botón de auxilio y definir las notificaciones. La evaluación de usabilidad observó que el botón podía activarse por error, y la aplicación Android ya lo corrige al pedir que se mantenga presionado; falta comprobar con adultos mayores que ese gesto les resulte claro. Además, integrar Firebase Cloud Messaging y evaluar las videollamadas que pidió Yrma.
 
 <br>
 
