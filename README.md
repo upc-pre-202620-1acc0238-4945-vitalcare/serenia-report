@@ -419,7 +419,7 @@ En el siguiente cuadro se describe las acciones realizadas y enunciados de concl
             Investigué y definí las convenciones de código del proyecto y configuré el despliegue del software, además de modelar la navegación de la aplicación mediante Wireflow y User Flow Diagrams.
             <br><br>
             <u>AV2</u><br>
-            Aprendí a distribuir la aplicación Android con Firebase, que agiliza la entrega a usuarios de prueba aunque genera dependencia del servicio. Además, validé la aplicación con usuarios para obtener evidencia de su uso real y apliqué Flutter en el desarrollo multiplataforma.
+            Aprendí a distribuir la aplicación Android con Firebase App Distribution, que agiliza la entrega a usuarios de prueba aunque genera dependencia del servicio, y desplegué el backend en Azure. Validé la aplicación con una adulta mayor para obtener evidencia de su uso real y apliqué Flutter y Dart en la aplicación del familiar, donde desarrollé la sección de Alertas: la lista y el detalle de las alertas, el aviso de alertas pendientes en la barra de navegación y la acción de llamar al adulto mayor.
             <br><br>
             <b>Salinas Guzman, Brianna Cristina</b><br>
             <u>AV1</u><br>
