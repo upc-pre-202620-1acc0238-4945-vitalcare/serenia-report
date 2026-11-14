@@ -7777,7 +7777,31 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamHistorialDetalle.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
 ![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar//FamInicioPausa.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamInicioEmergencia.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamInicioInactividad.png)
 
 </div>
 
@@ -7793,7 +7817,63 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamAlertaDetalle.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamAlertaAtendiendo.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamAlertasResuelta.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
 ![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamCirculoQuitar.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamTurnos.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoLibre.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoOcupado.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoReasignar.png)
 
 </div>
 
@@ -7809,7 +7889,23 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamMensajes.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
 ![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamFotoRevisar.png)
+
+</div>
+
+<br>
+
+<div align="center">
+
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamFotoEnviada.png)
 
 </div>
 
