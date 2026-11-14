@@ -10272,45 +10272,36 @@ Requerir una interacción intencional para confirmar la emergencia. En lugar de 
 
 # Conclusiones y Recomendaciones
 
-Esta segunda entrega suma al análisis y al diseño de la primera el diseño de la interfaz (Capítulo III) y la implementación y validación del Sprint 1 (Capítulo IV). Las conclusiones contrastan lo planteado en el proceso de Lean UX (sección 1.2.2) con lo encontrado en las entrevistas de descubrimiento (sección 2.2) y de validación (sección 4.3), y las recomendaciones señalan lo que sigue para las próximas entregas.
+Esta tercera entrega suma la implementación y el despliegue del Sprint 2 y la validación de la aplicación ya construida. Las conclusiones contrastan lo planteado en el Lean UX con lo logrado y lo encontrado con usuarios, y las recomendaciones señalan lo que sigue.
+
+<br>
 
 **Conclusiones**
 
-1. **El problema planteado se confirma, y se observa desde los dos lados.** El Problem Statement describe la ausencia de un canal ligero entre "no comunicarse" y "llamar todos los días". En las entrevistas, los 4 familiares a distancia se preocupan cuando no pueden verificar cómo está el adulto mayor, y los 3 adultos mayores evitan contar sus problemas para no preocupar a sus familiares. Ambos segmentos sufren el mismo vacío desde extremos opuestos, lo que respalda una solución de dos aplicaciones conectadas. La muestra es pequeña (7 entrevistas), por lo que estos resultados orientan el diseño pero no permiten generalizar.
+1. El problema planteado se sigue confirmando desde los dos lados. Los familiares a distancia se preocupan cuando no pueden saber cómo está el adulto mayor, y los adultos mayores evitan contar sus problemas para no preocupar a su familia. En la validación con la aplicación ya construida, Yrma dijo que se sentiría tranquila de que su familia vea cómo está, porque se preocuparía menos. La muestra es pequeña, así que estos resultados orientan el diseño pero no permiten generalizar.
 
-2. **Los assumptions de usuario se cumplen en su mayoría, con dos matices.** Los 3 adultos mayores cuentan con smartphone, tal como se asumió, pero los 3 reportan dificultades con funciones nuevas o con la lentitud de las aplicaciones. Esto exige mantener el check-in de un solo toque y el modo simplificado, y no dar por hecho que sabrán resolver cualquier interacción. Por otro lado, la desconfianza hacia soluciones de vigilancia se confirmó en el segmento de familiares (2 de 4 la expresaron de forma directa), mientras que en los adultos mayores el freno observado fue el temor a ser una carga, más que a ser vigilados.
+2. La aplicación Android ya funciona con el backend real y se distribuye sola. Dejó los datos de ejemplo y consume los servicios de cuenta, check-in, círculo familiar, alertas y mensajes. Cada vez que se integran cambios a la rama principal, un flujo automático genera el APK y lo envía a los testers por Firebase App Distribution.
 
-3. **Las entrevistas de validación respaldan la propuesta, con matices.** Con la landing y el prototipo (sección 4.3.2), las tres personas entrevistadas del Segmento 1 entendieron qué hace Serenia y consideraron fácil el recorrido; la excepción puntual fueron las palabras pequeñas, que a Yrma le costó leer, mientras que Eva valoró los colores, el tamaño de los botones y la tipografía. En el Segmento 2, José y Kevin valoraron la vinculación por código como un proceso rápido y menos invasivo que el rastreo por GPS, y el historial y las alertas como una forma de reducir la preocupación diaria. Son opiniones de pocas personas ante un prototipo, por lo que muestran comprensión y aceptación, pero no adopción sostenida.
+3. El backend quedó ampliado y comprobado en producción. Tiene 57 operaciones en 17 grupos REST, con documentación Swagger actualizada, y está desplegado en Azure. Se verificó que exige autenticación y que guarda las contraseñas cifradas.
+La accesibilidad para adultos mayores avanzó. Se agregaron el tamaño de letra grande, el alto contraste y el modo simplificado del check-in, que responden a las dificultades con funciones nuevas y con palabras pequeñas que mencionaron los entrevistados.
 
-4. **Los Hypothesis Statements siguen sin validarse con uso real.** Las cuatro hipótesis (adopción diaria del check-in, "cuéntame algo", panel de estado con alertas selectivas y botón de auxilio) y sus criterios de éxito (alta tasa de check-ins, menos llamadas por ansiedad y uso recurrente del panel) requieren observar el uso del producto durante varios días. La asunción de mayor riesgo continúa siendo que el Segmento 1 adopte el check-in diario como hábito, tal como se señaló en el Lean UX Canvas. Una revisión reciente indica que el uso sostenido de aplicaciones móviles de salud depende sobre todo de motivos intrínsecos, como la autonomía, la competencia y la relación con otras personas (Baykoca et al., 2026), lo que refuerza la decisión de mantener el check-in simple.
+4. La validación con la aplicación fue positiva, aunque limitada. Yrma la consideró muy interesante, dijo que letras, tamaños e íconos están bien y que la recomendaría a su familia y a sus amigas. Pero solo observó la aplicación por videollamada, sin manejarla, así que muestra aceptación y no uso sostenido.
 
-5. **La evaluación heurística identificó cinco problemas de usabilidad.** La sección 4.3.3 registra uno de severidad 4, la activación accidental del botón de auxilio con un solo toque; tres de severidad 3, que son el envío de audio sin revisión ni cancelación, las alertas sin jerarquía visual de criticidad y la modificación de turnos sin prevención de errores; y uno de severidad 2, el mensaje ambiguo en el estado de pausa. Los cinco tienen una recomendación concreta.
+5. La aplicación Flutter del familiar tiene su primera versión. Sigue la misma organización por contextos que el resto del proyecto, y adoptarla permitió al equipo comparar Flutter con Jetpack Compose y aprender cuándo conviene cada enfoque. Todavía faltan pantallas por terminar.
 
-6. **El modelado estratégico dio como resultado seis bounded contexts con fronteras justificadas.** El proceso de EventStorming en diez pasos (sección 2.5.1) permitió delimitar tres contextos Core (Daily Check-in, Wellbeing Monitoring y Alerts & Safety), dos Supporting (Care Circle y Social Companionship) y uno Generic (Identity & Access). Los tres Core coinciden con la propuesta de valor: capturar la señal diaria, interpretarla y alertar cuando corresponde. El Context Map (sección 2.5.2) formaliza sus relaciones mediante Customer/Supplier entre los contextos internos y Anti-Corruption Layer frente a los sistemas externos, el proveedor de notificaciones push y el almacenamiento de archivos; no se aplicaron Shared Kernel ni Conformist.
-
-7. **El backend está implementado y desplegado.** Se construyó en Spring Boot con Java 26 siguiendo Domain-Driven Design, con seis bounded contexts y las capas domain, application, infrastructure e interfaces en cada uno. Expone 56 operaciones en 17 grupos REST, documentadas con OpenAPI, y se ejecuta en Azure como imagen Docker sobre Azure App Service, con Azure Database for MySQL y un contenedor privado de Azure Blob Storage para los archivos multimedia (sección 4.1.4).
-
-8. **La landing y la aplicación Android ya existen.** La landing page está publicada en Netlify con despliegue continuo desde GitHub. La aplicación Android del adulto mayor, construida en Kotlin con Jetpack Compose, incluye las pantallas de Home, Check-in, Alerts and Safety, Social Companionship, Identity and Access y Care Circle, navegables y con datos de ejemplo (sección 4.1.3).
-
-9. **El diseño de la interfaz cubre ambos segmentos.** Se definieron seis wireflows y seis user flows, tres por segmento, y un sistema de etiquetas propio para cada rol: primera persona para el adulto mayor ("Mi cuenta", "Mi ayuda") y tercera persona para el familiar ("Círculo de Mamá Rosa").
+<br>
 
 **Recomendaciones**
 
-1. **Validar con uso real la asunción de mayor riesgo.** Con la aplicación conectada al backend, medir durante varios días la tasa de check-ins diarios de los adultos mayores y convertir los criterios de éxito del Problem Statement en métricas concretas.
+1. Validar con uso real el hábito del check-in diario. Medir durante varios días cuántos adultos mayores responden cada día, y que ellos mismos manejen la aplicación.
 
-2. **Corregir los problemas de la evaluación heurística por severidad.** Empezar por el botón de auxilio, que debe requerir una confirmación intencional, y seguir con el envío de audio, la jerarquía visual de las alertas, la modificación de turnos y el mensaje de pausa.
+2. Agregar pruebas automáticas a las reglas más críticas. Empezar por los códigos de invitación, los turnos y las alertas, y ejecutarlas en el mismo flujo que genera el APK.
 
-3. **Mejorar la legibilidad para adultos mayores.** Aumentar el tamaño de las palabras pequeñas señaladas en la entrevista de Yrma y ofrecer una opción de letra más grande, en línea con los requisitos de accesibilidad (NF01, NF04 y US08).
+3. Terminar y distribuir la aplicación Flutter del familiar. Completar Inicio, Historial y Mensajes, y distribuirla a los testers como la de Android.
 
-4. **Conectar la aplicación Android al backend y distribuirla.** Reemplazar los datos de ejemplo por los servicios de la API y distribuir cada versión mediante Firebase App Distribution; después construir la aplicación del familiar a distancia.
+4. Corregir lo pendiente de la evaluación de usabilidad y definir las notificaciones. Confirmar que el botón de auxilio pide una confirmación clara, integrar Firebase Cloud Messaging y evaluar las videollamadas que pidió Yrma.
 
-5. **Agregar pruebas automáticas a las reglas de dominio más críticas.** Las prioritarias son el canje de códigos de invitación (un solo uso y un solo vínculo activo por familiar), la unicidad de turnos por fecha y las transiciones de estado de las alertas, junto con escenarios de aceptación asociados a las historias de usuario.
-
-6. **Resolver las preguntas abiertas de los Bounded Context Canvases antes de implementar el contexto que las contiene.** Las más importantes son la vigencia y la revocación de los vínculos, la duración de la ventana de inactividad y cuántos días forman un patrón de malestar.
-
-7. **Definir e integrar el proveedor de notificaciones push.** Firebase Cloud Messaging, estudiado en el spike SP01, es la opción planteada para las notificaciones de check-in, inactividad y emergencia.
-
-8. **Evaluar las funciones que pidieron las personas entrevistadas.** Yrma propuso poder hacer videollamadas con su familia; conviene analizarlo junto con el envío de fotos y audios del contexto Social Companionship.
+<br>
 
 <div style="page-break-after: always;"></div>
 
