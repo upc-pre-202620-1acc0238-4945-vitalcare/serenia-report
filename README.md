@@ -9534,6 +9534,53 @@ Finalmente, se comprobó el comportamiento del servicio ante solicitudes incompl
 Estas pruebas permitieron comprobar las respuestas de los servicios ante solicitudes válidas y solicitudes con datos incompletos, verificando el comportamiento esperado de la API durante el Sprint 2.
 
 #### 4.2.2.6. Execution Evidence for Sprint Review
+
+Al cierre del Sprint 2, se obtuvieron avances en la implementación de las aplicaciones móviles de Serenia, incorporando nuevas funcionalidades y mejoras orientadas a facilitar la interacción entre los adultos mayores y sus familiares.
+
+La aplicación Android, dirigida a los adultos mayores, presenta la evolución de sus principales interfaces y funcionalidades. Por otro lado, se desarrolló la primera versión de la aplicación Flutter, orientada a los familiares que realizan el acompañamiento a distancia.
+
+A continuación, se presentan las evidencias de ejecución de las aplicaciones móviles.
+
+**1. Aplicación Android – Adulto mayor**
+
+Se presentan las principales vistas de la aplicación Android ejecutándose en el emulador o dispositivo de prueba.
+
+<div align="center">
+
+![Android Home](assets/img/sprint-2/android-home.png)
+
+<br/><i>Imagen X. Ejecución de la pantalla principal de la aplicación Android.</i>
+
+</div>
+
+<div align="center">
+
+![Android Check-in](assets/img/sprint-2/android-checkin.png)
+
+<br/><i>Imagen X. Ejecución de la interfaz del check-in diario.</i>
+
+</div>
+
+<div align="center">
+
+![Android Simplified Mode](assets/img/sprint-2/android-simplified-mode.png)
+
+<br/><i>Imagen X. Ejecución de la interfaz del modo simplificado.</i>
+
+</div>
+
+**2. Aplicación Flutter – Familiar a distancia**
+
+Durante este sprint se desarrolló la primera versión de la aplicación multiplataforma, cuya interfaz está orientada a facilitar el seguimiento y acompañamiento del adulto mayor por parte de sus familiares.
+
+<div align="center">
+
+![Flutter Home](assets/img/sprint-2/flutter-home.png)
+
+<br/><i>Imagen X. Ejecución de la pantalla de inicio de la aplicación Flutter.</i>
+
+</div>
+
 #### 4.2.2.7. Services Documentation Evidence for Sprint Review
 
 Durante el Sprint 2 se actualizó la documentación de los Web Services de **Serenia Platform** con OpenAPI/Swagger, integrada directamente en el backend Spring Boot. La documentación cubre los seis bounded contexts de la plataforma: IAM, Care Circle, Daily Check-in, Alerts and Safety, Social Companionship y Wellbeing Monitoring. En total quedaron documentados **57 endpoints agrupados en 17 recursos** (uno más que en el Sprint 1, por el nuevo endpoint para obtener la foto de perfil). Además, se documentaron los endpoints que dan soporte a las historias comprometidas en el Sprint 2: la alerta por inactividad del check-in (US16), la sugerencia de acción por patrón de malestar (US18), la asignación y consulta de turnos de atención (US20, US21), el historial de check-ins (US17) y el modo simplificado de interfaz (US08).
