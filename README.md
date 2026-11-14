@@ -7686,7 +7686,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/bienvenida.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/adulto-mayor/01-registro-bienvenida.png)
 
 </div>
 
@@ -7694,7 +7694,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/2.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/adulto-mayor/04-registro-rol.png)
 
 </div>
 
@@ -7702,7 +7702,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/3.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/adulto-mayor/02-registro-ingreso.png)
 
 </div>
 
@@ -7710,7 +7710,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/18.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamCodigo.png)
 
 </div>
 
@@ -7718,7 +7718,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/19.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamConectados.png)
 
 </div>
 
@@ -7726,7 +7726,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/20.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamInicio.png)
 
 </div>
 
@@ -7734,7 +7734,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/21.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamCirculo.png)
 
 </div>
 
@@ -7742,7 +7742,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/22.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamInicioSugerencia.png)
 
 </div>
 
@@ -7750,7 +7750,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/23.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamCuenta.png)
 
 </div>
 
@@ -7758,7 +7758,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/24.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamHistorial.png)
 
 </div>
 
@@ -7766,7 +7766,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/25.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar//FamInicioPausa.png)
 
 </div>
 
@@ -7774,7 +7774,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/26.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamAlertas.png)
 
 </div>
 
@@ -7782,7 +7782,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/27.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamCirculoQuitar.png)
 
 </div>
 
@@ -7790,7 +7790,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/28.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar//FamNotas.png)
 
 </div>
 
@@ -7798,7 +7798,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/29.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamFotoRevisar.png)
 
 </div>
 
@@ -7806,7 +7806,7 @@ El recorrido del familiar comienza con la misma bienvenida, ingreso y creación 
 
 <div align="center">
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/30.png)
+![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamAudioEscuchando.png)
 
 </div>
 
