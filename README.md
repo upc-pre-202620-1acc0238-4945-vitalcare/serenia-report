@@ -10316,7 +10316,7 @@ Esta segunda entrega suma al análisis y al diseño de la primera el diseño de 
 
 ## Video App Validation
 
-En esta sección se documenta la validación de la aplicación Android de Serenia con adultos mayores, es decir, con la aplicación ya construida y no con el prototipo de la sección 4.3.2. Cada sesión se grabó en un video independiente, y para cada una se presenta la captura, la ficha de la persona entrevistada, el enlace al video y un resumen de sus apreciaciones. Las heurísticas de usabilidad, arquitectura de información y diseño inclusivo se evalúan en la sección 4.3.3, y la evidencia de la distribución de la aplicación a los testers se presenta en la sección 4.2.2.8.
+En esta sección se documenta la validación de la aplicación Android de Serenia con adultos mayores, es decir, con la aplicación ya construida y no con el prototipo de la sección 4.3.2. Cada sesión se grabó en un video independiente, y para cada una se presenta la captura, la ficha de la persona entrevistada, el enlace al video y un resumen de sus apreciaciones. La evidencia de la distribución de la aplicación a los testers se presenta en la sección 4.2.2.8.
 
 <br>
 
@@ -10339,7 +10339,7 @@ En esta sección se documenta la validación de la aplicación Android de Sereni
   <tr><td><b>Fecha</b></td><td>13/11/2026</td></tr>
   <tr><td><b>Timing en el video</b></td><td><i>00:00</i></td></tr>
   <tr><td><b>Duración</b></td><td>18 min 40 s</td></tr>
-  <tr><td><b>URL del video</b></td><td><a href="">Ver video en OneDrive</a></td></tr>
+  <tr><td><b>URL del video</b></td><td><a href="https://upcedupe-my.sharepoint.com/:v:/g/personal/u202012001_upc_edu_pe/IQAD58Zl6XkYTrsH73qTai27AZgOBrQqlpHlBtTX8ehtn3I?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&amp;e=nTYCMB">Ver video en OneDrive</a></td></tr>
 </table>
 
 </div>
