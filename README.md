@@ -198,52 +198,64 @@ La Imagen 5 muestra el resumen de actividad (Pulse) del repositorio entre el 10 
 
 **Tercera Entrega (AV2)**
 
-Para esta entrega el equipo mantuvo el mismo flujo de trabajo: ramas independientes creadas desde `develop`, Pull Requests para integrar cada cambio y commits con Conventional Commits. A continuación se presenta, por cada repositorio, el resumen de actividad (Pulse) del periodo de la tercera entrega, con los Pull Requests integrados, los commits y el gráfico de Top committers.
+Para esta entrega el equipo mantuvo el flujo de trabajo basado en GitFlow y Conventional Commits en los cinco repositorios del proyecto. Cada aporte se desarrolló en una rama `feature/` o `fix/` creada desde `develop` y se integró mediante Pull Requests; al cierre del Sprint 2 los cambios estables se llevaron a la rama principal y se publicaron como nuevas versiones. Además de los repositorios ya existentes, en esta entrega se creó el repositorio `serenia-mobile-flutter`, que contiene la primera versión de la aplicación desarrollada en Flutter.
 
 **serenia-report:**
 
-Para el informe del proyecto el equipo siguió trabajando directamente sobre el repositorio `serenia-report`, con ramas `feature/` y `fix/` creadas desde `develop` e integradas mediante Pull Requests, y con commits que siguen la convención de Conventional Commits y un alcance entre paréntesis que indica la sección del informe, por ejemplo `docs(app-validation)`, `docs(mockups)` o `docs(student-outcome)`. En esta entrega se agregaron la validación de la aplicación Android, la evidencia del despliegue del Sprint 2, los mock-ups del adulto mayor y del familiar, las conclusiones y los videos.
+Para el informe el equipo continuó trabajando en el repositorio `serenia-report`, con ramas como `feature/sprint-planning-2`, `feature/deployment-sprint-2`, `feature/student-outcome-av2`, `feature/app-validation-av2` y `fix/conclusions-av2`. Los commits siguieron la convención `docs:` con un alcance que identifica la sección modificada, por ejemplo `docs(mockups)`, `docs(app-validation)` o `docs(conclusiones)`, y `fix:` para correcciones como la numeración de imágenes o las rutas de archivos.
+
+La Imagen 6 muestra el resumen de actividad (Pulse) del repositorio entre el 11 de octubre y el 13 de noviembre de 2026: 19 Pull Requests integrados (del #153 al #172), con 63 commits realizados por los integrantes del equipo. El gráfico de Top committers evidencia los aportes de cada integrante al informe.
 
 <p align="center">
-  <img src="assets/img/project-report-collaboration-insights/insights-av2-report.png" alt="AV2 Insights" width="900"/>
-    <br/><i>Imagen 6. Insights de la Tercera Entrega (AV2): repositorio serenia-report</i>
+  <img src="assets/img/project-report-collaboration-insights/insights-av2-5.png" alt="AV2 Insights" width="900"/>
+    <br/><i>Imagen 6. Insights de la Tercera Entrega (AV2) - serenia-report</i>
 </p>
 
 **serenia-website:**
 
-Para la Landing Page el equipo trabajó sobre el repositorio `serenia-website`. En esta entrega se agregó la sección de videos, con las tarjetas de los videos About The Product y About The Team y su enlace en la navegación, además de ajustes de estilo y la corrección del equivalente en dólares del plan anual.
+Para la Landing Page el equipo trabajó sobre el repositorio `serenia-website`, incorporando la sección de videos del producto y del equipo en la rama `feature/landing-video-section`, integrada mediante el Pull Request #9. Los commits siguieron la convención `feat(landing)` para las nuevas funcionalidades, como el componente `VideoCard` y el enlace a la sección de videos en la barra de navegación, y `style(landing)` para los ajustes visuales y de espaciado en dispositivos móviles. También se corrigió el equivalente en dólares del plan anual.
+
+La Imagen 7 muestra el resumen de actividad (Pulse) del repositorio durante el periodo de la entrega: 1 Pull Request integrado, con 9 commits realizados por los integrantes del equipo.
 
 <p align="center">
-  <img src="assets/img/project-report-collaboration-insights/insights-av2-website.png" alt="AV2 Insights" width="900"/>
-    <br/><i>Imagen 7. Insights de la Tercera Entrega (AV2): repositorio serenia-website</i>
+  <img src="assets/img/project-report-collaboration-insights/insights-av2-3.png" alt="AV2 Insights" width="900"/>
+    <br/><i>Imagen 7. Insights de la Tercera Entrega (AV2) - serenia-website</i>
 </p>
 
 **serenia-platform:**
 
-Para el backend el equipo trabajó sobre el repositorio `serenia-platform`. En esta entrega se actualizó la documentación OpenAPI, se incorporó la subida y consulta de la foto de perfil y se corrigieron hallazgos como la zona horaria UTC, las preferencias de check-in que no se podían convertir y la respuesta `400` ante parámetros faltantes o inválidos. El servicio se desplegó de nuevo en Azure con su documentación Swagger.
+Para el backend el equipo continuó trabajando sobre el repositorio `serenia-platform`, integrando las ramas `feature/README`, `feature/profile-photo`, `feature/api-documentation` y `fix/backend-findings` a `develop` mediante Pull Requests. En este periodo se implementó la subida y consulta de la foto de perfil, se trasladó el almacenamiento de archivos al shared kernel, se actualizó la documentación OpenAPI y se corrigieron los hallazgos detectados en el backend, como la zona horaria UTC y la respuesta `400` ante parámetros inválidos. Al cierre del sprint se integró `develop` a la rama principal y se publicó la versión `v2.0.0`.
+
+La Imagen 8 muestra el resumen de actividad (Pulse) del repositorio durante el periodo de la entrega: 5 Pull Requests integrados (del #11 al #15), con 15 commits realizados por los integrantes del equipo, y 1 release publicada, `v2.0.0`.
 
 <p align="center">
-  <img src="assets/img/project-report-collaboration-insights/insights-av2-platform.png" alt="AV2 Insights" width="900"/>
-    <br/><i>Imagen 8. Insights de la Tercera Entrega (AV2): repositorio serenia-platform</i>
+  <img src="assets/img/project-report-collaboration-insights/insights-av2_2.png" alt="AV2 Insights" width="900"/>
+    <br/><i>Imagen 8. Insights de la Tercera Entrega (AV2) - serenia-platform</i>
 </p>
 
 **serenia-mobile-android:**
 
-Para la aplicación del adulto mayor el equipo trabajó sobre el repositorio `serenia-mobile-android`, con una rama `feature/` por funcionalidad, como `design-system`, `iam`, `daily-check-in`, `alerts-and-safety`, `care-circle`, `social-companionship` y `profile-photo`, integradas mediante Pull Requests a `develop`. Al integrar cambios a la rama principal, un flujo automático de GitHub Actions genera el APK y lo distribuye a los testers por Firebase App Distribution.
+Para la aplicación Android el equipo trabajó sobre el repositorio `serenia-mobile-android`, desarrollando cada funcionalidad en ramas `feature/` independientes, como `feature/design-system`, `feature/iam`, `feature/daily-check-in`, `feature/care-circle`, `feature/alerts-and-safety` y `feature/social-companionship`, que conectaron la aplicación con el backend de cada bounded context. También se agregaron ramas `chore/` para la actualización del Android Gradle Plugin y la configuración de integración continua (`chore/android-ci`), y la rama `feature/azure-backend-url` para apuntar la aplicación al backend desplegado en Azure. Al cierre del sprint se integró `develop` a `main` y se publicó la versión `v2.0.0`.
+
+La Imagen 9 muestra el resumen de actividad (Pulse) del repositorio durante el periodo de la entrega: 20 Pull Requests integrados (del #13 al #36), con 177 commits realizados por los integrantes del equipo, y 1 release publicada, `v2.0.0`.
 
 <p align="center">
-  <img src="assets/img/project-report-collaboration-insights/insights-av2-android.png" alt="AV2 Insights" width="900"/>
-    <br/><i>Imagen 9. Insights de la Tercera Entrega (AV2): repositorio serenia-mobile-android</i>
+  <img src="assets/img/project-report-collaboration-insights/insights-av2_1.png" alt="AV2 Insights" width="900"/>
+    <br/><i>Imagen 9. Insights de la Tercera Entrega (AV2) - serenia-mobile-android</i>
 </p>
 
 **serenia-mobile-flutter:**
 
-Para la aplicación del familiar el equipo trabajó sobre el repositorio `serenia-mobile-flutter`, creado en esta entrega. El código se organiza por contexto delimitado (iam, carecircle, account, alertsandsafety y socialcompanionship), con una rama `feature/` por funcionalidad integrada mediante Pull Requests a `develop`.
+Para la primera versión de la aplicación en Flutter el equipo creó el repositorio `serenia-mobile-flutter`, organizando el código por bounded context dentro de `lib/features` (IAM, Care Circle, Daily Check-in, Wellbeing Monitoring, Alerts and Safety, Social Companionship y Account), además de una carpeta `core` con el design system y los componentes compartidos. Cada funcionalidad se desarrolló en una rama independiente, como `feature/iam`, `feature/alerts`, `feature/care-shifts`, `feature/shared-notes` y `feature/revoke-family-link`, y se integró a `develop` mediante Pull Requests. Los commits siguieron la convención Conventional Commits con alcances como `feat(circle)`, `feat(alerts)` y `feat(design-system)`.
+
+La Imagen 10 muestra el resumen de actividad (Pulse) del repositorio durante el periodo de la entrega: 17 Pull Requests integrados (del #1 al #17), con 195 commits realizados por los integrantes del equipo.
 
 <p align="center">
-  <img src="assets/img/project-report-collaboration-insights/insights-av2-flutter.png" alt="AV2 Insights" width="900"/>
-    <br/><i>Imagen 10. Insights de la Tercera Entrega (AV2): repositorio serenia-mobile-flutter</i>
+  <img src="assets/img/project-report-collaboration-insights/insight-av2-4.png" alt="AV2 Insights" width="900"/>
+    <br/><i>Imagen 10. Insights de la Tercera Entrega (AV2) - serenia-mobile-flutter</i>
 </p>
+
+<br>
 
 <div style="page-break-after: always;"></div>
 
@@ -3986,7 +3998,7 @@ El proceso se desarrolló en tres momentos:
 
 **Separación de lo genérico y lo complementario.** Finalmente, el equipo aisló los eventos que no aportan diferenciación competitiva. Por un lado, los de identidad, autenticación y gestión de perfil, que son resolubles con mecanismos estándar y cuyas reglas no cambian con el negocio de Serenia. Por otro lado, los de mensajería de audio, imágenes y recordatorios sociales, que enriquecen la experiencia de acompañamiento pero no producen ninguna señal que el sistema evalúe ni disparan ningún flujo de alerta.
 
-El resultado de la sesión fueron seis bounded contexts candidatos, clasificados según su aporte de valor y presentados en las Imágenes 23 a 28:
+El resultado de la sesión fueron seis bounded contexts candidatos, clasificados según su aporte de valor y presentados en las Imágenes 39 a 44:
 
 <br>
 
@@ -9424,7 +9436,7 @@ El objetivo principal de este Sprint 2 fue ampliar las funcionalidades de Sereni
 
 A continuación, se presenta el Board de Trello utilizado durante el Sprint 2, donde se gestionaron las historias de usuario y tareas técnicas priorizadas.
 
-**URL público del Board:** [Insertar URL público de Trello]
+**URL público del Board:** [https://trello.com/invite/b/6aa8e6d78ed225cd21e9e93c/ATTI46cbaeeceb1072274d9c62399714ddaeF68A89AE/serenia]
 
 <div align="center">
 
@@ -9438,27 +9450,27 @@ El Sprint Backlog estuvo conformado por las siguientes historias de usuario y t�
 
 | Sprint # | User Story Id | User Story Title | Work-Item / Task Id | Work-Item / Task Title | Description | Estimation (Story Points) | Assigned To | Status (Todo / InProcess / To-Review / Done) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Sprint 2 | US16 | Alerta por inactividad del check-in | — | — | Notificar a los familiares cuando el adulto mayor no registre su check-in dentro del plazo establecido. | 5 | Por confirmar | To Do |
-| Sprint 2 | US18 | Sugerencia de acción por patrón de malestar | — | — | Proporcionar sugerencias a los familiares cuando se detecten patrones de ánimo bajo. | 5 | Por confirmar | To Do |
-| Sprint 2 | US20 | Asignación de turnos de atención | — | — | Permitir que los familiares organicen y asignen turnos de atención. | 5 | Por confirmar | To Do |
-| Sprint 2 | NF03 | Control de acceso a los datos de bienestar | — | — | Restringir el acceso a la información de bienestar según los permisos del usuario. | 5 | Por confirmar | To Do |
-| Sprint 2 | TS06 | Gestión de mensajes de audio | — | — | Gestionar la creación, almacenamiento, publicación y consulta de mensajes de audio. | 5 | Por confirmar | To Do |
-| Sprint 2 | TS08 | Gestión de alertas de emergencia | — | — | Gestionar la generación, reconocimiento y resolución de alertas de emergencia. | 5 | Por confirmar | To Do |
-| Sprint 2 | TS09 | Gestión del panel de estado | — | — | Gestionar la información presentada en el panel de seguimiento del adulto mayor. | 5 | Por confirmar | To Do |
-| Sprint 2 | TS10 | Gestión de alertas de inactividad | — | — | Gestionar las alertas generadas por la falta de respuesta a los check-ins. | 5 | Por confirmar | To Do |
-| Sprint 2 | TS11 | Gestión de turnos de atención | — | — | Gestionar el registro, consulta y reasignación de turnos familiares. | 5 | Por confirmar | To Do |
-| Sprint 2 | TS13 | Gestión de indicadores de bienestar | — | — | Gestionar los indicadores utilizados para identificar patrones de bienestar. | 5 | Por confirmar | To Do |
-| Sprint 2 | US06 | Rotación de preguntas del check-in | — | — | Variar las preguntas presentadas al adulto mayor durante los check-ins diarios. | 3 | Por confirmar | To Do |
-| Sprint 2 | US08 | Modo simplificado de interfaz | — | — | Ofrecer una interfaz simplificada que facilite la interacción del adulto mayor. | 3 | Por confirmar | To Do |
-| Sprint 2 | US17 | Historial de check-ins del adulto mayor | — | — | Permitir consultar los registros históricos de los check-ins realizados. | 3 | Por confirmar | To Do |
-| Sprint 2 | NF04 | Usabilidad sin experiencia tecnológica previa | — | — | Facilitar la utilización de la solución por personas con poca experiencia tecnológica. | 3 | Por confirmar | To Do |
-| Sprint 2 | TS07 | Gestión de recordatorios de contacto social | — | — | Gestionar la programación y seguimiento de recordatorios de contacto social. | 3 | Por confirmar | To Do |
-| Sprint 2 | TS12 | Gestión de notas compartidas | — | — | Gestionar la creación, consulta y modificación de notas compartidas entre familiares. | 3 | Por confirmar | To Do |
-| Sprint 2 | US25 | Navegación y diseño responsive del sitio | — | — | Mejorar la navegación y adaptación de la página web a distintos tamaños de pantalla. | 3 | Por confirmar | To Do |
-| Sprint 2 | US03 | Registro de respuesta del check-in diario | — | — | Permitir registrar la respuesta y el estado de ánimo del adulto mayor. | 2 | Por confirmar | To Do |
-| Sprint 2 | US05 | Configuración del horario del check-in | — | — | Permitir configurar el horario de presentación del check-in diario. | 2 | Por confirmar | To Do |
-| Sprint 2 | US07 | Pausa diaria de preguntas | — | — | Permitir pausar temporalmente las preguntas del check-in durante el día. | 2 | Por confirmar | To Do |
-| Sprint 2 | US21 | Consulta del turno de atención vigente | — | — | Permitir consultar el turno de atención asignado a los familiares. | 2 | Por confirmar | To Do |
+| Sprint 2 | US16 | Alerta por inactividad del check-in | — | — | Notificar a los familiares cuando el adulto mayor no registre su check-in dentro del plazo establecido. | 5 | Arturo Contreras | Done |
+| Sprint 2 | US18 | Sugerencia de acción por patrón de malestar | — | — | Proporcionar sugerencias a los familiares cuando se detecten patrones de ánimo bajo. | 5 | Arturo Contreras | Done |
+| Sprint 2 | US20 | Asignación de turnos de atención | — | — | Permitir que los familiares organicen y asignen turnos de atención. | 5 | Arturo Contreras | Done |
+| Sprint 2 | NF03 | Control de acceso a los datos de bienestar | — | — | Restringir el acceso a la información de bienestar según los permisos del usuario. | 5 | Victor García | Done |
+| Sprint 2 | TS06 | Gestión de mensajes de audio | — | — | Gestionar la creación, almacenamiento, publicación y consulta de mensajes de audio. | 5 | Carla Gallardo | Done |
+| Sprint 2 | TS08 | Gestión de alertas de emergencia | — | — | Gestionar la generación, reconocimiento y resolución de alertas de emergencia. | 5 | Victor García | Done |
+| Sprint 2 | TS09 | Gestión del panel de estado | — | — | Gestionar la información presentada en el panel de seguimiento del adulto mayor. | 5 | Victor García | Done |
+| Sprint 2 | TS10 | Gestión de alertas de inactividad | — | — | Gestionar las alertas generadas por la falta de respuesta a los check-ins. | 5 | Kelber Sandoval | Done |
+| Sprint 2 | TS11 | Gestión de turnos de atención | — | — | Gestionar el registro, consulta y reasignación de turnos familiares. | 5 | Carla Gallardo | Done |
+| Sprint 2 | TS13 | Gestión de indicadores de bienestar | — | — | Gestionar los indicadores utilizados para identificar patrones de bienestar. | 5 | Kelber Sandoval | Done |
+| Sprint 2 | US06 | Rotación de preguntas del check-in | — | — | Variar las preguntas presentadas al adulto mayor durante los check-ins diarios. | 3 | Arturo Contreras | Done |
+| Sprint 2 | US08 | Modo simplificado de interfaz | — | — | Ofrecer una interfaz simplificada que facilite la interacción del adulto mayor. | 3 | Kelber Sandoval | Done |
+| Sprint 2 | US17 | Historial de check-ins del adulto mayor | — | — | Permitir consultar los registros históricos de los check-ins realizados. | 3 | Carla Gallardo | Done |
+| Sprint 2 | NF04 | Usabilidad sin experiencia tecnológica previa | — | — | Facilitar la utilización de la solución por personas con poca experiencia tecnológica. | 3 | Brianna Salinas | Done |
+| Sprint 2 | TS07 | Gestión de recordatorios de contacto social | — | — | Gestionar la programación y seguimiento de recordatorios de contacto social. | 3 | Brianna Salinas | Done |
+| Sprint 2 | TS12 | Gestión de notas compartidas | — | — | Gestionar la creación, consulta y modificación de notas compartidas entre familiares. | 3 | Kelber Sandoval | Done |
+| Sprint 2 | US25 | Navegación y diseño responsive del sitio | — | — | Mejorar la navegación y adaptación de la página web a distintos tamaños de pantalla. | 3 | Victor García | Done |
+| Sprint 2 | US03 | Registro de respuesta del check-in diario | — | — | Permitir registrar la respuesta y el estado de ánimo del adulto mayor. | 2 | Kelber Sandoval | Done |
+| Sprint 2 | US05 | Configuración del horario del check-in | — | — | Permitir configurar el horario de presentación del check-in diario. | 2 | Brianna Salinas | Done |
+| Sprint 2 | US07 | Pausa diaria de preguntas | — | — | Permitir pausar temporalmente las preguntas del check-in durante el día. | 2 | Kelber Sandoval | Done |
+| Sprint 2 | US21 | Consulta del turno de atención vigente | — | — | Permitir consultar el turno de atención asignado a los familiares. | 2 | Victor García | Done |
 
 **Total de historias comprometidas:** 21.
 
@@ -9534,6 +9546,53 @@ Finalmente, se comprobó el comportamiento del servicio ante solicitudes incompl
 Estas pruebas permitieron comprobar las respuestas de los servicios ante solicitudes válidas y solicitudes con datos incompletos, verificando el comportamiento esperado de la API durante el Sprint 2.
 
 #### 4.2.2.6. Execution Evidence for Sprint Review
+
+Al cierre del Sprint 2, se obtuvieron avances en la implementación de las aplicaciones móviles de Serenia, incorporando nuevas funcionalidades y mejoras orientadas a facilitar la interacción entre los adultos mayores y sus familiares.
+
+La aplicación Android, dirigida a los adultos mayores, presenta la evolución de sus principales interfaces y funcionalidades. Por otro lado, se desarrolló la primera versión de la aplicación Flutter, orientada a los familiares que realizan el acompañamiento a distancia.
+
+A continuación, se presentan las evidencias de ejecución de las aplicaciones móviles.
+
+**1. Aplicación Android – Adulto mayor**
+
+Se presentan las principales vistas de la aplicación Android ejecutándose en el emulador o dispositivo de prueba.
+
+<div align="center">
+
+![Android Home](assets/img/sprint-2/android-home.png)
+
+<br/><i>Imagen X. Ejecución de la pantalla principal de la aplicación Android.</i>
+
+</div>
+
+<div align="center">
+
+![Android Check-in](assets/img/sprint-2/android-checkin.png)
+
+<br/><i>Imagen X. Ejecución de la interfaz del check-in diario.</i>
+
+</div>
+
+<div align="center">
+
+![Android Simplified Mode](assets/img/sprint-2/android-simplified-mode.png)
+
+<br/><i>Imagen X. Ejecución de la interfaz del modo simplificado.</i>
+
+</div>
+
+**2. Aplicación Flutter – Familiar a distancia**
+
+Durante este sprint se desarrolló la primera versión de la aplicación multiplataforma, cuya interfaz está orientada a facilitar el seguimiento y acompañamiento del adulto mayor por parte de sus familiares.
+
+<div align="center">
+
+![Flutter Home](assets/img/sprint-2/flutter-home.png)
+
+<br/><i>Imagen X. Ejecución de la pantalla de inicio de la aplicación Flutter.</i>
+
+</div>
+
 #### 4.2.2.7. Services Documentation Evidence for Sprint Review
 
 Durante el Sprint 2 se actualizó la documentación de los Web Services de **Serenia Platform** con OpenAPI/Swagger, integrada directamente en el backend Spring Boot. La documentación cubre los seis bounded contexts de la plataforma: IAM, Care Circle, Daily Check-in, Alerts and Safety, Social Companionship y Wellbeing Monitoring. En total quedaron documentados **57 endpoints agrupados en 17 recursos** (uno más que en el Sprint 1, por el nuevo endpoint para obtener la foto de perfil). Además, se documentaron los endpoints que dan soporte a las historias comprometidas en el Sprint 2: la alerta por inactividad del check-in (US16), la sugerencia de acción por patrón de malestar (US18), la asignación y consulta de turnos de atención (US20, US21), el historial de check-ins (US17) y el modo simplificado de interfaz (US08).
@@ -10022,7 +10081,7 @@ En el repositorio de la aplicación móvil los integrantes registraron las sigui
 
 <div align="center">
 
-![insight](./assets/img/insight-sprint2/insights1.png)
+![insight](./assets/img/project-report-collaboration-insights/insights-av2_1.png)
   <br/><i>Imagen 155. Top committers del repositorio de la aplicación android.</i>
 
 </div>
@@ -10044,7 +10103,7 @@ En el backend se registraron 10 commits durante el Sprint 2: Arturouu con 5 comm
 
 <div align="center">
 
-![insight](./assets/img/insight-sprint2/insights2.png)
+![insight](./assets/img/project-report-collaboration-insights/insights-av2_2.png)
   <br/><i>Imagen 157. Top committers del repositorio de la plataforma</i>
 
 </div>
@@ -10516,7 +10575,7 @@ En esta sección se documenta la validación de la aplicación Android de Sereni
 
 <img src="assets/img/interviews/validacion-app-yrma.png" alt="Screenshot de la validación de la aplicación Android con Yrma Huamán" width="700"/>
 
-<p align="center"><i>Imagen 170. Captura de la entrevista de validación de la aplicación Android con Yrma Huamán Jiménez.</i></p>
+<p align="center"><i>Imagen 165. Captura de la entrevista de validación de la aplicación Android con Yrma Huamán Jiménez.</i></p>
 
 <br>
 
@@ -10546,6 +10605,54 @@ Dijo que la aplicación le parece "muy interesante" y útil para comunicarse con
 Recomendaría la aplicación a sus familiares y a amigas de su edad. Explicó que, como los hijos salen a otras provincias o a la capital por estudio o trabajo, las adultas mayores se sienten solas, y que una herramienta así les ayuda a relacionarse todos los días con su familia y a sentirse más cerca. Al cierre felicitó a Victor y le preguntó si seguirá diseñando aplicaciones similares.
 
 <br>
+
+## Video App Validation 2
+
+En esta sección se documenta la validación de la aplicación Android de Serenia mediante una prueba de usabilidad realizada por Kelber Sandoval. A diferencia de las validaciones efectuadas sobre el prototipo, esta sesión se llevó a cabo utilizando la aplicación ya construida e instalada en un dispositivo móvil.
+
+Durante la prueba, un participante exploró la aplicación simulando el perfil de un adulto mayor. Se le propusieron diferentes actividades para observar la facilidad de uso, la comprensión de las opciones disponibles, la navegación entre pantallas y la accesibilidad de las funcionalidades principales.
+
+<br>
+
+<div align="center">
+
+**Entrevista de validación: Prueba de usabilidad realizada por Kelber Sandoval**
+
+<img src="assets/img/interviews/validacion-app-kelber.png" alt="Captura de la prueba de usabilidad de la aplicación Android Serenia realizada por Kelber Sandoval" width="700"/>
+
+<p align="center"><i>Imagen 166. Captura de la prueba de usabilidad de la aplicación Android Serenia realizada por Kelber Sandoval.</i></p>
+
+<br>
+
+| Campo | Detalle |
+|---|---|
+| **Participante** | Leonel Sandoval |
+| **Edad** | 18 |
+| **Distrito** | SAN JUAN DE LURIGANCHO |
+| **Entrevistador** | Kelber Sandoval |
+| **Fecha** | 13/11/2026 |
+| **Timing en el video** | 00:00 |
+| **Duración** | 11 min 27 s |
+| **URL del video** | [Ver video de validación en OneDrive/Drive](https://upcedupe-my.sharepoint.com/:f:/g/personal/u202418645_upc_edu_pe/IgCHeLh8k-9WRKC_Ps67E7bjAYT9orqiwcLW-afmipDx0IA?e=YyMdwq) |
+
+</div>
+
+**Resumen:**
+
+La sesión consistió en una prueba de usabilidad de la aplicación Android de Serenia. Para realizarla, Kelber presentó brevemente el propósito de la aplicación y explicó que el participante debía explorarla simulando ser un adulto mayor. A diferencia de una demostración guiada, se buscó que el participante identificara y utilizara las opciones disponibles por su cuenta, mientras Kelber observaba su interacción.
+
+En primer lugar, se realizó el inicio de sesión utilizando una cuenta de demostración con información previamente registrada. Después, se exploró la pantalla principal y la funcionalidad de check-in diario, cuyo propósito es permitir que el adulto mayor registre cómo se encuentra y comparta su estado de ánimo con sus familiares.
+
+Posteriormente, se revisó la sección Cuenta, donde se encuentran las preferencias de la aplicación. También se exploró el modo simplificado, diseñado para facilitar la interacción mediante botones de mayor tamaño y una navegación reducida.
+
+La prueba continuó con la sección Mi círculo familiar, donde se pueden visualizar los familiares vinculados a la cuenta. Asimismo, se exploraron las funcionalidades de acompañamiento social, entre ellas los recordatorios, los mensajes de audio y las fotografías familiares, que buscan mantener la comunicación y el vínculo entre el adulto mayor y sus familiares.
+
+Finalmente, se localizó la funcionalidad Pedir ayuda, que permite enviar una alerta a los familiares ante una situación de emergencia. Para cerrar la sesión, Kelber realizó preguntas sobre las funcionalidades que resultaron más sencillas de utilizar, las posibles dificultades durante la navegación y los cambios que el participante propondría para mejorar la aplicación.
+
+Esta prueba permitió recorrer las principales funcionalidades de Serenia desde la perspectiva de un usuario que simula el perfil de un adulto mayor, obteniendo observaciones sobre la navegación, la comprensión de las opciones y la accesibilidad de la interfaz.
+
+<br>
+
 
 ## Video About The Product
 
