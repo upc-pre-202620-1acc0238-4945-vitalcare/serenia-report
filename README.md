@@ -9789,9 +9789,9 @@ El video About The Team presenta al equipo detrás de Serenia y el trabajo que r
 
 **About The Team**
 
-![Video About The Team](brandradar-report/assets/ux-design/desktop-prototyping.png)
+![Video About The Team](assets/img/about-the-team/abouttheteam.png)
 
-[Ver video en Microsoft Stream]()
+[Ver video en Microsoft Stream](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202410239_upc_edu_pe/IQAn0BIMhvSkRL250UwWte4aAcyqSpS7y7ZUcXUX7iLixBA?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=Wrjlwl)
 
 <br>
 </div>
