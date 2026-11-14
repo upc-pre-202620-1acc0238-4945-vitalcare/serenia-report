@@ -7691,231 +7691,160 @@ En Cuenta cambia la hora de su pregunta del día, activa el modo simplificado o 
 
 ## Flujo del familiar
 
-El recorrido del familiar comienza con la misma bienvenida, ingreso y creación de cuenta. Luego accede a su aplicación, organizada en cinco secciones: Inicio, Historial, Alertas, Círculo y Mensajes. En el inicio ve cómo amaneció su adulto mayor y accede al detalle de su check-in. En Historial revisa los registros anteriores y en Alertas atiende las emergencias y las inactividades. En Círculo gestiona a los familiares vinculados, los turnos de atención y las notas compartidas, y en Mensajes reproduce los audios y envía fotos.
+El recorrido del familiar comienza con la bienvenida, el ingreso o la creación de la cuenta y la vinculación con el adulto mayor mediante su código de invitación. Luego accede a su aplicación, organizada en cinco secciones: Inicio, Alertas, Círculo, Mensajes y Cuenta. En Inicio ve cómo amaneció su adulto mayor, el turno de atención del día y las pequeñas victorias de la semana, y desde allí abre el Historial. En Alertas atiende las emergencias y las inactividades. En Círculo gestiona a los familiares vinculados, los turnos de atención y las notas compartidas. En Mensajes escucha los audios y envía fotos, y en Cuenta edita sus datos, cambia su contraseña y cierra sesión.
 
 <br>
 
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/adulto-mayor/01-registro-bienvenida.png)
-
-</div>
+El flujo se presenta con las pantallas de alta fidelidad de la aplicación del familiar, con datos de ejemplo, agrupadas por sección.
 
 <br>
 
-<div align="center">
+**Registro y vinculación**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/adulto-mayor/04-registro-rol.png)
+El familiar llega a la bienvenida y puede iniciar sesión o crear su cuenta. Al crearla elige su rol y la completa en tres pasos: sus datos básicos, el código de invitación de ocho letras y números que le comparte su adulto mayor, y el parentesco con él o ella. Los errores se muestran en el mismo formulario, y si el código no es válido o ya se usó, la pantalla lo explica y sugiere pedir uno nuevo. Al terminar, una pantalla confirma que ambos quedaron conectados.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAuthBienvenida.png" width="170" alt="Bienvenida"><br><sub>Bienvenida</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAuthRol.png" width="170" alt="Elección de rol"><br><sub>Elección de rol</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAuthLogin.png" width="170" alt="Iniciar sesión"><br><sub>Iniciar sesión</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAuthLoginError.png" width="170" alt="Error al iniciar sesión"><br><sub>Error al iniciar sesión</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamRegistro.png" width="170" alt="Crear cuenta, paso 1 de 3"><br><sub>Crear cuenta, paso 1 de 3</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamRegistroError.png" width="170" alt="Errores al crear la cuenta"><br><sub>Errores al crear la cuenta</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCodigo.png" width="170" alt="Código de invitación, paso 2 de 3"><br><sub>Código de invitación, paso 2 de 3</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCodigoError.png" width="170" alt="Código no válido"><br><sub>Código no válido</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamParentesco.png" width="170" alt="Parentesco, paso 3 de 3"><br><sub>Parentesco, paso 3 de 3</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamConectados.png" width="170" alt="Cuentas conectadas"><br><sub>Cuentas conectadas</sub></td>
+</tr>
+</table>
 
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/adulto-mayor/02-registro-ingreso.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamCodigo.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamConectados.png)
-
-</div>
+<p align="center"><i>Imagen 105. Pantallas de registro, ingreso y vinculación de la aplicación del familiar.</i></p>
 
 <br>
 
-<div align="center">
+**Inicio y seguimiento diario**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamInicio.png)
+En Inicio el familiar ve cómo amaneció su adulto mayor: la respuesta del check-in del día, el turno de atención de hoy y las pequeñas victorias de la semana. Si todavía no responde, la tarjeta indica a qué hora se le avisará. Cuando el ánimo es bajo varios días seguidos, aparece una sugerencia con la opción de llamar. Si el adulto mayor prefirió no responder, se muestra la pausa sin generar alerta. Si pide ayuda o pasa una hora sin responder, el inicio destaca una tarjeta con las opciones de llamar o encargarse.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamInicio.png" width="220" alt="Check-in respondido"><br><sub>Check-in respondido</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamInicioPendiente.png" width="220" alt="Aún no responde"><br><sub>Aún no responde</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamInicioSugerencia.png" width="220" alt="Sugerencia por ánimo bajo"><br><sub>Sugerencia por ánimo bajo</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamInicioPausa.png" width="220" alt="Pausa del día"><br><sub>Pausa del día</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamInicioEmergencia.png" width="220" alt="Pidió ayuda"><br><sub>Pidió ayuda</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamInicioInactividad.png" width="220" alt="Sin responder"><br><sub>Sin responder</sub></td>
+</tr>
+</table>
 
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamCirculo.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamInicioSugerencia.png)
-
-</div>
+<p align="center"><i>Imagen 106. Pantallas de inicio y seguimiento diario de la aplicación del familiar.</i></p>
 
 <br>
 
-<div align="center">
+**Historial**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamCuenta.png)
+Desde "Ver historial" el familiar revisa los registros de la semana actual y de la pasada, con el estado de ánimo y la hora de cada respuesta, incluidos los días en que prefirió no responder o no respondió. Al abrir un día ve cómo amaneció, sus recordatorios y si los cumplió, y la semana completa. Si todavía no hay registros, la pantalla lo explica.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamHistorial.png" width="220" alt="Historial semanal"><br><sub>Historial semanal</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamHistorialDetalle.png" width="220" alt="Detalle de un día"><br><sub>Detalle de un día</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamHistorialVacio.png" width="220" alt="Sin registros"><br><sub>Sin registros</sub></td>
+</tr>
+</table>
 
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamHistorial.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamHistorialDetalle.png)
-
-</div>
+<p align="center"><i>Imagen 107. Pantallas del historial de la aplicación del familiar.</i></p>
 
 <br>
 
-<div align="center">
+**Alertas**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamInicioPausa.png)
+En Alertas el familiar ve las alertas pendientes y las anteriores, cada una con su tipo, su estado y quién la resolvió. Al abrir una alerta ve qué pasó y a quiénes se avisó, y puede llamar al adulto mayor o encargarse de atenderla, de modo que los demás familiares sepan que alguien ya lo está haciendo. Cuando se confirma que el adulto mayor está bien, la alerta se marca como resuelta y la aplicación permite deshacerlo. Si no hay alertas, la pantalla lo indica.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAlertas.png" width="220" alt="Alertas pendientes y anteriores"><br><sub>Alertas pendientes y anteriores</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAlertasVacio.png" width="220" alt="Sin alertas"><br><sub>Sin alertas</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAlertaDetalle.png" width="220" alt="Detalle de la alerta"><br><sub>Detalle de la alerta</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAlertaAtendiendo.png" width="220" alt="Alerta en atención"><br><sub>Alerta en atención</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAlertasResuelta.png" width="220" alt="Alerta resuelta"><br><sub>Alerta resuelta</sub></td>
+</tr>
+</table>
 
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamInicioEmergencia.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamInicioInactividad.png)
-
-</div>
+<p align="center"><i>Imagen 108. Pantallas de alertas de la aplicación del familiar.</i></p>
 
 <br>
 
-<div align="center">
+**Círculo, turnos y notas**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamAlertas.png)
+En Círculo el familiar ve a quienes acompañan al adulto mayor y accede a los turnos de atención y a las notas compartidas. También puede quitar su vínculo: la aplicación pide confirmación y explica que dejará de ver cómo está y de recibir sus alertas, y que sus turnos futuros quedarán libres. En Turnos de atención ve la semana y quién da seguimiento cada día; puede anotarse en un día libre, pasarle su turno a otro familiar o elegir otro día cuando el día ya está cubierto. Las notas compartidas reúnen lo que todos en el círculo deben saber, y cada persona puede agregar una nota o editar las suyas.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCirculo.png" width="170" alt="Círculo familiar"><br><sub>Círculo familiar</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCirculoQuitar.png" width="170" alt="Quitar el vínculo"><br><sub>Quitar el vínculo</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamTurnos.png" width="170" alt="Turnos de atención"><br><sub>Turnos de atención</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoLibre.png" width="170" alt="Día sin asignar"><br><sub>Día sin asignar</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoOcupado.png" width="170" alt="Día ya cubierto"><br><sub>Día ya cubierto</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoReasignar.png" width="170" alt="Pasar el turno"><br><sub>Pasar el turno</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamNotas.png" width="170" alt="Notas compartidas"><br><sub>Notas compartidas</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamNotaEditar.png" width="170" alt="Editar una nota"><br><sub>Editar una nota</sub></td>
+</tr>
+</table>
 
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamAlertaDetalle.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamAlertaAtendiendo.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamAlertasResuelta.png)
-
-</div>
+<p align="center"><i>Imagen 109. Pantallas del círculo, los turnos de atención y las notas compartidas de la aplicación del familiar.</i></p>
 
 <br>
 
-<div align="center">
+**Mensajes**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamCirculoQuitar.png)
+En Mensajes el familiar escucha los audios que el adulto mayor graba para la familia, con la hora y la duración de cada uno, y ve las fotos que se comparten. Un audio nuevo se marca como tal y se reproduce desde la lista. Si el adulto mayor aún no envió audios, la pantalla lo explica. Para enviar una foto, el familiar la elige de su galería, la revisa y confirma el envío; el adulto mayor la verá en su aplicación, en Familia, con el nombre de quien la envió.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamMensajes.png" width="220" alt="Audios y fotos"><br><sub>Audios y fotos</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamMensajesSinAudios.png" width="220" alt="Sin audios"><br><sub>Sin audios</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAudioEscuchando.png" width="220" alt="Reproducción de un audio"><br><sub>Reproducción de un audio</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamFotoRevisar.png" width="220" alt="Revisar la foto"><br><sub>Revisar la foto</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamFotoEnviada.png" width="220" alt="Foto enviada"><br><sub>Foto enviada</sub></td>
+</tr>
+</table>
 
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamTurnos.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoLibre.png)
-
-</div>
+<p align="center"><i>Imagen 110. Pantallas de mensajes de la aplicación del familiar.</i></p>
 
 <br>
 
-<div align="center">
+**Cuenta**
 
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoOcupado.png)
+En Cuenta el familiar edita sus datos y su foto, ve a quién acompaña, cambia su contraseña y cierra sesión. Los formularios señalan los errores junto a cada campo, por ejemplo un correo incompleto o una contraseña actual incorrecta, y al cambiar la contraseña se cierra la sesión en otros celulares. Cerrar sesión pide confirmación y advierte que, mientras no vuelva a entrar, no recibirá las alertas en ese celular.
 
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCuenta.png" width="170" alt="Mi cuenta"><br><sub>Mi cuenta</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamMisDatos.png" width="170" alt="Mis datos"><br><sub>Mis datos</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamMisDatosError.png" width="170" alt="Errores en mis datos"><br><sub>Errores en mis datos</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamClave.png" width="170" alt="Cambiar contraseña"><br><sub>Cambiar contraseña</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamClaveError.png" width="170" alt="Contraseña actual incorrecta"><br><sub>Contraseña actual incorrecta</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCuentaClaveOk.png" width="170" alt="Contraseña cambiada"><br><sub>Contraseña cambiada</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCuentaSalir.png" width="170" alt="Cerrar sesión"><br><sub>Cerrar sesión</sub></td>
+</tr>
+</table>
 
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoReasignar.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamNotas.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamMensajes.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamFotoRevisar.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamFotoEnviada.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Mockup](assets/img/ux-design/mobile-app/mockup/familiar/FamAudioEscuchando.png)
-
-</div>
+<p align="center"><i>Imagen 111. Pantallas de cuenta de la aplicación del familiar.</i></p>
 
 <br>
 
@@ -7929,36 +7858,36 @@ Un user flow muestra la ruta que sigue el usuario para lograr su objetivo, con l
 
 **User Flow 1. Registro y vinculación con la familia (Segmento 1)**
 
-**User goal:** registrarse y crear su círculo familiar para obtener el código de invitación que compartirá con sus familiares. Esta ruta cumple las historias US01 (registro de cuenta de usuario), US05 (configuración del horario del check-in) y US40 (generación de código de invitación) y se muestra en la Imagen 105.
+**User goal:** registrarse y crear su círculo familiar para obtener el código de invitación que compartirá con sus familiares. Esta ruta cumple las historias US01 (registro de cuenta de usuario), US05 (configuración del horario del check-in) y US40 (generación de código de invitación) y se muestra en la Imagen 112.
 
 <div align="center">
 
 ![User Flow 1 - Registro y vinculación con la familia](assets/img/ux-design/mobile-app/flows/user-flow-1-registro-adulto.png)
-  <br/><i>Imagen 105. User Flow 1. Registro y vinculación con la familia (Segmento 1).</i>
+  <br/><i>Imagen 112. User Flow 1. Registro y vinculación con la familia (Segmento 1).</i>
 </div>
 
 **Condiciones del flujo:** el adulto mayor crea su cuenta con los datos básicos que la aplicación pide; si algún dato no es válido, la pantalla indica el error y no avanza hasta que se corrige. Con la cuenta creada, elige la hora del día en que quiere recibir su pregunta (puede cambiarla después desde Cuenta), y la aplicación crea su círculo familiar, que desde ese momento tiene un único adulto mayor. El código de cuatro números que recibe se usa una sola vez, y es el adulto mayor quien decide con quién lo comparte; sin círculo y sin código, ninguna otra función de la aplicación tiene destinatario.
 
 **User Flow 2. Check-in diario (Segmento 1)**
 
-**User goal:** contar en un toque cómo amaneció, o dejar pasar el día sin responder si no lo desea. Esta ruta cumple las historias US03 (registro de respuesta del check-in) y US07 (pausa diaria de preguntas) y se muestra en la Imagen 106.
+**User goal:** contar en un toque cómo amaneció, o dejar pasar el día sin responder si no lo desea. Esta ruta cumple las historias US03 (registro de respuesta del check-in) y US07 (pausa diaria de preguntas) y se muestra en la Imagen 113.
 
 <div align="center">
 
 ![User Flow 2 - Check-in diario](assets/img/ux-design/mobile-app/flows/user-flow-2-checkin.png)
-  <br/><i>Imagen 106. User Flow 2. Check-in diario (Segmento 1).</i>
+  <br/><i>Imagen 113. User Flow 2. Check-in diario (Segmento 1).</i>
 </div>
 
 **Condiciones del flujo:** el check-in llega a la hora que el adulto mayor configuró, y el usuario decide si responde ese día. Si responde, la aplicación registra su estado de ánimo y lo agradece; si prefiere no hacerlo, activa la pausa del día, con lo que el sistema omite el check-in e informa a los familiares vinculados que hoy optó por no participar. En ninguno de los dos casos se genera una alerta. Si el adulto mayor no hace ninguna de las dos cosas y el plazo vence, se activa la evaluación de inactividad del bounded context Alerts and Safety (sección 2.6.6), que corresponde a otro flujo.
 
 **User Flow 3. Pedir ayuda (Segmento 1)**
 
-**User goal:** pedir ayuda de inmediato y que la familia lo sepa sin buscar a quién llamar. Esta ruta cumple las historias US13 (activación del botón de auxilio) y US14 (alerta inmediata al familiar) y se muestra en la Imagen 107.
+**User goal:** pedir ayuda de inmediato y que la familia lo sepa sin buscar a quién llamar. Esta ruta cumple las historias US13 (activación del botón de auxilio) y US14 (alerta inmediata al familiar) y se muestra en la Imagen 114.
 
 <div align="center">
 
 ![User Flow 3 - Pedir ayuda](assets/img/ux-design/mobile-app/flows/user-flow-3-ayuda.png)
-  <br/><i>Imagen 107. User Flow 3. Pedir ayuda (Segmento 1).</i>
+  <br/><i>Imagen 114. User Flow 3. Pedir ayuda (Segmento 1).</i>
 </div>
 
 **Condiciones del flujo:** el botón "Ayuda" está siempre a la vista en la pantalla de inicio del adulto mayor, de modo que puede activarlo sin tener que buscarlo. Al activarlo, el sistema registra la emergencia y confirma al usuario que avisó a su familia. Si el círculo tiene familiares vinculados, todos reciben la alerta al mismo tiempo y la ven en la sección Alertas de su aplicación con las etiquetas "Emergencia" y "Pendiente". Si no hay familiares vinculados, la emergencia queda registrada con un despacho fallido y nadie es notificado.
@@ -7967,36 +7896,36 @@ Un user flow muestra la ruta que sigue el usuario para lograr su objetivo, con l
 
 **User Flow 4. Registro y vinculación con el adulto mayor (Segmento 2)**
 
-**User goal:** vincular su cuenta con la de su adulto mayor mediante un código de invitación, para ver cómo amaneció. Esta ruta cumple las historias US02 (vinculación familiar por código de invitación) y US40 (generación de código de invitación) y se muestra en la Imagen 108.
+**User goal:** vincular su cuenta con la de su adulto mayor mediante un código de invitación, para ver cómo amaneció. Esta ruta cumple las historias US02 (vinculación familiar por código de invitación) y US40 (generación de código de invitación) y se muestra en la Imagen 115.
 
 <div align="center">
 
 ![User Flow 4 - Registro y vinculación con el adulto mayor](assets/img/ux-design/mobile-app/flows/user-flow-4-registro-familiar.png)
-  <br/><i>Imagen 108. User Flow 4. Registro y vinculación con el adulto mayor (Segmento 2).</i>
+  <br/><i>Imagen 115. User Flow 4. Registro y vinculación con el adulto mayor (Segmento 2).</i>
 </div>
 
 **Condiciones del flujo:** el adulto mayor genera previamente su código de invitación desde su aplicación; el código es de cuatro números y se usa una sola vez, por lo que él decide quién se vincula. El familiar crea su cuenta y escribe el código. Si es válido y vigente, el sistema registra el vínculo y habilita el acceso al panel de estado del adulto mayor. Si es inválido o ya venció, no se crea el vínculo y el familiar puede ingresar otro código.
 
 **User Flow 5. Seguimiento del bienestar (Segmento 2)**
 
-**User goal:** saber cómo está su adulto mayor día a día, sin tener que llamarlo. Esta ruta cumple las historias US15 (consulta del panel de estado diario), US17 (historial de check-ins), US18 (sugerencia de acción por patrón de malestar) y US19 (registro de pequeñas victorias) y se muestra en la Imagen 109.
+**User goal:** saber cómo está su adulto mayor día a día, sin tener que llamarlo. Esta ruta cumple las historias US15 (consulta del panel de estado diario), US17 (historial de check-ins), US18 (sugerencia de acción por patrón de malestar) y US19 (registro de pequeñas victorias) y se muestra en la Imagen 116.
 
 <div align="center">
 
 ![User Flow 5 - Seguimiento del bienestar](assets/img/ux-design/mobile-app/flows/user-flow-5-seguimiento-bienestar.png)
-  <br/><i>Imagen 109. User Flow 5. Seguimiento del bienestar (Segmento 2).</i>
+  <br/><i>Imagen 116. User Flow 5. Seguimiento del bienestar (Segmento 2).</i>
 </div>
 
 **Condiciones del flujo:** el inicio del familiar muestra el check-in de hoy: si el adulto mayor respondió, aparece su estado de ánimo; si todavía no responde, aparece "Aún no responde" hasta que venza el plazo. Al desplazarse, el familiar ve las "Pequeñas victorias" de la semana y, si el adulto mayor completó tres días consecutivos de malestar, la sugerencia de bienestar, que puede descartar (historia US37). En Historial ve los registros ordenados del más reciente al más antiguo y puede filtrarlos por estado; al elegir un día se abre el detalle del check-in, con la respuesta y la pregunta de esa fecha.
 
 **User Flow 6. Atender una alerta (Segmento 2)**
 
-**User goal:** atender las alertas de su adulto mayor y saber cuáles siguen pendientes. Esta ruta cumple las historias US14 (alerta inmediata al familiar), US38 (reconocimiento de alertas) y US39 (resolución de alertas) y se muestra en la Imagen 110.
+**User goal:** atender las alertas de su adulto mayor y saber cuáles siguen pendientes. Esta ruta cumple las historias US14 (alerta inmediata al familiar), US38 (reconocimiento de alertas) y US39 (resolución de alertas) y se muestra en la Imagen 117.
 
 <div align="center">
 
 ![User Flow 6 - Atender una alerta](assets/img/ux-design/mobile-app/flows/user-flow-6-atender-alerta.png)
-  <br/><i>Imagen 110. User Flow 6. Atender una alerta (Segmento 2).</i>
+  <br/><i>Imagen 117. User Flow 6. Atender una alerta (Segmento 2).</i>
 </div>
 
 **Condiciones del flujo:** la insignia del ícono de Alertas indica cuántas alertas siguen pendientes. En la lista, cada alerta muestra su tipo ("Emergencia" o "Inactividad") y su estado ("Pendiente" o "Resuelta"). Cada alerta admite un único reconocimiento y una única resolución: si dos familiares actúan al mismo tiempo, solo se aplica la primera acción, y así todos saben que alguien ya está atendiendo. Al resolverse, la alerta pasa a "Resuelta" y, si quien la resolvió lo desea, deja una nota que describe cómo se resolvió.
@@ -8022,7 +7951,7 @@ Las decisiones de interacción más importantes son el check-in de un toque, la 
 <div align="center">
 
 ![prototipo](assets/img/insights/video-proto-adulto.png)
-  <br/><i>Imagen 111. Prototipo del adulto mayor.</i>
+  <br/><i>Imagen 118. Prototipo del adulto mayor.</i>
 </div>
 
 **Video de la app del adulto mayor:** [Prototipo del adulto mayor](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQAFCb9JvRsCRZOACF3hmsxcAVYs0CxhCY7lhd7hUdkSD4A?e=HnP1Gb&nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D)
@@ -8037,7 +7966,7 @@ Las decisiones de interacción responden a la necesidad de enterarse rápido y c
 <div align="center">
 
 ![prototipo](assets/img/insights/video-proto-familia.png)
-  <br/><i>Imagen 112. Prototipo del familiar a distancia.</i>
+  <br/><i>Imagen 119. Prototipo del familiar a distancia.</i>
 </div>
 
 **Video de la app del familiar:** [Prototipo del familiar a distancia](https://upcedupe-my.sharepoint.com/:v:/g/personal/u202414970_upc_edu_pe/IQBY8hFWqFp4T5gpWxH0pwxXAYg_Z92yIvNsQhUq_43SeX0?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJTdHJlYW1XZWJBcHAiLCJyZWZlcnJhbFZpZXciOiJTaGFyZURpYWxvZy1MaW5rIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXcifX0%3D&e=szvj5b)
@@ -8263,13 +8192,13 @@ La aplicación móvil se organiza por funcionalidad y sigue el mismo vocabulario
 
 ### 4.1.4. Software Deployment Configuration
 
-Esta sección explica cómo publicar cada producto de Serenia a partir de su repositorio de código, con los pasos suficientes para que otro integrante del equipo pueda repetir el despliegue. La evidencia de lo ejecutado en cada sprint, con sus capturas, se presenta en las secciones 4.2.1.8 y 4.2.2.8 (Software Deployment Evidence for Sprint Review). Los tres productos de la solución se publican en plataformas distintas, como muestra el Deployment Diagram de la sección 2.5.3.3, que se repite en la Imagen 113.
+Esta sección explica cómo publicar cada producto de Serenia a partir de su repositorio de código, con los pasos suficientes para que otro integrante del equipo pueda repetir el despliegue. La evidencia de lo ejecutado en cada sprint, con sus capturas, se presenta en las secciones 4.2.1.8 y 4.2.2.8 (Software Deployment Evidence for Sprint Review). Los tres productos de la solución se publican en plataformas distintas, como muestra el Deployment Diagram de la sección 2.5.3.3, que se repite en la Imagen 120.
 
 <br>
 
 <div align="center">
   <img src="assets/img/software-architecture/deployment-diagram.png" alt="Deployment Diagram - Serenia" width="700"/>
-  <br/><i>Imagen 113. Deployment Diagram de Serenia.</i>
+  <br/><i>Imagen 120. Deployment Diagram de Serenia.</i>
 </div>
 
 <br>
@@ -8463,7 +8392,7 @@ El objetivo principal del Sprint 1 fue establecer la arquitectura base de la API
 <div align="center">
 
 ![Evidencia de Trello](assets/img/sprint-1/trello-board.png)
-  <br/><i>Imagen 114. Board de Trello correspondiente al Sprint 1.</i>
+  <br/><i>Imagen 121. Board de Trello correspondiente al Sprint 1.</i>
 
 </div>
 
@@ -8517,11 +8446,11 @@ A continuación, se presentan las tablas de control por repositorio, detallando 
 
 En este Sprint se logró un avance significativo en la estructuración e implementación de la solución, tanto a nivel de interfaces de usuario como de servicios backend. 
 
-Por un lado, el backend fue desplegado exitosamente en Microsoft Azure, y su documentación generada automáticamente puede visualizarse y probarse a través de Swagger UI, donde se exponen los endpoints funcionales desarrollados durante el sprint (ver Imagen 115).
+Por un lado, el backend fue desplegado exitosamente en Microsoft Azure, y su documentación generada automáticamente puede visualizarse y probarse a través de Swagger UI, donde se exponen los endpoints funcionales desarrollados durante el sprint (ver Imagen 122).
 
 **Enlace de la API REST (Swagger UI):** [https://serenia-platform.azurewebsites.net/swagger-ui/index.html#/]
 
-Por otro lado, se completó la maquetación de la Landing Page pública, la cual ya se encuentra en un entorno de producción accesible para los usuarios finales, comunicando la propuesta de valor y los planes de Serenia (ver Imagen 116).
+Por otro lado, se completó la maquetación de la Landing Page pública, la cual ya se encuentra en un entorno de producción accesible para los usuarios finales, comunicando la propuesta de valor y los planes de Serenia (ver Imagen 123).
 
 **Enlace de la Landing Page:** [https://sereniawebsite.netlify.app/]
 
@@ -8530,14 +8459,14 @@ Por otro lado, se completó la maquetación de la Landing Page pública, la cual
 <div align="center">
 
 ![Ejecución API Swagger](assets/img/sprint-1/api-execution.png)
-  <br/><i>Imagen 115. Ejecución del entorno de pruebas de la API REST documentada en Swagger UI.</i>
+  <br/><i>Imagen 122. Ejecución del entorno de pruebas de la API REST documentada en Swagger UI.</i>
 
 </div>
 
 <div align="center">
 
 ![Ejecución Landing Page](assets/img/sprint-1/landing-execution.png)
-  <br/><i>Imagen 116. Ejecución en producción de la Landing Page de Serenia.</i>
+  <br/><i>Imagen 123. Ejecución en producción de la Landing Page de Serenia.</i>
 
 </div>
 
@@ -9149,70 +9078,70 @@ Las siguientes capturas muestran la interacción con la documentación OpenAPI d
 <p align="center">
   <img src="./assets/img/sprint/capturas-azure-sprint1/serenia-deploy-img/azure-swagger.png" alt="Swagger UI de Serenia Platform en el entorno desplegado" width="900">
 </p>
-<p align="center"><em>Imagen 117. Swagger UI de Serenia Platform en el entorno desplegado.</em></p>
+<p align="center"><em>Imagen 124. Swagger UI de Serenia Platform en el entorno desplegado.</em></p>
 
 **Registro de usuario (`POST /api/v1/users`).** Se despliega el endpoint con el ejemplo del *Request body* (`RegisterUserRequest`) y la tabla de respuestas documentadas: `201` (*User registered successfully*), `400` (*Invalid input data*) y `409` (*Email already registered*).
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/post-users-doc.png" alt="Documentación de POST /api/v1/users" width="900">
 </p>
-<p align="center"><em>Imagen 118. Documentación de POST /api/v1/users.</em></p>
+<p align="center"><em>Imagen 125. Documentación de POST /api/v1/users.</em></p>
 
 **Respuesta `201 Created` al registrar un usuario.** Se ejecuta la petición con *Try it out* contra `https://serenia-platform.azurewebsites.net/api/v1/users`, con los datos de muestra de *Rosa Quispe Mamani* (`rosa.quispe.demo@example.com`, rol `OLDER_ADULT`). El servidor devuelve la cuenta creada con `status: "ACTIVE"` y `photoUrl: null`, sin incluir la contraseña.
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/post-users-response.png" alt="Respuesta 201 de POST /api/v1/users" width="900">
 </p>
-<p align="center"><em>Imagen 119. Respuesta 201 de POST /api/v1/users.</em></p>
+<p align="center"><em>Imagen 126. Respuesta 201 de POST /api/v1/users.</em></p>
 
 **Inicio de sesión (`POST /api/v1/sessions`).** La respuesta `201` incluye el `sessionId`, el `token` JWT, la fecha de vencimiento `expiresAt` (7 días después del inicio de sesión) y los datos del usuario autenticado.
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/post-sessions-response.png" alt="Respuesta 201 de POST /api/v1/sessions" width="900">
 </p>
-<p align="center"><em>Imagen 120. Respuesta 201 de POST /api/v1/sessions.</em></p>
+<p align="center"><em>Imagen 127. Respuesta 201 de POST /api/v1/sessions.</em></p>
 
 **Autorización con el token Bearer.** Se pega el token en el botón **Authorize** (esquema `bearerAuth`, *http, Bearer*). El diálogo confirma el estado *Authorized* y oculta el valor del token; a partir de ese momento Swagger UI envía la cabecera `Authorization: Bearer <token>` en cada petición.
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/swagger-authorize.png" alt="Diálogo Authorize de Swagger UI con el token Bearer aplicado" width="900">
 </p>
-<p align="center"><em>Imagen 121. Diálogo Authorize de Swagger UI con el token Bearer aplicado.</em></p>
+<p align="center"><em>Imagen 128. Diálogo Authorize de Swagger UI con el token Bearer aplicado.</em></p>
 
 **Generación de un código de invitación (`POST /api/v1/care-circles/{careCircleId}/invitation-codes`).** Con el token de Rosa y el identificador de su círculo de cuidado (`2e7a5bda-fc5c-4b40-8639-35f166d32b22`), la API responde `201` con el código `KQ6TEM76` en estado `PENDING` y su fecha de vencimiento `expiresAt`. La captura incluye el *Curl* equivalente con la cabecera `Authorization`.
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/post-invitation-codes-response.png" alt="Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/invitation-codes" width="900">
 </p>
-<p align="center"><em>Imagen 122. Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/invitation-codes.</em></p>
+<p align="center"><em>Imagen 129. Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/invitation-codes.</em></p>
 
 **Canje del código por un familiar (`POST /api/v1/family-links`).** Con el token de la hija (rol `DISTANT_RELATIVE`), se envía el código `KQ6TEM76` y la etiqueta de parentesco `hija`. La API responde `201` y establece el vínculo `ACTIVE` entre la familiar (`relativeId`) y el círculo de cuidado de Rosa (`careCircleId`).
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/post-family-links-response.png" alt="Respuesta 201 de POST /api/v1/family-links" width="900">
 </p>
-<p align="center"><em>Imagen 123. Respuesta 201 de POST /api/v1/family-links.</em></p>
+<p align="center"><em>Imagen 130. Respuesta 201 de POST /api/v1/family-links.</em></p>
 
 **Botón de ayuda (`POST /api/v1/emergency-alerts`).** Con el token de Rosa, la API registra la emergencia y responde `201` con la alerta de tipo `EMERGENCY` en estado `DISPATCHED` y `deliveryConfirmed: true`, lo que indica que la familia vinculada fue notificada. Los campos de reconocimiento y resolución permanecen en `null` hasta que un familiar atienda la alerta.
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/post-emergency-alerts-response.png" alt="Respuesta 201 de POST /api/v1/emergency-alerts" width="900">
 </p>
-<p align="center"><em>Imagen 124. Respuesta 201 de POST /api/v1/emergency-alerts.</em></p>
+<p align="center"><em>Imagen 131. Respuesta 201 de POST /api/v1/emergency-alerts.</em></p>
 
 **Respuesta de error de validación.** Al enviar un correo inválido (`no-es-un-correo`) y una contraseña de 3 caracteres, la API responde `400` con el objeto de error `{ code, message, details }`: `code` es `VALIDATION_ERROR` y `details` lista los campos incumplidos (*Field password: La contraseña debe tener entre 8 y 72 caracteres; Field email: Debe ser un correo electrónico válido*).
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/error-400-response.png" alt="Respuesta de error 400 de POST /api/v1/users" width="900">
 </p>
-<p align="center"><em>Imagen 125. Respuesta de error 400 de POST /api/v1/users.</em></p>
+<p align="center"><em>Imagen 132. Respuesta de error 400 de POST /api/v1/users.</em></p>
 
 **Respuesta de error de conflicto.** Al registrar un correo que ya existe, la API responde `409` con `code: "USER_CONFLICT"` y el detalle `user.email.already.registered`, tal como se documenta para este endpoint (*Email already registered*).
 
 <p align="center">
   <img src="./assets/img/sprint/serenia-api-img/post-users-409.png" alt="Respuesta de error 409 de POST /api/v1/users" width="900">
 </p>
-<p align="center"><em>Imagen 126. Respuesta de error 409 de POST /api/v1/users.</em></p>
+<p align="center"><em>Imagen 133. Respuesta de error 409 de POST /api/v1/users.</em></p>
 
 **Repositorio y commits relacionados con la documentación**
 
@@ -9728,7 +9657,7 @@ En la cabecera de Swagger UI se observa la nueva descripción de la API: la list
 <p align="center">
   <img src="./assets/img/sprint-2/swagger1.png" alt="Swagger UI de Serenia Platform con la guía de uso de la API" width="900">
 </p>
-<p align="center"><em>Imagen 127. Swagger UI de Serenia Platform con la guía de uso de la API.</em></p>
+<p align="center"><em>Imagen 134. Swagger UI de Serenia Platform con la guía de uso de la API.</em></p>
 
 Subida de la foto de perfil <br>
 
@@ -9737,7 +9666,7 @@ El adulto mayor sube su foto de perfil con `PUT /api/v1/users/{userId}/photo` co
 <p align="center">
   <img src="./assets/img/sprint-2/swagger2.png" alt="Respuesta 200 de PUT /api/v1/users/{userId}/photo" width="900">
 </p>
-<p align="center"><em>Imagen 128. Respuesta 200 de PUT /api/v1/users/{userId}/photo.</em></p>
+<p align="center"><em>Imagen 135. Respuesta 200 de PUT /api/v1/users/{userId}/photo.</em></p>
 
 Historial de check-ins <br>
 
@@ -9746,7 +9675,7 @@ El familiar consulta el historial de check-ins de Rosa con `GET /api/v1/check-in
 <p align="center">
   <img src="./assets/img/sprint-2/swagger3.png" alt="Respuesta 200 de GET /api/v1/check-ins" width="900">
 </p>
-<p align="center"><em>Imagen 129. Respuesta 200 de GET /api/v1/check-ins (historial).</em></p>
+<p align="center"><em>Imagen 136. Respuesta 200 de GET /api/v1/check-ins (historial).</em></p>
 
 Alerta por inactividad del check-in <br>
 
@@ -9755,12 +9684,12 @@ Al no responderse el check-in del día dentro del plazo, se genera una alerta `I
 <p align="center">
   <img src="./assets/img/sprint-2/swagger4.png" alt="Respuesta 200 de GET /api/v1/alerts con una alerta de inactividad" width="900">
 </p>
-<p align="center"><em>Imagen 130. Respuesta 200 de GET /api/v1/alerts con una alerta de inactividad.</em></p>
+<p align="center"><em>Imagen 137. Respuesta 200 de GET /api/v1/alerts con una alerta de inactividad.</em></p>
 
 <p align="center">
   <img src="./assets/img/sprint-2/swagger5.png" alt="Respuesta 200 de POST /api/v1/inactivity-alerts/{alertId}/acknowledge" width="900">
 </p>
-<p align="center"><em>Imagen 131. Respuesta 200 de POST /api/v1/inactivity-alerts/{alertId}/acknowledge.</em></p>
+<p align="center"><em>Imagen 138. Respuesta 200 de POST /api/v1/inactivity-alerts/{alertId}/acknowledge.</em></p>
 
 Sugerencias de bienestar <br>
 
@@ -9769,7 +9698,7 @@ El familiar consulta las sugerencias activas con `GET /api/v1/wellbeing-suggesti
 <p align="center">
   <img src="./assets/img/sprint-2/swagger6.png" alt="Respuesta 200 de GET /api/v1/wellbeing-suggestions" width="900">
 </p>
-<p align="center"><em>Imagen 132. Respuesta 200 de GET /api/v1/wellbeing-suggestions.</em></p>
+<p align="center"><em>Imagen 139. Respuesta 200 de GET /api/v1/wellbeing-suggestions.</em></p>
 
 Asignación y consulta de turnos de atención <br>
 
@@ -9778,12 +9707,12 @@ La hija se asigna un turno con `POST /api/v1/care-circles/{careCircleId}/care-sh
 <p align="center">
   <img src="./assets/img/sprint-2/swagger8.png" alt="Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/care-shifts" width="900">
 </p>
-<p align="center"><em>Imagen 133. Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/care-shifts.</em></p>
+<p align="center"><em>Imagen 140. Respuesta 201 de POST /api/v1/care-circles/{careCircleId}/care-shifts.</em></p>
 
 <p align="center">
   <img src="./assets/img/sprint-2/swagger9.png" alt="Respuesta 200 de GET /api/v1/care-circles/{careCircleId}/care-shifts" width="900">
 </p>
-<p align="center"><em>Imagen 134. Respuesta 200 de GET /api/v1/care-circles/{careCircleId}/care-shifts.</em></p>
+<p align="center"><em>Imagen 141. Respuesta 200 de GET /api/v1/care-circles/{careCircleId}/care-shifts.</em></p>
 
 Modo simplificado de interfaz <br>
 
@@ -9792,7 +9721,7 @@ Rosa activa el modo simplificado con `PUT /api/v1/check-in-preferences/{preferen
 <p align="center">
   <img src="./assets/img/sprint-2/swagger10.png" alt="Respuesta 200 de PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode" width="900">
 </p>
-<p align="center"><em>Imagen 135. Respuesta 200 de PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode.</em></p>
+<p align="center"><em>Imagen 142. Respuesta 200 de PUT /api/v1/check-in-preferences/{preferencesId}/simplified-mode.</em></p>
 
 Respuesta de error por parámetro faltante <br>
 
@@ -9801,7 +9730,7 @@ Al consultar el historial sin enviar `from` ni `to`, la API responde `400` con `
 <p align="center">
   <img src="./assets/img/sprint-2/swagger11.png" alt="Respuesta de error 400 por parámetro faltante" width="900">
 </p>
-<p align="center"><em>Imagen 136. Respuesta de error 400 por parámetro faltante.</em></p>
+<p align="center"><em>Imagen 143. Respuesta de error 400 por parámetro faltante.</em></p>
 
 ---
 
@@ -9847,42 +9776,42 @@ La aplicación Android se registró en un proyecto de Firebase y se distribuye a
 
 <div align="center">
   <img src="assets/img/sprint-2/despliegue-android/01-firebase-proyecto.png" alt="Panel del proyecto de Firebase serenia-mobile-android, con el plan Spark." width="700"/>
-  <br/><i>Imagen 137. Panel del proyecto de Firebase serenia-mobile-android, con el plan Spark.</i>
+  <br/><i>Imagen 144. Panel del proyecto de Firebase serenia-mobile-android, con el plan Spark.</i>
 </div>
 
 <br>
 
 <div align="center">
   <img src="assets/img/sprint-2/despliegue-android/02-firebase-registro-app.png" alt="Registro de la aplicación Android con el paquete com.vitalcare.serenia en Firebase." width="700"/>
-  <br/><i>Imagen 138. Registro de la aplicación Android con el paquete com.vitalcare.serenia en Firebase.</i>
+  <br/><i>Imagen 145. Registro de la aplicación Android con el paquete com.vitalcare.serenia en Firebase.</i>
 </div>
 
 <br>
 
 <div align="center">
   <img src="assets/img/sprint-2/despliegue-android/03-firebase-configuracion-app.png" alt="Configuración de la aplicación Serenia registrada en el proyecto de Firebase." width="700"/>
-  <br/><i>Imagen 139. Configuración de la aplicación Serenia registrada en el proyecto de Firebase.</i>
+  <br/><i>Imagen 146. Configuración de la aplicación Serenia registrada en el proyecto de Firebase.</i>
 </div>
 
 <br>
 
 <div align="center">
   <img src="assets/img/sprint-2/despliegue-android/04-app-distribution-testers.png" alt="Grupo de verificadores testers en Firebase App Distribution." width="700"/>
-  <br/><i>Imagen 140. Grupo de verificadores testers en Firebase App Distribution.</i>
+  <br/><i>Imagen 147. Grupo de verificadores testers en Firebase App Distribution.</i>
 </div>
 
 <br>
 
 <div align="center">
   <img src="assets/img/sprint-2/despliegue-android/05-app-distribution-version.png" alt="Versión 1.0 (1) subida a Firebase App Distribution con su nota de versión." width="700"/>
-  <br/><i>Imagen 141. Versión 1.0 (1) subida a Firebase App Distribution con su nota de versión.</i>
+  <br/><i>Imagen 148. Versión 1.0 (1) subida a Firebase App Distribution con su nota de versión.</i>
 </div>
 
 <br>
 
 <div align="center">
   <img src="assets/img/sprint-2/despliegue-android/06-app-distribution-distribucion.png" alt="Distribución de la versión 1.0 (1) al grupo de verificadores testers." width="700"/>
-  <br/><i>Imagen 142. Distribución de la versión 1.0 (1) al grupo de verificadores testers.</i>
+  <br/><i>Imagen 149. Distribución de la versión 1.0 (1) al grupo de verificadores testers.</i>
 </div>
 
 <br>
@@ -9920,7 +9849,7 @@ En el repositorio de la aplicación móvil los integrantes registraron las sigui
 <div align="center">
 
 ![insight](./assets/img/insight-sprint2/insights1.png)
-  <br/><i>Imagen 143. Top committers del repositorio de la aplicación android.</i>
+  <br/><i>Imagen 150. Top committers del repositorio de la aplicación android.</i>
 
 </div>
 
@@ -9930,7 +9859,7 @@ Se mergearon 15 Pull Requests hacia `develop` (del #13 al #28), cada uno corresp
 <div align="center">
 
 ![insight](./assets/img/insight-sprint2/insights3.png)
-  <br/><i>Imagen 144. Pull request del repositorio de la aplicación android mergeados a develop.</i>
+  <br/><i>Imagen 151. Pull request del repositorio de la aplicación android mergeados a develop.</i>
 
 </div>
 
@@ -9942,7 +9871,7 @@ En el backend se registraron 10 commits durante el Sprint 2: Arturouu con 5 comm
 <div align="center">
 
 ![insight](./assets/img/insight-sprint2/insights2.png)
-  <br/><i>Imagen 145. Top committers del repositorio de la plataforma</i>
+  <br/><i>Imagen 152. Top committers del repositorio de la plataforma</i>
 
 </div>
 
@@ -9952,7 +9881,7 @@ Se mergearon 4 Pull Requests hacia `develop`: `feature/README` (#11), `feature/p
 <div align="center">
 
 ![insight](./assets/img/insight-sprint2/insights4.png)
-  <br/><i>Imagen 146. Pull request del repositorio de la plataforma mergeados a develop.</i>
+  <br/><i>Imagen 153. Pull request del repositorio de la plataforma mergeados a develop.</i>
 
 </div>
 
@@ -10029,7 +9958,7 @@ Los User Flows propuestos corresponden a las funcionalidades core de la aplicaci
 
 <img src="assets/img/interviews/validacion-segmento1-yrma.png" alt="Screenshot entrevista de validación Yrma Huamán" width="700"/>
 
-<p align="center"><i>Imagen 147. Captura de la entrevista de validación con Yrma Huamán Jiménez.</i></p>
+<p align="center"><i>Imagen 154. Captura de la entrevista de validación con Yrma Huamán Jiménez.</i></p>
 
 <br>
 
@@ -10062,7 +9991,7 @@ Lo más fácil fue identificar los botones por su color llamativo; lo más difí
 
 <img src="assets/img/interviews/entrevista-validacion-yolanda.png" alt="Screenshot entrevista de validación Yolanda Bardalez" width="700"/>
 
-<p align="center"><i>Imagen 148. Captura de la entrevista de validación con Yolanda Bardalez.</i></p>
+<p align="center"><i>Imagen 155. Captura de la entrevista de validación con Yolanda Bardalez.</i></p>
 
 <br>
 
@@ -10097,7 +10026,7 @@ Finalmente, tras revisar la sección de la cuenta y el flujo completo de la inte
 
 <img src="assets/img/interviews/validation-interview-arturo-eva.png" alt="Screenshot de entrevista de validación - Eva Martinez" width="700"/>
 
-<p align="center"><i>Imagen 149. Captura de la entrevista de validación con Eva Martínez.</i></p>
+<p align="center"><i>Imagen 156. Captura de la entrevista de validación con Eva Martínez.</i></p>
 
 <br>
 
@@ -10133,7 +10062,7 @@ Luego probó el prototipo de la aplicación móvil y valoró de forma positiva l
 
 <img src="assets/img/interviews/validacion-jose.png" alt="Screenshot validación José Cámara" width="700"/>
 
-<p align="center"><i>Imagen 150. Captura de la entrevista de validación con José Cámara.</i></p>
+<p align="center"><i>Imagen 157. Captura de la entrevista de validación con José Cámara.</i></p>
 
 <br>
 
@@ -10163,7 +10092,7 @@ Durante la sesión de validación, José interactuó con la Landing Page y los f
 
 <img src="assets/img/interviews/validacion-kevin.png" alt="Screenshot validación Kevin" width="700"/>
 
-<p align="center"><i>Imagen 151. Captura de la entrevista de validación con Kevin.</i></p>
+<p align="center"><i>Imagen 158. Captura de la entrevista de validación con Kevin.</i></p>
 
 <br>
 
@@ -10195,7 +10124,7 @@ Kevin evaluó el prototipo móvil y la Landing Page enfocándose en la usabilida
 
 <img src="assets/img/interviews/validacion-brianna.png" alt="Screenshot entrevista de validación Enrique Guzmán" width="700"/>
 
-<p align="center"><i>Imagen 152. Captura de la entrevista de validación con Enrique Guzmán.</i></p>
+<p align="center"><i>Imagen 159. Captura de la entrevista de validación con Enrique Guzmán.</i></p>
 
 <br>
 
@@ -10413,7 +10342,7 @@ En esta sección se documenta la validación de la aplicación Android de Sereni
 
 <img src="assets/img/interviews/validacion-app-yrma.png" alt="Screenshot de la validación de la aplicación Android con Yrma Huamán" width="700"/>
 
-<p align="center"><i>Imagen 153. Captura de la entrevista de validación de la aplicación Android con Yrma Huamán Jiménez.</i></p>
+<p align="center"><i>Imagen 160. Captura de la entrevista de validación de la aplicación Android con Yrma Huamán Jiménez.</i></p>
 
 <br>
 
