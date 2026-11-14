@@ -9401,6 +9401,23 @@ Los 5 integrantes del equipo participaron en la implementación de la plataforma
 | Sprint 2 Velocity | 80 |
 | Sum of Story Points | 79 |
 #### 4.2.2.2. Aspect Leaders and Collaborators
+
+Durante el Sprint 2, el equipo distribuyó sus responsabilidades considerando la evolución del backend, el desarrollo de las aplicaciones móviles y las actividades de seguimiento y validación. Se mantuvo una organización colaborativa en la que cada integrante asumió responsabilidades específicas, permitiendo avanzar paralelamente en los diferentes componentes de Serenia.
+
+A continuación, se presenta la matriz Leadership-and-Collaboration (LACX), que identifica a los líderes (L) y colaboradores (C) de los principales aspectos desarrollados durante el sprint.
+
+| Team Member (Last Name, First Name) | GitHub Username | Backend & API Leader (L) / Collaborator (C) | Android Application Leader (L) / Collaborator (C) | Flutter Application Leader (L) / Collaborator (C) | Agile, Testing & Execution Leader (L) / Collaborator (C) | Cloud & Documentation Leader (L) / Collaborator (C) |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Contreras Torres, Arturo Valentino | Arturouu | L | L | — | — | C |
+| Gallardo Morales, Carla Alejandra | Carlsss28 | C | — | — | C | L |
+| García Paredes, Victor Manuel | vicmacode | C | C | — | — | C |
+| Salinas Guzman, Brianna Cristina | brianna-salinas | — | C | — | — | — |
+| Sandoval Aiquipa, Kelber Yamir | Kyesei | — | — | L | L | — |
+
+*L: Leader (responsable principal). C: Collaborator (colaborador). —: sin responsabilidad individual registrada en esta distribución.*
+
+La distribución considera las contribuciones registradas en los repositorios, especialmente las actividades de desarrollo Android, correcciones del backend, mejoras de accesibilidad y documentación técnica. En particular, Kelber Sandoval estuvo a cargo del seguimiento del Sprint Backlog, la recopilación de evidencias de validación y ejecución, y el desarrollo de la vista de inicio de la aplicación Flutter.
+
 #### 4.2.2.3. Sprint Backlog 2
 #### 4.2.2.4. Development Evidence for Sprint Review
 #### 4.2.2.5. Testing Suite Evidence for Sprint Review
