@@ -9934,7 +9934,7 @@ Los User Flows propuestos corresponden a las funcionalidades core de la aplicaci
 
 <img src="assets/img/interviews/validacion-segmento1-yrma.png" alt="Screenshot entrevista de validación Yrma Huamán" width="700"/>
 
-<p align="center"><i>Imagen 133. Captura de la entrevista de validación con Yrma Huamán Jiménez.</i></p>
+<p align="center"><i>Imagen 147. Captura de la entrevista de validación con Yrma Huamán Jiménez.</i></p>
 
 <br>
 
@@ -9967,7 +9967,7 @@ Lo más fácil fue identificar los botones por su color llamativo; lo más difí
 
 <img src="assets/img/interviews/entrevista-validacion-yolanda.png" alt="Screenshot entrevista de validación Yolanda Bardalez" width="700"/>
 
-<p align="center"><i>Imagen 134. Captura de la entrevista de validación con Yolanda Bardalez.</i></p>
+<p align="center"><i>Imagen 148. Captura de la entrevista de validación con Yolanda Bardalez.</i></p>
 
 <br>
 
@@ -10002,7 +10002,7 @@ Finalmente, tras revisar la sección de la cuenta y el flujo completo de la inte
 
 <img src="assets/img/interviews/validation-interview-arturo-eva.png" alt="Screenshot de entrevista de validación - Eva Martinez" width="700"/>
 
-<p align="center"><i>Imagen 135. Captura de la entrevista de validación con Eva Martínez.</i></p>
+<p align="center"><i>Imagen 149. Captura de la entrevista de validación con Eva Martínez.</i></p>
 
 <br>
 
@@ -10029,8 +10029,44 @@ Luego probó el prototipo de la aplicación móvil y valoró de forma positiva l
 
 <br>
 
+<br>
+
+<div align="center">
+
+##### Entrevista 4
+
+<img src="assets/img/interviews/validacion-app-yrma.png" alt="Screenshot entrevista de validación de la aplicación Android con Yrma Huamán" width="700"/>
+
+<p align="center"><i>Imagen 150. Captura de la entrevista de validación de la aplicación Android con Yrma Huamán Jiménez.</i></p>
+
+<br>
+
+<table align="center">
+  <tr><th>Campo</th><th>Detalle</th></tr>
+  <tr><td><b>Nombres y apellidos</b></td><td>Yrma Huamán Jiménez</td></tr>
+  <tr><td><b>Edad</b></td><td>61 años</td></tr>
+  <tr><td><b>Distrito</b></td><td>Tarapoto, San Martín</td></tr>
+  <tr><td><b>Entrevistador</b></td><td>Victor Manuel García Paredes</td></tr>
+  <tr><td><b>Fecha</b></td><td>13/11/2026</td></tr>
+  <tr><td><b>Timing en el video</b></td><td><i>00:00</i></td></tr>
+  <tr><td><b>Duración</b></td><td>18 min 40 s</td></tr>
+  <tr><td><b>URL del video</b></td><td><a href="">Ver video en OneDrive</a></td></tr>
+</table>
+
+</div>
+
+**Resumen:**
 
 
+Esta fue la tercera sesión con Yrma y la primera con la aplicación Android ya construida, en lugar del prototipo. La sesión fue por videollamada: Victor ejecutó la aplicación, instalada desde el APK, en un emulador de Android de su computadora y compartió su pantalla, de modo que Yrma observó la aplicación y opinó, pero no la manejó ella misma. Por eso esta entrada recoge su comprensión y sus impresiones, y no una medición de tareas completadas por ella.
+
+Victor creó una cuenta de prueba como adulto mayor y le mostró las pantallas de la aplicación: el inicio con la pregunta del día, el botón "Pedir ayuda" que, mantenido presionado, avisa a la familia, los recordatorios, la pestaña Familia con la grabación y el envío de mensajes de voz, el círculo familiar con el código de invitación y las fotos que envían los familiares, y la pestaña Cuenta con la foto, los datos personales, la hora de la pregunta, el modo simplificado, el alto contraste y el cambio de contraseña. En los recordatorios creó con ella un evento de ejemplo, un festival de coros navideños el 16 de diciembre a las 8 de la mañana, y le mostró cómo marcarlo como hecho o descartarlo. Yrma lo comparó con "una agenda, pero virtual".
+
+Dijo que la aplicación le parece "muy interesante" y útil para comunicarse con sus familiares y, por la edad, para recordar fechas y actividades pendientes que a veces se olvidan por el trabajo y los quehaceres. Sobre el diseño señaló que las letras, el tamaño y los íconos están bien, que pudo visualizarlo todo y que no tuvo ninguna dificultad. Respondió que se sentiría tranquila de que su familia vea cómo está, porque su familia se preocuparía menos al saber de ella y ver sus fotos. Al preguntarle qué cambiaría, volvió a pedir la videollamada en directo, como ya lo había propuesto antes; también mencionó que podrían ampliarse las agendas y el registro de las actividades diarias, aunque enseguida dijo que no agregaría nada más. Sobre el ícono, comentó que ve un libro abierto con personas y que le gusta que sea verde porque ama la naturaleza.
+
+Recomendaría la aplicación a sus familiares y a amigas de su edad. Explicó que, como los hijos salen a otras provincias o a la capital por estudio o trabajo, las adultas mayores se sienten solas, y que una herramienta así les ayuda a relacionarse todos los días con su familia y a sentirse más cerca. Al cierre felicitó a Victor y le preguntó si seguirá diseñando aplicaciones similares.
+
+<br>
 
 #### Segmento 2: Familiares a distancia
 
@@ -10040,7 +10076,7 @@ Luego probó el prototipo de la aplicación móvil y valoró de forma positiva l
 
 <img src="assets/img/interviews/validacion-jose.png" alt="Screenshot validación José Cámara" width="700"/>
 
-<p align="center"><i>Imagen 136. Captura de la entrevista de validación con José Cámara.</i></p>
+<p align="center"><i>Imagen 151. Captura de la entrevista de validación con José Cámara.</i></p>
 
 <br>
 
@@ -10070,7 +10106,7 @@ Durante la sesión de validación, José interactuó con la Landing Page y los f
 
 <img src="assets/img/interviews/validacion-kevin.png" alt="Screenshot validación Kevin" width="700"/>
 
-<p align="center"><i>Imagen 137. Captura de la entrevista de validación con Kevin.</i></p>
+<p align="center"><i>Imagen 152. Captura de la entrevista de validación con Kevin.</i></p>
 
 <br>
 
@@ -10102,7 +10138,7 @@ Kevin evaluó el prototipo móvil y la Landing Page enfocándose en la usabilida
 
 <img src="assets/img/interviews/validacion-brianna.png" alt="Screenshot entrevista de validación Enrique Guzmán" width="700"/>
 
-<p align="center"><i>Imagen 138. Captura de la entrevista de validación con Enrique Guzmán.</i></p>
+<p align="center"><i>Imagen 153. Captura de la entrevista de validación con Enrique Guzmán.</i></p>
 
 <br>
 
@@ -10318,6 +10354,24 @@ Esta segunda entrega suma al análisis y al diseño de la primera el diseño de 
 
 ## Video App Validation
 
+Las sesiones de validación de la aplicación Android de Serenia con adultos mayores se grabaron en videos independientes, uno por entrevista. La aplicación se instaló desde el APK en un emulador de Android y se compartió por videollamada, tal como se describe en la sección 4.3.2, donde cada entrevista tiene su ficha y su resumen; las heurísticas de usabilidad, arquitectura de información y diseño inclusivo se evalúan en la sección 4.3.3. La evidencia de la distribución de la aplicación a los testers se presenta en la sección 4.2.2.8.
+
+<br>
+
+<div align="center">
+
+**Validación de la aplicación: Yrma Huamán Jiménez**
+
+![Video App Validation: Yrma Huamán](assets/img/interviews/validacion-app-yrma.png)
+
+<p align="center"><i>Imagen 154. Captura del video de validación de la aplicación Android con Yrma Huamán Jiménez.</i></p>
+
+<table align="center">
+  <tr><th>Entrevistada</th><th>Entrevistador</th><th>Fecha</th><th>Duración</th><th>Enlace</th></tr>
+  <tr><td>Yrma Huamán Jiménez</td><td>Victor Manuel García Paredes</td><td>13/11/2026</td><td>18 min 40 s</td><td><a href="">Ver video en OneDrive</a></td></tr>
+</table>
+
+</div>
 
 <br>
 
