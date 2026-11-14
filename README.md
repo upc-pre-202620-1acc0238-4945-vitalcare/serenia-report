@@ -207,7 +207,7 @@ Para el informe el equipo continuó trabajando en el repositorio `serenia-report
 La Imagen 6 muestra el resumen de actividad (Pulse) del repositorio entre el 11 de octubre y el 13 de noviembre de 2026: 19 Pull Requests integrados (del #153 al #172), con 63 commits realizados por los integrantes del equipo. El gráfico de Top committers evidencia los aportes de cada integrante al informe.
 
 <p align="center">
-  <img src="assets/img/project-report-collaboration-insights/insights-av2.png" alt="AV2 Insights" width="900"/>
+  <img src="assets/img/project-report-collaboration-insights/insights-av2-5.png" alt="AV2 Insights" width="900"/>
     <br/><i>Imagen 6. Insights de la Tercera Entrega (AV2) - serenia-report</i>
 </p>
 
@@ -218,7 +218,7 @@ Para la Landing Page el equipo trabajó sobre el repositorio `serenia-website`, 
 La Imagen 7 muestra el resumen de actividad (Pulse) del repositorio durante el periodo de la entrega: 1 Pull Request integrado, con 9 commits realizados por los integrantes del equipo.
 
 <p align="center">
-  <img src="assets/img/project-report-collaboration-insights/insights-av2-website.png" alt="AV2 Insights" width="900"/>
+  <img src="assets/img/project-report-collaboration-insights/insights-av2-3.png" alt="AV2 Insights" width="900"/>
     <br/><i>Imagen 7. Insights de la Tercera Entrega (AV2) - serenia-website</i>
 </p>
 
@@ -229,7 +229,7 @@ Para el backend el equipo continuó trabajando sobre el repositorio `serenia-pla
 La Imagen 8 muestra el resumen de actividad (Pulse) del repositorio durante el periodo de la entrega: 5 Pull Requests integrados (del #11 al #15), con 15 commits realizados por los integrantes del equipo, y 1 release publicada, `v2.0.0`.
 
 <p align="center">
-  <img src="assets/img/project-report-collaboration-insights/insights-av2-platform.png" alt="AV2 Insights" width="900"/>
+  <img src="assets/img/project-report-collaboration-insights/insights-av2_2.png" alt="AV2 Insights" width="900"/>
     <br/><i>Imagen 8. Insights de la Tercera Entrega (AV2) - serenia-platform</i>
 </p>
 
@@ -240,7 +240,7 @@ Para la aplicación Android el equipo trabajó sobre el repositorio `serenia-mob
 La Imagen 9 muestra el resumen de actividad (Pulse) del repositorio durante el periodo de la entrega: 20 Pull Requests integrados (del #13 al #36), con 177 commits realizados por los integrantes del equipo, y 1 release publicada, `v2.0.0`.
 
 <p align="center">
-  <img src="assets/img/project-report-collaboration-insights/insights-av2-mobile.png" alt="AV2 Insights" width="900"/>
+  <img src="assets/img/project-report-collaboration-insights/insights-av2_1.png" alt="AV2 Insights" width="900"/>
     <br/><i>Imagen 9. Insights de la Tercera Entrega (AV2) - serenia-mobile-android</i>
 </p>
 
@@ -251,7 +251,7 @@ Para la primera versión de la aplicación en Flutter el equipo creó el reposit
 La Imagen 10 muestra el resumen de actividad (Pulse) del repositorio durante el periodo de la entrega: 17 Pull Requests integrados (del #1 al #17), con 195 commits realizados por los integrantes del equipo.
 
 <p align="center">
-  <img src="assets/img/project-report-collaboration-insights/insights-av2-flutter.png" alt="AV2 Insights" width="900"/>
+  <img src="assets/img/project-report-collaboration-insights/insight-av2-4.png" alt="AV2 Insights" width="900"/>
     <br/><i>Imagen 10. Insights de la Tercera Entrega (AV2) - serenia-mobile-flutter</i>
 </p>
 
@@ -9905,7 +9905,7 @@ En el repositorio de la aplicación móvil los integrantes registraron las sigui
 
 <div align="center">
 
-![insight](./assets/img/insight-sprint2/insights1.png)
+![insight](./assets/img/project-report-collaboration-insights/insights-av2_1.png)
   <br/><i>Imagen 155. Top committers del repositorio de la aplicación android.</i>
 
 </div>
@@ -9927,7 +9927,7 @@ En el backend se registraron 10 commits durante el Sprint 2: Arturouu con 5 comm
 
 <div align="center">
 
-![insight](./assets/img/insight-sprint2/insights2.png)
+![insight](./assets/img/project-report-collaboration-insights/insights-av2_2.png)
   <br/><i>Imagen 157. Top committers del repositorio de la plataforma</i>
 
 </div>
