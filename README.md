@@ -9436,7 +9436,7 @@ El objetivo principal de este Sprint 2 fue ampliar las funcionalidades de Sereni
 
 A continuación, se presenta el Board de Trello utilizado durante el Sprint 2, donde se gestionaron las historias de usuario y tareas técnicas priorizadas.
 
-**URL público del Board:** [Insertar URL público de Trello]
+**URL público del Board:** [https://trello.com/invite/b/6aa8e6d78ed225cd21e9e93c/ATTI46cbaeeceb1072274d9c62399714ddaeF68A89AE/serenia]
 
 <div align="center">
 
@@ -9450,27 +9450,27 @@ El Sprint Backlog estuvo conformado por las siguientes historias de usuario y t�
 
 | Sprint # | User Story Id | User Story Title | Work-Item / Task Id | Work-Item / Task Title | Description | Estimation (Story Points) | Assigned To | Status (Todo / InProcess / To-Review / Done) |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| Sprint 2 | US16 | Alerta por inactividad del check-in | — | — | Notificar a los familiares cuando el adulto mayor no registre su check-in dentro del plazo establecido. | 5 | Por confirmar | To Do |
-| Sprint 2 | US18 | Sugerencia de acción por patrón de malestar | — | — | Proporcionar sugerencias a los familiares cuando se detecten patrones de ánimo bajo. | 5 | Por confirmar | To Do |
-| Sprint 2 | US20 | Asignación de turnos de atención | — | — | Permitir que los familiares organicen y asignen turnos de atención. | 5 | Por confirmar | To Do |
-| Sprint 2 | NF03 | Control de acceso a los datos de bienestar | — | — | Restringir el acceso a la información de bienestar según los permisos del usuario. | 5 | Por confirmar | To Do |
-| Sprint 2 | TS06 | Gestión de mensajes de audio | — | — | Gestionar la creación, almacenamiento, publicación y consulta de mensajes de audio. | 5 | Por confirmar | To Do |
-| Sprint 2 | TS08 | Gestión de alertas de emergencia | — | — | Gestionar la generación, reconocimiento y resolución de alertas de emergencia. | 5 | Por confirmar | To Do |
-| Sprint 2 | TS09 | Gestión del panel de estado | — | — | Gestionar la información presentada en el panel de seguimiento del adulto mayor. | 5 | Por confirmar | To Do |
-| Sprint 2 | TS10 | Gestión de alertas de inactividad | — | — | Gestionar las alertas generadas por la falta de respuesta a los check-ins. | 5 | Por confirmar | To Do |
-| Sprint 2 | TS11 | Gestión de turnos de atención | — | — | Gestionar el registro, consulta y reasignación de turnos familiares. | 5 | Por confirmar | To Do |
-| Sprint 2 | TS13 | Gestión de indicadores de bienestar | — | — | Gestionar los indicadores utilizados para identificar patrones de bienestar. | 5 | Por confirmar | To Do |
-| Sprint 2 | US06 | Rotación de preguntas del check-in | — | — | Variar las preguntas presentadas al adulto mayor durante los check-ins diarios. | 3 | Por confirmar | To Do |
-| Sprint 2 | US08 | Modo simplificado de interfaz | — | — | Ofrecer una interfaz simplificada que facilite la interacción del adulto mayor. | 3 | Por confirmar | To Do |
-| Sprint 2 | US17 | Historial de check-ins del adulto mayor | — | — | Permitir consultar los registros históricos de los check-ins realizados. | 3 | Por confirmar | To Do |
-| Sprint 2 | NF04 | Usabilidad sin experiencia tecnológica previa | — | — | Facilitar la utilización de la solución por personas con poca experiencia tecnológica. | 3 | Por confirmar | To Do |
-| Sprint 2 | TS07 | Gestión de recordatorios de contacto social | — | — | Gestionar la programación y seguimiento de recordatorios de contacto social. | 3 | Por confirmar | To Do |
-| Sprint 2 | TS12 | Gestión de notas compartidas | — | — | Gestionar la creación, consulta y modificación de notas compartidas entre familiares. | 3 | Por confirmar | To Do |
-| Sprint 2 | US25 | Navegación y diseño responsive del sitio | — | — | Mejorar la navegación y adaptación de la página web a distintos tamaños de pantalla. | 3 | Por confirmar | To Do |
-| Sprint 2 | US03 | Registro de respuesta del check-in diario | — | — | Permitir registrar la respuesta y el estado de ánimo del adulto mayor. | 2 | Por confirmar | To Do |
-| Sprint 2 | US05 | Configuración del horario del check-in | — | — | Permitir configurar el horario de presentación del check-in diario. | 2 | Por confirmar | To Do |
-| Sprint 2 | US07 | Pausa diaria de preguntas | — | — | Permitir pausar temporalmente las preguntas del check-in durante el día. | 2 | Por confirmar | To Do |
-| Sprint 2 | US21 | Consulta del turno de atención vigente | — | — | Permitir consultar el turno de atención asignado a los familiares. | 2 | Por confirmar | To Do |
+| Sprint 2 | US16 | Alerta por inactividad del check-in | — | — | Notificar a los familiares cuando el adulto mayor no registre su check-in dentro del plazo establecido. | 5 | Arturo Contreras | Done |
+| Sprint 2 | US18 | Sugerencia de acción por patrón de malestar | — | — | Proporcionar sugerencias a los familiares cuando se detecten patrones de ánimo bajo. | 5 | Arturo Contreras | Done |
+| Sprint 2 | US20 | Asignación de turnos de atención | — | — | Permitir que los familiares organicen y asignen turnos de atención. | 5 | Arturo Contreras | Done |
+| Sprint 2 | NF03 | Control de acceso a los datos de bienestar | — | — | Restringir el acceso a la información de bienestar según los permisos del usuario. | 5 | Victor García | Done |
+| Sprint 2 | TS06 | Gestión de mensajes de audio | — | — | Gestionar la creación, almacenamiento, publicación y consulta de mensajes de audio. | 5 | Carla Gallardo | Done |
+| Sprint 2 | TS08 | Gestión de alertas de emergencia | — | — | Gestionar la generación, reconocimiento y resolución de alertas de emergencia. | 5 | Victor García | Done |
+| Sprint 2 | TS09 | Gestión del panel de estado | — | — | Gestionar la información presentada en el panel de seguimiento del adulto mayor. | 5 | Victor García | Done |
+| Sprint 2 | TS10 | Gestión de alertas de inactividad | — | — | Gestionar las alertas generadas por la falta de respuesta a los check-ins. | 5 | Kelber Sandoval | Done |
+| Sprint 2 | TS11 | Gestión de turnos de atención | — | — | Gestionar el registro, consulta y reasignación de turnos familiares. | 5 | Carla Gallardo | Done |
+| Sprint 2 | TS13 | Gestión de indicadores de bienestar | — | — | Gestionar los indicadores utilizados para identificar patrones de bienestar. | 5 | Kelber Sandoval | Done |
+| Sprint 2 | US06 | Rotación de preguntas del check-in | — | — | Variar las preguntas presentadas al adulto mayor durante los check-ins diarios. | 3 | Arturo Contreras | Done |
+| Sprint 2 | US08 | Modo simplificado de interfaz | — | — | Ofrecer una interfaz simplificada que facilite la interacción del adulto mayor. | 3 | Kelber Sandoval | Done |
+| Sprint 2 | US17 | Historial de check-ins del adulto mayor | — | — | Permitir consultar los registros históricos de los check-ins realizados. | 3 | Carla Gallardo | Done |
+| Sprint 2 | NF04 | Usabilidad sin experiencia tecnológica previa | — | — | Facilitar la utilización de la solución por personas con poca experiencia tecnológica. | 3 | Brianna Salinas | Done |
+| Sprint 2 | TS07 | Gestión de recordatorios de contacto social | — | — | Gestionar la programación y seguimiento de recordatorios de contacto social. | 3 | Brianna Salinas | Done |
+| Sprint 2 | TS12 | Gestión de notas compartidas | — | — | Gestionar la creación, consulta y modificación de notas compartidas entre familiares. | 3 | Kelber Sandoval | Done |
+| Sprint 2 | US25 | Navegación y diseño responsive del sitio | — | — | Mejorar la navegación y adaptación de la página web a distintos tamaños de pantalla. | 3 | Victor García | Done |
+| Sprint 2 | US03 | Registro de respuesta del check-in diario | — | — | Permitir registrar la respuesta y el estado de ánimo del adulto mayor. | 2 | Kelber Sandoval | Done |
+| Sprint 2 | US05 | Configuración del horario del check-in | — | — | Permitir configurar el horario de presentación del check-in diario. | 2 | Brianna Salinas | Done |
+| Sprint 2 | US07 | Pausa diaria de preguntas | — | — | Permitir pausar temporalmente las preguntas del check-in durante el día. | 2 | Kelber Sandoval | Done |
+| Sprint 2 | US21 | Consulta del turno de atención vigente | — | — | Permitir consultar el turno de atención asignado a los familiares. | 2 | Victor García | Done |
 
 **Total de historias comprometidas:** 21.
 
