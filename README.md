@@ -9487,6 +9487,52 @@ A continuación, se presentan algunos de los commits más representativos que ev
 | serenia-mobile-flutter | feature/care-shifts | 33478c4 | feat(circle): add CareShiftsPage | Implementación de la pantalla para consultar y visualizar los turnos de atención familiares. Autor: Carlsss28. PR #12. | 13/11/2026 |
 
 #### 4.2.2.5. Testing Suite Evidence for Sprint Review
+
+Durante el Sprint 2, las actividades de validación se enfocaron en comprobar el comportamiento de los servicios REST y el cumplimiento de las funcionalidades implementadas. Para ello, se realizaron pruebas funcionales manuales mediante la documentación interactiva de Swagger UI, utilizando la opción *Try it out* para ejecutar solicitudes HTTP y verificar las respuestas obtenidas.
+
+Las pruebas permitieron validar operaciones relacionadas con el historial de check-ins, alertas por inactividad, sugerencias de bienestar, asignación y consulta de turnos de atención y configuración del modo simplificado.
+
+A continuación, se presentan las principales pruebas ejecutadas durante el sprint:
+
+| Funcionalidad | Endpoint | Tipo de solicitud | Respuesta obtenida |
+| :--- | :--- | :--- | :--- |
+| Historial de check-ins | `/api/v1/check-ins` | GET | 200 OK |
+| Consulta de alertas por inactividad | `/api/v1/alerts` | GET | 200 OK |
+| Reconocimiento de alerta de inactividad | `/api/v1/inactivity-alerts/{alertId}/acknowledge` | POST | 200 OK |
+| Consulta de sugerencias de bienestar | `/api/v1/wellbeing-suggestions` | GET | 200 OK |
+| Asignación de turno de atención | `/api/v1/care-circles/{careCircleId}/care-shifts` | POST | 201 Created |
+| Consulta de turnos de atención | `/api/v1/care-circles/{careCircleId}/care-shifts` | GET | 200 OK |
+| Activación del modo simplificado | `/api/v1/check-in-preferences/{preferencesId}/simplified-mode` | PUT | 200 OK |
+| Validación de parámetros obligatorios | `/api/v1/check-ins` | GET | 400 Bad Request |
+
+**Evidencias de ejecución de pruebas**
+
+**1. Consulta del historial de check-ins**
+
+Se verificó que el servicio permitiera consultar los registros históricos del adulto mayor, incluyendo los estados de los check-ins respondidos y aquellos que no fueron completados.
+
+**2. Consulta y reconocimiento de alertas por inactividad**
+
+Se verificó la obtención de alertas generadas por la falta de respuesta a los check-ins y el reconocimiento de estas por parte del familiar responsable.
+
+**3. Consulta de sugerencias de bienestar**
+
+Se comprobó que el servicio devolviera las sugerencias activas cuando se identifican patrones de malestar en los registros del adulto mayor.
+
+**4. Asignación y consulta de turnos de atención**
+
+Se verificó el registro de un turno de atención mediante una solicitud POST y la posterior consulta de los turnos mediante una solicitud GET.
+
+**5. Activación del modo simplificado**
+
+Se verificó que el servicio permitiera actualizar las preferencias del adulto mayor y activar el modo simplificado de la interfaz.
+
+**6. Validación de parámetros obligatorios**
+
+Finalmente, se comprobó el comportamiento del servicio ante solicitudes incompletas. Al consultar el historial sin proporcionar los parámetros obligatorios, la API devolvió un error `400 Bad Request`, acompañado del código `VALIDATION_ERROR`.
+
+Estas pruebas permitieron comprobar las respuestas de los servicios ante solicitudes válidas y solicitudes con datos incompletos, verificando el comportamiento esperado de la API durante el Sprint 2.
+
 #### 4.2.2.6. Execution Evidence for Sprint Review
 #### 4.2.2.7. Services Documentation Evidence for Sprint Review
 
