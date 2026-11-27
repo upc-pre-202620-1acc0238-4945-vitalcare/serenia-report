@@ -283,6 +283,8 @@ La Imagen 10 muestra el resumen de actividad (Pulse) del repositorio durante el 
     <br/><i>Imagen 10. Insights de la Tercera Entrega (AV2) - serenia-mobile-flutter</i>
 </p>
 
+**Cuarta Entrega (TB2)**
+
 <br>
 
 <div style="page-break-after: always;"></div>
@@ -440,6 +442,16 @@ La Imagen 10 muestra el resumen de actividad (Pulse) del repositorio durante el 
       - [4.2.2.7. Services Documentation Evidence for Sprint Review](#4227-services-documentation-evidence-for-sprint-review)
       - [4.2.2.8. Software Deployment Evidence for Sprint Review](#4228-software-deployment-evidence-for-sprint-review)
       - [4.2.2.9. Team Collaboration Insights during Sprint](#4229-team-collaboration-insights-during-sprint)
+    - [4.2.3. Sprint 3](#423-sprint-3)
+      - [4.2.3.1. Sprint Planning 3](#4231-sprint-planning-3)
+      - [4.2.3.2. Aspect Leaders and Collaborators](#4232-aspect-leaders-and-collaborators)
+      - [4.2.3.3. Sprint Backlog 3](#4233-sprint-backlog-3)
+      - [4.2.3.4. Development Evidence for Sprint Review](#4234-development-evidence-for-sprint-review)
+      - [4.2.3.5. Testing Suite Evidence for Sprint Review](#4235-testing-suite-evidence-for-sprint-review)
+      - [4.2.3.6. Execution Evidence for Sprint Review](#4236-execution-evidence-for-sprint-review)
+      - [4.2.3.7. Services Documentation Evidence for Sprint Review](#4237-services-documentation-evidence-for-sprint-review)
+      - [4.2.3.8. Software Deployment Evidence for Sprint Review](#4238-software-deployment-evidence-for-sprint-review)
+      - [4.2.3.9. Team Collaboration Insights during Sprint](#4239-team-collaboration-insights-during-sprint)
   - [4.3. Validation Interviews](#43-validation-interviews)
     - [4.3.1. Diseño de Entrevistas](#431-diseño-de-entrevistas)
     - [4.3.2. Registro de Entrevistas](#432-registro-de-entrevistas)
@@ -10145,6 +10157,26 @@ Se mergearon 4 Pull Requests hacia `develop`: `feature/README` (#11), `feature/p
   <br/><i>Imagen 158. Pull request del repositorio de la plataforma mergeados a develop.</i>
 
 </div>
+
+### 4.2.3. Sprint 3
+
+#### 4.2.3.1. Sprint Planning 3
+
+#### 4.2.3.2. Aspect Leaders and Collaborators
+
+#### 4.2.3.3. Sprint Backlog 3
+
+#### 4.2.3.4. Development Evidence for Sprint Review
+
+#### 4.2.3.5. Testing Suite Evidence for Sprint Review
+
+#### 4.2.3.6. Execution Evidence for Sprint Review
+
+#### 4.2.3.7. Services Documentation Evidence for Sprint Review
+
+#### 4.2.3.8. Software Deployment Evidence for Sprint Review
+
+#### 4.2.3.9. Team Collaboration Insights during Sprint
 
 ## 4.3. Validation Interviews
 
