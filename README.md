@@ -457,10 +457,10 @@ La Imagen 10 muestra el resumen de actividad (Pulse) del repositorio durante el 
     - [4.3.2. Registro de Entrevistas](#432-registro-de-entrevistas)
     - [4.3.3. Evaluaciones según heurísticas](#433-evaluaciones-según-heurísticas)
 - [Conclusiones](#conclusiones)
-  - [Conclusiones y Recomendaciones](#conclusiones-y-recomendaciones)
+  - [Conclusiones y recomendaciones](#conclusiones-y-recomendaciones)
   - [Video App Validation](#video-app-validation)
-  - [Video About The Product](#video-about-the-product)
-  - [Video About The Team](#video-about-the-team)
+  - [Video About the product](#video-about-the-product)
+  - [Video About the team](#video-about-the-team)
 - [Glosario](#glosario)
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
@@ -10617,7 +10617,9 @@ Requerir una interacción intencional para confirmar la emergencia. En lugar de 
 
 <br>
 
-# Conclusiones y Recomendaciones
+# Conclusiones
+
+## Conclusiones y recomendaciones
 
 Esta tercera entrega suma la implementación y el despliegue del Sprint 2 y la validación de la aplicación ya construida. Las conclusiones contrastan lo planteado en el Lean UX con lo logrado y lo encontrado con usuarios, y las recomendaciones señalan lo que sigue.
 
@@ -10654,6 +10656,8 @@ Esta tercera entrega suma la implementación y el despliegue del Sprint 2 y la v
 <div style="page-break-after: always;"></div>
 
 ## Video App Validation
+
+**Video 1**
 
 En esta sección se documenta la validación de la aplicación Android de Serenia con adultos mayores, es decir, con la aplicación ya construida y no con el prototipo de la sección 4.3.2. Cada sesión se grabó en un video independiente, y para cada una se presenta la captura, la ficha de la persona entrevistada, el enlace al video y un resumen de sus apreciaciones. La evidencia de la distribución de la aplicación a los testers se presenta en la sección 4.2.2.8.
 
@@ -10696,7 +10700,7 @@ Recomendaría la aplicación a sus familiares y a amigas de su edad. Explicó qu
 
 <br>
 
-## Video App Validation 2
+**Video 2**
 
 En esta sección se documenta la validación de la aplicación Android de Serenia mediante una prueba de usabilidad realizada por Kelber Sandoval. A diferencia de las validaciones efectuadas sobre el prototipo, esta sesión se llevó a cabo utilizando la aplicación ya construida e instalada en un dispositivo móvil.
 
@@ -10744,7 +10748,7 @@ Esta prueba permitió recorrer las principales funcionalidades de Serenia desde 
 <br>
 
 
-## Video About The Product
+## Video About the product
 
 El video About The Product presenta Serenia, la aplicación que acompaña a los adultos mayores que viven solos y mantiene a sus familias al tanto de cómo están. En poco más de tres minutos muestra el problema que buscamos resolver, el funcionamiento de la aplicación y el testimonio de una usuaria que participó en la validación.
 
@@ -10764,7 +10768,7 @@ El video About The Product presenta Serenia, la aplicación que acompaña a los 
 
 <br>
 
-## Video About The Team
+## Video About the team
 
 El video About The Team presenta al equipo detrás de Serenia y el trabajo que realizamos durante el curso. Muestra las actividades de cada integrante, la colaboración del equipo y el aporte de cada uno al proyecto, junto con sus testimonios personales. También refleja cómo el curso desarrolla el ABET EAC Student Outcome 7.
 
