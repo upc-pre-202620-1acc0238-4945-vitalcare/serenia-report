@@ -113,6 +113,34 @@
         Capítulo IV: Product Implementation & Validation (Sprint 2) <br>
       </td>
     </tr>
+    </tr>
+      <tr>
+      <td><b>Cuarta Entrega (TB2)</b></td>
+      <td>1/12/2026</td>
+      <td>
+        Contreras Torres, Arturo Valentino <br>
+        <p></p>
+        Gallardo Morales, Carla Alejandra <br>
+        <p></p>
+        García Paredes, Victor Manuel <br>
+        <p></p>
+        Salinas Guzman, Brianna Cristina <br>
+        <p></p>
+        Sandoval Aiquipa, Kelber Yamir <br>
+      </td>
+      <td>
+        Corrección del reporte <br>
+        Mejora de artefactos <br>
+        Versión final de Landing Page <br>
+        Versión final de Web Services <br>
+        Versión final de Android Application <br>
+        Versión final de Flutter Application <br>
+        Versión final del video con la validación de la aplicación <br>
+        Versión final del video About-the-Product <br>
+        Versión final del video About-the-Team <br>
+        Capítulo IV: Product Implementation & Validation (Sprint 3) <br>
+      </td>
+    </tr>
   </table>
 
 <br>
