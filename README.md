@@ -7194,7 +7194,10 @@ En la versión de escritorio, las secciones de Cómo funciona, Funciones y Plane
 
 *Elaboración propia*
 
-![Landing Page Wireframe Desktop](assets/img/ux-design/landing-page/web-wireframe.png)
+<img src="assets/img/ux-design/landing-page/web-wireframe/web-wireframe-01.png" width="700" alt="Landing Page Wireframe Desktop (1/4)"><br>
+<img src="assets/img/ux-design/landing-page/web-wireframe/web-wireframe-02.png" width="700" alt="Landing Page Wireframe Desktop (2/4)"><br>
+<img src="assets/img/ux-design/landing-page/web-wireframe/web-wireframe-03.png" width="700" alt="Landing Page Wireframe Desktop (3/4)"><br>
+<img src="assets/img/ux-design/landing-page/web-wireframe/web-wireframe-04.png" width="700" alt="Landing Page Wireframe Desktop (4/4)">
 
 <br/><i>Imagen 94. Wireframe de la landing page en versión de escritorio.</i>
 
@@ -7204,7 +7207,8 @@ En la versión de escritorio, las secciones de Cómo funciona, Funciones y Plane
 
 *Elaboración propia*
 
-![Landing Page Wireframe Mobile](assets/img/ux-design/landing-page/mobile-wireframe.png)
+<img src="assets/img/ux-design/landing-page/mobile-wireframe/mobile-wireframe-01.png" width="220" alt="Landing Page Wireframe Mobile (1/6)"> <img src="assets/img/ux-design/landing-page/mobile-wireframe/mobile-wireframe-02.png" width="220" alt="Landing Page Wireframe Mobile (2/6)"> <img src="assets/img/ux-design/landing-page/mobile-wireframe/mobile-wireframe-03.png" width="220" alt="Landing Page Wireframe Mobile (3/6)"><br>
+<img src="assets/img/ux-design/landing-page/mobile-wireframe/mobile-wireframe-04.png" width="220" alt="Landing Page Wireframe Mobile (4/6)"> <img src="assets/img/ux-design/landing-page/mobile-wireframe/mobile-wireframe-05.png" width="220" alt="Landing Page Wireframe Mobile (5/6)"> <img src="assets/img/ux-design/landing-page/mobile-wireframe/mobile-wireframe-06.png" width="220" alt="Landing Page Wireframe Mobile (6/6)">
 
 <br/><i>Imagen 95. Wireframe de la landing page en versión móvil.</i>
 
@@ -7239,7 +7243,10 @@ La landing page publicada puede consultarse en [sereniawebsite.netlify.app](http
 
 *Elaboración propia en Figma*
 
-![Landing Page Mock-up Desktop](assets/img/ux-design/landing-page/web-mockup.png)
+<img src="assets/img/ux-design/landing-page/web-mockup/web-mockup-01.png" width="700" alt="Landing Page Mock-up Desktop (1/4)"><br>
+<img src="assets/img/ux-design/landing-page/web-mockup/web-mockup-02.png" width="700" alt="Landing Page Mock-up Desktop (2/4)"><br>
+<img src="assets/img/ux-design/landing-page/web-mockup/web-mockup-03.png" width="700" alt="Landing Page Mock-up Desktop (3/4)"><br>
+<img src="assets/img/ux-design/landing-page/web-mockup/web-mockup-04.png" width="700" alt="Landing Page Mock-up Desktop (4/4)">
 
 <br/><i>Imagen 96. Mock-up de la landing page en versión de escritorio.</i>
 
@@ -7249,7 +7256,8 @@ La landing page publicada puede consultarse en [sereniawebsite.netlify.app](http
 
 *Elaboración propia en Figma*
 
-![Landing Page Mock-up Mobile](assets/img/ux-design/landing-page/mobile-mockup.png)
+<img src="assets/img/ux-design/landing-page/mobile-mockup/mobile-mockup-01.png" width="220" alt="Landing Page Mock-up Mobile (1/6)"> <img src="assets/img/ux-design/landing-page/mobile-mockup/mobile-mockup-02.png" width="220" alt="Landing Page Mock-up Mobile (2/6)"> <img src="assets/img/ux-design/landing-page/mobile-mockup/mobile-mockup-03.png" width="220" alt="Landing Page Mock-up Mobile (3/6)"><br>
+<img src="assets/img/ux-design/landing-page/mobile-mockup/mobile-mockup-04.png" width="220" alt="Landing Page Mock-up Mobile (4/6)"> <img src="assets/img/ux-design/landing-page/mobile-mockup/mobile-mockup-05.png" width="220" alt="Landing Page Mock-up Mobile (5/6)"> <img src="assets/img/ux-design/landing-page/mobile-mockup/mobile-mockup-06.png" width="220" alt="Landing Page Mock-up Mobile (6/6)">
 
 <br/><i>Imagen 97. Mock-up de la landing page en versión móvil.</i>
 
@@ -7277,38 +7285,14 @@ El recorrido del adulto mayor comienza con la bienvenida, la creación de la cue
 
 <br>
 
-<table align="center">
-<tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/1.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/2.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/3.png" width="220" alt="Mobile Wireframe"></td>
-</tr>
-<tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/inicio-sesion.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/4.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/5.png" width="220" alt="Mobile Wireframe"></td>
-</tr>
-<tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/6.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/7.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/8.png" width="220" alt="Mobile Wireframe"></td>
-</tr>
-<tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/9.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/10.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/11.png" width="220" alt="Mobile Wireframe"></td>
-</tr>
-<tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/12.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/13.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/14.png" width="220" alt="Mobile Wireframe"></td>
-</tr>
-<tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/15.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/16.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/17.png" width="220" alt="Mobile Wireframe"></td>
-</tr>
-</table>
+<p align="center">
+<img src="assets/img/ux-design/mobile-app/wireframes/1.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/2.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/3.png" width="220" alt="Mobile Wireframe"><br>
+<img src="assets/img/ux-design/mobile-app/wireframes/inicio-sesion.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/4.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/5.png" width="220" alt="Mobile Wireframe"><br>
+<img src="assets/img/ux-design/mobile-app/wireframes/6.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/7.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/8.png" width="220" alt="Mobile Wireframe"><br>
+<img src="assets/img/ux-design/mobile-app/wireframes/9.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/10.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/11.png" width="220" alt="Mobile Wireframe"><br>
+<img src="assets/img/ux-design/mobile-app/wireframes/12.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/13.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/14.png" width="220" alt="Mobile Wireframe"><br>
+<img src="assets/img/ux-design/mobile-app/wireframes/15.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/16.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/17.png" width="220" alt="Mobile Wireframe">
+</p>
 
 <br>
 
@@ -7319,36 +7303,14 @@ El recorrido del familiar comienza con la misma bienvenida, creación de cuenta 
 
 <br>
 
-<table align="center">
-<tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/1.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/2.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/3.png" width="220" alt="Mobile Wireframe"></td>
-</tr>
-<tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/inicio-sesion.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/18.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/19.png" width="220" alt="Mobile Wireframe"></td>
-</tr>
-<tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/20.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/21.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/22.png" width="220" alt="Mobile Wireframe"></td>
-</tr>
-<tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/23.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/24.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/25.png" width="220" alt="Mobile Wireframe"></td>
-</tr>
-<tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/26.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/27.png" width="220" alt="Mobile Wireframe"></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/28.png" width="220" alt="Mobile Wireframe"></td>
-</tr>
-<tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/29.png" width="220" alt="Mobile Wireframe"></td>
-</tr>
-</table>
+<p align="center">
+<img src="assets/img/ux-design/mobile-app/wireframes/1.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/2.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/3.png" width="220" alt="Mobile Wireframe"><br>
+<img src="assets/img/ux-design/mobile-app/wireframes/inicio-sesion.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/18.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/19.png" width="220" alt="Mobile Wireframe"><br>
+<img src="assets/img/ux-design/mobile-app/wireframes/20.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/21.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/22.png" width="220" alt="Mobile Wireframe"><br>
+<img src="assets/img/ux-design/mobile-app/wireframes/23.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/24.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/25.png" width="220" alt="Mobile Wireframe"><br>
+<img src="assets/img/ux-design/mobile-app/wireframes/26.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/27.png" width="220" alt="Mobile Wireframe"> <img src="assets/img/ux-design/mobile-app/wireframes/28.png" width="220" alt="Mobile Wireframe"><br>
+<img src="assets/img/ux-design/mobile-app/wireframes/29.png" width="220" alt="Mobile Wireframe">
+</p>
 
 <br>
 
