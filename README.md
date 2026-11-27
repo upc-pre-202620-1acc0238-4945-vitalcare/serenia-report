@@ -7277,147 +7277,38 @@ El recorrido del adulto mayor comienza con la bienvenida, la creación de la cue
 
 <br>
 
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/1.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/2.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/3.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/inicio-sesion.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/4.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/5.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/6.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/7.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/8.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/9.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/10.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/11.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/12.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/13.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/14.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/15.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/16.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/17.png)
-
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/1.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/2.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/3.png" width="220" alt="Mobile Wireframe"></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/inicio-sesion.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/4.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/5.png" width="220" alt="Mobile Wireframe"></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/6.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/7.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/8.png" width="220" alt="Mobile Wireframe"></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/9.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/10.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/11.png" width="220" alt="Mobile Wireframe"></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/12.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/13.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/14.png" width="220" alt="Mobile Wireframe"></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/15.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/16.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/17.png" width="220" alt="Mobile Wireframe"></td>
+</tr>
+</table>
 
 <br>
 
@@ -7428,131 +7319,36 @@ El recorrido del familiar comienza con la misma bienvenida, creación de cuenta 
 
 <br>
 
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/1.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/2.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/3.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/inicio-sesion.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/18.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/19.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/20.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/21.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/22.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/23.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/24.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/25.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/26.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/27.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/28.png)
-
-</div>
-
-<br>
-
-<div align="center">
-
-![Mobile Wireframe](assets/img/ux-design/mobile-app/wireframes/29.png)
-
-</div>
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/1.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/2.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/3.png" width="220" alt="Mobile Wireframe"></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/inicio-sesion.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/18.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/19.png" width="220" alt="Mobile Wireframe"></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/20.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/21.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/22.png" width="220" alt="Mobile Wireframe"></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/23.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/24.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/25.png" width="220" alt="Mobile Wireframe"></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/26.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/27.png" width="220" alt="Mobile Wireframe"></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/28.png" width="220" alt="Mobile Wireframe"></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/wireframes/29.png" width="220" alt="Mobile Wireframe"></td>
+</tr>
+</table>
 
 <br>
 
@@ -7691,16 +7487,18 @@ La persona llega a la bienvenida y puede iniciar sesión o crear su cuenta. Si c
 
 <table align="center">
 <tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/01-registro-bienvenida.png" width="170" alt="Bienvenida"><br><sub>Bienvenida</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/02-registro-ingreso.png" width="170" alt="Iniciar sesión"><br><sub>Iniciar sesión</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/03-registro-ingreso-error.png" width="170" alt="Error al iniciar sesión"><br><sub>Error al iniciar sesión</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/04-registro-rol.png" width="170" alt="Elección de rol"><br><sub>Elección de rol</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/01-registro-bienvenida.png" width="220" alt="Bienvenida"><br><sub>Bienvenida</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/02-registro-ingreso.png" width="220" alt="Iniciar sesión"><br><sub>Iniciar sesión</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/03-registro-ingreso-error.png" width="220" alt="Error al iniciar sesión"><br><sub>Error al iniciar sesión</sub></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/05-registro-crear-cuenta.png" width="170" alt="Crear cuenta, paso 1 de 3"><br><sub>Crear cuenta, paso 1 de 3</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/06-registro-crear-cuenta-error.png" width="170" alt="Errores al crear la cuenta"><br><sub>Errores al crear la cuenta</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/07-registro-hora-pregunta.png" width="170" alt="Hora de la pregunta, paso 2 de 3"><br><sub>Hora de la pregunta, paso 2 de 3</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/08-registro-codigo-invitacion.png" width="170" alt="Código de invitación, paso 3 de 3"><br><sub>Código de invitación, paso 3 de 3</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/04-registro-rol.png" width="220" alt="Elección de rol"><br><sub>Elección de rol</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/05-registro-crear-cuenta.png" width="220" alt="Crear cuenta, paso 1 de 3"><br><sub>Crear cuenta, paso 1 de 3</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/06-registro-crear-cuenta-error.png" width="220" alt="Errores al crear la cuenta"><br><sub>Errores al crear la cuenta</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/07-registro-hora-pregunta.png" width="220" alt="Hora de la pregunta, paso 2 de 3"><br><sub>Hora de la pregunta, paso 2 de 3</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/08-registro-codigo-invitacion.png" width="220" alt="Código de invitación, paso 3 de 3"><br><sub>Código de invitación, paso 3 de 3</sub></td>
 </tr>
 </table>
 
@@ -7750,16 +7548,18 @@ En Recordar gestiona sus recordatorios. Puede crear uno nuevo con su texto, día
 
 <table align="center">
 <tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/17-recordar-lista.png" width="170" alt="Lista de recordatorios"><br><sub>Lista de recordatorios</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/18-recordar-vacio.png" width="170" alt="Sin recordatorios"><br><sub>Sin recordatorios</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/19-recordar-nuevo.png" width="170" alt="Nuevo recordatorio"><br><sub>Nuevo recordatorio</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/20-recordar-nuevo-error.png" width="170" alt="Errores de validación"><br><sub>Errores de validación</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/17-recordar-lista.png" width="220" alt="Lista de recordatorios"><br><sub>Lista de recordatorios</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/18-recordar-vacio.png" width="220" alt="Sin recordatorios"><br><sub>Sin recordatorios</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/19-recordar-nuevo.png" width="220" alt="Nuevo recordatorio"><br><sub>Nuevo recordatorio</sub></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/21-recordar-nuevo-dia.png" width="170" alt="Elegir el día"><br><sub>Elegir el día</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/22-recordar-nuevo-hora.png" width="170" alt="Elegir la hora"><br><sub>Elegir la hora</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/23-recordar-hecho.png" width="170" alt="Recordatorio hecho"><br><sub>Recordatorio hecho</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/24-recordar-cancelar.png" width="170" alt="Confirmar que ya no lo necesita"><br><sub>Confirmar que ya no lo necesita</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/20-recordar-nuevo-error.png" width="220" alt="Errores de validación"><br><sub>Errores de validación</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/21-recordar-nuevo-dia.png" width="220" alt="Elegir el día"><br><sub>Elegir el día</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/22-recordar-nuevo-hora.png" width="220" alt="Elegir la hora"><br><sub>Elegir la hora</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/23-recordar-hecho.png" width="220" alt="Recordatorio hecho"><br><sub>Recordatorio hecho</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/24-recordar-cancelar.png" width="220" alt="Confirmar que ya no lo necesita"><br><sub>Confirmar que ya no lo necesita</sub></td>
 </tr>
 </table>
 
@@ -7799,16 +7599,18 @@ En Cuenta cambia la hora de su pregunta del día, activa el modo simplificado o 
 
 <table align="center">
 <tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/34-cuenta-inicio.png" width="170" alt="Mi cuenta"><br><sub>Mi cuenta</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/35-cuenta-hora-error.png" width="170" alt="Error en la hora"><br><sub>Error en la hora</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/36-cuenta-cerrar-sesion.png" width="170" alt="Cerrar sesión"><br><sub>Cerrar sesión</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/37-cuenta-mis-datos.png" width="170" alt="Mis datos"><br><sub>Mis datos</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/34-cuenta-inicio.png" width="220" alt="Mi cuenta"><br><sub>Mi cuenta</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/35-cuenta-hora-error.png" width="220" alt="Error en la hora"><br><sub>Error en la hora</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/36-cuenta-cerrar-sesion.png" width="220" alt="Cerrar sesión"><br><sub>Cerrar sesión</sub></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/38-cuenta-mis-datos-error.png" width="170" alt="Errores en mis datos"><br><sub>Errores en mis datos</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/39-cuenta-clave.png" width="170" alt="Cambiar contraseña"><br><sub>Cambiar contraseña</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/40-cuenta-clave-error.png" width="170" alt="Error en la contraseña actual"><br><sub>Error en la contraseña actual</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/41-cuenta-clave-ok.png" width="170" alt="Contraseña cambiada"><br><sub>Contraseña cambiada</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/37-cuenta-mis-datos.png" width="220" alt="Mis datos"><br><sub>Mis datos</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/38-cuenta-mis-datos-error.png" width="220" alt="Errores en mis datos"><br><sub>Errores en mis datos</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/39-cuenta-clave.png" width="220" alt="Cambiar contraseña"><br><sub>Cambiar contraseña</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/40-cuenta-clave-error.png" width="220" alt="Error en la contraseña actual"><br><sub>Error en la contraseña actual</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/adulto-mayor/41-cuenta-clave-ok.png" width="220" alt="Contraseña cambiada"><br><sub>Contraseña cambiada</sub></td>
 </tr>
 </table>
 
@@ -7832,20 +7634,22 @@ El familiar llega a la bienvenida y puede iniciar sesión o crear su cuenta. Al 
 
 <table align="center">
 <tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAuthBienvenida.png" width="170" alt="Bienvenida"><br><sub>Bienvenida</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAuthRol.png" width="170" alt="Elección de rol"><br><sub>Elección de rol</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAuthLogin.png" width="170" alt="Iniciar sesión"><br><sub>Iniciar sesión</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAuthLoginError.png" width="170" alt="Error al iniciar sesión"><br><sub>Error al iniciar sesión</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAuthBienvenida.png" width="220" alt="Bienvenida"><br><sub>Bienvenida</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAuthRol.png" width="220" alt="Elección de rol"><br><sub>Elección de rol</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAuthLogin.png" width="220" alt="Iniciar sesión"><br><sub>Iniciar sesión</sub></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamRegistro.png" width="170" alt="Crear cuenta, paso 1 de 3"><br><sub>Crear cuenta, paso 1 de 3</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamRegistroError.png" width="170" alt="Errores al crear la cuenta"><br><sub>Errores al crear la cuenta</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCodigo.png" width="170" alt="Código de invitación, paso 2 de 3"><br><sub>Código de invitación, paso 2 de 3</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCodigoError.png" width="170" alt="Código no válido"><br><sub>Código no válido</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamAuthLoginError.png" width="220" alt="Error al iniciar sesión"><br><sub>Error al iniciar sesión</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamRegistro.png" width="220" alt="Crear cuenta, paso 1 de 3"><br><sub>Crear cuenta, paso 1 de 3</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamRegistroError.png" width="220" alt="Errores al crear la cuenta"><br><sub>Errores al crear la cuenta</sub></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamParentesco.png" width="170" alt="Parentesco, paso 3 de 3"><br><sub>Parentesco, paso 3 de 3</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamConectados.png" width="170" alt="Cuentas conectadas"><br><sub>Cuentas conectadas</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCodigo.png" width="220" alt="Código de invitación, paso 2 de 3"><br><sub>Código de invitación, paso 2 de 3</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCodigoError.png" width="220" alt="Código no válido"><br><sub>Código no válido</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamParentesco.png" width="220" alt="Parentesco, paso 3 de 3"><br><sub>Parentesco, paso 3 de 3</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamConectados.png" width="220" alt="Cuentas conectadas"><br><sub>Cuentas conectadas</sub></td>
 </tr>
 </table>
 
@@ -7916,16 +7720,18 @@ En Círculo el familiar ve a quienes acompañan al adulto mayor y accede a los t
 
 <table align="center">
 <tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCirculo.png" width="170" alt="Círculo familiar"><br><sub>Círculo familiar</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCirculoQuitar.png" width="170" alt="Quitar el vínculo"><br><sub>Quitar el vínculo</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamTurnos.png" width="170" alt="Turnos de atención"><br><sub>Turnos de atención</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoLibre.png" width="170" alt="Día sin asignar"><br><sub>Día sin asignar</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCirculo.png" width="220" alt="Círculo familiar"><br><sub>Círculo familiar</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCirculoQuitar.png" width="220" alt="Quitar el vínculo"><br><sub>Quitar el vínculo</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamTurnos.png" width="220" alt="Turnos de atención"><br><sub>Turnos de atención</sub></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoOcupado.png" width="170" alt="Día ya cubierto"><br><sub>Día ya cubierto</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoReasignar.png" width="170" alt="Pasar el turno"><br><sub>Pasar el turno</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamNotas.png" width="170" alt="Notas compartidas"><br><sub>Notas compartidas</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamNotaEditar.png" width="170" alt="Editar una nota"><br><sub>Editar una nota</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoLibre.png" width="220" alt="Día sin asignar"><br><sub>Día sin asignar</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoOcupado.png" width="220" alt="Día ya cubierto"><br><sub>Día ya cubierto</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamTurnoReasignar.png" width="220" alt="Pasar el turno"><br><sub>Pasar el turno</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamNotas.png" width="220" alt="Notas compartidas"><br><sub>Notas compartidas</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamNotaEditar.png" width="220" alt="Editar una nota"><br><sub>Editar una nota</sub></td>
 </tr>
 </table>
 
@@ -7959,15 +7765,17 @@ En Cuenta el familiar edita sus datos y su foto, ve a quién acompaña, cambia s
 
 <table align="center">
 <tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCuenta.png" width="170" alt="Mi cuenta"><br><sub>Mi cuenta</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamMisDatos.png" width="170" alt="Mis datos"><br><sub>Mis datos</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamMisDatosError.png" width="170" alt="Errores en mis datos"><br><sub>Errores en mis datos</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamClave.png" width="170" alt="Cambiar contraseña"><br><sub>Cambiar contraseña</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCuenta.png" width="220" alt="Mi cuenta"><br><sub>Mi cuenta</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamMisDatos.png" width="220" alt="Mis datos"><br><sub>Mis datos</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamMisDatosError.png" width="220" alt="Errores en mis datos"><br><sub>Errores en mis datos</sub></td>
 </tr>
 <tr>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamClaveError.png" width="170" alt="Contraseña actual incorrecta"><br><sub>Contraseña actual incorrecta</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCuentaClaveOk.png" width="170" alt="Contraseña cambiada"><br><sub>Contraseña cambiada</sub></td>
-<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCuentaSalir.png" width="170" alt="Cerrar sesión"><br><sub>Cerrar sesión</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamClave.png" width="220" alt="Cambiar contraseña"><br><sub>Cambiar contraseña</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamClaveError.png" width="220" alt="Contraseña actual incorrecta"><br><sub>Contraseña actual incorrecta</sub></td>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCuentaClaveOk.png" width="220" alt="Contraseña cambiada"><br><sub>Contraseña cambiada</sub></td>
+</tr>
+<tr>
+<td align="center"><img src="assets/img/ux-design/mobile-app/mockup/familiar/FamCuentaSalir.png" width="220" alt="Cerrar sesión"><br><sub>Cerrar sesión</sub></td>
 </tr>
 </table>
 
