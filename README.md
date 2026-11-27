@@ -345,7 +345,7 @@ La Imagen 10 muestra el resumen de actividad (Pulse) del repositorio durante el 
       - [2.6.1.1. Domain Layer](#2611-domain-layer)
       - [2.6.1.2. Interface Layer](#2612-interface-layer)
       - [2.6.1.3. Application Layer](#2613-application-layer)
-      - [2.6.1.4 Infrastructure Layer](#2614-infrastructure-layer)
+      - [2.6.1.4. Infrastructure Layer](#2614-infrastructure-layer)
       - [2.6.1.5. Bounded Context Software Architecture Component Level Diagrams](#2615-bounded-context-software-architecture-component-level-diagrams)
       - [2.6.1.6. Bounded Context Software Architecture Code Level Diagrams](#2616-bounded-context-software-architecture-code-level-diagrams)
         - [2.6.1.6.1. Bounded Context Domain Layer Class Diagrams](#26161-bounded-context-domain-layer-class-diagrams)
@@ -354,7 +354,7 @@ La Imagen 10 muestra el resumen de actividad (Pulse) del repositorio durante el 
       - [2.6.2.1. Domain Layer](#2621-domain-layer)
       - [2.6.2.2. Interface Layer](#2622-interface-layer)
       - [2.6.2.3. Application Layer](#2623-application-layer)
-      - [2.6.2.4 Infrastructure Layer](#2624-infrastructure-layer)
+      - [2.6.2.4. Infrastructure Layer](#2624-infrastructure-layer)
       - [2.6.2.5. Bounded Context Software Architecture Component Level Diagrams](#2625-bounded-context-software-architecture-component-level-diagrams)
       - [2.6.2.6. Bounded Context Software Architecture Code Level Diagrams](#2626-bounded-context-software-architecture-code-level-diagrams)
         - [2.6.2.6.1. Bounded Context Domain Layer Class Diagrams](#26261-bounded-context-domain-layer-class-diagrams)
@@ -363,7 +363,7 @@ La Imagen 10 muestra el resumen de actividad (Pulse) del repositorio durante el 
       - [2.6.3.1. Domain Layer](#2631-domain-layer)
       - [2.6.3.2. Interface Layer](#2632-interface-layer)
       - [2.6.3.3. Application Layer](#2633-application-layer)
-      - [2.6.3.4 Infrastructure Layer](#2634-infrastructure-layer)
+      - [2.6.3.4. Infrastructure Layer](#2634-infrastructure-layer)
       - [2.6.3.5. Bounded Context Software Architecture Component Level Diagrams](#2635-bounded-context-software-architecture-component-level-diagrams)
       - [2.6.3.6. Bounded Context Software Architecture Code Level Diagrams](#2636-bounded-context-software-architecture-code-level-diagrams)
         - [2.6.3.6.1. Bounded Context Domain Layer Class Diagrams](#26361-bounded-context-domain-layer-class-diagrams)
@@ -372,7 +372,7 @@ La Imagen 10 muestra el resumen de actividad (Pulse) del repositorio durante el 
       - [2.6.4.1. Domain Layer](#2641-domain-layer)
       - [2.6.4.2. Interface Layer](#2642-interface-layer)
       - [2.6.4.3. Application Layer](#2643-application-layer)
-      - [2.6.4.4 Infrastructure Layer](#2644-infrastructure-layer)
+      - [2.6.4.4. Infrastructure Layer](#2644-infrastructure-layer)
       - [2.6.4.5. Bounded Context Software Architecture Component Level Diagrams](#2645-bounded-context-software-architecture-component-level-diagrams)
       - [2.6.4.6. Bounded Context Software Architecture Code Level Diagrams](#2646-bounded-context-software-architecture-code-level-diagrams)
         - [2.6.4.6.1. Bounded Context Domain Layer Class Diagrams](#26461-bounded-context-domain-layer-class-diagrams)
@@ -381,7 +381,7 @@ La Imagen 10 muestra el resumen de actividad (Pulse) del repositorio durante el 
       - [2.6.5.1. Domain Layer](#2651-domain-layer)
       - [2.6.5.2. Interface Layer](#2652-interface-layer)
       - [2.6.5.3. Application Layer](#2653-application-layer)
-      - [2.6.5.4 Infrastructure Layer](#2654-infrastructure-layer)
+      - [2.6.5.4. Infrastructure Layer](#2654-infrastructure-layer)
       - [2.6.5.5. Bounded Context Software Architecture Component Level Diagrams](#2655-bounded-context-software-architecture-component-level-diagrams)
       - [2.6.5.6. Bounded Context Software Architecture Code Level Diagrams](#2656-bounded-context-software-architecture-code-level-diagrams)
         - [2.6.5.6.1. Bounded Context Domain Layer Class Diagrams](#26561-bounded-context-domain-layer-class-diagrams)
@@ -390,7 +390,7 @@ La Imagen 10 muestra el resumen de actividad (Pulse) del repositorio durante el 
       - [2.6.6.1. Domain Layer](#2661-domain-layer)
       - [2.6.6.2. Interface Layer](#2662-interface-layer)
       - [2.6.6.3. Application Layer](#2663-application-layer)
-      - [2.6.6.4 Infrastructure Layer](#2664-infrastructure-layer)
+      - [2.6.6.4. Infrastructure Layer](#2664-infrastructure-layer)
       - [2.6.6.5. Bounded Context Software Architecture Component Level Diagrams](#2665-bounded-context-software-architecture-component-level-diagrams)
       - [2.6.6.6. Bounded Context Software Architecture Code Level Diagrams](#2666-bounded-context-software-architecture-code-level-diagrams)
         - [2.6.6.6.1. Bounded Context Domain Layer Class Diagrams](#26661-bounded-context-domain-layer-class-diagrams)
@@ -457,10 +457,10 @@ La Imagen 10 muestra el resumen de actividad (Pulse) del repositorio durante el 
     - [4.3.2. Registro de Entrevistas](#432-registro-de-entrevistas)
     - [4.3.3. Evaluaciones según heurísticas](#433-evaluaciones-según-heurísticas)
 - [Conclusiones](#conclusiones)
-  - [Conclusiones y Recomendaciones](#conclusiones-y-recomendaciones)
+  - [Conclusiones y recomendaciones](#conclusiones-y-recomendaciones)
   - [Video App Validation](#video-app-validation)
-  - [Video About The Product](#video-about-the-product)
-  - [Video About The Team](#video-about-the-team)
+  - [Video About the product](#video-about-the-product)
+  - [Video About the team](#video-about-the-team)
 - [Glosario](#glosario)
 - [Bibliografía](#bibliografía)
 - [Anexos](#anexos)
@@ -701,15 +701,15 @@ VitalCare nace para sanar esta desconexión apostando por tecnología que acompa
 
 El corazón de Serenia es que cada interacción se sienta como una charla genuina y no como un chequeo médico. Incluye preguntas ligeras, un espacio para grabar anécdotas y alertas familiares que solo suenan cuando de verdad hacen falta. Queremos devolver la naturalidad al cuidado a distancia: dándole tranquilidad a la familia y respetando siempre la autonomía del adulto mayor.
 
-## Misión
+#### Misión
 
 Dar a los adultos mayores que viven solos una forma simple y natural de comunicar su día a día, y a sus familias, la tranquilidad de saber cómo están. Reducimos la ansiedad de la distancia conectándolos desde el afecto, sin caer en el monitoreo invasivo.
 
-## Visión
+#### Visión
 
 Ser la plataforma de compañía digital que transforme cómo las familias de Latinoamérica se cuidan a distancia. Queremos fortalecer el vínculo emocional por encima del reporte clínico, logrando que ningún adulto mayor enfrente la soledad en silencio.
 
-## Valores
+#### Valores
 
 - **Cercanía:** <br>
   Diseñamos cada interacción con un lenguaje cálido y humano. Cuidar no debe sentirse como una obligación ni leerse como un historial médico.
@@ -829,25 +829,25 @@ El diferenciador central de Serenia frente a otras soluciones de monitoreo es su
 
 ### 1.2.1. Antecedentes y problemática
 
-## The 5W's y 2H's
+#### The 5W's y 2H's
 
-### Who (¿Quién?)
+**Who (¿Quién?)**
 
 Los afectados son, por un lado, los adultos mayores que viven solos (sin convivir con hijos o familiares) y, por otro, sus familiares directos que residen en otra vivienda o ciudad y que ejercen un rol de cuidado a distancia.
 
-### What (¿Qué?)
+**What (¿Qué?)**
 
 Existe una desconexión de cuidado entre ambas partes: los familiares viven en un estado constante de incertidumbre sobre el bienestar del adulto mayor, mientras que el adulto mayor tiende a ocultar cuando tuvo un mal día, un malestar o un momento de soledad, para no "molestar" a la familia. El resultado es que ambas partes terminan cuidándose a medias, sin un canal simple y natural para comunicar y monitorear el bienestar diario.
 
-### Where (¿Dónde?)
+**Where (¿Dónde?)**
 
 El problema se ubica principalmente en hogares peruanos donde el adulto mayor vive de manera unipersonal (solo), mientras que los familiares a cargo residen en otro hogar, distrito o ciudad, lo que impide la supervisión presencial cotidiana.
 
-### When (¿Cuándo?)
+**When (¿Cuándo?)**
 
 Es un problema de naturaleza diaria y recurrente, no puntual: la incertidumbre y las llamadas por ansiedad ocurren todos los días, y se agrava progresivamente a medida que crece la proporción de adultos mayores que viven solos.
 
-### Why (¿Por qué?)
+**Why (¿Por qué?)**
 
 Según la Agencia Andina (2025), citando datos del Instituto Nacional de Estadística e Informática (INEI), en Lima Metropolitana el 25,3% de los hogares jefaturados por adultos mayores (60 años a más) son unipersonales (es decir, compuestos únicamente por la persona mayor), cifra que aumentó 2,3 puntos porcentuales respecto al mismo periodo del año anterior (Andina, 2025). Esta tendencia se ha mantenido creciente: según cifras más recientes del INEI correspondientes al tercer trimestre de 2025, reportadas por Infobae (2025), a nivel nacional el 26,9% de los hogares con jefatura de una persona adulta mayor ya son unipersonales, frente al 24,5% registrado dos años antes (Infobae, 2025). Esta creciente proporción de adultos mayores que viven solos explica por qué los familiares terminan llamando todos los días por ansiedad (no porque haya pasado algo puntual) y por qué el adulto mayor evita reportar molestias por no sentirse una carga. No existe hoy un canal intermedio entre "no comunicarse" y "llamar todos los días" que permita transmitir bienestar de forma ligera, sin fricción y sin depender de una llamada telefónica. La literatura reciente coincide con este diagnóstico: quienes viven solos tienen menos acceso inmediato a cuidadores informales y pueden depender más del apoyo tecnológico para mantener su seguridad, su independencia y su conexión social (Xu et al., 2026). La Imagen 11 muestra la distribución de estos hogares según su área de residencia y el sexo de la persona que los encabeza.
 
@@ -857,12 +857,12 @@ Según la Agencia Andina (2025), citando datos del Instituto Nacional de Estadí
 </p>
 <p align="center"><i>Imagen 11. Hogares jefaturados por adultos mayores, según área de residencia y sexo. Tomado de <em>Informe Técnico: Situación de la Población Adulta Mayor</em>, por Instituto Nacional de Estadística e Informática [INEI], 2025, p. 3 (https://m.inei.gob.pe/media/MenuRecursivo/boletines/informe-tecnico_adultomayor.pdf).</i></p>
 
-### How (¿Cómo?)
+**How (¿Cómo?)**
 
 Se propone Serenia, una solución compuesta por dos aplicaciones móviles conectadas: una dirigida al adulto mayor y otra dirigida al familiar a distancia. La app del adulto mayor inicia proactivamente un check-in diario de un solo toque con preguntas variables y ligeras (no solo "¿cómo estás?"), ofrece un espacio opcional de "cuéntame algo" (mensajes de audio cortos), recordatorios de contacto social, control sobre su propia sensibilidad, un modo simplificado y un botón de auxilio siempre visible. La app del familiar ofrece un panel de estado diario, alertas solo ante señales fuera de lo habitual, sugerencias suaves de acción, registro de pequeñas victorias, coordinación entre varios familiares y notas compartidas. El diferenciador central es que la propuesta busca sentirse como compañía con respaldo y no como una herramienta de vigilancia o monitoreo clínico.
 
 
-### How much (¿Cuánto?)
+**How much (¿Cuánto?)**
 
 El costo de no resolver este problema no es solo emocional, sino también económico y de salud mental para quienes ejercen el rol de cuidado a distancia: el Banco Interamericano de Desarrollo (BID, 2024), en una encuesta aplicada en 25 países de América Latina y el Caribe, encontró que el 31% de los cuidadores no remunerados de personas mayores reporta síntomas de depresión y que el 44% ha tenido que dejar su empleo para poder cuidar (Banco Interamericano de Desarrollo [BID], 2024). Esto evidencia que, sin una herramienta que aligere la carga de supervisión constante, el desgaste recae de forma directa sobre la salud mental y la estabilidad laboral del familiar cuidador. Para el AV1, el alcance se limita al análisis del problema, la propuesta de valor y el diseño de la solución (sin desarrollo de código todavía), enfocado en las dos aplicaciones descritas: la app nativa para el adulto mayor y la app cross-platform para el familiar.
 
@@ -938,13 +938,13 @@ URL del archivo en Figma: https://www.figma.com/design/MtWwz8GxmrY0eR7eyc2UC0/Le
 
 Serenia conecta a dos perfiles de usuarios clave, definidos a partir del problema que resolvemos y respaldados por la realidad demográfica peruana.
 
-#### Segmento 1: Adultos mayores que viven solos
+### Segmento 1: Adultos mayores que viven solos
 
 - **Perfil:** Personas de 60 años a más, residentes en zonas urbanas del Perú, que viven solas y cuentan con un teléfono celular.
 
 - **Sustento:** Aunque se suele pensar que la tecnología es una barrera, las cifras dicen lo contrario. En este grupo etario, el uso de celular llega al 97,7%, y la penetración de internet en áreas urbanas alcanza el 56,8% (INEI, 2025b). Además, el 25,3% de los hogares limeños con jefatura adulta mayor son unipersonales (INEI, 2025a). Esto confirma un escenario claro: existe un grupo numeroso de adultos mayores viviendo sin compañía permanente, pero que ya tienen en sus manos el dispositivo necesario para aprovechar una interacción sencilla, de un solo toque, como la que propone Serenia.
 
-#### Segmento 2: Familiares a distancia
+### Segmento 2: Familiares a distancia
 
 - **Perfil:** Hijos, hijas o parientes cercanos de 25 a 59 años que no conviven con el adulto mayor (ya sea por migración a otra ciudad o por vivir en distritos distintos) y buscan saber de ellos sin recurrir a llamadas constantes.
 
@@ -1383,7 +1383,7 @@ Kevin está comprometido y vive con su novia y su hijo recién nacido. Trabaja c
 
 A partir de las tres entrevistas realizadas a adultos mayores que viven solos, se identificaron características comunes relacionadas con su situación familiar, rutina diaria, comunicación con sus familiares y uso de tecnología. Estos aspectos permiten reconocer patrones importantes para la construcción del arquetipo del segmento.
 
-#### Características objetivas
+**Características objetivas**
 
 | Característica | Resultado | Porcentaje |
 |---|---:|---:|
@@ -1401,7 +1401,7 @@ En cuanto a su rutina, las entrevistadas realizan principalmente actividades rel
 
 Respecto al uso de tecnología, las tres cuentan con un celular táctil y utilizan WhatsApp como uno de sus principales medios de comunicación. También utilizan otras aplicaciones como Facebook, Messenger, YouTube y TikTok. Sin embargo, las tres mencionan dificultades cuando se enfrentan a funciones nuevas, problemas de rendimiento o situaciones que no saben resolver por sí mismas.
 
-#### Características subjetivas
+**Características subjetivas**
 
 Uno de los patrones más importantes encontrados es el temor a molestar o preocupar a sus familiares. En las tres entrevistas aparece, aunque con diferentes matices, la tendencia a intentar resolver los problemas por cuenta propia antes de comunicarlos.
 
@@ -1413,7 +1413,7 @@ Otro aspecto común es la necesidad de sentirse acompañadas y mantener el vínc
 
 Finalmente, existe una dificultad tecnológica recurrente. Las entrevistadas utilizan el celular para comunicarse y entretenerse, pero no siempre se sienten seguras utilizando nuevas funciones. Yrma menciona que el celular puede trabarse y que evita llamar para no interrumpir a sus hijas, Yolanda necesita pedir ayuda cuando no sabe utilizar alguna función, y Eva señala como molestia la lentitud ocasional de algunas aplicaciones.
 
-#### Principales patrones identificados
+**Principales patrones identificados**
 
 | Patrón identificado | Entrevistas relacionadas | Porcentaje |
 |---|---|---:|
@@ -1428,7 +1428,7 @@ Finalmente, existe una dificultad tecnológica recurrente. Las entrevistadas uti
 
 A partir de las cuatro entrevistas realizadas a familiares de adultos mayores que viven separados de ellos, se identificaron características comunes relacionadas con la distancia, la preocupación por el bienestar del adulto mayor, la comunicación familiar y la necesidad de contar con información sobre su estado sin invadir su privacidad. Estos aspectos permiten reconocer patrones relevantes para la construcción del arquetipo del segmento.
 
-#### Características objetivas
+**Características objetivas**
 
 | Característica | Resultado | Porcentaje |
 |---|---:|---:|
@@ -1446,7 +1446,7 @@ A pesar de la distancia, todos mantienen algún tipo de comunicación con el adu
 
 Un aspecto común es que la distancia dificulta conocer directamente cómo se encuentra el adulto mayor. Los cuatro entrevistados expresaron preocupación ante la posibilidad de que ocurra una emergencia, una caída o algún problema de salud cuando ellos no se encuentran cerca.
 
-#### Características subjetivas
+**Características subjetivas**
 
 La principal característica identificada en este segmento es la preocupación constante por el bienestar del adulto mayor. Los familiares quieren saber que la persona se encuentra bien, pero no siempre pueden visitarla o comunicarse con ella durante el día.
 
@@ -1460,7 +1460,7 @@ Asimismo, se identifica una preocupación por no invadir la privacidad del adult
 
 Finalmente, también aparece la necesidad de contar con una solución simple y accesible. Isabel señala que la aplicación debería ser fácil de utilizar y considerar la condición visual de su padre. José y Kevin también consideran importante que la interfaz no sea complicada para el adulto mayor, ya que esto podría generar rechazo o estrés.
 
-#### Principales patrones identificados
+**Principales patrones identificados**
 
 | Patrón identificado | Entrevistas relacionadas | Porcentaje |
 |---|---|---:|
@@ -1480,14 +1480,14 @@ Finalmente, también aparece la necesidad de contar con una solución simple y a
 
 En esta sección se presentan los user personas construidos a partir del análisis de las entrevistas de los adultos mayores y sus familiares a distancia. Estos artefactos sintetizan patrones de comportamiento, necesidades, motivaciones y frustraciones identificadas durante la investigación, permitiendo representar de manera clara a los segmentos clave de nuestro proyecto. La Imagen 20 presenta el user persona del primer segmento y la Imagen 21, el del segundo.
 
-### Segmento 1 - Adultos mayores que viven solos
+#### Segmento 1 - Adultos mayores que viven solos
 
 <div align="center">
   <img src="assets/img/user-persona/jorge-lopez-seg1.png" alt="User persona - Adultos mayores que viven solos" width="700"/>
   <br/><i>Imagen 20. User Persona - Primer Segmento.</i>
 </div>
 
-### Segmento 2 - Familiares a distancia
+#### Segmento 2 - Familiares a distancia
 
 <div align="center">
   <img src="assets/img/user-persona/daniel-torres-seg2.png" alt="User persona- Familiares a distancia" width="700"/>
@@ -1542,7 +1542,7 @@ En esta sección se detallan los User Journey Maps en su versión "As-Is", uno p
 
 A continuación, se presentan los diagramas que resumen la situación actual de los usuarios: la Imagen 22 corresponde al primer segmento y la Imagen 23, al segundo.
 
-### Segmento 1 - Adultos mayores que viven solos
+#### Segmento 1 - Adultos mayores que viven solos
 
 <div align="center">
 
@@ -1552,7 +1552,7 @@ A continuación, se presentan los diagramas que resumen la situación actual de 
 </div>
 
 
-### Segmento 2 - Familiares a distancia
+#### Segmento 2 - Familiares a distancia
 
 <div align="center">
 
@@ -1569,7 +1569,7 @@ En esta sección, el equipo resume el proceso de elaboración de los *Empathy Ma
 
 A continuación, se presentan las capturas de los mapas resultantes elaborados en la herramienta indicada: la Imagen 24 corresponde al primer segmento y la Imagen 25, al segundo.
 
-### Segmento 1 - Adultos mayores que viven solos
+#### Segmento 1 - Adultos mayores que viven solos
 
 <div align="center">
 
@@ -1579,7 +1579,7 @@ A continuación, se presentan las capturas de los mapas resultantes elaborados e
 </div>
 
 
-### Segmento 2 - Familiares a distancia
+#### Segmento 2 - Familiares a distancia
 
 <div align="center">
 
@@ -4065,7 +4065,8 @@ El resultado de la sesión fueron seis bounded contexts candidatos, clasificados
 <br>
 
 
-### Daily Check-in - Core <br>
+**Daily Check-in - Core**
+
 Es el mecanismo primario por el cual Serenia genera valor diferencial: convierte una interacción emocional cotidiana en una señal estructurada, sin que el adulto mayor sienta que está siendo monitoreado clínicamente. Sin este contexto no existe el dato que el resto del sistema necesita para funcionar. La Imagen 39 muestra los eventos, comandos y aggregates que lo componen.
 
 <br>
@@ -4074,7 +4075,8 @@ Es el mecanismo primario por el cual Serenia genera valor diferencial: convierte
   <br/><i>Imagen 39. Daily Check-in - Bounded Context Core identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
-### Wellbeing Monitoring - Core <br>
+**Wellbeing Monitoring - Core**
+
 Es el contexto que interpreta las señales del check-in y las convierte en información para la familia a distancia. Concentra la lógica del negocio más distintiva de Serenia: distinguir un mal día puntual de un patrón de deterioro sostenido, evitando tanto la falsa alarma como la negligencia. La Imagen 40 muestra los elementos que lo componen.
 
 <br>
@@ -4083,7 +4085,8 @@ Es el contexto que interpreta las señales del check-in y las convierte en infor
   <br/><i>Imagen 40. Wellbeing Monitoring - Bounded Context Core identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
-### Alerts & Safety - Core <br>
+**Alerts & Safety - Core**
+
 Es la garantía de tranquilidad que sostiene la decisión de compra del familiar a distancia. Sin una respuesta confiable ante inactividad o emergencia, el resto de la propuesta de valor pierde sustento, porque el familiar seguiría necesitando de llamar por su cuenta ante cualquier duda. La Imagen 41 muestra los elementos que lo componen.
 
 <br>
@@ -4092,7 +4095,8 @@ Es la garantía de tranquilidad que sostiene la decisión de compra del familiar
   <br/><i>Imagen 41. Alerts & Safety - Bounded Context Core identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
-### Care Circle - Supporting <br>
+**Care Circle - Supporting**
+
 No genera valor por sí solo, pero es indispensable para que el core opere: sin un vínculo familiar establecido no hay a quién notificar ni con quién compartir el estado del adulto mayor. Se mantiene separado del core porque administra estructura de relación (vínculos, turnos, notas compartidas), no interpretación de bienestar. La Imagen 42 muestra los elementos que lo componen.
 
 <br>
@@ -4101,7 +4105,8 @@ No genera valor por sí solo, pero es indispensable para que el core opere: sin 
   <br/><i>Imagen 42. Care Circle - Bounded Context Supporting identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
-### Social Companionship - Supporting <br>
+**Social Companionship - Supporting**
+
 Complementa la experiencia de acompañamiento con mensajería de audio, fotos y recordatorios sociales, pero ninguno de sus eventos produce una señal que el sistema evalúe ni deriva en alerta. Aporta valor percibido, no valor operativo. La Imagen 43 muestra los elementos que lo componen.
 
 <br>
@@ -4110,7 +4115,8 @@ Complementa la experiencia de acompañamiento con mensajería de audio, fotos y 
   <br/><i>Imagen 43. Social Companionship - Bounded Context Supporting identificado en el Candidate Context Discovery.</i>
 </div> <br>
 
-### Identity & Access - Generic <br>
+**Identity & Access - Generic**
+
 Resuelve un problema estándar (registro, autenticación, gestión de sesión) con reglas de negocio genéricas que no cambian por ser Serenia. Es indispensable para que exista cualquier otro contexto, pero no distingue a Serenia de ninguna otra aplicación. La Imagen 44 muestra los elementos que lo componen.
 
 <br>
@@ -4121,7 +4127,7 @@ Resuelve un problema estándar (registro, autenticación, gestión de sesión) c
 
 Al finalizar, el equipo aplicó una verificación del lenguaje ubicuo sobre cada frontera, comprobando que ningún término tuviera dos significados dentro de un mismo contexto. Esta revisión confirmó, por ejemplo, la separación entre Daily Check-in y Wellbeing Monitoring. Otra discusión del equipo fue la frontera entre Daily Check-in y Social Companionship, por compartir ambos la dimensión emocional de la interacción; se resolvió mantenerlas separadas sobre la base de que únicamente el check-in produce una señal que el sistema evalúa, mientras que el acompañamiento social no está sujeto a ninguna evaluación.
 
-## EventStorming Serenia
+**EventStorming Serenia**
 
 La Imagen 45 reúne los seis bounded contexts en un solo tablero y muestra cómo se relacionan entre sí.
 
@@ -7038,7 +7044,8 @@ Todos los productos comparten cuatro criterios: pocas opciones visibles a la vez
 | Aplicación móvil del familiar a distancia | Barra de navegación inferior con cinco destinos | Acceso al perfil desde la pantalla de inicio, navegación local por sección, enlaces contextuales y notificaciones push con acceso directo |
 | Landing page web | Barra de navegación superior fija con anclas a secciones | Selector de idioma, botón "Probar gratis" repetido, menú adaptado a móvil, pie de página |
 
-### Aplicación móvil del adulto mayor.
+**Aplicación móvil del adulto mayor**
+
 La navegación se mantiene lo más simple posible, ya que cada opción adicional es una decisión más para un usuario con baja familiaridad tecnológica. Por eso la aplicación usa una barra de navegación inferior con solo cuatro destinos, flotante y ubicada al alcance del pulgar. La pestaña activa se resalta con una píldora blanca que muestra el ícono y su nombre, mientras que las demás muestran solo el ícono, de modo que el usuario siempre sabe en qué sección está.
 
 <br>
@@ -7071,7 +7078,8 @@ La navegación se mantiene lo más simple posible, ya que cada opción adicional
 
 <br>
 
-### Aplicación móvil del familiar a distancia.
+**Aplicación móvil del familiar a distancia**
+
 Esta aplicación concentra más contenido, por lo que emplea una barra de navegación inferior con cinco destinos, con el mismo estilo flotante en verde oscuro de la aplicación del adulto mayor. La pestaña activa se resalta con una píldora blanca que incluye el ícono y la etiqueta, para que el usuario siempre sepa dónde está.
 
 <br>
@@ -7263,7 +7271,7 @@ Cada wireframe corresponde a una pantalla del prototipo y conserva sus mismos el
 
 <br>
 
-## Flujo del adulto mayor
+**Flujo del adulto mayor**
 
 El recorrido del adulto mayor comienza con la bienvenida, la creación de la cuenta y el inicio de sesión. Luego accede a su aplicación, organizada en cuatro secciones: Inicio, Recordar, Familia y Cuenta. Desde el inicio responde su check-in diario con un toque, puede omitirlo si prefiere no responder y dispone del botón "Ayuda" para avisar a su familia. En las demás secciones gestiona sus recordatorios, comparte fotos y audios con su familia, consulta su círculo y su código de invitación, y administra su cuenta.
 
@@ -7414,7 +7422,7 @@ El recorrido del adulto mayor comienza con la bienvenida, la creación de la cue
 <br>
 
 
-## Flujo del familiar
+**Flujo del familiar**
 
 El recorrido del familiar comienza con la misma bienvenida, creación de cuenta e inicio de sesión. Luego accede a su aplicación, organizada en cinco secciones: Inicio, Historial, Alertas, Círculo y Mensajes. En el inicio ve cómo amaneció su adulto mayor y accede al detalle de su check-in; en Historial revisa los registros anteriores y en Alertas atiende las emergencias y las inactividades. En Círculo gestiona a los familiares vinculados, los turnos de atención y las notas compartidas, y en Mensajes reproduce los audios y envía fotos.
 
@@ -7656,18 +7664,18 @@ Los mock-ups de Serenia traducen los requisitos funcionales del proyecto en pant
 
 <br>
 
-### Lineamientos de diseño
+**Lineamientos de diseño**
 
 Se usó la identidad visual de Serenia, con una paleta cálida basada en verde azulado, fondos crema y acentos suaves. En la aplicación implementada todo el texto usa la familia tipográfica Nunito, con tamaños grandes para facilitar la lectura. Cada aplicación incluye un menú inferior con sus secciones, donde la sección activa se resalta. La interfaz del adulto mayor prioriza textos grandes, botones amplios y una acción principal por pantalla. La del familiar prioriza un resumen rápido del estado de su ser querido, con el detalle a un toque.
 
 
-### Decisiones de producto reflejadas
+**Decisiones de producto reflejadas**
 
 El acceso es solo con correo y contraseña. La vinculación se hace con un código que genera el adulto mayor y que el familiar ingresa en su aplicación. No hay planes ni precios, ni llamadas desde la aplicación, y la aplicación del adulto mayor no incluye audios que lean textos en voz alta. El único audio es el mensaje que el adulto mayor graba para su familia.
 
 <br>
 
-## Flujo del adulto mayor
+**Flujo del adulto mayor**
 
 El recorrido del adulto mayor comienza con la bienvenida, el ingreso a la cuenta y la creación de la cuenta. Luego accede a su aplicación, organizada en cuatro secciones: Inicio, Recordar, Familia y Cuenta. Desde el inicio responde su check-in diario con un toque, puede omitirlo si prefiere no responder, y dispone del botón "Pedir ayuda", que debe mantener presionado hasta completar una cuenta regresiva para avisar a su familia en una emergencia; si lo suelta antes, no se envía nada. En las demás secciones gestiona sus recordatorios, comparte fotos y audios con su familia, consulta su círculo y su código de invitación, y administra su cuenta.
 
@@ -7808,7 +7816,7 @@ En Cuenta cambia la hora de su pregunta del día, activa el modo simplificado o 
 
 <br>
 
-## Flujo del familiar
+**Flujo del familiar**
 
 El recorrido del familiar comienza con la bienvenida, el ingreso o la creación de la cuenta y la vinculación con el adulto mayor mediante su código de invitación. Luego accede a su aplicación, organizada en cinco secciones: Inicio, Alertas, Círculo, Mensajes y Cuenta. En Inicio ve cómo amaneció su adulto mayor, el turno de atención del día y las pequeñas victorias de la semana, y desde allí abre el Historial. En Alertas atiende las emergencias y las inactividades. En Círculo gestiona a los familiares vinculados, los turnos de atención y las notas compartidas. En Mensajes escucha los audios y envía fotos, y en Cuenta edita sus datos, cambia su contraseña y cierra sesión.
 
@@ -10211,13 +10219,13 @@ En esta sección se registra y explica el proceso de validación de Serenia con 
 
 Personas de 60 años a más, residentes en zonas urbanas del Perú, que viven solas y cuentan con un teléfono celular. Para las entrevistas de validación se evaluará la usabilidad, la claridad y la accesibilidad de Serenia desde la perspectiva del adulto mayor. Ello se conseguirá considerando los avances del proyecto hasta el Sprint 1, que comprenden el landing page y el prototipo interactivo de la aplicación del adulto mayor, y podrá ajustarse según el avance del equipo de desarrollo y el acuerdo con los entrevistados. Se validará el feedback de cada participante en el uso del prototipo junto con el landing page, poniendo especial atención en si puede completar cada tarea sin ayuda y con la menor cantidad de toques posible.
 
-##### Objetivos de la Entrevista:
+##### Objetivos de la Entrevista
 
 1) Validar la experiencia de usuario (UX) y la interfaz de usuario (UI) de la aplicación del adulto mayor, evaluando si comprende los textos, reconoce los botones y completa las tareas principales de forma autónoma, sin necesidad de que alguien le explique cómo hacerlo.
 
 2) Evaluar si Serenia resulta para el adulto mayor una alternativa útil y aceptable frente a la llamada diaria de verificación, y si las funcionalidades base (registro y creación del círculo familiar, check-in diario y botón de ayuda) le transmiten seguridad sin sentirse vigilado.
 
-##### Criterios de Evaluación:
+##### Criterios de Evaluación
 
 - Evaluar si el adulto mayor completa el registro y la creación del círculo familiar sin asistencia, comprendiendo para qué sirve el código de 4 dígitos y a quién debe compartirlo.
 - Medir el tiempo y el número de toques que necesita para responder el check-in diario desde que abre la notificación hasta que ve la confirmación "Tu familia sabrá que estás bien".
@@ -10238,13 +10246,13 @@ Los User Flows propuestos son los principales de la aplicación del adulto mayor
 
 Hijos, hijas o parientes cercanos de 25 a 59 años que no conviven con el adulto mayor y buscan saber de él sin recurrir a llamadas constantes. Para las entrevistas de validación se evaluará la usabilidad, la utilidad y la eficiencia de Serenia desde la perspectiva del familiar. Ello se conseguirá considerando los avances del proyecto hasta el Sprint 1, que comprenden el landing page y el prototipo interactivo de la aplicación del familiar, y podrá ajustarse según el avance del equipo de desarrollo y el acuerdo con los entrevistados. Se validará el feedback de cada participante en el uso del prototipo junto con el landing page, enfocándose en si la información que recibe le da tranquilidad y le permite actuar a tiempo cuando el adulto mayor lo necesita.
 
-##### Objetivos de la Entrevista:
+##### Objetivos de la Entrevista
 
 1) Validar la experiencia de usuario (UX) y la interfaz de usuario (UI) de la aplicación del familiar, evaluando si comprende la arquitectura de navegación (Inicio, Historial y Alertas) y accede a la información del adulto mayor de manera rápida e intuitiva.
 
 2) Evaluar si Serenia ofrece al familiar una propuesta de valor diferencial frente a las llamadas y los mensajes de verificación, y si las funcionalidades base (vinculación por código, seguimiento del bienestar y atención de alertas) cubren su necesidad de estar presente a distancia.
 
-##### Criterios de Evaluación:
+##### Criterios de Evaluación
 
 - Evaluar si el familiar completa el registro y la vinculación con el código de 4 dígitos sin ambigüedades, y si entiende qué ocurre cuando el código es inválido o ya venció.
 - Medir el tiempo que necesita para identificar, desde Inicio, si el adulto mayor respondió el check-in del día y cuál fue su estado de ánimo.
@@ -10609,7 +10617,9 @@ Requerir una interacción intencional para confirmar la emergencia. En lugar de 
 
 <br>
 
-# Conclusiones y Recomendaciones
+# Conclusiones
+
+## Conclusiones y recomendaciones
 
 Esta tercera entrega suma la implementación y el despliegue del Sprint 2 y la validación de la aplicación ya construida. Las conclusiones contrastan lo planteado en el Lean UX con lo logrado y lo encontrado con usuarios, y las recomendaciones señalan lo que sigue.
 
@@ -10646,6 +10656,8 @@ Esta tercera entrega suma la implementación y el despliegue del Sprint 2 y la v
 <div style="page-break-after: always;"></div>
 
 ## Video App Validation
+
+**Video 1**
 
 En esta sección se documenta la validación de la aplicación Android de Serenia con adultos mayores, es decir, con la aplicación ya construida y no con el prototipo de la sección 4.3.2. Cada sesión se grabó en un video independiente, y para cada una se presenta la captura, la ficha de la persona entrevistada, el enlace al video y un resumen de sus apreciaciones. La evidencia de la distribución de la aplicación a los testers se presenta en la sección 4.2.2.8.
 
@@ -10688,7 +10700,7 @@ Recomendaría la aplicación a sus familiares y a amigas de su edad. Explicó qu
 
 <br>
 
-## Video App Validation 2
+**Video 2**
 
 En esta sección se documenta la validación de la aplicación Android de Serenia mediante una prueba de usabilidad realizada por Kelber Sandoval. A diferencia de las validaciones efectuadas sobre el prototipo, esta sesión se llevó a cabo utilizando la aplicación ya construida e instalada en un dispositivo móvil.
 
@@ -10736,7 +10748,7 @@ Esta prueba permitió recorrer las principales funcionalidades de Serenia desde 
 <br>
 
 
-## Video About The Product
+## Video About the product
 
 El video About The Product presenta Serenia, la aplicación que acompaña a los adultos mayores que viven solos y mantiene a sus familias al tanto de cómo están. En poco más de tres minutos muestra el problema que buscamos resolver, el funcionamiento de la aplicación y el testimonio de una usuaria que participó en la validación.
 
@@ -10756,7 +10768,7 @@ El video About The Product presenta Serenia, la aplicación que acompaña a los 
 
 <br>
 
-## Video About The Team
+## Video About the team
 
 El video About The Team presenta al equipo detrás de Serenia y el trabajo que realizamos durante el curso. Muestra las actividades de cada integrante, la colaboración del equipo y el aporte de cada uno al proyecto, junto con sus testimonios personales. También refleja cómo el curso desarrolla el ABET EAC Student Outcome 7.
 
