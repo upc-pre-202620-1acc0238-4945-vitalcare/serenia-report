@@ -6859,20 +6859,19 @@ navigation bar:
 
 - **Español:**
 
-![Barra de navegación - Landing Page (ES)](assets/img/labeling-system/navegationvar-es.png)
+<p align="center"><img src="assets/img/labeling-system/navegationvar-es.png" width="700" alt="Barra de navegación - Landing Page (ES)"></p>
 
 
 - **Inglés:**
 
-![Barra de navegación - Landing Page (EN)](assets/img/labeling-system/navegationvar-en.png)
+<p align="center"><img src="assets/img/labeling-system/navegationvar-en.png" width="700" alt="Barra de navegación - Landing Page (EN)"></p>
 
 
 Los títulos de cada sección siguen el mismo criterio: frases cortas, en tono cálido, que anticipan el contenido del bloque, como "Tres pasos, cada día. Nada más.", "Una app, dos formas de estar cerca." y "Acompaña sin invadir.". En la sección de precios, los planes se etiquetan como Básico (Gratis) y Familia (14 días gratis), de modo que el costo sea evidente desde el primer vistazo.
 
-![Hero de la Landing Page](assets/img/labeling-system/landing-hero.png)
+<p align="center"><img src="assets/img/labeling-system/landing-hero.png" width="700" alt="Hero de la Landing Page"></p>
 
-
-![Sección de planes de la Landing Page](assets/img/labeling-system/landing-plans.png)
+<p align="center"><img src="assets/img/labeling-system/landing-plans.png" width="700" alt="Sección de planes de la Landing Page"></p>
 
 
 Luego, se mantiene una paleta de colores basada en verdes profundos sobre fondos crema, con acentos en café, que genera armonía visual y transmite calma y cercanía.
@@ -6881,42 +6880,50 @@ Luego, se mantiene una paleta de colores basada en verdes profundos sobre fondos
 
 En la versión móvil, el recorrido inicial usa etiquetas de una o dos palabras con verbos de acción: "Empezar", "Ya tengo cuenta", "Iniciar sesión", "Crear cuenta", "Continuar" y "Entrar a Serenia". Las pantallas se titulan con frases cortas y conversacionales, como "Qué bueno verte de nuevo", "Solo necesitamos tres datos." y "Elige tu plan". Para personalizar la experiencia, la pregunta "¿Quién eres?" ofrece dos opciones redactadas desde la identidad del usuario: "Soy familiar" y "Soy adulto mayor", cada una acompañada de una frase breve que explica su propósito.
 
-![Pantalla de bienvenida](assets/img/labeling-system/welcome-app.png)
-
-
-![Selección de rol](assets/img/labeling-system/rol.png)
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/labeling-system/welcome-app.png" width="220" alt="Pantalla de bienvenida"><br><sub>Pantalla de bienvenida</sub></td>
+<td align="center"><img src="assets/img/labeling-system/rol.png" width="220" alt="Selección de rol"><br><sub>Selección de rol</sub></td>
+</tr>
+</table>
 
 
 **Labeling System App para Adultos Mayores**
 
 En la vista del adulto mayor, las etiquetas se redactan en primera persona y con el menor número de palabras posible, de modo que el usuario sienta la app como propia: "Mi cuenta", "Mi pregunta", "Mi ayuda" y "Mi teléfono". La pantalla principal saluda por el nombre ("Buenos días, Rosa") y plantea una sola pregunta, "¿Cómo amaneciste hoy?", con tres opciones directas: Muy bien, Más o menos y No tan bien. Además, se ofrecen salidas sin presión como "Cuéntame algo" y "Hoy no quiero responder", y la acción final se expresa con claridad: "Enviar a mi familia". El lenguaje es afectuoso, evita términos técnicos y se complementa con un modo simplificado que muestra solo lo esencial: cómo está el usuario y pedir ayuda.
 
-![Inicio del adulto mayor](assets/img/labeling-system/app-adulto.png)
-
-
 Cuando el usuario necesita apoyo, la etiqueta "Ayuda" abre una confirmación en lenguaje claro: "¿Quieres que avisemos a tu familia?", con las respuestas "Sí, avisar" y "No, ya estoy bien".
 
-![Pantalla de ayuda](assets/img/labeling-system/app-adulto-ayuda.png)
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/labeling-system/app-adulto.png" width="220" alt="Inicio del adulto mayor"><br><sub>Inicio del adulto mayor</sub></td>
+<td align="center"><img src="assets/img/labeling-system/app-adulto-ayuda.png" width="220" alt="Pantalla de ayuda"><br><sub>Pantalla de ayuda</sub></td>
+</tr>
+</table>
 
 **Labeling System App para Familiares a distancia**
 
 En la vista del familiar se mantiene la coherencia estructural con la versión del adulto mayor, pero las etiquetas se redactan en tercera persona y mencionan a la persona cuidada, lo que da contexto inmediato: "¿Cómo amaneció Mamá Rosa hoy?", "Círculo de Mamá Rosa" y "Para Mamá Rosa". Las secciones principales son Inicio, Historial, Alertas, Círculo y Mensajes, y las acciones se expresan con verbos simples: Llamar, Mensaje, Responderle, "Llamar ahora" y "Programar recordatorio". Las sugerencias usan un tono suave, como "Un gesto suave" y "Un gesto sugerido", en línea con la propuesta de acompañar sin alarmar.
 
-![Inicio del familiar](assets/img/labeling-system/app-familiar.png)
-
-
-![Alertas del familiar](assets/img/labeling-system/app-familiar-alerta.png)
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/labeling-system/app-familiar.png" width="220" alt="Inicio del familiar"><br><sub>Inicio del familiar</sub></td>
+<td align="center"><img src="assets/img/labeling-system/app-familiar-alerta.png" width="220" alt="Alertas del familiar"><br><sub>Alertas del familiar</sub></td>
+</tr>
+</table>
 
 
 **Iconografía estándar**
 
 En esta sección se consideran los íconos completamente intuitivos para el usuario, que se adaptan a una acción o funcionalidad específica: casa para Inicio, campana para Avisos y Alertas, burbuja de chat para Familia y Mensajes, reloj con flecha para Historial, grupo de personas para Círculo, micrófono para Audio y usuario para Cuenta. Todos pertenecen a un mismo set de íconos (Phosphor) para mantener un estilo uniforme, y siempre se acompañan de una etiqueta de texto, para no depender únicamente del símbolo, algo especialmente importante en adultos mayores.
 
-![Íconos estándar](assets/img/labeling-system/nav-icon1.png)
-![Íconos estándar](assets/img/labeling-system/nav-icon2.png)
-![Íconos estándar](assets/img/labeling-system/nav-icon3.png)
-![Íconos estándar](assets/img/labeling-system/nav-icon4.png)
-![Íconos estándar](assets/img/labeling-system/nav-icon5.png)
+<p align="center">
+<img src="assets/img/labeling-system/nav-icon1.png" height="50" alt="Íconos estándar">
+<img src="assets/img/labeling-system/nav-icon2.png" height="50" alt="Íconos estándar">
+<img src="assets/img/labeling-system/nav-icon3.png" height="50" alt="Íconos estándar">
+<img src="assets/img/labeling-system/nav-icon4.png" height="50" alt="Íconos estándar">
+<img src="assets/img/labeling-system/nav-icon5.png" height="50" alt="Íconos estándar">
+</p>
 
 
 
@@ -6924,14 +6931,14 @@ En esta sección se consideran los íconos completamente intuitivos para el usua
 
 Son los elementos con los que el usuario interactúa más seguido, como la navigation bar del móvil. La versión del adulto mayor se limita a cuatro pestañas (Inicio, Avisos, Familia y Cuenta) para reducir la carga cognitiva, mientras que la del familiar cuenta con cinco (Inicio, Historial, Alertas, Círculo y Mensajes) para cubrir el seguimiento del círculo de cuidado. La pestaña activa se resalta con color para indicar la ubicación del usuario.
 
-navigation bar adulto mayor:
+navigation bar adulto mayor y familiar:
 
-![Navigation bar - Adulto mayor](assets/img/labeling-system/navegationbar-mobile.png)
-
-
-navigation bar familiar:
-
-![Navigation bar - Familiar](assets/img/labeling-system/navbar-mobile2.png)
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/labeling-system/navegationbar-mobile.png" width="320" alt="Navigation bar - Adulto mayor"><br><sub>Navigation bar - Adulto mayor</sub></td>
+<td align="center"><img src="assets/img/labeling-system/navbar-mobile2.png" width="320" alt="Navigation bar - Familiar"><br><sub>Navigation bar - Familiar</sub></td>
+</tr>
+</table>
 
 **Elementos de validación**
 
@@ -6939,10 +6946,12 @@ navigation bar familiar:
 
 icons:
 
-![Validación exitosa](assets/img/labeling-system/alertsent-mobile.png)
-
-
-![Validación de error](assets/img/labeling-system/error-landing.png)
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/labeling-system/alertsent-mobile.png" width="220" alt="Validación exitosa"><br><sub>Validación exitosa</sub></td>
+<td align="center"><img src="assets/img/labeling-system/error-landing.png" width="460" alt="Validación de error"><br><sub>Validación de error</sub></td>
+</tr>
+</table>
 
 
 #### 3.1.2.3. SEO Tags and Meta Tags
@@ -9397,41 +9406,29 @@ A continuación, se presentan las evidencias de ejecución de las aplicaciones m
 
 Se presentan las principales vistas de la aplicación Android ejecutándose en el emulador o dispositivo de prueba.
 
-<div align="center">
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/sprint-2/android-home.png" width="220" alt="Pantalla principal"><br><sub>Pantalla principal</sub></td>
+<td align="center"><img src="assets/img/sprint-2/android-checkin.png" width="220" alt="Check-in diario"><br><sub>Check-in diario</sub></td>
+<td align="center"><img src="assets/img/sprint-2/android-simplified-mode.png" width="220" alt="Modo simplificado"><br><sub>Modo simplificado</sub></td>
+</tr>
+</table>
 
-![Android Home](assets/img/sprint-2/android-home.png)
+<p align="center"><i>Imagen X. Ejecución de la pantalla principal, el check-in diario y el modo simplificado de la aplicación Android.</i></p>
 
-<br/><i>Imagen X. Ejecución de la pantalla principal de la aplicación Android.</i>
-
-</div>
-
-<div align="center">
-
-![Android Check-in](assets/img/sprint-2/android-checkin.png)
-
-<br/><i>Imagen X. Ejecución de la interfaz del check-in diario.</i>
-
-</div>
-
-<div align="center">
-
-![Android Simplified Mode](assets/img/sprint-2/android-simplified-mode.png)
-
-<br/><i>Imagen X. Ejecución de la interfaz del modo simplificado.</i>
-
-</div>
+<br>
 
 **2. Aplicación Flutter – Familiar a distancia**
 
 Durante este sprint se desarrolló la primera versión de la aplicación multiplataforma, cuya interfaz está orientada a facilitar el seguimiento y acompañamiento del adulto mayor por parte de sus familiares.
 
-<div align="center">
+<table align="center">
+<tr>
+<td align="center"><img src="assets/img/sprint-2/flutter-home.png" width="220" alt="Pantalla de inicio"><br><sub>Pantalla de inicio</sub></td>
+</tr>
+</table>
 
-![Flutter Home](assets/img/sprint-2/flutter-home.png)
-
-<br/><i>Imagen X. Ejecución de la pantalla de inicio de la aplicación Flutter.</i>
-
-</div>
+<p align="center"><i>Imagen X. Ejecución de la pantalla de inicio de la aplicación Flutter.</i></p>
 
 #### 4.2.2.7. Services Documentation Evidence for Sprint Review
 
